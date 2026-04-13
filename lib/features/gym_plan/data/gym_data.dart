@@ -131,6 +131,10 @@ class GymData {
       id: 'abs_1', name: 'Abdominal Crunch Machine', sets: '3', reps: '12-15', rest: '1 min',
       tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
     ),
+    Exercise(
+      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+    ),
   ];
 
   // Lower A (Wednesday) - Quad & Glute Focus
@@ -159,6 +163,10 @@ class GymData {
       id: 'abs_1', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
     ),
+    Exercise(
+      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+    ),
   ];
 
   // Upper B (Thursday) - Back & Arms emphasis
@@ -168,7 +176,7 @@ class GymData {
       tip: '🎯 Focus: Mid-back (rhomboids, traps) for "thickness".\n\n💡 How to do it: Keep back straight and chest up. Pull the handles toward your navel, squeezing shoulder blades together like cracking a walnut between them.\n\n⚠️ Common Pitfall: Rounding your lower back and yanking with your biceps. Use a controlled steady pull from your back muscles.',
     ),
     Exercise(
-      id: 'pull_3', name: 'Hammer Strength MTS Front Pulldown', sets: '3', reps: '8-12', rest: '2-3 min', note: 'Replaces High Row',
+      id: 'pull_3', name: 'Hammer Strength MTS Front Pulldown', sets: '3', reps: '8-12', rest: '2-3 min',
       tip: '🎯 Focus: Upper back and rear shoulders (delts).\n\n💡 How to do it: Pull higher towards the upper chest, keeping elbows flared out slightly wider than a traditional lat-focused row.\n\n⚠️ Common Pitfall: Shrugging your shoulders up into your ears. Actively push your shoulders down and back during the pull.',
     ),
     Exercise(
@@ -191,6 +199,10 @@ class GymData {
       id: 'abs_1', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
     ),
+    Exercise(
+      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+    ),
   ];
 
   // Lower B (Friday) - Hamstring & Glute Focus
@@ -198,6 +210,10 @@ class GymData {
     Exercise(
       id: 'legs_3', name: 'Wide Stance Leg Press', sets: '4', reps: '8-10', rest: '2-3 min',
       tip: '🎯 Focus: Shifts emphasis to your glutes and inner thighs (adductors).\n\n💡 How to do it: Place feet wider than shoulders and point toes slightly outward (e.g., 11 and 1 o\'clock).\n\n⚠️ Common Pitfall: Knees caving inward as you push. Actively think about driving your knees outward so they stay in perfect alignment with your toes.',
+    ),
+    Exercise(
+      id: 'legs_7', name: 'Dumbbell Romanian Deadlift', sets: '3', reps: '8-10', rest: '2-3 min',
+      tip: '🎯 Focus: Glutes and hamstrings through a hip hinge — the #1 movement pattern for building a great butt.\n\n💡 How to do it: Hold dumbbells in front of your thighs with a neutral grip. Stand with feet hip-width apart. Push your hips BACK (not down) like you\'re closing a car door with your butt. Keep the dumbbells gliding along your legs. Lower until you feel a deep stretch in your hamstrings (roughly mid-shin). Drive your hips forward to stand up, squeezing your glutes hard at the top.\n\n⚠️ Common Pitfall: Rounding your lower back — this is dangerous. Keep your chest proud, shoulders back, and maintain a slight arch in your lower back the entire time. If your back rounds, the weight is too heavy or you\'re going too deep.',
     ),
     Exercise(
       id: 'legs_2', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2-3 min',
@@ -218,6 +234,10 @@ class GymData {
     Exercise(
       id: 'abs_2', name: 'Dumbbell Side Bend', sets: '3', reps: '12-15/side', rest: '1 min',
       tip: '🎯 Focus: Obliques (the muscles on the side of your abs that frame the "V").\n\n💡 How to do it: Hold one dumbbell in one hand. Stand straight, core tight. Slowly lean sideways toward the dumbbell, then contract your opposite oblique to pull yourself back upright and slightly past center. Do all reps on one side, then switch.\n\n⚠️ Common Pitfall: Holding a dumbbell in BOTH hands (this cancels out the resistance). Only hold weight in one hand. Also don\'t twist — keep the movement strictly in the side-to-side plane.',
+    ),
+    Exercise(
+      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
   ];
 }

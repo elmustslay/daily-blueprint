@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/gym_data.dart';
+import '../../daily_plan/data/daily_plan_data.dart';
 import 'gym_stats_screen.dart';
 
 // Provides max and prev weight tuple
@@ -84,10 +85,14 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
   Widget _buildWorkoutList(List<Exercise> exercises) {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: exercises.length,
+      itemCount: exercises.length + (DailyPlanData.isDeloadWeek() ? 1 : 0),
       separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (context, index) {
-        return ExerciseCard(exercise: exercises[index]);
+        if (DailyPlanData.isDeloadWeek() && index == 0) {
+          return _buildGymDeloadAlert();
+        }
+        final exerciseIndex = DailyPlanData.isDeloadWeek() ? index - 1 : index;
+        return ExerciseCard(exercise: exercises[exerciseIndex]);
       },
     );
   }
@@ -165,7 +170,7 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.4)),
                       ),
-                      child: const Text('Tuesday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
+                      child: const Text('Tue & Sun', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
                     ),
                   ],
                 ),
@@ -238,6 +243,95 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
             onPressed: () => Navigator.of(ctx).pop(),
             child: const Text('Let\'s crush it!'),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGymDeloadAlert() {
+    return GestureDetector(
+      onTap: () => _showDeloadDialog(),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: Colors.red.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.redAccent, width: 2),
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.warning_rounded, color: Colors.redAccent, size: 22),
+            SizedBox(width: 8),
+            Text(
+              'DELOAD WEEK',
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+              ),
+            ),
+            SizedBox(width: 8),
+            Text('Tap for details', style: TextStyle(color: Colors.redAccent, fontSize: 12)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDeloadDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.fitness_center, color: Colors.redAccent),
+            SizedBox(width: 8),
+            Text('Deload Protocol', style: TextStyle(fontWeight: FontWeight.bold)),
+          ],
+        ),
+        content: const SingleChildScrollView(
+          child: Text(
+            '🔴 DELOAD WEEK — Recovery Protocol\n'
+            'Your body recovers and supercompensates this week. Still train, but lighter.\n\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            'LIFTING (Mon / Wed / Thu / Fri):\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            '• Use 50% of your normal working weight\n'
+            '• Do 2 sets instead of 3-4 per exercise\n'
+            '• Same rep ranges, same rest periods\n'
+            '• Focus on perfect form & mind-muscle connection\n'
+            '• Stop every set 4-5 reps short of failure\n\n'
+            'Example:\n'
+            '  If you normally Chest Press 120 lbs × 4 sets × 8 reps\n'
+            '  → This week: 60 lbs × 2 sets × 8 reps\n\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            'CARDIO:\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            '• Tuesday LISS: Same 30 min walk, drop incline to 4-6%\n'
+            '• Saturday HIIT → Replace with LISS (30 min easy walk, no sprints)\n'
+            '• Sunday LISS: Keep as is\n\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            'PLANK HOLD:\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            '• Do 2 sets × 20-30 sec (instead of 3 × 30-60 sec)\n\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            'NUTRITION & SUPPLEMENTS:\n'
+            '━━━━━━━━━━━━━━━━━━━━\n'
+            '• Keep protein intake the same\n'
+            '• Keep creatine at 5g/day (never cycle creatine)\n'
+            '• Keep all other supplements unchanged\n'
+            '• If hungrier than usual — that\'s normal, don\'t overeat\n\n'
+            '⚡ You\'ll come back STRONGER next week. Trust the process.',
+            style: TextStyle(height: 1.5, fontSize: 14),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Got it — light week! 💪'),
+          ),
         ],
       ),
     );

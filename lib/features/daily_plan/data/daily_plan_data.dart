@@ -13,6 +13,28 @@ class TimelineItem {
 }
 
 class DailyPlanData {
+  // Plan start date — April 13, 2026 (Monday)
+  static final DateTime planStartDate = DateTime(2026, 4, 13);
+
+  /// Deload: every 6th week (weeks 6, 12, 18, ...)
+  static bool isDeloadWeek() {
+    final now = DateTime.now();
+    final diff = now.difference(planStartDate).inDays;
+    if (diff < 0) return false;
+    final weekNumber = (diff ~/ 7) + 1;
+    return weekNumber % 6 == 0;
+  }
+
+  /// Ashwagandha: 8 weeks on, 4 weeks off (12-week cycle)
+  static bool isAshwagandhaOff() {
+    final now = DateTime.now();
+    final diff = now.difference(planStartDate).inDays;
+    if (diff < 0) return false;
+    final weekNumber = (diff ~/ 7) + 1;
+    final posInCycle = ((weekNumber - 1) % 12) + 1;
+    return posInCycle > 8;
+  }
+
   static const Map<String, int> waterBottles = {
     'mon': 7,
     'tue': 6,
@@ -28,7 +50,7 @@ class DailyPlanData {
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed (NK 9060/Bondi)', 'put on sunscreen']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
-      TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['3 scrambled eggs w/ 1/5 bag spinach', '1 capsule citicoline', '2 cup whole milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
+      TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['3 scrambled eggs w/ 1/5 bag spinach', '1 capsule citicoline', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
       TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['Pasta lunch', '3tsp husk', 'kindle/laptop', 'the supplement capsule', 'gym outfit', '2 key/wallet/phone', 'airpods', 'water bottle']),
       TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
       TimelineItem(time: '9:00-12:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water']),
@@ -47,7 +69,7 @@ class DailyPlanData {
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed', 'NO sunscreen']),
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
-      TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['2 scrambled eggs w/ 1/5 (2nd) bag spinach', '1 capsule citicoline', '1 cup whole milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
+      TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['2 scrambled eggs w/ 1/5 (2nd) bag spinach', '1 capsule citicoline', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
       TimelineItem(time: '8:10-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb prepped chicken (divide in 4, 4 fridge)']),
       TimelineItem(time: '9:05-12:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water', 'Laundry + Dishwasher']),
       TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1 serving of my pasta', '2 D3-K2 supplement capsule', '💧 1 bottle water']),
@@ -83,7 +105,7 @@ class DailyPlanData {
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed', 'NO sunscreen']),
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
-      TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['2 scrambled eggs w/ 1/5 (3rd) bag spinach', '1 capsule citicoline', '1 cup whole milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
+      TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['2 scrambled eggs w/ 1/5 (3rd) bag spinach', '1 capsule citicoline', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
       TimelineItem(time: '8:10-12:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water', 'Laundry + Dishwasher']),
       TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1 serving of my pasta', '2 D3-K2 supplement capsule', '💧 1 bottle water']),
       TimelineItem(time: '12:30-4:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water', 'Laundry + Dishwasher']),
@@ -100,7 +122,7 @@ class DailyPlanData {
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed (NK 9060/Bondi)', 'put on sunscreen']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
-      TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['3 scrambled eggs w/ 1/5 (4th) bag spinach', '1 capsule citicoline', '1 tiny avocado', '2 cup whole milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
+      TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['3 scrambled eggs w/ 1/5 (4th) bag spinach', '1 capsule citicoline', '1 tiny avocado', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
       TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['Pasta Lunch', '3tsp husk', 'kindle/laptop', 'the supplement capsule', 'gym outfit', '2 key/wallet/phone', 'airpods', 'water bottle']),
       TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
       TimelineItem(time: '9:00-12:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water']),
@@ -142,8 +164,9 @@ class DailyPlanData {
       TimelineItem(time: '2:00-2:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1/4 cup almonds', '2 D3-K2 supplement capsule', '💧 1 bottle water']),
       TimelineItem(time: '2:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: ['wash hand + put on sunscreen', 'check what I have before going', "Trader Joe's (all groceries are bought there)", '💧 1 bottle water + 1 scoop Greens Powder']),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking', icon: '🧑‍🍳', details: ['💧 2 bottle water with 4tsp husk at 4:30pm', '12oz chickpea fusilli pasta + 3lb ground turkey + 48oz marinara sauce + 2 can lentils + 2/4 cup nutritional yeast + 6 full chopped bell peppers (divide in 6, for fridge)', '1lb Wild Sockeye Salmon (divide in 3, 3 fridge)', 'PREP FOR TUE: Dice 1lb chicken + mix w/ seasonings (store in airtight container)']),
-      TimelineItem(time: '6:00-6:45 pm', title: 'Read', icon: '📚', details: ['1 scoop whey isolate (30g protein)', '5g creatine', '1/3 (3rd) container Raspberries', '💧 1 bottle water']),
-      TimelineItem(time: '6:45-7:25 pm', title: 'Dinner', icon: '🥩', details: ['0.5 lbs top sirloin steak w/ 1/5 (5th) bag spinach', '2 cup (rest) whole milk']),
+      TimelineItem(time: '6:00-6:15 pm', title: 'Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '5g creatine', '1/3 (3rd) container Raspberries', '💧 1 bottle water']),
+      TimelineItem(time: '6:15-7:00 pm', title: 'LISS Cardio Walk', icon: '🚶', details: ['Open Apple Watch → Workout → Outdoor Walk', '30 min brisk walk around neighborhood', 'Stay in Heart Rate Zone 2 (120-140 bpm)', '10 min stretching/mobility']),
+      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🥩', details: ['0.5 lbs top sirloin steak w/ 1/5 (5th) bag spinach', '2 cup (rest) 2% ultra-pasteurized milk']),
       TimelineItem(time: '7:25-8:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop casein protein', '1 tbsp Chia Seeds', '2 cap Ashwaganda', '💧 1 bottle water']),
       TimelineItem(time: '8:00-9:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['Do Dermaroller (No minoxidil)']),
       TimelineItem(time: '9:00-9:15 pm', title: 'Night Supplement', icon: '🌙', details: ['2 Magnesium Glycinate capsule', 'Cerave Moisturizer']),
