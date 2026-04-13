@@ -134,8 +134,17 @@ class _BookPlanScreenState extends ConsumerState<BookPlanScreen> {
         statusColor = Colors.blueAccent;
         statusText = 'On Track ($expectedProgress% expected)';
       } else {
-        statusColor = Colors.redAccent;
-        statusText = 'Behind ($expectedProgress% expected)';
+        // If the expected progress includes this week's target, show yellow
+        // (user still has the rest of the week to catch up).
+        // Red only if behind on a deadline that already passed.
+        final lastWeekExpected = book.expectedProgressForWeek(currentWeek - 1);
+        if (currentProgress >= lastWeekExpected) {
+          statusColor = Colors.amberAccent;
+          statusText = 'Due this week ($expectedProgress% expected)';
+        } else {
+          statusColor = Colors.redAccent;
+          statusText = 'Behind ($expectedProgress% expected)';
+        }
       }
     }
 

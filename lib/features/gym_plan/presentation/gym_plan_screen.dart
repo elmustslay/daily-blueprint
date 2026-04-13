@@ -52,20 +52,12 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
         title: const Text('El\'s Workout Plan'),
         bottom: TabBar(
           controller: _tabController,
-          onTap: (index) {
-            if (index == _tabController.index) {
-              if (index == 0) _showDayAdvice(context, 'Upper A Guide', upperAdvice);
-              if (index == 1) _showDayAdvice(context, 'Lower A Guide', lowerAdvice);
-              if (index == 2) _showDayAdvice(context, 'Upper B Guide', upperAdvice);
-              if (index == 3) _showDayAdvice(context, 'Lower B Guide', lowerAdvice);
-            }
-          },
-          tabs: const [
-            Tab(text: 'Upper A'),
-            Tab(text: 'Lower A'),
-            Tab(text: 'Upper B'),
-            Tab(text: 'Lower B'),
-            Tab(text: 'Cardio'),
+          tabs: [
+            _buildLongPressTab('Upper A', 0, 'Upper A Guide', upperAdvice),
+            _buildLongPressTab('Lower A', 1, 'Lower A Guide', lowerAdvice),
+            _buildLongPressTab('Upper B', 2, 'Upper B Guide', upperAdvice),
+            _buildLongPressTab('Lower B', 3, 'Lower B Guide', lowerAdvice),
+            const Tab(text: 'Cardio'),
           ],
         ),
       ),
@@ -79,6 +71,14 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
           _buildCardioTab(),
         ],
       ),
+    );
+  }
+
+  Widget _buildLongPressTab(String label, int index, String title, String advice) {
+    return GestureDetector(
+      onLongPress: () => _showDayAdvice(context, title, advice),
+      behavior: HitTestBehavior.opaque,
+      child: Tab(text: label),
     );
   }
 
