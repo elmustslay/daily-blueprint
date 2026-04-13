@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fix-ur-life',
+      title: 'Slay Life',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: const DashboardScreen(),

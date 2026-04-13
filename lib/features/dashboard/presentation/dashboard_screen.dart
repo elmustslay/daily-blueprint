@@ -14,7 +14,7 @@ class DashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fix-ur-life'),
+        title: const Text('Time to slay'),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -26,11 +26,6 @@ class DashboardScreen extends ConsumerWidget {
               Text(
                 'Welcome back, El',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 28),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'What would you like to focus on today?',
-                style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 32),
               Expanded(
