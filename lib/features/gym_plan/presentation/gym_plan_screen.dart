@@ -19,6 +19,29 @@ class GymPlanScreen extends StatefulWidget {
 }
 
 class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProviderStateMixin {
+  // --- Advices ---
+  static const String pushAdvice = '''• WARM-UP: Doing lighter, high-rep sets gets blood flowing and "greases the groove"—crucial before your heavy 6-8 rep sets.
+
+• FORM OVER WEIGHT (NO EGO LIFTING): The #1 beginner pitfall! The plan calls for 6-8 reps. This means you should form-fail around the 7th or 8th rep. If you can only do 4, it's too heavy. If 10 is easy, it's too light.
+
+• CONTROL THE "NEGATIVE": Don't let the weight slam back. Use a 1-second push (concentric) and a 3-second controlled return (eccentric). Growth happens on the negative!''';
+
+  static const String legsAdvice = '''• WARM-UP: Extremely important on leg day to prepare your knees and hips. Do lighter warm-up sets on the Leg Press.
+
+• BRACE YOUR CORE: Keep your core tight (like taking a punch) for every exercise here. It protects your lower back and makes lifts infinitely more powerful.
+
+• FULL RANGE OF MOTION (ROM): No "half reps." Grow best through full range—deep on presses (safely), and full stretches on curls/extensions.
+
+• DON'T LOCK YOUR KNEES: When pushing leg weight, extend until almost straight, but never "lock out" the joint hard. Keep a soft bend.''';
+
+  static const String pullAdvice = '''• WARM-UP: Get the blood strictly to your back first with lighter Lat Pulldowns.
+
+• PULL WITH YOUR ELBOWS: The golden rule of back exercises! Treat your hands as "meat hooks" and drive from your elbows. Try a "thumbless grip" (thumb over the bar) to stop your biceps from taking over.
+
+• MIND-MUSCLE CONNECTION: Squeeze your shoulder blades together like you're pinching a walnut on every single row and pulldown.
+
+• KEEP YOUR CHEST UP: Resist the urge to round your back. Keep a proud chest and a rigid straight spine to protect your lower back.''';
+
   late TabController _tabController;
 
   @override
@@ -34,6 +57,13 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
         title: const Text('El\'s Workout Plan'),
         bottom: TabBar(
           controller: _tabController,
+          onTap: (index) {
+            if (index == _tabController.index) {
+              if (index == 0) _showDayAdvice(context, 'Push Day Guide', pushAdvice);
+              if (index == 1) _showDayAdvice(context, 'Leg Day Guide', legsAdvice);
+              if (index == 2) _showDayAdvice(context, 'Pull Day Guide', pullAdvice);
+            }
+          },
           tabs: const [
             Tab(text: 'Push'),
             Tab(text: 'Legs'),
@@ -97,6 +127,27 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
           ),
         )
       ],
+    );
+  }
+
+  void _showDayAdvice(BuildContext context, String title, String advice) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: SingleChildScrollView(
+          child: Text(
+            advice,
+            style: const TextStyle(height: 1.5, fontSize: 15),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Let\'s crush it!'),
+          )
+        ],
+      ),
     );
   }
 }
