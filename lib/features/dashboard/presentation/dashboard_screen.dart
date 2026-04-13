@@ -5,6 +5,7 @@ import '../../gym_plan/presentation/gym_plan_screen.dart';
 import '../../recipe/presentation/recipe_screen.dart';
 import '../../shopping_list/presentation/shopping_list_screen.dart';
 import '../../book_plan/presentation/book_plan_screen.dart';
+import '../../weight_track/presentation/weight_track_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -72,6 +73,13 @@ class DashboardScreen extends ConsumerWidget {
                       icon: Icons.book_rounded,
                       color: Colors.purpleAccent,
                       destination: const BookPlanScreen(),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Weight',
+                      icon: Icons.monitor_weight_rounded,
+                      color: Colors.tealAccent,
+                      destination: const WeightTrackScreen(),
                     ),
                   ],
                 ),

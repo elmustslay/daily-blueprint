@@ -153,10 +153,6 @@ class GymData {
       id: 'legs_6', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Soleus (the wider chunk of your calf muscle).\n\n💡 How to do it: Focus on a deep, full stretch at the bottom (heels dropped low) and push up onto your big toes as high as mechanically possible at the top.\n\n⚠️ Common Pitfall: "Bouncy" fast partial reps. Do deliberate reps: Stretch, pause... Squeeze, pause. Control every inch of the movement for real growth.',
     ),
-    Exercise(
-      id: 'legs_7', name: 'Machine Hip Abduction', sets: '3', reps: '20-30', rest: '1 min',
-      tip: '🎯 Focus: Upper & Outer Glutes (Gluteus Medius).\n\n💡 How to do it: Scoot to edge of seat, hinge torso forward at 45-degrees. Grab bars to brace upper body. For maximum activation, slightly hover your butt off the seat while you push. Drive outward with knees, not feet.\n\n⚠️ Common Pitfall: Using momentum to swing the weight out. 1-sec explode out, 1-sec squeeze hold, 3-seconds slow return.',
-    ),
   ];
 
   static const List<Exercise> pullDay = [

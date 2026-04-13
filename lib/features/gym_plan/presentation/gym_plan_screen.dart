@@ -105,7 +105,22 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('🔥 HIIT (High-Intensity Interval Training)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text('🔥 HIIT (High-Intensity Interval Training)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.redAccent.withValues(alpha: 0.4)),
+                      ),
+                      child: const Text('Saturday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.redAccent)),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 const Text('⚠️ WARM-UP: 5 min brisk walk before your first sprint interval. Never sprint cold.', style: TextStyle(color: Colors.orangeAccent)),
                 const SizedBox(height: 8),
@@ -121,7 +136,22 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('🚶 LISS (Low-Intensity Steady State)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text('🚶 LISS (Low-Intensity Steady State)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.greenAccent.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.4)),
+                      ),
+                      child: const Text('Thursday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 const Text('30 minutes. Brisk walk, incline 8-12% keeping heart rate in Zone 2.', style: TextStyle(color: Colors.white70)),
               ],
