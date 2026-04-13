@@ -4,6 +4,7 @@ import '../../daily_plan/presentation/daily_plan_screen.dart';
 import '../../gym_plan/presentation/gym_plan_screen.dart';
 import '../../recipe/presentation/recipe_screen.dart';
 import '../../shopping_list/presentation/shopping_list_screen.dart';
+import '../../book_plan/presentation/book_plan_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -64,6 +65,13 @@ class DashboardScreen extends ConsumerWidget {
                       icon: Icons.shopping_cart_rounded,
                       color: Colors.greenAccent,
                       destination: const ShoppingListScreen(),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Book Plan',
+                      icon: Icons.book_rounded,
+                      color: Colors.purpleAccent,
+                      destination: const BookPlanScreen(),
                     ),
                   ],
                 ),
