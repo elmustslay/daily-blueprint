@@ -19,7 +19,7 @@ class Book {
     if (currentWeek < startWeek) return 0;
     int weeksIn = currentWeek - startWeek + 1;
     if (weeksIn >= expectedDurationWeeks) return 100;
-    return weeksIn * weeklyGoalPercent;
+    return (weeksIn * weeklyGoalPercent).clamp(0, 100);
   }
 }
 

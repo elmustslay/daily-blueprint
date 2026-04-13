@@ -29,7 +29,7 @@ class DailyPlanData {
       TimelineItem(time: '6:50-7:10 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed (NK 9060/Bondi)', 'put on sunscreen']),
       TimelineItem(time: '7:10-7:40 am', title: 'Morning Prayer', icon: '🙏', details: ['prayer and reading']),
       TimelineItem(time: '7:40-8:10 am', title: 'Breakfast', icon: '🍳', details: ['3 scrambled eggs w/ 1/5 bag spinach', '1 capsule citicoline', '2 cup whole milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
-      TimelineItem(time: '8:10-8:30 am', title: 'Grab things to take to work', icon: '🗂️', details: ['Pasta lunch', '3tsp husk', 'kindle/laptop', 'the supplement capsule', 'gym outfit', '2 key/wallet/phone', 'airpods', 'water bottle']),
+      TimelineItem(time: '8:10-8:30 am', title: 'Grab things to take to work', icon: '🗂️', details: ['Pasta lunch', '3tsp husk', 'kindle/laptop', 'the supplement capsule', 'gym outfit', 'keys/wallet/phone', 'airpods', 'water bottle']),
       TimelineItem(time: '8:30-9:00 am', title: 'Commute to Work', icon: '🚗'),
       TimelineItem(time: '9:00-12:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water']),
       TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 serving of my pasta', '2 D3-K2 supplement capsule', '💧 1 bottle water']),
@@ -53,7 +53,7 @@ class DailyPlanData {
       TimelineItem(time: '4:00-6:30 pm', title: 'Study/Haircut', icon: '📚'),
       TimelineItem(time: '6:30-7:30 pm', title: 'Dinner', icon: '🍗', details: ["Chicken and Quinoa"]),
       TimelineItem(time: '7:30-9:00 pm', title: 'Chores & Shower', icon: '🚿'),
-      TimelineItem(time: '9:00-10:29 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙'),
+      TimelineItem(time: '9:00-10:30 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙'),
     ],
     'wed': [
       TimelineItem(time: '6:30-6:50 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),

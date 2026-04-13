@@ -83,6 +83,14 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       return item;
     }).toList();
   }
+
+  void resetAll() {
+    final prefs = SharedPrefsLogic.instance;
+    state = state.map((item) {
+      prefs.setBool('shop_${item.id}', false);
+      return item.copyWith(isChecked: false);
+    }).toList();
+  }
 }
 
 final shoppingListProvider = NotifierProvider<ShoppingListNotifier, List<ShoppingItem>>(ShoppingListNotifier.new);
@@ -111,6 +119,13 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> with Si
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shopping List'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            tooltip: 'Reset list',
+            onPressed: () => _confirmReset(context, ref),
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
@@ -204,6 +219,29 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> with Si
                 : null,
           );
         },
+      ),
+    );
+  }
+
+  void _confirmReset(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Reset Shopping List?'),
+        content: const Text('This will uncheck all items. Use this at the start of a new shopping trip.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(shoppingListProvider.notifier).resetAll();
+              Navigator.of(ctx).pop();
+            },
+            child: const Text('Reset'),
+          ),
+        ],
       ),
     );
   }

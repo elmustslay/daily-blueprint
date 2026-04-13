@@ -62,7 +62,7 @@ class GymStatsScreen extends ConsumerWidget {
                           dotData: const FlDotData(show: true),
                           belowBarData: BarAreaData(
                             show: true,
-                            color: Colors.blueAccent.withOpacity(0.2),
+                            color: Colors.blueAccent.withValues(alpha: 0.2),
                           ),
                         ),
                       ],
@@ -86,12 +86,12 @@ class GymStatsScreen extends ConsumerWidget {
                       ),
                       gridData: FlGridData(
                         show: true,
-                        getDrawingHorizontalLine: (value) => FlLine(color: Colors.grey.withOpacity(0.2), strokeWidth: 1),
-                        getDrawingVerticalLine: (value) => FlLine(color: Colors.grey.withOpacity(0.2), strokeWidth: 1),
+                        getDrawingHorizontalLine: (value) => FlLine(color: Colors.grey.withValues(alpha: 0.2), strokeWidth: 1),
+                        getDrawingVerticalLine: (value) => FlLine(color: Colors.grey.withValues(alpha: 0.2), strokeWidth: 1),
                       ),
                       borderData: FlBorderData(
                         show: true,
-                        border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                        border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
                       ),
                     ),
                   ),

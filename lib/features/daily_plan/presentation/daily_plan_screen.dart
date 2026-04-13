@@ -9,11 +9,22 @@ class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
   Map<String, List<bool>> build() {
     final prefs = SharedPrefsLogic.instance;
     final Map<String, List<bool>> stateMap = {};
-    
+
+    // Compute this week's Monday as a string key
+    final now = DateTime.now();
+    final weekStart = now.subtract(Duration(days: now.weekday - 1));
+    final weekStartStr =
+        '${weekStart.year}-${weekStart.month.toString().padLeft(2, '0')}-${weekStart.day.toString().padLeft(2, '0')}';
+
+    final isNewWeek = prefs.getString('water_week_start') != weekStartStr;
+    if (isNewWeek) {
+      prefs.setString('water_week_start', weekStartStr);
+    }
+
     for (final dayKey in DailyPlanData.waterBottles.keys) {
       final bottlesCount = DailyPlanData.waterBottles[dayKey] ?? 0;
       final keys = prefs.getStringList('water_$dayKey');
-      if (keys != null && keys.length == bottlesCount) {
+      if (!isNewWeek && keys != null && keys.length == bottlesCount) {
         stateMap[dayKey] = keys.map((e) => e == 'true').toList();
       } else {
         stateMap[dayKey] = List.filled(bottlesCount, false);
@@ -130,9 +141,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: isChecked ? Colors.blue.withOpacity(0.2) : Colors.transparent,
+                      color: isChecked ? Colors.blue.withValues(alpha: 0.2) : Colors.transparent,
                       border: Border.all(
-                        color: isChecked ? Colors.blueAccent : Colors.grey.withOpacity(0.5),
+                        color: isChecked ? Colors.blueAccent : Colors.grey.withValues(alpha: 0.5),
                         width: 2,
                       ),
                     ),
@@ -141,10 +152,8 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                         '💧',
                         style: TextStyle(
                           fontSize: 20,
-                          color: isChecked ? null : Colors.grey,
-                          // Grayscale effect in flutter for unsupported emojis is tricky natively,
-                          // so we decrease opacity or just rely on the border to indicate state.
-                        ).copyWith(color: isChecked ? Colors.white : Colors.white.withOpacity(0.3)),
+                          color: isChecked ? Colors.white : Colors.white.withValues(alpha: 0.3),
+                        ),
                       ),
                     ),
                   ),
@@ -193,7 +202,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor.withOpacity(0.5),
+                      color: Theme.of(context).cardColor.withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(

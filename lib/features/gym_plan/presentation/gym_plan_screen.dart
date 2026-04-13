@@ -5,7 +5,7 @@ import 'gym_stats_screen.dart';
 
 // Provides max and prev weight tuple
 final pastWeightsProvider = FutureProvider.family<Map<String, double?>, String>((ref, exerciseId) async {
-  final repo = ref.read(gymRepoProvider);
+  final repo = ref.watch(gymRepoProvider);
   final maxW = await repo.getMaxWeight(exerciseId);
   final prevW = await repo.getPrevWeight(exerciseId);
   return {'max': maxW, 'prev': prevW};
@@ -106,6 +106,8 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('🔥 HIIT (High-Intensity Interval Training)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                const SizedBox(height: 8),
+                const Text('⚠️ WARM-UP: 5 min brisk walk before your first sprint interval. Never sprint cold.', style: TextStyle(color: Colors.orangeAccent)),
                 const SizedBox(height: 8),
                 const Text('8x Intervals: 30sec sprint, 90sec walk. Cool-down 5 min.', style: TextStyle(color: Colors.white70)),
               ],
