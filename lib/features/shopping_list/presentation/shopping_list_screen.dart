@@ -42,6 +42,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Dairy
       ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '2 dozen'),
       ShoppingItem(id: 'dairy-2', name: '2% Ultra-Pasteurized Milk', subtext: '.5 gallon'),
+      ShoppingItem(id: 'dairy-3', name: 'Butter', subtext: '1 stick'),
 
       // Others
       ShoppingItem(id: 'oth-1', name: 'Canned Lentils', subtext: '2 containers'),
@@ -52,7 +53,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'oth-6', name: 'Almonds', subtext: '1 bag (need 1 cup)'),
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 12tbsp)'),
       ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
-      ShoppingItem(id: 'oth-9', name: 'Chia Seeds', subtext: '1 bag (need 7 tbsp/week)'),
 
       // Amazon
       ShoppingItem(id: 'amz-1', name: 'Orgain Organic Greens'),
@@ -68,6 +68,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-11', name: 'NAC (N-Acetyl Cysteine)'),
       ShoppingItem(id: 'amz-12', name: 'Selenium (25mcg)'),
       ShoppingItem(id: 'amz-13', name: 'Ashwagandha'),
+      ShoppingItem(id: 'amz-14', name: 'Chia Seeds'),
     ];
 
     final prefs = SharedPrefsLogic.instance;
