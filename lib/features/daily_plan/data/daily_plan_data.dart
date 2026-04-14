@@ -37,7 +37,7 @@ class DailyPlanData {
 
   static const Map<String, int> waterBottles = {
     'mon': 7,
-    'tue': 6,
+    'tue': 7,
     'wed': 7,
     'thu': 7,
     'fri': 7,
@@ -76,7 +76,7 @@ class DailyPlanData {
       TimelineItem(time: '12:30-4:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water', 'Laundry + Dishwasher']),
       TimelineItem(time: '4:00-4:15 pm', title: 'Snack Break', icon: '🥤', details: ['1/3 container Raspberries', '1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', '💧 1 bottle water']),
       TimelineItem(time: '4:15-5:00 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, study or work']),
-      TimelineItem(time: '5:00-6:30 pm', title: 'Cardio (LISS)', icon: '🏃', details: ['micellar wipe + sunscreen before leaving', '30 min walk + 15 min stretch (see Gym Plan → Cardio)', 'Every 2-3 weeks: swap for haircut']),
+      TimelineItem(time: '5:00-6:30 pm', title: 'Cardio (LISS)', icon: '🏃', details: ['micellar wipe + sunscreen before leaving', '30 min walk + 15 min stretch (see Gym Plan → Cardio)', 'Every 2-3 weeks: swap for haircut', '💧 1 bottle water']),
       TimelineItem(time: '6:30-7:30 pm', title: 'Dinner', icon: '🍗', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1/4 cup almonds', '💧 1 bottle water']),
       TimelineItem(time: '7:30-8:15 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop casein protein', '1 tbsp Chia Seeds', '2 cap Ashwagandha']),
       TimelineItem(time: '8:15-9:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['minoxidil treatment brush on beard (wait until face is dry)']),
