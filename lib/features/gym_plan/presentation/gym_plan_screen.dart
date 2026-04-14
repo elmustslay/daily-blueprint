@@ -101,6 +101,7 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        // ── Tuesday LISS ──
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -110,58 +111,7 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
                 Row(
                   children: [
                     const Expanded(
-                      child: Text('🔥 HIIT (High-Intensity Interval Training)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.redAccent.withValues(alpha: 0.4)),
-                      ),
-                      child: const Text('Saturday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.redAccent)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                const Text('⌚ Apple Watch: Start an "HIIT" workout. Track Heart Rate Zones.', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
-                const SizedBox(height: 12),
-                const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
-                const SizedBox(height: 8),
-                const Text(
-                  '1️⃣ WARM-UP (5 min)\n'
-                  '   • Brisk walk on treadmill, speed 3.0-3.5 mph\n'
-                  '   • Goal: Heart Rate Zone 2 (110-130 bpm)\n'
-                  '   • Loosen up legs, get blood flowing\n\n'
-                  '2️⃣ SPRINT INTERVALS — 8 Rounds (20 min)\n'
-                  '   For each round:\n'
-                  '   • 🏃 SPRINT 30 sec: Treadmill speed 8-10 mph (or outdoor all-out sprint)\n'
-                  '   • Goal: Heart Rate Zone 4-5 (160-180+ bpm)\n'
-                  '   • 🚶 WALK 90 sec: Drop speed to 3.0 mph\n'
-                  '   • Goal: Let HR drop to Zone 2-3 (120-140 bpm) before next sprint\n'
-                  '   • If HR doesn\'t drop below 150 by the walk end, rest 30 sec longer\n\n'
-                  '3️⃣ COOL-DOWN (5 min)\n'
-                  '   • Walk at 2.5-3.0 mph, gradually slowing\n'
-                  '   • Goal: Heart Rate back to Zone 1 (<110 bpm)\n'
-                  '   • Light static stretches for quads, hamstrings, calves\n\n'
-                  '📊 After: Check Apple Watch summary — aim for 15+ min in Zone 4-5 over time.',
-                  style: TextStyle(color: Colors.white70, height: 1.6),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text('🚶 LISS (Low-Intensity Steady State)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                      child: Text('🚶 LISS — Incline Walk + Stretch', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -170,12 +120,12 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.4)),
                       ),
-                      child: const Text('Tue & Sun', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
+                      child: const Text('Tuesday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                const Text('⌚ Apple Watch: Start an "Outdoor Walk" or "Indoor Walk" workout.', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
+                const Text('⌚ Apple Watch → Workout → Indoor Walk (treadmill) or Outdoor Walk', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
                 const SizedBox(height: 12),
                 const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
                 const SizedBox(height: 8),
@@ -202,6 +152,108 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
           ),
         ),
         const SizedBox(height: 16),
+        // ── Saturday HIIT ──
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text('🔥 HIIT — Sprint Intervals', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.redAccent.withValues(alpha: 0.4)),
+                      ),
+                      child: const Text('Saturday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.redAccent)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                const Text('⌚ Apple Watch → Workout → HIIT', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
+                const SizedBox(height: 12),
+                const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                const SizedBox(height: 8),
+                const Text(
+                  '1️⃣ WARM-UP (5 min)\n'
+                  '   • Brisk walk on treadmill, speed 3.0-3.5 mph\n'
+                  '   • Goal: Heart Rate Zone 2 (110-140 bpm)\n'
+                  '   • Loosen up legs, get blood flowing\n\n'
+                  '2️⃣ SPRINT INTERVALS — 8 Rounds (20 min)\n'
+                  '   For each round:\n'
+                  '   • 🏃 SPRINT 30 sec: Treadmill speed 8-10 mph (or outdoor all-out sprint)\n'
+                  '   • Goal: Heart Rate Zone 4-5 (160-180+ bpm)\n'
+                  '   • 🚶 WALK 90 sec: Drop speed to 3.0 mph\n'
+                  '   • Goal: Let HR drop to Zone 2-3 (120-140 bpm) before next sprint\n'
+                  '   • If HR doesn\'t drop below 150 by the walk end, rest 30 sec longer\n\n'
+                  '3️⃣ COOL-DOWN (5 min)\n'
+                  '   • Walk at 2.5-3.0 mph, gradually slowing\n'
+                  '   • Goal: Heart Rate back to Zone 1 (<110 bpm)\n'
+                  '   • Light static stretches for quads, hamstrings, calves\n\n'
+                  '📊 After: Check Apple Watch summary — aim for 15+ min in Zone 4-5 over time.',
+                  style: TextStyle(color: Colors.white70, height: 1.6),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        // ── Sunday LISS ──
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text('🚶 LISS — Outdoor Walk + Stretch', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.greenAccent.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.4)),
+                      ),
+                      child: const Text('Sunday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                const Text('⌚ Apple Watch → Workout → Outdoor Walk', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
+                const SizedBox(height: 12),
+                const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                const SizedBox(height: 8),
+                const Text(
+                  '1️⃣ BRISK WALK (30 min)\n'
+                  '   • Walk briskly around the neighborhood\n'
+                  '   • Goal: Stay in Heart Rate Zone 2 (120-140 bpm)\n'
+                  '   • You should be able to hold a conversation but feel slightly winded\n'
+                  '   • ⚠️ If HR goes above 150, slow down\n'
+                  '   • ⚠️ If HR stays below 110, pick up the pace\n\n'
+                  '2️⃣ STRETCH & MOBILITY (10 min)\n'
+                  '   • Quad stretch (30 sec/side)\n'
+                  '   • Hamstring stretch (30 sec/side)\n'
+                  '   • Hip flexor lunge stretch (30 sec/side)\n'
+                  '   • Calf stretch against wall (30 sec/side)\n'
+                  '   • Cat-cow spinal mobility (10 reps)\n\n'
+                  '📊 After: Check Apple Watch — you want 25+ min in Zone 2.',
+                  style: TextStyle(color: Colors.white70, height: 1.6),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        // ── HR Zones Reference ──
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

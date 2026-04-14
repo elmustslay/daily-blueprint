@@ -140,31 +140,31 @@ class GymData {
   // Lower A (Wednesday) - Quad & Glute Focus
   static const List<Exercise> lowerADay = [
     Exercise(
-      id: 'legs_1', name: 'Leg Press Machine', sets: '4', reps: '6-8', rest: '2-3 min',
+      id: 'legs_1a', name: 'Leg Press Machine', sets: '4', reps: '6-8', rest: '2-3 min',
       tip: '🎯 Focus: Big compound lift for quads and glutes.\n\n💡 How to do it: Place feet shoulder-width apart. As you lower the weight, aim to bring knees towards your chest. Push through the whole foot (especially the heel) to drive up.\n\n⚠️ Common Pitfall: "Butt wink" – lifting your lower back/hips off the seat at the bottom. Only go as deep as you can before your hips peel off the pad.',
     ),
     Exercise(
-      id: 'legs_2', name: 'Seated Leg Curl Machine', sets: '3', reps: '8-10', rest: '2-3 min',
+      id: 'legs_2a', name: 'Seated Leg Curl Machine', sets: '3', reps: '8-10', rest: '2-3 min',
       tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
     ),
     Exercise(
-      id: 'legs_5', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
+      id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
       tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
     ),
     Exercise(
-      id: 'legs_4', name: 'Glute Kickback Machine', sets: '3', reps: '12-15', rest: '1-2 min',
+      id: 'legs_4a', name: 'Glute Kickback Machine', sets: '3', reps: '12-15', rest: '1-2 min',
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Chest against the pad, grip handles firmly. Core tight. Drive your heel back and up toward the ceiling. Squeeze your butt hard at the top.\n\n⚠️ Common Pitfall: Arching your lower back to get the leg higher. This turns off the glute entirely. Keep your spine perfectly neutral.',
     ),
     Exercise(
-      id: 'legs_6', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
+      id: 'legs_6a', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Soleus (the wider chunk of your calf muscle).\n\n💡 How to do it: Focus on a deep, full stretch at the bottom (heels dropped low) and push up onto your big toes as high as mechanically possible at the top.\n\n⚠️ Common Pitfall: "Bouncy" fast partial reps. Do deliberate reps: Stretch, pause... Squeeze, pause. Control every inch of the movement for real growth.',
     ),
     Exercise(
-      id: 'abs_1', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
+      id: 'abs_1_high', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
     ),
     Exercise(
-      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
   ];
@@ -185,7 +185,7 @@ class GymData {
     ),
     Exercise(
       id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: 'To Failure', rest: '1-2 min',
-      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it: On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 8-10 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way up), get a full stretch at the top, and a hard squeeze at the bottom lockout.',
+      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it: On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 8-10 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
     ),
     Exercise(
       id: 'push_7', name: 'Machine Tricep Extension', sets: '3', reps: '10-12', rest: '1-2 min',
@@ -196,11 +196,11 @@ class GymData {
       tip: '🎯 Focus: The Brachialis (pushes bicep up) and Brachioradialis (forearm chunk).\n\n💡 How to do it: Use a neutral grip (palms facing body). Pin elbows strictly to your ribs. Curl weight toward the shoulder leading with the thumb. Grip the dumbbell tight to heavily activate the forearm. 3-seconds slow on the way down.\n\n⚠️ Common Pitfall: "The Elbow Drift". Letting elbows swing forward or outward to cheat the weight up. Drop the weight if your hips are swinging.',
     ),
     Exercise(
-      id: 'abs_1', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
+      id: 'abs_1_high', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
     ),
     Exercise(
-      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      id: 'bw_1b', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
   ];
@@ -208,35 +208,35 @@ class GymData {
   // Lower B (Friday) - Hamstring & Glute Focus
   static const List<Exercise> lowerBDay = [
     Exercise(
-      id: 'legs_3', name: 'Wide Stance Leg Press', sets: '4', reps: '8-10', rest: '2-3 min',
+      id: 'legs_3b', name: 'Wide Stance Leg Press', sets: '4', reps: '8-10', rest: '2-3 min',
       tip: '🎯 Focus: Shifts emphasis to your glutes and inner thighs (adductors).\n\n💡 How to do it: Place feet wider than shoulders and point toes slightly outward (e.g., 11 and 1 o\'clock).\n\n⚠️ Common Pitfall: Knees caving inward as you push. Actively think about driving your knees outward so they stay in perfect alignment with your toes.',
     ),
     Exercise(
-      id: 'legs_7', name: 'Dumbbell Romanian Deadlift', sets: '3', reps: '8-10', rest: '2-3 min',
+      id: 'legs_7b', name: 'Dumbbell Romanian Deadlift', sets: '3', reps: '8-10', rest: '2-3 min',
       tip: '🎯 Focus: Glutes and hamstrings through a hip hinge — the #1 movement pattern for building a great butt.\n\n💡 How to do it: Hold dumbbells in front of your thighs with a neutral grip. Stand with feet hip-width apart. Push your hips BACK (not down) like you\'re closing a car door with your butt. Keep the dumbbells gliding along your legs. Lower until you feel a deep stretch in your hamstrings (roughly mid-shin). Drive your hips forward to stand up, squeezing your glutes hard at the top.\n\n⚠️ Common Pitfall: Rounding your lower back — this is dangerous. Keep your chest proud, shoulders back, and maintain a slight arch in your lower back the entire time. If your back rounds, the weight is too heavy or you\'re going too deep.',
     ),
     Exercise(
-      id: 'legs_2', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2-3 min',
+      id: 'legs_2b', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2-3 min',
       tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
     ),
     Exercise(
-      id: 'legs_5', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
+      id: 'legs_5b', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
       tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
     ),
     Exercise(
-      id: 'legs_4', name: 'Glute Kickback Machine', sets: '3', reps: '12-15', rest: '1-2 min',
+      id: 'legs_4b', name: 'Glute Kickback Machine', sets: '3', reps: '12-15', rest: '1-2 min',
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Chest against the pad, grip handles firmly. Core tight. Drive your heel back and up toward the ceiling. Squeeze your butt hard at the top.\n\n⚠️ Common Pitfall: Arching your lower back to get the leg higher. This turns off the glute entirely. Keep your spine perfectly neutral.',
     ),
     Exercise(
-      id: 'legs_6', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
+      id: 'legs_6b', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
       tip: '🎯 Focus: Soleus (the wider chunk of your calf muscle).\n\n💡 How to do it: Focus on a deep, full stretch at the bottom (heels dropped low) and push up onto your big toes as high as mechanically possible at the top.\n\n⚠️ Common Pitfall: "Bouncy" fast partial reps. Do deliberate reps: Stretch, pause... Squeeze, pause. Control every inch of the movement for real growth.',
     ),
     Exercise(
-      id: 'abs_2', name: 'Dumbbell Side Bend', sets: '3', reps: '12-15/side', rest: '1 min',
+      id: 'abs_2b', name: 'Dumbbell Side Bend', sets: '3', reps: '12-15/side', rest: '1 min',
       tip: '🎯 Focus: Obliques (the muscles on the side of your abs that frame the "V").\n\n💡 How to do it: Hold one dumbbell in one hand. Stand straight, core tight. Slowly lean sideways toward the dumbbell, then contract your opposite oblique to pull yourself back upright and slightly past center. Do all reps on one side, then switch.\n\n⚠️ Common Pitfall: Holding a dumbbell in BOTH hands (this cancels out the resistance). Only hold weight in one hand. Also don\'t twist — keep the movement strictly in the side-to-side plane.',
     ),
     Exercise(
-      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
+      id: 'bw_1c', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
   ];
