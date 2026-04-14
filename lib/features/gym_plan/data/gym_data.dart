@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../../core/storage/sqlite_db.dart';
 
 // --- Domain ---
@@ -7,8 +9,9 @@ class ExerciseLog {
   final String exerciseId;
   final double weight;
   final DateTime date;
+  final int setIndex;
 
-  ExerciseLog({this.id, required this.exerciseId, required this.weight, required this.date});
+  ExerciseLog({this.id, required this.exerciseId, required this.weight, required this.date, this.setIndex = 1});
 }
 
 class Exercise {
@@ -32,21 +35,29 @@ class Exercise {
 }
 
 abstract class GymRepository {
-  Future<void> logWeight(String exerciseId, double weight);
+  Future<void> logWeights(String exerciseId, List<double> weights, {int startIndex = 1});
   Future<List<ExerciseLog>> getLogs(String exerciseId);
-  Future<double?> getMaxWeight(String exerciseId);
-  Future<double?> getPrevWeight(String exerciseId);
+  Future<double?> getMaxWeight(String exerciseId, int setIndex);
+  Future<double?> getPrevWeight(String exerciseId, int setIndex);
+  Future<String> exportAllTrendsCsv();
 }
 
 // --- Data ---
 class GymRepositoryImpl implements GymRepository {
   @override
-  Future<void> logWeight(String exerciseId, double weight) async {
+  Future<void> logWeights(String exerciseId, List<double> weights, {int startIndex = 1}) async {
     final db = await SqliteDb.instance;
-    await db.insert('logs', {
-      'exercise_id': exerciseId,
-      'weight': weight,
-      'date': DateTime.now().toIso8601String(),
+    final now = DateTime.now().toIso8601String();
+    
+    await db.transaction((txn) async {
+      for (int i = 0; i < weights.length; i++) {
+        await txn.insert('logs', {
+          'exercise_id': exerciseId,
+          'weight': weights[i],
+          'date': now,
+          'set_index': startIndex + i,
+        });
+      }
     });
   }
 
@@ -64,13 +75,14 @@ class GymRepositoryImpl implements GymRepository {
       exerciseId: e['exercise_id'] as String,
       weight: e['weight'] as double,
       date: DateTime.parse(e['date'] as String),
+      setIndex: e['set_index'] != null ? e['set_index'] as int : 1,
     )).toList();
   }
 
   @override
-  Future<double?> getMaxWeight(String exerciseId) async {
+  Future<double?> getMaxWeight(String exerciseId, int setIndex) async {
     final db = await SqliteDb.instance;
-    final result = await db.rawQuery('SELECT MAX(weight) as max_w FROM logs WHERE exercise_id = ?', [exerciseId]);
+    final result = await db.rawQuery('SELECT MAX(weight) as max_w FROM logs WHERE exercise_id = ? AND set_index = ?', [exerciseId, setIndex]);
     if (result.isNotEmpty && result.first['max_w'] != null) {
       return result.first['max_w'] as double;
     }
@@ -78,12 +90,12 @@ class GymRepositoryImpl implements GymRepository {
   }
 
   @override
-  Future<double?> getPrevWeight(String exerciseId) async {
+  Future<double?> getPrevWeight(String exerciseId, int setIndex) async {
     final db = await SqliteDb.instance;
     final result = await db.query(
       'logs',
-      where: 'exercise_id = ?',
-      whereArgs: [exerciseId],
+      where: 'exercise_id = ? AND set_index = ?',
+      whereArgs: [exerciseId, setIndex],
       orderBy: 'date DESC',
       limit: 1,
     );
@@ -92,11 +104,67 @@ class GymRepositoryImpl implements GymRepository {
     }
     return null;
   }
+
+  @override
+  Future<String> exportAllTrendsCsv() async {
+    final db = await SqliteDb.instance;
+    final logs = await db.query('logs', orderBy: 'date ASC, set_index ASC');
+    
+    final grouped = <String, Map<int, double>>{};
+    final exercises = <String, String>{}; 
+    final dates = <String, String>{};
+    
+    for (var row in logs) {
+      final dateIso = row['date'] as String;
+      final eId = row['exercise_id'] as String;
+      final weight = row['weight'] as double;
+      final int sIndex = row['set_index'] != null ? row['set_index'] as int : 1;
+      
+      final dateOnly = dateIso.split('T')[0];
+      final key = '$dateOnly|$eId';
+      if (!grouped.containsKey(key)) {
+        grouped[key] = {};
+        exercises[key] = eId;
+        dates[key] = dateOnly;
+      }
+      grouped[key]![sIndex] = weight;
+    }
+    
+    final buffer = StringBuffer();
+    buffer.writeln('Date,Exercise,Set 1 (lbs),Set 2 (lbs),Set 3 (lbs),Set 4 (lbs),Set 5 (lbs),Set 6 (lbs)');
+    for (var key in grouped.keys) {
+      final date = dates[key];
+      final eId = exercises[key];
+      final readableName = GymData.getExerciseName(eId!);
+      final weightsMap = grouped[key]!;
+      final w1 = weightsMap[1] ?? '';
+      final w2 = weightsMap[2] ?? '';
+      final w3 = weightsMap[3] ?? '';
+      final w4 = weightsMap[4] ?? '';
+      final w5 = weightsMap[5] ?? '';
+      final w6 = weightsMap[6] ?? '';
+      buffer.writeln('$date,"$readableName",$w1,$w2,$w3,$w4,$w5,$w6');
+    }
+    
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/workout_trends.csv');
+    await file.writeAsString(buffer.toString());
+    return file.path;
+  }
 }
 
 final gymRepoProvider = Provider<GymRepository>((ref) => GymRepositoryImpl());
 
 class GymData {
+  static String getExerciseName(String id) {
+    for (var list in [upperADay, lowerADay, upperBDay, lowerBDay]) {
+      for (var ex in list) {
+        if (ex.id == id) return ex.name;
+      }
+    }
+    return id; // fallback
+  }
+
   // Upper A (Monday) - Chest & Shoulder emphasis
   static const List<Exercise> upperADay = [
     Exercise(

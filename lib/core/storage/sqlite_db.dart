@@ -16,14 +16,15 @@ class SqliteDb {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 1,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             exercise_id TEXT NOT NULL,
             weight REAL NOT NULL,
-            date TEXT NOT NULL
+            date TEXT NOT NULL,
+            set_index INTEGER DEFAULT 1
           )
         ''');
         await db.execute('''
@@ -33,17 +34,6 @@ class SqliteDb {
             date TEXT NOT NULL UNIQUE
           )
         ''');
-      },
-      onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 2) {
-          await db.execute('''
-            CREATE TABLE body_weight (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              weight REAL NOT NULL,
-              date TEXT NOT NULL UNIQUE
-            )
-          ''');
-        }
       },
     );
   }

@@ -1,25 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 import '../data/gym_data.dart';
 import '../../daily_plan/data/daily_plan_data.dart';
 import 'gym_stats_screen.dart';
 
 // Provides max and prev weight tuple
-final pastWeightsProvider = FutureProvider.family<Map<String, double?>, String>((ref, exerciseId) async {
+typedef PastWeightArg = ({String exerciseId, int setIndex});
+
+final pastWeightsProvider = FutureProvider.family<Map<String, double?>, PastWeightArg>((ref, arg) async {
   final repo = ref.watch(gymRepoProvider);
-  final maxW = await repo.getMaxWeight(exerciseId);
-  final prevW = await repo.getPrevWeight(exerciseId);
+  final maxW = await repo.getMaxWeight(arg.exerciseId, arg.setIndex);
+  final prevW = await repo.getPrevWeight(arg.exerciseId, arg.setIndex);
   return {'max': maxW, 'prev': prevW};
 });
 
-class GymPlanScreen extends StatefulWidget {
+final todayLogCountProvider = FutureProvider.family<int, String>((ref, exerciseId) async {
+  final repo = ref.watch(gymRepoProvider);
+  final logs = await repo.getLogs(exerciseId);
+  final today = DateTime.now().toIso8601String().split('T')[0];
+  
+  int count = 0;
+  for (var log in logs) {
+    if (log.date.toIso8601String().split('T')[0] == today) {
+      count++;
+    }
+  }
+  return count;
+});
+
+class SelectedFirstExerciseNotifier extends Notifier<String?> {
+  @override
+  String? build() => null;
+  
+  void setExercise(String id) {
+    state = id;
+  }
+}
+
+final selectedFirstExerciseProvider = NotifierProvider<SelectedFirstExerciseNotifier, String?>(SelectedFirstExerciseNotifier.new);
+
+class GymPlanScreen extends ConsumerStatefulWidget {
   const GymPlanScreen({super.key});
 
   @override
-  State<GymPlanScreen> createState() => _GymPlanScreenState();
+  ConsumerState<GymPlanScreen> createState() => _GymPlanScreenState();
 }
 
-class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProviderStateMixin {
+class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTickerProviderStateMixin {
   // --- Advices ---
   static const String upperAdvice = '''• WARM-UP: Do 1-2 light sets on your first compound lift (chest press or rows). Gets blood flowing and "greases the groove" before heavy sets.
 
@@ -50,6 +78,22 @@ class _GymPlanScreenState extends State<GymPlanScreen> with SingleTickerProvider
     return Scaffold(
       appBar: AppBar(
         title: const Text('El\'s Workout Plan'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.download),
+            tooltip: 'Export Trends',
+            onPressed: () async {
+              try {
+                final path = await ref.read(gymRepoProvider).exportAllTrendsCsv();
+                await Share.shareXFiles([XFile(path)], text: 'My Workout Trends');
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error exporting: \$e')));
+                }
+              }
+            },
+          )
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: [
@@ -397,18 +441,39 @@ class ExerciseCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final weightsAsync = ref.watch(pastWeightsProvider(exercise.id));
+    int numSets = 3;
+    final match = RegExp(r'(\d+)').allMatches(exercise.sets);
+    if (match.isNotEmpty) {
+      numSets = int.parse(match.last.group(0)!);
+    }
+
+    final todayLogCountAsync = ref.watch(todayLogCountProvider(exercise.id));
+    final todayLogCount = todayLogCountAsync.value ?? 0;
     
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: InkWell(
-        onTap: exercise.tip != null ? () => _showTipDialog(context) : null,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+    final isCompleted = todayLogCount >= numSets;
+    final nextSetIndex = isCompleted ? numSets : (todayLogCount + 1);
+
+    final weightsAsync = ref.watch(pastWeightsProvider((exerciseId: exercise.id, setIndex: nextSetIndex)));
+    
+    final baselineWeightsAsync = ref.watch(pastWeightsProvider((exerciseId: exercise.id, setIndex: 1)));
+    final baselinePrevW = baselineWeightsAsync.value?['prev'];
+    final workingWeight = baselinePrevW ?? baselineWeightsAsync.value?['max'];
+
+    final selectedStartId = ref.watch(selectedFirstExerciseProvider);
+    final isPrimaryWarmup = selectedStartId == exercise.id;
+
+    return Opacity(
+      opacity: isCompleted ? 0.6 : 1.0,
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: InkWell(
+          onTap: exercise.tip != null ? () => _showTipDialog(context) : null,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -442,6 +507,21 @@ class ExerciseCard extends ConsumerWidget {
               ],
             ),
             const Divider(height: 32),
+            if (todayLogCount == 0) ...[
+              if (isPrimaryWarmup)
+                _buildWarmupSuggestion(workingWeight),
+              if (!isPrimaryWarmup)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      ref.read(selectedFirstExerciseProvider.notifier).setExercise(exercise.id);
+                    },
+                    icon: const Icon(Icons.local_fire_department, size: 16, color: Colors.orangeAccent),
+                    label: const Text('Set as Start', style: TextStyle(color: Colors.orangeAccent)),
+                  ),
+                ),
+            ],
             weightsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('Error: $err'),
@@ -454,14 +534,14 @@ class ExerciseCard extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Max: ${maxW != null ? '$maxW lbs' : '--'}', style: const TextStyle(color: Colors.grey)),
-                        Text('Prev: ${prevW != null ? '$prevW lbs' : '--'}', style: const TextStyle(color: Colors.grey)),
+                        Text('Set $nextSetIndex Max: ${maxW != null ? '$maxW lbs' : '--'}', style: const TextStyle(color: Colors.grey)),
+                        Text('Set $nextSetIndex Prev: ${prevW != null ? '$prevW lbs' : '--'}', style: const TextStyle(color: Colors.grey)),
                       ],
                     ),
                     ElevatedButton.icon(
-                      onPressed: () => _showLogDialog(context, ref),
-                      icon: const Icon(Icons.add),
-                      label: const Text('Log Weight'),
+                      onPressed: isCompleted ? null : () => _showLogDialog(context, ref, todayLogCount, numSets),
+                      icon: Icon(isCompleted ? Icons.check : Icons.add),
+                      label: Text(isCompleted ? 'Completed' : 'Log Weight'),
                     )
                   ],
                 );
@@ -470,9 +550,10 @@ class ExerciseCard extends ConsumerWidget {
           ],
         ),
       ),
-    ),
-  );
-}
+      ),
+      ),
+    );
+  }
 
   Widget _buildStat(String label, String value) {
     return Column(
@@ -484,19 +565,100 @@ class ExerciseCard extends ConsumerWidget {
     );
   }
 
-  void _showLogDialog(BuildContext context, WidgetRef ref) {
-    final txtController = TextEditingController();
+  Widget _buildWarmupSuggestion(double? workingWeight) {
+    if (workingWeight == null) {
+      return Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.orangeAccent.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.5)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Row(
+              children: [
+                Icon(Icons.local_fire_department, color: Colors.orangeAccent, size: 18),
+                SizedBox(width: 8),
+                Text('Smart Warm-up', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
+              ],
+            ),
+            SizedBox(height: 8),
+            Text('1. Very light weight for 10-15 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
+            SizedBox(height: 4),
+            Text('2. Moderate light weight for 8-10 reps', style: TextStyle(fontSize: 13, color: Colors.white)),
+          ],
+        ),
+      );
+    }
+
+    double roundTo5(double w) => (w / 5).round() * 5.0;
+
+    final w1 = roundTo5(workingWeight * 0.5);
+    final w2 = roundTo5(workingWeight * 0.7);
+    final w3 = roundTo5(workingWeight * 0.85);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.orangeAccent.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Row(
+            children: [
+              Icon(Icons.local_fire_department, color: Colors.orangeAccent, size: 18),
+              SizedBox(width: 8),
+              Text('Smart Warm-up', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          const Text('1. Very light weight for 10-15 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
+          const SizedBox(height: 4),
+          Text('2. ~${w1.toStringAsFixed(0)} lbs for 8-10 reps (50%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          const SizedBox(height: 4),
+          Text('3. ~${w2.toStringAsFixed(0)} lbs for 4-6 reps (70%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          const SizedBox(height: 4),
+          Text('4. ~${w3.toStringAsFixed(0)} lbs for 1-2 reps (Primer)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+        ],
+      ),
+    );
+  }
+
+  void _showLogDialog(BuildContext context, WidgetRef ref, int loggedToday, int totalSets) {
+    final remainingSets = totalSets - loggedToday;
+    if (remainingSets <= 0) return;
+    
+    final controllers = List.generate(remainingSets, (index) => TextEditingController());
 
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text('Log ${exercise.name}'),
-        content: TextField(
-          controller: txtController,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(
-            labelText: 'Weight (lbs)',
-            border: OutlineInputBorder(),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: remainingSets,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: TextField(
+                  controller: controllers[index],
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(
+                    labelText: 'Set ${loggedToday + index + 1} (lbs)',
+                    border: const OutlineInputBorder(),
+                  ),
+                ),
+              );
+            },
           ),
         ),
         actions: [
@@ -506,11 +668,19 @@ class ExerciseCard extends ConsumerWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              final val = double.tryParse(txtController.text);
-              if (val != null) {
-                await ref.read(gymRepoProvider).logWeight(exercise.id, val);
-                ref.invalidate(pastWeightsProvider(exercise.id));
-                ref.invalidate(exerciseLogsProvider(exercise.id));
+              final weights = <double>[];
+              for (var c in controllers) {
+                final w = double.tryParse(c.text);
+                if (w != null) weights.add(w);
+              }
+              if (weights.isNotEmpty) {
+                await ref.read(gymRepoProvider).logWeights(exercise.id, weights, startIndex: loggedToday + 1);
+                ref.invalidate(pastWeightsProvider);
+                ref.invalidate(todayLogCountProvider(exercise.id));
+                // ignore: invalid_use_of_visible_for_testing_member
+                try {
+                  ref.invalidate(exerciseLogsProvider(exercise.id));
+                } catch (_) {}
                 if (ctx.mounted) Navigator.of(ctx).pop();
               }
             },

@@ -16,7 +16,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // App title in AppBar
-    expect(find.text('Fix-ur-life'), findsOneWidget);
+    expect(find.text('Time to slay'), findsOneWidget);
 
     // All 5 dashboard cards
     expect(find.text('Daily Plan'), findsOneWidget);

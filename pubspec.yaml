@@ -41,6 +41,7 @@ dependencies:
   fl_chart: ^1.2.0
   intl: ^0.20.2
   path: ^1.9.1
+  share_plus: ^10.1.2
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  sqflite_common_ffi: ^2.4.0+2
+  path_provider_platform_interface: ^2.1.2
+  plugin_platform_interface: ^2.1.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
