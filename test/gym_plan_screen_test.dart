@@ -35,7 +35,7 @@ class FakeGymRepository implements GymRepository {
 }
 
 void main() {
-  Widget buildTestableWidget(FakeGymRepository repo, Exercise exercise) {
+  Widget buildTestableWidget(FakeGymRepository repo, Exercise exercise, {bool hasStartedWorkout = false}) {
     return ProviderScope(
       overrides: [
         gymRepoProvider.overrideWithValue(repo),
@@ -44,6 +44,7 @@ void main() {
         home: Scaffold(
           body: ExerciseCard(
             exercise: exercise,
+            hasStartedWorkout: hasStartedWorkout,
           ),
         ),
       ),
@@ -88,7 +89,7 @@ void main() {
     repo.mockedPrev = 200.0;
     repo.logsToday = 1;
 
-    await tester.pumpWidget(buildTestableWidget(repo, testExercise));
+    await tester.pumpWidget(buildTestableWidget(repo, testExercise, hasStartedWorkout: true));
     await tester.pumpAndSettle();
 
     expect(find.text('Smart Warm-up'), findsNothing);

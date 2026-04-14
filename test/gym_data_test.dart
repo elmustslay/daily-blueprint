@@ -12,6 +12,11 @@ class MockPathProviderPlatform extends Fake with MockPlatformInterfaceMixin impl
   Future<String?> getApplicationDocumentsPath() async {
     return Directory.systemTemp.path;
   }
+
+  @override
+  Future<String?> getTemporaryPath() async {
+    return Directory.systemTemp.path;
+  }
 }
 
 void main() {

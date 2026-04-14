@@ -146,7 +146,7 @@ class GymRepositoryImpl implements GymRepository {
       buffer.writeln('$date,"$readableName",$w1,$w2,$w3,$w4,$w5,$w6');
     }
     
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getTemporaryDirectory();
     final file = File('${directory.path}/workout_trends.csv');
     await file.writeAsString(buffer.toString());
     return file.path;

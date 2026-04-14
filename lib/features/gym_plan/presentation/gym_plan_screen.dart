@@ -85,10 +85,15 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
             onPressed: () async {
               try {
                 final path = await ref.read(gymRepoProvider).exportAllTrendsCsv();
-                await Share.shareXFiles([XFile(path)], text: 'My Workout Trends');
+                final box = context.findRenderObject() as RenderBox?;
+                await Share.shareXFiles(
+                  [XFile(path)], 
+                  text: 'My Workout Trends',
+                  sharePositionOrigin: box != null ? box.localToGlobal(Offset.zero) & box.size : null,
+                );
               } catch (e) {
                 if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error exporting: \$e')));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error exporting: $e')));
                 }
               }
             },
@@ -127,6 +132,12 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
   }
 
   Widget _buildWorkoutList(List<Exercise> exercises) {
+    bool hasStartedWorkout = false;
+    for (var ex in exercises) {
+      final count = ref.watch(todayLogCountProvider(ex.id)).value ?? 0;
+      if (count > 0) hasStartedWorkout = true;
+    }
+
     return ListView.separated(
       padding: const EdgeInsets.all(16),
       itemCount: exercises.length + (DailyPlanData.isDeloadWeek() ? 1 : 0),
@@ -136,7 +147,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
           return _buildGymDeloadAlert();
         }
         final exerciseIndex = DailyPlanData.isDeloadWeek() ? index - 1 : index;
-        return ExerciseCard(exercise: exercises[exerciseIndex]);
+        return ExerciseCard(exercise: exercises[exerciseIndex], hasStartedWorkout: hasStartedWorkout);
       },
     );
   }
@@ -436,8 +447,9 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
 
 class ExerciseCard extends ConsumerWidget {
   final Exercise exercise;
+  final bool hasStartedWorkout;
 
-  const ExerciseCard({super.key, required this.exercise});
+  const ExerciseCard({super.key, required this.exercise, this.hasStartedWorkout = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -507,7 +519,7 @@ class ExerciseCard extends ConsumerWidget {
               ],
             ),
             const Divider(height: 32),
-            if (todayLogCount == 0) ...[
+            if (todayLogCount == 0 && !hasStartedWorkout) ...[
               if (isPrimaryWarmup)
                 _buildWarmupSuggestion(workingWeight),
               if (!isPrimaryWarmup)
@@ -596,6 +608,7 @@ class ExerciseCard extends ConsumerWidget {
 
     double roundTo5(double w) => (w / 5).round() * 5.0;
 
+    final w0 = roundTo5(workingWeight * 0.3);
     final w1 = roundTo5(workingWeight * 0.5);
     final w2 = roundTo5(workingWeight * 0.7);
     final w3 = roundTo5(workingWeight * 0.85);
@@ -619,7 +632,7 @@ class ExerciseCard extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 8),
-          const Text('1. Very light weight for 10-15 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
+          Text('1. ~${w0.toStringAsFixed(0)} lbs for 10-15 reps (30%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
           Text('2. ~${w1.toStringAsFixed(0)} lbs for 8-10 reps (50%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
