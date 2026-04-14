@@ -114,6 +114,32 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     final bottlesCount = DailyPlanData.waterBottles[dayKey] ?? 0;
     final totalOz = bottlesCount * 21;
 
+    int? currentIndex;
+    bool isRed = false;
+
+    final now = DateTime.now();
+    // Monday is 1, Sunday is 7 in DateTime.weekday
+    final dayIndex = days.indexOf(dayKey) + 1;
+    
+    if (now.weekday == dayIndex && bottlesCount > 0) {
+      final wakeMinutes = 7 * 60; // 7:00 AM
+      final stopDrinkingMinutes = 20 * 60 + 30; // 8:30 PM (2hrs prior to 10:30 PM)
+      final currentMinutes = now.hour * 60 + now.minute;
+
+      if (currentMinutes < wakeMinutes) {
+        currentIndex = 0;
+      } else if (currentMinutes < stopDrinkingMinutes) {
+        final windowLength = stopDrinkingMinutes - wakeMinutes; // 810 mins
+        final minutesPerBottle = windowLength / bottlesCount;
+        final elapsed = currentMinutes - wakeMinutes;
+        currentIndex = (elapsed / minutesPerBottle).floor();
+        if (currentIndex! >= bottlesCount) currentIndex = bottlesCount - 1;
+      } else {
+        currentIndex = bottlesCount - 1;
+        isRed = true;
+      }
+    }
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -141,6 +167,27 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
               bottlesCount,
               (index) {
                 final isChecked = waterState[index];
+                
+                Color borderColor;
+                Color bgColor;
+                Color iconColor;
+                
+                if (index == currentIndex) {
+                  if (isRed) {
+                    borderColor = Colors.redAccent;
+                    bgColor = isChecked ? Colors.red.withValues(alpha: 0.2) : Colors.transparent;
+                    iconColor = isChecked ? Colors.redAccent : Colors.redAccent.withValues(alpha: 0.5);
+                  } else {
+                    borderColor = Colors.amber;
+                    bgColor = isChecked ? Colors.amber.withValues(alpha: 0.2) : Colors.transparent;
+                    iconColor = isChecked ? Colors.amber : Colors.amber.withValues(alpha: 0.5);
+                  }
+                } else {
+                  borderColor = isChecked ? Colors.blueAccent : Colors.grey.withValues(alpha: 0.5);
+                  bgColor = isChecked ? Colors.blue.withValues(alpha: 0.2) : Colors.transparent;
+                  iconColor = isChecked ? Colors.blueAccent : Colors.grey.withValues(alpha: 0.5);
+                }
+
                 return GestureDetector(
                   onTap: () => ref.read(waterTrackerProvider.notifier).toggleBottle(dayKey, index),
                   child: AnimatedContainer(
@@ -149,19 +196,17 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: isChecked ? Colors.blue.withValues(alpha: 0.2) : Colors.transparent,
+                      color: bgColor,
                       border: Border.all(
-                        color: isChecked ? Colors.blueAccent : Colors.grey.withValues(alpha: 0.5),
+                        color: borderColor,
                         width: 2,
                       ),
                     ),
                     child: Center(
-                      child: Text(
-                        '💧',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: isChecked ? Colors.white : Colors.white.withValues(alpha: 0.3),
-                        ),
+                      child: Icon(
+                        Icons.water_drop,
+                        size: 20,
+                        color: iconColor,
                       ),
                     ),
                   ),
