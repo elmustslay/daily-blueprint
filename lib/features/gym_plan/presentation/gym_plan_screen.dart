@@ -67,10 +67,29 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
 
   late TabController _tabController;
 
+  int _getInitialTabIndex() {
+    final weekday = DateTime.now().weekday;
+    switch (weekday) {
+      case DateTime.monday: return 0; // Upper A
+      case DateTime.wednesday: return 1; // Lower A
+      case DateTime.thursday: return 2; // Upper B
+      case DateTime.friday: return 3; // Lower B
+      case DateTime.tuesday:
+      case DateTime.saturday:
+      case DateTime.sunday:
+      default:
+        return 4; // Cardio
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(
+      initialIndex: _getInitialTabIndex(),
+      length: 5, 
+      vsync: this
+    );
   }
 
   @override

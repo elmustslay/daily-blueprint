@@ -160,6 +160,11 @@ void main() {
     );
     await tester.pumpAndSettle();
     
+    // Explicitly navigate to Upper A so the test checks the expected workout list,
+    // otherwise the new default tab feature will open to today's workout (e.g. Lower A).
+    await tester.tap(find.text('Upper A'));
+    await tester.pumpAndSettle();
+    
     final exerciseCards = tester.widgetList<ExerciseCard>(find.byType(ExerciseCard)).toList();
     final titles = exerciseCards.map((card) => card.exercise.name).toList();
     
@@ -175,5 +180,36 @@ void main() {
     expect(titles.last, 'Machine Shoulder Press'); 
 
     addTearDown(tester.view.resetPhysicalSize);
+  });
+
+  testWidgets('GymPlanScreen opens to the correct default tab based on current weekday', (WidgetTester tester) async {
+    final repo = FakeGymRepository();
+    
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          gymRepoProvider.overrideWithValue(repo),
+        ],
+        child: const MaterialApp(
+          home: GymPlanScreen(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    
+    final tabBar = tester.widget<TabBar>(find.byType(TabBar));
+    final controller = tabBar.controller!;
+    
+    final weekday = DateTime.now().weekday;
+    int expectedIndex;
+    switch (weekday) {
+      case DateTime.monday: expectedIndex = 0; break;
+      case DateTime.wednesday: expectedIndex = 1; break;
+      case DateTime.thursday: expectedIndex = 2; break;
+      case DateTime.friday: expectedIndex = 3; break;
+      default: expectedIndex = 4; break;
+    }
+    
+    expect(controller.index, expectedIndex);
   });
 }
