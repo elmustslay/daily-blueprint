@@ -135,7 +135,7 @@ class GymRepositoryImpl implements GymRepository {
     for (var key in grouped.keys) {
       final date = dates[key];
       final eId = exercises[key];
-      final readableName = GymData.getExerciseName(eId!);
+      final readableName = GymData.getExerciseNameWithReps(eId!);
       final weightsMap = grouped[key]!;
       final w1 = weightsMap[1] ?? '';
       final w2 = weightsMap[2] ?? '';
@@ -160,6 +160,15 @@ class GymData {
     for (var list in [upperADay, lowerADay, upperBDay, lowerBDay]) {
       for (var ex in list) {
         if (ex.id == id) return ex.name;
+      }
+    }
+    return id; // fallback
+  }
+
+  static String getExerciseNameWithReps(String id) {
+    for (var list in [upperADay, lowerADay, upperBDay, lowerBDay]) {
+      for (var ex in list) {
+        if (ex.id == id) return '${ex.name} (${ex.reps})';
       }
     }
     return id; // fallback

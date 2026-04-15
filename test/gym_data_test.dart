@@ -67,7 +67,7 @@ void main() {
     final content = await file.readAsString();
     
     expect(content.contains('Date,Exercise,Set 1 (lbs),Set 2 (lbs),Set 3 (lbs),Set 4 (lbs),Set 5 (lbs),Set 6 (lbs)'), true);
-    expect(content.contains('"Leg Press Machine",200.0,210.0,220.0,230.0,,'), true);
+    expect(content.contains('"Leg Press Machine (6-8)",200.0,210.0,220.0,230.0,,'), true);
   });
 
   test('exportAllTrendsCsv handles sparse data properly', () async {
@@ -82,7 +82,7 @@ void main() {
     final content = await File(csvPath).readAsString();
     
     // Should have 150.0 in Set 1, empty Set 2 (indicated by double comma), and 160.0 in Set 3
-    expect(content.contains('"Lat Pulldown Machine",150.0,,160.0,,,'), true);
+    expect(content.contains('"Lat Pulldown Machine (8-12)",150.0,,160.0,,,'), true);
   });
 
   test('getMaxWeight specifically isolates by set_index across multiple dates', () async {
