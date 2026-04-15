@@ -300,8 +300,8 @@ class GymData {
       tip: '🎯 Focus: Soleus (the wider chunk of your calf muscle).\n\n💡 How to do it: Focus on a deep, full stretch at the bottom (heels dropped low) and push up onto your big toes as high as mechanically possible at the top.\n\n⚠️ Common Pitfall: "Bouncy" fast partial reps. Do deliberate reps: Stretch, pause... Squeeze, pause. Control every inch of the movement for real growth.',
     ),
     Exercise(
-      id: 'abs_2b', name: 'Dumbbell Side Bend', sets: '3', reps: '12-15/side', rest: '1 min',
-      tip: '🎯 Focus: Obliques (the muscles on the side of your abs that frame the "V").\n\n💡 How to do it: Hold one dumbbell in one hand. Stand straight, core tight. Slowly lean sideways toward the dumbbell, then contract your opposite oblique to pull yourself back upright and slightly past center. Do all reps on one side, then switch.\n\n⚠️ Common Pitfall: Holding a dumbbell in BOTH hands (this cancels out the resistance). Only hold weight in one hand. Also don\'t twist — keep the movement strictly in the side-to-side plane.',
+      id: 'abs_2b', name: 'Bicycle Crunches', sets: '2', reps: '15-20/side', rest: '1 min',
+      tip: '🎯 Focus: Obliques and overall core definition without widening the waist.\n\n💡 How to do it: Keep your lower back pressed firmly into the floor. Bring your opposite elbow to your opposite knee, fully extending the other leg straight out. Move slowly and control the twist.\n\n⚠️ Common Pitfall: Pulling on your neck or rushing through the reps. The slower you twist, the harder the obliques have to work to stabilize you.',
     ),
     Exercise(
       id: 'bw_1c', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
