@@ -51,7 +51,7 @@ class RecipeScreen extends StatelessWidget {
             ingredients: [
               '2 cups water',
               '1 cup quinoa, rinsed',
-              'Avocado oil (for cooking)',
+              'Avocado oil (2tsp + 1tbsp)',
               '1 lb diced chicken',
               '2 tbsp butter',
               'Salt, pepper, paprika, and cumin to taste',
@@ -64,7 +64,7 @@ class RecipeScreen extends StatelessWidget {
             ],
             instructions: [
               'Prep Chicken (Sunday): Dry the chicken completely and dice it. In a ziplock, mix with 2tsp avocado oil, 1tsp salt, 1/2tsp black pepper, 1tsp smoked paprika, 1/2 tsp cumin. Store in fridge until Tuesday.',
-              'Heat Pan: Heat a bit of avocado oil in the sauté pan over medium-high heat.',
+              'Heat Pan: Heat a bit of avocado oil (1 tbsp) in the sauté pan over medium-high heat.',
               'Cook Chicken: Once oil dances, add the chicken. Let sear 4 minutes without stirring.',
               'Stir Chicken: After the 4 min, stir occasionally and cook until golden brown and fully cooked (~7-10 minutes total). Once done, add 1 tbsp butter to it.',
               'Cook Quinoa: In the saucepan, bring 2 cups of water to a boil.',
@@ -83,7 +83,7 @@ class RecipeScreen extends StatelessWidget {
             yields: '3 Portions (3 Fridge)',
             ingredients: [
               '1 lb salmon',
-              'Avocado oil, salt, pepper (as needed)',
+              '1-2 tsp avocado oil, salt, pepper (as needed)',
             ],
             equipment: [],
             instructions: [
