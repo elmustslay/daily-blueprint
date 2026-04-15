@@ -133,21 +133,46 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
 
   Widget _buildWorkoutList(List<Exercise> exercises) {
     bool hasStartedWorkout = false;
-    for (var ex in exercises) {
-      final count = ref.watch(todayLogCountProvider(ex.id)).value ?? 0;
+    
+    int getCategory(Exercise exercise) {
+      int numSets = 3;
+      final match = RegExp(r'(\d+)').allMatches(exercise.sets);
+      if (match.isNotEmpty) {
+        numSets = int.parse(match.last.group(0)!);
+      }
+      final count = ref.watch(todayLogCountProvider(exercise.id)).value ?? 0;
       if (count > 0) hasStartedWorkout = true;
+      
+      if (count >= numSets) return 2; // completed
+      if (count > 0) return 0; // active
+      return 1; // untouched
     }
+
+    final indexedExercises = exercises.asMap().entries.toList();
+    final categories = <int, int>{};
+    for (var entry in indexedExercises) {
+      categories[entry.key] = getCategory(entry.value);
+    }
+
+    indexedExercises.sort((a, b) {
+      final catA = categories[a.key]!;
+      final catB = categories[b.key]!;
+      if (catA != catB) return catA.compareTo(catB);
+      return a.key.compareTo(b.key);
+    });
+
+    final finalExercises = indexedExercises.map((e) => e.value).toList();
 
     return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: exercises.length + (DailyPlanData.isDeloadWeek() ? 1 : 0),
+      itemCount: finalExercises.length + (DailyPlanData.isDeloadWeek() ? 1 : 0),
       separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (context, index) {
         if (DailyPlanData.isDeloadWeek() && index == 0) {
           return _buildGymDeloadAlert();
         }
         final exerciseIndex = DailyPlanData.isDeloadWeek() ? index - 1 : index;
-        return ExerciseCard(exercise: exercises[exerciseIndex], hasStartedWorkout: hasStartedWorkout);
+        return ExerciseCard(exercise: finalExercises[exerciseIndex], hasStartedWorkout: hasStartedWorkout);
       },
     );
   }
