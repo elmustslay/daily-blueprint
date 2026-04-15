@@ -224,8 +224,8 @@ class GymData {
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Chest against the pad, grip handles firmly. Core tight. Drive your heel back and up toward the ceiling. Squeeze your butt hard at the top.\n\n⚠️ Common Pitfall: Arching your lower back to get the leg higher. This turns off the glute entirely. Keep your spine perfectly neutral.',
     ),
     Exercise(
-      id: 'legs_6a', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
-      tip: '🎯 Focus: Soleus (the wider chunk of your calf muscle).\n\n💡 How to do it: Focus on a deep, full stretch at the bottom (heels dropped low) and push up onto your big toes as high as mechanically possible at the top.\n\n⚠️ Common Pitfall: "Bouncy" fast partial reps. Do deliberate reps: Stretch, pause... Squeeze, pause. Control every inch of the movement for real growth.',
+      id: 'legs_6a', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min',
+      tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it: Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
     ),
     Exercise(
       id: 'abs_1_high', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
@@ -296,8 +296,8 @@ class GymData {
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Chest against the pad, grip handles firmly. Core tight. Drive your heel back and up toward the ceiling. Squeeze your butt hard at the top.\n\n⚠️ Common Pitfall: Arching your lower back to get the leg higher. This turns off the glute entirely. Keep your spine perfectly neutral.',
     ),
     Exercise(
-      id: 'legs_6b', name: 'Machine Seated Calf Extension', sets: '4', reps: '15-20', rest: '1 min',
-      tip: '🎯 Focus: Soleus (the wider chunk of your calf muscle).\n\n💡 How to do it: Focus on a deep, full stretch at the bottom (heels dropped low) and push up onto your big toes as high as mechanically possible at the top.\n\n⚠️ Common Pitfall: "Bouncy" fast partial reps. Do deliberate reps: Stretch, pause... Squeeze, pause. Control every inch of the movement for real growth.',
+      id: 'legs_6b', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min',
+      tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it: Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
     ),
     Exercise(
       id: 'abs_2b', name: 'Bicycle Crunches', sets: '2', reps: '15-20/side', rest: '1 min',
