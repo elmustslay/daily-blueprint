@@ -71,7 +71,7 @@ class DailyPlanData {
   static const Map<String, List<TimelineItem>> schedules = {
     'mon': [
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
-      TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed (NK 9060/Bondi)', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'put on sunscreen']),
+      TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed (NK 9060/Bondi)', 'put on sunscreen']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ 1/5 bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
       TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '2tsp husk', 'kindle/laptop', '2 D3-K2 capsules', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
@@ -90,7 +90,7 @@ class DailyPlanData {
     ],
     'tue': [
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
-      TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'NO sunscreen']),
+      TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed', 'NO sunscreen']),
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 2 scrambled eggs w/ 1/5 (2nd) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
       TimelineItem(time: '8:10-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb prepped chicken (divide in 4, 4 fridge)']),
@@ -107,7 +107,7 @@ class DailyPlanData {
     ],
     'wed': [
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
-      TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed (cloud x 4)', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'put on sunscreen']),
+      TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed (cloud x 4)', 'put on sunscreen']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter', '💧 1 bottle water']),
       TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '1tsp husk', 'kindle/laptop', '2 D3-K2 capsules', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
@@ -126,7 +126,7 @@ class DailyPlanData {
     ],
     'thu': [
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
-      TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'NO sunscreen']),
+      TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed', 'NO sunscreen']),
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 2 scrambled eggs w/ 1/5 (3rd) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
       TimelineItem(time: '8:10-12:00 pm', title: 'Work', icon: '💻', details: ['💧 1 bottle water', 'Laundry + Dishwasher']),
@@ -143,7 +143,7 @@ class DailyPlanData {
     ],
     'fri': [
       TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
-      TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed (cloud x 4)', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'put on sunscreen']),
+      TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed (cloud x 4)', 'put on sunscreen']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ 1/5 (4th) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter', '💧 1 bottle water']),
       TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '1tsp husk', 'kindle/laptop', '2 D3-K2 capsules', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
@@ -162,7 +162,7 @@ class DailyPlanData {
     ],
     'sat': [
       TimelineItem(time: '7:00-7:20 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
-      TimelineItem(time: '7:20-7:40 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'get dressed for gym (Hoka Bondi 8)', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer']),
+      TimelineItem(time: '7:20-7:40 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed for gym (Hoka Bondi 8)']),
       TimelineItem(time: '7:40-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
       TimelineItem(time: '8:10-8:45 am', title: 'Relax', icon: '📖', details: ['20mg adderall IR']),
       TimelineItem(time: '8:45-12:00 pm', title: 'Study', icon: '📚', details: ['💧 1 bottle water']),
@@ -180,7 +180,7 @@ class DailyPlanData {
       TimelineItem(time: '10:00-10:45 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['2 Magnesium Glycinate capsule', 'Cerave Moisturizer', 'Joseon alpha-arbutin']),
     ],
     'sun': [
-      TimelineItem(time: '7:00-7:30 am', title: 'Wakeup + get ready', icon: '☀️', details: ['get dressed for shopping (NK 9060)', 'brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', '600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:30 am', title: 'Wakeup + get ready', icon: '☀️', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed for shopping (NK 9060)', '600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:30-9:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '9:00-9:30 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '20mg adderall IR', '3 softgel (not serving) omega-3', '1 tbsp peanut butter w/ 1 tiny avocado', '💧 1 bottle water']),
       TimelineItem(time: '9:30-2:00 pm', title: 'Study Time', icon: '📚'),
