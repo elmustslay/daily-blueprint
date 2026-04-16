@@ -13,6 +13,29 @@ class TimelineItem {
 }
 
 class DailyPlanData {
+  /*
+   * SUPPLEMENT DOSAGE & SAFETY LOG:
+   * 
+   * General Assessment: The stack is remarkably well-calibrated and safe. No individual
+   * dosages exceed the tolerable upper intake limits. The combinations are smart (e.g., Zinc balanced with Copper).
+   * 
+   * Morning:
+   * - NAC: 600mg + Selenium: 25mcg (Safe, supports glutathione)
+   * - Citicoline: 250mg + Tyrosine: 25mg (Safe maintenance dose for focus)
+   * - Copper Glycinate: 3mg (Balances the zinc at lunch)
+   * - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
+   * - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
+   * 
+   * Mid-Day:
+   * - Zinc Picolinate: 30mg (Well within the 40mg upper limit, safely balanced by morning Copper)
+   * - D3-K2: 2 capsules providing 2000 IU D3 + 90mcg K2 (Optimal, moderate dose for daily use)
+   * 
+   * Evening/Night:
+   * - Ashwagandha: 2 capsules = 500mg of 25:1 extract (equiv 12500mg root) + 5mg black pepper extract.
+   *   [Safety Note: Research shows 500-600mg is the optimal clinical dose for maximizing testosterone, strength, and muscle hypertrophy. Because this is a high-potency dose, the 8-weeks on / 4-weeks off cycle is mandatory to prevent emotional blunting while keeping maximum gains.]
+   * - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
+   */
+
   // Plan start date — April 13, 2026 (Monday)
   static final DateTime planStartDate = DateTime(2026, 4, 13);
 
