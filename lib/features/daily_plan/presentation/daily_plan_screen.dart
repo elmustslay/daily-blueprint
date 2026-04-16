@@ -123,7 +123,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     
     if (now.weekday == dayIndex && bottlesCount > 0) {
       final wakeMinutes = 7 * 60; // 7:00 AM
-      final stopDrinkingMinutes = 20 * 60 + 30; // 8:30 PM (2hrs prior to 10:30 PM)
+      final stopDrinkingMinutes = 20 * 60; // 8:00 PM
       final currentMinutes = now.hour * 60 + now.minute;
 
       if (currentMinutes < wakeMinutes) {
