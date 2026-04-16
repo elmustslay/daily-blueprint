@@ -161,7 +161,7 @@ class DailyPlanData {
       TimelineItem(time: '10:00-11:00 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['3 Magnesium Glycinate capsule', 'Cerave Moisturizer', 'Retinol Serum']),
     ],
     'sat': [
-      TimelineItem(time: '7:00-7:20 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:20 am', title: 'Wakeup', icon: '☀️'),
       TimelineItem(time: '7:20-7:40 am', title: 'Get Ready', icon: '🚿', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed for gym (Hoka Bondi 8)']),
       TimelineItem(time: '7:40-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter', '3 softgel (not serving) omega-3', '💧 1 bottle water']),
       TimelineItem(time: '8:10-8:45 am', title: 'Relax', icon: '📖', details: ['20mg adderall IR']),
@@ -177,10 +177,10 @@ class DailyPlanData {
       TimelineItem(time: '7:30-8:00 pm', title: 'Dinner', icon: '🍗', details: ['1 serving of my pasta', '💧 1 bottle water']),
       TimelineItem(time: '8:00-9:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop casein protein', '1 tbsp Chia Seeds', '2 cap Ashwagandha']),
       TimelineItem(time: '9:15-10:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['minoxidil treatment brush on beard (wait until face is dry)']),
-      TimelineItem(time: '10:00-10:45 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['2 Magnesium Glycinate capsule', 'Cerave Moisturizer', 'Joseon alpha-arbutin']),
+      TimelineItem(time: '10:00-10:45 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['600mg NAC + 25mcg Selenium', '2 Magnesium Glycinate capsule', 'Cerave Moisturizer', 'Joseon alpha-arbutin']),
     ],
     'sun': [
-      TimelineItem(time: '7:00-7:30 am', title: 'Wakeup + get ready', icon: '☀️', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed for shopping (NK 9060)', '600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:30 am', title: 'Wakeup + get ready', icon: '☀️', details: ['brush teeth', 'wash face + Ascorbyl Glucoside 12% (wait 60s)', 'CeraVe moisturizer', 'get dressed for shopping (NK 9060)']),
       TimelineItem(time: '7:30-9:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '9:00-9:30 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '20mg adderall IR', '3 softgel (not serving) omega-3', '1 tbsp peanut butter w/ 1 tiny avocado', '💧 1 bottle water']),
       TimelineItem(time: '9:30-2:00 pm', title: 'Study Time', icon: '📚'),
@@ -192,7 +192,7 @@ class DailyPlanData {
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🥩', details: ['0.5 lbs top sirloin steak w/ 1/5 (5th) bag spinach', '2 cup (rest) 2% ultra-pasteurized milk']),
       TimelineItem(time: '7:25-8:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop casein protein', '1 tbsp Chia Seeds', '2 cap Ashwagandha', '💧 1 bottle water']),
       TimelineItem(time: '8:00-9:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['Do Dermaroller (No minoxidil)']),
-      TimelineItem(time: '9:00-9:15 pm', title: 'Night Supplement', icon: '🌙', details: ['2 Magnesium Glycinate capsule', 'Cerave Moisturizer']),
+      TimelineItem(time: '9:00-9:15 pm', title: 'Night Supplement', icon: '🌙', details: ['600mg NAC + 25mcg Selenium', '2 Magnesium Glycinate capsule', 'Cerave Moisturizer']),
       TimelineItem(time: '9:15-10:30 pm', title: 'Read/Reflect & Sleep', icon: '😴'),
     ],
   };

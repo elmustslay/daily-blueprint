@@ -49,7 +49,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'oth-2', name: 'Chickpea Fusilli Pasta', subtext: '1 box (need 12oz)'),
       ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (need 1 cup)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 jar (48 oz)'),
-      ShoppingItem(id: 'oth-5', name: 'Peanut butter', subtext: '1 jar'),
       ShoppingItem(id: 'oth-6', name: 'Almonds', subtext: '1 bag (need 1 cup)'),
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 12tbsp)'),
       ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
