@@ -106,4 +106,33 @@ void main() {
     // Prev of Set 1 should be 390.0 (Session 2 is the most recent date)
     expect(await repo.getPrevWeight('legs_3b', 1), 390.0);
   });
+
+  test('updateLogWeight and deleteLog modify the logs correctly', () async {
+    final repo = GymRepositoryImpl();
+    await repo.logWeights('push_1', [100.0], startIndex: 1);
+    
+    var logs = await repo.getLogs('push_1');
+    expect(logs.length, 1);
+    final logId = logs.first.id!;
+    
+    await repo.updateLogWeight(logId, 150.0);
+    logs = await repo.getLogs('push_1');
+    expect(logs.first.weight, 150.0);
+    
+    await repo.deleteLog(logId);
+    logs = await repo.getLogs('push_1');
+    expect(logs.isEmpty, true);
+  });
+
+  test('getAllLogs returns all logs sorted by date descending', () async {
+    final repo = GymRepositoryImpl();
+    await repo.logWeights('push_1', [100.0], startIndex: 1);
+    await Future.delayed(const Duration(milliseconds: 10));
+    await repo.logWeights('legs_1a', [200.0], startIndex: 1);
+    
+    final logs = await repo.getAllLogs();
+    expect(logs.length >= 2, true);
+    // Because it's sorted by date DESC, the most recent should be legs_1a
+    expect(logs.first.exerciseId, 'legs_1a');
+  });
 }

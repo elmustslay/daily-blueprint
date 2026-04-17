@@ -34,6 +34,15 @@ class FakeGymRepository implements GymRepository {
 
   @override
   Future<String> exportAllTrendsCsv() async => "path/to/csv";
+
+  @override
+  Future<void> updateLogWeight(int id, double newWeight) async {}
+
+  @override
+  Future<void> deleteLog(int id) async {}
+
+  @override
+  Future<List<ExerciseLog>> getAllLogs() async => [];
 }
 
 void main() {
@@ -135,7 +144,7 @@ void main() {
   testWidgets('GymPlanScreen sorts active workouts to top, untouched in middle, completed at bottom', (WidgetTester tester) async {
     final repo = FakeGymRepository();
     // GymData.upperADay has 9 exercises.
-    // [0] push_1: 'Machine Chest Press'
+    // [0] push_1: 'Hammer Strength MTS Incline Press'
     // [1] push_2: 'Machine Shoulder Press' (we will set to COMPLETED)
     // [2] pull_1: 'Lat Pulldown Machine'
     // [3] push_3: 'Pec Deck / Machine Fly' (we will set to ACTIVE)
@@ -170,7 +179,7 @@ void main() {
     
     // We expect the new sorted sequence based on Active -> Untouched -> Completed
     expect(titles.first, 'Pec Deck / Machine Fly'); 
-    expect(titles[1], 'Machine Chest Press');
+    expect(titles[1], 'Hammer Strength MTS Incline Press');
     expect(titles[2], 'Lat Pulldown Machine');
     expect(titles[3], 'Machine Reverse Fly / Rear Delt');
     expect(titles[4], 'Tricep Pushdown/Press');

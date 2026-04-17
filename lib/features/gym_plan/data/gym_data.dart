@@ -40,6 +40,9 @@ abstract class GymRepository {
   Future<double?> getMaxWeight(String exerciseId, int setIndex);
   Future<double?> getPrevWeight(String exerciseId, int setIndex);
   Future<String> exportAllTrendsCsv();
+  Future<void> updateLogWeight(int id, double newWeight);
+  Future<void> deleteLog(int id);
+  Future<List<ExerciseLog>> getAllLogs();
 }
 
 // --- Data ---
@@ -151,6 +154,31 @@ class GymRepositoryImpl implements GymRepository {
     await file.writeAsString(buffer.toString());
     return file.path;
   }
+
+  @override
+  Future<void> updateLogWeight(int id, double newWeight) async {
+    final db = await SqliteDb.instance;
+    await db.update('logs', {'weight': newWeight}, where: 'id = ?', whereArgs: [id]);
+  }
+
+  @override
+  Future<void> deleteLog(int id) async {
+    final db = await SqliteDb.instance;
+    await db.delete('logs', where: 'id = ?', whereArgs: [id]);
+  }
+
+  @override
+  Future<List<ExerciseLog>> getAllLogs() async {
+    final db = await SqliteDb.instance;
+    final maps = await db.query('logs', orderBy: 'date DESC');
+    return maps.map((e) => ExerciseLog(
+      id: e['id'] as int,
+      exerciseId: e['exercise_id'] as String,
+      weight: e['weight'] as double,
+      date: DateTime.parse(e['date'] as String),
+      setIndex: e['set_index'] != null ? e['set_index'] as int : 1,
+    )).toList();
+  }
 }
 
 final gymRepoProvider = Provider<GymRepository>((ref) => GymRepositoryImpl());
@@ -177,8 +205,8 @@ class GymData {
   // Upper A (Monday) - Chest & Shoulder emphasis
   static const List<Exercise> upperADay = [
     Exercise(
-      id: 'push_1', name: 'Machine Chest Press', sets: '4', reps: '6-8', rest: '2-3 min',
-      tip: '🎯 Focus: Feel it in your chest (pecs).\n\n💡 How to do it: Adjust seat height so handles are level with the middle of your chest. Drop your shoulders down and squeeze your shoulder blades back (like pinching a pencil).\n\n⚠️ Common Pitfall: Flaring elbows out to 90 degrees. Tuck your elbows slightly to a 45-60 degree angle to protect your shoulders.',
+      id: 'push_1', name: 'Hammer Strength MTS Incline Press', sets: '4', reps: '6-8', rest: '2-3 min',
+      tip: '🎯 Focus: Upper chest (clavicular head) for that "armor-plate" look.\n\n💡 How to do it: Adjust seat height so handles align near your upper chest/collarbone. Keep shoulders pinned back. The MTS allows each arm to work independently and converges inward—squeeze hard at the peak!\n\n⚠️ Common Pitfall: Letting your shoulders roll forward at the top of the press. Keep your chest up and shoulder blades bolted into the pad the entire time.',
     ),
     Exercise(
       id: 'push_2', name: 'Machine Shoulder Press', sets: '3', reps: '6-8', rest: '2-3 min',
@@ -249,8 +277,8 @@ class GymData {
   // Upper B (Thursday) - Back & Arms emphasis
   static const List<Exercise> upperBDay = [
     Exercise(
-      id: 'pull_2', name: 'Machine Seated Row / Hammer MTS', sets: '3', reps: '8-12', rest: '2-3 min',
-      tip: '🎯 Focus: Mid-back (rhomboids, traps) for "thickness".\n\n💡 How to do it: Keep back straight and chest up. Pull the handles toward your navel, squeezing shoulder blades together like cracking a walnut between them.\n\n⚠️ Common Pitfall: Rounding your lower back and yanking with your biceps. Use a controlled steady pull from your back muscles.',
+      id: 'pull_2', name: 'Machine Seated Row', sets: '3', reps: '8-12', rest: '2-3 min',
+      tip: '🎯 Focus: Lats and Mid-back for V-taper width and back thickness.\n\n💡 How to do it: Adjust the chest pad so you get a deep stretch when reaching for the handles. Keep your chest firmly glued to the pad. Drive your elbows straight back and down toward your hips (think of your hands as just hooks).\n\n⚠️ Common Pitfall: Pulling your chest off the pad to use momentum, or shrugging your shoulders up. Keep shoulders pinned down and torso completely frozen against the pad.',
     ),
     Exercise(
       id: 'pull_3', name: 'Hammer Strength MTS Front Pulldown', sets: '3', reps: '8-12', rest: '2-3 min',

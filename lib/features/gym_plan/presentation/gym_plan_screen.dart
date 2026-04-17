@@ -4,6 +4,8 @@ import 'package:share_plus/share_plus.dart';
 import '../data/gym_data.dart';
 import '../../daily_plan/data/daily_plan_data.dart';
 import 'gym_stats_screen.dart';
+import 'gym_logs_editor_screen.dart';
+
 
 // Provides max and prev weight tuple
 typedef PastWeightArg = ({String exerciseId, int setIndex});
@@ -98,6 +100,18 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
       appBar: AppBar(
         title: const Text('El\'s Workout Plan'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            tooltip: 'Edit Logs',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const GymLogsEditorScreen()),
+              ).then((_) {
+                ref.invalidate(pastWeightsProvider);
+                ref.invalidate(todayLogCountProvider);
+              });
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.download),
             tooltip: 'Export Trends',
