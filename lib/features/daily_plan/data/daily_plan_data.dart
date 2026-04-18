@@ -28,7 +28,7 @@ class DailyPlanData {
    * 
    * Mid-Day:
    * - Zinc Picolinate: 30mg (Well within the 40mg upper limit, safely balanced by morning Copper)
-   * - D3-K2: 2 capsules providing 2000 IU D3 + 90mcg K2 (Optimal, moderate dose for daily use)
+   * - D3-K2: 1 capsule providing 5000 IU D3 + 100mcg K2 (MK-7) (Optimal, high dose for melanin-rich indoor lifestyle)
    * 
    * Evening/Night:
    * - Ashwagandha: 2 capsules = 500mg of 25:1 extract (equiv 12500mg root) + 5mg black pepper extract.
@@ -74,10 +74,10 @@ class DailyPlanData {
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed (NK 9060/Bondi)', '6. Wash hands -> Apply sunscreen (face first, then neck)']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ 1/5 bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter']),
-      TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '2tsp husk', 'kindle/laptop', '2 D3-K2 capsules', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
+      TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '2tsp husk', 'kindle/laptop', '1 D3-K2', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
       TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
       TimelineItem(time: '9:00-12:00 pm', title: 'Work', icon: '💻'),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '1 D3-K2']),
       TimelineItem(time: '12:30-5:00 pm', title: 'Work', icon: '💻', details: ['2 tsp husk at 2:30pm']),
       TimelineItem(time: '5:00-5:30 pm', title: 'Commute To Gym', icon: '🚗', details: ['micellar wipe + reapply sunscreen', '1 banana (pre-workout)']),
       TimelineItem(time: '5:30-7:00 pm', title: 'Gym Session (Upper A)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
@@ -95,7 +95,7 @@ class DailyPlanData {
       TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 2 scrambled eggs w/ 1/5 (2nd) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3']),
       TimelineItem(time: '8:10-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb prepped chicken (divide in 4, 4 fridge)']),
       TimelineItem(time: '9:05-12:00 pm', title: 'Work', icon: '💻', details: ['Laundry + Dishwasher']),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '1 D3-K2']),
       TimelineItem(time: '12:30-4:00 pm', title: 'Work', icon: '💻', details: ['Laundry + Dishwasher']),
       TimelineItem(time: '4:00-4:15 pm', title: 'Snack Break', icon: '🥤', details: ['1/3 container Raspberries', '1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)']),
       TimelineItem(time: '4:15-5:00 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, study or work']),
@@ -110,10 +110,10 @@ class DailyPlanData {
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed (cloud x 4)', '6. Wash hands -> Apply sunscreen (face first, then neck)']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter']),
-      TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '1tsp husk', 'kindle/laptop', '2 D3-K2 capsules', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
+      TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '1tsp husk', 'kindle/laptop', '1 D3-K2', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
       TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
       TimelineItem(time: '9:00-12:00 pm', title: 'Work', icon: '💻'),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '1 D3-K2']),
       TimelineItem(time: '12:30-5:00 pm', title: 'Work', icon: '💻', details: ['1 tsp husk at 2:30pm']),
       TimelineItem(time: '5:00-5:30 pm', title: 'Commute To Gym', icon: '🚗', details: ['micellar wipe + reapply sunscreen', '1 banana (pre-workout)']),
       TimelineItem(time: '5:30-7:30 pm', title: 'Gym Session (Lower A)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
@@ -130,7 +130,7 @@ class DailyPlanData {
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 2 scrambled eggs w/ 1/5 (3rd) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3']),
       TimelineItem(time: '8:10-12:00 pm', title: 'Work', icon: '💻', details: ['Laundry + Dishwasher']),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '1 D3-K2']),
       TimelineItem(time: '12:30-4:00 pm', title: 'Work', icon: '💻', details: ['Laundry + Dishwasher']),
       TimelineItem(time: '4:00-4:15 pm', title: 'Snack Break', icon: '🥤', details: ['1/3 (2nd) container Raspberries', '1 banana (pre-workout)']),
       TimelineItem(time: '4:15-5:30 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, work or study']),
@@ -146,10 +146,10 @@ class DailyPlanData {
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed (cloud x 4)', '6. Wash hands -> Apply sunscreen (face first, then neck)']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ 1/5 (4th) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter']),
-      TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '1tsp husk', 'kindle/laptop', '2 D3-K2 capsules', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
+      TimelineItem(time: '8:25-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['1 cap Zinc Picolinate', 'Pasta lunch', '1tsp husk', 'kindle/laptop', '1 D3-K2', 'gym outfit', 'micellar wipes', 'sunscreen', '1 banana', '2 key/wallet/phone', 'airpods', 'water bottle']),
       TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
       TimelineItem(time: '9:00-12:00 pm', title: 'Work', icon: '💻'),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🥗', details: ['1 cap Zinc Picolinate (30mg)', '1 serving of my pasta', '1 D3-K2']),
       TimelineItem(time: '12:30-5:00 pm', title: 'Work', icon: '💻', details: ['1 tsp husk at 2:30pm']),
       TimelineItem(time: '5:00-5:30 pm', title: 'Commute to Gym', icon: '🚗', details: ['micellar wipe + reapply sunscreen', '1 banana (pre-workout)']),
       TimelineItem(time: '5:30-7:30 pm', title: 'Gym Session (Lower B)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
@@ -166,7 +166,7 @@ class DailyPlanData {
       TimelineItem(time: '7:40-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter', '3 softgel (not serving) omega-3']),
       TimelineItem(time: '8:10-8:45 am', title: 'Relax', icon: '📖', details: ['20mg adderall IR']),
       TimelineItem(time: '8:45-12:00 pm', title: 'Study', icon: '📚'),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1 cap Zinc Picolinate (30mg)', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1 cap Zinc Picolinate (30mg)', '1 D3-K2']),
       TimelineItem(time: '12:30-1:30 pm', title: 'Study', icon: '📚'),
       TimelineItem(time: '1:30-1:40 pm', title: 'Snack Break', icon: '🥤', details: ['1/4 cup almonds', '1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)']),
       TimelineItem(time: '1:40-2:00 pm', title: 'Reflection/Revision', icon: '🔄', details: ['Has this plan been working?']),
@@ -184,7 +184,7 @@ class DailyPlanData {
       TimelineItem(time: '7:30-9:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '9:00-9:30 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '20mg adderall IR', '3 softgel (not serving) omega-3', '1 tbsp peanut butter w/ 1 tiny avocado']),
       TimelineItem(time: '9:30-2:00 pm', title: 'Study Time', icon: '📚'),
-      TimelineItem(time: '2:00-2:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1/4 cup almonds', '1 cap Zinc Picolinate (30mg)', '2 D3-K2 supplement capsule']),
+      TimelineItem(time: '2:00-2:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1/4 cup almonds', '1 cap Zinc Picolinate (30mg)', '1 D3-K2']),
       TimelineItem(time: '2:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: ['wash hand + put on sunscreen', 'check what I have before going', "Trader Joe's (all groceries are bought there)", '1 scoop Greens Powder']),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking', icon: '🧑‍🍳', details: ['4tsp husk at 4:30pm', '12oz chickpea fusilli pasta + 3lb ground turkey + 48oz marinara sauce + 2 can lentils + 2/4 cup nutritional yeast + 6 full chopped bell peppers (divide in 6, for fridge)', '1lb Wild Sockeye Salmon (divide in 3, 3 fridge)', 'PREP FOR TUE: Dice 1lb chicken + mix w/ seasonings (store in airtight container)']),
       TimelineItem(time: '6:00-6:15 pm', title: 'Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '5g creatine', '1/3 (3rd) container Raspberries']),
