@@ -13,12 +13,13 @@ class WeightTrackScreen extends ConsumerStatefulWidget {
 
 class _WeightTrackScreenState extends ConsumerState<WeightTrackScreen> {
   final _controller = TextEditingController();
-  bool _isSunday = false;
+  bool _isMorning = false;
 
   @override
   void initState() {
     super.initState();
-    _isSunday = DateTime.now().weekday == DateTime.sunday;
+    final hour = DateTime.now().hour;
+    _isMorning = hour >= 6 && hour < 10;
   }
 
   @override
@@ -45,7 +46,7 @@ class _WeightTrackScreenState extends ConsumerState<WeightTrackScreen> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        if (_isSunday)
+        if (_isMorning)
           Container(
             margin: const EdgeInsets.only(bottom: 16),
             padding: const EdgeInsets.all(14),
@@ -60,7 +61,7 @@ class _WeightTrackScreenState extends ConsumerState<WeightTrackScreen> {
                 SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    "It's Sunday — time to weigh in!",
+                    "Good morning — time to weigh in!",
                     style: TextStyle(color: Colors.amber, fontWeight: FontWeight.w600, fontSize: 15),
                   ),
                 ),
