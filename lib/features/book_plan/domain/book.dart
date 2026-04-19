@@ -23,6 +23,14 @@ class Book {
   }
 
   int expectedProgressForToday(int currentWeek) {
+    return calculateProgressForDay(currentWeek, DateTime.now().weekday);
+  }
+
+  int expectedProgressForYesterday(int currentWeek) {
+    return calculateProgressForDay(currentWeek, (DateTime.now().weekday - 1).clamp(0, 7));
+  }
+
+  int calculateProgressForDay(int currentWeek, int weekday) {
     if (currentWeek < startWeek) return 0;
     
     int lastWeekProgress = expectedProgressForWeek(currentWeek - 1);
@@ -31,9 +39,10 @@ class Book {
     int diff = thisWeekTarget - lastWeekProgress;
     if (diff <= 0) return thisWeekTarget;
     
-    int weekday = DateTime.now().weekday; // 1 = Mon ... 7 = Sun
-    int expectedToday = lastWeekProgress + ((diff / 7.0) * weekday).round();
-    return expectedToday.clamp(0, 100);
+    if (weekday <= 0) return lastWeekProgress;
+    
+    int expectedForDay = lastWeekProgress + ((diff / 7.0) * weekday).round();
+    return expectedForDay.clamp(0, 100);
   }
 }
 

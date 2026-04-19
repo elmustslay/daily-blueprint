@@ -117,39 +117,51 @@ class _BookPlanScreenState extends ConsumerState<BookPlanScreen> {
     
     final expectedEOW = book.expectedProgressForWeek(currentWeek);
     final expectedToday = book.expectedProgressForToday(currentWeek);
+    final expectedYesterday = book.expectedProgressForYesterday(currentWeek);
     
     bool isActive = currentWeek >= book.startWeek && currentWeek < (book.startWeek + book.expectedDurationWeeks);
     bool isPast = currentWeek >= (book.startWeek + book.expectedDurationWeeks);
     
     Color statusColor;
-    String statusText;
+    Widget statusWidget;
     
     if (currentProgress == 100) {
       statusColor = Colors.greenAccent;
-      statusText = 'Completed';
+      statusWidget = Text('Completed', style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.bold));
     } else if (currentWeek < book.startWeek) {
       statusColor = Colors.grey;
-      statusText = 'Starts Week ${book.startWeek}';
+      statusWidget = Text('Starts Week ${book.startWeek}', style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.bold));
     } else {
-      if (currentProgress >= expectedEOW) {
-        statusColor = Colors.blueAccent;
-        statusText = 'On Track ($expectedEOW% due EOW)';
-      } else if (currentProgress >= expectedToday) {
-        statusColor = Colors.blueAccent;
-        statusText = 'On Track ($expectedToday% expected today and $expectedEOW% due EOW)';
+      Color todayColor;
+      if (currentProgress >= expectedToday) {
+        todayColor = Colors.blueAccent;
+      } else if (currentProgress >= expectedYesterday) {
+        todayColor = Colors.amberAccent;
       } else {
-        // If the expected progress includes this week's target, show yellow
-        // (user still has the rest of the week to catch up).
-        // Red only if behind on a deadline that already passed.
-        final lastWeekExpected = book.expectedProgressForWeek(currentWeek - 1);
-        if (currentProgress >= lastWeekExpected) {
-          statusColor = Colors.amberAccent;
-          statusText = 'Due this week ($expectedToday% expected today and $expectedEOW% due EOW)';
-        } else {
-          statusColor = Colors.redAccent;
-          statusText = 'Behind ($expectedToday% expected today and $expectedEOW% due EOW)';
-        }
+        todayColor = Colors.redAccent;
       }
+
+      Color eowColor;
+      final lastWeekExpected = book.expectedProgressForWeek(currentWeek - 1);
+      if (currentProgress >= expectedEOW) {
+        eowColor = Colors.blueAccent;
+      } else if (currentProgress >= lastWeekExpected) {
+        eowColor = Colors.amberAccent;
+      } else {
+        eowColor = Colors.redAccent;
+      }
+
+      statusColor = todayColor;
+      statusWidget = RichText(
+        text: TextSpan(
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          children: [
+            TextSpan(text: '$expectedToday% today', style: TextStyle(color: todayColor)),
+            const TextSpan(text: ' ; ', style: TextStyle(color: Colors.white70)),
+            TextSpan(text: '$expectedEOW% EOW', style: TextStyle(color: eowColor)),
+          ],
+        ),
+      );
     }
 
     return InkWell(
@@ -206,10 +218,7 @@ class _BookPlanScreenState extends ConsumerState<BookPlanScreen> {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Text(
-                  statusText,
-                  style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.bold),
-                )
+                statusWidget
               ],
             )
           ],
