@@ -70,7 +70,7 @@ class DailyPlanData {
 
   static const Map<String, List<TimelineItem>> schedules = {
     'mon': [
-      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. 600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed (NK 9060/Bondi)', '6. Wash hands -> Apply sunscreen (face first, then neck)']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ 1/5 bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter']),
@@ -90,7 +90,7 @@ class DailyPlanData {
       TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
     ],
     'tue': [
-      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. 600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed', '6. NO sunscreen']),
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 2 scrambled eggs w/ 1/5 (2nd) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3']),
@@ -108,7 +108,7 @@ class DailyPlanData {
       TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
     ],
     'wed': [
-      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. 600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed (cloud x 4)', '6. Wash hands -> Apply sunscreen (face first, then neck)']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter']),
@@ -128,7 +128,7 @@ class DailyPlanData {
       TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
     ],
     'thu': [
-      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. 600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed', '6. NO sunscreen']),
       TimelineItem(time: '7:15-7:45 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '7:45-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 2 scrambled eggs w/ 1/5 (3rd) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cup 2% ultra-pasteurized milk w/ 1 tiny avocado', '3 softgel (not serving) omega-3']),
@@ -146,7 +146,7 @@ class DailyPlanData {
       TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
     ],
     'fri': [
-      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['600mg NAC + 25mcg Selenium']),
+      TimelineItem(time: '7:00-7:05 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. 600mg NAC + 25mcg Selenium']),
       TimelineItem(time: '7:05-7:25 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed (cloud x 4)', '6. Wash hands -> Apply sunscreen (face first, then neck)']),
       TimelineItem(time: '7:25-8:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '8:00-8:25 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ 1/5 (4th) bag spinach', '1 capsule citicoline', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado', '2 cup 2% ultra-pasteurized milk w/ 2 tbsp peanut butter']),
@@ -166,7 +166,7 @@ class DailyPlanData {
       TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
     ],
     'sat': [
-      TimelineItem(time: '7:00-7:20 am', title: 'Wakeup', icon: '☀️'),
+      TimelineItem(time: '7:00-7:20 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)']),
       TimelineItem(time: '7:20-7:40 am', title: 'Get Ready', icon: '🚿', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed for gym (Hoka Bondi 8)']),
       TimelineItem(time: '7:40-8:10 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs w/ .5 mushroom', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 tiny avocado w/ 2 tbsp peanut butter', '3 softgel (not serving) omega-3']),
       TimelineItem(time: '8:10-8:45 am', title: 'Relax', icon: '📖', details: ['20mg adderall IR']),
@@ -186,7 +186,7 @@ class DailyPlanData {
       TimelineItem(time: '10:15-10:45 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
     ],
     'sun': [
-      TimelineItem(time: '7:00-7:30 am', title: 'Wakeup + get ready', icon: '☀️', details: ['1. Brush teeth', '2. Wash face -> PAT DRY', '3. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '4. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '5. Get dressed for shopping (NK 9060)']),
+      TimelineItem(time: '7:00-7:30 am', title: 'Wakeup + get ready', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Brush teeth', '4. Wash face -> PAT DRY', '5. Apply Ascorbyl 12%: 3 drops on face first, then 1 drop on neck -> WAIT 60-90s', '6. Wash hands -> Apply CeraVe moisturizer (face first, then neck) -> WAIT 1-2m', '7. Get dressed for shopping (NK 9060)']),
       TimelineItem(time: '7:30-9:00 am', title: 'Morning Reading', icon: '📖', details: ['reading']),
       TimelineItem(time: '9:00-9:30 am', title: 'Breakfast', icon: '🍳', details: ['1tsp oil + 3 scrambled eggs', '1 cap Copper Glycinate (3mg)', '1 cap Biotin+Keratin (10mg/500mg)', '20mg adderall IR', '3 softgel (not serving) omega-3', '1 tbsp peanut butter w/ 1 tiny avocado']),
       TimelineItem(time: '9:30-2:00 pm', title: 'Study Time', icon: '📚'),
