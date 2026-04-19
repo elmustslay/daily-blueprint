@@ -21,6 +21,20 @@ class Book {
     if (weeksIn >= expectedDurationWeeks) return 100;
     return (weeksIn * weeklyGoalPercent).clamp(0, 100);
   }
+
+  int expectedProgressForToday(int currentWeek) {
+    if (currentWeek < startWeek) return 0;
+    
+    int lastWeekProgress = expectedProgressForWeek(currentWeek - 1);
+    int thisWeekTarget = expectedProgressForWeek(currentWeek);
+    
+    int diff = thisWeekTarget - lastWeekProgress;
+    if (diff <= 0) return thisWeekTarget;
+    
+    int weekday = DateTime.now().weekday; // 1 = Mon ... 7 = Sun
+    int expectedToday = lastWeekProgress + ((diff / 7.0) * weekday).round();
+    return expectedToday.clamp(0, 100);
+  }
 }
 
 class ReadingTrack {

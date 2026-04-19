@@ -115,7 +115,8 @@ class _BookPlanScreenState extends ConsumerState<BookPlanScreen> {
     final progressMap = ref.watch(bookProgressProvider);
     final currentProgress = progressMap[book.id] ?? 0;
     
-    final expectedProgress = book.expectedProgressForWeek(currentWeek);
+    final expectedEOW = book.expectedProgressForWeek(currentWeek);
+    final expectedToday = book.expectedProgressForToday(currentWeek);
     
     bool isActive = currentWeek >= book.startWeek && currentWeek < (book.startWeek + book.expectedDurationWeeks);
     bool isPast = currentWeek >= (book.startWeek + book.expectedDurationWeeks);
@@ -130,9 +131,12 @@ class _BookPlanScreenState extends ConsumerState<BookPlanScreen> {
       statusColor = Colors.grey;
       statusText = 'Starts Week ${book.startWeek}';
     } else {
-      if (currentProgress >= expectedProgress) {
+      if (currentProgress >= expectedEOW) {
         statusColor = Colors.blueAccent;
-        statusText = 'On Track ($expectedProgress% expected)';
+        statusText = 'On Track ($expectedEOW% due EOW)';
+      } else if (currentProgress >= expectedToday) {
+        statusColor = Colors.blueAccent;
+        statusText = 'On Track ($expectedToday% expected today and $expectedEOW% due EOW)';
       } else {
         // If the expected progress includes this week's target, show yellow
         // (user still has the rest of the week to catch up).
@@ -140,10 +144,10 @@ class _BookPlanScreenState extends ConsumerState<BookPlanScreen> {
         final lastWeekExpected = book.expectedProgressForWeek(currentWeek - 1);
         if (currentProgress >= lastWeekExpected) {
           statusColor = Colors.amberAccent;
-          statusText = 'Due this week ($expectedProgress% expected)';
+          statusText = 'Due this week ($expectedToday% expected today and $expectedEOW% due EOW)';
         } else {
           statusColor = Colors.redAccent;
-          statusText = 'Behind ($expectedProgress% expected)';
+          statusText = 'Behind ($expectedToday% expected today and $expectedEOW% due EOW)';
         }
       }
     }
