@@ -26,7 +26,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
   List<ShoppingItem> build() {
     final initialItems = [
       // Produce
-      ShoppingItem(id: 'prod-2', name: 'Avocados ("teeny tiny")', subtext: '6 (find ripe)'),
       ShoppingItem(id: 'prod-3', name: 'Bell Peppers', subtext: '2 pack (6)'),
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
       ShoppingItem(id: 'prod-5', name: 'Mushrooms', subtext: '1 container (/2)'),
@@ -42,7 +41,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Dairy
       ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '2 dozen'),
       ShoppingItem(id: 'dairy-2', name: '2% Ultra-Pasteurized Milk', subtext: '.5 gallon'),
-      ShoppingItem(id: 'dairy-3', name: 'Butter', subtext: '1 stick'),
 
       // Others
       ShoppingItem(id: 'oth-1', name: 'Canned Lentils', subtext: '2 containers'),
