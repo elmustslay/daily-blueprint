@@ -209,8 +209,8 @@ class GymData {
       tip: '🎯 Focus: Upper chest (clavicular head) for that "armor-plate" look.\n\n💡 How to do it: Adjust seat height so handles align near your upper chest/collarbone. Keep shoulders pinned back. The MTS allows each arm to work independently and converges inward—squeeze hard at the peak!\n\n⚠️ Common Pitfall: Letting your shoulders roll forward at the top of the press. Keep your chest up and shoulder blades bolted into the pad the entire time.',
     ),
     Exercise(
-      id: 'push_2', name: 'Machine Shoulder Press', sets: '3', reps: '6-8', rest: '2-3 min',
-      tip: '🎯 Focus: Front and side of your shoulders.\n\n💡 How to do it: Keep your back flat against the pad without excessively arching your lower back. Brace your core tightly.\n\n⚠️ Common Pitfall: Setting the seat too low. Handles should start at or just above shoulder level. If they start at your chest, you are turning it into an incline chest press.',
+      id: 'push_2', name: 'Dumbbell Lateral Raise', sets: '3', reps: '10-15', rest: '1-2 min',
+      tip: '🎯 Focus: The side deltoid (shoulder cap) to widen the upper body and create the V-Taper.\n\n💡 How to do it: Lean slightly forward. Raise the dumbbells out to the sides until shoulder height, leading with your elbows. Imagine you are pouring water out of two pitchers at the top.\n\n⚠️ Common Pitfall: Shrugging your shoulders up to your ears, which shifts the work to your traps. Keep your shoulder blades pinned down.',
     ),
     Exercise(
       id: 'pull_1', name: 'Lat Pulldown Machine', sets: '3', reps: '8-12', rest: '2-3 min',
@@ -239,6 +239,10 @@ class GymData {
     Exercise(
       id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+    ),
+    Exercise(
+      id: 'stretch_upper_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
+      tip: 'Upper Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Pec/Chest Stretch: Place forearm on a doorframe/rack at 90 degrees and lean forward until you feel a deep stretch in your chest.\n2️⃣ Lat/Back Stretch: Grab a vertical pole with one hand, sit hips back, and let it pull your arm overhead.\n3️⃣ Tricep Stretch: Reach hand behind your neck and gently pull the elbow back with your other hand.\n4️⃣ Posture Reset: Dead hang from a pull-up bar for 30-45 seconds to decompress your spine.',
     ),
   ];
 
@@ -271,6 +275,10 @@ class GymData {
     Exercise(
       id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+    ),
+    Exercise(
+      id: 'stretch_lower_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
+      tip: 'Lower Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Hip Flexor Lunge: Kneel on one knee, squeeze the glute on the grounded leg, and push hips forward.\n2️⃣ Hamstring Stretch: Put foot on a low bench and gently hinge forward at the hips with a flat back.\n3️⃣ Couch Stretch (Quads): Put shin against a wall/bench, knee on the floor, and sit upright.\n4️⃣ Calf/Ankle Mobilization: Stand on a ledge, let heels drop deep, and hold the stretch to prevent Achilles tightness.',
     ),
   ];
 
@@ -308,6 +316,10 @@ class GymData {
       id: 'bw_1b', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
+    Exercise(
+      id: 'stretch_upper_b', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
+      tip: 'Upper Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Pec/Chest Stretch: Place forearm on a doorframe/rack at 90 degrees and lean forward until you feel a deep stretch in your chest.\n2️⃣ Lat/Back Stretch: Grab a vertical pole with one hand, sit hips back, and let it pull your arm overhead.\n3️⃣ Tricep Stretch: Reach hand behind your neck and gently pull the elbow back with your other hand.\n4️⃣ Posture Reset: Dead hang from a pull-up bar for 30-45 seconds to decompress your spine.',
+    ),
   ];
 
   // Lower B (Friday) - Hamstring & Glute Focus
@@ -343,6 +355,10 @@ class GymData {
     Exercise(
       id: 'bw_1c', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+    ),
+    Exercise(
+      id: 'stretch_lower_b', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
+      tip: 'Lower Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Hip Flexor Lunge: Kneel on one knee, squeeze the glute on the grounded leg, and push hips forward.\n2️⃣ Hamstring Stretch: Put foot on a low bench and gently hinge forward at the hips with a flat back.\n3️⃣ Couch Stretch (Quads): Put shin against a wall/bench, knee on the floor, and sit upright.\n4️⃣ Calf/Ankle Mobilization: Stand on a ledge, let heels drop deep, and hold the stretch to prevent Achilles tightness.',
     ),
   ];
 }

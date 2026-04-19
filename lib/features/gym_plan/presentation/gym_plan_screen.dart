@@ -214,8 +214,10 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // ── Tuesday LISS ──
+        // ── The Aesthetic Zone 2 Blueprint ──
         Card(
+          elevation: 4,
+          shadowColor: Colors.blueAccent.withValues(alpha: 0.2),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -224,141 +226,37 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
                 Row(
                   children: [
                     const Expanded(
-                      child: Text('🚶 LISS — Incline Walk + Stretch', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                      child: Text('🚶 The Aesthetic Fat-Burner (Zone 2)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.greenAccent.withValues(alpha: 0.15),
+                        color: Colors.blueAccent.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.4)),
+                        border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.4)),
                       ),
-                      child: const Text('Tuesday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
+                      child: const Text('Tue & Sat', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.blueAccent)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                const Text('⌚ Apple Watch → Workout → Indoor Walk (treadmill) or Outdoor Walk', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
+                const Text('⌚ Apple Watch → Workout → Indoor Walk', style: TextStyle(color: Colors.cyanAccent, fontSize: 13, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
-                const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                const Text('Step-by-Step Execution:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
                 const SizedBox(height: 8),
                 const Text(
-                  '1️⃣ INCLINE WALK (30 min)\n'
-                  '   • Treadmill: Speed 3.0-3.5 mph, Incline 8-12%\n'
-                  '   • OR outdoor: Find a hilly route or walk briskly\n'
-                  '   • Goal: Stay in Heart Rate Zone 2 the ENTIRE time (120-140 bpm)\n'
-                  '   • You should be able to hold a conversation but feel slightly winded\n'
-                  '   • ⚠️ If HR goes above 150, you\'re going too fast — slow down\n'
-                  '   • ⚠️ If HR stays below 110, bump incline up or walk faster\n\n'
-                  '2️⃣ STRETCH & MOBILITY (15 min)\n'
-                  '   • Quad stretch (30 sec/side) — pull heel to glute\n'
-                  '   • Hamstring stretch (30 sec/side) — foot on bench, lean forward\n'
-                  '   • Hip flexor lunge stretch (30 sec/side)\n'
-                  '   • Calf stretch against wall (30 sec/side)\n'
-                  '   • Cat-cow spinal mobility (10 reps)\n'
-                  '   • World\'s greatest stretch (5/side)\n\n'
-                  '📊 After: Check Apple Watch — you want 25+ min in Zone 2. Fat burn is maximized here.',
-                  style: TextStyle(color: Colors.white70, height: 1.6),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        // ── Saturday HIIT ──
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text('🔥 HIIT — Sprint Intervals', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.redAccent.withValues(alpha: 0.4)),
-                      ),
-                      child: const Text('Saturday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.redAccent)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                const Text('⌚ Apple Watch → Workout → HIIT', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
-                const SizedBox(height: 12),
-                const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
-                const SizedBox(height: 8),
-                const Text(
-                  '1️⃣ WARM-UP (5 min)\n'
-                  '   • Brisk walk on treadmill, speed 3.0-3.5 mph\n'
-                  '   • Goal: Heart Rate Zone 2 (110-140 bpm)\n'
-                  '   • Loosen up legs, get blood flowing\n\n'
-                  '2️⃣ SPRINT INTERVALS — 8 Rounds (20 min)\n'
-                  '   For each round:\n'
-                  '   • 🏃 SPRINT 30 sec: Treadmill speed 8-10 mph (or outdoor all-out sprint)\n'
-                  '   • Goal: Heart Rate Zone 4-5 (160-180+ bpm)\n'
-                  '   • 🚶 WALK 90 sec: Drop speed to 3.0 mph\n'
-                  '   • Goal: Let HR drop to Zone 2-3 (120-140 bpm) before next sprint\n'
-                  '   • If HR doesn\'t drop below 150 by the walk end, rest 30 sec longer\n\n'
-                  '3️⃣ COOL-DOWN (5 min)\n'
-                  '   • Walk at 2.5-3.0 mph, gradually slowing\n'
-                  '   • Goal: Heart Rate back to Zone 1 (<110 bpm)\n'
-                  '   • Light static stretches for quads, hamstrings, calves\n\n'
-                  '📊 After: Check Apple Watch summary — aim for 15+ min in Zone 4-5 over time.',
-                  style: TextStyle(color: Colors.white70, height: 1.6),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        // ── Sunday LISS ──
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text('🚶 LISS — Outdoor Walk + Stretch', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.4)),
-                      ),
-                      child: const Text('Sunday', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.greenAccent)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                const Text('⌚ Apple Watch → Workout → Outdoor Walk', style: TextStyle(color: Colors.cyanAccent, fontSize: 13)),
-                const SizedBox(height: 12),
-                const Text('Step-by-Step:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
-                const SizedBox(height: 8),
-                const Text(
-                  '1️⃣ BRISK WALK (30 min)\n'
-                  '   • Walk briskly around the neighborhood\n'
-                  '   • Goal: Stay in Heart Rate Zone 2 (120-140 bpm)\n'
-                  '   • You should be able to hold a conversation but feel slightly winded\n'
-                  '   • ⚠️ If HR goes above 150, slow down\n'
-                  '   • ⚠️ If HR stays below 110, pick up the pace\n\n'
-                  '2️⃣ STRETCH & MOBILITY (10 min)\n'
-                  '   • Quad stretch (30 sec/side)\n'
-                  '   • Hamstring stretch (30 sec/side)\n'
-                  '   • Hip flexor lunge stretch (30 sec/side)\n'
-                  '   • Calf stretch against wall (30 sec/side)\n'
-                  '   • Cat-cow spinal mobility (10 reps)\n\n'
-                  '📊 After: Check Apple Watch — you want 25+ min in Zone 2.',
+                  '1️⃣ THE SETUP (40 mins)\n'
+                  '   • Machine: Incline Treadmill\n'
+                  '   • Incline: 10% - 15% (as high as comfortable)\n'
+                  '   • Speed: 2.5 - 3.2 mph (Do NOT jog, just a brisk walk)\n\n'
+                  '2️⃣ THE GOLDEN RULES (Aesthetics)\n'
+                  '   • 🚫 DO NOT hold the handrails. Pump your arms. Holding on burns 30% fewer calories.\n'
+                  '   • Swipe left on your Apple Watch to view the live Heart Rate Zones.\n'
+                  '   • Your target is strictly Zone 2 (120 - 140 bpm).\n\n'
+                  '3️⃣ LIVE TROUBLESHOOTING\n'
+                  '   • If your HR hits 145+ (Zone 3), flatten the incline slightly or slow down.\n'
+                  '   • If your HR drops to 110 (Zone 1), crank the incline to MAX.\n'
+                  '   • Result: You will sweat heavily but be able to hold a conversation without gasping. This strips pure facial/belly fat without burning muscle or causing cortisol bloating.',
                   style: TextStyle(color: Colors.white70, height: 1.6),
                 ),
               ],
@@ -377,10 +275,10 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
                 const SizedBox(height: 12),
                 const Text(
                   'Zone 1 (50-60%): < 110 bpm — Very light, warm-up/cool-down\n'
-                  'Zone 2 (60-70%): 110-140 bpm — Fat burning, conversation pace\n'
-                  'Zone 3 (70-80%): 140-160 bpm — Moderate effort, breathing harder\n'
-                  'Zone 4 (80-90%): 160-175 bpm — Hard effort, can\'t talk much\n'
-                  'Zone 5 (90-100%): 175-198 bpm — Max effort, sprint pace\n\n'
+                  'Zone 2 (60-70%): 110-140 bpm — FAT BURNING ZONE, conversation pace. Stay here!\n'
+                  'Zone 3 (70-80%): 140-160 bpm — Sweets/Sugar burning. Spikes appetite.\n'
+                  'Zone 4 (80-90%): 160-175 bpm — Hard effort, depletes muscle glycogen.\n'
+                  'Zone 5 (90-100%): 175-198 bpm — Max effort, sprint pace.\n\n'
                   '(Based on max HR ~198 bpm for age 22)',
                   style: TextStyle(color: Colors.white70, height: 1.6),
                 ),
