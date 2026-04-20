@@ -40,7 +40,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       // Dairy
       ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '2 dozen'),
-      ShoppingItem(id: 'dairy-2', name: '2% Ultra-Pasteurized Milk', subtext: '.5 gallon'),
+      ShoppingItem(id: 'dairy-2', name: '2% Unsweetened Almond Milk', subtext: '.5 gallon'),
 
       // Others
       ShoppingItem(id: 'oth-1', name: 'Canned Lentils', subtext: '2 containers'),
