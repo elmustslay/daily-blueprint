@@ -29,7 +29,7 @@ class RecipeScreen extends StatelessWidget {
             ],
             equipment: [
               '6-8 qt stock pot (with strainer)',
-              'Large sauté pan (12-inch or 3-4 qt)',
+              'Large Stainless Steel Sauté Pan',
               'Cutting board',
             ],
             instructions: [
@@ -57,7 +57,7 @@ class RecipeScreen extends StatelessWidget {
             ],
             equipment: [
               '2-3 qt saucepan',
-              'Large sauté pan (12-inch or 3-4 qt)',
+              'Large Stainless Steel Sauté Pan',
               'Colander',
               'Cutting board',
             ],
@@ -84,9 +84,9 @@ class RecipeScreen extends StatelessWidget {
               '1 lb salmon',
               '1-2 tsp avocado oil, salt, pepper (as needed)',
             ],
-            equipment: [],
+            equipment: ['Non-Stick Skillet (Best for fish skin)'],
             instructions: [
-              'Prep & Direct Oiling: Pat salmon COMPLETELY dry with a paper towel. Rub the 1-2 tsp avocado oil DIRECTLY onto the fish (both sides), NOT into the pan. Season with salt and pepper.',
+              'Prep & Direct Oiling: 1. Pat salmon COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the fish. 3. Rub to coat both sides. 4. Do NOT pour oil into the pan (exposed oil in the empty edges of the pan produces heavy smoke). Season with salt and pepper.',
               'Heat dry pan (Water Bead Test): Heat the dry skillet over medium heat for 2-3 mins. Drop a droplet of water; when it forms a perfect ball that glides around the pan (Leidenfrost effect), the pan is ready. Pour out the water.',
               'Sear on the skin: Place the pre-oiled salmon skin side down into the hot dry pan. (This prevents empty oil spots on the pan from smoking/burning). Press lightly for 10-15 seconds so it stays flat.',
               'Cook gently: Keep heat at medium. Let it cook 5-7 minutes. It will release from the pan naturally when it\'s ready. Tip: If empty spots in the pan start smoking/blackening, spoon in a few drops of water to cool them.',
@@ -108,13 +108,13 @@ class RecipeScreen extends StatelessWidget {
               'Black Pepper (to taste)',
             ],
             equipment: [
-              'Cast Iron Skillet (or heavy-bottomed sauté pan)',
+              'Stainless Steel Skillet/Sauté Pan (DO NOT use Non-Stick for high heat sears)',
               'Tongs',
               'Paper Towels',
             ],
             instructions: [
-              'Prep & Direct Oiling: Remove steak from fridge 30 mins before. Pat COMPLETELY dry. Rub the 1-2 tsp avocado oil DIRECTLY onto the steak itself, NOT into the pan. Season generously.',
-              'Heat dry pan (Water Bead Test): Heat the dry cast iron/skillet over medium heat. Drop 1-2 drops of water; when they form a perfect mercury-like ball that slides around without evaporating, the pan is ready. Wipe out the water.',
+              'Prep & Direct Oiling (CRUCIAL FOR NO SMOKE): 1. Pat steak COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the steak. 3. Rub coat all sides. 4. Season generously. Do NOT pour any oil directly into the pan! Your pan is much larger than the steak. If you pour oil into the empty pan, all that exposed oil around the edges of the steak will hit its smoke point and burn instantly, filling your kitchen with smoke. By only oiling the actual steak, the oil is trapped perfectly under the meat and cannot smoke.',
+              'Heat dry pan (Water Bead Test): Heat the dry stainless steel skillet over medium heat. Drop 1-2 drops of water; when they form a perfect mercury-like ball that slides around without evaporating, the pan is ready. Wipe out the water.',
               'Sear Steak: Place the oiled steak into the dry pan. (Because the steak doesn\'t cover the entire pan, putting oil in the pan directly causes the exposed oil to burn and smoke heavily). Sear 3-4 mins undisturbed. Tip: If empty spots in the pan start smoking/blackening, spoon in a few drops of water to cool those spots and stop the burning. Flip and sear another 3-4 mins.',
               'Rest Steak: Transfer the steak to a cutting board and let rest for 5-10 minutes.',
               'Cook Spinach: While steak rests, reduce pan heat to medium-low. Add the spinach to the hot pan and stir for 1-2 minutes until just wilted.',
