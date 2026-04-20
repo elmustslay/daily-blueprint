@@ -98,10 +98,10 @@ class RecipeScreen extends StatelessWidget {
           _buildRecipeCard(
             context,
             icon: '🥩',
-            title: 'Pan-Seared Sirloin & Spinach',
+            title: 'Pan-Seared Ribeye & Spinach',
             yields: '1 Serving (Sunday Dinner)',
             ingredients: [
-              '0.5 lb (8 oz) Top Sirloin Steak',
+              '<0.7 lb Ribeye Steak',
               '1/5 bag of Spinach',
               '1-2 tsp Avocado Oil',
               'Salt (to taste)',
