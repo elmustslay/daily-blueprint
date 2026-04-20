@@ -193,7 +193,7 @@ class DailyPlanData {
       TimelineItem(time: '2:00-2:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound chicken breast', '1/4 cup almonds', '1 cap Zinc Picolinate (30mg)', '1 D3-K2']),
       TimelineItem(time: '2:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: ['Wash hands -> Mineral Unseen SPF (quarter-sized dollop for face/ears -> Wash hands -> quarter-sized dollop for neck)', 'check what I have before going', "Trader Joe's (all groceries are bought there)", '1 scoop Greens Powder']),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking', icon: '🧑‍🍳', details: ['1 tsp husk at 4:30pm', '12oz chickpea fusilli pasta + 3lb ground turkey + 48oz marinara sauce + 2 can lentils + 2/4 cup nutritional yeast + 6 full chopped bell peppers (divide in 6, for fridge)', '1lb Wild Sockeye Salmon (divide in 3, 3 fridge)', 'PREP FOR TUE: Dice 1lb chicken + mix w/ seasonings (store in airtight container)']),
-      TimelineItem(time: '6:00-6:15 pm', title: 'Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '5g creatine', '1/3 (3rd) container Raspberries']),
+      TimelineItem(time: '6:00-6:15 pm', title: 'Snack', icon: '🥤', details: ['5g creatine', '1/3 (3rd) container Raspberries']),
       TimelineItem(time: '6:15-7:00 pm', title: 'Rest / Active Recovery', icon: '🛋️', details: ['1 tsp husk at 6:30pm']),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🥩', details: ['<0.7 lbs top Ribeye steak w/ 1/5 (5th) bag spinach', '2 cup (rest) 2% ultra-pasteurized milk']),
       TimelineItem(time: '7:25-8:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha']),
