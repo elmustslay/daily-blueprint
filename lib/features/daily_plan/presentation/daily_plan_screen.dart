@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/storage/shared_prefs.dart';
 import '../data/daily_plan_data.dart';
+import '../../micro_macro_calorie_track/domain/nutrition.dart';
 
 // --- State ---
 class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
@@ -57,13 +58,13 @@ class DailyPlanScreen extends ConsumerStatefulWidget {
 
 class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-  final List<String> displayDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  final List<String> days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'weekly'];
+  final List<String> displayDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Weekly'];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 8, vsync: this);
     // Set to current day (0 = monday in our tab layout, but DateTime.weekday is 1=Mon, 7=Sun)
     int currentDayIndex = DateTime.now().weekday - 1; 
     _tabController.index = currentDayIndex;
@@ -82,13 +83,20 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
       ),
       body: TabBarView(
         controller: _tabController,
-        children: days.map((day) => _buildDayContent(day)).toList(),
+        children: days.map((day) => day == 'weekly' ? _buildWeeklySummary() : _buildDayContent(day)).toList(),
       ),
     );
   }
 
   Widget _buildDayContent(String dayKey) {
     final items = DailyPlanData.schedules[dayKey] ?? [];
+    
+    NutritionFact dailyTotals = const NutritionFact();
+    for (var item in items) {
+      if (item.mealRecord != null) {
+        dailyTotals += item.mealRecord!.totalNutrition;
+      }
+    }
     
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -101,9 +109,109 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
           _buildAshwagandhaAlert(),
           const SizedBox(height: 12),
         ],
+        _buildDailyNutritionSummary(dailyTotals),
+        const SizedBox(height: 16),
         _buildWaterTracker(dayKey),
         const SizedBox(height: 24),
         ...items.map((item) => _buildTimelineItem(item)),
+      ],
+    );
+  }
+
+  Widget _buildWeeklySummary() {
+    NutritionFact weeklyTotals = const NutritionFact();
+    for (var dayItems in DailyPlanData.schedules.values) {
+      for (var item in dayItems) {
+        if (item.mealRecord != null) {
+          weeklyTotals += item.mealRecord!.totalNutrition;
+        }
+      }
+    }
+    
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        _buildDailyNutritionSummary(weeklyTotals, title: 'Total Weekly Nutrients'),
+      ],
+    );
+  }
+
+  Widget _buildDailyNutritionSummary(NutritionFact total, {String title = 'Daily Nutrition Goal'}) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Theme.of(context).dividerColor),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildMacroCircle('Calories', '${total.calories.round()}', Colors.orangeAccent),
+              _buildMacroCircle('Protein', '${total.protein.round()}g', Colors.blueAccent),
+              _buildMacroCircle('Carbs', '${total.carbs.round()}g', Colors.greenAccent),
+              _buildMacroCircle('Fat', '${total.fat.round()}g', Colors.purpleAccent),
+            ],
+          ),
+          if (total.microNutrients.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            const Text('Micronutrients & Supplements', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white70)),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: total.microNutrients.entries.map((e) => Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.tealAccent.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.tealAccent.withValues(alpha: 0.4)),
+                ),
+                child: Text('${e.key}: ${_formatMicronutrient(e.value)}', style: const TextStyle(fontSize: 12, color: Colors.tealAccent, fontWeight: FontWeight.w600)),
+              )).toList(),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  String _formatMicronutrient(double value) {
+    if (value == value.toInt()) return value.toInt().toString();
+    return value.toStringAsFixed(1);
+  }
+
+  Widget _buildMacroCircle(String label, String value, Color color) {
+    return Column(
+      children: [
+        Container(
+          width: 65,
+          height: 65,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: color.withOpacity(0.5), width: 3),
+            color: color.withOpacity(0.1),
+          ),
+          child: Center(
+            child: Text(
+              value,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: color),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(fontSize: 13, color: Colors.white70, fontWeight: FontWeight.w500)),
       ],
     );
   }
@@ -249,7 +357,25 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
               children: [
                 Text(item.time, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent)),
                 const SizedBox(height: 4),
-                Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(child: Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white))),
+                    if (item.mealRecord != null && item.mealRecord!.totalNutrition.calories > 0)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.orangeAccent.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.orangeAccent.withOpacity(0.4)),
+                        ),
+                        child: Text(
+                          '${item.mealRecord!.totalNutrition.calories.round()} kcal',
+                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
+                        ),
+                      ),
+                  ],
+                ),
                 if (item.details.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   Container(

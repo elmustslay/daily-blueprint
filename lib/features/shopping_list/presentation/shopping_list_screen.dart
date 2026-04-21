@@ -52,7 +52,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
 
       // Amazon
-      ShoppingItem(id: 'amz-1', name: 'Orgain Organic Greens'),
       ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'),
       ShoppingItem(id: 'amz-3', name: 'Multivitamins'),
       ShoppingItem(id: 'amz-4', name: 'D3-K2 Supplement'),
@@ -62,8 +61,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-8', name: 'Casein Protein Powder'),
       ShoppingItem(id: 'amz-9', name: 'Magnesium Glycinate'),
       ShoppingItem(id: 'amz-10', name: 'Citicoline'),
-      ShoppingItem(id: 'amz-11', name: 'NAC (N-Acetyl Cysteine)'),
-      ShoppingItem(id: 'amz-12', name: 'Selenium (25mcg)'),
+      ShoppingItem(id: 'amz-11', name: 'NAC + Selenium'),
       ShoppingItem(id: 'amz-13', name: 'Ashwagandha'),
       ShoppingItem(id: 'amz-14', name: 'Chia Seeds'),
     ];
