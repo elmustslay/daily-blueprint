@@ -6,15 +6,43 @@ class IngredientsData {
   static const Ingredient spinach = Ingredient(
     id: 'spinach',
     name: 'Spinach',
-    baseUnit: 'bag', // 1 bag = 12oz
-    nutritionPerBaseUnit: NutritionFact(calories: 58, protein: 7.2, carbs: 9.1, fat: 0.9),
+    baseUnit: 'bag', // 1 bag = 4 servings
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 80, 
+      protein: 8, 
+      carbs: 12, 
+      fat: 0,
+      microNutrients: {
+        'Sodium (mg)': 260,
+        'Potassium (mg)': 1880,
+        'Fiber (g)': 8,
+        'Calcium (mg)': 320,
+        'Iron (mg)': 9.2,
+        'Magnesium (mg)': 268, // USDA average (not usually on basic nutrition labels)
+        'Vitamin A (mcg)': 1580, // USDA average (not usually on basic nutrition labels)
+      },
+    ),
   );
 
   static const Ingredient egg = Ingredient(
     id: 'egg',
     name: 'Egg',
     baseUnit: 'large egg',
-    nutritionPerBaseUnit: NutritionFact(calories: 78, protein: 6.3, carbs: 0.6, fat: 5.3), // #default value
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 78, 
+      protein: 6.3, 
+      carbs: 0.6, 
+      fat: 5.3,
+      microNutrients: {
+        'Cholesterol (mg)': 186,
+        'Sodium (mg)': 71,
+        'Potassium (mg)': 69,
+        'Magnesium (mg)': 6,
+        'Calcium (mg)': 28,
+        'Iron (mg)': 0.9,
+        'Vitamin A (mcg)': 80,
+      },
+    ), // #default value
   );
 
   static const Ingredient avocadoOil = Ingredient(
@@ -85,7 +113,16 @@ class IngredientsData {
     id: 'banana',
     name: 'Banana',
     baseUnit: 'medium',
-    nutritionPerBaseUnit: NutritionFact(calories: 105, protein: 1.3, carbs: 27, fat: 0.3), // #default value
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 105, 
+      protein: 1.3, 
+      carbs: 27, 
+      fat: 0.3,
+      microNutrients: {
+        'Potassium (mg)': 422,
+        'Magnesium (mg)': 32,
+      },
+    ), // #default value
   );
 
   static const Ingredient psylliumHusk = Ingredient(
@@ -112,7 +149,20 @@ class IngredientsData {
     id: 'salmon',
     name: 'Wild Sockeye Salmon',
     baseUnit: 'lb',
-    nutritionPerBaseUnit: NutritionFact(calories: 650, protein: 95, carbs: 0, fat: 25), // #default value
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 650, 
+      protein: 95, 
+      carbs: 0, 
+      fat: 25,
+      microNutrients: {
+        'Sodium (mg)': 200,
+        'Potassium (mg)': 1700,
+        'Magnesium (mg)': 130,
+        'Vitamin D3 (mcg)': 50,
+        'Vitamin A (mcg)': 200,
+        'Vitamin B12 (mcg)': 20,
+      },
+    ), // #default value
   );
 
   static const Ingredient wheyIsolate = Ingredient(
@@ -221,7 +271,18 @@ class IngredientsData {
     id: 'chicken_breast',
     name: 'Chicken Breast',
     baseUnit: 'lb',
-    nutritionPerBaseUnit: NutritionFact(calories: 750, protein: 140, carbs: 0, fat: 16), // #default value
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 750, 
+      protein: 140, 
+      carbs: 0, 
+      fat: 16,
+      microNutrients: {
+        'Sodium (mg)': 300,
+        'Potassium (mg)': 1100,
+        'Magnesium (mg)': 130,
+        'Iron (mg)': 4,
+      },
+    ), // #default value
   );
 
   static const Ingredient almonds = Ingredient(
@@ -234,15 +295,34 @@ class IngredientsData {
   static const Ingredient raspberries = Ingredient(
     id: 'raspberries',
     name: 'Raspberries',
-    baseUnit: 'container',
-    nutritionPerBaseUnit: NutritionFact(calories: 120, protein: 2, carbs: 28, fat: 1), // #default value
+    baseUnit: 'container (6oz)',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 90, 
+      protein: 2, 
+      carbs: 20, 
+      fat: 1.1,
+      microNutrients: {
+        'Fiber (g)': 11,
+        'Potassium (mg)': 256,
+        'Magnesium (mg)': 37,
+      },
+    ), // #default value
   );
 
   static const Ingredient mushroom = Ingredient(
     id: 'mushroom',
     name: 'Mushroom',
-    baseUnit: 'cup',
-    nutritionPerBaseUnit: NutritionFact(calories: 15, protein: 2.2, carbs: 2.3, fat: 0.2), // #default value
+    baseUnit: 'container (8oz)', // 8oz standard grocery pack
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 50, 
+      protein: 7, 
+      carbs: 7, 
+      fat: 0.7,
+      microNutrients: {
+        'Potassium (mg)': 720,
+        'Magnesium (mg)': 20,
+      },
+    ), // #default value
   );
   
   static const Ingredient ribeye = Ingredient(
