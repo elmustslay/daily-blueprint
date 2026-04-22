@@ -11,25 +11,32 @@ class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
     final prefs = SharedPrefsLogic.instance;
     final Map<String, List<bool>> stateMap = {};
 
-    // Compute this week's Monday as a string key
+    // Shift time by 2 hours so the reset happens at 2 AM Monday instead of midnight
     final now = DateTime.now();
-    final weekStart = now.subtract(Duration(days: now.weekday - 1));
+    final adjustedTime = now.subtract(const Duration(hours: 2));
+    final weekStart = adjustedTime.subtract(Duration(days: adjustedTime.weekday - 1));
     final weekStartStr =
         '${weekStart.year}-${weekStart.month.toString().padLeft(2, '0')}-${weekStart.day.toString().padLeft(2, '0')}';
 
     final isNewWeek = prefs.getString('water_week_start') != weekStartStr;
-    if (isNewWeek) {
-      prefs.setString('water_week_start', weekStartStr);
-    }
-
+    
     for (final dayKey in DailyPlanData.waterBottles.keys) {
       final bottlesCount = DailyPlanData.waterBottles[dayKey] ?? 0;
       final keys = prefs.getStringList('water_$dayKey');
+      
       if (!isNewWeek && keys != null && keys.length == bottlesCount) {
         stateMap[dayKey] = keys.map((e) => e == 'true').toList();
       } else {
         stateMap[dayKey] = List.filled(bottlesCount, false);
+        // Clear the stale data from storage if it's a new week
+        if (isNewWeek) {
+          prefs.remove('water_$dayKey');
+        }
       }
+    }
+
+    if (isNewWeek) {
+      prefs.setString('water_week_start', weekStartStr);
     }
     return stateMap;
   }
