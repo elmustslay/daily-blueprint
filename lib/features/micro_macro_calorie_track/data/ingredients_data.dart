@@ -469,6 +469,17 @@ class IngredientsData {
     ),
   );
 
+  static const Ingredient finasteride = Ingredient(
+    id: 'finasteride',
+    name: 'Finasteride (1mg)',
+    baseUnit: 'tablet',
+    nutritionPerBaseUnit: NutritionFact(
+      microNutrients: {
+        'Finasteride (mg)': 1,
+      },
+    ),
+  );
+
 
 
   static const Ingredient citicoline = Ingredient(
