@@ -13,7 +13,7 @@ class RecipeData {
         '2 tbsp avocado oil',
         '3 lb ground turkey',
         '2 container canned lentils',
-        'Salt & pepper to taste',
+        'Pepper to taste',
         '6 bell peppers',
         '48 oz marinara sauce',
         '12 tbsp nutritional yeast',
@@ -34,7 +34,7 @@ class RecipeData {
         'Cutting board',
       ],
       instructions: [
-        'Cook Pasta: In the stock pot, bring 3 quarts of water to a rolling boil. Add 1 tsp salt, then the 12 oz chickpea pasta. Cook 7 minutes, until al dente. Drain well and set aside.',
+        'Cook Pasta: In the stock pot, bring 3 quarts of water to a rolling boil. Add the 12 oz chickpea pasta. Cook 7 minutes, until al dente. Drain well and set aside.',
         'Start Sauce: Heat the large dry sauté pan over medium heat for 2 mins FIRST. ONLY THEN add 1 tbsp avocado oil, followed IMMEDIATELY by the 3 lb ground turkey (this prevents oil from sitting and burning). Season with 1/4tsp pepper, break apart and cook until browned (~8 minutes).',
         'Add Veggies: While turkey is browning, wash and chop the 6 bell peppers. Once turkey is browned, add the chopped peppers and cook until softened (~5-6 minutes).',
         'Simmer: Slowly pour in 48 oz marinara sauce (rinse jar with a little water and add that too). Stir as it heats (~3 minutes). Lower heat to medium-low.',
@@ -52,12 +52,15 @@ class RecipeData {
         '2 cups water',
         '1 cup quinoa, rinsed',
         '1 lb 96% Lean Ground Beef',
-        'Salt, pepper, paprika, cumin, garlic powder, onion powder, oregano',
+        '2 tsp Morton Lite Salt, 1 tsp black pepper',
+        '2 tsp smoked paprika, 1.5 tsp cumin',
+        '1.5 tsp garlic powder, 1 tsp onion powder, 1 tsp oregano',
       ],
       servings: 4,
       ingredients: [
         IngredientPortion(ingredient: IngredientsData.quinoa, amount: 1),
         IngredientPortion(ingredient: IngredientsData.leanGroundBeef96, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 2),
       ],
       equipment: [
         '2-3 qt saucepan',
@@ -67,7 +70,7 @@ class RecipeData {
       instructions: [
         'Cook Quinoa: In the saucepan, bring 2 cups of water to a boil. Wash (colander) 1 cup quinoa. Add to boiling water, reduce heat to low, cover, and simmer 15 minutes. Remove from heat, let sit 5 mins, fluff with a fork.',
         'Cook Beef: Heat the large dry sauté pan over medium-high heat for 2 minutes. Add the 1 lb of ground beef directly to the dry pan (no oil needed, the 4% fat is enough). Break it apart with a spatula.',
-        'Season: Sprinkle 1tsp salt, 1/2tsp black pepper, 1tsp smoked paprika, 1/2tsp cumin, 1tsp garlic powder, 1tsp onion powder, and 0.5tsp dried oregano over the cooking beef. Cook until browned and fully cooked through (~8-10 minutes).',
+        'Season: Sprinkle 2 tsp Morton Lite Salt, 1 tsp black pepper, 2 tsp smoked paprika, 1.5 tsp cumin, 1.5 tsp garlic powder, 1 tsp onion powder, and 1 tsp dried oregano over the cooking beef. Cook until browned and fully cooked through (~8-10 minutes).',
         'Combine: Add the cooked quinoa directly into the pan with the beef and mix thoroughly so the quinoa absorbs the beef drippings and spices.',
         'Store & Serve: Divide into 4 containers. Tip for eating cold: Squeeze a fresh lime or lemon wedge over it right before eating! The citrus acidity beautifully complements the cumin/paprika and instantly revives the moisture profile completely calorie-free.',
       ],
@@ -79,18 +82,19 @@ class RecipeData {
       yields: '3 Portions (3 Fridge)',
       textIngredients: [
         '1 lb salmon',
-        '1.5 tsp avocado oil, salt, pepper (as needed)',
+        '1.5 tsp avocado oil, 1.5 tsp Morton Lite Salt, pepper',
       ],
       servings: 3,
       ingredients: [
         IngredientPortion(ingredient: IngredientsData.salmon, amount: 1),
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 1.5),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 1.5),
       ],
       equipment: [
         'Non-Stick Skillet (Best for fish skin)',
       ],
       instructions: [
-        'Prep & Direct Oiling: 1. Pat salmon COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the fish. 3. Rub to coat both sides. 4. Do NOT pour oil into the pan (exposed oil in the empty edges of the pan produces heavy smoke). Season with salt and pepper.',
+        'Prep & Direct Oiling: 1. Pat salmon COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the fish. 3. Rub to coat both sides. 4. Do NOT pour oil into the pan (exposed oil in the empty edges of the pan produces heavy smoke). Season with 1.5 tsp Morton Lite Salt and pepper.',
         'Heat dry pan (Water Bead Test): Heat the dry skillet over medium heat for 2-3 mins. Drop a droplet of water; when it forms a perfect ball that glides around the pan (Leidenfrost effect), the pan is ready. Pour out the water.',
         'Sear on the skin: Place the pre-oiled salmon skin side down into the hot dry pan. (This prevents empty oil spots on the pan from smoking/burning). Press lightly for 10-15 seconds so it stays flat.',
         'Cook gently: Keep heat at medium. Let it cook 5-7 minutes. It will release from the pan naturally when it\'s ready. Tip: If empty spots in the pan start smoking/blackening, spoon in a few drops of water to cool them.',
@@ -104,10 +108,10 @@ class RecipeData {
       icon: '🥩',
       yields: '1 Serving (Sunday Dinner)',
       textIngredients: [
-        '<0.7 lb Ribeye Steak',
+        '0.7 lb Ribeye Steak',
         '1/5 bag of Spinach',
         '1.5 tsp Avocado Oil',
-        'Salt (to taste)',
+        '0.5 tsp Morton Lite Salt',
         'Black Pepper (to taste)',
       ],
       servings: 1,
@@ -115,6 +119,7 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.ribeye, amount: 0.7),
         IngredientPortion(ingredient: IngredientsData.spinach, amount: 0.2), // 1/5 bag
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 1.5),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
       ],
       equipment: [
         'Stainless Steel Skillet/Sauté Pan (DO NOT use Non-Stick for high heat sears)',
@@ -122,7 +127,7 @@ class RecipeData {
         'Paper Towels',
       ],
       instructions: [
-        'Prep & Direct Oiling (CRUCIAL FOR NO SMOKE): 1. Pat steak COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the steak. 3. Rub coat all sides. 4. Season generously. Do NOT pour any oil directly into the pan! Your pan is much larger than the steak. If you pour oil into the empty pan, all that exposed oil around the edges of the steak will hit its smoke point and burn instantly, filling your kitchen with smoke. By only oiling the actual steak, the oil is trapped perfectly under the meat and cannot smoke.',
+        'Prep & Direct Oiling (CRUCIAL FOR NO SMOKE): 1. Pat steak COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the steak. 3. Rub coat all sides. 4. Season with 0.5 tsp Morton Lite Salt. Do NOT pour any oil directly into the pan! Your pan is much larger than the steak. If you pour oil into the empty pan, all that exposed oil around the edges of the steak will hit its smoke point and burn instantly, filling your kitchen with smoke. By only oiling the actual steak, the oil is trapped perfectly under the meat and cannot smoke.',
         'Heat dry pan (Water Bead Test): Heat the dry stainless steel skillet over medium heat. Drop 1-2 drops of water; when they form a perfect mercury-like ball that slides around without evaporating, the pan is ready. Wipe out the water.',
         'Sear Steak: Place the oiled steak into the dry pan. (Because the steak doesn\'t cover the entire pan, putting oil in the pan directly causes the exposed oil to burn and smoke heavily). Sear 3-4 mins undisturbed. Tip: If empty spots in the pan start smoking/blackening, spoon in a few drops of water to cool those spots and stop the burning. Flip and sear another 3-4 mins.',
         'Rest Steak: Transfer the steak to a cutting board and let rest for 5-10 minutes.',

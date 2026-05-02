@@ -400,6 +400,24 @@ class IngredientsData {
     ),
   );
 
+  static const Ingredient liteSalt = Ingredient(
+    id: 'lite_salt',
+    name: 'Morton Lite Salt',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fat: 0,
+      microNutrients: {
+        'Sodium (mg)': 1160,
+        'Potassium (mg)': 1400,
+        'Iodine (mcg)': 240,
+      },
+    ),
+  );
+
+
   static const Ingredient marinaraSauce = Ingredient(
     id: 'marinara',
     name: 'Marinara Sauce',
