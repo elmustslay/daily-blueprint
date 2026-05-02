@@ -210,7 +210,7 @@ class GymData {
     ),
     Exercise(
       id: 'push_2', name: 'Dumbbell Lateral Raise', sets: '3', reps: '10-15', rest: '1-2 min',
-      tip: '🎯 Focus: The side deltoid (shoulder cap) to widen the upper body and create the V-Taper.\n\n💡 How to do it: Lean slightly forward. Raise the dumbbells out to the sides until shoulder height, leading with your elbows. Imagine you are pouring water out of two pitchers at the top.\n\n⚠️ Common Pitfall: Shrugging your shoulders up to your ears, which shifts the work to your traps. Keep your shoulder blades pinned down.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame.',
+      tip: '🎯 Focus: The side deltoid (shoulder cap) to widen the upper body and create the V-Taper.\n\n💡 How to do it: Lean slightly forward. Raise the dumbbells out to the sides until shoulder height, leading with your elbows. Imagine you are pouring water out of two pitchers at the top.\n\n⚠️ Common Pitfall: Shrugging your shoulders up to your ears, which shifts the work to your traps. Keep your shoulder blades pinned down.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame. Because you are doing only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, the set doesn\'t count.',
     ),
     Exercise(
       id: 'pull_1', name: 'Lat Pulldown Machine', sets: '3', reps: '8-12', rest: '2-3 min',
@@ -260,10 +260,9 @@ class GymData {
       id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
       tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
     ),
-    // TODO LATER: Replace Glute Kickback Machine with Dumbbell Bulgarian Split Squats for massive glute shaping.
     Exercise(
-      id: 'legs_4a', name: 'Glute Kickback Machine', sets: '3', reps: '12-15', rest: '1-2 min',
-      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Chest against the pad, grip handles firmly. Core tight. Drive your heel back and up toward the ceiling. Squeeze your butt hard at the top.\n\n⚠️ Common Pitfall: Arching your lower back to get the leg higher. This turns off the glute entirely. Keep your spine perfectly neutral.',
+      id: 'legs_4a', name: 'Dumbbell Reverse Lunges', sets: '3', reps: '10-12', rest: '1-2 min',
+      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle) and Quads.\n\n💡 How to do it: Hold dumbbells at your sides. Step one foot backwards and sink your hips down until your back knee almost touches the floor. Lean your torso slightly forward to put the maximum stretch and load on your front glute. Push off the front heel to return to standing.\n\n⚠️ Common Pitfall: Pushing off the back foot. The back leg is just a kickstand; 90% of the weight should be driven up by the front heel/glute.',
     ),
     Exercise(
       id: 'legs_6a', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min',
@@ -296,7 +295,7 @@ class GymData {
     ),
     Exercise(
       id: 'push_4', name: 'Machine Lateral Raise', sets: '3', reps: '10-15', rest: '1-2 min',
-      tip: '🎯 Focus: Building the "cap" of your shoulder (side deltoid) for a wider look.\n\n💡 How to do it: Lock shoulder blades down and back. Lead with your elbows. Imagine pushing the pads out to the sides of the room, not up toward the ceiling.\n\n⚠️ Common Pitfall: Shrugging your shoulders up towards your ears (which over-activates the traps). Use lighter weight and maintain strict form.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame.',
+      tip: '🎯 Focus: Building the "cap" of your shoulder (side deltoid) for a wider look.\n\n💡 How to do it: Lock shoulder blades down and back. Lead with your elbows. Imagine pushing the pads out to the sides of the room, not up toward the ceiling.\n\n⚠️ Common Pitfall: Shrugging your shoulders up towards your ears (which over-activates the traps). Use lighter weight and maintain strict form.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame. Because you are doing only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, the set doesn\'t count.',
     ),
     Exercise(
       id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: 'To Failure', rest: '1-2 min',
@@ -342,10 +341,9 @@ class GymData {
       id: 'legs_5b', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
       tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
     ),
-    // TODO LATER: Replace Glute Kickback Machine with Barbell/Machine Hip Thrusts.
     Exercise(
-      id: 'legs_4b', name: 'Glute Kickback Machine', sets: '3', reps: '12-15', rest: '1-2 min',
-      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Chest against the pad, grip handles firmly. Core tight. Drive your heel back and up toward the ceiling. Squeeze your butt hard at the top.\n\n⚠️ Common Pitfall: Arching your lower back to get the leg higher. This turns off the glute entirely. Keep your spine perfectly neutral.',
+      id: 'legs_4b', name: 'Floor Glute Bridges', sets: '3', reps: '10-15', rest: '1-2 min',
+      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Lie flat on your back, knees bent, feet flat on the floor shoulder-width apart. Rest a heavy dumbbell or barbell across your hip crease. Drive through your heels to thrust your hips straight up into the air. Squeeze your glutes at the absolute top for a full 1-2 seconds.\n\n⚠️ Common Pitfall: Hyperextending your lower back. Your ribs should stay tucked down. The movement comes entirely from squeezing the glutes, not arching your spine.',
     ),
     Exercise(
       id: 'legs_6b', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min',

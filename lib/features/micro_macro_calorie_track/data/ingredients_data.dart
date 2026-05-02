@@ -382,6 +382,24 @@ class IngredientsData {
     ),
   );
 
+  static const Ingredient leanGroundBeef96 = Ingredient(
+    id: 'ground_beef_96',
+    name: 'Ground Beef (96% Lean)',
+    baseUnit: 'lb',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 520, 
+      protein: 84, 
+      carbs: 0, 
+      fat: 16,
+      microNutrients: {
+        'Saturated Fat (g)': 8,
+        'Cholesterol (mg)': 240,
+        'Sodium (mg)': 260,
+        'Iron (mg)': 10.8,
+      },
+    ),
+  );
+
   static const Ingredient marinaraSauce = Ingredient(
     id: 'marinara',
     name: 'Marinara Sauce',
