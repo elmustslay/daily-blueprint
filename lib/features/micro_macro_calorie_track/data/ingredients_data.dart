@@ -267,23 +267,7 @@ class IngredientsData {
     ),
   );
 
-  static const Ingredient chickenBreast = Ingredient(
-    id: 'chicken_breast',
-    name: 'Chicken Breast',
-    baseUnit: 'lb',
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 750, 
-      protein: 140, 
-      carbs: 0, 
-      fat: 16,
-      microNutrients: {
-        'Sodium (mg)': 300,
-        'Potassium (mg)': 1100,
-        'Magnesium (mg)': 130,
-        'Iron (mg)': 4,
-      },
-    ), // #default value
-  );
+
 
   static const Ingredient almonds = Ingredient(
     id: 'almonds',

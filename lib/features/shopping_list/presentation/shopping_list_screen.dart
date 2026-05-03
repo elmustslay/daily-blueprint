@@ -34,12 +34,12 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),
-      ShoppingItem(id: 'meat-2', name: 'Chicken Breast (diced)', subtext: '1 lb'),
+      ShoppingItem(id: 'meat-2', name: '96% Lean Ground Beef', subtext: '1 lb'),
       ShoppingItem(id: 'meat-3', name: 'Sockeye Salmon Fillet', subtext: '1 lb'),
       ShoppingItem(id: 'meat-4', name: 'Ribeye Steak', subtext: '0.6-0.7 lb (greater better) '),
 
       // Dairy
-      ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '2 dozen'),
+      ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '1 or 2 dozen'),
       ShoppingItem(id: 'dairy-2', name: '2% Unsweetened Almond Milk', subtext: '.5 gallon'),
 
       // Others
