@@ -39,7 +39,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'meat-4', name: 'Ribeye Steak', subtext: '0.6-0.7 lb (greater better) '),
 
       // Dairy
-      ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '1 or 2 dozen'),
+      ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '1.5 dozen (need 18/week)'),
       ShoppingItem(id: 'dairy-2', name: '2% Unsweetened Almond Milk', subtext: '.5 gallon'),
 
       // Others

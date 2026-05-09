@@ -17,6 +17,7 @@ class RecipeData {
         '6 bell peppers',
         '48 oz marinara sauce',
         '12 tbsp nutritional yeast',
+        '4/5 bag of Spinach (Wilted at the end)',
       ],
       servings: 6,
       ingredients: [
@@ -27,6 +28,7 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.bellPeppers, amount: 6),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 48),
         IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 12),
+        IngredientPortion(ingredient: IngredientsData.spinach, amount: 0.8), // 4/5 bag
       ],
       equipment: [
         '6-8 qt stock pot (with strainer)',
@@ -39,7 +41,7 @@ class RecipeData {
         'Add Veggies: While turkey is browning, wash and chop the 6 bell peppers. Once turkey is browned, add the chopped peppers and cook until softened (~5-6 minutes).',
         'Simmer: Slowly pour in 48 oz marinara sauce (rinse jar with a little water and add that too). Stir as it heats (~3 minutes). Lower heat to medium-low.',
         'Finish Sauce: drain & rinse lentil. Simmer uncovered for 10 minutes, stirring occasionally. Stir in 12 tbsp nutritional yeast to finish.',
-        'Combine: Add the drained chickpea pasta to the sauté pan with the sauce. Toss everything together for 2 minutes over low heat until evenly coated and hot.',
+        'Combine & Wilt: Add the drained chickpea pasta and 4/5 bag of spinach to the sauté pan with the sauce. Toss everything together for 2 minutes over low heat until the spinach is fully wilted and pasta is coated.',
         'Store: Divide into 6 containers (for the fridge).',
       ],
     ),
@@ -138,6 +140,31 @@ class RecipeData {
         'Rest Steak: Transfer the steak to a cutting board and let rest for 5-10 minutes.',
         'Cook Spinach: While steak rests, reduce pan heat to medium-low. Add the spinach to the hot pan and stir for 1-2 minutes until just wilted.',
         'Serve: Slice the steak against the grain and serve immediately with the wilted spinach.',
+      ],
+    ),
+    const Recipe(
+      id: 'hard_boiled_eggs',
+      name: 'Perfect Hard Boiled Eggs',
+      icon: '🥚',
+      yields: '18 Eggs (All on Sunday)',
+      textIngredients: [
+        '18 large eggs (All on Sunday)',
+        'Ice cubes and cold water (Crucial for peeling)',
+      ],
+      servings: 18,
+      ingredients: [
+        IngredientPortion(ingredient: IngredientsData.egg, amount: 18),
+      ],
+      equipment: [
+        '7-Egg Cooker',
+        'Large bowl for ice bath',
+      ],
+      instructions: [
+        'The Setup: Do this in 3 batches on Sunday to prep all 18 eggs for the entire week (Mon-Sun). Pierce the bottom of each egg if your cooker has a pin (prevents cracking).',
+        'Cook: Add the exact water amount for "Hard Boiled" into your cooker. Run the cycle until it shuts off.',
+        'The Ice Bath (CRITICAL): Immediately transfer the hot eggs into a bowl of heavy ice water. Let them sit for 5 minutes. The thermal shock shrinks the egg away from the shell, creating a microscopic gap that makes peeling effortless.',
+        'Store: Keep the eggs IN THEIR SHELLS and place them into your dedicated clear egg storage bin in the fridge so they never mix with raw eggs. Unpeeled eggs last 7 days. Peeled eggs get slimy after 2 days.',
+        'Peeling Hack: When you are at work and ready to eat, crack the egg all over by rolling it on your desk under your palm. The shell will slide off in one or two large pieces.',
       ],
     ),
   ];
