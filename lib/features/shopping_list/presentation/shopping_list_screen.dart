@@ -28,8 +28,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Produce
       ShoppingItem(id: 'prod-3', name: 'Bell Peppers', subtext: '2 pack (6)'),
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
-      ShoppingItem(id: 'prod-5', name: 'Mushrooms', subtext: '1 container (/2)'),
-      ShoppingItem(id: 'prod-6', name: 'Raspberries', subtext: '1 container (/3)'),
       ShoppingItem(id: 'prod-7', name: 'Bananas', subtext: '1 bunch (need 4/week)'),
       
       // Poultry & Meat
