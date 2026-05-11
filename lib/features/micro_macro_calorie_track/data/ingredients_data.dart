@@ -150,19 +150,22 @@ class IngredientsData {
     name: 'Wild Sockeye Salmon',
     baseUnit: 'lb',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 650, 
-      protein: 95, 
+      calories: 640, 
+      protein: 92, 
       carbs: 0, 
-      fat: 25,
+      fat: 28,
       microNutrients: {
-        'Sodium (mg)': 200,
-        'Potassium (mg)': 1700,
+        'Saturated Fat (g)': 10,
+        'Cholesterol (mg)': 240,
+        'Sodium (mg)': 320,
+        'Potassium (mg)': 1504,
         'Magnesium (mg)': 130,
-        'Vitamin D3 (mcg)': 50,
+        'Vitamin D3 (mcg)': 64,
         'Vitamin A (mcg)': 200,
         'Vitamin B12 (mcg)': 20,
+        'Iron (mg)': 2.88,
       },
-    ), // #default value
+    ),
   );
 
   static const Ingredient wheyIsolate = Ingredient(
@@ -473,7 +476,18 @@ class IngredientsData {
     id: 'bell_pepper',
     name: 'Bell Pepper',
     baseUnit: 'medium',
-    nutritionPerBaseUnit: NutritionFact(calories: 24, protein: 1, carbs: 6, fat: 0.2), // #default value
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 24, 
+      protein: 1, 
+      carbs: 6, 
+      fat: 0.2,
+      microNutrients: {
+        'Vitamin C (mg)': 152,
+        'Fiber (g)': 2.5,
+        'Potassium (mg)': 211,
+        'Vitamin A (mcg)': 1100,
+      },
+    ),
   );
 
   // SUPPLEMENTS
