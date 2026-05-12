@@ -62,6 +62,8 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-11', name: 'NAC + Selenium'),
       ShoppingItem(id: 'amz-13', name: 'Ashwagandha'),
       ShoppingItem(id: 'amz-14', name: 'Chia Seeds'),
+      ShoppingItem(id: 'amz-15', name: 'Anua Heartleaf Pore Control Cleansing Oil', subtext: 'Sunscreen Remover'),
+      ShoppingItem(id: 'amz-16', name: 'La Roche-Posay Lipikar Wash AP+', subtext: 'Moisturizing Body Wash (for 2x daily showers)'),
     ];
 
     final prefs = SharedPrefsLogic.instance;

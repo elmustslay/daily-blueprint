@@ -65,8 +65,9 @@ class DailyPlanScreen extends ConsumerStatefulWidget {
 
 class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'weekly'];
-  final List<String> displayDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Weekly'];
+  final List<String> days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'nutrition'];
+  final List<String> displayDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Nutrition'];
+  final Map<String, GlobalKey> _itemKeys = {};
 
   @override
   void initState() {
@@ -75,6 +76,93 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     // Set to current day (0 = monday in our tab layout, but DateTime.weekday is 1=Mon, 7=Sun)
     int currentDayIndex = DateTime.now().weekday - 1; 
     _tabController.index = currentDayIndex;
+
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        Future.delayed(const Duration(milliseconds: 100), _scrollToCurrentTime);
+      }
+    });
+    
+    // Give the layout engine a moment to render the slivers before scrolling
+    Future.delayed(const Duration(milliseconds: 400), _scrollToCurrentTime);
+  }
+
+  void _scrollToCurrentTime() {
+    if (!mounted) return;
+    int dayIndex = _tabController.index;
+    if (dayIndex >= 7) return; // nutrition
+    
+    String currentDayKey = days[dayIndex];
+    if (DateTime.now().weekday - 1 != dayIndex) return; // Only scroll if viewing today
+    
+    final items = DailyPlanData.schedules[currentDayKey] ?? [];
+    
+    int targetIndex = -1;
+    final now = DateTime.now();
+    final currentMins = now.hour * 60 + now.minute;
+    
+    for (int i = 0; i < items.length; i++) {
+       final startMins = _parseStartTimeMins(items[i].time);
+       if (startMins != null && currentMins >= startMins) {
+           targetIndex = i;
+       }
+    }
+    
+    if (targetIndex != -1) {
+       final key = _itemKeys['${currentDayKey}_$targetIndex'];
+       if (key != null && key.currentContext != null) {
+          Scrollable.ensureVisible(
+            key.currentContext!,
+            duration: Duration.zero,
+            alignment: 0.1, // slightly below the sticky header
+          );
+       }
+    }
+  }
+
+  int? _parseStartTimeMins(String timeString) {
+    try {
+      final parts = timeString.split('-');
+      if (parts.length != 2) return null;
+      
+      final startStr = parts[0].trim();
+      final endPart = parts[1].trim();
+      
+      final endTokens = endPart.split(' ');
+      if (endTokens.length != 2) return null;
+      
+      final endStr = endTokens[0];
+      final amPm = endTokens[1].toLowerCase();
+      
+      int parseTime(String timeStr, bool isPm) {
+        final tParts = timeStr.split(':');
+        int h = int.parse(tParts[0]);
+        int m = int.parse(tParts[1]);
+        if (isPm && h != 12) h += 12;
+        if (!isPm && h == 12) h = 0;
+        return h * 60 + m;
+      }
+      
+      bool startIsPm = amPm == 'pm';
+      int startH = int.parse(startStr.split(':')[0]);
+      int endH = int.parse(endStr.split(':')[0]);
+      
+      if (amPm == 'pm') {
+        if (startH == 12) {
+           startIsPm = true;
+        } else if (endH == 12 && startH >= 7 && startH < 12) {
+           startIsPm = false; // e.g. "9:00-12:00 pm" -> 9 AM
+        } else if (startH > endH && endH != 12) {
+           startIsPm = false; // e.g. "10:00-1:00 pm" -> 10 AM
+        } else {
+           startIsPm = true; // e.g. "10:15-10:45 pm" -> 10 PM
+        }
+      }
+      
+      return parseTime(startStr, startIsPm);
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
@@ -90,7 +178,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
       ),
       body: TabBarView(
         controller: _tabController,
-        children: days.map((day) => day == 'weekly' ? _buildWeeklySummary() : _buildDayContent(day)).toList(),
+        children: days.map((day) => day == 'nutrition' ? _buildNutritionTab() : _buildDayContent(day)).toList(),
       ),
     );
   }
@@ -105,40 +193,101 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
       }
     }
     
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        if (DailyPlanData.isDeloadWeek()) ...[
-          _buildDeloadAlert(),
-          const SizedBox(height: 12),
-        ],
-        if (DailyPlanData.isAshwagandhaOff()) ...[
-          _buildAshwagandhaAlert(),
-          const SizedBox(height: 12),
-        ],
-        _buildDailyNutritionSummary(dailyTotals),
-        const SizedBox(height: 16),
-        _buildWaterTracker(dayKey),
-        const SizedBox(height: 24),
-        ...items.map((item) => _buildTimelineItem(item)),
+    return CustomScrollView(
+      slivers: [
+        SliverPersistentHeader(
+          pinned: true,
+          delegate: _StickyWaterHeaderDelegate(
+            child: Container(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+              child: _buildWaterTracker(dayKey),
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (DailyPlanData.isDeloadWeek()) ...[
+                  _buildDeloadAlert(),
+                  const SizedBox(height: 12),
+                ],
+                if (DailyPlanData.isAshwagandhaOff()) ...[
+                  _buildAshwagandhaAlert(),
+                  const SizedBox(height: 12),
+                ],
+                const SizedBox(height: 16),
+                ...items.asMap().entries.map((entry) {
+                  int idx = entry.key;
+                  TimelineItem item = entry.value;
+                  String keyStr = '${dayKey}_$idx';
+                  _itemKeys[keyStr] ??= GlobalKey();
+                  
+                  return _buildTimelineItem(item, _itemKeys[keyStr]!);
+                }),
+                const SizedBox(height: 32),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  Widget _buildWeeklySummary() {
+  Widget _buildNutritionTab() {
     NutritionFact weeklyTotals = const NutritionFact();
-    for (var dayItems in DailyPlanData.schedules.values) {
+    final Map<String, NutritionFact> dailyTotalsMap = {};
+    
+    for (int i = 0; i < 7; i++) {
+      final dayKey = days[i];
+      final dayItems = DailyPlanData.schedules[dayKey] ?? [];
+      NutritionFact dayTotal = const NutritionFact();
+      
       for (var item in dayItems) {
         if (item.mealRecord != null) {
+          dayTotal += item.mealRecord!.totalNutrition;
           weeklyTotals += item.mealRecord!.totalNutrition;
         }
       }
+      dailyTotalsMap[dayKey] = dayTotal;
     }
     
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        _buildDailyNutritionSummary(weeklyTotals, title: 'Total Weekly Nutrients'),
+        const Text('Daily Summaries', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+        const SizedBox(height: 16),
+        for (int i = 0; i < 7; i++) 
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: ExpansionTile(
+              title: Text('${displayDays[i]} Nutrition', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+              collapsedBackgroundColor: Theme.of(context).cardColor,
+              backgroundColor: Theme.of(context).cardColor,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              children: [
+                _buildDailyNutritionSummary(dailyTotalsMap[days[i]]!, title: ''),
+              ],
+            ),
+          ),
+        const SizedBox(height: 16),
+        const Text('Overall', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+        const SizedBox(height: 16),
+        ExpansionTile(
+          title: const Text('Weekly Summary', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+          initiallyExpanded: true,
+          collapsedBackgroundColor: Theme.of(context).cardColor,
+          backgroundColor: Theme.of(context).cardColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          children: [
+            _buildDailyNutritionSummary(weeklyTotals, title: ''),
+          ],
+        ),
       ],
     );
   }
@@ -157,11 +306,13 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-          ),
-          const SizedBox(height: 16),
+          if (title.isNotEmpty) ...[
+            Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+            ),
+            const SizedBox(height: 16),
+          ],
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -334,8 +485,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
-  Widget _buildTimelineItem(TimelineItem item) {
+  Widget _buildTimelineItem(TimelineItem item, GlobalKey key) {
     return Padding(
+      key: key,
       padding: const EdgeInsets.only(bottom: 24),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -530,5 +682,26 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         ],
       ),
     );
+  }
+}
+
+class _StickyWaterHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _StickyWaterHeaderDelegate({required this.child});
+
+  @override
+  double get minExtent => 165;
+  @override
+  double get maxExtent => 165;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(covariant _StickyWaterHeaderDelegate oldDelegate) {
+    return true;
   }
 }
