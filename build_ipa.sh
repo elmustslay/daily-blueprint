@@ -49,12 +49,18 @@ sed -i '' 's/ENABLE_USER_SCRIPT_SANDBOXING = YES;/ENABLE_USER_SCRIPT_SANDBOXING 
   ios/Runner.xcodeproj/project.pbxproj 2>/dev/null || true
 
 # ── Pod install ───────────────────────────────────────────────────────────
-cyan "Running pod install ..."
-(cd ios && pod install --repo-update)
+# [OLD SLOW CODE - uncomment if you have dependency issues]
+# cyan "Running pod install ..."
+# (cd ios && pod install --repo-update)
+cyan "Running pod install (skipping repo-update for speed) ..."
+(cd ios && pod install)
 
 # ── Clean old artefacts ───────────────────────────────────────────────────
-cyan "Cleaning previous build ..."
-rm -rf build/ios_ipa Blueprint.ipa Payload
+# [OLD SLOW CODE - uncomment if you have Xcode caching issues]
+# cyan "Cleaning previous build ..."
+# rm -rf build/ios_ipa Blueprint.ipa Payload
+cyan "Cleaning previous build artefacts (keeping derived data for incremental builds) ..."
+rm -rf Blueprint.ipa Payload
 
 # ── Build with xcodebuild ────────────────────────────────────────────────
 cyan "Building Runner.app (this may take a few minutes) ..."
