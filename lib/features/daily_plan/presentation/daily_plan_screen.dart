@@ -748,9 +748,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('🩸 Phlebotomy Protocol', style: TextStyle(fontWeight: FontWeight.bold)),
+            title: const Text('🩸 Therapeutic Phlebotomy Protocol', style: TextStyle(fontWeight: FontWeight.bold)),
             content: const Text(
-              'It has been ~5 months. To manage high ferritin buildup from your continuous high-iron red meat athletic diet, it is clinically recommended to donate blood.\n\nThis dumps excess ferritin and forces your body to generate fresh erythrocytes!',
+              'Therapeutic Phlebotomy Check: It has been ~5 months. To manage high ferritin buildup from a continuous, high-heme red meat diet, therapeutic phlebotomy may be required to clear oxidative stress and generate fresh erythrocytes.\n\nACTION REQUIRED: Order a full iron panel. Only execute donation if Serum Ferritin is > 250 ng/mL. Do not rely only on the hemoglobin screening being over 13.3g/dL.',
               style: TextStyle(height: 1.5),
             ),
             actions: [
