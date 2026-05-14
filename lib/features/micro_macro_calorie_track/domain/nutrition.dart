@@ -40,11 +40,11 @@ class NutritionFact {
 
   Map<String, dynamic> toJson() {
     return {
-      'calories': double.parse(calories.toStringAsFixed(1)),
-      'protein': double.parse(protein.toStringAsFixed(1)),
-      'carbs': double.parse(carbs.toStringAsFixed(1)),
-      'fat': double.parse(fat.toStringAsFixed(1)),
-      'microNutrients': microNutrients.map((k, v) => MapEntry(k, double.parse(v.toStringAsFixed(2)))),
+      'Calories': double.parse(calories.toStringAsFixed(1)),
+      'Protein': double.parse(protein.toStringAsFixed(1)),
+      'Carbs': double.parse(carbs.toStringAsFixed(1)),
+      'Fat': double.parse(fat.toStringAsFixed(1)),
+      'Micros': microNutrients.map((k, v) => MapEntry(k, double.parse(v.toStringAsFixed(2)))),
     };
   }
 }
