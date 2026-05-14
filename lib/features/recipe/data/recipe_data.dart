@@ -16,7 +16,7 @@ class RecipeData {
         'Pepper to taste',
         '6 bell peppers',
         '48 oz marinara sauce',
-        '9 tbsp nutritional yeast',
+        '4 tbsp nutritional yeast',
         '1 bag of Spinach (Wilted at the end)',
       ],
       servings: 6,
@@ -27,7 +27,7 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.cannedLentils, amount: 2),
         IngredientPortion(ingredient: IngredientsData.bellPeppers, amount: 6),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 48),
-        IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 9),
+        IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 4),
         IngredientPortion(ingredient: IngredientsData.spinach, amount: 1), // 1 bag
       ],
       equipment: [

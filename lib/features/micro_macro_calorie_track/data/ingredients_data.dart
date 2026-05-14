@@ -32,7 +32,8 @@ class IngredientsData {
         'Niacin (mg)': 2.4, // #this is default assumed value
         'Vitamin B5 (mg)': 0.22, // #this is default assumed value
         'Vitamin B6 (mg)': 0.66, // #this is default assumed value
-        'Folate (mcg DFE)': 660, // #this is default assumed value
+        'Natural Folate (mcg)': 660, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 65, // #this is default assumed value
         'Tyrosine (mg)': 340, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -72,7 +73,8 @@ class IngredientsData {
         'Niacin (mg)': 17.2, // #this is default assumed value
         'Vitamin B5 (mg)': 3.6, // #this is default assumed value
         'Vitamin B6 (mg)': 1.4, // #this is default assumed value
-        'Folate (mcg DFE)': 219.7, // #this is default assumed value
+        'Natural Folate (mcg)': 219.7, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 199.5, // #this is default assumed value
         'Tyrosine (mg)': 2180, // #this is default assumed value
       },
@@ -112,7 +114,8 @@ class IngredientsData {
         'Niacin (mg)': 0.03, // #this is default assumed value
         'Vitamin B5 (mg)': 0.7, // #this is default assumed value
         'Vitamin B6 (mg)': 0.08, // #this is default assumed value
-        'Folate (mcg DFE)': 24, // #this is default assumed value
+        'Natural Folate (mcg)': 24, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 147, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
         'DHA (mg)': 30, // #this is default assumed value
@@ -152,7 +155,8 @@ class IngredientsData {
         'Niacin (mg)': 0, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Folate (mcg DFE)': 0, // #this is default assumed value
+        'Natural Folate (mcg)': 0, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 0, // #this is default assumed value
         'Tyrosine (mg)': 0, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -196,7 +200,8 @@ class IngredientsData {
         'Niacin (mg)': 2.1, // #this is default assumed value
         'Vitamin B5 (mg)': 0.1, // #this is default assumed value
         'Vitamin B6 (mg)': 0.08, // #this is default assumed value
-        'Folate (mcg DFE)': 12, // #this is default assumed value
+        'Natural Folate (mcg)': 12, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 10, // #this is default assumed value
         'Tyrosine (mg)': 150, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -237,7 +242,8 @@ class IngredientsData {
         'Niacin (mg)': 0.1, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Folate (mcg DFE)': 1, // #this is default assumed value
+        'Natural Folate (mcg)': 1, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 0, // #this is default assumed value
         'Tyrosine (mg)': 10, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -275,7 +281,8 @@ class IngredientsData {
         'Niacin (mg)': 0.8, // #this is default assumed value
         'Vitamin B5 (mg)': 0.4, // #this is default assumed value
         'Vitamin B6 (mg)': 0.43, // #this is default assumed value
-        'Folate (mcg DFE)': 24, // #this is default assumed value
+        'Natural Folate (mcg)': 24, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 12, // #this is default assumed value
         'Tyrosine (mg)': 10, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -339,7 +346,8 @@ class IngredientsData {
         'Niacin (mg)': 38, // #this is default assumed value
         'Vitamin B5 (mg)': 7.5, // #this is default assumed value
         'Vitamin B6 (mg)': 3.1, // #this is default assumed value
-        'Folate (mcg DFE)': 113, // #this is default assumed value
+        'Natural Folate (mcg)': 113, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 400, // #this is default assumed value
       },
     ),
@@ -380,7 +388,8 @@ class IngredientsData {
         'Niacin (mg)': 0, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Folate (mcg DFE)': 0, // #this is default assumed value
+        'Natural Folate (mcg)': 0, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 60, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
         'DHA (mg)': 0, // #this is default assumed value
@@ -437,7 +446,8 @@ class IngredientsData {
         'Niacin (mg)': 0.1, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Folate (mcg DFE)': 0, // #this is default assumed value
+        'Natural Folate (mcg)': 0, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 80, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
         'DHA (mg)': 0, // #this is default assumed value
@@ -479,7 +489,8 @@ class IngredientsData {
         'Niacin (mg)': 0.9, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Folate (mcg DFE)': 5, // #this is default assumed value
+        'Natural Folate (mcg)': 5, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 8, // #this is default assumed value
         'Tyrosine (mg)': 40, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -520,7 +531,8 @@ class IngredientsData {
         'Niacin (mg)': 0.6, // #this is default assumed value
         'Vitamin B5 (mg)': 0.3, // #this is default assumed value
         'Vitamin B6 (mg)': 0.2, // #this is default assumed value
-        'Folate (mcg DFE)': 78, // #this is default assumed value
+        'Natural Folate (mcg)': 78, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 30, // #this is default assumed value
         'Tyrosine (mg)': 150, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -561,7 +573,8 @@ class IngredientsData {
         'Niacin (mg)': 1, // #this is default assumed value
         'Vitamin B5 (mg)': 0.1, // #this is default assumed value
         'Vitamin B6 (mg)': 0.04, // #this is default assumed value
-        'Folate (mcg DFE)': 12, // #this is default assumed value
+        'Natural Folate (mcg)': 12, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 15, // #this is default assumed value
         'Tyrosine (mg)': 130, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -599,7 +612,8 @@ class IngredientsData {
         'Niacin (mg)': 0.7, // #this is default assumed value
         'Vitamin B5 (mg)': 0.4, // #this is default assumed value
         'Vitamin B6 (mg)': 0.07, // #this is default assumed value
-        'Folate (mcg DFE)': 26, // #this is default assumed value
+        'Natural Folate (mcg)': 26, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 15, // #this is default assumed value
         'Tyrosine (mg)': 20, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -637,7 +651,8 @@ class IngredientsData {
         'Niacin (mg)': 2.5, // #this is default assumed value
         'Vitamin B5 (mg)': 1, // #this is default assumed value
         'Vitamin B6 (mg)': 0.07, // #this is default assumed value
-        'Folate (mcg DFE)': 12, // #this is default assumed value
+        'Natural Folate (mcg)': 12, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 12, // #this is default assumed value
         'Tyrosine (mg)': 20, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -678,7 +693,8 @@ class IngredientsData {
         'Niacin (mg)': 25, // #this is default assumed value
         'Vitamin B5 (mg)': 2.5, // #this is default assumed value
         'Vitamin B6 (mg)': 2, // #this is default assumed value
-        'Folate (mcg DFE)': 25, // #this is default assumed value
+        'Natural Folate (mcg)': 25, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 400, // #this is default assumed value
         'Tyrosine (mg)': 5000, // #this is default assumed value
         'EPA (mg)': 15, // #this is default assumed value
@@ -720,7 +736,8 @@ class IngredientsData {
         'Niacin (mg)': 0.8, // #this is default assumed value
         'Vitamin B5 (mg)': 0.2, // #this is default assumed value
         'Vitamin B6 (mg)': 0.2, // #this is default assumed value
-        'Folate (mcg DFE)': 150, // #this is default assumed value
+        'Natural Folate (mcg)': 150, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 30, // #this is default assumed value
         'Tyrosine (mg)': 300, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -760,7 +777,8 @@ class IngredientsData {
         'Niacin (mg)': 28, // #this is default assumed value
         'Vitamin B5 (mg)': 4, // #this is default assumed value
         'Vitamin B6 (mg)': 2, // #this is default assumed value
-        'Folate (mcg DFE)': 30, // #this is default assumed value
+        'Natural Folate (mcg)': 30, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 350, // #this is default assumed value
         'EPA (mg)': 10, // #this is default assumed value
         'DHA (mg)': 10, // #this is default assumed value
@@ -801,7 +819,8 @@ class IngredientsData {
         'Niacin (mg)': 25, // #this is default assumed value
         'Vitamin B5 (mg)': 2.5, // #this is default assumed value
         'Vitamin B6 (mg)': 1.8, // #this is default assumed value
-        'Folate (mcg DFE)': 35, // #this is default assumed value
+        'Natural Folate (mcg)': 35, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 370, // #this is default assumed value
         'EPA (mg)': 15, // #this is default assumed value
         'DHA (mg)': 10, // #this is default assumed value
@@ -860,7 +879,8 @@ class IngredientsData {
         'Niacin (mg)': 1.5, // #this is default assumed value
         'Vitamin B5 (mg)': 0.1, // #this is default assumed value
         'Vitamin B6 (mg)': 0.15, // #this is default assumed value
-        'Folate (mcg DFE)': 12, // #this is default assumed value
+        'Natural Folate (mcg)': 12, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 15, // #this is default assumed value
         'Tyrosine (mg)': 40, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -901,7 +921,8 @@ class IngredientsData {
         'Niacin (mg)': 1, // #this is default assumed value
         'Vitamin B5 (mg)': 0.6, // #this is default assumed value
         'Vitamin B6 (mg)': 0.17, // #this is default assumed value
-        'Folate (mcg DFE)': 180, // #this is default assumed value
+        'Natural Folate (mcg)': 180, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 30, // #this is default assumed value
         'Tyrosine (mg)': 200, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
@@ -929,7 +950,8 @@ class IngredientsData {
         'Riboflavin (mg)': 3.35,
         'Niacin (mg)': 16.6,
         'Vitamin B6 (mg)': 2.21,
-        'Folate (mcg DFE)': 605,
+        'Natural Folate (mcg)': 0, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 605, // #this is default assumed value
         'Vitamin B12 (mcg)': 4.48,
         'Zinc (mg)': 0.6,
       
@@ -981,7 +1003,8 @@ class IngredientsData {
         'Niacin (mg)': 1.1, // #this is default assumed value
         'Vitamin B5 (mg)': 0.3, // #this is default assumed value
         'Vitamin B6 (mg)': 0.3, // #this is default assumed value
-        'Folate (mcg DFE)': 54, // #this is default assumed value
+        'Natural Folate (mcg)': 54, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 6, // #this is default assumed value
         'Tyrosine (mg)': 15, // #this is default assumed value
         'EPA (mg)': 0, // #this is default assumed value
