@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/storage/shared_prefs.dart';
 import '../data/daily_plan_data.dart';
@@ -219,6 +221,10 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                   _buildAshwagandhaAlert(),
                   const SizedBox(height: 12),
                 ],
+                if (DailyPlanData.isBloodDonationWeek()) ...[
+                  _buildBloodDonationAlert(),
+                  const SizedBox(height: 12),
+                ],
                 const SizedBox(height: 16),
                 ...items.asMap().entries.map((entry) {
                   int idx = entry.key;
@@ -258,7 +264,26 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        const Text('Daily Summaries', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('Daily Summaries', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+            IconButton(
+              icon: const Icon(Icons.copy, color: Colors.white),
+              tooltip: 'Copy JSON for AI',
+              onPressed: () {
+                final exportData = {
+                  'weeklyTotals': weeklyTotals.toJson(),
+                  'dailyTotals': dailyTotalsMap.map((k, v) => MapEntry(k, v.toJson())),
+                };
+                Clipboard.setData(ClipboardData(text: jsonEncode(exportData)));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Nutrition JSON copied to clipboard')),
+                );
+              },
+            ),
+          ],
+        ),
         const SizedBox(height: 16),
         for (int i = 0; i < 7; i++) 
           Padding(
@@ -680,6 +705,56 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildBloodDonationAlert() {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('🩸 Phlebotomy Protocol', style: TextStyle(fontWeight: FontWeight.bold)),
+            content: const Text(
+              'It has been ~5 months. To manage high ferritin buildup from your continuous high-iron red meat athletic diet, it is clinically recommended to donate blood.\n\nThis dumps excess ferritin and forces your body to generate fresh erythrocytes!',
+              style: TextStyle(height: 1.5),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Got it! 🩸'),
+              ),
+            ],
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.redAccent.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.redAccent, width: 2),
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.bloodtype, color: Colors.redAccent, size: 22),
+            SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                '🩸 DONATE BLOOD THIS WEEK',
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

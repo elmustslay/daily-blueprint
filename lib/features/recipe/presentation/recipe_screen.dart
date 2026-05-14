@@ -13,7 +13,7 @@ class RecipeScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: RecipeData.recipes.map((recipe) => Column(
+        children: RecipeData.recipes.where((r) => !r.isOutdated).map((recipe) => Column(
           children: [
             _buildRecipeCard(context, recipe),
             const SizedBox(height: 16),

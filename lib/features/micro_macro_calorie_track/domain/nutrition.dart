@@ -37,6 +37,16 @@ class NutritionFact {
       microNutrients: newMicros,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'calories': double.parse(calories.toStringAsFixed(1)),
+      'protein': double.parse(protein.toStringAsFixed(1)),
+      'carbs': double.parse(carbs.toStringAsFixed(1)),
+      'fat': double.parse(fat.toStringAsFixed(1)),
+      'microNutrients': microNutrients.map((k, v) => MapEntry(k, double.parse(v.toStringAsFixed(2)))),
+    };
+  }
 }
 
 class Ingredient {
@@ -75,6 +85,7 @@ class Recipe {
   final String icon;
   final List<String> equipment;
   final List<String> instructions;
+  final bool isOutdated;
 
   const Recipe({
     required this.id,
@@ -86,6 +97,7 @@ class Recipe {
     this.icon = '',
     this.equipment = const [],
     this.instructions = const [],
+    this.isOutdated = false,
   });
 
   NutritionFact get nutritionPerServing {

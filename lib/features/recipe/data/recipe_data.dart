@@ -16,8 +16,8 @@ class RecipeData {
         'Pepper to taste',
         '6 bell peppers',
         '48 oz marinara sauce',
-        '12 tbsp nutritional yeast',
-        '4/5 bag of Spinach (Wilted at the end)',
+        '9 tbsp nutritional yeast',
+        '1 bag of Spinach (Wilted at the end)',
       ],
       servings: 6,
       ingredients: [
@@ -27,8 +27,8 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.cannedLentils, amount: 2),
         IngredientPortion(ingredient: IngredientsData.bellPeppers, amount: 6),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 48),
-        IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 12),
-        IngredientPortion(ingredient: IngredientsData.spinach, amount: 0.8), // 4/5 bag
+        IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 9),
+        IngredientPortion(ingredient: IngredientsData.spinach, amount: 1), // 1 bag
       ],
       equipment: [
         '6-8 qt stock pot (with strainer)',
@@ -41,7 +41,7 @@ class RecipeData {
         'Add Veggies: While turkey is browning, wash and chop the 6 bell peppers. Once turkey is browned, add the chopped peppers and cook until softened (~5-6 minutes).',
         'Simmer: Slowly pour in 48 oz marinara sauce (rinse jar with a little water and add that too). Stir as it heats (~3 minutes). Lower heat to medium-low.',
         'Finish Sauce: drain & rinse lentil. Simmer uncovered for 10 minutes, stirring occasionally. Stir in 12 tbsp nutritional yeast to finish.',
-        'Combine & Wilt: Add the drained chickpea pasta and 4/5 bag of spinach to the sauté pan with the sauce. Toss everything together for 2 minutes over low heat until the spinach is fully wilted and pasta is coated.',
+        'Combine & Wilt: Add the drained chickpea pasta and 1 bag of spinach to the sauté pan with the sauce. Toss everything together for 2 minutes over low heat until the spinach is fully wilted and pasta is coated.',
         'Store: Divide into 6 containers (for the fridge).',
       ],
     ),
@@ -113,6 +113,7 @@ class RecipeData {
       id: 'ribeye',
       name: 'Pan-Seared Ribeye & Spinach',
       icon: '🥩',
+      isOutdated: true,
       yields: '1 Serving (Sunday Dinner)',
       textIngredients: [
         '0.7 lb Ribeye Steak',
