@@ -217,6 +217,10 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                   _buildDeloadAlert(),
                   const SizedBox(height: 12),
                 ],
+                if (DailyPlanData.shouldScaleUpCardio()) ...[
+                  _buildCardioScaleUpAlert(),
+                  const SizedBox(height: 12),
+                ],
                 if (DailyPlanData.isAshwagandhaOff()) ...[
                   _buildAshwagandhaAlert(),
                   const SizedBox(height: 12),
@@ -586,6 +590,35 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCardioScaleUpAlert() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.orange.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.orangeAccent, width: 2),
+      ),
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.directions_run, color: Colors.orangeAccent, size: 20),
+          SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              'Beginning this week, add 10 min to each session of your cardio.',
+              style: TextStyle(
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ],
       ),
     );

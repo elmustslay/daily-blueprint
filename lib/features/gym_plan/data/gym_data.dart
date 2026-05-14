@@ -254,7 +254,7 @@ class GymData {
     ),
     Exercise(
       id: 'legs_4a', name: 'Dumbbell Reverse Lunges', sets: '3', reps: '10-12', rest: '1-2 min',
-      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle) and Quads.\n\n💡 How to do it: Hold dumbbells at your sides. Step one foot backwards and sink your hips down until your back knee almost touches the floor. Lean your torso slightly forward to put the maximum stretch and load on your front glute. Push off the front heel to return to standing.\n\n⚠️ Common Pitfall: Pushing off the back foot. The back leg is just a kickstand; 90% of the weight should be driven up by the front heel/glute.',
+      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle) and Quads.\n\n💡 How to do it: Hold dumbbells at your sides. Step one foot backwards and sink your hips down until your back knee almost touches the floor. Lean your torso slightly forward to put the maximum stretch and load on your front glute. Push off the front heel to return to standing.\n\n⚠️ Common Pitfall: Pushing off the back foot. The back leg is just a kickstand; 90% of the weight should be driven up by the front heel/glute.\n\n🔥 SYMMETRY FIX: Because your right leg is 1.3 lbs heavier, ALWAYS start your set by stepping your right leg back so your LEFT (weak) leg is doing the pushing. Go to failure on the left leg, then match that exact number of reps on the right leg (even if the right leg could do more).',
     ),
     Exercise(
       id: 'legs_2a', name: 'Seated Leg Curl Machine', sets: '3', reps: '8-10', rest: '2-3 min',
