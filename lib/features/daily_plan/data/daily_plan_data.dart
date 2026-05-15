@@ -22,9 +22,6 @@ class DailyPlanData {
   /*
    * SUPPLEMENT DOSAGE & SAFETY LOG:
    * 
-   * General Assessment: The stack is remarkably well-calibrated and safe. No individual
-   * dosages exceed the tolerable upper intake limits. The combinations are smart (e.g., Zinc balanced with Copper).
-   * 
    * Morning:
    * - NAC: 600mg + Selenium: 25mcg (Safe, supports glutathione)
    * - Citicoline: 250mg + Tyrosine: 25mg (Safe maintenance dose for focus)

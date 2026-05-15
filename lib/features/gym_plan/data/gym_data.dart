@@ -209,10 +209,6 @@ class GymData {
       tip: '🎯 Focus: Upper chest (clavicular head) for that "armor-plate" look.\n\n💡 How to do it: Adjust seat height so handles align near your upper chest/collarbone. Keep shoulders pinned back. The MTS allows each arm to work independently and converges inward—squeeze hard at the peak!\n\n⚠️ Common Pitfall: Letting your shoulders roll forward at the top of the press. Keep your chest up and shoulder blades bolted into the pad the entire time.',
     ),
     Exercise(
-      id: 'push_2', name: 'Dumbbell Lateral Raise', sets: '3', reps: '10-15', rest: '1-2 min',
-      tip: '🎯 Focus: The side deltoid (shoulder cap) to widen the upper body and create the V-Taper.\n\n💡 How to do it: Lean slightly forward. Raise the dumbbells out to the sides until shoulder height, leading with your elbows. Imagine you are pouring water out of two pitchers at the top.\n\n⚠️ Common Pitfall: Shrugging your shoulders up to your ears, which shifts the work to your traps. Keep your shoulder blades pinned down.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame. Because you are doing only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, the set doesn\'t count.',
-    ),
-    Exercise(
       id: 'pull_1', name: 'Lat Pulldown Machine', sets: '3', reps: '8-12', rest: '2-3 min',
       tip: '🎯 Focus: Your lats (the "wings" on the sides of your back).\n\n💡 How to do it: Grab bar wider than shoulders. Pull down by bringing your elbows straight down to your back pockets. Pull the bar to your upper chest.\n\n⚠️ Common Pitfall: Leaning back too far to use heavy momentum. Keep torso mostly upright. Never pull behind the neck.',
     ),
@@ -225,20 +221,16 @@ class GymData {
       tip: '🎯 Focus: Rear deltoids (back of shoulder).\n\n💡 How to do it: Keep weight light for the 15-20 rep range. Keep a slight but rigid bend in your elbows. Open arms wide and squeeze shoulder blades at the peak.\n\n⚠️ Common Pitfall: Bending elbows to 90 degrees making it a row. Keep arms relatively straight to isolate the small rear delt muscle.',
     ),
     Exercise(
+      id: 'push_2', name: 'Dumbbell Lateral Raise', sets: '3', reps: '10-15', rest: '1-2 min',
+      tip: '🎯 Focus: The side deltoid (shoulder cap) to widen the upper body and create the V-Taper.\n\n💡 How to do it: Lean slightly forward. Raise the dumbbells out to the sides until shoulder height, leading with your elbows. Imagine you are pouring water out of two pitchers at the top.\n\n⚠️ Common Pitfall: Shrugging your shoulders up to your ears, which shifts the work to your traps. Keep your shoulder blades pinned down.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame. Because you are doing only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, the set doesn\'t count.',
+    ),
+    Exercise(
       id: 'push_5', name: 'Tricep Pushdown/Press', sets: '3', reps: '8-12', rest: '1-2 min',
       tip: '🎯 Focus: The lateral and long heads of the triceps.\n\n💡 How to do it: Keep your chest up and shoulders back. Pin your elbows to your sides and push straight down until arms are fully extended.\n\n⚠️ Common Pitfall: Letting the cable pull your elbows fully forward on the way up. Keep the elbows strictly locked by your ribs.',
     ),
     Exercise(
       id: 'pull_5', name: 'Machine Bicep Curl', sets: '3', reps: '10-12', rest: '1-2 min',
       tip: '🎯 Focus: The main "peak" of your bicep.\n\n💡 How to do it: Adjust seat so your armpit is snug against the top of the pad. Your upper arm should be completely immobilized. Squeeze hard at the peak of the curl.\n\n⚠️ Common Pitfall: Lifting elbows off the pad or rocking your shoulders. Lock your upper arm firmly against the pad at all times.',
-    ),
-    Exercise(
-      id: 'abs_1', name: 'Abdominal Crunch Machine', sets: '3', reps: '12-15', rest: '1 min',
-      tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
-    ),
-    Exercise(
-      id: 'bw_1', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
-      tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
     Exercise(
       id: 'stretch_upper_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
@@ -253,12 +245,12 @@ class GymData {
       tip: '🎯 Focus: Big compound lift for quads and glutes.\n\n💡 How to do it: Place feet shoulder-width apart. As you lower the weight, aim to bring knees towards your chest. Push through the whole foot (especially the heel) to drive up.\n\n⚠️ Common Pitfall: "Butt wink" – lifting your lower back/hips off the seat at the bottom. Only go as deep as you can before your hips peel off the pad.',
     ),
     Exercise(
-      id: 'legs_4a', name: 'Dumbbell Reverse Lunges', sets: '3', reps: '10-12', rest: '1-2 min',
-      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle) and Quads.\n\n💡 How to do it: Hold dumbbells at your sides. Step one foot backwards and sink your hips down until your back knee almost touches the floor. Lean your torso slightly forward to put the maximum stretch and load on your front glute. Push off the front heel to return to standing.\n\n⚠️ Common Pitfall: Pushing off the back foot. The back leg is just a kickstand; 90% of the weight should be driven up by the front heel/glute.\n\n🔥 SYMMETRY FIX: Because your right leg is 1.3 lbs heavier, ALWAYS start your set by stepping your right leg back so your LEFT (weak) leg is doing the pushing. Go to failure on the left leg, then match that exact number of reps on the right leg (even if the right leg could do more).',
-    ),
-    Exercise(
       id: 'legs_2a', name: 'Seated Leg Curl Machine', sets: '3', reps: '8-10', rest: '2-3 min',
       tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
+    ),
+    Exercise(
+      id: 'legs_4a', name: 'Dumbbell Reverse Lunges', sets: '3', reps: '10-12', rest: '1-2 min',
+      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle) and Quads.\n\n💡 How to do it: Hold dumbbells at your sides. Step one foot backwards and sink your hips down until your back knee almost touches the floor. Lean your torso slightly forward to put the maximum stretch and load on your front glute. Push off the front heel to return to standing.\n\n⚠️ Common Pitfall: Pushing off the back foot. The back leg is just a kickstand; 90% of the weight should be driven up by the front heel/glute.\n\n🔥 SYMMETRY FIX: Because your right leg is 1.3 lbs heavier, ALWAYS start your set by stepping your right leg back so your LEFT (weak) leg is doing the pushing. Go to failure on the left leg, then match that exact number of reps on the right leg (even if the right leg could do more).',
     ),
     Exercise(
       id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
@@ -276,7 +268,7 @@ class GymData {
       id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
-    // TODO LATER: Add EZ Bar Curls or Cable Rope Hammer Curls (3x10-12) here to increase weekly bicep volume for filling out t-shirt sleeves.
+    // TODO LATER LATER: Add EZ Bar Curls or Cable Rope Hammer Curls (3x10-12) here to increase weekly bicep volume for filling out t-shirt sleeves.
     Exercise(
       id: 'stretch_lower_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
       tip: 'Lower Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Hip Flexor Lunge: Kneel on one knee, squeeze the glute on the grounded leg, and push hips forward.\n2️⃣ Hamstring Stretch: Put foot on a low bench and gently hinge forward at the hips with a flat back.\n3️⃣ Couch Stretch (Quads): Put shin against a wall/bench, knee on the floor, and sit upright.\n4️⃣ Calf/Ankle Mobilization: Stand on a ledge, let heels drop deep, and hold the stretch to prevent Achilles tightness.',
@@ -290,6 +282,10 @@ class GymData {
       tip: '🎯 Focus: Upper back and rear shoulders (delts).\n\n💡 How to do it: Pull higher towards the upper chest, keeping elbows flared out slightly wider than a traditional lat-focused row.\n\n⚠️ Common Pitfall: Shrugging your shoulders up into your ears. Actively push your shoulders down and back during the pull.',
     ),
     Exercise(
+      id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: 'To Failure', rest: '1-2 min',
+      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it: On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 8-10 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
+    ),
+    Exercise(
       id: 'pull_2', name: 'Machine Seated Row', sets: '3', reps: '8-12', rest: '2-3 min',
       tip: '🎯 Focus: Lats and Mid-back for V-taper width and back thickness.\n\n💡 How to do it: Adjust the chest pad so you get a deep stretch when reaching for the handles. Keep your chest firmly glued to the pad. Drive your elbows straight back and down toward your hips (think of your hands as just hooks).\n\n⚠️ Common Pitfall: Pulling your chest off the pad to use momentum, or shrugging your shoulders up. Keep shoulders pinned down and torso completely frozen against the pad.',
     ),
@@ -298,24 +294,12 @@ class GymData {
       tip: '🎯 Focus: Building the "cap" of your shoulder (side deltoid) for a wider look.\n\n💡 How to do it: Lock shoulder blades down and back. Lead with your elbows. Imagine pushing the pads out to the sides of the room, not up toward the ceiling.\n\n⚠️ Common Pitfall: Shrugging your shoulders up towards your ears (which over-activates the traps). Use lighter weight and maintain strict form.\n\n🔥 AESTHETIC NOTE: Never skip these! Side delts are the entire secret to an attractive, broad upper body on a 5\'7" frame. Because you are doing only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, the set doesn\'t count.',
     ),
     Exercise(
-      id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: 'To Failure', rest: '1-2 min',
-      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it: On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 8-10 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
-    ),
-    Exercise(
-      id: 'pull_6', name: 'Dumbbell Hammer Curl', sets: '3-4', reps: '12-15', rest: '1 min',
-      tip: '🎯 Focus: The Brachialis (pushes bicep up) and Brachioradialis (forearm chunk).\n\n💡 How to do it: Use a neutral grip (palms facing body). Pin elbows strictly to your ribs. Curl weight toward the shoulder leading with the thumb. Grip the dumbbell tight to heavily activate the forearm. 3-seconds slow on the way down.\n\n⚠️ Common Pitfall: "The Elbow Drift". Letting elbows swing forward or outward to cheat the weight up. Drop the weight if your hips are swinging.',
-    ),
-    Exercise(
       id: 'push_7', name: 'Machine Tricep Extension', sets: '3', reps: '10-12', rest: '1-2 min',
       tip: '🎯 Focus: Isolating the triceps (back of your arm).\n\n💡 How to do it: Pin your elbows to the table/pads. The only part of your body that should move is your forearm hinging at the elbow.\n\n⚠️ Common Pitfall: Letting your elbows flare out or using your shoulders/back to force the weight down. Lock everything in place.',
     ),
     Exercise(
-      id: 'abs_1_high', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min',
-      tip: '🎯 Focus: Upper and lower abs (rectus abdominis).\n\n💡 How to do it: Sit down, grab the handles, and curl your torso forward by contracting your abs — not by pulling with your arms. Exhale as you crunch, pause at peak contraction for 1 second, then slowly return.\n\n⚠️ Common Pitfall: Using your arms and hip flexors to yank the weight. Keep your arms locked in position and focus entirely on your abs doing the curling motion. Start light!',
-    ),
-    Exercise(
-      id: 'bw_1b', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
-      tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
+      id: 'pull_6', name: 'Dumbbell Hammer Curl', sets: '3-4', reps: '12-15', rest: '1 min',
+      tip: '🎯 Focus: The Brachialis (pushes bicep up) and Brachioradialis (forearm chunk).\n\n💡 How to do it: Use a neutral grip (palms facing body). Pin elbows strictly to your ribs. Curl weight toward the shoulder leading with the thumb. Grip the dumbbell tight to heavily activate the forearm. 3-seconds slow on the way down.\n\n⚠️ Common Pitfall: "The Elbow Drift". Letting elbows swing forward or outward to cheat the weight up. Drop the weight if your hips are swinging.',
     ),
     Exercise(
       id: 'stretch_upper_b', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
@@ -333,13 +317,13 @@ class GymData {
       id: 'legs_3b', name: 'Wide Stance Leg Press', sets: '4', reps: '8-10', rest: '2-3 min',
       tip: '🎯 Focus: Shifts emphasis to your glutes and inner thighs (adductors).\n\n💡 How to do it: Place feet wider than shoulders and point toes slightly outward (e.g., 11 and 1 o\'clock).\n\n⚠️ Common Pitfall: Knees caving inward as you push. Actively think about driving your knees outward so they stay in perfect alignment with your toes.',
     ),
+     Exercise(
+      id: 'legs_2b', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2-3 min',
+      tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
+    ),
     Exercise(
       id: 'legs_4b', name: 'Floor Glute Bridges', sets: '3', reps: '10-15', rest: '1-2 min',
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Lie flat on your back, knees bent, feet flat on the floor shoulder-width apart. Rest a heavy dumbbell or barbell across your hip crease. Drive through your heels to thrust your hips straight up into the air. Squeeze your glutes at the absolute top for a full 1-2 seconds.\n\n⚠️ Common Pitfall: Hyperextending your lower back. Your ribs should stay tucked down. The movement comes entirely from squeezing the glutes, not arching your spine.',
-    ),
-    Exercise(
-      id: 'legs_2b', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2-3 min',
-      tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
     ),
     Exercise(
       id: 'legs_5b', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
