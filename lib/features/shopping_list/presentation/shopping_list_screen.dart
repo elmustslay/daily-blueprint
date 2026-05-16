@@ -48,6 +48,14 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 12tbsp)'),
       ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
+      
+      // Spices
+      ShoppingItem(id: 'spc-1', name: 'Smoked Paprika', subtext: 'need 2tsp'),
+      ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.5tsp'),
+      ShoppingItem(id: 'spc-3', name: 'Onion Powder', subtext: 'need 1tsp'),
+      ShoppingItem(id: 'spc-4', name: 'Dried Oregano', subtext: 'need 1tsp'),
+
+
 
       // Amazon
       ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'),
@@ -160,7 +168,11 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> with Si
         const SizedBox(height: 16),
         _buildSectionHeader('Others'),
         _buildSectionItems(allItems, (item) => item.id.startsWith('oth-')),
+        const SizedBox(height: 16),
+        _buildSectionHeader('Spices'),
+        _buildSectionItems(allItems, (item) => item.id.startsWith('spc-')),
       ],
+
     );
   }
 
