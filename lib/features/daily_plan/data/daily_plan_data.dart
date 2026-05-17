@@ -86,7 +86,7 @@ class DailyPlanData {
   };
 
   /*
-   * LONG-TERM SKINCARE PLAN:
+   * FUTURE SKINCARE PLAN:
    * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Cetaphil or Cerave pm (depending on day).
    * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY CeraVe PM (wait 30m after rolling to avoid flushing/hyperpigmentation).
    */
@@ -97,150 +97,412 @@ class DailyPlanData {
    * 1. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
    * 2. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
    */
+  static TimelineItem _wakeup(String time, {bool nac = false, bool copper = false}) {
+    return TimelineItem(
+      time: time,
+      title: 'Wakeup',
+      icon: '☀️',
+      details: [
+        'Use bathroom',
+        'Weight (Step on scale)',
+        if (nac) 'Take 600mg NAC + 25mcg Selenium (Combo Pill)',
+        'Take 250mg Citicoline (w/ 25mg Tyrosine)',
+        if (copper) 'Take 1 cap Copper Glycinate (3mg)',
+      ],
+      mealRecord: MealRecord(items: [
+        if (nac) const IngredientPortion(ingredient: IngredientsData.nac, amount: 1),
+        const IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1),
+        if (copper) const IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1),
+      ]),
+    );
+  }
+
+  static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
+    return TimelineItem(
+      time: time,
+      title: 'Get Ready',
+      icon: '🚿',
+      details: [
+        'Set Dehumidifier to 69% -> Brush teeth',
+        'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */,
+        'Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s',
+        skincare,
+        'Apply deodorant',
+        clothes,
+      ],
+    );
+  }
+
+  static TimelineItem _morningReading(String time, {String additional = ''}) {
+    return TimelineItem(
+      time: time,
+      title: 'Morning Reading',
+      icon: '📖',
+      details: [
+        'Turn on Verilux HappyLight (45-degree angle to face)',
+        if (additional.isNotEmpty) additional,
+        'Set Dehumidifier to 30%',
+      ],
+    );
+  }
+
+  static TimelineItem _grabThings(String time, {bool zinc = false}) {
+    return TimelineItem(
+      time: time,
+      title: 'Grab things to take to work',
+      icon: '🗂️',
+      details: [
+        'kindle/laptop',
+        '2 key/wallet/phone',
+        'airpods',
+        'gym outfit',
+        'Blotting Sheet',
+        'sunscreen',
+        'Pasta lunch',
+        '3 Boiled Eggs',
+        zinc ? 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin, Zinc Picolinate)' : 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin)',
+        'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt',
+        '1 banana',
+        'water bottle'
+      ],
+    );
+  }
+
+  static TimelineItem _commuteToWork(String time) {
+    return TimelineItem(time: time, title: 'Commute to Work', icon: '🚗');
+  }
+
+  static TimelineItem _work(String time, {List<String> details = const [], String title = 'Work'}) {
+    return TimelineItem(time: time, title: title, icon: '💻', details: details);
+  }
+
+  static TimelineItem _preLunchFiber(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Pre-Lunch Fiber',
+      icon: '🥤',
+      details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'],
+      mealRecord: const MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)
+      ]),
+    );
+  }
+
+  static TimelineItem _pastaLunch(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Lunch',
+      icon: '🍝',
+      details: ['1 serving of my pasta (Spinach is cooked inside)'],
+      mealRecord: MealRecord(recipeItems: [
+        RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)
+      ]),
+    );
+  }
+
+  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true}) {
+    return TimelineItem(
+      time: time,
+      title: 'Afternoon Snack',
+      icon: eggs > 0 ? '🥚' : '🥤',
+      details: [
+        if (eggs > 0) '$eggs Boiled Eggs',
+        if (vitamins) ...[
+          '3 softgel omega-3',
+          '1 D3-K2',
+          '1 standalone K2 (100mcg)',
+          '1 cap Biotin+Keratin (10mg/500mg)',
+        ],
+        if (zinc) '1 cap Zinc Picolinate (30mg)',
+        if (whey) '1 scoop whey isolate (30g protein)',
+        if (whey) '1 scoop creatine monohydrate (5g)',
+      ],
+      mealRecord: MealRecord(items: [
+        if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
+        if (vitamins) ...[
+          const IngredientPortion(ingredient: IngredientsData.omega3, amount: 3),
+          const IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1),
+          const IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1),
+          const IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1),
+        ],
+        if (zinc) const IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1),
+        if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1),
+        if (whey) const IngredientPortion(ingredient: IngredientsData.creatine, amount: 1),
+      ]),
+    );
+  }
+
+  static TimelineItem _preMedicationBuffer(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Pre-Medication Buffer',
+      icon: '🥚',
+      details: [
+        '2 Boiled Eggs',
+        '3 softgel omega-3',
+        '1 D3-K2',
+        '1 standalone K2 (100mcg)',
+        '1 cap Biotin+Keratin (10mg/500mg)',
+      ],
+      mealRecord: const MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.egg, amount: 2),
+        IngredientPortion(ingredient: IngredientsData.omega3, amount: 3),
+        IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1),
+      ]),
+    );
+  }
+
+  static TimelineItem _postWorkout(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Post-Workout',
+      icon: '🥤',
+      details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'],
+      mealRecord: const MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)
+      ]),
+    );
+  }
+
+  static TimelineItem _salmonDinner(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Dinner',
+      icon: '🥗',
+      details: ['1/3 lb Wild Sockeye Salmon', '2 cups Unsweetened Almond Milk'],
+      mealRecord: MealRecord(items: [
+        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)
+      ], recipeItems: [
+        RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1)
+      ]),
+    );
+  }
+
+  static TimelineItem _beefDinner(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Dinner',
+      icon: '🍛',
+      details: ['1/4 cup quinoa + 1/4 pound ground beef', '1 cup Unsweetened Almond Milk'],
+      mealRecord: MealRecord(items: [
+        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1)
+      ], recipeItems: [
+        RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)
+      ]),
+    );
+  }
+
+  static TimelineItem _chores(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Chores & Clean Up',
+      icon: '🧼',
+      details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'],
+      mealRecord: const MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.casein, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
+      ]),
+    );
+  }
+
+  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage'}) {
+    return TimelineItem(
+      time: time,
+      title: 'Shower & Bed Prep',
+      icon: '🚿',
+      details: [
+        'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen',
+        'In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse',
+        'Hair: $hair, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock',
+        'PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */
+      ],
+    );
+  }
+
+  static TimelineItem _nightSupplement(String time, {
+    required String skincare, 
+    int magAmount = 2, 
+    String magName = 'Magnesium Glycinate',
+    String title = 'Night Supplement + Read/Reflect',
+  }) {
+    return TimelineItem(
+      time: time,
+      title: title,
+      icon: '🌙',
+      details: [
+        'Take $magAmount $magName + 1 tablet Finasteride (1mg)',
+        skincare,
+        'CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry',
+        'Set Dehumidifier to 30%',
+      ],
+      mealRecord: MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: magAmount.toDouble()),
+        const IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)
+      ]),
+    );
+  }
+
+  static TimelineItem _fallAsleep(String time) {
+    return TimelineItem(time: time, title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']);
+  }
+
+  static const String _cetaphil = 'Cetaphil DermaControl Oil Absorbing Moisturizer with SPF 30: 1 squirt for face, 1 for neck';
+  static const String _ceravePM = 'CeraVe PM: 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
+  static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
+  static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
+  static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
+
   static final Map<String, List<TimelineItem>> schedules = {
     'mon': [
-      TimelineItem(time: '7:30-7:35 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 250mg Citicoline (w/ 25mg Tyrosine)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1)])),
-      TimelineItem(time: '7:35-8:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. Cetaphil DermaControl Oil Absorbing Moisturizer with SPF 30: 1 squirt for face, 1 for neck', '5. Apply deodorant', '6. Get dressed (NK 9060/Bondi)']),
-      TimelineItem(time: '8:15-8:30 am', title: 'Morning Reading', icon: '📖', details: ['Turn on Verilux HappyLight (45-degree angle to face)', 'reading']),
-      TimelineItem(time: '8:30-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['kindle/laptop', '2 key/wallet/phone', 'airpods', 'gym outfit', 'Blotting Sheet', 'sunscreen', 'Pasta lunch', '3 Boiled Eggs', 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin)', 'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt', '1 banana', 'water bottle', 'Set Dehumidifier to 30%']),
-      TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
-      TimelineItem(time: '9:00-11:30 am', title: 'Work', icon: '💻'),
-      TimelineItem(time: '11:30-12:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍝', details: ['1 serving of my pasta (Spinach is cooked inside)'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)])),
-      TimelineItem(time: '12:30-3:30 pm', title: 'Work', icon: '💻'),
-      TimelineItem(time: '3:30-3:45 pm', title: 'Afternoon Snack', icon: '🥚', details: ['3 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 3), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1)])),
-      TimelineItem(time: '3:45-5:00 pm', title: 'Work', icon: '💻'),
+      _wakeup('7:30-7:35 am'),
+      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (NK 9060/Bondi)'),
+      _morningReading('8:15-8:30 am'),
+      _grabThings('8:30-8:35 am'),
+      _commuteToWork('8:35-9:00 am'),
+      _work('9:00-11:30 am'),
+      _preLunchFiber('11:30-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm'),
+      _work('12:30-3:30 pm'),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3),
+      _work('3:45-5:00 pm'),
       TimelineItem(time: '5:00-5:30 pm', title: 'Commute To Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)', '1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
       TimelineItem(time: '5:30-7:00 pm', title: 'Gym Session (Upper A)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
-      TimelineItem(time: '7:00-7:15 pm', title: 'Post-Workout', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
-      TimelineItem(time: '7:15-7:30 pm', title: 'Dinner', icon: '🥗', details: ['1/3 lb Wild Sockeye Salmon', '2 cups Unsweetened Almond Milk'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)], recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1)])),
-      TimelineItem(time: '7:30-8:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      _postWorkout('7:00-7:15 pm'),
+      _salmonDinner('7:15-7:30 pm'),
+      _chores('7:30-8:00 pm'),
       TimelineItem(time: '8:00-9:00 pm', title: 'Study Time', icon: '📚'),
-      TimelineItem(time: '9:00-10:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: 60s warm massage, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '10:00-10:30 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['1. Take 3 Magnesium Glycinate + 1 tablet Finasteride (1mg)', '2. Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Read/Reflect', '5. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 3), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
-      TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _bedPrep('9:00-10:00 pm'),
+      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
+      _fallAsleep('10:30-11:00 pm'),
     ],
     'tue': [
-      TimelineItem(time: '7:30-7:35 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 600mg NAC + 25mcg Selenium (Combo Pill)', '4. Take 250mg Citicoline (w/ 25mg Tyrosine)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.nac, amount: 1), IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1)])),
-      TimelineItem(time: '7:35-8:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. CeraVe PM: 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s', '5. Apply deodorant', '6. Get dressed']),
-      TimelineItem(time: '8:15-8:30 am', title: 'Morning Reading', icon: '📖', details: ['Turn on Verilux HappyLight (45-degree angle to face)', 'reading']),
-      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1. 1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)', '2. Set Dehumidifier to 30%']),
-      TimelineItem(time: '9:05-11:30 am', title: 'Work', icon: '💻', details: ['Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener', 'Run Dishwasher']),
-      TimelineItem(time: '11:30-12:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍝', details: ['1 serving of my pasta (Spinach is cooked inside)'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)])),
-      TimelineItem(time: '12:30-3:30 pm', title: 'Work', icon: '💻', details: ['Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + 1/3 cup Bleach + EXTRA RINSE']),
-      TimelineItem(time: '3:30-4:00 pm', title: 'Afternoon Snack', icon: '🥚', details: ['2 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 2), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1)])),
+      _wakeup('7:30-7:35 am', nac: true),
+      _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
+      _morningReading('8:15-8:30 am'),
+      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
+      _work('9:05-11:30 am', details: ['Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener', 'Run Dishwasher']),
+      _preLunchFiber('11:30-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm'),
+      _work('12:30-3:30 pm', details: ['Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + 1/3 cup Bleach + EXTRA RINSE']),
+      _afternoonSnack('3:30-4:00 pm', eggs: 2),
       TimelineItem(time: '4:00-4:15 pm', title: 'Pre-Cardio Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
       TimelineItem(time: '4:15-5:00 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, study or work']),
       TimelineItem(time: '5:00-6:30 pm', title: 'Cardio (LISS)', icon: '🏃', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt index finger for face/ears -> Wash hands -> 1 squirt middle finger for neck) before leaving', '40 min walk (see Gym Plan → Cardio)', 'Every 2-3 weeks: swap for haircut']),
-      TimelineItem(time: '6:30-7:30 pm', title: 'Dinner', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', '1 cup Unsweetened Almond Milk'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1)], recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)])),
-      TimelineItem(time: '7:30-8:15 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
-      TimelineItem(time: '8:15-9:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: 60s warm massage, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '9:00-10:30 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['1. Take 2 Magnesium Glycinate + 1 tablet Finasteride (1mg)', '2. Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Read/Reflect', '5. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 2), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
-      TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _beefDinner('6:30-7:30 pm'),
+      _chores('7:30-8:15 pm'),
+      _bedPrep('8:15-9:00 pm'),
+      _nightSupplement('9:00-10:30 pm', magAmount: 2, skincare: _bha),
+      _fallAsleep('10:30-11:00 pm'),
     ],
     'wed': [
-      TimelineItem(time: '7:30-7:35 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 250mg Citicoline (w/ 25mg Tyrosine)', '4. Take 1 cap Copper Glycinate (3mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1), IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1)])),
-      TimelineItem(time: '7:35-8:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. Cetaphil DermaControl Oil Absorbing Moisturizer with SPF 30: 1 squirt for face, 1 for neck', '5. Apply deodorant', '6. Get dressed (cloud x 4)']),
-      TimelineItem(time: '8:15-8:30 am', title: 'Morning Reading', icon: '📖', details: ['Turn on Verilux HappyLight (45-degree angle to face)', 'reading']),
-      TimelineItem(time: '8:30-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['kindle/laptop', '2 key/wallet/phone', 'airpods', 'gym outfit', 'Blotting Sheet', 'sunscreen', 'Pasta lunch', '3 Boiled Eggs', 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin, Zinc Picolinate)', 'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt', '1 banana', 'water bottle', 'Set Dehumidifier to 30%']),
-      TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
-      TimelineItem(time: '9:00-11:30 am', title: 'Work', icon: '💻'),
-      TimelineItem(time: '11:30-12:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍝', details: ['1 serving of my pasta (Spinach is cooked inside)'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)])),
-      TimelineItem(time: '12:30-3:30 pm', title: 'Work', icon: '💻'),
-      TimelineItem(time: '3:30-3:45 pm', title: 'Afternoon Snack', icon: '🥚', details: ['3 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cap Zinc Picolinate (30mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 3), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1), IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1)])),
-      TimelineItem(time: '3:45-5:00 pm', title: 'Work', icon: '💻'),
+      _wakeup('7:30-7:35 am', copper: true),
+      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:15-8:30 am'),
+      _grabThings('8:30-8:35 am', zinc: true),
+      _commuteToWork('8:35-9:00 am'),
+      _work('9:00-11:30 am'),
+      _preLunchFiber('11:30-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm'),
+      _work('12:30-3:30 pm'),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
+      _work('3:45-5:00 pm'),
       TimelineItem(time: '5:00-5:30 pm', title: 'Commute To Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)', '1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
       TimelineItem(time: '5:30-7:30 pm', title: 'Gym Session (Lower A)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
-      TimelineItem(time: '7:30-7:40 pm', title: 'Post-Workout', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
-      TimelineItem(time: '7:40-8:00 pm', title: 'Dinner', icon: '🥗', details: ['1/3 lb Wild Sockeye Salmon', '2 cups Unsweetened Almond Milk'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)], recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1)])),
-      TimelineItem(time: '8:00-8:30 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      _postWorkout('7:30-7:40 pm'),
+      _salmonDinner('7:40-8:00 pm'),
+      _chores('8:00-8:30 pm'),
       TimelineItem(time: '8:30-9:30 pm', title: 'Study Time', icon: '📚'),
-      TimelineItem(time: '9:30-10:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: CeraVe Gentle Shampoo (45s lather), Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '10:00-10:30 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['1. Take 3 Magnesium Glycinate + 1 tablet Finasteride (1mg)', '2. Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Read/Reflect', '5. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 3), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
-      TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _bedPrep('9:30-10:00 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
+      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
+      _fallAsleep('10:30-11:00 pm'),
     ],
     'thu': [
-      TimelineItem(time: '7:30-7:35 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 250mg Citicoline (w/ 25mg Tyrosine)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1)])),
-      TimelineItem(time: '7:35-8:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. CeraVe PM: 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s', '5. Apply deodorant', '6. Get dressed']),
-      TimelineItem(time: '8:15-8:30 am', title: 'Morning Reading', icon: '📖', details: ['1. Turn on Verilux HappyLight (45-degree angle to face)', '2. Reading', '3. Set Dehumidifier to 30%']),
-      TimelineItem(time: '8:30-11:30 am', title: 'Work', icon: '💻', details: ['Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness + OxiClean)', 'Run Dishwasher']),
-      TimelineItem(time: '11:30-12:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍝', details: ['1 serving of my pasta (Spinach is cooked inside)'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)])),
-      TimelineItem(time: '12:30-3:30 pm', title: 'Work', icon: '💻', details: ['Fold & Put Away Laundry']),
-      TimelineItem(time: '3:30-3:45 pm', title: 'Afternoon Snack', icon: '🥚', details: ['3 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 3), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1)])),
+      _wakeup('7:30-7:35 am'),
+      _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
+      _morningReading('8:15-8:30 am'),
+      _work('8:30-11:30 am', details: ['Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness + OxiClean)', 'Run Dishwasher']),
+      _preLunchFiber('11:30-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm'),
+      _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3),
       TimelineItem(time: '3:45-5:15 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, work or study']),
       TimelineItem(time: '5:15-5:30 pm', title: 'Commute to the gym', icon: '🚗', details: ['1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
       TimelineItem(time: '5:30-7:15 pm', title: 'Gym Session (Upper B)', icon: '🏋️', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt index finger for face/ears -> Wash hands -> 1 squirt middle finger for neck) before leaving', 'Includes 20 min travel each way']),
-      TimelineItem(time: '7:15-7:30 pm', title: 'Post-Workout', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
-      TimelineItem(time: '7:30-8:00 pm', title: 'Dinner', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', '1 cup Unsweetened Almond Milk'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1)], recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)])),
-      TimelineItem(time: '8:00-8:30 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
-      TimelineItem(time: '8:30-9:15 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: 60s warm massage, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '9:15-10:30 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['1. Take 2 Magnesium Glycinate + 1 tablet Finasteride (1mg)', '2. Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Read/Reflect', '5. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 2), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
-      TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _postWorkout('7:15-7:30 pm'),
+      _beefDinner('7:30-8:00 pm'),
+      _chores('8:00-8:30 pm'),
+      _bedPrep('8:30-9:15 pm'),
+      _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
+      _fallAsleep('10:30-11:00 pm'),
     ],
     'fri': [
-      TimelineItem(time: '7:30-7:35 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 250mg Citicoline (w/ 25mg Tyrosine)', '4. Take 1 cap Copper Glycinate (3mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1), IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1)])),
-      TimelineItem(time: '7:35-8:15 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. Cetaphil DermaControl Oil Absorbing Moisturizer with SPF 30: 1 squirt for face, 1 for neck', '5. Apply deodorant', '6. Get dressed (cloud x 4)']),
-      TimelineItem(time: '8:15-8:30 am', title: 'Morning Reading', icon: '📖', details: ['Turn on Verilux HappyLight (45-degree angle to face)', 'reading']),
-      TimelineItem(time: '8:30-8:35 am', title: 'Grab things to take to work', icon: '🗂️', details: ['kindle/laptop', '2 key/wallet/phone', 'airpods', 'gym outfit', 'Blotting Sheet', 'sunscreen', 'Pasta lunch', '3 Boiled Eggs', 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin)', 'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt', '1 banana', 'water bottle', 'Set Dehumidifier to 30%']),
-      TimelineItem(time: '8:35-9:00 am', title: 'Commute to Work', icon: '🚗'),
-      TimelineItem(time: '9:00-11:30 am', title: 'Work', icon: '💻'),
-      TimelineItem(time: '11:30-12:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍝', details: ['1 serving of my pasta (Spinach is cooked inside)'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)])),
-      TimelineItem(time: '12:30-3:30 pm', title: 'Work', icon: '💻'),
-      TimelineItem(time: '3:30-3:45 pm', title: 'Afternoon Snack', icon: '🥚', details: ['3 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 3), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1)])),
-      TimelineItem(time: '3:45-5:00 pm', title: 'Work', icon: '💻'),
+      _wakeup('7:30-7:35 am', copper: true),
+      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:15-8:30 am'),
+      _grabThings('8:30-8:35 am'),
+      _commuteToWork('8:35-9:00 am'),
+      _work('9:00-11:30 am'),
+      _preLunchFiber('11:30-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm'),
+      _work('12:30-3:30 pm'),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3),
+      _work('3:45-5:00 pm'),
       TimelineItem(time: '5:00-5:30 pm', title: 'Commute to Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)', '1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
       TimelineItem(time: '5:30-7:30 pm', title: 'Gym Session (Lower B)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
-      TimelineItem(time: '7:30-7:40 pm', title: 'Post-Workout', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
-      TimelineItem(time: '7:40-8:00 pm', title: 'Dinner', icon: '🥗', details: ['1/3 lb Wild Sockeye Salmon', '2 cups Unsweetened Almond Milk'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)], recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1)])),
-      TimelineItem(time: '8:00-8:30 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      _postWorkout('7:30-7:40 pm'),
+      _salmonDinner('7:40-8:00 pm'),
+      _chores('8:00-8:30 pm'),
       TimelineItem(time: '8:30-9:30 pm', title: 'Study Time', icon: '📚'),
-      TimelineItem(time: '9:30-10:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: 60s warm massage, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '10:00-10:30 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['1. Take 3 Magnesium Glycinate + 1 tablet Finasteride (1mg)', '2. Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Read/Reflect', '5. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 3), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
-      TimelineItem(time: '10:30-11:00 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _bedPrep('9:30-10:00 pm'),
+      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
+      _fallAsleep('10:30-11:00 pm'),
     ],
     'sat': [
-      TimelineItem(time: '7:30-7:40 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 600mg NAC + 25mcg Selenium (Combo Pill)', '4. Take 250mg Citicoline (w/ 25mg Tyrosine)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.nac, amount: 1), IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1)])),
-      TimelineItem(time: '7:40-8:20 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. CeraVe PM: 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s', '5. Apply deodorant', '6. Get dressed for gym (Hoka Bondi 8)']),
-      TimelineItem(time: '8:20-8:45 am', title: 'Relax', icon: '📖', details: ['1. Turn on Verilux HappyLight (45-degree angle to face)', '2. 20mg adderall IR', '3. Set Dehumidifier to 30%']),
+      _wakeup('7:30-7:40 am', nac: true),
+      _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
+      _preMedicationBuffer('8:15-8:20 am'),
+      _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
       TimelineItem(time: '8:45-11:30 am', title: 'Study', icon: '📚'),
-      TimelineItem(time: '11:30-12:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
-      TimelineItem(time: '12:00-12:30 pm', title: 'Lunch', icon: '🍝', details: ['1 serving of my pasta (Spinach is cooked inside)'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)])),
+      _preLunchFiber('11:30-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm'),
       TimelineItem(time: '12:30-1:45 pm', title: 'Study', icon: '📚'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Reflection/Revision', icon: '🔄', details: ['Has this plan been working?']),
       TimelineItem(time: '2:00-3:30 pm', title: 'Study', icon: '📚'),
-      TimelineItem(time: '3:30-4:00 pm', title: 'Afternoon Snack', icon: '🥚', details: ['2 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)', '1 cap Zinc Picolinate (30mg)', '1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 2), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1), IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1), IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
+      _afternoonSnack('3:30-4:00 pm', eggs: 0, zinc: true, whey: true, vitamins: false),
       TimelineItem(time: '4:00-6:00 pm', title: 'Study', icon: '📚'),
       TimelineItem(time: '6:00-6:20 pm', title: 'Commute to Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt index finger for face/ears -> Wash hands -> 1 squirt middle finger for neck) before leaving']),
       TimelineItem(time: '6:20-7:20 pm', title: 'Cardio (LISS)', icon: '🏃', details: ['40 min walk (see Gym Plan → Cardio)']),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
-      TimelineItem(time: '7:30-8:00 pm', title: 'Dinner', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', '1 cup Unsweetened Almond Milk'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1)], recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)])),
-      TimelineItem(time: '8:00-9:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
-      TimelineItem(time: '9:15-10:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: Nizoral 1% (5m lather), Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '10:00-10:15 pm', title: 'Night Supplement + Read/Reflect', icon: '🌙', details: ['1. Take 2 Magnesium + 1 tablet Finasteride (1mg)', '2. Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Read/Reflect', '5. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 2), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
-      TimelineItem(time: '10:15-10:45 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _beefDinner('7:30-8:00 pm'),
+      _chores('8:00-9:00 pm'),
+      _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
+      _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
+      _fallAsleep('10:15-10:45 pm'),
     ],
     'sun': [
-      TimelineItem(time: '7:30-7:35 am', title: 'Wakeup', icon: '☀️', details: ['1. Use bathroom', '2. Weight (Step on scale)', '3. Take 600mg NAC + 25mcg Selenium (Combo Pill)', '4. Take 250mg Citicoline (w/ 25mg Tyrosine)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.nac, amount: 1), IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1)])),
-      TimelineItem(time: '7:35-8:20 am', title: 'Get Ready', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Brush teeth', '2. Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */, '3. Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s', '4. CeraVe PM: 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s', '5. Apply deodorant', '6. Get dressed for shopping (NK 9060)']),
-      TimelineItem(time: '8:20-9:30 am', title: 'Morning Reading', icon: '📖', details: ['1. Turn on Verilux HappyLight (45-degree angle to face)', '2. Reading', '3. Set Dehumidifier to 30%']),
+      _wakeup('7:30-7:35 am', nac: true),
+      _getReady('7:35-8:20 am', skincare: _ceravePM, clothes: 'Get dressed for shopping (NK 9060)'),
+      _morningReading('8:20-9:15 am'),
+      _preMedicationBuffer('9:15-9:30 am'),
       TimelineItem(time: '9:30-12:30 pm', title: 'Study Time', icon: '📚', details: ['20mg adderall IR at 9:30am']),
-      TimelineItem(time: '12:30-1:00 pm', title: 'Pre-Lunch Fiber', icon: '🥤', details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2), IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)])),
+      _preLunchFiber('12:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)])),
-      TimelineItem(time: '1:30-1:45 pm', title: 'Afternoon Snack', icon: '🥚', details: ['2 Boiled Eggs', '3 softgel omega-3', '1 D3-K2', '1 standalone K2 (100mcg)', '1 cap Biotin+Keratin (10mg/500mg)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.egg, amount: 2), IngredientPortion(ingredient: IngredientsData.omega3, amount: 3), IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1), IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1), IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1)])),
-      TimelineItem(time: '1:45-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (quarter-sized dollop for face/ears -> quarter-sized dollop for neck)', 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
+      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (quarter-sized dollop for face/ears -> quarter-sized dollop for neck)', 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs']),
       TimelineItem(time: '6:00-6:15 pm', title: 'Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '5g creatine'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
       TimelineItem(time: '6:15-7:00 pm', title: 'Rest / Active Recovery', icon: '🛋️'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', '2 cups Unsweetened Almond Milk'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)])),
-      TimelineItem(time: '7:25-8:00 pm', title: 'Chores & Clean Up', icon: '🧼', details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.casein, amount: 1), IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1), IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
-      TimelineItem(time: '8:00-9:00 pm', title: 'Shower & Bed Prep', icon: '🚿', details: ['1. Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen', '2. In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse', '3. Hair: 60s warm massage, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock', '4. PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */]),
-      TimelineItem(time: '9:00-9:15 pm', title: 'Night Supplement', icon: '🌙', details: ['1. Take 2 Magnesium + 1 tablet Finasteride (1mg)', '2. Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m', '3. CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry', '4. Set Dehumidifier to 30%'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: 2), IngredientPortion(ingredient: IngredientsData.finasteride, amount: 1)])),
+      _chores('7:25-8:00 pm'),
+      _bedPrep('8:00-9:00 pm'),
+      _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
       TimelineItem(time: '9:15-10:00 pm', title: 'Read/Reflect', icon: '📚'),
-      TimelineItem(time: '10:00-10:30 pm', title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']),
+      _fallAsleep('10:00-10:30 pm'),
     ],
   };
+
 }
