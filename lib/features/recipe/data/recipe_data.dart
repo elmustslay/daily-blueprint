@@ -40,7 +40,7 @@ class RecipeData {
         'Start Sauce: Heat the large dry sauté pan over medium heat for 2 mins FIRST. ONLY THEN add 1 tbsp avocado oil, followed IMMEDIATELY by the 3 lb ground turkey (this prevents oil from sitting and burning). Season with 1/4tsp pepper, break apart and cook until browned (~8 minutes).',
         'Add Veggies: While turkey is browning, wash and chop the 6 bell peppers. Once turkey is browned, add the chopped peppers and cook until softened (~5-6 minutes).',
         'Simmer: Slowly pour in 48 oz marinara sauce (rinse jar with a little water and add that too). Stir as it heats (~3 minutes). Lower heat to medium-low.',
-        'Finish Sauce: drain & rinse lentil. Simmer uncovered for 10 minutes, stirring occasionally. Stir in 12 tbsp nutritional yeast to finish.',
+        'Finish Sauce: drain & rinse lentil. Simmer uncovered for 10 minutes, stirring occasionally. Stir in 4 tbsp nutritional yeast to finish.',
         'Combine & Wilt: Add the drained chickpea pasta and 1 bag of spinach to the sauté pan with the sauce. Toss everything together for 2 minutes over low heat until the spinach is fully wilted and pasta is coated.',
         'Store: Divide into 6 containers (for the fridge).',
       ],
@@ -161,7 +161,7 @@ class RecipeData {
         'Large bowl for ice bath',
       ],
       instructions: [
-        'The Setup: Do this in 3 batches on Sunday to prep all 18 eggs for the entire week (Mon-Sun). Pierce the bottom of each egg if your cooker has a pin (prevents cracking).',
+        'The Setup: Do this in 3 batches on Sunday to prep all 18 eggs for the entire week (Mon-Sun). Pierce the top (non-pointy end) of each egg with pin, and keep that side up too.',
         'Cook: Add the exact water amount for "Hard Boiled" into your cooker. Run the cycle until it shuts off.',
         'The Ice Bath (CRITICAL): Immediately transfer the hot eggs into a bowl of heavy ice water. Let them sit for 5 minutes. The thermal shock shrinks the egg away from the shell, creating a microscopic gap that makes peeling effortless.',
         'Store: Keep the eggs IN THEIR SHELLS and place them into your dedicated clear egg storage bin in the fridge so they never mix with raw eggs. Unpeeled eggs last 7 days. Peeled eggs get slimy after 2 days.',
