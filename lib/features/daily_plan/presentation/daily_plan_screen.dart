@@ -669,44 +669,44 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         ),
         content: const SingleChildScrollView(
           child: Text(
-            '🔴 DELOAD WEEK — Recovery Protocol\n'
-            'Your body recovers and supercompensates this week. Still train, but lighter.\n\n'
+            '🔴 DELOAD WEEK — Intensity-Preservation\n'
+            'Because you are on a caloric deficit, dropping weight will signal your body to shed muscle. Drop fatigue, not intensity.\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
             'LIFTING (Mon / Wed / Thu / Fri):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Use 50% of your normal working weight\n'
-            '• Do 2 sets instead of 3-4 per exercise\n'
-            '• Same rep ranges, same rest periods\n'
-            '• Focus on perfect form & mind-muscle connection\n'
-            '• Stop every set 4-5 reps short of failure\n\n'
+            '• Keep your working weight the SAME (100%)\n'
+            '• Cut your volume in half (e.g., 2 sets instead of 4)\n'
+            '• Keep the same rep ranges and rest periods\n'
+            '• Stop 2-3 reps short of failure (RPE 7) on every set\n'
+            '• Do absolutely zero forced reps or drop sets\n\n'
             'Example:\n'
-            '  If you normally Chest Press 120 lbs × 4 sets × 8 reps\n'
-            '  → This week: 60 lbs × 2 sets × 8 reps\n\n'
+            '  If you normally Leg Press 200 lbs × 4 sets to failure\n'
+            '  → This week: 200 lbs × 2 sets (stopping 2 reps early)\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            'CARDIO:\n'
+            'CARDIO (Tue / Sat):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Tuesday LISS: Same 30 min walk, drop incline to 4-6%\n'
-            '• Saturday HIIT → Replace with LISS (30 min easy walk, no sprints)\n'
-            '• Sunday LISS: Keep as is\n\n'
+            '• Keep your 40-minute LISS schedule exactly same.\n'
+            '• Since you track HR, just stay strictly in your target zone.\n'
+            '• LISS does not tax the CNS, so no deload is needed here. Keep burning the fat.\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
             'PLANK HOLD:\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Do 2 sets × 20-30 sec (instead of 3 × 30-60 sec)\n\n'
+            '• Do 2 sets × 20-30 sec (instead of 3-4 sets)\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
             'NUTRITION & SUPPLEMENTS:\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Keep protein intake the same\n'
-            '• Keep creatine at 5g/day (never cycle creatine)\n'
-            '• Keep all other supplements unchanged\n'
-            '• If hungrier than usual — that\'s normal, don\'t overeat\n\n'
-            '⚡ You\'ll come back STRONGER next week. Trust the process.',
+            '• Keep protein intake the exact same\n'
+            '• Keep creatine at 5g/day (never cycle it)\n'
+            '• Expect sleep quality to drastically improve this week\n'
+            '• If hungrier than usual — that\'s normal, hold the cut line\n\n'
+            '⚡ Clear the CNS fatigue. Keep the muscle. Trust the math.',
             style: TextStyle(height: 1.5, fontSize: 14),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Got it — light week! 💪'),
+            child: const Text('Got it — heavy weight, low volume! 🧠'),
           ),
         ],
       ),
