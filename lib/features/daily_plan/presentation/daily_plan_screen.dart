@@ -579,8 +579,17 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('• ', style: TextStyle(color: Colors.grey)),
-                            Expanded(child: Text(detail, style: const TextStyle(color: Colors.white70))),
+                            Text('• ', style: TextStyle(color: Colors.grey, fontSize: (item.title == 'Get Ready' || item.title == 'Shower & Bed Prep') ? 18 : null)),
+                            Expanded(
+                              child: Text(
+                                detail, 
+                                style: TextStyle(
+                                  color: Colors.white70, 
+                                  fontSize: (item.title == 'Get Ready' || item.title == 'Shower & Bed Prep') ? 18 : null,
+                                  height: (item.title == 'Get Ready' || item.title == 'Shower & Bed Prep') ? 1.4 : null,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       )).toList(),

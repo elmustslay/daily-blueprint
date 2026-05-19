@@ -87,7 +87,7 @@ class DailyPlanData {
     );
   }
 
-    static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
+  static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
     return TimelineItem(
       time: time,
       title: 'Get Ready',
@@ -95,7 +95,8 @@ class DailyPlanData {
       details: [
         'Set Dehumidifier to 69% -> Brush teeth',
         'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH)',
-        'Face & neck: LUKEWARM water + firm but gentle fingertip massage (no nails) for EXACTLY 20s (NO SOAP) -> Finish: 15s full-body cold shock',
+        'Face & neck: Wet face with LUKEWARM water. Lather a half-pump of Lipikar AP+ in wet hands first, then glide over face with zero pressure for EXACTLY 20s -> Rinse',
+        'Finish: 15s full-body cold shock',
         'Pat face & neck completely bone-dry with clean Washcloth #1',
         'Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s',
         skincare,
@@ -111,10 +112,12 @@ class DailyPlanData {
       title: 'Shower & Bed Prep',
       icon: '🚿',
       details: [
-        'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen',
-        'In-Shower: Wet hands, rub face/neck/ears to emulsify (rub for 15-20s) -> Rinse',
-        'Hair: $hair, Body: Bioderma Atoderm Wash (WITH Washcloth)',
-        'Face: Wet face first. Lather CeraVe Foaming in wet hands for 3-4s to build foam, then gently massage foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse) -> Finish: 15s full-body cold shock',
+        'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
+        'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
+        'Hair: $hair',
+        'Body: Massage 4-6 pumps Bioderma Oil (2-3 upper, 2-3 lower) over wet skin with bare hands. Soak Washcloth in WARM water (not hot), gently squeeze once so it is saturated but not dripping, then glide over body',
+        'Face: Lather 1 pump of Lipikar AP+ in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)',
+        'Finish: 15s full-body cold shock',
         'Pat face & beard completely dry with fresh Washcloth #2 (Do Skincare immediately while bathroom is humid)'
       ],
     );
