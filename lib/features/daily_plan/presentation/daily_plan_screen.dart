@@ -67,7 +67,7 @@ class DailyPlanScreen extends ConsumerStatefulWidget {
 
 class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'nutrition'];
+  final List<String> days = [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.wed, DailyPlanData.thu, DailyPlanData.fri, DailyPlanData.sat, DailyPlanData.sun, 'nutrition'];
   final List<String> displayDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Nutrition'];
   final Map<String, GlobalKey> _itemKeys = {};
 

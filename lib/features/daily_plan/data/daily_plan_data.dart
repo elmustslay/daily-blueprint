@@ -18,85 +18,55 @@ class TimelineItem {
   });
 }
 
-class DailyPlanData {
-  /*
-   * SUPPLEMENT DOSAGE & SAFETY LOG:
-   * 
-   * Morning:
-   * - NAC: 600mg + Selenium: 25mcg (Safe, supports glutathione)
-   * - Citicoline: 250mg + Tyrosine: 25mg (Safe maintenance dose for focus)
-   * - Copper Glycinate: 3mg (Taken Wed/Fri. Empty stomach isolation prevents NAC chelation)
-   * 
-   * Mid-Day:
-   * - D3-K2: 1 capsule providing 5000 IU D3 + 100mcg K2 (MK-7) (Optimal, high dose for melanin-rich indoor lifestyle)
-   * - Standalone K2: 100mcg (Added to support high D3)
-   * 
-   * Afternoon (With Eggs):
-   * - Zinc Picolinate: 30mg (Taken Wed/Sat. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
-   * - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
-   * - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
-   * 
-   * Evening/Night:
-   * - Ashwagandha: 2 capsules = 500mg of 25:1 extract (equiv 12500mg root) + 5mg black pepper extract.
-   *   [Safety Note: Research shows 500-600mg is the optimal clinical dose for maximizing testosterone, strength, and muscle hypertrophy. Because this is a high-potency dose, the 8-weeks on / 4-weeks off cycle is mandatory to prevent emotional blunting while keeping maximum gains.]
-   * - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
-   */
+class _Portions {
+  static const omega3 = IngredientPortion(ingredient: IngredientsData.omega3, amount: 3);
+  static const d3K2 = IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1);
+  static const standaloneK2 = IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1);
+  static const biotin = IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1);
+  static const zinc = IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1);
+  static const whey = IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1);
+  static const creatine = IngredientPortion(ingredient: IngredientsData.creatine, amount: 1);
+  
+  static const coreVitamins = [omega3, d3K2, standaloneK2, biotin];
+}
 
+class _Recipes {
+  static final pasta = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1);
+  static final salmon = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1);
+  static final beef = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1);
+}
+
+class DailyPlanData {
   static final DateTime planStartDate = DateTime(2026, 4, 13);
 
-  static bool isDeloadWeek() {
+  static const String mon = 'mon';
+  static const String tue = 'tue';
+  static const String wed = 'wed';
+  static const String thu = 'thu';
+  static const String fri = 'fri';
+  static const String sat = 'sat';
+  static const String sun = 'sun';
+
+  static int get _currentWeekNumber {
     final now = DateTime.now();
     final diff = now.difference(planStartDate).inDays;
-    if (diff < 0) return false;
-    final weekNumber = (diff ~/ 7) + 1;
-    return weekNumber % 6 == 0;
+    if (diff < 0) return 0;
+    return (diff ~/ 7) + 1;
   }
 
+  static bool isDeloadWeek() => _currentWeekNumber > 1 && (_currentWeekNumber - 1) % 6 == 0;
+  static bool shouldScaleUpCardio() => _currentWeekNumber >= 17;
+  static bool isBloodDonationWeek() => _currentWeekNumber > 0 && _currentWeekNumber % 22 == 0;
+  
   static bool isAshwagandhaOff() {
-    final now = DateTime.now();
-    final diff = now.difference(planStartDate).inDays;
-    if (diff < 0) return false;
-    final weekNumber = (diff ~/ 7) + 1;
-    final posInCycle = ((weekNumber - 1) % 12) + 1;
-    return posInCycle > 8;
-  }
-
-  static bool shouldScaleUpCardio() {
-    final now = DateTime.now();
-    final diff = now.difference(planStartDate).inDays;
-    if (diff < 0) return false;
-    final weekNumber = (diff ~/ 7) + 1;
-    // At the 4-month mark (week 17), metabolic adaptation requires scaling up LISS cardio to maintain fat loss.
-    return weekNumber >= 17;
-  }
-
-  // Phlebotomy is the clinical gold standard for managing high ferritin
-  // from a continuous, high-heme iron athletic diet (beef).
-  static bool isBloodDonationWeek() {
-    final now = DateTime.now();
-    final diff = now.difference(planStartDate).inDays;
-    if (diff < 0) return false;
-    final weekNumber = (diff ~/ 7) + 1;
-    // 5 months is roughly 22 weeks
-    return weekNumber % 22 == 0;
+    if (_currentWeekNumber == 0) return false;
+    return ((_currentWeekNumber - 1) % 12) + 1 > 8;
   }
 
   static const Map<String, int> waterBottles = {
-    'mon': 7, 'tue': 7, 'wed': 7, 'thu': 7, 'fri': 7, 'sat': 7, 'sun': 7,
+    mon: 7, tue: 7, wed: 7, thu: 7, fri: 7, sat: 7, sun: 7,
   };
 
-  /*
-   * FUTURE SKINCARE PLAN:
-   * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Cetaphil or Cerave pm (depending on day).
-   * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY CeraVe PM (wait 30m after rolling to avoid flushing/hyperpigmentation).
-   */
-
-  /*
-   * FUTURE LAUNDRY PLAN:
-   * If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
-   * 1. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
-   * 2. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
-   */
   static TimelineItem _wakeup(String time, {bool nac = false, bool copper = false}) {
     return TimelineItem(
       time: time,
@@ -124,7 +94,7 @@ class DailyPlanData {
       icon: '🚿',
       details: [
         'Set Dehumidifier to 69% -> Brush teeth',
-        'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: If itching returns from 2x showers, use Nivea In-Shower Lotion to seal barrier */,
+        'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)',
         'Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s',
         skincare,
         'Apply deodorant',
@@ -195,9 +165,7 @@ class DailyPlanData {
       title: 'Lunch',
       icon: '🍝',
       details: ['1 serving of my pasta (Spinach is cooked inside)'],
-      mealRecord: MealRecord(recipeItems: [
-        RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1)
-      ]),
+      mealRecord: MealRecord(recipeItems: [_Recipes.pasta]),
     );
   }
 
@@ -220,15 +188,10 @@ class DailyPlanData {
       ],
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
-        if (vitamins) ...[
-          const IngredientPortion(ingredient: IngredientsData.omega3, amount: 3),
-          const IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1),
-          const IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1),
-          const IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1),
-        ],
-        if (zinc) const IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1),
-        if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1),
-        if (whey) const IngredientPortion(ingredient: IngredientsData.creatine, amount: 1),
+        if (vitamins) ..._Portions.coreVitamins,
+        if (zinc) _Portions.zinc,
+        if (whey) _Portions.whey,
+        if (whey) _Portions.creatine,
       ]),
     );
   }
@@ -247,24 +210,29 @@ class DailyPlanData {
       ],
       mealRecord: const MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.egg, amount: 2),
-        IngredientPortion(ingredient: IngredientsData.omega3, amount: 3),
-        IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1),
+        ..._Portions.coreVitamins,
       ]),
     );
   }
 
-  static TimelineItem _postWorkout(String time) {
+  static TimelineItem _wheyCreatine(String time, {String title = 'Snack'}) {
     return TimelineItem(
       time: time,
-      title: 'Post-Workout',
+      title: title,
       icon: '🥤',
       details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'],
       mealRecord: const MealRecord(items: [
-        IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)
+        _Portions.whey,
+        _Portions.creatine
       ]),
+    );
+  }
+
+  static TimelineItem _gym(String time, String title, {bool isCardio = false}) {
+    return TimelineItem(
+      time: time,
+      title: title,
+      icon: isCardio ? '🏃' : '🏋️',
     );
   }
 
@@ -276,9 +244,7 @@ class DailyPlanData {
       details: ['1/3 lb Wild Sockeye Salmon', '2 cups Unsweetened Almond Milk'],
       mealRecord: MealRecord(items: [
         const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)
-      ], recipeItems: [
-        RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1)
-      ]),
+      ], recipeItems: [_Recipes.salmon]),
     );
   }
 
@@ -290,9 +256,7 @@ class DailyPlanData {
       details: ['1/4 cup quinoa + 1/4 pound ground beef', '1 cup Unsweetened Almond Milk'],
       mealRecord: MealRecord(items: [
         const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1)
-      ], recipeItems: [
-        RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)
-      ]),
+      ], recipeItems: [_Recipes.beef]),
     );
   }
 
@@ -319,7 +283,7 @@ class DailyPlanData {
         'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse',
         'Hair: $hair, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock',
-        'PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)' /* FUTURE PLAN: , '5. Minoxidil: Exactly 1mL liquid/half-cap foam rubbed deeply to skin of beard/mustache -> let dry 30-60m' */
+        'PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)'
       ],
     );
   }
@@ -356,9 +320,27 @@ class DailyPlanData {
   static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
+  static const String _secondSunscreen = 'Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
 
-  static final Map<String, List<TimelineItem>> schedules = {
-    'mon': [
+  static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener';
+  static const String _laundryBathTowels = 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + 1/3 cup Bleach + EXTRA RINSE';
+  static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness + OxiClean)';
+
+  static TimelineItem _commuteToGym(String time, {bool preWorkoutBanana = false, bool applySunscreen = true}) {
+    return TimelineItem(
+      time: time,
+      title: 'Commute to Gym',
+      icon: '🚗',
+      details: [
+        if (applySunscreen) _secondSunscreen,
+        if (preWorkoutBanana) '1 banana (pre-workout)',
+      ],
+      mealRecord: preWorkoutBanana ? const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)]) : null,
+    );
+  }
+
+  static Map<String, List<TimelineItem>> get schedules => {
+    mon: [
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningReading('8:15-8:30 am'),
@@ -370,9 +352,9 @@ class DailyPlanData {
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3),
       _work('3:45-5:00 pm'),
-      TimelineItem(time: '5:00-5:30 pm', title: 'Commute To Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)', '1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
-      TimelineItem(time: '5:30-7:00 pm', title: 'Gym Session (Upper A)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
-      _postWorkout('7:00-7:15 pm'),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
+      _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
+      _wheyCreatine('7:00-7:15 pm', title: 'Post-Workout'),
       _salmonDinner('7:15-7:30 pm'),
       _chores('7:30-8:00 pm'),
       TimelineItem(time: '8:00-9:00 pm', title: 'Study Time', icon: '📚'),
@@ -380,26 +362,27 @@ class DailyPlanData {
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
     ],
-    'tue': [
+    tue: [
       _wakeup('7:30-7:35 am', nac: true),
       _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
-      _work('9:05-11:30 am', details: ['Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener', 'Run Dishwasher']),
+      _work('9:05-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher']),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
-      _work('12:30-3:30 pm', details: ['Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + 1/3 cup Bleach + EXTRA RINSE']),
+      _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 2),
-      TimelineItem(time: '4:00-4:15 pm', title: 'Pre-Cardio Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
+      _wheyCreatine('4:00-4:15 pm', title: 'Pre-Cardio Snack'),
       TimelineItem(time: '4:15-5:00 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, study or work']),
-      TimelineItem(time: '5:00-6:30 pm', title: 'Cardio (LISS)', icon: '🏃', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt index finger for face/ears -> Wash hands -> 1 squirt middle finger for neck) before leaving', '40 min walk (see Gym Plan → Cardio)', 'Every 2-3 weeks: swap for haircut']),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false),
+      _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       _beefDinner('6:30-7:30 pm'),
       _chores('7:30-8:15 pm'),
       _bedPrep('8:15-9:00 pm'),
       _nightSupplement('9:00-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
     ],
-    'wed': [
+    wed: [
       _wakeup('7:30-7:35 am', copper: true),
       _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:15-8:30 am'),
@@ -411,9 +394,9 @@ class DailyPlanData {
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
       _work('3:45-5:00 pm'),
-      TimelineItem(time: '5:00-5:30 pm', title: 'Commute To Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)', '1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
-      TimelineItem(time: '5:30-7:30 pm', title: 'Gym Session (Lower A)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
-      _postWorkout('7:30-7:40 pm'),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
+      _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
+      _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
       _salmonDinner('7:40-8:00 pm'),
       _chores('8:00-8:30 pm'),
       TimelineItem(time: '8:30-9:30 pm', title: 'Study Time', icon: '📚'),
@@ -421,26 +404,26 @@ class DailyPlanData {
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
     ],
-    'thu': [
+    thu: [
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _work('8:30-11:30 am', details: ['Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness + OxiClean)', 'Run Dishwasher']),
+      _work('8:30-11:30 am', details: [_laundryRegular, 'Run Dishwasher']),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3),
       TimelineItem(time: '3:45-5:15 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, work or study']),
-      TimelineItem(time: '5:15-5:30 pm', title: 'Commute to the gym', icon: '🚗', details: ['1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
-      TimelineItem(time: '5:30-7:15 pm', title: 'Gym Session (Upper B)', icon: '🏋️', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt index finger for face/ears -> Wash hands -> 1 squirt middle finger for neck) before leaving', 'Includes 20 min travel each way']),
-      _postWorkout('7:15-7:30 pm'),
+      _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
+      _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
+      _wheyCreatine('7:15-7:30 pm', title: 'Post-Workout'),
       _beefDinner('7:30-8:00 pm'),
       _chores('8:00-8:30 pm'),
       _bedPrep('8:30-9:15 pm'),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
     ],
-    'fri': [
+    fri: [
       _wakeup('7:30-7:35 am', copper: true),
       _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:15-8:30 am'),
@@ -452,9 +435,9 @@ class DailyPlanData {
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3),
       _work('3:45-5:00 pm'),
-      TimelineItem(time: '5:00-5:30 pm', title: 'Commute to Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)', '1 banana (pre-workout)'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
-      TimelineItem(time: '5:30-7:30 pm', title: 'Gym Session (Lower B)', icon: '🏋️', details: ['Includes the 15 min travel time back home']),
-      _postWorkout('7:30-7:40 pm'),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
+      _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
+      _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
       _salmonDinner('7:40-8:00 pm'),
       _chores('8:00-8:30 pm'),
       TimelineItem(time: '8:30-9:30 pm', title: 'Study Time', icon: '📚'),
@@ -462,7 +445,7 @@ class DailyPlanData {
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
     ],
-    'sat': [
+    sat: [
       _wakeup('7:30-7:40 am', nac: true),
       _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:15-8:20 am'),
@@ -475,8 +458,8 @@ class DailyPlanData {
       TimelineItem(time: '2:00-3:30 pm', title: 'Study', icon: '📚'),
       _afternoonSnack('3:30-4:00 pm', eggs: 0, zinc: true, whey: true, vitamins: false),
       TimelineItem(time: '4:00-6:00 pm', title: 'Study', icon: '📚'),
-      TimelineItem(time: '6:00-6:20 pm', title: 'Commute to Gym', icon: '🚗', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt index finger for face/ears -> Wash hands -> 1 squirt middle finger for neck) before leaving']),
-      TimelineItem(time: '6:20-7:20 pm', title: 'Cardio (LISS)', icon: '🏃', details: ['40 min walk (see Gym Plan → Cardio)']),
+      _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
+      _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:30-8:00 pm'),
       _chores('8:00-9:00 pm'),
@@ -484,17 +467,17 @@ class DailyPlanData {
       _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
       _fallAsleep('10:15-10:45 pm'),
     ],
-    'sun': [
+    sun: [
       _wakeup('7:30-7:35 am', nac: true),
       _getReady('7:35-8:20 am', skincare: _ceravePM, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
       TimelineItem(time: '9:30-12:30 pm', title: 'Study Time', icon: '📚', details: ['20mg adderall IR at 9:30am']),
       _preLunchFiber('12:30-1:00 pm'),
-      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1)])),
-      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: ['Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (quarter-sized dollop for face/ears -> quarter-sized dollop for neck)', 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
+      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
+      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs']),
-      TimelineItem(time: '6:00-6:15 pm', title: 'Snack', icon: '🥤', details: ['1 scoop whey isolate (30g protein)', '5g creatine'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1), IngredientPortion(ingredient: IngredientsData.creatine, amount: 1)])),
+      _wheyCreatine('6:00-6:15 pm'),
       TimelineItem(time: '6:15-7:00 pm', title: 'Rest / Active Recovery', icon: '🛋️'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', '2 cups Unsweetened Almond Milk'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)])),
       _chores('7:25-8:00 pm'),
@@ -505,4 +488,36 @@ class DailyPlanData {
     ],
   };
 
+  /*
+   * SUPPLEMENT DOSAGE & SAFETY LOG:
+   * 
+   * Morning:
+   * - NAC: 600mg + Selenium: 25mcg (Safe, supports glutathione)
+   * - Citicoline: 250mg + Tyrosine: 25mg (Safe maintenance dose for focus)
+   * - Copper Glycinate: 3mg (Taken Wed/Fri. Empty stomach isolation prevents NAC chelation)
+   * 
+   * Mid-Day:
+   * - D3-K2: 1 capsule providing 5000 IU D3 + 100mcg K2 (MK-7) (Optimal, high dose for melanin-rich indoor lifestyle)
+   * - Standalone K2: 100mcg (Added to support high D3)
+   * 
+   * Afternoon (With Eggs):
+   * - Zinc Picolinate: 30mg (Taken Wed/Sat. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
+   * - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
+   * - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
+   * 
+   * Evening/Night:
+   * - Ashwagandha: 2 capsules = 500mg of 25:1 extract (equiv 12500mg root) + 5mg black pepper extract.
+   *   [Safety Note: Research shows 500-600mg is the optimal clinical dose for maximizing testosterone, strength, and muscle hypertrophy. Because this is a high-potency dose, the 8-weeks on / 4-weeks off cycle is mandatory to prevent emotional blunting while keeping maximum gains.]
+   * - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
+   * 
+   * FUTURE SKINCARE PLAN:
+   * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Cetaphil or Cerave pm (depending on day).
+   * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY CeraVe PM (wait 30m after rolling to avoid flushing/hyperpigmentation).
+   * 3. Introduce minoxidil for night and in-shower lotion for morning.
+   * 
+   * FUTURE LAUNDRY PLAN:
+   * If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
+   * 1. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
+   * 2. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
+   */
 }
