@@ -87,14 +87,16 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
+    static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
     return TimelineItem(
       time: time,
       title: 'Get Ready',
       icon: '🚿',
       details: [
         'Set Dehumidifier to 69% -> Brush teeth',
-        'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH) -> Face (CeraVe Foaming, LUKEWARM. DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock -> PAT DRY (Do Skincare immediately while bathroom is humid)',
+        'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH)',
+        'Face & neck: LUKEWARM water + firm but gentle fingertip massage (no nails) for EXACTLY 20s (NO SOAP) -> Finish: 15s full-body cold shock',
+        'Pat face & neck completely bone-dry with clean Washcloth #1',
         'Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s',
         skincare,
         'Apply deodorant',
@@ -102,6 +104,22 @@ class DailyPlanData {
       ],
     );
   }
+
+  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage'}) {
+    return TimelineItem(
+      time: time,
+      title: 'Shower & Bed Prep',
+      icon: '🚿',
+      details: [
+        'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen',
+        'In-Shower: Wet hands, rub face/neck/ears to emulsify (rub for 15-20s) -> Rinse',
+        'Hair: $hair, Body: Bioderma Atoderm Wash (WITH Washcloth)',
+        'Face: Wet face first. Lather CeraVe Foaming in wet hands for 3-4s to build foam, then gently massage foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse) -> Finish: 15s full-body cold shock',
+        'Pat face & beard completely dry with fresh Washcloth #2 (Do Skincare immediately while bathroom is humid)'
+      ],
+    );
+  }
+
 
   static TimelineItem _morningReading(String time, {String additional = ''}) {
     return TimelineItem(
@@ -196,7 +214,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _preMedicationBuffer(String time) {
+  static TimelineItem _preMedicationBuffer(String time, {bool zinc = false}) {
     return TimelineItem(
       time: time,
       title: 'Pre-Medication Buffer',
@@ -207,10 +225,12 @@ class DailyPlanData {
         '1 D3-K2',
         '1 standalone K2 (100mcg)',
         '1 cap Biotin+Keratin (10mg/500mg)',
+        if (zinc) '1 cap Zinc Picolinate (30mg)',
       ],
-      mealRecord: const MealRecord(items: [
-        IngredientPortion(ingredient: IngredientsData.egg, amount: 2),
+      mealRecord: MealRecord(items: [
+        const IngredientPortion(ingredient: IngredientsData.egg, amount: 2),
         ..._Portions.coreVitamins,
+        if (zinc) _Portions.zinc,
       ]),
     );
   }
@@ -237,25 +257,37 @@ class DailyPlanData {
   }
 
   static TimelineItem _salmonDinner(String time) {
+    final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
       title: 'Dinner',
       icon: '🥗',
-      details: ['1/3 lb Wild Sockeye Salmon', '2 cups Unsweetened Almond Milk'],
+      details: [
+        '1/3 lb Wild Sockeye Salmon', 
+        '2 cups Unsweetened Almond Milk',
+        if (showAshwagandha) '2 cap Ashwagandha'
+      ],
       mealRecord: MealRecord(items: [
-        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)
+        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2),
+        if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
       ], recipeItems: [_Recipes.salmon]),
     );
   }
 
   static TimelineItem _beefDinner(String time) {
+    final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
       title: 'Dinner',
       icon: '🍛',
-      details: ['1/4 cup quinoa + 1/4 pound ground beef', '1 cup Unsweetened Almond Milk'],
+      details: [
+        '1/4 cup quinoa + 1/4 pound ground beef', 
+        '1 cup Unsweetened Almond Milk',
+        if (showAshwagandha) '2 cap Ashwagandha'
+      ],
       mealRecord: MealRecord(items: [
-        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1)
+        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1),
+        if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
       ], recipeItems: [_Recipes.beef]),
     );
   }
@@ -265,26 +297,11 @@ class DailyPlanData {
       time: time,
       title: 'Chores & Clean Up',
       icon: '🧼',
-      details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)', '2 cap Ashwagandha'],
+      details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)'],
       mealRecord: const MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.casein, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
+        IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1)
       ]),
-    );
-  }
-
-  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage'}) {
-    return TimelineItem(
-      time: time,
-      title: 'Shower & Bed Prep',
-      icon: '🚿',
-      details: [
-        'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps Cleansing Oil on DRY face (30s) to melt sunscreen',
-        'In-Shower: Wet hands, rub face/neck/ears to emulsify (15-20s) -> Rinse',
-        'Hair: $hair, Body: Bioderma Atoderm Wash (WITH Washcloth), Face: CeraVe Foaming (DO NOT DOUBLE WASH) -> Finish: 15s full-body cold shock',
-        'PAT face & beard completely dry (Do Skincare immediately while bathroom is humid)'
-      ],
     );
   }
 
@@ -448,7 +465,7 @@ class DailyPlanData {
     sat: [
       _wakeup('7:30-7:40 am', nac: true),
       _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
-      _preMedicationBuffer('8:15-8:20 am'),
+      _preMedicationBuffer('8:15-8:20 am', zinc: true),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
       TimelineItem(time: '8:45-11:30 am', title: 'Study', icon: '📚'),
       _preLunchFiber('11:30-12:00 pm'),
@@ -456,7 +473,7 @@ class DailyPlanData {
       TimelineItem(time: '12:30-1:45 pm', title: 'Study', icon: '📚'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Reflection/Revision', icon: '🔄', details: ['Has this plan been working?']),
       TimelineItem(time: '2:00-3:30 pm', title: 'Study', icon: '📚'),
-      _afternoonSnack('3:30-4:00 pm', eggs: 0, zinc: true, whey: true, vitamins: false),
+      _afternoonSnack('3:30-4:00 pm', eggs: 0, whey: true, vitamins: false),
       TimelineItem(time: '4:00-6:00 pm', title: 'Study', icon: '📚'),
       _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
@@ -479,7 +496,7 @@ class DailyPlanData {
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs']),
       _wheyCreatine('6:00-6:15 pm'),
       TimelineItem(time: '6:15-7:00 pm', title: 'Rest / Active Recovery', icon: '🛋️'),
-      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', '2 cups Unsweetened Almond Milk'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2)])),
+      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', '2 cups Unsweetened Almond Milk', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
       _bedPrep('8:00-9:00 pm'),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
@@ -505,15 +522,17 @@ class DailyPlanData {
    * - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
    * - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
    * 
-   * Evening/Night:
+   * Dinner:
    * - Ashwagandha: 2 capsules = 500mg of 25:1 extract (equiv 12500mg root) + 5mg black pepper extract.
    *   [Safety Note: Research shows 500-600mg is the optimal clinical dose for maximizing testosterone, strength, and muscle hypertrophy. Because this is a high-potency dose, the 8-weeks on / 4-weeks off cycle is mandatory to prevent emotional blunting while keeping maximum gains.]
+   * 
+   * Night:
    * - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
    * 
    * FUTURE SKINCARE PLAN:
    * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Cetaphil or Cerave pm (depending on day).
    * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY CeraVe PM (wait 30m after rolling to avoid flushing/hyperpigmentation).
-   * 3. Introduce minoxidil for night and in-shower lotion for morning.
+   * 3. Introduce minoxidil for night (except weekends and Mondays) and in-shower lotion for morning.
    * 
    * FUTURE LAUNDRY PLAN:
    * If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
