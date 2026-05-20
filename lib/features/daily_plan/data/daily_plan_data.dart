@@ -98,7 +98,7 @@ class DailyPlanData {
       icon: '🚿',
       details: [
         'Set Dehumidifier to 69% -> Brush teeth',
-        'Shower: Hair (60s warm massage) -> Body (Lipikar AP+, NO WASHCLOTH)',
+        'Shower: Hair (60s warm massage) -> Body (Bioderma Atoderm Cleansing Oil, 1.5 pumps upper / 1.5 pumps lower, BARE HANDS ONLY)',
         'Face & neck: Wet face with LUKEWARM water. Lather a half-pump of Lipikar AP+ in wet hands first, then glide over face with zero pressure for EXACTLY 20s -> Rinse',
         'Finish: 15s full-body cold shock',
         'Pat face & neck completely bone-dry with clean Washcloth #1',
@@ -119,7 +119,7 @@ class DailyPlanData {
         'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
         'Hair: $hair',
-        'Body: Massage 4-6 pumps Bioderma Oil (2-3 upper, 2-3 lower) over wet skin with bare hands. Soak Washcloth in WARM water (not hot), gently squeeze once so it is saturated but not dripping, then glide over body',
+        'Body: Hold Washcloth under water until SOAKING wet. Pump 1 pump of Lipikar AP+ into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and, once done/rinsed another 1 pump for lower body (for frictionless gym maintenance)',
         'Face: Lather 1 pump of Lipikar AP+ in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)',
         'Finish: 15s full-body cold shock',
         'Pat face & beard completely dry with fresh Washcloth #2 (Do Skincare immediately while bathroom is humid)'
