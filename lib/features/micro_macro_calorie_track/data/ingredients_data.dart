@@ -1143,4 +1143,27 @@ class IngredientsData {
       },
     ),
   );
+
+  static const Ingredient vitaminE = Ingredient(
+    id: 'vitaminE',
+    name: 'Vitamin E',
+    baseUnit: 'capsule',
+    nutritionPerBaseUnit: NutritionFact(
+      microNutrients: {
+        'Vitamin E (mg)': 267,
+      },
+    ),
+  );
+
+  static const Ingredient calciumCitrate = Ingredient(
+    id: 'calciumCitrate',
+    name: 'Calcium Citrate',
+    baseUnit: 'capsule',
+    nutritionPerBaseUnit: NutritionFact(
+      microNutrients: {
+        'Calcium (mg)': 146.66,
+      },
+    ),
+  );
+
 }

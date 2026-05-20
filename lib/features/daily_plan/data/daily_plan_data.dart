@@ -19,15 +19,19 @@ class TimelineItem {
 }
 
 class _Portions {
-  static const omega3 = IngredientPortion(ingredient: IngredientsData.omega3, amount: 3);
   static const d3K2 = IngredientPortion(ingredient: IngredientsData.d3K2, amount: 1);
   static const standaloneK2 = IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 1);
+  static const vitaminE = IngredientPortion(ingredient: IngredientsData.vitaminE, amount: 1);
+  static const omega3 = IngredientPortion(ingredient: IngredientsData.omega3, amount: 3);
   static const biotin = IngredientPortion(ingredient: IngredientsData.biotinKeratin, amount: 1);
+  
   static const zinc = IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1);
   static const whey = IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1);
   static const creatine = IngredientPortion(ingredient: IngredientsData.creatine, amount: 1);
   
-  static const coreVitamins = [omega3, d3K2, standaloneK2, biotin];
+  static const calciumCitrate = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 3);
+
+  static const coreVitamins = [d3K2, standaloneK2, vitaminE, omega3, biotin];
 }
 
 class _Recipes {
@@ -163,8 +167,17 @@ class DailyPlanData {
     return TimelineItem(time: time, title: 'Commute to Work', icon: '🚗');
   }
 
-  static TimelineItem _work(String time, {List<String> details = const [], String title = 'Work'}) {
-    return TimelineItem(time: time, title: title, icon: '💻', details: details);
+  static TimelineItem _work(String time, {List<String> details = const [], String title = 'Work', bool calcium = false}) {
+    return TimelineItem(
+      time: time, 
+      title: title, 
+      icon: '💻', 
+      details: [
+        if (calcium) '10:00 am: Take 3 Calcium Citrate capsules (438mg)',
+        ...details
+      ],
+      mealRecord: calcium ? const MealRecord(items: [_Portions.calciumCitrate]) : null,
+    );
   }
 
   static TimelineItem _preLunchFiber(String time) {
@@ -202,6 +215,7 @@ class DailyPlanData {
           '1 D3-K2',
           '1 standalone K2 (100mcg)',
           '1 cap Biotin+Keratin (10mg/500mg)',
+          '1 softgel Vitamin E (267mg)',
         ],
         if (zinc) '1 cap Zinc Picolinate (30mg)',
         if (whey) '1 scoop whey isolate (30g protein)',
@@ -228,6 +242,7 @@ class DailyPlanData {
         '1 D3-K2',
         '1 standalone K2 (100mcg)',
         '1 cap Biotin+Keratin (10mg/500mg)',
+        '1 softgel Vitamin E (267mg)',
         if (zinc) '1 cap Zinc Picolinate (30mg)',
       ],
       mealRecord: MealRecord(items: [
@@ -267,11 +282,9 @@ class DailyPlanData {
       icon: '🥗',
       details: [
         '1/3 lb Wild Sockeye Salmon', 
-        '2 cups Unsweetened Almond Milk',
         if (showAshwagandha) '2 cap Ashwagandha'
       ],
       mealRecord: MealRecord(items: [
-        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2),
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
       ], recipeItems: [_Recipes.salmon]),
     );
@@ -285,11 +298,9 @@ class DailyPlanData {
       icon: '🍛',
       details: [
         '1/4 cup quinoa + 1/4 pound ground beef', 
-        '1 cup Unsweetened Almond Milk',
         if (showAshwagandha) '2 cap Ashwagandha'
       ],
       mealRecord: MealRecord(items: [
-        const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 1),
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
       ], recipeItems: [_Recipes.beef]),
     );
@@ -366,7 +377,7 @@ class DailyPlanData {
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am'),
       _commuteToWork('8:35-9:00 am'),
-      _work('9:00-11:30 am'),
+      _work('9:00-11:30 am', calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
@@ -387,7 +398,7 @@ class DailyPlanData {
       _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
-      _work('9:05-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher']),
+      _work('9:05-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
@@ -428,7 +439,7 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _work('8:30-11:30 am', details: [_laundryRegular, 'Run Dishwasher']),
+      _work('8:30-11:30 am', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
@@ -470,7 +481,7 @@ class DailyPlanData {
       _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:15-8:20 am', zinc: true),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
-      TimelineItem(time: '8:45-11:30 am', title: 'Study', icon: '📚'),
+      TimelineItem(time: '8:45-11:30 am', title: 'Study', icon: '📚', details: ['10:00 am: Take 3 Calcium Citrate capsules (438mg)'], mealRecord: const MealRecord(items: [_Portions.calciumCitrate])),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       TimelineItem(time: '12:30-1:45 pm', title: 'Study', icon: '📚'),
@@ -492,14 +503,14 @@ class DailyPlanData {
       _getReady('7:35-8:20 am', skincare: _ceravePM, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
-      TimelineItem(time: '9:30-12:30 pm', title: 'Study Time', icon: '📚', details: ['20mg adderall IR at 9:30am']),
+      TimelineItem(time: '9:30-12:30 pm', title: 'Study Time', icon: '📚', details: ['20mg adderall IR at 9:30am', '10:00 am: Take 3 Calcium Citrate capsules (438mg)'], mealRecord: const MealRecord(items: [_Portions.calciumCitrate])),
       _preLunchFiber('12:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs']),
       _wheyCreatine('6:00-6:15 pm'),
       TimelineItem(time: '6:15-7:00 pm', title: 'Rest / Active Recovery', icon: '🛋️'),
-      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', '2 cups Unsweetened Almond Milk', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), const IngredientPortion(ingredient: IngredientsData.almondMilk, amount: 2), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
       _bedPrep('8:00-9:00 pm'),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
