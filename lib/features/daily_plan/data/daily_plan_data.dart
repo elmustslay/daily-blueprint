@@ -311,7 +311,10 @@ class DailyPlanData {
       time: time,
       title: 'Chores & Clean Up',
       icon: '🧼',
-      details: ['1 scoop Casein + 1 tbsp Chia in 14-16oz water (drink immediately)'],
+      details: [
+        '1 scoop Casein + 1 tbsp Chia in 16oz water',
+        'The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.',
+      ], 
       mealRecord: const MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.casein, amount: 1),
         IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1)
@@ -375,13 +378,13 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningReading('8:15-8:30 am'),
-      _grabThings('8:30-8:35 am'),
+      _grabThings('8:30-8:35 am', zinc: true),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-11:30 am', calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
       _work('3:45-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
@@ -479,7 +482,7 @@ class DailyPlanData {
     sat: [
       _wakeup('7:30-7:40 am', nac: true),
       _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
-      _preMedicationBuffer('8:15-8:20 am', zinc: true),
+      _preMedicationBuffer('8:15-8:20 am'),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
       TimelineItem(time: '8:45-11:30 am', title: 'Study', icon: '📚', details: ['10:00 am: Take 3 Calcium Citrate capsules (438mg)'], mealRecord: const MealRecord(items: [_Portions.calciumCitrate])),
       _preLunchFiber('11:30-12:00 pm'),
@@ -532,7 +535,7 @@ class DailyPlanData {
    * - Standalone K2: 100mcg (Added to support high D3)
    * 
    * Afternoon (With Eggs):
-   * - Zinc Picolinate: 30mg (Taken Wed/Sat. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
+   * - Zinc Picolinate: 30mg (Taken Mon/Wed. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
    * - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
    * - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
    * 

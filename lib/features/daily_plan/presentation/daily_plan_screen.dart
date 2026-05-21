@@ -7,39 +7,105 @@ import '../data/daily_plan_data.dart';
 import '../../micro_macro_calorie_track/domain/nutrition.dart';
 
 // --- State ---
+class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
+  @override
+  Map<String, List<bool>> build() {
+    final prefs = SharedPrefsLogic.instance;
+    final Map<String, List<bool>> stateMap = {};
+
+    final now = DateTime.now().subtract(const Duration(hours: 2));
+    final currentWeekday = now.weekday;
+
+    final List<String> dayKeys = [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.wed, DailyPlanData.thu, DailyPlanData.fri, DailyPlanData.sat, DailyPlanData.sun];
+
+    for (int i = 0; i < 7; i++) {
+      final dayKey = dayKeys[i];
+      final tabWeekday = i + 1; // 1 to 7
+
+      DateTime targetDate;
+      if (tabWeekday <= currentWeekday) {
+        targetDate = now.subtract(Duration(days: currentWeekday - tabWeekday));
+      } else {
+        targetDate = now.subtract(Duration(days: 7 - (tabWeekday - currentWeekday)));
+      }
+
+      final targetDateStr = '${targetDate.year}-${targetDate.month.toString().padLeft(2, '0')}-${targetDate.day.toString().padLeft(2, '0')}';
+      
+      final savedTargetDateStr = prefs.getString('supp_target_date_$dayKey');
+      
+      if (savedTargetDateStr != targetDateStr) {
+        prefs.remove('supp_$dayKey');
+        prefs.setString('supp_target_date_$dayKey', targetDateStr);
+        stateMap[dayKey] = [false, false];
+      } else {
+        final keys = prefs.getStringList('supp_$dayKey');
+        if (keys != null && keys.length == 2) {
+          stateMap[dayKey] = keys.map((e) => e == 'true').toList();
+        } else {
+          stateMap[dayKey] = [false, false];
+        }
+      }
+    }
+
+    return stateMap;
+  }
+
+  void toggleSupplement(String dayKey, int index) {
+    if (!state.containsKey(dayKey)) return;
+    final newStateMap = Map<String, List<bool>>.from(state);
+    final dayList = List<bool>.from(newStateMap[dayKey]!);
+    dayList[index] = !dayList[index];
+    newStateMap[dayKey] = dayList;
+    state = newStateMap;
+    
+    SharedPrefsLogic.instance.setStringList('supp_$dayKey', dayList.map((e) => e.toString()).toList());
+  }
+}
+
+final supplementTrackerProvider = NotifierProvider<SupplementTrackerNotifier, Map<String, List<bool>>>(SupplementTrackerNotifier.new);
+
 class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
   @override
   Map<String, List<bool>> build() {
     final prefs = SharedPrefsLogic.instance;
     final Map<String, List<bool>> stateMap = {};
 
-    // Shift time by 2 hours so the reset happens at 2 AM Monday instead of midnight
-    final now = DateTime.now();
-    final adjustedTime = now.subtract(const Duration(hours: 2));
-    final weekStart = adjustedTime.subtract(Duration(days: adjustedTime.weekday - 1));
-    final weekStartStr =
-        '${weekStart.year}-${weekStart.month.toString().padLeft(2, '0')}-${weekStart.day.toString().padLeft(2, '0')}';
+    final now = DateTime.now().subtract(const Duration(hours: 2));
+    final currentWeekday = now.weekday;
 
-    final isNewWeek = prefs.getString('water_week_start') != weekStartStr;
-    
-    for (final dayKey in DailyPlanData.waterBottles.keys) {
-      final bottlesCount = DailyPlanData.waterBottles[dayKey] ?? 0;
-      final keys = prefs.getStringList('water_$dayKey');
-      
-      if (!isNewWeek && keys != null && keys.length == bottlesCount) {
-        stateMap[dayKey] = keys.map((e) => e == 'true').toList();
+    final List<String> dayKeys = [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.wed, DailyPlanData.thu, DailyPlanData.fri, DailyPlanData.sat, DailyPlanData.sun];
+
+    for (int i = 0; i < 7; i++) {
+      final dayKey = dayKeys[i];
+      final tabWeekday = i + 1; // 1 to 7
+
+      DateTime targetDate;
+      if (tabWeekday <= currentWeekday) {
+        targetDate = now.subtract(Duration(days: currentWeekday - tabWeekday));
       } else {
+        targetDate = now.subtract(Duration(days: 7 - (tabWeekday - currentWeekday)));
+      }
+
+      final targetDateStr = '${targetDate.year}-${targetDate.month.toString().padLeft(2, '0')}-${targetDate.day.toString().padLeft(2, '0')}';
+      
+      final savedTargetDateStr = prefs.getString('water_target_date_$dayKey');
+      final bottlesCount = DailyPlanData.waterBottles[dayKey] ?? 0;
+      
+      if (savedTargetDateStr != targetDateStr) {
+        // Target date changed (a week has passed for this specific day), clear data
+        prefs.remove('water_$dayKey');
+        prefs.setString('water_target_date_$dayKey', targetDateStr);
         stateMap[dayKey] = List.filled(bottlesCount, false);
-        // Clear the stale data from storage if it's a new week
-        if (isNewWeek) {
-          prefs.remove('water_$dayKey');
+      } else {
+        final keys = prefs.getStringList('water_$dayKey');
+        if (keys != null && keys.length == bottlesCount) {
+          stateMap[dayKey] = keys.map((e) => e == 'true').toList();
+        } else {
+          stateMap[dayKey] = List.filled(bottlesCount, false);
         }
       }
     }
 
-    if (isNewWeek) {
-      prefs.setString('water_week_start', weekStartStr);
-    }
     return stateMap;
   }
 
@@ -213,6 +279,8 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                _buildSupplementTracker(dayKey),
+                const SizedBox(height: 16),
                 if (DailyPlanData.isDeloadWeek()) ...[
                   _buildDeloadAlert(),
                   const SizedBox(height: 12),
@@ -318,6 +386,55 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildSupplementTracker(String dayKey) {
+    final suppState = ref.watch(supplementTrackerProvider);
+    final dayChecks = suppState[dayKey] ?? [false, false];
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Theme.of(context).dividerColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Daily Supplements', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
+          const SizedBox(height: 12),
+          _buildSuppCheckboxRow('Creatine (5g)', dayKey, 0, dayChecks[0]),
+          const SizedBox(height: 12),
+          _buildSuppCheckboxRow('Finasteride (1mg)', dayKey, 1, dayChecks[1]),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSuppCheckboxRow(String title, String dayKey, int index, bool isChecked) {
+    return GestureDetector(
+      onTap: () => ref.read(supplementTrackerProvider.notifier).toggleSupplement(dayKey, index),
+      child: Row(
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isChecked ? Colors.green.withValues(alpha: 0.2) : Colors.transparent,
+              border: Border.all(color: isChecked ? Colors.greenAccent : Colors.grey.withValues(alpha: 0.5), width: 2),
+            ),
+            child: Center(
+              child: isChecked ? const Icon(Icons.check, size: 16, color: Colors.greenAccent) : null,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text(title, style: const TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.w500)),
+        ],
+      ),
     );
   }
 
