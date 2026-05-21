@@ -31,7 +31,7 @@ class _Portions {
   
   static const calciumCitrate = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 3);
 
-  static const coreVitamins = [d3K2, standaloneK2, vitaminE, omega3, biotin];
+  static const coreVitamins = [d3K2, standaloneK2, omega3, biotin];
 }
 
 class _Recipes {
@@ -203,7 +203,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true}) {
+  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true, bool vitaminE = false}) {
     return TimelineItem(
       time: time,
       title: 'Afternoon Snack',
@@ -215,7 +215,7 @@ class DailyPlanData {
           '1 D3-K2',
           '1 standalone K2 (100mcg)',
           '1 cap Biotin+Keratin (10mg/500mg)',
-          '1 softgel Vitamin E (267mg)',
+          if (vitaminE) '1 softgel Vitamin E (267mg)', // Now conditional
         ],
         if (zinc) '1 cap Zinc Picolinate (30mg)',
         if (whey) '1 scoop whey isolate (30g protein)',
@@ -224,6 +224,7 @@ class DailyPlanData {
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
         if (vitamins) ..._Portions.coreVitamins,
+        if (vitamins && vitaminE) _Portions.vitaminE, // Now conditional
         if (zinc) _Portions.zinc,
         if (whey) _Portions.whey,
         if (whey) _Portions.creatine,
@@ -231,7 +232,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _preMedicationBuffer(String time, {bool zinc = false}) {
+  static TimelineItem _preMedicationBuffer(String time, {bool zinc = false, bool vitaminE = true}) {
     return TimelineItem(
       time: time,
       title: 'Pre-Medication Buffer',
@@ -242,12 +243,13 @@ class DailyPlanData {
         '1 D3-K2',
         '1 standalone K2 (100mcg)',
         '1 cap Biotin+Keratin (10mg/500mg)',
-        '1 softgel Vitamin E (267mg)',
+        if (vitaminE) '1 softgel Vitamin E (267mg)',
         if (zinc) '1 cap Zinc Picolinate (30mg)',
       ],
       mealRecord: MealRecord(items: [
         const IngredientPortion(ingredient: IngredientsData.egg, amount: 2),
         ..._Portions.coreVitamins,
+        if (vitaminE) _Portions.vitaminE,
         if (zinc) _Portions.zinc,
       ]),
     );
@@ -405,7 +407,7 @@ class DailyPlanData {
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
-      _afternoonSnack('3:30-4:00 pm', eggs: 2),
+      _afternoonSnack('3:30-4:00 pm', eggs: 2, vitaminE: true),
       _wheyCreatine('4:00-4:15 pm', title: 'Pre-Cardio Snack'),
       TimelineItem(time: '4:15-5:00 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, study or work']),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false),
@@ -446,7 +448,7 @@ class DailyPlanData {
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
       TimelineItem(time: '3:45-5:15 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, work or study']),
       _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
