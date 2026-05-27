@@ -706,42 +706,43 @@ class IngredientsData {
   static const Ingredient chickpeaPasta = Ingredient(
     id: 'chickpea_pasta',
     name: 'Chickpea Fusilli',
-    baseUnit: 'oz', // Converted from 56g (2 oz) serving
+    baseUnit: 'oz', // Scaled exactly from a 56g (1.9753 oz) label serving
     nutritionPerBaseUnit: NutritionFact(
-      calories: 95,
-      protein: 5.5,
-      carbs: 18,
-      fat: 1.25,
+      calories: 96.1859,
+      protein: 5.5687,
+      carbs: 18.2247,
+      fat: 1.2656,
       microNutrients: {
-        'Saturated Fat (g)': 0,
-        'Sodium (mg)': 0,
-        'Fiber (g)': 3,
-        'Sugar (g)': 0.5,
-        'Calcium (mg)': 20,
-        'Iron (mg)': 1.05,
-        'Potassium (mg)': 225,
-        'Magnesium (mg)': 45, // #this is default assumed value
-        'Zinc (mg)': 1.8, // #this is default assumed value
-      
+        'Saturated Fat (g)': 0.0,
+        'Sodium (mg)': 0.0,
+        'Fiber (g)': 3.0374,
+        'Sugar (g)': 0.5062,
+        'Added Sugar (g)': 0.0,
+        'Calcium (mg)': 20.2497,
+        'Iron (mg)': 1.0631,
+        'Potassium (mg)': 227.8087,
+        
+        'Magnesium (mg)': 45.56, // #this is default assumed value
+        'Zinc (mg)': 1.82, // #this is default assumed value
         'Copper (mg)': 0.3, // #this is default assumed value
-        'Selenium (mcg)': 4, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
-        'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 2, // #this is default assumed value
-        'Vitamin E (mg)': 0.5, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
+        'Selenium (mcg)': 4.05, // #this is default assumed value
+        'Vitamin A (mcg)': 0.0, // #this is default assumed value
+        'Vitamin C (mg)': 0.0, // #this is default assumed value
+        'Vitamin D3 (mcg)': 0.0, // #this is default assumed value
+        'Vitamin K (mcg)': 2.02, // #this is default assumed value
+        'Vitamin E (mg)': 0.51, // #this is default assumed value
+        'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
         'Thiamin (mg)': 0.1, // #this is default assumed value
         'Riboflavin (mg)': 0.1, // #this is default assumed value
-        'Niacin (mg)': 0.8, // #this is default assumed value
+        'Niacin (mg)': 0.81, // #this is default assumed value
         'Vitamin B5 (mg)': 0.2, // #this is default assumed value
         'Vitamin B6 (mg)': 0.2, // #this is default assumed value
-        'Natural Folate (mcg)': 150, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 30, // #this is default assumed value
-        'Tyrosine (mg)': 300, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Natural Folate (mcg)': 151.87, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0.0, // #this is default assumed value
+        'Choline (mg)': 30.37, // #this is default assumed value
+        'Tyrosine (mg)': 303.74, // #this is default assumed value
+        'EPA (mg)': 0.0, // #this is default assumed value
+        'DHA (mg)': 0.0, // #this is default assumed value
       },
     ),
   );
@@ -846,87 +847,90 @@ class IngredientsData {
   );
 
 
-  static const Ingredient marinaraSauce = Ingredient(
-    id: 'marinara',
-    name: 'Marinara Sauce',
-    baseUnit: 'oz', // Converted from 1/2 cup (4 oz) serving
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 22.5,
-      protein: 0.5,
-      carbs: 2.5,
-      fat: 1.25,
-      microNutrients: {
-        'Saturated Fat (g)': 0.25,
-        'Sodium (mg)': 137.5,
-        'Fiber (g)': 0.5,
-        'Sugar (g)': 1.5,
-        'Calcium (mg)': 10,
-        'Iron (mg)': 0.15,
-        'Potassium (mg)': 105,
-      
-        'Magnesium (mg)': 25, // #this is default assumed value
-        'Zinc (mg)': 0.3, // #this is default assumed value
-        'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 1, // #this is default assumed value
-        'Vitamin A (mcg)': 30, // #this is default assumed value
-        'Vitamin C (mg)': 15, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 3.5, // #this is default assumed value
-        'Vitamin E (mg)': 1.5, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0.05, // #this is default assumed value
-        'Riboflavin (mg)': 0.05, // #this is default assumed value
-        'Niacin (mg)': 1.5, // #this is default assumed value
-        'Vitamin B5 (mg)': 0.1, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.15, // #this is default assumed value
-        'Natural Folate (mcg)': 12, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 15, // #this is default assumed value
-        'Tyrosine (mg)': 40, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
-      },
-    ),
-  );
+static const Ingredient marinaraSauce = Ingredient(
+  id: 'marinara',
+  name: 'Marinara Sauce',
+  baseUnit: 'oz', // Scaled exactly from a 125g (4.4092 oz) label serving
+  nutritionPerBaseUnit: NutritionFact(
+    calories: 20.4117,
+    protein: 0.4536,
+    carbs: 2.2680,
+    fat: 1.1340,
+    microNutrients: {
+      'Saturated Fat (g)': 0.2268,
+      'Sodium (mg)': 124.7379,
+      'Fiber (g)': 0.4536,
+      'Sugar (g)': 1.3608,
+      'Added Sugar (g)': 0.2268,
+      'Calcium (mg)': 9.0718,
+      'Iron (mg)': 0.1361,
+      'Potassium (mg)': 95.2544,
+    
+      'Magnesium (mg)': 3.17, // #this is default assumed value
+      'Zinc (mg)': 0.05, // #this is default assumed value
+      'Copper (mg)': 0.03, // #this is default assumed value
+      'Selenium (mcg)': 0.1, // #this is default assumed value
+      'Vitamin A (mcg)': 11.0, // #this is default assumed value
+      'Vitamin C (mg)': 1.6, // #this is default assumed value
+      'Vitamin D3 (mcg)': 0.0, // #this is default assumed value
+      'Vitamin K (mcg)': 1.2, // #this is default assumed value
+      'Vitamin E (mg)': 0.35, // #this is default assumed value
+      'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
+      'Thiamin (mg)': 0.01, // #this is default assumed value
+      'Riboflavin (mg)': 0.02, // #this is default assumed value
+      'Niacin (mg)': 0.27, // #this is default assumed value
+      'Vitamin B5 (mg)': 0.09, // #this is default assumed value
+      'Vitamin B6 (mg)': 0.03, // #this is default assumed value
+      'Natural Folate (mcg)': 2.2, // #this is default assumed value
+      'Synthetic Folic Acid (mcg)': 0.0, // #this is default assumed value
+      'Choline (mg)': 2.72, // #this is default assumed value
+      'Tyrosine (mg)': 10.8, // #this is default assumed value
+      'EPA (mg)': 0.0, // #this is default assumed value
+      'DHA (mg)': 0.0, // #this is default assumed value
+    },
+  ),
+);
 
   static const Ingredient cannedLentils = Ingredient(
     id: 'lentils',
     name: 'Canned Lentils',
-    baseUnit: 'container', // Converted from 3.5 servings (2/3 cup each)
+    baseUnit: 'container', // Converted from 3.5 servings (130g / 2/3 cup each)
     nutritionPerBaseUnit: NutritionFact(
-      calories: 280,
-      protein: 21,
-      carbs: 56,
+      calories: 280.0,
+      protein: 21.0,
+      carbs: 56.0,
       fat: 1.75,
       microNutrients: {
-        'Sodium (mg)': 1015,
+        'Saturated Fat (g)': 0.0,
+        'Sodium (mg)': 1015.0,
         'Fiber (g)': 10.5,
-        'Sugar (g)': 0,
-        'Calcium (mg)': 70,
+        'Sugar (g)': 0.0,
+        'Added Sugar (g)': 0.0,
+        'Calcium (mg)': 70.0,
         'Iron (mg)': 5.95,
-        'Potassium (mg)': 700,
-        'Magnesium (mg)': 100, // #this is default assumed value
-        'Zinc (mg)': 3.8, // #this is default assumed value
-      
-        'Copper (mg)': 0.25, // #this is default assumed value
-        'Selenium (mcg)': 3, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
-        'Vitamin C (mg)': 1, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 1.7, // #this is default assumed value
-        'Vitamin E (mg)': 0.1, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0.16, // #this is default assumed value
-        'Riboflavin (mg)': 0.07, // #this is default assumed value
-        'Niacin (mg)': 1, // #this is default assumed value
-        'Vitamin B5 (mg)': 0.6, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.17, // #this is default assumed value
-        'Natural Folate (mcg)': 180, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 30, // #this is default assumed value
-        'Tyrosine (mg)': 200, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Potassium (mg)': 700.0,
+        
+        'Magnesium (mg)': 350.0, // #this is default assumed value
+        'Zinc (mg)': 13.3, // #this is default assumed value
+        'Copper (mg)': 0.88, // #this is default assumed value
+        'Selenium (mcg)': 10.5, // #this is default assumed value
+        'Vitamin A (mcg)': 0.0, // #this is default assumed value
+        'Vitamin C (mg)': 3.5, // #this is default assumed value
+        'Vitamin D3 (mcg)': 0.0, // #this is default assumed value
+        'Vitamin K (mcg)': 5.95, // #this is default assumed value
+        'Vitamin E (mg)': 0.35, // #this is default assumed value
+        'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
+        'Thiamin (mg)': 0.56, // #this is default assumed value
+        'Riboflavin (mg)': 0.25, // #this is default assumed value
+        'Niacin (mg)': 3.5, // #this is default assumed value
+        'Vitamin B5 (mg)': 2.1, // #this is default assumed value
+        'Vitamin B6 (mg)': 0.6, // #this is default assumed value
+        'Natural Folate (mcg)': 630.0, // #this is default assumed value
+        'Synthetic Folic Acid (mcg)': 0.0, // #this is default assumed value
+        'Choline (mg)': 105.0, // #this is default assumed value
+        'Tyrosine (mg)': 700.0, // #this is default assumed value
+        'EPA (mg)': 0.0, // #this is default assumed value
+        'DHA (mg)': 0.0, // #this is default assumed value
       },
     ),
   );
