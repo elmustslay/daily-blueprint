@@ -91,7 +91,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _getReady(String time, {required String skincare, required String clothes, List<String> extraDetails = const []}) {
+  static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
     return TimelineItem(
       time: time,
       title: 'Get Ready',
@@ -106,7 +106,6 @@ class DailyPlanData {
         skincare,
         'Apply deodorant',
         clothes,
-        ...extraDetails,
       ],
     );
   }
@@ -184,13 +183,12 @@ class DailyPlanData {
 
   static TimelineItem _study(String time, {
     List<String> details = const [],
-    String title = 'Study Time',
     bool calcium = false,
     bool cetirizine = false,
   }) {
     return TimelineItem(
       time: time,
-      title: title,
+      title: 'Study Time',
       icon: '📚',
       details: [
         if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
@@ -449,8 +447,8 @@ class DailyPlanData {
     ],
     wed: [
       _wakeup('7:30-7:35 am', copper: true),
-      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)', extraDetails: ['Take ground beef out of freezer to thaw in fridge']),
-      _morningReading('8:15-8:30 am'),
+      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:15-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
       _grabThings('8:30-8:35 am', zinc: true),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-11:30 am'),
@@ -541,8 +539,8 @@ class DailyPlanData {
       _study('9:30-12:30 pm', calcium: true, details: ['20mg adderall IR at 9:30am']),
       _preLunchFiber('12:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
-      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)", 'Put ground beef in freezer after shopping']),
-      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs']),
+      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
+      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
       _wheyCreatine('6:00-6:15 pm'),
       _relaxOrCatchUp('6:15-7:00 pm', title: 'Rest / Active Recovery'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
