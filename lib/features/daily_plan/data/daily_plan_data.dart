@@ -91,7 +91,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _getReady(String time, {required String skincare, required String clothes}) {
+  static TimelineItem _getReady(String time, {required String skincare, required String clothes, List<String> extraDetails = const []}) {
     return TimelineItem(
       time: time,
       title: 'Get Ready',
@@ -106,16 +106,18 @@ class DailyPlanData {
         skincare,
         'Apply deodorant',
         clothes,
+        ...extraDetails,
       ],
     );
   }
 
-  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage'}) {
+  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage', bool cetirizine = false}) {
     return TimelineItem(
       time: time,
       title: 'Shower & Bed Prep',
       icon: '🚿',
       details: [
+        if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
         'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
         'Hair: $hair',
@@ -141,7 +143,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _grabThings(String time, {bool zinc = false}) {
+  static TimelineItem _grabThings(String time, {bool zinc = false, int eggs = 3, bool banana = true}) {
     return TimelineItem(
       time: time,
       title: 'Grab things to take to work',
@@ -154,10 +156,10 @@ class DailyPlanData {
         'Blotting Sheet',
         'sunscreen',
         'Pasta lunch',
-        '3 Boiled Eggs',
+        '$eggs Boiled Eggs',
         zinc ? 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin, Zinc Picolinate)' : 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin)',
         'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt',
-        '1 banana',
+        if (banana) '1 banana',
         'water bottle'
       ],
     );
@@ -177,6 +179,33 @@ class DailyPlanData {
         ...details
       ],
       mealRecord: calcium ? const MealRecord(items: [_Portions.calciumCitrate]) : null,
+    );
+  }
+
+  static TimelineItem _study(String time, {
+    List<String> details = const [],
+    String title = 'Study Time',
+    bool calcium = false,
+    bool cetirizine = false,
+  }) {
+    return TimelineItem(
+      time: time,
+      title: title,
+      icon: '📚',
+      details: [
+        if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
+        if (calcium) '10:00 am: Take 3 Calcium Citrate capsules (438mg)',
+        ...details
+      ],
+      mealRecord: calcium ? const MealRecord(items: [_Portions.calciumCitrate]) : null,
+    );
+  }
+
+  static TimelineItem _relaxOrCatchUp(String time, {String title = 'Relax / Catch up on reading', String icon = '🛋️'}) {
+    return TimelineItem(
+      time: time,
+      title: title,
+      icon: icon,
     );
   }
 
@@ -308,12 +337,13 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _chores(String time) {
+  static TimelineItem _chores(String time, {bool cetirizine = false}) {
     return TimelineItem(
       time: time,
       title: 'Chores & Clean Up',
       icon: '🧼',
       details: [
+        if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
         '1 scoop Casein + 1 tbsp Chia in 16oz water',
         'The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.',
       ], 
@@ -378,49 +408,48 @@ class DailyPlanData {
   static Map<String, List<TimelineItem>> get schedules => {
     mon: [
       _wakeup('7:30-7:35 am'),
-      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (NK 9060/Bondi)'),
+      _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _grabThings('8:30-8:35 am', zinc: true),
-      _commuteToWork('8:35-9:00 am'),
-      _work('9:00-11:30 am', calcium: true),
+      _work('8:30-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
-      _work('12:30-3:30 pm'),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
-      _work('3:45-5:00 pm'),
+      _work('12:30-3:30 pm', details: [_laundryBathTowels]),
+      _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true),
+      _work('4:00-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
       _wheyCreatine('7:00-7:15 pm', title: 'Post-Workout'),
       _salmonDinner('7:15-7:30 pm'),
       _chores('7:30-8:00 pm'),
-      TimelineItem(time: '8:00-9:00 pm', title: 'Study Time', icon: '📚'),
+      _study('8:00-9:00 pm', cetirizine: true),
       _bedPrep('9:00-10:00 pm'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
     ],
     tue: [
       _wakeup('7:30-7:35 am', nac: true),
-      _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
+      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningReading('8:15-8:30 am'),
-      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
-      _work('9:05-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
+      _grabThings('8:30-8:35 am', zinc: false, eggs: 3, banana: false),
+      _commuteToWork('8:35-9:00 am'),
+      _work('9:00-11:30 am', calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
-      _work('12:30-3:30 pm', details: [_laundryBathTowels]),
-      _afternoonSnack('3:30-4:00 pm', eggs: 2, vitaminE: true),
-      _wheyCreatine('4:00-4:15 pm', title: 'Pre-Cardio Snack'),
-      TimelineItem(time: '4:15-5:00 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, study or work']),
+      _work('12:30-3:30 pm'),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false),
+      _work('3:45-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false),
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
-      _beefDinner('6:30-7:30 pm'),
+      _wheyCreatine('6:30-6:45 pm', title: 'Post-Workout'),
+      _salmonDinner('6:45-7:30 pm'),
       _chores('7:30-8:15 pm'),
-      _bedPrep('8:15-9:00 pm'),
+      _bedPrep('8:15-9:00 pm', cetirizine: true),
       _nightSupplement('9:00-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
     ],
     wed: [
       _wakeup('7:30-7:35 am', copper: true),
-      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
+      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)', extraDetails: ['Take ground beef out of freezer to thaw in fridge']),
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am', zinc: true),
       _commuteToWork('8:35-9:00 am'),
@@ -435,7 +464,7 @@ class DailyPlanData {
       _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
       _salmonDinner('7:40-8:00 pm'),
       _chores('8:00-8:30 pm'),
-      TimelineItem(time: '8:30-9:30 pm', title: 'Study Time', icon: '📚'),
+      _study('8:30-9:30 pm', cetirizine: true),
       _bedPrep('9:30-10:00 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
@@ -444,18 +473,19 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _work('8:30-11:30 am', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
+      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
+      _work('9:05-11:30 am', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
-      TimelineItem(time: '3:45-5:15 pm', title: 'Work/Study', icon: '💻', details: ['Depending on your workload, work or study']),
+      _work('3:45-5:15 pm'),
       _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _wheyCreatine('7:15-7:30 pm', title: 'Post-Workout'),
       _beefDinner('7:30-8:00 pm'),
       _chores('8:00-8:30 pm'),
-      _bedPrep('8:30-9:15 pm'),
+      _bedPrep('8:30-9:15 pm', cetirizine: true),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
     ],
@@ -474,9 +504,9 @@ class DailyPlanData {
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
       _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
-      _salmonDinner('7:40-8:00 pm'),
+      _beefDinner('7:40-8:00 pm'),
       _chores('8:00-8:30 pm'),
-      TimelineItem(time: '8:30-9:30 pm', title: 'Study Time', icon: '📚'),
+      _study('8:30-9:30 pm', cetirizine: true),
       _bedPrep('9:30-10:00 pm'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
@@ -486,19 +516,19 @@ class DailyPlanData {
       _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:15-8:20 am'),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
-      TimelineItem(time: '8:45-11:30 am', title: 'Study', icon: '📚', details: ['10:00 am: Take 3 Calcium Citrate capsules (438mg)'], mealRecord: const MealRecord(items: [_Portions.calciumCitrate])),
+      _study('8:45-11:30 am', calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
-      TimelineItem(time: '12:30-1:45 pm', title: 'Study', icon: '📚'),
+      _study('12:30-1:45 pm'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Reflection/Revision', icon: '🔄', details: ['Has this plan been working?']),
-      TimelineItem(time: '2:00-3:30 pm', title: 'Study', icon: '📚'),
+      _study('2:00-3:30 pm'),
       _afternoonSnack('3:30-4:00 pm', eggs: 0, whey: true, vitamins: false),
-      TimelineItem(time: '4:00-6:00 pm', title: 'Study', icon: '📚'),
+      _study('4:00-6:00 pm'),
       _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:30-8:00 pm'),
-      _chores('8:00-9:00 pm'),
+      _chores('8:00-9:00 pm', cetirizine: true),
       _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
       _fallAsleep('10:15-10:45 pm'),
@@ -508,18 +538,18 @@ class DailyPlanData {
       _getReady('7:35-8:20 am', skincare: _ceravePM, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
-      TimelineItem(time: '9:30-12:30 pm', title: 'Study Time', icon: '📚', details: ['20mg adderall IR at 9:30am', '10:00 am: Take 3 Calcium Citrate capsules (438mg)'], mealRecord: const MealRecord(items: [_Portions.calciumCitrate])),
+      _study('9:30-12:30 pm', calcium: true, details: ['20mg adderall IR at 9:30am']),
       _preLunchFiber('12:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
-      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
+      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)", 'Put ground beef in freezer after shopping']),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs']),
       _wheyCreatine('6:00-6:15 pm'),
-      TimelineItem(time: '6:15-7:00 pm', title: 'Rest / Active Recovery', icon: '🛋️'),
+      _relaxOrCatchUp('6:15-7:00 pm', title: 'Rest / Active Recovery'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
-      _bedPrep('8:00-9:00 pm'),
+      _bedPrep('8:00-9:00 pm', cetirizine: true),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
-      TimelineItem(time: '9:15-10:00 pm', title: 'Read/Reflect', icon: '📚'),
+      _relaxOrCatchUp('9:15-10:00 pm'),
       _fallAsleep('10:00-10:30 pm'),
     ],
   };
@@ -547,6 +577,7 @@ class DailyPlanData {
    * 
    * Night:
    * - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
+   * - Cetirizine (Zyrtec): 10mg (Taken daily at 8:30 PM. Gold-standard treatment for physical urticarias/itching triggered by temperature shifts, cold air drafts, and water evaporation. Evening dosing minimizes daytime sedation).
    * 
    * FUTURE SKINCARE PLAN:
    * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Cetaphil or Cerave pm (depending on day).
