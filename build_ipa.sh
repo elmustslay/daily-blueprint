@@ -60,7 +60,7 @@ cyan "Running pod install (skipping repo-update for speed) ..."
 # cyan "Cleaning previous build ..."
 # rm -rf build/ios_ipa Blueprint.ipa Payload
 cyan "Cleaning previous build artefacts (keeping derived data for incremental builds) ..."
-rm -rf Blueprint.ipa Payload
+rm -rf blueprint*.ipa Payload
 
 # ── Build with xcodebuild ────────────────────────────────────────────────
 cyan "Building Runner.app (this may take a few minutes) ..."
@@ -109,19 +109,22 @@ if command -v codesign &>/dev/null; then
 fi
 
 # ── Package into IPA ─────────────────────────────────────────────────────
-cyan "Packaging Blueprint.ipa ..."
+RAND_VAL=$((1 + RANDOM % 999))
+IPA_NAME="blueprint${RAND_VAL}.ipa"
+
+cyan "Packaging $IPA_NAME ..."
 mkdir -p Payload
 cp -R "$APP_PATH" Payload/
 
 # Drop any leftover _CodeSignature dirs
 find Payload -name "_CodeSignature" -type d -exec rm -rf {} + 2>/dev/null || true
 
-zip -rq Blueprint.ipa Payload
+zip -rq "$IPA_NAME" Payload
 rm -rf Payload
 
-IPA_SIZE=$(stat -f%z Blueprint.ipa 2>/dev/null \
-  || stat --printf="%s" Blueprint.ipa)
+IPA_SIZE=$(stat -f%z "$IPA_NAME" 2>/dev/null \
+  || stat --printf="%s" "$IPA_NAME")
 green "============================================"
-green "  Blueprint.ipa created ($(( IPA_SIZE / 1024 / 1024 )) MB)"
+green "  $IPA_NAME created ($(( IPA_SIZE / 1024 / 1024 )) MB)"
 green "  Sideload with AltStore or Sideloadly"
 green "============================================"
