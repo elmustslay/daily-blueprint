@@ -365,7 +365,7 @@ class DailyPlanData {
       details: [
         'Take $magAmount $magName + 1 tablet Finasteride (1mg)',
         skincare,
-        'CeraVe PM: 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry',
+        'Moisturizer (CeraVe PM): 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry',
         'Set Dehumidifier to 30%',
       ],
       mealRecord: MealRecord(items: [
@@ -379,8 +379,8 @@ class DailyPlanData {
     return TimelineItem(time: time, title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']);
   }
 
-  static const String _cetaphil = 'Cetaphil DermaControl Oil Absorbing Moisturizer with SPF 30: 1 squirt for face, 1 for neck';
-  static const String _ceravePM = 'CeraVe PM: 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
+  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
+  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 3m -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
   static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
@@ -406,7 +406,7 @@ class DailyPlanData {
   static Map<String, List<TimelineItem>> get schedules => {
     mon: [
       _wakeup('7:30-7:35 am'),
-      _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
+      _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
       _work('8:30-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
       _preLunchFiber('11:30-12:00 pm'),
@@ -426,7 +426,7 @@ class DailyPlanData {
     ],
     tue: [
       _wakeup('7:30-7:35 am', nac: true),
-      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (NK 9060/Bondi)'),
+      _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am', zinc: false, eggs: 3, banana: false),
       _commuteToWork('8:35-9:00 am'),
@@ -447,7 +447,7 @@ class DailyPlanData {
     ],
     wed: [
       _wakeup('7:30-7:35 am', copper: true),
-      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
+      _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:15-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
       _grabThings('8:30-8:35 am', zinc: true),
       _commuteToWork('8:35-9:00 am'),
@@ -469,7 +469,7 @@ class DailyPlanData {
     ],
     thu: [
       _wakeup('7:30-7:35 am'),
-      _getReady('7:35-8:15 am', skincare: _ceravePM, clothes: 'Get dressed'),
+      _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
       _work('9:05-11:30 am', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
@@ -489,7 +489,7 @@ class DailyPlanData {
     ],
     fri: [
       _wakeup('7:30-7:35 am', copper: true),
-      _getReady('7:35-8:15 am', skincare: _cetaphil, clothes: 'Get dressed (cloud x 4)'),
+      _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am'),
       _commuteToWork('8:35-9:00 am'),
@@ -511,7 +511,7 @@ class DailyPlanData {
     ],
     sat: [
       _wakeup('7:30-7:40 am', nac: true),
-      _getReady('7:40-8:15 am', skincare: _ceravePM, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
+      _getReady('7:40-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:15-8:20 am'),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
       _study('8:45-11:30 am', calcium: true),
@@ -533,7 +533,7 @@ class DailyPlanData {
     ],
     sun: [
       _wakeup('7:30-7:35 am', nac: true),
-      _getReady('7:35-8:20 am', skincare: _ceravePM, clothes: 'Get dressed for shopping (NK 9060)'),
+      _getReady('7:35-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
       _study('9:30-12:30 pm', calcium: true, details: ['20mg adderall IR at 9:30am']),
@@ -578,10 +578,10 @@ class DailyPlanData {
    * - Cetirizine (Zyrtec): 10mg (Taken daily at 8:30 PM. Gold-standard treatment for physical urticarias/itching triggered by temperature shifts, cold air drafts, and water evaporation. Evening dosing minimizes daytime sedation).
    * 
    * FUTURE SKINCARE PLAN:
-   * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Cetaphil or Cerave pm (depending on day).
-   * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY CeraVe PM (wait 30m after rolling to avoid flushing/hyperpigmentation).
+   * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Moisturizer (CeraVe PM) -> sunscreen (on work days).
+   * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY Moisturizer (CeraVe PM) (wait 30m after rolling to avoid flushing/hyperpigmentation).
    * 3. Introduce minoxidil for night (except weekends and Mondays) and in-shower lotion for morning.
-   * 
+   * 4. CeravePm might be repalced by Vanicream if it's irritating after a few weeks.
    * FUTURE LAUNDRY PLAN:
    * If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
    * 1. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
