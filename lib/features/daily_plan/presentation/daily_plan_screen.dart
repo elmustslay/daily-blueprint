@@ -23,6 +23,10 @@ class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
       final tabWeekday = i + 1; // 1 to 7
 
       DateTime targetDate;
+      final differenceInDays = tabWeekday <= currentWeekday
+          ? (currentWeekday - tabWeekday)
+          : (7 - (tabWeekday - currentWeekday));
+
       if (tabWeekday <= currentWeekday) {
         targetDate = now.subtract(Duration(days: currentWeekday - tabWeekday));
       } else {
@@ -33,7 +37,7 @@ class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
       
       final savedTargetDateStr = prefs.getString('supp_target_date_$dayKey');
       
-      if (savedTargetDateStr != targetDateStr) {
+      if (savedTargetDateStr != targetDateStr || differenceInDays > 4) {
         prefs.remove('supp_$dayKey');
         prefs.setString('supp_target_date_$dayKey', targetDateStr);
         stateMap[dayKey] = [false, false];
