@@ -225,7 +225,7 @@ class DailyPlanData {
       time: time,
       title: 'Lunch',
       icon: '🍝',
-      details: ['1 serving of my pasta (Spinach is cooked inside)'],
+      details: ['1 serving of my pasta'],
       mealRecord: MealRecord(recipeItems: [_Recipes.pasta]),
     );
   }
@@ -514,14 +514,18 @@ class DailyPlanData {
       _getReady('7:40-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:15-8:20 am'),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
-      _study('8:45-11:30 am', calcium: true),
+      _study('8:45-10:15 am', calcium: true),
+      TimelineItem(time: '10:15-10:35 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
+      _study('10:35-11:30 am'),
       _preLunchFiber('11:30-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _study('12:30-1:45 pm'),
-      TimelineItem(time: '1:45-2:00 pm', title: 'Reflection/Revision', icon: '🔄', details: ['Has this plan been working?']),
+      TimelineItem(time: '1:45-2:00 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('2:00-3:30 pm'),
       _afternoonSnack('3:30-4:00 pm', eggs: 0, whey: true, vitamins: false),
-      _study('4:00-6:00 pm'),
+      _study('4:00-4:50 pm'),
+      TimelineItem(time: '4:50-5:10 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
+      _study('5:10-6:00 pm'),
       _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
@@ -536,13 +540,15 @@ class DailyPlanData {
       _getReady('7:35-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
-      _study('9:30-12:30 pm', calcium: true, details: ['20mg adderall IR at 9:30am']),
+      _study('9:30-11:00 am', calcium: true, details: ['20mg adderall IR at 9:30am']),
+      TimelineItem(time: '11:00-11:30 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
+      _study('11:30-12:30 pm'),
       _preLunchFiber('12:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
       _wheyCreatine('6:00-6:15 pm'),
-      _relaxOrCatchUp('6:15-7:00 pm', title: 'Rest / Active Recovery'),
+      _relaxOrCatchUp('6:15-7:00 pm', title: 'Rest / Weekly Reflection'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
       _bedPrep('8:00-9:00 pm', cetirizine: true),
@@ -582,9 +588,13 @@ class DailyPlanData {
    * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY Moisturizer (CeraVe PM) (wait 30m after rolling to avoid flushing/hyperpigmentation).
    * 3. Introduce minoxidil for night (except weekends and Mondays) and in-shower lotion for morning.
    * 4. CeravePm might be repalced by Vanicream if it's irritating after a few weeks.
+   * 5. Switch from reusable microfiber facial washcloths to buying/using disposable face towels (e.g., Clean Skin Club Clean Towels XL) to dry face post-wash to eliminate bacterial transfer.
    * FUTURE LAUNDRY PLAN:
-   * If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
-   * 1. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
-   * 2. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
+   * 1. Purchase 6 Supima cotton pillowcases and a set of percale sheets/pillowcases (giving a total of 8 pillowcases and 1 bedsheet in rotation).
+   * 2. Swap pillowcases every night for optimal skin hygiene.
+   * 3. Wash bedding/pillowcases separately from heavy towels to prevent friction, pilling, and lint transfer, and dry them on LOW heat.
+   * 4. If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
+   *    a. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
+   *    b. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
    */
 }
