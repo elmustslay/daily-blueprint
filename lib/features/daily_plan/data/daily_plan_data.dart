@@ -557,6 +557,7 @@ class DailyPlanData {
       _fallAsleep('10:00-10:30 pm'),
     ],
   };
+}
 
   /*
    * SUPPLEMENT DOSAGE & SAFETY LOG:
@@ -597,4 +598,4 @@ class DailyPlanData {
    *    a. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
    *    b. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
    */
-}
+

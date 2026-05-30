@@ -75,5 +75,52 @@ void main() {
       // Sunday(7): 80 + 20 = 100
       expect(intensiveBook.calculateProgressForDay(4, 7), 100);
     });
+
+    test('Black Skin (b25) progress calculations', () {
+      const blackSkin = Book(
+        id: 'b25',
+        title: 'Black Skin: The Definitive Skincare Guide',
+        author: 'Dija Ayodele',
+        weeklyGoalPercent: 25,
+        startWeek: 13,
+        expectedDurationWeeks: 4,
+      );
+
+      // Prior to startWeek
+      expect(blackSkin.expectedProgressForWeek(12), 0);
+      expect(blackSkin.calculateProgressForDay(12, 5), 0);
+
+      // Week 13 (First week of book)
+      expect(blackSkin.expectedProgressForWeek(13), 25);
+      // Tuesday of Week 13: 25/7 * 2 = 7.14 -> 7%
+      expect(blackSkin.calculateProgressForDay(13, 2), 7);
+      // Sunday of Week 13: 25%
+      expect(blackSkin.calculateProgressForDay(13, 7), 25);
+
+      // After expected duration (Week 17 and onwards)
+      expect(blackSkin.expectedProgressForWeek(17), 100);
+    });
+
+    test('Bigger Leaner Stronger (b26) progress calculations', () {
+      const bls = Book(
+        id: 'b26',
+        title: 'Bigger Leaner Stronger',
+        author: 'Michael Matthews',
+        weeklyGoalPercent: 17,
+        startWeek: 18,
+        expectedDurationWeeks: 6,
+      );
+
+      // Prior to startWeek
+      expect(bls.expectedProgressForWeek(17), 0);
+
+      // Week 18 (First week of book)
+      expect(bls.expectedProgressForWeek(18), 17);
+      // Saturday of Week 18: 17/7 * 6 = 14.57 -> 15%
+      expect(bls.calculateProgressForDay(18, 6), 15);
+
+      // Week 23 (Last week of expected duration)
+      expect(bls.expectedProgressForWeek(23), 100);
+    });
   });
 }

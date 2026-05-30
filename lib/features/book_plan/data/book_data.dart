@@ -56,8 +56,16 @@ class BookData {
           name: 'Wealth Mindset Track',
           books: [
             Book(id: 'b9', title: 'The Psychology of Money', author: 'Morgan Housel', weeklyGoalPercent: 33, startWeek: 13, expectedDurationWeeks: 3),
-            Book(id: 'b10', title: 'The Almanac of Naval Ravikant', author: 'Eric Jorgenson', weeklyGoalPercent: 33, startWeek: 16, expectedDurationWeeks: 3),
-            Book(id: 'b24', title: 'The Unspoken Rules: Secrets to Starting Your Career Off Right', author: 'Gorick Ng', weeklyGoalPercent: 33, startWeek: 19, expectedDurationWeeks: 3),
+            Book(id: 'b10', title: 'The Almanack of Naval Ravikant', author: 'Eric Jorgenson', weeklyGoalPercent: 33, startWeek: 16, expectedDurationWeeks: 3),
+            Book(id: 'b24', title: 'Quit Porn and Get Rich: The Unspoken Rule of Successful People', author: 'Martin Prescott', weeklyGoalPercent: 33, startWeek: 19, expectedDurationWeeks: 3),
+          ],
+        ),
+        ReadingTrack(
+          id: 'q2_t3',
+          name: 'Physical & Health Optimization Track',
+          books: [
+            Book(id: 'b25', title: 'Black Skin: The Definitive Skincare Guide', author: 'Dija Ayodele', weeklyGoalPercent: 25, startWeek: 13, expectedDurationWeeks: 4),
+            Book(id: 'b26', title: 'Bigger Leaner Stronger', author: 'Michael Matthews', weeklyGoalPercent: 17, startWeek: 18, expectedDurationWeeks: 6),
           ],
         ),
       ],
