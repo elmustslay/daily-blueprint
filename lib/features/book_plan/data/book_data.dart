@@ -53,11 +53,12 @@ class BookData {
         ),
         ReadingTrack(
           id: 'q2_t2',
-          name: 'Wealth Mindset Track',
+          name: 'Behavioral Reset & Wealth Track',
           books: [
             Book(id: 'b9', title: 'The Psychology of Money', author: 'Morgan Housel', weeklyGoalPercent: 33, startWeek: 13, expectedDurationWeeks: 3),
-            Book(id: 'b10', title: 'The Almanack of Naval Ravikant', author: 'Eric Jorgenson', weeklyGoalPercent: 33, startWeek: 16, expectedDurationWeeks: 3),
-            Book(id: 'b24', title: 'Quit Porn and Get Rich: The Unspoken Rule of Successful People', author: 'Martin Prescott', weeklyGoalPercent: 33, startWeek: 19, expectedDurationWeeks: 3),
+            Book(id: 'b27', title: 'Dopamine Nation', author: 'Anna Lembke', weeklyGoalPercent: 33, startWeek: 16, expectedDurationWeeks: 3),
+            Book(id: 'b28', title: 'Breaking the Cycle', author: 'George N. Collins', weeklyGoalPercent: 50, startWeek: 19, expectedDurationWeeks: 2),
+            Book(id: 'b10', title: 'The Almanack of Naval Ravikant', author: 'Eric Jorgenson', weeklyGoalPercent: 33, startWeek: 21, expectedDurationWeeks: 3),
           ],
         ),
         ReadingTrack(

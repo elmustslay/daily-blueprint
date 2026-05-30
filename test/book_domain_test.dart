@@ -122,5 +122,35 @@ void main() {
       // Week 23 (Last week of expected duration)
       expect(bls.expectedProgressForWeek(23), 100);
     });
+    test('Dopamine Nation (b27) progress calculations', () {
+      const dn = Book(
+        id: 'b27',
+        title: 'Dopamine Nation',
+        author: 'Anna Lembke',
+        weeklyGoalPercent: 33,
+        startWeek: 16,
+        expectedDurationWeeks: 3,
+      );
+
+      expect(dn.expectedProgressForWeek(15), 0);
+      expect(dn.expectedProgressForWeek(16), 33);
+      expect(dn.expectedProgressForWeek(17), 66);
+      expect(dn.expectedProgressForWeek(18), 100); 
+    });
+
+    test('Breaking the Cycle (b28) progress calculations', () {
+      const btc = Book(
+        id: 'b28',
+        title: 'Breaking the Cycle',
+        author: 'George N. Collins',
+        weeklyGoalPercent: 50,
+        startWeek: 19,
+        expectedDurationWeeks: 2,
+      );
+
+      expect(btc.expectedProgressForWeek(18), 0);
+      expect(btc.expectedProgressForWeek(19), 50);
+      expect(btc.expectedProgressForWeek(20), 100);
+    });
   });
 }
