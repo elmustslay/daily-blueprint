@@ -126,7 +126,7 @@ class IngredientsData {
   static const Ingredient avocadoOil = Ingredient(
     id: 'avocado_oil',
     name: 'Avocado Oil',
-    baseUnit: 'tsp', // Converted from 1 Tbsp (3 tsp) serving
+    baseUnit: 'tsp',
     nutritionPerBaseUnit: NutritionFact(
       calories: 40,
       protein: 0,
@@ -165,92 +165,7 @@ class IngredientsData {
     ),
   );
 
-  static const Ingredient peanutButter = Ingredient(
-    id: 'pb',
-    name: 'Peanut Butter',
-    baseUnit: 'tbsp',
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 95, 
-      protein: 3.5, 
-      carbs: 4.0,   
-      fat: 7.5,     
-      microNutrients: {
-        'Saturated Fat (g)': 1.5,
-        'Polyunsaturated Fat (g)': 1.5,
-        'Monounsaturated Fat (g)': 4.0,
-        'Fiber (g)': 1.0,
-        'Sugar (g)': 1.5,
-        'Sodium (mg)': 65,
-        'Calcium (mg)': 13, // 1% of 1300mg DV
-        'Iron (mg)': 0.18,  // 1% of 18mg DV
-        'Potassium (mg)': 94, // 2% of 4700mg DV
-      
-        'Magnesium (mg)': 24, // #this is default assumed value
-        'Zinc (mg)': 0.4, // #this is default assumed value
-        'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 1.1, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
-        'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 0.1, // #this is default assumed value
-        'Vitamin E (mg)': 1.4, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0.02, // #this is default assumed value
-        'Riboflavin (mg)': 0.02, // #this is default assumed value
-        'Niacin (mg)': 2.1, // #this is default assumed value
-        'Vitamin B5 (mg)': 0.1, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.08, // #this is default assumed value
-        'Natural Folate (mcg)': 12, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 10, // #this is default assumed value
-        'Tyrosine (mg)': 150, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
-      },
-    ),
-  );
 
-  static const Ingredient almondMilk = Ingredient(
-    id: 'almond_milk',
-    name: 'Unsweetened Almond Milk',
-    baseUnit: 'cup',
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 30,
-      protein: 1,
-      carbs: 1,
-      fat: 2.5,
-      microNutrients: {
-        'Saturated Fat (g)': 0,
-        'Sodium (mg)': 130,
-        'Fiber (g)': 0,
-        'Sugar (g)': 0,
-        'Calcium (mg)': 450,
-        'Iron (mg)': 0.5,
-        'Potassium (mg)': 160,
-        'Vitamin A (mcg)': 90,
-        'Vitamin E (mg)': 7.5,
-      
-        'Magnesium (mg)': 15, // #this is default assumed value
-        'Zinc (mg)': 0.1, // #this is default assumed value
-        'Copper (mg)': 0.02, // #this is default assumed value
-        'Selenium (mcg)': 0.2, // #this is default assumed value
-        'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 0.2, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0, // #this is default assumed value
-        'Riboflavin (mg)': 0, // #this is default assumed value
-        'Niacin (mg)': 0.1, // #this is default assumed value
-        'Vitamin B5 (mg)': 0, // #this is default assumed value
-        'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Natural Folate (mcg)': 1, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 0, // #this is default assumed value
-        'Tyrosine (mg)': 10, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
-      },
-    ),
-  );
 
   static const Ingredient banana = Ingredient(
     id: 'banana',
@@ -543,206 +458,28 @@ class IngredientsData {
 
 
 
-  static const Ingredient almonds = Ingredient(
-    id: 'almonds',
-    name: 'Almonds',
-    baseUnit: 'cup', // normally user says 1/4 cup
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 825, 
-      protein: 30, 
-      carbs: 30, 
-      fat: 71,
-      microNutrients: {
-        'Calcium (mg)': 385, // #this is default assumed value
-        'Iron (mg)': 5.3, // #this is default assumed value
-        'Potassium (mg)': 1048, // #this is default assumed value
-        'Magnesium (mg)': 386, // #this is default assumed value
-        'Zinc (mg)': 4.4, // #this is default assumed value
-        'Vitamin E (mg)': 36.6, // #this is default assumed value
-        'Fiber (g)': 17.9, // #this is default assumed value
-      
-        'Copper (mg)': 0.3, // #this is default assumed value
-        'Selenium (mcg)': 1.2, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
-        'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0.06, // #this is default assumed value
-        'Riboflavin (mg)': 0.3, // #this is default assumed value
-        'Niacin (mg)': 1, // #this is default assumed value
-        'Vitamin B5 (mg)': 0.1, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.04, // #this is default assumed value
-        'Natural Folate (mcg)': 12, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 15, // #this is default assumed value
-        'Tyrosine (mg)': 130, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
-      },
-    ), // #default value
-  );
 
-  static const Ingredient raspberries = Ingredient(
-    id: 'raspberries',
-    name: 'Raspberries',
-    baseUnit: 'container (6oz)',
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 90, 
-      protein: 2, 
-      carbs: 20, 
-      fat: 1.1,
-      microNutrients: {
-        'Fiber (g)': 11,
-        'Potassium (mg)': 256,
-        'Magnesium (mg)': 37,
-      
-        'Calcium (mg)': 31, // #this is default assumed value
-        'Iron (mg)': 0.8, // #this is default assumed value
-        'Zinc (mg)': 0.5, // #this is default assumed value
-        'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 0.2, // #this is default assumed value
-        'Vitamin A (mcg)': 2, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 9.6, // #this is default assumed value
-        'Vitamin E (mg)': 1.1, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0.04, // #this is default assumed value
-        'Riboflavin (mg)': 0.05, // #this is default assumed value
-        'Niacin (mg)': 0.7, // #this is default assumed value
-        'Vitamin B5 (mg)': 0.4, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.07, // #this is default assumed value
-        'Natural Folate (mcg)': 26, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 15, // #this is default assumed value
-        'Tyrosine (mg)': 20, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
-      },
-    ), // #default value
-  );
-
-  static const Ingredient mushroom = Ingredient(
-    id: 'mushroom',
-    name: 'Mushroom',
-    baseUnit: 'container (8oz)', // 8oz standard grocery pack
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 50, 
-      protein: 7, 
-      carbs: 7, 
-      fat: 0.7,
-      microNutrients: {
-        'Potassium (mg)': 720,
-        'Magnesium (mg)': 20,
-        'Zinc (mg)': 1.2, // #this is default assumed value
-      
-        'Calcium (mg)': 2, // #this is default assumed value
-        'Iron (mg)': 0.3, // #this is default assumed value
-        'Copper (mg)': 0.2, // #this is default assumed value
-        'Selenium (mcg)': 6.5, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
-        'Vitamin C (mg)': 1.5, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0.2, // #this is default assumed value
-        'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 0, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0, // #this is default assumed value
-        'Thiamin (mg)': 0.06, // #this is default assumed value
-        'Riboflavin (mg)': 0.3, // #this is default assumed value
-        'Niacin (mg)': 2.5, // #this is default assumed value
-        'Vitamin B5 (mg)': 1, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.07, // #this is default assumed value
-        'Natural Folate (mcg)': 12, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 12, // #this is default assumed value
-        'Tyrosine (mg)': 20, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
-      },
-    ), // #default value
-  );
   
-  static const Ingredient ribeye = Ingredient(
-    id: 'ribeye',
-    name: 'Ribeye Steak',
-    baseUnit: 'lb', // Converted from 4 oz serving
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 1080,
-      protein: 84,
-      carbs: 0,
-      fat: 84,
-      microNutrients: {
-        'Saturated Fat (g)': 36,
-        'Cholesterol (mg)': 320,
-        'Sodium (mg)': 240,
-        'Iron (mg)': 7.2,
-        'Potassium (mg)': 1040,
-        'Zinc (mg)': 20.0, // #this is default assumed value
-        'Magnesium (mg)': 95, // #this is default assumed value
-        'Vitamin B12 (mcg)': 9.5, // #this is default assumed value
-      
-        'Calcium (mg)': 27, // #this is default assumed value
-        'Copper (mg)': 0.4, // #this is default assumed value
-        'Selenium (mcg)': 120, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
-        'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
-        'Vitamin K (mcg)': 6, // #this is default assumed value
-        'Vitamin E (mg)': 1.8, // #this is default assumed value
-        'Thiamin (mg)': 0.3, // #this is default assumed value
-        'Riboflavin (mg)': 0.8, // #this is default assumed value
-        'Niacin (mg)': 25, // #this is default assumed value
-        'Vitamin B5 (mg)': 2.5, // #this is default assumed value
-        'Vitamin B6 (mg)': 2, // #this is default assumed value
-        'Natural Folate (mcg)': 25, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 400, // #this is default assumed value
-        'Tyrosine (mg)': 5000, // #this is default assumed value
-        'EPA (mg)': 15, // #this is default assumed value
-        'DHA (mg)': 10, // #this is default assumed value
-      },
-    ),
-  );
 
-  static const Ingredient chickpeaPasta = Ingredient(
-    id: 'chickpea_pasta',
-    name: 'Chickpea Fusilli',
-    baseUnit: 'oz', // Scaled exactly from a 56g (1.9753 oz) label serving
+
+  static const Ingredient carbeDiemPasta = Ingredient(
+    id: 'carbe_diem_pasta',
+    name: 'Carbe Diem Pasta',
+    baseUnit: 'oz',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 96.1859,
-      protein: 5.5687,
-      carbs: 18.2247,
-      fat: 1.2656,
+      calories: 55.0,
+      protein: 4.0,
+      carbs: 20.0,
+      fat: 0.25,
       microNutrients: {
         'Saturated Fat (g)': 0.0,
-        'Sodium (mg)': 0.0,
-        'Fiber (g)': 3.0374,
-        'Sugar (g)': 0.5062,
+        'Sodium (mg)': 37.5,
+        'Fiber (g)': 12.0,
+        'Sugar (g)': 0.0,
         'Added Sugar (g)': 0.0,
-        'Calcium (mg)': 20.2497,
-        'Iron (mg)': 1.0631,
-        'Potassium (mg)': 227.8087,
-        
-        'Magnesium (mg)': 45.56, // #this is default assumed value
-        'Zinc (mg)': 1.82, // #this is default assumed value
-        'Copper (mg)': 0.3, // #this is default assumed value
-        'Selenium (mcg)': 4.05, // #this is default assumed value
-        'Vitamin A (mcg)': 0.0, // #this is default assumed value
-        'Vitamin C (mg)': 0.0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0.0, // #this is default assumed value
-        'Vitamin K (mcg)': 2.02, // #this is default assumed value
-        'Vitamin E (mg)': 0.51, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
-        'Thiamin (mg)': 0.1, // #this is default assumed value
-        'Riboflavin (mg)': 0.1, // #this is default assumed value
-        'Niacin (mg)': 0.81, // #this is default assumed value
-        'Vitamin B5 (mg)': 0.2, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.2, // #this is default assumed value
-        'Natural Folate (mcg)': 151.87, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0.0, // #this is default assumed value
-        'Choline (mg)': 30.37, // #this is default assumed value
-        'Tyrosine (mg)': 303.74, // #this is default assumed value
-        'EPA (mg)': 0.0, // #this is default assumed value
-        'DHA (mg)': 0.0, // #this is default assumed value
+        'Calcium (mg)': 0.0,
+        'Iron (mg)': 0.35,
+        'Potassium (mg)': 0.0,
       },
     ),
   );
@@ -1170,4 +907,39 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
+  static const List<Ingredient> allIngredients = [
+    spinach,
+    chipotleBowl,
+    egg,
+    avocadoOil,
+    banana,
+    psylliumHusk,
+    salmon,
+    wheyIsolate,
+    creatine,
+    casein,
+    chiaSeeds,
+    quinoa,
+    carbeDiemPasta,
+    groundTurkey,
+    leanGroundBeef96,
+    liteSalt,
+    marinaraSauce,
+    cannedLentils,
+    nutritionalYeast,
+    bellPeppers,
+    nac,
+    finasteride,
+    citicoline,
+    copperGlycinate,
+    biotinKeratin,
+    omega3,
+    zincPicolinate,
+    d3K2,
+    ashwagandha,
+    rMagnesium,
+    standaloneK2,
+    vitaminE,
+    calciumCitrate,
+  ];
 }

@@ -142,7 +142,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _grabThings(String time, {bool zinc = false, int eggs = 3, bool banana = true}) {
+  static TimelineItem _grabThings(String time, {bool zinc = false, int eggs = 3, bool banana = true, bool husk = false}) {
     return TimelineItem(
       time: time,
       title: 'Grab things to take to work',
@@ -157,7 +157,7 @@ class DailyPlanData {
         'Pasta lunch',
         '$eggs Boiled Eggs',
         zinc ? 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin, Zinc Picolinate)' : 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin)',
-        'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt',
+        if (husk) 'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt',
         if (banana) '1 banana',
         'water bottle'
       ],
@@ -384,7 +384,7 @@ class DailyPlanData {
   static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
-  static const String _secondSunscreen = 'Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
+  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener';
   static const String _laundryBathTowels = 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + 1/3 cup Bleach + EXTRA RINSE';
@@ -396,7 +396,7 @@ class DailyPlanData {
       title: 'Commute to Gym',
       icon: '🚗',
       details: [
-        if (applySunscreen) _secondSunscreen,
+        if (applySunscreen) _sunscreen,
         if (preWorkoutBanana) '1 banana (pre-workout)',
       ],
       mealRecord: preWorkoutBanana ? const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)]) : null,
@@ -408,8 +408,7 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _work('8:30-11:30 am', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
-      _preLunchFiber('11:30-12:00 pm'),
+      _work('8:30-12:00 pm', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true),
@@ -430,13 +429,12 @@ class DailyPlanData {
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am', zinc: false, eggs: 3, banana: false),
       _commuteToWork('8:35-9:00 am'),
-      _work('9:00-11:30 am', calcium: true),
-      _preLunchFiber('11:30-12:00 pm'),
+      _work('9:00-12:00 pm', calcium: true),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false),
       _work('3:45-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false, applySunscreen: false),
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       _wheyCreatine('6:30-6:45 pm', title: 'Post-Workout'),
       _salmonDinner('6:45-7:30 pm'),
@@ -451,13 +449,12 @@ class DailyPlanData {
       _morningReading('8:15-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
       _grabThings('8:30-8:35 am', zinc: true),
       _commuteToWork('8:35-9:00 am'),
-      _work('9:00-11:30 am'),
-      _preLunchFiber('11:30-12:00 pm'),
+      _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
       _work('3:45-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
       _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
       _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
       _salmonDinner('7:40-8:00 pm'),
@@ -472,8 +469,7 @@ class DailyPlanData {
       _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
-      _work('9:05-11:30 am', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
-      _preLunchFiber('11:30-12:00 pm'),
+      _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
@@ -493,13 +489,12 @@ class DailyPlanData {
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am'),
       _commuteToWork('8:35-9:00 am'),
-      _work('9:00-11:30 am'),
-      _preLunchFiber('11:30-12:00 pm'),
+      _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3),
       _work('3:45-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
+      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
       _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
       _beefDinner('7:40-8:00 pm'),
@@ -516,8 +511,7 @@ class DailyPlanData {
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
       _study('8:45-10:15 am', calcium: true),
       TimelineItem(time: '10:15-10:35 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
-      _study('10:35-11:30 am'),
-      _preLunchFiber('11:30-12:00 pm'),
+      _study('10:35-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _study('12:30-1:45 pm'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
@@ -545,8 +539,8 @@ class DailyPlanData {
       _study('11:30-12:30 pm'),
       _preLunchFiber('12:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
-      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_secondSunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
-      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Prep 7 Containers: 2 tsp Husk + 1/8 tsp Lite Salt each', 'Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
+      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
+      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
       _wheyCreatine('6:00-6:15 pm'),
       _relaxOrCatchUp('6:15-7:00 pm', title: 'Rest / Weekly Reflection'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),

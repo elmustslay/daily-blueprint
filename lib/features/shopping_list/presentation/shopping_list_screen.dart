@@ -36,11 +36,10 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'meat-3', name: 'Sockeye Salmon Fillet', subtext: '1 lb (hard min 0.82 lb)'),
       // Dairy
       ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '1.5 dozen (need 18/week)'),
-      ShoppingItem(id: 'dairy-2', name: '2% Unsweetened Almond Milk', subtext: '.5 gallon'),
 
       // Others
       ShoppingItem(id: 'oth-1', name: 'Canned Lentils', subtext: '2 containers'),
-      ShoppingItem(id: 'oth-2', name: 'Chickpea Fusilli Pasta', subtext: '1 box (need 12oz)'),
+      ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1 box (need 12oz)'),
       ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (need 1 cup)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 jar (48 oz)'),
 

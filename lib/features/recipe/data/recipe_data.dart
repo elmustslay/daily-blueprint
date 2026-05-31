@@ -9,7 +9,7 @@ class RecipeData {
       icon: '🍝',
       yields: '6 Portions (6 Fridge)',
       textIngredients: [
-        '12 oz chickpea fusilli pasta',
+        '12 oz Carbe Diem Pasta',
         '1 tbsp avocado oil',
         '3 lb ground turkey',
         '0.5 tsp Morton Lite Salt',
@@ -22,8 +22,8 @@ class RecipeData {
       ],
       servings: 6,
       ingredients: [
-        IngredientPortion(ingredient: IngredientsData.chickpeaPasta, amount: 12),
-        IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 3), // 1 tbsp = 3 tsp (reduced from 6 to save calories)
+        IngredientPortion(ingredient: IngredientsData.carbeDiemPasta, amount: 12),
+        IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 3),
         IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: 3),
         IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
         IngredientPortion(ingredient: IngredientsData.cannedLentils, amount: 2),
@@ -33,18 +33,17 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.spinach, amount: 1), // 1 bag
       ],
       equipment: [
-        '6-8 qt stock pot (with strainer)',
-        'Large Stainless Steel Sauté Pan',
+        'Large 12 qt Stainless Steel Sauté Pan',
+        'Wooden spoon or spatula',
         'Cutting board',
       ],
       instructions: [
-        'Cook Pasta: Bring 3 quarts of water to a rolling boil in the stockpot. Add the 12 oz chickpea pasta and cook for exactly 7 minutes (until al dente). Drain well, rinse briefly with cold water (to wash away excess starches and prevent mushiness), and set aside.',
-        'Turkey Sear & Salt (Foundation Seasoning): Heat the large sauté pan over medium-high heat for 2 minutes. Add 1 tbsp (3 tsp) of avocado oil, then immediately add the 3 lb ground turkey. Season evenly with the 0.5 tsp Morton Lite Salt and 1/4 tsp pepper. (Adding salt here draws out turkey moisture for proper browning and seasons the meat to the core). Sauté and break apart until browned (~8 minutes).',
-        'Add Veggies: While turkey is browning, wash and chop the 6 bell peppers. Once the turkey is browned, add the chopped peppers and cook until softened (~5-6 minutes) to release and concentrate their natural sweetness.',
-        'Simmer Sauce: Slowly pour in the 48 oz marinara sauce. Rinse the jars with 1-2 tbsp water each and add that to the pan. Stir to combine, bring to a simmer, then lower the heat to medium-low.',
-        'Incorporate Lentils & Yeast: Drain & rinse the lentils. Add them to the sauce and simmer uncovered for 10 minutes, stirring occasionally to let the sauce thicken. Stir in the 4 tbsp nutritional yeast to finish.',
-        'Combine & Wilt (Oil Omitted): Add the drained chickpea pasta and 1 bag of spinach directly to the sauté pan with the sauce (we omit any finishing oil to save calories). Toss everything together over low heat for 2 minutes until the spinach is fully wilted and the pasta is hot and coated.',
-        'Store: Divide into 6 containers (for the fridge).',
+        'Turkey Sear & Salt (Foundation Seasoning): Heat the 12 qt stainless steel sauté pan over medium-high heat. Add 1 tbsp (3 tsp) of avocado oil, then immediately add the 3 lb ground turkey. Season evenly with the 0.5 tsp Morton Lite Salt and pepper to taste. Sauté and break apart until browned (~8 minutes).',
+        'Add Veggies: Add the chopped bell peppers to the pan and cook until softened (~4-5 minutes).',
+        'Liquid & Pasta Boil (One-Pot): Pour the 2 cups of water and the 48 oz of marinara sauce into the pan first. Stir well and bring to a boil. Slide the dry 12 oz Carbe Diem pasta directly into the liquid, ensuring it is submerged. Reduce heat to medium-low, cover with a lid, and simmer for 6 minutes, stirring occasionally.',
+        'Add Lentils & Yeast: Uncover the pan, stir in the 2 containers of drained/rinsed canned lentils and the 4 tbsp of nutritional yeast. Cook covered for another 3-5 minutes until the pasta is al dente and the liquid is beautifully absorbed.',
+        'Wilt Spinach: Stir in the bag of spinach and cook uncovered for 2 minutes over low heat until fully wilted and incorporated.',
+        'Store: Divide into 6 containers (for the fridge). Let cool uncovered on the counter for 20-30 minutes before snapping the lids on to prevent condensation/waterlogging and keep the pasta chewy al dente.',
       ],
     ),
     const Recipe(
@@ -112,40 +111,6 @@ class RecipeData {
         'Cook gently: Keep heat at medium. Let it cook undisturbed 5-7 minutes. The fat will render from the skin, turning it crispy. (If empty areas of the pan start smoking, spoon in a few drops of water to cool them). The fish is ready to flip when the skin releases naturally.',
         'Flip briefly: Turn the fillet and cook another 1-2 minutes until opaque on the sides and medium-rare in the center.',
         'Rest + Store: Remove from heat and let it rest on a plate for 2 minutes. Then divide into 3 portions.',
-      ],
-    ),
-    const Recipe(
-      id: 'ribeye',
-      name: 'Pan-Seared Ribeye & Spinach',
-      icon: '🥩',
-      isOutdated: true,
-      yields: '1 Serving (Sunday Dinner)',
-      textIngredients: [
-        '0.7 lb Ribeye Steak',
-        '1/5 bag of Spinach',
-        '1.5 tsp Avocado Oil',
-        '0.5 tsp Morton Lite Salt',
-        'Black Pepper (to taste)',
-      ],
-      servings: 1,
-      ingredients: [
-        IngredientPortion(ingredient: IngredientsData.ribeye, amount: 0.7),
-        IngredientPortion(ingredient: IngredientsData.spinach, amount: 0.2), // 1/5 bag
-        IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 1.5),
-        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
-      ],
-      equipment: [
-        'Stainless Steel Skillet/Sauté Pan (DO NOT use Non-Stick for high heat sears)',
-        'Tongs',
-        'Paper Towels',
-      ],
-      instructions: [
-        'Prep & Direct Oiling (CRUCIAL FOR NO SMOKE): 1. Pat steak COMPLETELY dry. 2. Pour 1-2 tsp oil directly onto the steak. 3. Rub coat all sides. 4. Season with 0.5 tsp Morton Lite Salt. Do NOT pour any oil directly into the pan! Your pan is much larger than the steak. If you pour oil into the empty pan, all that exposed oil around the edges of the steak will hit its smoke point and burn instantly, filling your kitchen with smoke. By only oiling the actual steak, the oil is trapped perfectly under the meat and cannot smoke.',
-        'Heat dry pan (Water Bead Test): Heat the dry stainless steel skillet over medium heat. Drop 1-2 drops of water; when they form a perfect mercury-like ball that slides around without evaporating, the pan is ready. Wipe out the water.',
-        'Sear Steak: Place the oiled steak into the dry pan. (Because the steak doesn\'t cover the entire pan, putting oil in the pan directly causes the exposed oil to burn and smoke heavily). Sear 3-4 mins undisturbed. Tip: If empty spots in the pan start smoking/blackening, spoon in a few drops of water to cool those spots and stop the burning. Flip and sear another 3-4 mins.',
-        'Rest Steak: Transfer the steak to a cutting board and let rest for 5-10 minutes.',
-        'Cook Spinach: While steak rests, reduce pan heat to medium-low. Add the spinach to the hot pan and stir for 1-2 minutes until just wilted.',
-        'Serve: Slice the steak against the grain and serve immediately with the wilted spinach.',
       ],
     ),
     const Recipe(

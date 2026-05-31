@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_app/features/daily_plan/data/daily_plan_data.dart';
 import 'package:my_app/features/micro_macro_calorie_track/domain/nutrition.dart';
+import 'package:my_app/features/micro_macro_calorie_track/data/ingredients_data.dart';
+import 'package:my_app/features/recipe/data/recipe_data.dart';
 
 void main() {
   test('Calculate and export nutrition to mynutrition.json', () async {
@@ -114,6 +116,42 @@ void main() {
       } catch (e) {
         print('Error: Failed to generate mynutrition.csv directly: $e');
       }
+    }
+
+    // Export Recipes Nutrition
+    try {
+      final Map<String, dynamic> recipeExport = {};
+      for (var recipe in RecipeData.recipes) {
+        recipeExport[recipe.id] = {
+          'name': recipe.name,
+          'servings': recipe.servings,
+          'nutrition': recipe.nutritionPerServing.toJson(),
+        };
+      }
+      final recipeJsonString = const JsonEncoder.withIndent('    ').convert(recipeExport);
+      final recipeJsonFile = File('recipe_nutrition.json');
+      await recipeJsonFile.writeAsString(recipeJsonString);
+      print('Successfully exported recipe nutrition to recipe_nutrition.json');
+    } catch (e) {
+      print('Error: Failed to export recipe nutrition: $e');
+    }
+
+    // Export Ingredients Nutrition
+    try {
+      final Map<String, dynamic> ingredientExport = {};
+      for (var ingredient in IngredientsData.allIngredients) {
+        ingredientExport[ingredient.id] = {
+          'name': ingredient.name,
+          'baseUnit': ingredient.baseUnit,
+          'nutrition': ingredient.nutritionPerBaseUnit.toJson(),
+        };
+      }
+      final ingredientJsonString = const JsonEncoder.withIndent('    ').convert(ingredientExport);
+      final ingredientJsonFile = File('ingredient_nutrition.json');
+      await ingredientJsonFile.writeAsString(ingredientJsonString);
+      print('Successfully exported ingredient nutrition to ingredient_nutrition.json');
+    } catch (e) {
+      print('Error: Failed to export ingredient nutrition: $e');
     }
   });
 }
