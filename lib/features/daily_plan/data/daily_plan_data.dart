@@ -30,6 +30,8 @@ class _Portions {
   static const creatine = IngredientPortion(ingredient: IngredientsData.creatine, amount: 1);
   
   static const calciumCitrate = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 3);
+  static const calciumCitrate2 = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 2);
+  static const calciumCitrate1 = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 1);
 
   static const coreVitamins = [d3K2, standaloneK2, omega3, biotin];
 }
@@ -173,11 +175,7 @@ class DailyPlanData {
       time: time, 
       title: title, 
       icon: '💻', 
-      details: [
-        if (calcium) '10:00 am: Take 3 Calcium Citrate capsules (438mg)',
-        ...details
-      ],
-      mealRecord: calcium ? const MealRecord(items: [_Portions.calciumCitrate]) : null,
+      details: details,
     );
   }
 
@@ -192,10 +190,8 @@ class DailyPlanData {
       icon: '📚',
       details: [
         if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
-        if (calcium) '10:00 am: Take 3 Calcium Citrate capsules (438mg)',
         ...details
       ],
-      mealRecord: calcium ? const MealRecord(items: [_Portions.calciumCitrate]) : null,
     );
   }
 
@@ -220,13 +216,23 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _pastaLunch(String time) {
+  static TimelineItem _pastaLunch(String time, {int calciumCaps = 0}) {
     return TimelineItem(
       time: time,
       title: 'Lunch',
       icon: '🍝',
-      details: ['1 serving of my pasta'],
-      mealRecord: MealRecord(recipeItems: [_Recipes.pasta]),
+      details: [
+        '1 serving of my pasta',
+        if (calciumCaps > 0) 'Take $calciumCaps Calcium Citrate capsule${calciumCaps > 1 ? "s" : ""} (${(calciumCaps * 146).toStringAsFixed(0)}mg) with meal to block iron absorption',
+      ],
+      mealRecord: MealRecord(
+        items: [
+          if (calciumCaps == 3) _Portions.calciumCitrate,
+          if (calciumCaps == 2) _Portions.calciumCitrate2,
+          if (calciumCaps == 1) _Portions.calciumCitrate1,
+        ],
+        recipeItems: [_Recipes.pasta],
+      ),
     );
   }
 
@@ -242,7 +248,7 @@ class DailyPlanData {
           '1 D3-K2',
           '1 standalone K2 (100mcg)',
           '1 cap Biotin+Keratin (10mg/500mg)',
-          if (vitaminE) '1 softgel Vitamin E (267mg)', // Now conditional
+          if (vitaminE) '1 softgel Vitamin E (267mg)',
         ],
         if (zinc) '1 cap Zinc Picolinate (30mg)',
         if (whey) '1 scoop whey isolate (30g protein)',
@@ -251,7 +257,7 @@ class DailyPlanData {
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
         if (vitamins) ..._Portions.coreVitamins,
-        if (vitamins && vitaminE) _Portions.vitaminE, // Now conditional
+        if (vitamins && vitaminE) _Portions.vitaminE,
         if (zinc) _Portions.zinc,
         if (whey) _Portions.whey,
         if (whey) _Portions.creatine,
@@ -319,7 +325,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _beefDinner(String time) {
+  static TimelineItem _beefDinner(String time, {int calciumCaps = 0}) {
     final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
@@ -327,10 +333,14 @@ class DailyPlanData {
       icon: '🍛',
       details: [
         '1/4 cup quinoa + 1/4 pound ground beef', 
-        if (showAshwagandha) '2 cap Ashwagandha'
+        if (showAshwagandha) '2 cap Ashwagandha',
+        if (calciumCaps > 0) 'Take $calciumCaps Calcium Citrate capsule${calciumCaps > 1 ? "s" : ""} (${(calciumCaps * 146).toStringAsFixed(0)}mg) with meal to block iron absorption',
       ],
       mealRecord: MealRecord(items: [
-        if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
+        if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
+        if (calciumCaps == 3) _Portions.calciumCitrate,
+        if (calciumCaps == 2) _Portions.calciumCitrate2,
+        if (calciumCaps == 1) _Portions.calciumCitrate1,
       ], recipeItems: [_Recipes.beef]),
     );
   }
@@ -408,8 +418,8 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _work('8:30-12:00 pm', details: [_laundryFaceTowels, 'Run Dishwasher'], calcium: true),
-      _pastaLunch('12:00-12:30 pm'),
+      _work('8:30-12:00 pm', details: [_laundryFaceTowels, 'Run Dishwasher']),
+      _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true),
       _work('4:00-5:00 pm'),
@@ -429,8 +439,8 @@ class DailyPlanData {
       _morningReading('8:15-8:30 am'),
       _grabThings('8:30-8:35 am', zinc: false, eggs: 3, banana: false),
       _commuteToWork('8:35-9:00 am'),
-      _work('9:00-12:00 pm', calcium: true),
-      _pastaLunch('12:00-12:30 pm'),
+      _work('9:00-12:00 pm'),
+      _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false),
       _work('3:45-5:00 pm'),
@@ -469,15 +479,15 @@ class DailyPlanData {
       _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
-      _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher'], calcium: true),
-      _pastaLunch('12:00-12:30 pm'),
+      _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
+      _pastaLunch('12:00-12:30 pm', calciumCaps: 2),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
       _work('3:45-5:15 pm'),
       _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _wheyCreatine('7:15-7:30 pm', title: 'Post-Workout'),
-      _beefDinner('7:30-8:00 pm'),
+      _beefDinner('7:30-8:00 pm', calciumCaps: 1),
       _chores('8:00-8:30 pm'),
       _bedPrep('8:30-9:15 pm', cetirizine: true),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
@@ -509,10 +519,10 @@ class DailyPlanData {
       _getReady('7:40-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:15-8:20 am'),
       _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
-      _study('8:45-10:15 am', calcium: true),
+      _study('8:45-10:15 am'),
       TimelineItem(time: '10:15-10:35 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('10:35-12:00 pm'),
-      _pastaLunch('12:00-12:30 pm'),
+      _pastaLunch('12:00-12:30 pm', calciumCaps: 2),
       _study('12:30-1:45 pm'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('2:00-3:30 pm'),
@@ -523,7 +533,7 @@ class DailyPlanData {
       _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
-      _beefDinner('7:30-8:00 pm'),
+      _beefDinner('7:30-8:00 pm', calciumCaps: 1),
       _chores('8:00-9:00 pm', cetirizine: true),
       _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
@@ -534,11 +544,11 @@ class DailyPlanData {
       _getReady('7:35-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
-      _study('9:30-11:00 am', calcium: true, details: ['20mg adderall IR at 9:30am']),
+      _study('9:30-11:00 am', details: ['20mg adderall IR at 9:30am']),
       TimelineItem(time: '11:00-11:30 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
       _study('11:30-12:30 pm'),
       _preLunchFiber('12:30-1:00 pm'),
-      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef'], mealRecord: MealRecord(recipeItems: [_Recipes.beef])),
+      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal to block iron absorption'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
       _wheyCreatine('6:00-6:15 pm'),
@@ -553,43 +563,4 @@ class DailyPlanData {
   };
 }
 
-  /*
-   * SUPPLEMENT DOSAGE & SAFETY LOG:
-   * 
-   * Morning:
-   * - NAC: 600mg + Selenium: 25mcg (Safe, supports glutathione)
-   * - Citicoline: 250mg + Tyrosine: 25mg (Safe maintenance dose for focus)
-   * - Copper Glycinate: 3mg (Taken Wed/Fri. Empty stomach isolation prevents NAC chelation)
-   * 
-   * Mid-Day:
-   * - D3-K2: 1 capsule providing 5000 IU D3 + 100mcg K2 (MK-7) (Optimal, high dose for melanin-rich indoor lifestyle)
-   * - Standalone K2: 100mcg (Added to support high D3)
-   * 
-   * Afternoon (With Eggs):
-   * - Zinc Picolinate: 30mg (Taken Mon/Wed. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
-   * - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
-   * - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
-   * 
-   * Dinner:
-   * - Ashwagandha: 2 capsules = 500mg of 25:1 extract (equiv 12500mg root) + 5mg black pepper extract.
-   *   [Safety Note: Research shows 500-600mg is the optimal clinical dose for maximizing testosterone, strength, and muscle hypertrophy. Because this is a high-potency dose, the 8-weeks on / 4-weeks off cycle is mandatory to prevent emotional blunting while keeping maximum gains.]
-   * 
-   * Night:
-   * - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
-   * - Cetirizine (Zyrtec): 10mg (Taken daily at 8:30 PM. Gold-standard treatment for physical urticarias/itching triggered by temperature shifts, cold air drafts, and water evaporation. Evening dosing minimizes daytime sedation).
-   * 
-   * FUTURE SKINCARE PLAN:
-   * 1. Move Joseon Alpha-Arbutin to EVERY morning (including no sunscreen days): Ascorbyl 12% -> wait 90s -> Joseon -> wait 2m -> Moisturizer (CeraVe PM) -> sunscreen (on work days).
-   * 2. On Sundays, bring back Dermaroller: Skip Joseon, use ONLY Moisturizer (CeraVe PM) (wait 30m after rolling to avoid flushing/hyperpigmentation).
-   * 3. Introduce minoxidil for night (except weekends and Mondays) and in-shower lotion for morning.
-   * 4. CeravePm might be repalced by Vanicream if it's irritating after a few weeks.
-   * 5. Switch from reusable microfiber facial washcloths to buying/using disposable face towels (e.g., Clean Skin Club Clean Towels XL) to dry face post-wash to eliminate bacterial transfer.
-   * FUTURE LAUNDRY PLAN:
-   * 1. Purchase 6 Supima cotton pillowcases and a set of percale sheets/pillowcases (giving a total of 8 pillowcases and 1 bedsheet in rotation).
-   * 2. Swap pillowcases every night for optimal skin hygiene.
-   * 3. Wash bedding/pillowcases separately from heavy towels to prevent friction, pilling, and lint transfer, and dry them on LOW heat.
-   * 4. If you ever decide to stop using small washcloths for your face and start using your large bath towels for both body AND face:
-   *    a. You MUST wash them on a Quick Cycle every other day to prevent acne/bacteria from damp towels sitting around.
-   *    b. This will wear the towels out in about a year, requiring you to buy a new $30-$40 set yearly (a worthwhile trade-off for clear skin and convenience).
-   */
 
