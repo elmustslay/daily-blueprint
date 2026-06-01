@@ -21,3 +21,49 @@ Dinner:
 Night:
 - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
 - Cetirizine (Zyrtec): 10mg (Taken daily at 8:30 PM. Gold-standard treatment for physical urticarias/itching triggered by temperature shifts, cold air drafts, and water evaporation. Evening dosing minimizes daytime sedation).
+
+---
+
+TIMING CONFLICTS & INTERACTIONS (WHAT HAPPENS IF TIMING IS MESSED UP):
+
+1. Calcium Citrate vs. High-Iron Meals (Turkey Pasta, Beef Bowl)
+   - Goal: Block non-heme iron absorption to manage ferritin levels.
+   - Conflict: Taking Calcium Citrate too far from the meal (e.g., 1+ hours before or after).
+   - What happens if messed up: The calcium won't mix with the food in your gut. Your body will absorb all the iron, defeating your iron-blocking protocol.
+   - Rule: Must be taken *with the first few bites* of the meal.
+
+2. Calcium Citrate vs. Zinc & Copper
+   - Goal: Prevent calcium from competing with essential trace minerals.
+   - Conflict: Taking calcium capsules within 2 hours of Zinc Picolinate or Copper Glycinate, or taking calcium on Wed/Fri.
+   - What happens if messed up: Calcium binds to the same gut receptors (DMT1), severely blocking zinc and copper absorption and rendering those supplements ineffective.
+   - Rule: Keep calcium at least 2.5 hours away from zinc/copper, and strictly take 0 calcium capsules on Wed/Fri (your copper/zinc days).
+
+3. Copper Glycinate vs. Zinc Picolinate
+   - Goal: Avoid mutual absorption competition.
+   - Conflict: Taking copper and zinc at the same time.
+   - What happens if messed up: They compete directly for uptake. Zinc will win, leading to blocked copper absorption and potentially causing a copper deficiency over time.
+   - Rule: Isolate Copper Glycinate to morning wakeup and Zinc Picolinate to the afternoon snack.
+
+4. NAC vs. Copper & Zinc (Chelation)
+   - Goal: Prevent metal chelation.
+   - Conflict: Taking NAC at the same time as copper or zinc.
+   - What happens if messed up: The thiol group in NAC can weakly bind/chelate transition metals, preventing both the NAC and the mineral from being properly absorbed.
+   - Rule: Separate NAC from copper/zinc by at least 2 hours (NAC is taken at wakeup or Sat/Sun medication buffer; copper/zinc are spaced later).
+
+5. Calcium Citrate vs. Bedtime Magnesium
+   - Goal: Avoid mineral competition.
+   - Conflict: Taking high doses of calcium (e.g., 3 capsules) too close to Magnesium Glycinate (less than 1.5 hours apart).
+   - What happens if messed up: Reduced absorption of your nighttime magnesium, potentially leading to muscle tightness or poorer sleep quality.
+   - Rule: Keep them separated. Your lunchtime calcium has a 9-hour gap; your dinner calcium (Thurs/Sat) has a safe 2-hour gap.
+
+6. Calcium Citrate vs. Adderall IR (Saturdays & Sundays)
+   - Goal: Avoid absorption spikes and heart rate volatility.
+   - Conflict: Taking calcium capsules within 2 hours of taking your Adderall.
+   - What happens if messed up: Calcium can transiently alkalinize your stomach/urinary pH, which dramatically speeds up Adderall absorption and slows down excretion, causing a sudden heart rate spike, jitteriness, or an abrupt crash.
+   - Rule: Keep calcium at least 3 hours away from your morning Adderall dose.
+
+7. Psyllium Husk (Soluble Fiber) vs. Any Supplement
+   - Goal: Prevent nutrient trapping.
+   - Conflict: Taking supplements/medication at the same time or within 1 hour after your fiber drink.
+   - What happens if messed up: Soluble fiber forms a thick gel in your gut that physically traps vitamins and minerals, carrying them out of your body unabsorbed.
+   - Rule: Always take supplements at least 1 hour *before* or 2 hours *after* drinking psyllium husk.

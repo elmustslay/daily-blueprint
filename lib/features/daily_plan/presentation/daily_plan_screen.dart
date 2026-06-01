@@ -159,6 +159,45 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     Future.delayed(const Duration(milliseconds: 400), _scrollToCurrentTime);
   }
 
+  void _showReasoningDialog() async {
+    try {
+      final content = await rootBundle.loadString('docs/reasoning.txt');
+      if (!mounted) return;
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.blueAccent),
+              SizedBox(width: 8),
+              Text('Supplement Info & Conflicts', style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              child: SelectableText(
+                content,
+                style: const TextStyle(fontSize: 13, fontFamily: 'monospace', color: Colors.white70),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Close'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error loading reasoning file: $e')),
+      );
+    }
+  }
+
   void _scrollToCurrentTime() {
     if (!mounted) return;
     int dayIndex = _tabController.index;
@@ -245,7 +284,17 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: displayDays.map((d) => Tab(text: d)).toList(),
+          tabs: displayDays.map((d) {
+            if (d == 'Nutrition') {
+              return Tab(
+                child: GestureDetector(
+                  onLongPress: _showReasoningDialog,
+                  child: Text(d),
+                ),
+              );
+            }
+            return Tab(text: d);
+          }).toList(),
         ),
       ),
       body: TabBarView(
