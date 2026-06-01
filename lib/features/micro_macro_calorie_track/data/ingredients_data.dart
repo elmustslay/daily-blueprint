@@ -15,29 +15,29 @@ class IngredientsData {
         'Sodium (mg)': 260,
         'Potassium (mg)': 1880,
         'Fiber (g)': 8,
-        'Calcium (mg)': 320,
-        'Iron (mg)': 9.2,
+        'Calcium (Food) (mg)': 320,
+        'Iron (Food) (mg)': 9.2,
         'Magnesium (mg)': 268, // #this is default assumed value 
-        'Vitamin A (mcg)': 1580, // #this is default assumed value
-        'Zinc (mg)': 0.6, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 1580, // #this is default assumed value
+        'Zinc (Food) (mg)': 0.6, // #this is default assumed value
       
         'Copper (mg)': 0.44, // #this is default assumed value
-        'Selenium (mcg)': 3.4, // #this is default assumed value
+        'Selenium (Food) (mcg)': 3.4, // #this is default assumed value
         'Vitamin C (mg)': 95, // #this is default assumed value
         'Vitamin K (mcg)': 1640, // #this is default assumed value
-        'Vitamin E (mg)': 6.9, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 6.9, // #this is default assumed value
         'Vitamin B12 (mcg)': 0, // #this is default assumed value
         'Thiamin (mg)': 0.26, // #this is default assumed value
         'Riboflavin (mg)': 0.64, // #this is default assumed value
         'Niacin (mg)': 2.4, // #this is default assumed value
         'Vitamin B5 (mg)': 0.22, // #this is default assumed value
         'Vitamin B6 (mg)': 0.66, // #this is default assumed value
-        'Natural Folate (mcg)': 660, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 660, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 65, // #this is default assumed value
-        'Tyrosine (mg)': 340, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 340, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -56,27 +56,27 @@ class IngredientsData {
         'Fiber (g)': 11,
         'Sugar (g)': 6,
         'Sodium (mg)': 1320,
-        'Calcium (mg)': 195,
-        'Iron (mg)': 6.12,
-        'Vitamin A (mcg)': 108,
+        'Calcium (Food) (mg)': 195,
+        'Iron (Food) (mg)': 6.12,
+        'Vitamin A (Food) (mcg)': 108,
         'Vitamin C (mg)': 115.2,
         'Potassium (mg)': 1245.5, // #this is default assumed value
         'Magnesium (mg)': 193.0, // #this is default assumed value
-        'Zinc (mg)': 6.5, // #this is default assumed value
+        'Zinc (Food) (mg)': 6.5, // #this is default assumed value
         'Copper (mg)': 0.71, // #this is default assumed value
-        'Selenium (mcg)': 71.6, // #this is default assumed value
+        'Selenium (Food) (mcg)': 71.6, // #this is default assumed value
         'Vitamin K (mcg)': 13.6, // #this is default assumed value
-        'Vitamin E (mg)': 2.5, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 2.5, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.9, // #this is default assumed value
         'Thiamin (mg)': 0.64, // #this is default assumed value
         'Riboflavin (mg)': 0.6, // #this is default assumed value
         'Niacin (mg)': 17.2, // #this is default assumed value
         'Vitamin B5 (mg)': 3.6, // #this is default assumed value
         'Vitamin B6 (mg)': 1.4, // #this is default assumed value
-        'Natural Folate (mcg)': 219.7, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 219.7, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 199.5, // #this is default assumed value
-        'Tyrosine (mg)': 2180, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 2180, // #this is default assumed value
       },
     ),
   );
@@ -95,30 +95,30 @@ class IngredientsData {
         'Sodium (mg)': 71,
         'Potassium (mg)': 69,
         'Magnesium (mg)': 6,
-        'Calcium (mg)': 28,
-        'Iron (mg)': 0.9,
-        'Vitamin A (mcg)': 80,
-        'Zinc (mg)': 0.6, // #this is default assumed value
-        'Total Omega-3 (mg)': 30, // #this is default assumed value
-        'Selenium (mcg)': 15.4, // #this is default assumed value
-        'Tyrosine (mg)': 250, // #this is default assumed value
+        'Calcium (Food) (mg)': 28,
+        'Iron (Food) (mg)': 0.9,
+        'Vitamin A (Food) (mcg)': 80,
+        'Zinc (Food) (mg)': 0.6, // #this is default assumed value
+        'Total Omega-3 (Food) (mg)': 30, // #this is default assumed value
+        'Selenium (Food) (mcg)': 15.4, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 250, // #this is default assumed value
       
         'Copper (mg)': 0.04, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 1, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 1, // #this is default assumed value
         'Vitamin K (mcg)': 0.1, // #this is default assumed value
-        'Vitamin E (mg)': 0.5, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0.5, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.4, // #this is default assumed value
         'Thiamin (mg)': 0.02, // #this is default assumed value
         'Riboflavin (mg)': 0.2, // #this is default assumed value
         'Niacin (mg)': 0.03, // #this is default assumed value
         'Vitamin B5 (mg)': 0.7, // #this is default assumed value
         'Vitamin B6 (mg)': 0.08, // #this is default assumed value
-        'Natural Folate (mcg)': 24, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 24, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 147, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 30, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 30, // #this is default assumed value
       },
     ), // #default value
   );
@@ -139,28 +139,28 @@ class IngredientsData {
       
         'Potassium (mg)': 0, // #this is default assumed value
         'Magnesium (mg)': 0, // #this is default assumed value
-        'Calcium (mg)': 0, // #this is default assumed value
-        'Iron (mg)': 0, // #this is default assumed value
-        'Zinc (mg)': 0, // #this is default assumed value
+        'Calcium (Food) (mg)': 0, // #this is default assumed value
+        'Iron (Food) (mg)': 0, // #this is default assumed value
+        'Zinc (Food) (mg)': 0, // #this is default assumed value
         'Copper (mg)': 0, // #this is default assumed value
-        'Selenium (mcg)': 0, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 0, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 1.9, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 1.9, // #this is default assumed value
         'Vitamin B12 (mcg)': 0, // #this is default assumed value
         'Thiamin (mg)': 0, // #this is default assumed value
         'Riboflavin (mg)': 0, // #this is default assumed value
         'Niacin (mg)': 0, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Natural Folate (mcg)': 0, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 0, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 0, // #this is default assumed value
-        'Tyrosine (mg)': 0, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 0, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -180,28 +180,28 @@ class IngredientsData {
         'Potassium (mg)': 422,
         'Magnesium (mg)': 32,
       
-        'Calcium (mg)': 6, // #this is default assumed value
-        'Iron (mg)': 0.3, // #this is default assumed value
-        'Zinc (mg)': 0.2, // #this is default assumed value
+        'Calcium (Food) (mg)': 6, // #this is default assumed value
+        'Iron (Food) (mg)': 0.3, // #this is default assumed value
+        'Zinc (Food) (mg)': 0.2, // #this is default assumed value
         'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 1.2, // #this is default assumed value
-        'Vitamin A (mcg)': 3, // #this is default assumed value
+        'Selenium (Food) (mcg)': 1.2, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 3, // #this is default assumed value
         'Vitamin C (mg)': 10, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0.6, // #this is default assumed value
-        'Vitamin E (mg)': 0.1, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0.1, // #this is default assumed value
         'Vitamin B12 (mcg)': 0, // #this is default assumed value
         'Thiamin (mg)': 0.04, // #this is default assumed value
         'Riboflavin (mg)': 0.09, // #this is default assumed value
         'Niacin (mg)': 0.8, // #this is default assumed value
         'Vitamin B5 (mg)': 0.4, // #this is default assumed value
         'Vitamin B6 (mg)': 0.43, // #this is default assumed value
-        'Natural Folate (mcg)': 24, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 24, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 12, // #this is default assumed value
-        'Tyrosine (mg)': 10, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 10, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ), // #default value
   );
@@ -219,9 +219,9 @@ class IngredientsData {
         'Fiber (g)': 4,
         'Soluble Fiber (g)': 4,
         'Sodium (mg)': 0,
-        'Iron (mg)': 1.8,
+        'Iron (Supplement) (mg)': 1.8,
         'Potassium (mg)': 46,
-        'Calcium (mg)': 11,
+        'Calcium (Supplement) (mg)': 11,
       },
     ),
   );
@@ -241,28 +241,28 @@ class IngredientsData {
         'Sodium (mg)': 320,
         'Potassium (mg)': 1504,
         'Magnesium (mg)': 130,
-        'Vitamin D3 (mcg)': 64,
-        'Vitamin A (mcg)': 200,
+        'Vitamin D3 (Food) (mcg)': 64,
+        'Vitamin A (Food) (mcg)': 200,
         'Vitamin B12 (mcg)': 20,
-        'Iron (mg)': 2.88,
-        'EPA (mg)': 2100, // #this is default assumed value
-        'DHA (mg)': 3937, // #this is default assumed value
-        'Total Omega-3 (mg)': 6037, // #this is default assumed value
-        'Zinc (mg)': 2.0, // #this is default assumed value
-        'Selenium (mcg)': 180, // #this is default assumed value
-        'Tyrosine (mg)': 5284, // #this is default assumed value
+        'Iron (Food) (mg)': 2.88,
+        'EPA (Food) (mg)': 2100, // #this is default assumed value
+        'DHA (Food) (mg)': 3937, // #this is default assumed value
+        'Total Omega-3 (Food) (mg)': 6037, // #this is default assumed value
+        'Zinc (Food) (mg)': 2.0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 180, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 5284, // #this is default assumed value
       
         'Copper (mg)': 0.3, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0.5, // #this is default assumed value
-        'Vitamin E (mg)': 6, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 6, // #this is default assumed value
         'Thiamin (mg)': 0.9, // #this is default assumed value
         'Riboflavin (mg)': 1.7, // #this is default assumed value
         'Niacin (mg)': 38, // #this is default assumed value
         'Vitamin B5 (mg)': 7.5, // #this is default assumed value
         'Vitamin B6 (mg)': 3.1, // #this is default assumed value
-        'Natural Folate (mcg)': 113, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 113, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 400, // #this is default assumed value
       },
     ),
@@ -283,31 +283,31 @@ class IngredientsData {
         'Sodium (mg)': 85,
         'Fiber (g)': 0,
         'Sugar (g)': 1,
-        'Calcium (mg)': 110,
-        'Iron (mg)': 0.2,
+        'Calcium (Food) (mg)': 110,
+        'Iron (Food) (mg)': 0.2,
         'Potassium (mg)': 120,
-        'Tyrosine (mg)': 900, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 900, // #this is default assumed value
       
         'Magnesium (mg)': 25, // #this is default assumed value
-        'Zinc (mg)': 0.2, // #this is default assumed value
+        'Zinc (Food) (mg)': 0.2, // #this is default assumed value
         'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 5, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 5, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 0, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.3, // #this is default assumed value
         'Thiamin (mg)': 0, // #this is default assumed value
         'Riboflavin (mg)': 0.2, // #this is default assumed value
         'Niacin (mg)': 0, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Natural Folate (mcg)': 0, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 0, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 60, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -342,30 +342,30 @@ class IngredientsData {
         'Cholesterol (mg)': 20,
         'Fiber (g)': 1,
         'Sugar (g)': 1,
-        'Calcium (mg)': 580,
-        'Iron (mg)': 1.3,
+        'Calcium (Food) (mg)': 580,
+        'Iron (Food) (mg)': 1.3,
         'Potassium (mg)': 200,
-        'Tyrosine (mg)': 1300, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 1300, // #this is default assumed value
       
-        'Zinc (mg)': 1, // #this is default assumed value
+        'Zinc (Food) (mg)': 1, // #this is default assumed value
         'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 8, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 8, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 0, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.5, // #this is default assumed value
         'Thiamin (mg)': 0, // #this is default assumed value
         'Riboflavin (mg)': 0.3, // #this is default assumed value
         'Niacin (mg)': 0.1, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Natural Folate (mcg)': 0, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 0, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 80, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -385,31 +385,31 @@ class IngredientsData {
         'Monounsaturated Fat (g)': 0.2,
         'Fiber (g)': 4,
         'Sugar (g)': 0,
-        'Calcium (mg)': 78,
-        'Iron (mg)': 1.08,
+        'Calcium (Food) (mg)': 78,
+        'Iron (Food) (mg)': 1.08,
         'Potassium (mg)': 37.6,
-        'Total Omega-3 (mg)': 1800, // #this is default assumed value
+        'Total Omega-3 (Food) (mg)': 1800, // #this is default assumed value
       
-        'Zinc (mg)': 0.5, // #this is default assumed value
+        'Zinc (Food) (mg)': 0.5, // #this is default assumed value
         'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 5.5, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 5.5, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0.2, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 0.1, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0.1, // #this is default assumed value
         'Vitamin B12 (mcg)': 0, // #this is default assumed value
         'Thiamin (mg)': 0.06, // #this is default assumed value
         'Riboflavin (mg)': 0.02, // #this is default assumed value
         'Niacin (mg)': 0.9, // #this is default assumed value
         'Vitamin B5 (mg)': 0, // #this is default assumed value
         'Vitamin B6 (mg)': 0, // #this is default assumed value
-        'Natural Folate (mcg)': 5, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 5, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 8, // #this is default assumed value
-        'Tyrosine (mg)': 40, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 40, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -428,30 +428,30 @@ class IngredientsData {
         'Sodium (mg)': 0,
         'Fiber (g)': 12,
         'Sugar (g)': 4,
-        'Calcium (mg)': 80,
-        'Iron (mg)': 7.6,
+        'Calcium (Food) (mg)': 80,
+        'Iron (Food) (mg)': 7.6,
         'Potassium (mg)': 960,
       
-        'Zinc (mg)': 1.3, // #this is default assumed value
+        'Zinc (Food) (mg)': 1.3, // #this is default assumed value
         'Copper (mg)': 0.25, // #this is default assumed value
-        'Selenium (mcg)': 3.6, // #this is default assumed value
-        'Vitamin A (mcg)': 1, // #this is default assumed value
+        'Selenium (Food) (mcg)': 3.6, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 1, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 1, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 1, // #this is default assumed value
         'Vitamin B12 (mcg)': 0, // #this is default assumed value
         'Thiamin (mg)': 0.15, // #this is default assumed value
         'Riboflavin (mg)': 0.13, // #this is default assumed value
         'Niacin (mg)': 0.6, // #this is default assumed value
         'Vitamin B5 (mg)': 0.3, // #this is default assumed value
         'Vitamin B6 (mg)': 0.2, // #this is default assumed value
-        'Natural Folate (mcg)': 78, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 78, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 30, // #this is default assumed value
-        'Tyrosine (mg)': 150, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 150, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -477,8 +477,8 @@ class IngredientsData {
         'Fiber (g)': 12.0,
         'Sugar (g)': 0.0,
         'Added Sugar (g)': 0.0,
-        'Calcium (mg)': 0.0,
-        'Iron (mg)': 0.35,
+        'Calcium (Food) (mg)': 0.0,
+        'Iron (Food) (mg)': 0.35,
         'Potassium (mg)': 0.0,
       },
     ),
@@ -494,32 +494,32 @@ class IngredientsData {
       carbs: 0,
       fat: 32,
       microNutrients: {
-        'Iron (mg)': 4.4,
+        'Iron (Food) (mg)': 4.4,
         'Sodium (mg)': 300,
         'Potassium (mg)': 920,
-        'Zinc (mg)': 10.0, // #this is default assumed value
+        'Zinc (Food) (mg)': 10.0, // #this is default assumed value
         'Magnesium (mg)': 110, // #this is default assumed value
         'Vitamin B12 (mcg)': 6.0, // #this is default assumed value
-        'Tyrosine (mg)': 5171, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 5171, // #this is default assumed value
       
-        'Calcium (mg)': 65, // #this is default assumed value
+        'Calcium (Food) (mg)': 65, // #this is default assumed value
         'Copper (mg)': 0.3, // #this is default assumed value
-        'Selenium (mcg)': 110, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 110, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 1, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 1, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 1.5, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 1.5, // #this is default assumed value
         'Thiamin (mg)': 0.2, // #this is default assumed value
         'Riboflavin (mg)': 0.8, // #this is default assumed value
         'Niacin (mg)': 28, // #this is default assumed value
         'Vitamin B5 (mg)': 4, // #this is default assumed value
         'Vitamin B6 (mg)': 2, // #this is default assumed value
-        'Natural Folate (mcg)': 30, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 30, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 350, // #this is default assumed value
-        'EPA (mg)': 10, // #this is default assumed value
-        'DHA (mg)': 10, // #this is default assumed value
+        'EPA (Food) (mg)': 10, // #this is default assumed value
+        'DHA (Food) (mg)': 10, // #this is default assumed value
       },
     ),
   );
@@ -537,31 +537,31 @@ class IngredientsData {
         'Saturated Fat (g)': 8,
         'Cholesterol (mg)': 240,
         'Sodium (mg)': 260,
-        'Iron (mg)': 10.8,
-        'Zinc (mg)': 25.0, // #this is default assumed value
+        'Iron (Food) (mg)': 10.8,
+        'Zinc (Food) (mg)': 25.0, // #this is default assumed value
         'Magnesium (mg)': 100, // #this is default assumed value
         'Vitamin B12 (mcg)': 11.0, // #this is default assumed value
         'Potassium (mg)': 1500, // #this is default assumed value
-        'Selenium (mcg)': 112, // #this is default assumed value
-        'Tyrosine (mg)': 4717, // #this is default assumed value
+        'Selenium (Food) (mcg)': 112, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 4717, // #this is default assumed value
       
-        'Calcium (mg)': 30, // #this is default assumed value
+        'Calcium (Food) (mg)': 30, // #this is default assumed value
         'Copper (mg)': 0.3, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 4, // #this is default assumed value
-        'Vitamin E (mg)': 1.5, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 1.5, // #this is default assumed value
         'Thiamin (mg)': 0.2, // #this is default assumed value
         'Riboflavin (mg)': 0.9, // #this is default assumed value
         'Niacin (mg)': 25, // #this is default assumed value
         'Vitamin B5 (mg)': 2.5, // #this is default assumed value
         'Vitamin B6 (mg)': 1.8, // #this is default assumed value
-        'Natural Folate (mcg)': 35, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 35, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 370, // #this is default assumed value
-        'EPA (mg)': 15, // #this is default assumed value
-        'DHA (mg)': 10, // #this is default assumed value
+        'EPA (Food) (mg)': 15, // #this is default assumed value
+        'DHA (Food) (mg)': 10, // #this is default assumed value
       },
     ),
   );
@@ -599,31 +599,31 @@ static const Ingredient marinaraSauce = Ingredient(
       'Fiber (g)': 0.4536,
       'Sugar (g)': 1.3608,
       'Added Sugar (g)': 0.2268,
-      'Calcium (mg)': 9.0718,
-      'Iron (mg)': 0.1361,
+      'Calcium (Food) (mg)': 9.0718,
+      'Iron (Food) (mg)': 0.1361,
       'Potassium (mg)': 95.2544,
     
       'Magnesium (mg)': 3.17, // #this is default assumed value
-      'Zinc (mg)': 0.05, // #this is default assumed value
+      'Zinc (Food) (mg)': 0.05, // #this is default assumed value
       'Copper (mg)': 0.03, // #this is default assumed value
-      'Selenium (mcg)': 0.1, // #this is default assumed value
-      'Vitamin A (mcg)': 11.0, // #this is default assumed value
+      'Selenium (Food) (mcg)': 0.1, // #this is default assumed value
+      'Vitamin A (Food) (mcg)': 11.0, // #this is default assumed value
       'Vitamin C (mg)': 1.6, // #this is default assumed value
-      'Vitamin D3 (mcg)': 0.0, // #this is default assumed value
+      'Vitamin D3 (Food) (mcg)': 0.0, // #this is default assumed value
       'Vitamin K (mcg)': 1.2, // #this is default assumed value
-      'Vitamin E (mg)': 0.35, // #this is default assumed value
+      'Vitamin E (Food) (mg)': 0.35, // #this is default assumed value
       'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
       'Thiamin (mg)': 0.01, // #this is default assumed value
       'Riboflavin (mg)': 0.02, // #this is default assumed value
       'Niacin (mg)': 0.27, // #this is default assumed value
       'Vitamin B5 (mg)': 0.09, // #this is default assumed value
       'Vitamin B6 (mg)': 0.03, // #this is default assumed value
-      'Natural Folate (mcg)': 2.2, // #this is default assumed value
-      'Synthetic Folic Acid (mcg)': 0.0, // #this is default assumed value
+      'Folate (Food) (mcg)': 2.2, // #this is default assumed value
+      'Folic Acid (Supplement) (mcg)': 0.0, // #this is default assumed value
       'Choline (mg)': 2.72, // #this is default assumed value
-      'Tyrosine (mg)': 10.8, // #this is default assumed value
-      'EPA (mg)': 0.0, // #this is default assumed value
-      'DHA (mg)': 0.0, // #this is default assumed value
+      'Tyrosine (Food) (mg)': 10.8, // #this is default assumed value
+      'EPA (Food) (mg)': 0.0, // #this is default assumed value
+      'DHA (Food) (mg)': 0.0, // #this is default assumed value
     },
   ),
 );
@@ -643,31 +643,31 @@ static const Ingredient marinaraSauce = Ingredient(
         'Fiber (g)': 10.5,
         'Sugar (g)': 0.0,
         'Added Sugar (g)': 0.0,
-        'Calcium (mg)': 70.0,
-        'Iron (mg)': 5.95,
+        'Calcium (Food) (mg)': 70.0,
+        'Iron (Food) (mg)': 5.95,
         'Potassium (mg)': 700.0,
         
         'Magnesium (mg)': 350.0, // #this is default assumed value
-        'Zinc (mg)': 13.3, // #this is default assumed value
+        'Zinc (Food) (mg)': 13.3, // #this is default assumed value
         'Copper (mg)': 0.88, // #this is default assumed value
-        'Selenium (mcg)': 10.5, // #this is default assumed value
-        'Vitamin A (mcg)': 0.0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 10.5, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0.0, // #this is default assumed value
         'Vitamin C (mg)': 3.5, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0.0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0.0, // #this is default assumed value
         'Vitamin K (mcg)': 5.95, // #this is default assumed value
-        'Vitamin E (mg)': 0.35, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0.35, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
         'Thiamin (mg)': 0.56, // #this is default assumed value
         'Riboflavin (mg)': 0.25, // #this is default assumed value
         'Niacin (mg)': 3.5, // #this is default assumed value
         'Vitamin B5 (mg)': 2.1, // #this is default assumed value
         'Vitamin B6 (mg)': 0.6, // #this is default assumed value
-        'Natural Folate (mcg)': 630.0, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0.0, // #this is default assumed value
+        'Folate (Food) (mcg)': 630.0, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0.0, // #this is default assumed value
         'Choline (mg)': 105.0, // #this is default assumed value
-        'Tyrosine (mg)': 700.0, // #this is default assumed value
-        'EPA (mg)': 0.0, // #this is default assumed value
-        'DHA (mg)': 0.0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 700.0, // #this is default assumed value
+        'EPA (Food) (mg)': 0.0, // #this is default assumed value
+        'DHA (Food) (mg)': 0.0, // #this is default assumed value
       },
     ),
   );
@@ -685,31 +685,31 @@ static const Ingredient marinaraSauce = Ingredient(
         'Sodium (mg)': 10,
         'Fiber (g)': 1,
         'Sugar (g)': 0,
-        'Iron (mg)': 0.3,
+        'Iron (Food) (mg)': 0.3,
         'Potassium (mg)': 100,
         'Thiamin (mg)': 3.82,
         'Riboflavin (mg)': 3.35,
         'Niacin (mg)': 16.6,
         'Vitamin B6 (mg)': 2.21,
-        'Natural Folate (mcg)': 0, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 605, // #this is default assumed value
+        'Folate (Food) (mcg)': 0, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 605, // #this is default assumed value
         'Vitamin B12 (mcg)': 4.48,
-        'Zinc (mg)': 0.6,
+        'Zinc (Food) (mg)': 0.6,
       
         'Magnesium (mg)': 15, // #this is default assumed value
-        'Calcium (mg)': 5, // #this is default assumed value
+        'Calcium (Food) (mg)': 5, // #this is default assumed value
         'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 2, // #this is default assumed value
-        'Vitamin A (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 2, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 0, // #this is default assumed value
-        'Vitamin E (mg)': 0, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 0, // #this is default assumed value
         'Vitamin B5 (mg)': 1.5, // #this is default assumed value
         'Choline (mg)': 10, // #this is default assumed value
-        'Tyrosine (mg)': 100, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 100, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -727,29 +727,29 @@ static const Ingredient marinaraSauce = Ingredient(
         'Vitamin C (mg)': 152,
         'Fiber (g)': 2.5,
         'Potassium (mg)': 211,
-        'Vitamin A (mcg)': 1100,
+        'Vitamin A (Food) (mcg)': 1100,
       
         'Magnesium (mg)': 12, // #this is default assumed value
-        'Calcium (mg)': 8, // #this is default assumed value
-        'Iron (mg)': 0.5, // #this is default assumed value
-        'Zinc (mg)': 0.3, // #this is default assumed value
+        'Calcium (Food) (mg)': 8, // #this is default assumed value
+        'Iron (Food) (mg)': 0.5, // #this is default assumed value
+        'Zinc (Food) (mg)': 0.3, // #this is default assumed value
         'Copper (mg)': 0.1, // #this is default assumed value
-        'Selenium (mcg)': 0.1, // #this is default assumed value
-        'Vitamin D3 (mcg)': 0, // #this is default assumed value
+        'Selenium (Food) (mcg)': 0.1, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
         'Vitamin K (mcg)': 5.8, // #this is default assumed value
-        'Vitamin E (mg)': 1.8, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 1.8, // #this is default assumed value
         'Vitamin B12 (mcg)': 0, // #this is default assumed value
         'Thiamin (mg)': 0.06, // #this is default assumed value
         'Riboflavin (mg)': 0.1, // #this is default assumed value
         'Niacin (mg)': 1.1, // #this is default assumed value
         'Vitamin B5 (mg)': 0.3, // #this is default assumed value
         'Vitamin B6 (mg)': 0.3, // #this is default assumed value
-        'Natural Folate (mcg)': 54, // #this is default assumed value
-        'Synthetic Folic Acid (mcg)': 0, // #this is default assumed value
+        'Folate (Food) (mcg)': 54, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
         'Choline (mg)': 6, // #this is default assumed value
-        'Tyrosine (mg)': 15, // #this is default assumed value
-        'EPA (mg)': 0, // #this is default assumed value
-        'DHA (mg)': 0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 15, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
       },
     ),
   );
@@ -762,7 +762,7 @@ static const Ingredient marinaraSauce = Ingredient(
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
         'NAC (mg)': 600,
-        'Selenium (mcg)': 25,
+        'Selenium (Supplement) (mcg)': 25,
       },
     ),
   );
@@ -787,7 +787,7 @@ static const Ingredient marinaraSauce = Ingredient(
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
         'Citicoline (mg)': 250,
-        'Tyrosine (mg)': 25,
+        'Tyrosine (Supplement) (mg)': 25,
       },
     ),
   );
@@ -821,9 +821,9 @@ static const Ingredient marinaraSauce = Ingredient(
       carbs: 0,
       fat: 1.17,
       microNutrients: {
-        'EPA (mg)': 433.3,
-        'DHA (mg)': 286.7,
-        'Total Omega-3 (mg)': 720,
+        'EPA (Supplement) (mg)': 433.3,
+        'DHA (Supplement) (mg)': 286.7,
+        'Total Omega-3 (Supplement) (mg)': 720,
       },
     ),
   );
@@ -834,7 +834,7 @@ static const Ingredient marinaraSauce = Ingredient(
     baseUnit: 'capsule',
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
-        'Zinc (mg)': 30,
+        'Zinc (Supplement) (mg)': 30,
       },
     ),
   );
@@ -845,7 +845,7 @@ static const Ingredient marinaraSauce = Ingredient(
     baseUnit: 'capsule',
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
-        'Vitamin D3 (mcg)': 125,
+        'Vitamin D3 (Supplement) (mcg)': 125,
         'Vitamin K2 (mcg)': 100,
       },
     ),
@@ -891,7 +891,7 @@ static const Ingredient marinaraSauce = Ingredient(
     baseUnit: 'capsule',
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
-        'Vitamin E (mg)': 267,
+        'Vitamin E (Supplement) (mg)': 267,
       },
     ),
   );
@@ -902,7 +902,7 @@ static const Ingredient marinaraSauce = Ingredient(
     baseUnit: 'capsule',
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
-        'Calcium (mg)': 146.66,
+        'Calcium (Supplement) (mg)': 146.66,
       },
     ),
   );
