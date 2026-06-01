@@ -478,7 +478,7 @@ class DailyPlanData {
       _salmonDinner('6:45-7:30 pm'),
       _chores('7:30-8:15 pm'),
       _bedPrep('8:15-9:00 pm', cetirizine: true),
-      _nightSupplement('9:00-10:30 pm', magAmount: 2, skincare: _bha),
+      _nightSupplement('9:00-10:30 pm', magAmount: 2, skincare: _joseon),
       _fallAsleep('10:30-11:00 pm'),
     ],
     wed: [
@@ -545,7 +545,7 @@ class DailyPlanData {
       _chores('8:00-8:30 pm'),
       _study('8:30-9:30 pm', cetirizine: true),
       _bedPrep('9:30-10:00 pm'),
-      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
+      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
       _fallAsleep('10:30-11:00 pm'),
     ],
     sat: [
