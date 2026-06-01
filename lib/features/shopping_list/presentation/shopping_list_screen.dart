@@ -28,7 +28,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Produce
       ShoppingItem(id: 'prod-3', name: 'Bell Peppers', subtext: '2 pack (6)'),
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
-      ShoppingItem(id: 'prod-7', name: 'Bananas', subtext: '1 bunch (need 4/week)'),
+      ShoppingItem(id: 'prod-7', name: 'Bananas', subtext: '2 bunches (need 8/week)'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),
@@ -38,7 +38,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'dairy-1', name: 'Eggs', subtext: '1.5 dozen (need 18/week)'),
 
       // Others
-      ShoppingItem(id: 'oth-1', name: 'Canned Lentils', subtext: '2 containers'),
       ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1 box (need 12oz)'),
       ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (need 1 cup)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 jar (48 oz)'),

@@ -53,8 +53,10 @@ class DailyPlanData {
   static const String sat = 'sat';
   static const String sun = 'sun';
 
+  static DateTime? mockCurrentDate;
+
   static int get _currentWeekNumber {
-    final now = DateTime.now();
+    final now = mockCurrentDate ?? DateTime.now();
     final diff = now.difference(planStartDate).inDays;
     if (diff < 0) return 0;
     return (diff ~/ 7) + 1;
@@ -144,7 +146,17 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _grabThings(String time, {bool zinc = false, int eggs = 3, bool banana = true, bool husk = false}) {
+  static TimelineItem _grabThings(String time, {
+    bool zinc = false,
+    int eggs = 3,
+    int bananas = 1,
+    bool husk = false,
+    int calciumCaps = 0,
+  }) {
+    final List<String> supplements = ['D3/K2', 'K2', 'Omega-3', 'Biotin+Keratin'];
+    if (zinc) supplements.add('Zinc Picolinate');
+    if (calciumCaps > 0) supplements.add('Calcium Citrate');
+
     return TimelineItem(
       time: time,
       title: 'Grab things to take to work',
@@ -158,9 +170,9 @@ class DailyPlanData {
         'sunscreen',
         'Pasta lunch',
         '$eggs Boiled Eggs',
-        zinc ? 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin, Zinc Picolinate)' : 'Supplements (D3/K2, 1 K2, Omega-3, Biotin+Keratin)',
+        'Supplements (${supplements.join(", ")})',
         if (husk) 'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt',
-        if (banana) '1 banana',
+        if (bananas > 0) '${bananas == 1 ? "1 banana" : "$bananas bananas"}',
         'water bottle'
       ],
     );
@@ -251,7 +263,7 @@ class DailyPlanData {
           if (vitaminE) '1 softgel Vitamin E (267mg)',
         ],
         if (zinc) '1 cap Zinc Picolinate (30mg)',
-        if (whey) '1 scoop whey isolate (30g protein)',
+        if (whey) '1.5 scoops whey isolate (45g protein)',
         if (whey) '1 scoop creatine monohydrate (5g)',
       ],
       mealRecord: MealRecord(items: [
@@ -259,7 +271,7 @@ class DailyPlanData {
         if (vitamins) ..._Portions.coreVitamins,
         if (vitamins && vitaminE) _Portions.vitaminE,
         if (zinc) _Portions.zinc,
-        if (whey) _Portions.whey,
+        if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1.5),
         if (whey) _Portions.creatine,
       ]),
     );
@@ -396,9 +408,23 @@ class DailyPlanData {
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
   static const String _sunscreen = 'Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
 
-  static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener';
-  static const String _laundryBathTowels = 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + 1/3 cup Bleach + EXTRA RINSE';
+  static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener (Dry on LOW heat)';
+  static String get _laundryBathTowels => 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + ${_currentWeekNumber % 2 == 0 ? "1/3 cup Bleach" : "OxiClean"} + EXTRA RINSE (Dry on LOW heat)';
   static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness + OxiClean)';
+
+  static TimelineItem _preWorkoutBanana1(String time) {
+    return TimelineItem(
+      time: time,
+      title: 'Pre-Workout Banana 1',
+      icon: '🍌',
+      details: [
+        'Eat 1st banana (45m pre-workout)',
+      ],
+      mealRecord: const MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.banana, amount: 1)
+      ]),
+    );
+  }
 
   static TimelineItem _commuteToGym(String time, {bool preWorkoutBanana = false, bool applySunscreen = true}) {
     return TimelineItem(
@@ -407,7 +433,7 @@ class DailyPlanData {
       icon: '🚗',
       details: [
         if (applySunscreen) _sunscreen,
-        if (preWorkoutBanana) '1 banana (pre-workout)',
+        if (preWorkoutBanana) 'Eat 2nd banana (15m pre-workout)',
       ],
       mealRecord: preWorkoutBanana ? const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)]) : null,
     );
@@ -422,7 +448,9 @@ class DailyPlanData {
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true),
-      _work('4:00-5:00 pm'),
+      _work('4:00-4:45 pm'),
+      _preWorkoutBanana1('4:45-4:50 pm'),
+      _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
       _wheyCreatine('7:00-7:15 pm', title: 'Post-Workout'),
@@ -437,7 +465,7 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am', nac: true),
       _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningReading('8:15-8:30 am'),
-      _grabThings('8:30-8:35 am', zinc: false, eggs: 3, banana: false),
+      _grabThings('8:30-8:35 am', zinc: false, eggs: 3, bananas: 0, calciumCaps: 3),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
@@ -457,13 +485,15 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am', copper: true),
       _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:15-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
-      _grabThings('8:30-8:35 am', zinc: true),
+      _grabThings('8:30-8:35 am', zinc: true, bananas: 2),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
-      _work('3:45-5:00 pm'),
+      _work('3:45-4:45 pm'),
+      _preWorkoutBanana1('4:45-4:50 pm'),
+      _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
       _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
       _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
@@ -483,7 +513,9 @@ class DailyPlanData {
       _pastaLunch('12:00-12:30 pm', calciumCaps: 2),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
-      _work('3:45-5:15 pm'),
+      _work('3:45-4:45 pm'),
+      _preWorkoutBanana1('4:45-4:50 pm'),
+      _work('4:50-5:15 pm'),
       _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _wheyCreatine('7:15-7:30 pm', title: 'Post-Workout'),
@@ -497,13 +529,15 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am', copper: true),
       _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:15-8:30 am'),
-      _grabThings('8:30-8:35 am'),
+      _grabThings('8:30-8:35 am', bananas: 2),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3),
-      _work('3:45-5:00 pm'),
+      _work('3:45-4:45 pm'),
+      _preWorkoutBanana1('4:45-4:50 pm'),
+      _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
       _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
