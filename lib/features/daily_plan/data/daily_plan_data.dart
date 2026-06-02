@@ -408,9 +408,12 @@ class DailyPlanData {
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
   static const String _sunscreen = 'Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
 
-  static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp liquid detergent + OxiClean. NO Fabric Softener (Dry on LOW heat)';
-  static String get _laundryBathTowels => 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer + ${_currentWeekNumber % 2 == 0 ? "1/3 cup Bleach" : "OxiClean"} + EXTRA RINSE (Dry on LOW heat)';
-  static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness + OxiClean)';
+  static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp Arm&Hammer w/ OxiClean. NO Fabric Softener (Dry on LOW heat)';
+  static String get _laundryBathTowels {
+    final bool isBleachWeek = _currentWeekNumber % 2 == 0;
+    return 'Laundry Cycle 2: Bath Towels${isBleachWeek ? " & Washcloths" : ""} (5/5 warmness) -> 2 tbsp Arm&Hammer w/ OxiClean${isBleachWeek ? " + 1/3 cup Bleach" : ""} + EXTRA RINSE (Dry on LOW heat)';
+  }
+  static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> Arm&Hammer w/ OxiClean';
 
   static TimelineItem _preWorkoutBanana1(String time) {
     return TimelineItem(
