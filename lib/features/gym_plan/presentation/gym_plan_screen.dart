@@ -73,10 +73,10 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
     final weekday = DateTime.now().weekday;
     switch (weekday) {
       case DateTime.monday: return 0; // Upper A
-      case DateTime.wednesday: return 1; // Lower A
+      case DateTime.tuesday: return 1; // Lower A
       case DateTime.thursday: return 2; // Upper B
       case DateTime.friday: return 3; // Lower B
-      case DateTime.tuesday:
+      case DateTime.wednesday:
       case DateTime.saturday:
       case DateTime.sunday:
       default:
@@ -235,7 +235,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.4)),
                       ),
-                      child: const Text('Tue & Sat', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.blueAccent)),
+                      child: const Text('Wed & Sat', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.blueAccent)),
                     ),
                   ],
                 ),
@@ -370,7 +370,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
             '  If you normally Leg Press 200 lbs × 4 sets to failure\n'
             '  → This week: 200 lbs × 2 sets (stopping 2 reps early)\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            'CARDIO (Tue / Sat):\n'
+            'CARDIO (Wed / Sat):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
             '• Keep your 40-minute LISS schedule exactly same.\n'
             '• Since you track HR, just stay strictly in your target zone.\n'

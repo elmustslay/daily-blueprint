@@ -46,9 +46,9 @@ void main() {
     expect(bathTowelsDetailEven, contains('OxiClean'));
   });
 
-  test('Tuesday grab list contains Calcium Citrate capsules', () {
-    final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
-    final grabItem = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
+  test('Wednesday grab list contains Calcium Citrate capsules', () {
+    final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
+    final grabItem = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
     final supplementsDetail = grabItem.details.firstWhere((d) => d.startsWith('Supplements'));
 
     expect(supplementsDetail, contains('Calcium Citrate'));
@@ -57,24 +57,24 @@ void main() {
     expect(supplementsDetail, isNot(contains('1 K2')));
   });
 
-  test('Wednesday grab list does not contain Calcium Citrate capsules', () {
-    final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
-    final grabItem = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
+  test('Tuesday grab list does not contain Calcium Citrate capsules', () {
+    final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
+    final grabItem = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
     final supplementsDetail = grabItem.details.firstWhere((d) => d.startsWith('Supplements'));
 
     expect(supplementsDetail, isNot(contains('Calcium Citrate')));
   });
 
   test('Banana counts and presence in grab lists are correct', () {
-    // Tue: 0 bananas
+    // Tue: 2 bananas
     final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
     final tueGrab = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(tueGrab.details.any((d) => d.contains('banana')), isFalse);
+    expect(tueGrab.details, contains('2 bananas'));
 
-    // Wed: 2 bananas
+    // Wed: 0 bananas
     final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
     final wedGrab = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(wedGrab.details, contains('2 bananas'));
+    expect(wedGrab.details.any((d) => d.contains('banana')), isFalse);
 
     // Fri: 2 bananas
     final friSchedule = DailyPlanData.schedules[DailyPlanData.fri]!;
@@ -83,7 +83,7 @@ void main() {
   });
 
   test('Pre-workout banana schedule timing is correct on gym days', () {
-    for (final day in [DailyPlanData.mon, DailyPlanData.wed, DailyPlanData.thu, DailyPlanData.fri]) {
+    for (final day in [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.thu, DailyPlanData.fri]) {
       final schedule = DailyPlanData.schedules[day]!;
       
       // Banana 1 should be at 4:45 pm

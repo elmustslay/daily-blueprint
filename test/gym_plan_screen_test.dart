@@ -214,7 +214,7 @@ void main() {
     int expectedIndex;
     switch (weekday) {
       case DateTime.monday: expectedIndex = 0; break;
-      case DateTime.wednesday: expectedIndex = 1; break;
+      case DateTime.tuesday: expectedIndex = 1; break;
       case DateTime.thursday: expectedIndex = 2; break;
       case DateTime.friday: expectedIndex = 3; break;
       default: expectedIndex = 4; break;
