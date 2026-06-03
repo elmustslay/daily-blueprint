@@ -105,7 +105,7 @@ class DailyPlanData {
         'Shower: Hair (60s warm massage) -> Body (Bioderma Atoderm Cleansing Oil, 1.5 pumps upper / 1.5 pumps lower, BARE HANDS ONLY)',
         'Face & neck: Wet face with LUKEWARM water. Lather a half-pump of Lipikar AP+ in wet hands first, then glide over face with zero pressure for EXACTLY 20s -> Rinse',
         'Finish: 15s full-body cold shock',
-        'Pat face & neck completely bone-dry with clean Washcloth #1',
+        'Dab face & neck with clean Washcloth #1 so there is no dripping water (it does not have to be bone-dry, it is ok if ascorbyl gets foamy)',
         'Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s',
         skincare,
         'Apply deodorant',
@@ -406,7 +406,7 @@ class DailyPlanData {
   static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
-  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Press and lift oil) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
+  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp Arm&Hammer w/ OxiClean. NO Fabric Softener (Dry on LOW heat)';
   static String get _laundryBathTowels {

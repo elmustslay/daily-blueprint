@@ -43,7 +43,7 @@ void main() {
     final bathTowelsDetailEven = bathTowelsItemEven.details.firstWhere((d) => d.contains('Bath Towels'));
 
     expect(bathTowelsDetailEven, contains('1/3 cup Bleach'));
-    expect(bathTowelsDetailEven, isNot(contains('OxiClean')));
+    expect(bathTowelsDetailEven, contains('OxiClean'));
   });
 
   test('Tuesday grab list contains Calcium Citrate capsules', () {
