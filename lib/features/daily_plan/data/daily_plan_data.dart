@@ -75,6 +75,15 @@ class DailyPlanData {
     mon: 7, tue: 7, wed: 7, thu: 7, fri: 7, sat: 7, sun: 7,
   };
 
+  static List<String> getReminders(String dayKey) {
+    if (dayKey == wed) {
+      return ['🥩 Take ground beef out of freezer to thaw in fridge'];
+    } else if (dayKey == sun) {
+      return ['❄️ Put fresh ground beef into the freezer'];
+    }
+    return [];
+  }
+
   static TimelineItem _wakeup(String time, {bool nac = false, bool copper = false}) {
     return TimelineItem(
       time: time,

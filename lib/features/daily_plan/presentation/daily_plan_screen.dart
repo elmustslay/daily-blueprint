@@ -84,6 +84,10 @@ class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
       final tabWeekday = i + 1; // 1 to 7
 
       DateTime targetDate;
+      final differenceInDays = tabWeekday <= currentWeekday
+          ? (currentWeekday - tabWeekday)
+          : (7 - (tabWeekday - currentWeekday));
+
       if (tabWeekday <= currentWeekday) {
         targetDate = now.subtract(Duration(days: currentWeekday - tabWeekday));
       } else {
@@ -95,8 +99,8 @@ class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
       final savedTargetDateStr = prefs.getString('water_target_date_$dayKey');
       final bottlesCount = DailyPlanData.waterBottles[dayKey] ?? 0;
       
-      if (savedTargetDateStr != targetDateStr) {
-        // Target date changed (a week has passed for this specific day), clear data
+      if (savedTargetDateStr != targetDateStr || differenceInDays > 4) {
+        // Target date changed (a week has passed for this specific day) or > 4 days ago, clear data
         prefs.remove('water_$dayKey');
         prefs.setString('water_target_date_$dayKey', targetDateStr);
         stateMap[dayKey] = List.filled(bottlesCount, false);
@@ -127,6 +131,68 @@ class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
 
 final waterTrackerProvider = NotifierProvider<WaterTrackerNotifier, Map<String, List<bool>>>(WaterTrackerNotifier.new);
 
+class ReminderTrackerNotifier extends Notifier<Map<String, List<bool>>> {
+  @override
+  Map<String, List<bool>> build() {
+    final prefs = SharedPrefsLogic.instance;
+    final Map<String, List<bool>> stateMap = {};
+
+    final now = DateTime.now().subtract(const Duration(hours: 2));
+    final currentWeekday = now.weekday;
+
+    final List<String> dayKeys = [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.wed, DailyPlanData.thu, DailyPlanData.fri, DailyPlanData.sat, DailyPlanData.sun];
+
+    for (int i = 0; i < 7; i++) {
+      final dayKey = dayKeys[i];
+      final tabWeekday = i + 1; // 1 to 7
+
+      DateTime targetDate;
+      final differenceInDays = tabWeekday <= currentWeekday
+          ? (currentWeekday - tabWeekday)
+          : (7 - (tabWeekday - currentWeekday));
+
+      if (tabWeekday <= currentWeekday) {
+        targetDate = now.subtract(Duration(days: currentWeekday - tabWeekday));
+      } else {
+        targetDate = now.subtract(Duration(days: 7 - (tabWeekday - currentWeekday)));
+      }
+
+      final targetDateStr = '${targetDate.year}-${targetDate.month.toString().padLeft(2, '0')}-${targetDate.day.toString().padLeft(2, '0')}';
+      
+      final savedTargetDateStr = prefs.getString('reminders_target_date_$dayKey');
+      final remindersCount = DailyPlanData.getReminders(dayKey).length;
+      
+      if (savedTargetDateStr != targetDateStr || differenceInDays > 4) {
+        prefs.remove('reminders_$dayKey');
+        prefs.setString('reminders_target_date_$dayKey', targetDateStr);
+        stateMap[dayKey] = List.filled(remindersCount, false);
+      } else {
+        final keys = prefs.getStringList('reminders_$dayKey');
+        if (keys != null && keys.length == remindersCount) {
+          stateMap[dayKey] = keys.map((e) => e == 'true').toList();
+        } else {
+          stateMap[dayKey] = List.filled(remindersCount, false);
+        }
+      }
+    }
+
+    return stateMap;
+  }
+
+  void toggleReminder(String dayKey, int index) {
+    if (!state.containsKey(dayKey)) return;
+    final newStateMap = Map<String, List<bool>>.from(state);
+    final dayList = List<bool>.from(newStateMap[dayKey]!);
+    dayList[index] = !dayList[index];
+    newStateMap[dayKey] = dayList;
+    state = newStateMap;
+    
+    SharedPrefsLogic.instance.setStringList('reminders_$dayKey', dayList.map((e) => e.toString()).toList());
+  }
+}
+
+final reminderTrackerProvider = NotifierProvider<ReminderTrackerNotifier, Map<String, List<bool>>>(ReminderTrackerNotifier.new);
+
 // --- UI ---
 class DailyPlanScreen extends ConsumerStatefulWidget {
   const DailyPlanScreen({super.key});
@@ -154,12 +220,12 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
 
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {
-        Future.delayed(const Duration(milliseconds: 100), _scrollToCurrentTime);
+        WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrentTime());
       }
     });
     
-    // Give the layout engine a moment to render the slivers before scrolling
-    Future.delayed(const Duration(milliseconds: 400), _scrollToCurrentTime);
+    // Scroll immediately after first frame render
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrentTime());
   }
 
   void _showReasoningDialog() async {
@@ -224,13 +290,13 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     
     if (targetIndex != -1) {
        final key = _itemKeys['${currentDayKey}_$targetIndex'];
-       if (key != null && key.currentContext != null) {
+        if (key != null && key.currentContext != null) {
           Scrollable.ensureVisible(
             key.currentContext!,
             duration: Duration.zero,
-            alignment: 0.1, // slightly below the sticky header
+            alignment: 0.0, // exactly at the top edge
           );
-       }
+        }
     }
   }
 
@@ -283,12 +349,16 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Daily Blueprint'),
-        actions: [
-          _buildToggleButton('Water', _showWater, Colors.blueAccent, () {
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        leadingWidth: 90,
+        leading: Center(
+          child: _buildToggleButton('Water', _showWater, Colors.blueAccent, () {
             setState(() { _showWater = !_showWater; });
           }),
-          const SizedBox(width: 8),
+        ),
+        title: const Text('Daily Plan'),
+        actions: [
           _buildToggleButton('Supps', _showSupp, Colors.greenAccent, () {
             setState(() { _showSupp = !_showSupp; });
           }),
@@ -296,7 +366,10 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         ],
         bottom: TabBar(
           controller: _tabController,
-          isScrollable: true,
+          isScrollable: false,
+          labelPadding: EdgeInsets.zero,
+          labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          unselectedLabelStyle: const TextStyle(fontSize: 12),
           tabs: displayDays.map((d) {
             if (d == 'Nutrition') {
               return Tab(
@@ -310,9 +383,19 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
           }).toList(),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: days.map((day) => day == 'nutrition' ? _buildNutritionTab() : _buildDayContent(day)).toList(),
+      body: TweenAnimationBuilder<double>(
+        duration: const Duration(milliseconds: 300),
+        tween: Tween(begin: 0.0, end: 1.0),
+        builder: (context, value, child) {
+          return Opacity(
+            opacity: value,
+            child: child,
+          );
+        },
+        child: TabBarView(
+          controller: _tabController,
+          children: days.map((day) => day == 'nutrition' ? _buildNutritionTab() : _buildDayContent(day)).toList(),
+        ),
       ),
     );
   }
@@ -341,6 +424,72 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildDailyReminders(String dayKey) {
+    final reminders = DailyPlanData.getReminders(dayKey);
+    if (reminders.isEmpty) return const SizedBox.shrink();
+
+    final reminderStateMap = ref.watch(reminderTrackerProvider);
+    final reminderState = reminderStateMap[dayKey] ?? [];
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        children: reminders.asMap().entries.map((entry) {
+          int index = entry.key;
+          String text = entry.value;
+          bool isChecked = false;
+          if (index < reminderState.length) isChecked = reminderState[index];
+
+          return GestureDetector(
+            onTap: () => ref.read(reminderTrackerProvider.notifier).toggleReminder(dayKey, index),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: isChecked ? Colors.green.withValues(alpha: 0.1) : Colors.amber.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: isChecked ? Colors.green.withValues(alpha: 0.5) : Colors.amberAccent, 
+                  width: 1.5
+                ),
+              ),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: isChecked ? Colors.green.withValues(alpha: 0.2) : Colors.transparent,
+                      border: Border.all(color: isChecked ? Colors.greenAccent : Colors.amberAccent.withValues(alpha: 0.5), width: 2),
+                    ),
+                    child: Center(
+                      child: isChecked ? const Icon(Icons.check, size: 14, color: Colors.greenAccent) : null,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        color: isChecked ? Colors.grey : Colors.amberAccent,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        decoration: isChecked ? TextDecoration.lineThrough : null,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }
@@ -388,6 +537,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 16),
+                _buildDailyReminders(dayKey),
                 if (DailyPlanData.isDeloadWeek()) ...[
                   _buildDeloadAlert(),
                   const SizedBox(height: 12),
@@ -741,7 +891,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
   Widget _buildTimelineItem(TimelineItem item, GlobalKey key) {
     return Padding(
       key: key,
-      padding: const EdgeInsets.only(bottom: 24),
+      padding: const EdgeInsets.only(top: 16, bottom: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
