@@ -165,9 +165,8 @@ class DailyPlanData {
         'kindle/laptop',
         '2 key/wallet/phone',
         'airpods',
+        'apple watch',
         'gym outfit',
-        'Blotting Sheet',
-        'sunscreen',
         'Pasta lunch',
         '$eggs Boiled Eggs',
         'Supplements (${supplements.join(", ")})',
@@ -402,11 +401,11 @@ class DailyPlanData {
   }
 
   static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
-  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 3m -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
+  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp (pea-size) to face/ears, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat 1/8 tsp to face/ears, then 1/8 tsp to neck)';
   static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
-  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (1 squirt for face/ears -> 1 squirt for neck)';
+  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (Layer 1: 1/8 tsp (pea-size) to face/ears, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat 1/8 tsp to face/ears, then 1/8 tsp to neck)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp Arm&Hammer w/ OxiClean. NO Fabric Softener (Dry on LOW heat)';
   static String get _laundryBathTowels {

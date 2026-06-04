@@ -140,6 +140,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
   final List<String> days = [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.wed, DailyPlanData.thu, DailyPlanData.fri, DailyPlanData.sat, DailyPlanData.sun, 'nutrition'];
   final List<String> displayDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Nutrition'];
   final Map<String, GlobalKey> _itemKeys = {};
+  
+  bool _showWater = false;
+  bool _showSupp = false;
 
   @override
   void initState() {
@@ -281,6 +284,16 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     return Scaffold(
       appBar: AppBar(
         title: const Text('Daily Blueprint'),
+        actions: [
+          _buildToggleButton('Water', _showWater, Colors.blueAccent, () {
+            setState(() { _showWater = !_showWater; });
+          }),
+          const SizedBox(width: 8),
+          _buildToggleButton('Supps', _showSupp, Colors.greenAccent, () {
+            setState(() { _showSupp = !_showSupp; });
+          }),
+          const SizedBox(width: 16),
+        ],
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
@@ -304,6 +317,34 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
+  Widget _buildToggleButton(String label, bool isActive, Color activeColor, VoidCallback onTap) {
+    return Center(
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          decoration: BoxDecoration(
+            color: isActive ? activeColor.withValues(alpha: 0.2) : Colors.transparent,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isActive ? activeColor : Colors.grey.withValues(alpha: 0.5),
+              width: 1.5,
+            ),
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: isActive ? activeColor : Colors.grey,
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildDayContent(String dayKey) {
     final items = DailyPlanData.schedules[dayKey] ?? [];
     
@@ -316,23 +357,36 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     
     return CustomScrollView(
       slivers: [
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _StickyWaterHeaderDelegate(
-            child: Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-              child: _buildWaterTracker(dayKey),
+        if (_showWater)
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _StickyHeaderDelegate(
+              extent: 165,
+              child: Container(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+                child: _buildWaterTracker(dayKey),
+              ),
             ),
           ),
-        ),
+        if (_showSupp)
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _StickyHeaderDelegate(
+              extent: 165,
+              child: Container(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+                child: _buildSupplementTracker(dayKey),
+              ),
+            ),
+          ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildSupplementTracker(dayKey),
                 const SizedBox(height: 16),
                 if (DailyPlanData.isDeloadWeek()) ...[
                   _buildDeloadAlert(),
@@ -972,15 +1026,16 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
   }
 }
 
-class _StickyWaterHeaderDelegate extends SliverPersistentHeaderDelegate {
+class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;
+  final double extent;
 
-  _StickyWaterHeaderDelegate({required this.child});
+  _StickyHeaderDelegate({required this.child, required this.extent});
 
   @override
-  double get minExtent => 165;
+  double get minExtent => extent;
   @override
-  double get maxExtent => 165;
+  double get maxExtent => extent;
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -988,7 +1043,7 @@ class _StickyWaterHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(covariant _StickyWaterHeaderDelegate oldDelegate) {
+  bool shouldRebuild(covariant _StickyHeaderDelegate oldDelegate) {
     return true;
   }
 }
