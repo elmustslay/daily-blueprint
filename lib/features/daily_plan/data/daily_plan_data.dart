@@ -243,7 +243,7 @@ class DailyPlanData {
       icon: '🍝',
       details: [
         '1 serving of my pasta',
-        if (calciumCaps > 0) 'Take $calciumCaps Calcium Citrate capsule${calciumCaps > 1 ? "s" : ""} (${(calciumCaps * 146).toStringAsFixed(0)}mg) with meal to block iron absorption',
+        if (calciumCaps > 0) 'Take $calciumCaps Calcium Citrate capsule${calciumCaps > 1 ? "s" : ""} (${(calciumCaps * 146).toStringAsFixed(0)}mg) with meal to bind to spinach oxalates',
       ],
       mealRecord: MealRecord(
         items: [
@@ -308,18 +308,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _wheyCreatine(String time, {String title = 'Snack'}) {
-    return TimelineItem(
-      time: time,
-      title: title,
-      icon: '🥤',
-      details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)'],
-      mealRecord: const MealRecord(items: [
-        _Portions.whey,
-        _Portions.creatine
-      ]),
-    );
-  }
+
 
   static TimelineItem _gym(String time, String title, {bool isCardio = false}) {
     return TimelineItem(
@@ -329,38 +318,42 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _salmonDinner(String time) {
+  static TimelineItem _salmonDinner(String time, {bool withWheyCreatine = false}) {
     final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
-      title: 'Dinner',
+      title: 'Dinner' + (withWheyCreatine ? ' & Post-Workout Shake' : ''),
       icon: '🥗',
       details: [
+        if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
+        if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
         '1/3 lb Wild Sockeye Salmon', 
-        if (showAshwagandha) '2 cap Ashwagandha'
+        if (showAshwagandha) '2 cap Ashwagandha',
       ],
       mealRecord: MealRecord(items: [
-        if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)
+        if (withWheyCreatine) _Portions.whey,
+        if (withWheyCreatine) _Portions.creatine,
+        if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
       ], recipeItems: [_Recipes.salmon]),
     );
   }
 
-  static TimelineItem _beefDinner(String time, {int calciumCaps = 0}) {
+  static TimelineItem _beefDinner(String time, {bool withWheyCreatine = false}) {
     final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
-      title: 'Dinner',
+      title: 'Dinner' + (withWheyCreatine ? ' & Post-Workout Shake' : ''),
       icon: '🍛',
       details: [
+        if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
+        if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
         '1/4 cup quinoa + 1/4 pound ground beef', 
         if (showAshwagandha) '2 cap Ashwagandha',
-        if (calciumCaps > 0) 'Take $calciumCaps Calcium Citrate capsule${calciumCaps > 1 ? "s" : ""} (${(calciumCaps * 146).toStringAsFixed(0)}mg) with meal to block iron absorption',
       ],
       mealRecord: MealRecord(items: [
+        if (withWheyCreatine) _Portions.whey,
+        if (withWheyCreatine) _Portions.creatine,
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
-        if (calciumCaps == 3) _Portions.calciumCitrate,
-        if (calciumCaps == 2) _Portions.calciumCitrate2,
-        if (calciumCaps == 1) _Portions.calciumCitrate1,
       ], recipeItems: [_Recipes.beef]),
     );
   }
@@ -464,8 +457,7 @@ class DailyPlanData {
       _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
-      _wheyCreatine('7:00-7:15 pm', title: 'Post-Workout'),
-      _salmonDinner('7:15-7:30 pm'),
+      _salmonDinner('7:00-7:30 pm', withWheyCreatine: true),
       _chores('7:30-8:00 pm'),
       _study('8:00-9:00 pm', cetirizine: true),
       _bedPrep('9:00-10:00 pm'),
@@ -487,8 +479,7 @@ class DailyPlanData {
       _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
       _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
-      _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
-      _salmonDinner('7:40-8:00 pm'),
+      _salmonDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
       _study('8:30-9:30 pm', cetirizine: true),
       _bedPrep('9:30-10:00 pm'),
@@ -508,8 +499,7 @@ class DailyPlanData {
       _work('3:45-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false, applySunscreen: false),
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
-      _wheyCreatine('6:30-6:45 pm', title: 'Post-Workout'),
-      _salmonDinner('6:45-7:30 pm'),
+      _salmonDinner('6:30-7:30 pm', withWheyCreatine: true),
       _chores('7:30-8:00 pm'),
       _study('8:00-9:30 pm', cetirizine: true),
       _bedPrep('9:30-10:00 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
@@ -522,7 +512,7 @@ class DailyPlanData {
       _morningReading('8:15-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
       _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
-      _pastaLunch('12:00-12:30 pm', calciumCaps: 2),
+      _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
       _work('3:45-4:45 pm'),
@@ -530,8 +520,7 @@ class DailyPlanData {
       _work('4:50-5:15 pm'),
       _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
-      _wheyCreatine('7:15-7:30 pm', title: 'Post-Workout'),
-      _beefDinner('7:30-8:00 pm', calciumCaps: 1),
+      _beefDinner('7:15-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
       _bedPrep('8:30-9:15 pm', cetirizine: true),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
@@ -552,8 +541,7 @@ class DailyPlanData {
       _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
-      _wheyCreatine('7:30-7:40 pm', title: 'Post-Workout'),
-      _beefDinner('7:40-8:00 pm'),
+      _beefDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
       _study('8:30-9:30 pm', cetirizine: true),
       _bedPrep('9:30-10:00 pm'),
@@ -568,7 +556,7 @@ class DailyPlanData {
       _study('8:45-10:15 am'),
       TimelineItem(time: '10:15-10:35 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('10:35-12:00 pm'),
-      _pastaLunch('12:00-12:30 pm', calciumCaps: 2),
+      _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _study('12:30-1:45 pm'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('2:00-3:30 pm'),
@@ -579,7 +567,7 @@ class DailyPlanData {
       _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
-      _beefDinner('7:30-8:00 pm', calciumCaps: 1),
+      _beefDinner('7:30-8:00 pm', withWheyCreatine: false),
       _chores('8:00-9:00 pm', cetirizine: true),
       _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
@@ -594,12 +582,11 @@ class DailyPlanData {
       TimelineItem(time: '11:00-11:30 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
       _study('11:30-12:30 pm'),
       _preLunchFiber('12:30-1:00 pm'),
-      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal to block iron absorption'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
+      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
-      _wheyCreatine('6:00-6:15 pm'),
-      _relaxOrCatchUp('6:15-7:00 pm', title: 'Rest / Weekly Reflection'),
-      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner', icon: '🌯', details: ['Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      _relaxOrCatchUp('6:00-7:00 pm', title: 'Rest / Weekly Reflection'),
+      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
       _bedPrep('8:00-9:00 pm', cetirizine: true),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
