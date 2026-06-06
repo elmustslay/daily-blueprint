@@ -282,8 +282,8 @@ class GymData {
       tip: '🎯 Focus: Upper back and rear shoulders (delts).\n\n💡 How to do it: Pull higher towards the upper chest, keeping elbows flared out slightly wider than a traditional lat-focused row.\n\n⚠️ Common Pitfall: Shrugging your shoulders up into your ears. Actively push your shoulders down and back during the pull.',
     ),
     Exercise(
-      id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: 'To Failure', rest: '1-2 min',
-      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it: On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 8-10 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
+      id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: '15', rest: '1-2 min',
+      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it (at 60): On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 8-10 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
     ),
     Exercise(
       id: 'pull_2', name: 'Machine Seated Row', sets: '3', reps: '8-12', rest: '2-3 min',
@@ -315,15 +315,15 @@ class GymData {
     ),
     Exercise(
       id: 'legs_3b', name: 'Wide Stance Leg Press', sets: '4', reps: '8-10', rest: '2-3 min',
-      tip: '🎯 Focus: Shifts emphasis to your glutes and inner thighs (adductors).\n\n💡 How to do it: Place feet wider than shoulders and point toes slightly outward (e.g., 11 and 1 o\'clock).\n\n⚠️ Common Pitfall: Knees caving inward as you push. Actively think about driving your knees outward so they stay in perfect alignment with your toes.',
+      tip: '🎯 Focus: Shifts emphasis to your glutes and inner thighs (adductors).\n\n💡 How to do it (seat 3, high feet placement): Place feet wider than shoulders and point toes slightly outward (e.g., 11 and 1 o\'clock).\n\n⚠️ Common Pitfall: Knees caving inward as you push. Actively think about driving your knees outward so they stay in perfect alignment with your toes.',
     ),
      Exercise(
       id: 'legs_2b', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2-3 min',
-      tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
+      tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it (2-3 tight, 4max pad angle, 2 metal angle/marsh, 3 back angle): Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
     ),
     Exercise(
       id: 'legs_4b', name: 'Floor Glute Bridges', sets: '3', reps: '10-15', rest: '1-2 min',
-      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Lie flat on your back, knees bent, feet flat on the floor shoulder-width apart. Rest a heavy dumbbell or barbell across your hip crease. Drive through your heels to thrust your hips straight up into the air. Squeeze your glutes at the absolute top for a full 1-2 seconds.\n\n⚠️ Common Pitfall: Hyperextending your lower back. Your ribs should stay tucked down. The movement comes entirely from squeezing the glutes, not arching your spine.',
+      tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Lie flat on your back, knees bent, feet flat on the floor (as far possible from butt -- think 90 deg) shoulder-width apart. Rest a heavy dumbbell or barbell across your hip crease. Drive through your heels to thrust your hips straight up into the air. Squeeze your glutes at the absolute top for a full 1-2 seconds.\n\n⚠️ Common Pitfall: Hyperextending your lower back. Your ribs should stay tucked down. The movement comes entirely from squeezing the glutes, not arching your spine.',
     ),
     Exercise(
       id: 'legs_5b', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
@@ -331,7 +331,7 @@ class GymData {
     ),
     Exercise(
       id: 'legs_6b', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min',
-      tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it: Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
+      tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it (at 6, with 4 visible): Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
     ),
     Exercise(
       id: 'abs_2b', name: 'Bicycle Crunches', sets: '2', reps: '15-20/side', rest: '1 min',

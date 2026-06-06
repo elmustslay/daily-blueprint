@@ -3,14 +3,14 @@ SUPPLEMENT DOSAGE & SAFETY LOG:
 Morning:
 - NAC: 600mg + Selenium: 25mcg (Safe, supports glutathione)
 - Citicoline: 250mg + Tyrosine: 25mg (Safe maintenance dose for focus)
-- Copper Glycinate: 3mg (Taken Wed/Fri. Empty stomach isolation prevents NAC chelation)
+- Copper Glycinate: 3mg (Taken Tue/Fri. Empty stomach isolation prevents NAC chelation)
 
 Mid-Day:
 - D3-K2: 1 capsule providing 5000 IU D3 + 100mcg K2 (MK-7) (Optimal, high dose for melanin-rich indoor lifestyle)
 - Standalone K2: 100mcg (Added to support high D3)
 
 Afternoon (With Eggs):
-- Zinc Picolinate: 30mg (Taken Mon/Wed. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
+- Zinc Picolinate: 30mg (Taken Mon/Tue. Well within 40mg limit, safely spaced from Copper/Phytic Acid)
 - Biotin/Keratin: 10mg / 500mg (Standard for hair/skin)
 - Omega-3: 3 softgels containing 2160mg total (1300mg EPA / 860mg DHA) (Excellent therapeutic dose)
 
@@ -26,17 +26,18 @@ Night:
 
 TIMING CONFLICTS & INTERACTIONS (WHAT HAPPENS IF TIMING IS MESSED UP):
 
-1. Calcium Citrate vs. High-Iron Meals (Turkey Pasta, Beef Bowl)
-   - Goal: Block non-heme iron absorption to manage ferritin levels.
-   - Conflict: Taking Calcium Citrate too far from the meal (e.g., 1+ hours before or after).
-   - What happens if messed up: The calcium won't mix with the food in your gut. Your body will absorb all the iron, defeating your iron-blocking protocol.
-   - Rule: Must be taken *with the first few bites* of the meal.
+1. Calcium Protocols: Oxalate Binding (Lunch) vs. Iron Blocking (Dinner)
+   - Goal (Lunch): Bind to the massive oxalate load in the spinach (pasta meal-prep) to prevent kidney stones.
+   - Goal (Dinner): Block heme iron absorption from Beef/Salmon meals to manage ferritin levels.
+   - Mechanism (Lunch): The Calcium Citrate capsules are taken with your pasta to chemically bind to spinach oxalates in your gut, forming calcium oxalate which is safely excreted. This means the calcium is NOT absorbed. However, this is perfectly fine, because your ~838mg baseline of dairy calcium (Casein/Whey) already meets daily bodily requirements.
+   - Mechanism (Dinner): Your Casein (580mg) and Whey (110mg) dairy calcium is extremely potent at inhibiting iron. Taking Whey immediately before/with dinner and Casein shortly after perfectly surrounds your high-iron meals, blocking the iron without needing capsules.
+   - Rule: Keep capsules explicitly at Lunch (to bind oxalates) and Whey explicitly at Dinner (to block iron).
 
 2. Calcium Citrate vs. Zinc & Copper
    - Goal: Prevent calcium from competing with essential trace minerals.
-   - Conflict: Taking calcium capsules within 2 hours of Zinc Picolinate or Copper Glycinate, or taking calcium on Wed/Fri.
+   - Conflict: Taking calcium capsules within 2 hours of Zinc Picolinate or Copper Glycinate, or taking calcium on Tue/Fri.
    - What happens if messed up: Calcium binds to the same gut receptors (DMT1), severely blocking zinc and copper absorption and rendering those supplements ineffective.
-   - Rule: Keep calcium at least 2.5 hours away from zinc/copper, and strictly take 0 calcium capsules on Wed/Fri (your copper/zinc days).
+   - Rule: Keep calcium at least 2.5 hours away from zinc/copper, and strictly take 0 calcium capsules on Tue/Fri (your copper/zinc days).
 
 3. Copper Glycinate vs. Zinc Picolinate
    - Goal: Avoid mutual absorption competition.

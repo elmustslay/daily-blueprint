@@ -5,6 +5,7 @@ import '../data/gym_data.dart';
 import '../../daily_plan/data/daily_plan_data.dart';
 import 'gym_stats_screen.dart';
 import 'gym_logs_editor_screen.dart';
+import '../../../core/storage/shared_prefs.dart';
 
 
 // Provides max and prev weight tuple
@@ -664,21 +665,109 @@ class ExerciseCard extends ConsumerWidget {
     if (exercise.tip == null) return;
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('${exercise.name} Tips'),
-        content: SingleChildScrollView(
-          child: Text(
-            exercise.tip!,
-            style: const TextStyle(height: 1.4),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Got it!'),
-          )
-        ],
-      ),
+      builder: (ctx) => TipDialog(exercise: exercise),
     );
   }
 }
+
+class TipDialog extends StatefulWidget {
+  final Exercise exercise;
+
+  const TipDialog({super.key, required this.exercise});
+
+  @override
+  State<TipDialog> createState() => _TipDialogState();
+}
+
+class _TipDialogState extends State<TipDialog> {
+  bool _isEditing = false;
+  late TextEditingController _controller;
+  late String _currentTip;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentTip = SharedPrefsLogic.instance.getString('tip_${widget.exercise.id}') ?? widget.exercise.tip ?? '';
+    _controller = TextEditingController(text: _currentTip);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final originalTip = widget.exercise.tip ?? '';
+    final hasCustomTip = _currentTip != originalTip;
+
+    return AlertDialog(
+      title: Text('${widget.exercise.name} Tips'),
+      content: SingleChildScrollView(
+        child: _isEditing
+            ? TextField(
+                controller: _controller,
+                maxLines: null,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your custom tips here...',
+                ),
+              )
+            : Text(
+                _currentTip,
+                style: const TextStyle(height: 1.4),
+              ),
+      ),
+      actions: [
+        if (_isEditing)
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _controller.text = _currentTip;
+                _isEditing = false;
+              });
+            },
+            child: const Text('Cancel'),
+          ),
+        if (!_isEditing && hasCustomTip)
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _currentTip = originalTip;
+                _controller.text = _currentTip;
+                SharedPrefsLogic.instance.remove('tip_${widget.exercise.id}');
+              });
+            },
+            child: const Text('Revert', style: TextStyle(color: Colors.redAccent)),
+          ),
+        if (!_isEditing)
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _isEditing = true;
+              });
+            },
+            child: const Text('Edit'),
+          ),
+        if (_isEditing)
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _currentTip = _controller.text;
+                SharedPrefsLogic.instance.setString('tip_${widget.exercise.id}', _currentTip);
+                _isEditing = false;
+              });
+            },
+            child: const Text('Save'),
+          ),
+        if (!_isEditing)
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Got it!'),
+          )
+      ],
+    );
+  }
+}
+
