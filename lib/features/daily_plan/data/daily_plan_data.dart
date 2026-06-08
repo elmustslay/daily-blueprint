@@ -8,6 +8,7 @@ class TimelineItem {
   final String icon;
   final List<String> details;
   final MealRecord? mealRecord;
+  final bool isCardio;
 
   const TimelineItem({
     required this.time,
@@ -15,6 +16,7 @@ class TimelineItem {
     required this.icon,
     this.details = const [],
     this.mealRecord,
+    this.isCardio = false,
   });
 }
 
@@ -312,6 +314,7 @@ class DailyPlanData {
       time: time,
       title: title,
       icon: isCardio ? '🏃' : '🏋️',
+      isCardio: isCardio,
     );
   }
 

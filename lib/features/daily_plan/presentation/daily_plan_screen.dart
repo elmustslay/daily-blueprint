@@ -428,6 +428,63 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
+  Widget _buildReminderItem(String dayKey, int index, String text, bool isChecked) {
+    return GestureDetector(
+      onTap: () => ref.read(reminderTrackerProvider.notifier).toggleReminder(dayKey, index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: isChecked ? Colors.green.withValues(alpha: 0.1) : Colors.amber.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isChecked ? Colors.green.withValues(alpha: 0.5) : Colors.amberAccent, 
+            width: 1.5
+          ),
+          boxShadow: isChecked ? null : [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            )
+          ],
+        ),
+        child: Row(
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isChecked ? Colors.green.withValues(alpha: 0.2) : Colors.transparent,
+                border: Border.all(color: isChecked ? Colors.greenAccent : Colors.amberAccent.withValues(alpha: 0.5), width: 2),
+              ),
+              child: Center(
+                child: isChecked ? const Icon(Icons.check, size: 14, color: Colors.greenAccent) : null,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: isChecked ? Colors.grey : Colors.amberAccent,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  decoration: isChecked ? TextDecoration.lineThrough : null,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildDailyReminders(String dayKey) {
     final reminders = DailyPlanData.getReminders(dayKey);
     if (reminders.isEmpty) return const SizedBox.shrink();
@@ -435,60 +492,21 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     final reminderStateMap = ref.watch(reminderTrackerProvider);
     final reminderState = reminderStateMap[dayKey] ?? [];
 
+    final completedReminders = <MapEntry<int, String>>[];
+    for (int i = 0; i < reminders.length; i++) {
+      final isChecked = i < reminderState.length ? reminderState[i] : false;
+      if (isChecked) {
+        completedReminders.add(MapEntry(i, reminders[i]));
+      }
+    }
+
+    if (completedReminders.isEmpty) return const SizedBox.shrink();
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Column(
-        children: reminders.asMap().entries.map((entry) {
-          int index = entry.key;
-          String text = entry.value;
-          bool isChecked = false;
-          if (index < reminderState.length) isChecked = reminderState[index];
-
-          return GestureDetector(
-            onTap: () => ref.read(reminderTrackerProvider.notifier).toggleReminder(dayKey, index),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: isChecked ? Colors.green.withValues(alpha: 0.1) : Colors.amber.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: isChecked ? Colors.green.withValues(alpha: 0.5) : Colors.amberAccent, 
-                  width: 1.5
-                ),
-              ),
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isChecked ? Colors.green.withValues(alpha: 0.2) : Colors.transparent,
-                      border: Border.all(color: isChecked ? Colors.greenAccent : Colors.amberAccent.withValues(alpha: 0.5), width: 2),
-                    ),
-                    child: Center(
-                      child: isChecked ? const Icon(Icons.check, size: 14, color: Colors.greenAccent) : null,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      text,
-                      style: TextStyle(
-                        color: isChecked ? Colors.grey : Colors.amberAccent,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        decoration: isChecked ? TextDecoration.lineThrough : null,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+        children: completedReminders.map((entry) {
+          return _buildReminderItem(dayKey, entry.key, entry.value, true);
         }).toList(),
       ),
     );
@@ -503,30 +521,65 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         dailyTotals += item.mealRecord!.totalNutrition;
       }
     }
+
+    final reminders = DailyPlanData.getReminders(dayKey);
+    final reminderStateMap = ref.watch(reminderTrackerProvider);
+    final reminderState = reminderStateMap[dayKey] ?? [];
+
+    final incompleteReminders = <MapEntry<int, String>>[];
+    for (int i = 0; i < reminders.length; i++) {
+      final isChecked = i < reminderState.length ? reminderState[i] : false;
+      if (!isChecked) {
+        incompleteReminders.add(MapEntry(i, reminders[i]));
+      }
+    }
+
+    double stickyHeight = 0;
+    if (_showWater) stickyHeight += 165.0;
+    if (_showSupp) stickyHeight += 165.0;
+    if (incompleteReminders.isNotEmpty) {
+      stickyHeight += 16.0 + (incompleteReminders.length * 68.0);
+    }
     
     return CustomScrollView(
       slivers: [
-        if (_showWater)
+        if (stickyHeight > 0)
           SliverPersistentHeader(
             pinned: true,
             delegate: _StickyHeaderDelegate(
-              extent: 165,
+              extent: stickyHeight,
               child: Container(
                 color: Theme.of(context).scaffoldBackgroundColor,
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-                child: _buildWaterTracker(dayKey),
-              ),
-            ),
-          ),
-        if (_showSupp)
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _StickyHeaderDelegate(
-              extent: 165,
-              child: Container(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-                child: _buildSupplementTracker(dayKey),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_showWater)
+                      Container(
+                        height: 165.0,
+                        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+                        child: _buildWaterTracker(dayKey),
+                      ),
+                    if (_showSupp)
+                      Container(
+                        height: 165.0,
+                        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+                        child: _buildSupplementTracker(dayKey),
+                      ),
+                    if (incompleteReminders.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: incompleteReminders.map((entry) {
+                            return SizedBox(
+                              height: 68.0,
+                              child: _buildReminderItem(dayKey, entry.key, entry.value, false),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -544,10 +597,6 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                 ],
                 if (DailyPlanData.shouldScaleUpCardio()) ...[
                   _buildCardioScaleUpAlert(),
-                  const SizedBox(height: 12),
-                ],
-                if (DailyPlanData.isAshwagandhaOff()) ...[
-                  _buildAshwagandhaAlert(),
                   const SizedBox(height: 12),
                 ],
                 if (DailyPlanData.isBloodDonationWeek()) ...[
@@ -922,7 +971,37 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white))),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              item.title,
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                            ),
+                          ),
+                          if (item.isCardio && DailyPlanData.shouldScaleUpCardio()) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.orangeAccent.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(color: Colors.orangeAccent, width: 1),
+                              ),
+                              child: const Text(
+                                'SCALE-UP (+10 min)',
+                                style: TextStyle(
+                                  color: Colors.orangeAccent,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
                     if (item.mealRecord != null && item.mealRecord!.totalNutrition.calories > 0)
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -1096,34 +1175,6 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
-  Widget _buildAshwagandhaAlert() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.red.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.redAccent, width: 2),
-      ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.do_not_disturb_alt_rounded, color: Colors.redAccent, size: 22),
-          SizedBox(width: 8),
-          Flexible(
-            child: Text(
-              '⛔ NO ASHWAGANDHA THIS WEEK',
-              style: TextStyle(
-                color: Colors.redAccent,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildBloodDonationAlert() {
     return GestureDetector(
