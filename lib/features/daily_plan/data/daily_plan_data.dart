@@ -114,9 +114,8 @@ class DailyPlanData {
       details: [
         'Set Dehumidifier to 40% -> Brush teeth',
         'Face & neck: Wet a clean, fast-drying microfiber facial cloth with lukewarm water, wring out, and gently wipe face and neck',
-        'Ascorbyl 12% (Apply to slightly damp skin): 3 tiny drops for face, 2 for neck -> WAIT 90s',
+        'Ascorbyl 12% (Apply to slightly damp skin): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
-        'Apply deodorant',
         clothes,
       ],
     );
@@ -388,7 +387,8 @@ class DailyPlanData {
       details: [
         'Take $magAmount $magName + 1 tablet Finasteride (1mg)',
         skincare,
-        'Moisturizer (CeraVe PM): 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry',
+        'Apply 5% AHA to underarms (Deodorant - Apply to BONE DRY skin)',
+        'Moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT to dry',
         'Set Dehumidifier to 40%',
       ],
       mealRecord: MealRecord(items: [
@@ -410,12 +410,12 @@ class DailyPlanData {
     );
   }
 
-  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
-  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp (pea-size) to face/ears, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat 1/8 tsp to face/ears, then 1/8 tsp to neck)';
-  static const String _retinol = 'Retinol (Apply to BONE DRY skin to prevent irritation): 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
-  static const String _bha = 'Paula\'s Choice 2% BHA (Apply to BONE DRY skin to prevent irritation): Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
-  static const String _joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin): 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
-  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (Layer 1: 1/8 tsp (pea-size) to face/ears, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat 1/8 tsp to face/ears, then 1/8 tsp to neck)';
+  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT 30s';
+  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
+  static const String _retinol = 'Retinol (Apply to BONE DRY skin to prevent irritation): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m';
+  static const String _bha = 'Paula\'s Choice 2% BHA (Apply to BONE DRY skin to prevent irritation): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m';
+  static const String _joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m';
+  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp Arm&Hammer w/ OxiClean. NO Fabric Softener (Dry on LOW heat)';
   static String get _laundryBathTowels {
