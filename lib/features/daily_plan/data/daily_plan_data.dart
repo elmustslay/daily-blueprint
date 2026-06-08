@@ -108,14 +108,11 @@ class DailyPlanData {
     return TimelineItem(
       time: time,
       title: 'Get Ready',
-      icon: '🚿',
+      icon: '🧼',
       details: [
-        'Set Dehumidifier to 69% -> Brush teeth',
-        'Shower: Hair (60s warm massage) -> Body (Bioderma Atoderm Cleansing Oil, 1.5 pumps upper / 1.5 pumps lower, BARE HANDS ONLY)',
-        'Face & neck: Wet face with LUKEWARM water. Lather a half-pump of Lipikar AP+ in wet hands first, then glide over face with zero pressure for EXACTLY 20s -> Rinse',
-        'Finish: 15s full-body cold shock',
-        'Dab face & neck with clean Washcloth #1 so there is no dripping water (it does not have to be bone-dry, it is ok if ascorbyl gets foamy)',
-        'Ascorbyl 12%: 3 tiny drops for face, 2 for neck -> WAIT 90s',
+        'Set Dehumidifier to 40% -> Brush teeth',
+        'Face & neck: Wet a clean, fast-drying microfiber facial cloth with lukewarm water, wring out, and gently wipe face and neck',
+        'Ascorbyl 12% (Apply to slightly damp skin): 3 tiny drops for face, 2 for neck -> WAIT 90s',
         skincare,
         'Apply deodorant',
         clothes,
@@ -130,12 +127,12 @@ class DailyPlanData {
       icon: '🚿',
       details: [
         if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
-        'Set Dehumidifier to 69% -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
+        'Set Dehumidifier to 40% -> Brush teeth -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
         'Hair: $hair',
         'Body: Hold Washcloth under water until SOAKING wet. Pump 1 pump of Lipikar AP+ into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and, once done/rinsed another 1 pump for lower body (for frictionless gym maintenance)',
         'Face: Lather 1 pump of Lipikar AP+ in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)',
-        'Finish: 15s full-body cold shock',
+        'Finish: Lukewarm rinse',
         'Pat face & beard completely dry with fresh Washcloth #2 (Do Skincare immediately while bathroom is humid)'
       ],
     );
@@ -150,7 +147,7 @@ class DailyPlanData {
       details: [
         'Turn on Verilux HappyLight (45-degree angle to face)',
         if (additional.isNotEmpty) additional,
-        'Set Dehumidifier to 30%',
+        'Set Dehumidifier to 40%',
       ],
     );
   }
@@ -389,7 +386,7 @@ class DailyPlanData {
         'Take $magAmount $magName + 1 tablet Finasteride (1mg)',
         skincare,
         'Moisturizer (CeraVe PM): 1 pea-size for face/ears -> 1 pea-size for neck -> WAIT to dry',
-        'Set Dehumidifier to 30%',
+        'Set Dehumidifier to 40%',
       ],
       mealRecord: MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: magAmount.toDouble()),
@@ -412,9 +409,9 @@ class DailyPlanData {
 
   static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
   static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp (pea-size) to face/ears, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat 1/8 tsp to face/ears, then 1/8 tsp to neck)';
-  static const String _retinol = 'Retinol: 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
-  static const String _bha = 'Paula\'s Choice 2% BHA: Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
-  static const String _joseon = 'Joseon Alpha-Arbutin: 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
+  static const String _retinol = 'Retinol (Apply to BONE DRY skin to prevent irritation): 1 pea-sized pump ONLY for face -> 1/2 pea-sized pump for neck -> WAIT 1-2m';
+  static const String _bha = 'Paula\'s Choice 2% BHA (Apply to BONE DRY skin to prevent irritation): Splash 3-4 drops in hands and pat into face (focus on bumps) -> Pat lightly on neck -> WAIT 1-2m';
+  static const String _joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin): 2 tiny drops ONLY for face -> 1 drop for neck -> WAIT 1-2m';
   static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (Layer 1: 1/8 tsp (pea-size) to face/ears, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat 1/8 tsp to face/ears, then 1/8 tsp to neck)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp Arm&Hammer w/ OxiClean. NO Fabric Softener (Dry on LOW heat)';
@@ -453,9 +450,9 @@ class DailyPlanData {
 
   static Map<String, List<TimelineItem>> get schedules => {
     mon: [
-      _wakeup('7:30-7:35 am'),
-      _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
-      _morningReading('8:15-8:30 am'),
+      _wakeup('7:50-8:00 am'),
+      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
+      _morningReading('8:20-8:30 am'),
       _work('8:30-12:00 pm', details: ['Boil 18 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
@@ -473,9 +470,9 @@ class DailyPlanData {
       _fallAsleep('10:30-11:00 pm'),
     ],
     tue: [
-      _wakeup('7:30-7:35 am', copper: true),
-      _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
-      _morningReading('8:15-8:30 am'),
+      _wakeup('7:50-8:00 am', copper: true),
+      _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:20-8:30 am'),
       _grabThings('8:30-8:35 am', zinc: true, bananas: 2),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
@@ -495,9 +492,9 @@ class DailyPlanData {
       _fallAsleep('10:30-11:00 pm'),
     ],
     wed: [
-      _wakeup('7:30-7:35 am', nac: true),
-      _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
-      _morningReading('8:15-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
+      _wakeup('7:50-8:00 am', nac: true),
+      _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
+      _morningReading('8:20-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
       _grabThings('8:30-8:35 am', zinc: false, eggs: 3, bananas: 0, calciumCaps: 3),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
@@ -515,9 +512,9 @@ class DailyPlanData {
       _fallAsleep('10:30-11:00 pm'),
     ],
     thu: [
-      _wakeup('7:30-7:35 am'),
-      _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
-      _morningReading('8:15-8:30 am'),
+      _wakeup('7:50-8:00 am'),
+      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
+      _morningReading('8:20-8:30 am'),
       TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
       _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
@@ -535,9 +532,9 @@ class DailyPlanData {
       _fallAsleep('10:30-11:00 pm'),
     ],
     fri: [
-      _wakeup('7:30-7:35 am', copper: true),
-      _getReady('7:35-8:15 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
-      _morningReading('8:15-8:30 am'),
+      _wakeup('7:50-8:00 am', copper: true),
+      _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:20-8:30 am'),
       _grabThings('8:30-8:35 am', bananas: 2),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
@@ -557,10 +554,10 @@ class DailyPlanData {
       _fallAsleep('10:30-11:00 pm'),
     ],
     sat: [
-      _wakeup('7:30-7:40 am', nac: true),
-      _getReady('7:40-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
-      _preMedicationBuffer('8:15-8:20 am'),
-      _morningReading('8:20-8:45 am', additional: '20mg adderall IR'),
+      _wakeup('7:50-8:00 am', nac: true),
+      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
+      _preMedicationBuffer('8:20-8:25 am'),
+      _morningReading('8:25-8:45 am', additional: '20mg adderall IR'),
       _study('8:45-10:15 am'),
       TimelineItem(time: '10:15-10:35 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('10:35-12:00 pm'),
@@ -582,8 +579,8 @@ class DailyPlanData {
       _fallAsleep('10:15-10:45 pm'),
     ],
     sun: [
-      _wakeup('7:30-7:35 am', nac: true),
-      _getReady('7:35-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
+      _wakeup('7:50-8:00 am', nac: true),
+      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningReading('8:20-9:15 am'),
       _preMedicationBuffer('9:15-9:30 am'),
       _study('9:30-11:00 am', details: ['20mg adderall IR at 9:30am']),
