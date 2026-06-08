@@ -86,18 +86,19 @@ class IngredientsData {
     name: 'Egg',
     baseUnit: 'large egg',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 78, 
-      protein: 6.3, 
-      carbs: 0.6, 
-      fat: 5.3,
+      calories: 70, 
+      protein: 6, 
+      carbs: 0, 
+      fat: 5,
       microNutrients: {
-        'Cholesterol (mg)': 186,
-        'Sodium (mg)': 71,
-        'Potassium (mg)': 69,
-        'Magnesium (mg)': 6,
-        'Calcium (Food) (mg)': 28,
-        'Iron (Food) (mg)': 0.9,
-        'Vitamin A (Food) (mcg)': 80,
+        'Saturated Fat (g)': 1.5,
+        'Cholesterol (mg)': 185,
+        'Sodium (mg)': 70,
+        'Potassium (mg)': 0,
+        'Magnesium (mg)': 6, // #this is default assumed value
+        'Calcium (Food) (mg)': 26,
+        'Iron (Food) (mg)': 0.72,
+        'Vitamin A (Food) (mcg)': 80, // #this is default assumed value
         'Zinc (Food) (mg)': 0.6, // #this is default assumed value
         'Total Omega-3 (Food) (mg)': 30, // #this is default assumed value
         'Selenium (Food) (mcg)': 15.4, // #this is default assumed value
@@ -105,7 +106,7 @@ class IngredientsData {
       
         'Copper (mg)': 0.04, // #this is default assumed value
         'Vitamin C (mg)': 0, // #this is default assumed value
-        'Vitamin D3 (Food) (mcg)': 1, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 1.2, // #this is default assumed value
         'Vitamin K (mcg)': 0.1, // #this is default assumed value
         'Vitamin E (Food) (mg)': 0.5, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.4, // #this is default assumed value
@@ -714,20 +715,66 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
-  static const Ingredient bellPeppers = Ingredient(
-    id: 'bell_pepper',
-    name: 'Bell Pepper',
+  static const Ingredient redBellPepper = Ingredient(
+    id: 'red_bell_pepper',
+    name: 'Red Bell Pepper',
     baseUnit: 'medium',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 24, 
-      protein: 1, 
-      carbs: 6, 
-      fat: 0.2,
+      calories: 31, 
+      protein: 1.2, 
+      carbs: 7.2, 
+      fat: 0.36,
       microNutrients: {
-        'Vitamin C (mg)': 152,
-        'Fiber (g)': 2.5,
-        'Potassium (mg)': 211,
-        'Vitamin A (Food) (mcg)': 1100,
+        'Sodium (mg)': 4.8, // #this is default assumed value
+        'Vitamin C (mg)': 152, // #this is default assumed value
+        'Fiber (g)': 2.5, // #this is default assumed value
+        'Potassium (mg)': 251, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 187, // #this is default assumed value
+        'Lutein & Zeaxanthin (mcg)': 71, // #this is default assumed value
+        'Capsanthin & Capsorubin (mg)': 15.1, // #this is default assumed value
+      
+        'Magnesium (mg)': 12, // #this is default assumed value
+        'Calcium (Food) (mg)': 8, // #this is default assumed value
+        'Iron (Food) (mg)': 0.5, // #this is default assumed value
+        'Zinc (Food) (mg)': 0.3, // #this is default assumed value
+        'Copper (mg)': 0.1, // #this is default assumed value
+        'Selenium (Food) (mcg)': 0.1, // #this is default assumed value
+        'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
+        'Vitamin K (mcg)': 5.8, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 1.8, // #this is default assumed value
+        'Vitamin B12 (mcg)': 0, // #this is default assumed value
+        'Thiamin (mg)': 0.06, // #this is default assumed value
+        'Riboflavin (mg)': 0.1, // #this is default assumed value
+        'Niacin (mg)': 1.1, // #this is default assumed value
+        'Vitamin B5 (mg)': 0.3, // #this is default assumed value
+        'Vitamin B6 (mg)': 0.3, // #this is default assumed value
+        'Folate (Food) (mcg)': 54, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
+        'Choline (mg)': 6, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 15, // #this is default assumed value
+        'EPA (Food) (mg)': 0, // #this is default assumed value
+        'DHA (Food) (mg)': 0, // #this is default assumed value
+      },
+    ),
+  );
+
+  static const Ingredient orangeBellPepper = Ingredient(
+    id: 'orange_bell_pepper',
+    name: 'Orange Bell Pepper',
+    baseUnit: 'medium',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 31, 
+      protein: 1.2, 
+      carbs: 7, 
+      fat: 0.25,
+      microNutrients: {
+        'Sodium (mg)': 5, // #this is default assumed value
+        'Vitamin C (mg)': 150, // #this is default assumed value
+        'Fiber (g)': 2.5, // #this is default assumed value
+        'Potassium (mg)': 252, // #this is default assumed value
+        'Vitamin A (Food) (mcg)': 20, // #this is default assumed value
+        'Lutein & Zeaxanthin (mcg)': 680, // #this is default assumed value
+        'Capsanthin & Capsorubin (mg)': 0, // #this is default assumed value
       
         'Magnesium (mg)': 12, // #this is default assumed value
         'Calcium (Food) (mg)': 8, // #this is default assumed value
@@ -927,7 +974,8 @@ static const Ingredient marinaraSauce = Ingredient(
     marinaraSauce,
     cannedLentils,
     nutritionalYeast,
-    bellPeppers,
+    redBellPepper,
+    orangeBellPepper,
     nac,
     finasteride,
     citicoline,

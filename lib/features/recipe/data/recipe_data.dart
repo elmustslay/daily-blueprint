@@ -14,7 +14,7 @@ class RecipeData {
         '3 lb ground turkey',
         '0.5 tsp Morton Lite Salt',
         'Pepper to taste',
-        '6 bell peppers',
+        '4 red, 2 orange bell peppers',
         '48 oz marinara sauce',
         '4 tbsp nutritional yeast',
         '1 bag of Spinach (Wilted at the end)',
@@ -25,10 +25,11 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 3),
         IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: 3),
         IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
-        IngredientPortion(ingredient: IngredientsData.bellPeppers, amount: 6),
+        IngredientPortion(ingredient: IngredientsData.redBellPepper, amount: 4),
+        IngredientPortion(ingredient: IngredientsData.orangeBellPepper, amount: 2),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 48),
         IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 4),
-        IngredientPortion(ingredient: IngredientsData.spinach, amount: 1), // 1 bag
+        IngredientPortion(ingredient: IngredientsData.spinach, amount: 1),
       ],
       equipment: [
         'Large 12 qt Stainless Steel Sauté Pan',
@@ -36,7 +37,7 @@ class RecipeData {
         'Cutting board',
       ],
       instructions: [
-        'Turkey Sear & Salt (Foundation Seasoning): Heat the 12 qt stainless steel sauté pan over medium-high heat. Add 1 tbsp (3 tsp) of avocado oil, then immediately add the 3 lb ground turkey. Season evenly with the 0.5 tsp Morton Lite Salt and pepper to taste. Sauté and break apart until browned (~8 minutes).',
+        'Turkey Sear & Salt (Foundation Seasoning): Preheat the dry 12 qt stainless steel sauté pan over medium-high heat for 2-3 minutes (until a drop of water glides across the surface like mercury). Add 1 tbsp (3 tsp) of avocado oil, then immediately add the 3 lb ground turkey. Season evenly with the 0.5 tsp Morton Lite Salt and pepper to taste. Sauté and break apart until browned (~8 minutes).',
         'Add Veggies: Add the chopped bell peppers to the pan and cook until softened (~4-5 minutes).',
         'Liquid & Pasta Boil (One-Pot): Pour the 2 cups of water and the 48 oz of marinara sauce into the pan first. Stir well and bring to a boil. Slide the dry 12 oz Carbe Diem pasta directly into the liquid, ensuring it is submerged. Reduce heat to medium-low, cover with a lid, and simmer for 6 minutes, stirring occasionally.',
         'Add Yeast: Uncover the pan, stir in the 4 tbsp of nutritional yeast. Cook covered for another 3-5 minutes until the pasta is al dente and the liquid is beautifully absorbed.',
@@ -115,9 +116,9 @@ class RecipeData {
       id: 'hard_boiled_eggs',
       name: 'Perfect Hard Boiled Eggs',
       icon: '🥚',
-      yields: '18 Eggs (All on Sunday)',
+      yields: '18 Eggs',
       textIngredients: [
-        '18 large eggs (All on Sunday)',
+        '18 large eggs',
         'Ice cubes and cold water (Crucial for peeling)',
       ],
       servings: 18,
@@ -129,7 +130,7 @@ class RecipeData {
         'Large bowl for ice bath',
       ],
       instructions: [
-        'The Setup: Do this in 3 batches on Sunday to prep all 18 eggs for the entire week (Mon-Sun). Pierce the top (non-pointy end) of each egg with pin, and keep that side up too.',
+        'The Setup: Do this in 3 batches to prep all 18 eggs for the entire week (Mon-Sun). First, let the eggs sit on the cabinet for 10 minutes (putting cold eggs in is explosive/causes cracking). Pierce the top (non-pointy end, which is also the top in the carton) of each egg with a pin, and keep that side up too.',
         'Cook: Add the exact water amount for "Hard Boiled" into your cooker. Run the cycle until it shuts off.',
         'The Ice Bath (CRITICAL): Immediately transfer the hot eggs into a bowl of heavy ice water. Let them sit for 5 minutes. The thermal shock shrinks the egg away from the shell, creating a microscopic gap that makes peeling effortless.',
         'Store: Keep the eggs IN THEIR SHELLS and place them into your dedicated clear egg storage bin in the fridge so they never mix with raw eggs. Unpeeled eggs last 7 days. Peeled eggs get slimy after 2 days.',

@@ -96,4 +96,13 @@ void main() {
       expect(commute.details, contains('Eat 2nd banana (15m pre-workout)'));
     }
   });
+
+  test('Every day fall asleep details include todo list reminder and default instructions', () {
+    for (final day in DailyPlanData.schedules.keys) {
+      final schedule = DailyPlanData.schedules[day]!;
+      final fallAsleep = schedule.firstWhere((item) => item.title == 'Fall Asleep');
+      expect(fallAsleep.details, contains('Lights out, try to fall asleep within 30 min'));
+      expect(fallAsleep.details, contains('Come up with todo list for tom'));
+    }
+  });
 }

@@ -318,7 +318,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _salmonDinner(String time, {bool withWheyCreatine = false}) {
+  static TimelineItem _salmonDinner(String time, {bool withWheyCreatine = false, bool cook = false}) {
     final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
@@ -327,7 +327,7 @@ class DailyPlanData {
       details: [
         if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
         if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
-        '1/3 lb Wild Sockeye Salmon', 
+        if (cook) 'Cook Salmon (3 portions)' else '1/3 lb Wild Sockeye Salmon', 
         if (showAshwagandha) '2 cap Ashwagandha',
       ],
       mealRecord: MealRecord(items: [
@@ -399,7 +399,15 @@ class DailyPlanData {
   }
 
   static TimelineItem _fallAsleep(String time) {
-    return TimelineItem(time: time, title: 'Fall Asleep', icon: '😴', details: ['Lights out, try to fall asleep within 30 min']);
+    return TimelineItem(
+      time: time,
+      title: 'Fall Asleep',
+      icon: '😴',
+      details: [
+        'Come up with todo list for tom',
+        'Lights out, try to fall asleep within 30 min',
+      ],
+    );
   }
 
   static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 1 dime-size for face/ears, 1 pea-size for neck -> WAIT 30s';
@@ -448,7 +456,7 @@ class DailyPlanData {
       _wakeup('7:30-7:35 am'),
       _getReady('7:35-8:15 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:15-8:30 am'),
-      _work('8:30-12:00 pm', details: [_laundryFaceTowels, 'Run Dishwasher']),
+      _work('8:30-12:00 pm', details: ['Boil 18 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true),
@@ -457,7 +465,7 @@ class DailyPlanData {
       _work('4:50-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
-      _salmonDinner('7:00-7:30 pm', withWheyCreatine: true),
+      _salmonDinner('7:00-7:30 pm', withWheyCreatine: true, cook: true),
       _chores('7:30-8:00 pm'),
       _study('8:00-9:00 pm', cetirizine: true),
       _bedPrep('9:00-10:00 pm'),
@@ -583,7 +591,7 @@ class DailyPlanData {
       _study('11:30-1:00 pm'),
       TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
-      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta, Salmon, 18 Eggs', 'Put ground beef in freezer']),
+      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta (6 portions)', 'Put ground beef in freezer']),
       _relaxOrCatchUp('6:00-7:00 pm', title: 'Rest / Weekly Reflection'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
