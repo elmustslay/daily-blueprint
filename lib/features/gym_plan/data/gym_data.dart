@@ -226,7 +226,7 @@ class GymData {
     ),
     Exercise(
       id: 'push_5', name: 'Tricep Pushdown/Press', sets: '3', reps: '8-12', rest: '1-2 min',
-      tip: '🎯 Focus: The lateral and long heads of the triceps.\n\n💡 How to do it: Keep your chest up and shoulders back. Pin your elbows to your sides and push straight down until arms are fully extended.\n\n⚠️ Common Pitfall: Letting the cable pull your elbows fully forward on the way up. Keep the elbows strictly locked by your ribs.',
+      tip: '🎯 Focus: The lateral and long heads of the triceps.\n\n💡 How to do it: Use a narrow grip (with the point facing towards you). Keep your chest up and shoulders back. Pin your elbows to your sides and push straight down until arms are fully extended.\n\n⚠️ Common Pitfall: Letting the cable pull your elbows fully forward on the way up. Keep the elbows strictly locked by your ribs.',
     ),
     Exercise(
       id: 'pull_5', name: 'Machine Bicep Curl', sets: '3', reps: '10-12', rest: '1-2 min',
@@ -245,12 +245,12 @@ class GymData {
       tip: '🎯 Focus: Big compound lift for quads and glutes.\n\n💡 How to do it: Place feet shoulder-width apart. As you lower the weight, aim to bring knees towards your chest. Push through the whole foot (especially the heel) to drive up.\n\n⚠️ Common Pitfall: "Butt wink" – lifting your lower back/hips off the seat at the bottom. Only go as deep as you can before your hips peel off the pad.',
     ),
     Exercise(
-      id: 'legs_2a', name: 'Seated Leg Curl Machine', sets: '3', reps: '8-10', rest: '2-3 min',
-      tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
-    ),
-    Exercise(
       id: 'legs_4a', name: 'Dumbbell Reverse Lunges', sets: '3', reps: '10-12', rest: '1-2 min',
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle) and Quads.\n\n💡 How to do it: Hold dumbbells at your sides. Step one foot backwards and sink your hips down until your back knee almost touches the floor. Lean your torso slightly forward to put the maximum stretch and load on your front glute. Push off the front heel to return to standing.\n\n⚠️ Common Pitfall: Pushing off the back foot. The back leg is just a kickstand; 90% of the weight should be driven up by the front heel/glute.\n\n🔥 SYMMETRY FIX: Because your right leg is 1.3 lbs heavier, ALWAYS start your set by stepping your right leg back so your LEFT (weak) leg is doing the pushing. Go to failure on the left leg, then match that exact number of reps on the right leg (even if the right leg could do more).',
+    ),
+    Exercise(
+      id: 'legs_2a', name: 'Seated Leg Curl Machine', sets: '3', reps: '8-10', rest: '2-3 min',
+      tip: '🎯 Focus: Isolates hamstrings (back of thighs) in a lengthened position for max growth.\n\n💡 How to do it: Align knee joint perfectly with the machine\'s pivot point. Clamp the lap pad firmly against your thighs so they cannot move. Drive heels back and squeeze hard at the bottom.\n\n⚠️ Common Pitfall: If your knees can rise off the seat during the curl, the lap pad is too loose. Lock it down tight!',
     ),
     Exercise(
       id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min',
@@ -268,7 +268,10 @@ class GymData {
       id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
-    // TODO LATER LATER: Add EZ Bar Curls or Cable Rope Hammer Curls (3x10-12) here to increase weekly bicep volume for filling out t-shirt sleeves.
+    Exercise(
+      id: 'pull_bicep_1a', name: 'Alternating Dumbbell Curl', sets: '3', reps: '8-12', rest: '1-2 min',
+      tip: '🎯 Focus: Biceps (filling out t-shirt sleeves).\n\n💡 How to do it: Stand with dumbbells. Curl one arm up, twisting your wrist so your pinky turns toward your shoulder at the peak. Lower under control, then alternate.\n\n⚠️ Common Pitfall: Swinging your torso or letting your elbows drift forward. Keep your elbows pinned strictly to your sides.',
+    ),
     Exercise(
       id: 'stretch_lower_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None',
       tip: 'Lower Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Hip Flexor Lunge: Kneel on one knee, squeeze the glute on the grounded leg, and push hips forward.\n2️⃣ Hamstring Stretch: Put foot on a low bench and gently hinge forward at the hips with a flat back.\n3️⃣ Couch Stretch (Quads): Put shin against a wall/bench, knee on the floor, and sit upright.\n4️⃣ Calf/Ankle Mobilization: Stand on a ledge, let heels drop deep, and hold the stretch to prevent Achilles tightness.',

@@ -113,7 +113,7 @@ class DailyPlanData {
       icon: '🧼',
       details: [
         'Set Dehumidifier to 40% -> Brush teeth',
-        'Face & neck: Wet a clean, fast-drying microfiber facial cloth with lukewarm water, wring out, and gently wipe face and neck',
+        'Face & neck: Wet clean microfiber cloth with lukewarm water, wring so it\'s not dripping but still wetting face, and gently wipe',
         'Ascorbyl 12% (Apply to slightly damp skin): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
         clothes,
@@ -121,12 +121,13 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage', bool cetirizine = false}) {
+  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage', bool cetirizine = false, bool newBathTowel = false}) {
     return TimelineItem(
       time: time,
       title: 'Shower & Bed Prep',
       icon: '🚿',
       details: [
+        if (newBathTowel) '🛑 Grab a FRESH Bath Towel for the new rotation!',
         if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
         'Set Dehumidifier to 40% -> Brush teeth -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
@@ -410,18 +411,15 @@ class DailyPlanData {
     );
   }
 
-  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT 30s';
-  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
+  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 2 pumps (0.5 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 neck & ears) -> WAIT 30s';
+  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 2 pumps (0.5 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 neck & ears) -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
   static const String _retinol = 'Retinol (Apply to BONE DRY skin to prevent irritation): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA (Apply to BONE DRY skin to prevent irritation): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m';
   static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Face Towels & Pillowcases (${isDeloadWeek() ? "5/5" : "3/5"} warmness) -> 1-2 tbsp Arm&Hammer w/ OxiClean. NO Fabric Softener (Dry on LOW heat)';
-  static String get _laundryBathTowels {
-    final bool isBleachWeek = _currentWeekNumber % 2 == 0;
-    return 'Laundry Cycle 2: Bath Towels${isBleachWeek ? " & Washcloths" : ""} (5/5 warmness) -> 2 tbsp Arm&Hammer w/ OxiClean${isBleachWeek ? " + 1/3 cup Bleach" : ""} + EXTRA RINSE (Dry on LOW heat)';
-  }
+  static String get _laundryBathTowels => 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer w/ OxiClean + 1/3 cup Bleach + EXTRA RINSE (Dry on LOW heat)';
   static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> Arm&Hammer w/ OxiClean';
 
   static TimelineItem _preWorkoutBanana1(String time) {
@@ -468,7 +466,7 @@ class DailyPlanData {
       _salmonDinner('7:00-7:30 pm', withWheyCreatine: true, cook: true),
       _chores('7:30-8:00 pm'),
       _study('8:00-9:00 pm', cetirizine: true),
-      _bedPrep('9:00-10:00 pm'),
+      _bedPrep('9:00-10:00 pm', newBathTowel: true),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
     ],
@@ -530,7 +528,7 @@ class DailyPlanData {
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _beefDinner('7:15-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
-      _bedPrep('8:30-9:15 pm', cetirizine: true),
+      _bedPrep('8:30-9:15 pm', cetirizine: true, newBathTowel: true),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
     ],
