@@ -57,6 +57,10 @@ class DailyPlanData {
 
   static DateTime? mockCurrentDate;
 
+  // these lines to be removed after June 14.
+  static bool get isCheatMealRecoveryWeek => (mockCurrentDate ?? DateTime.now()).isBefore(DateTime(2026, 6, 15));
+  // end removal
+
   static int get _currentWeekNumber {
     final now = mockCurrentDate ?? DateTime.now();
     final diff = now.difference(planStartDate).inDays;

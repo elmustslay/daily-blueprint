@@ -535,6 +535,13 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     }
 
     double stickyHeight = 0;
+    // these lines to be removed after June 14.
+    bool showBeefAlert = DailyPlanData.isCheatMealRecoveryWeek && (dayKey == DailyPlanData.thu || dayKey == DailyPlanData.fri || dayKey == DailyPlanData.sat || dayKey == DailyPlanData.sun);
+    bool showBananaAlert = DailyPlanData.isCheatMealRecoveryWeek && (dayKey == DailyPlanData.tue || dayKey == DailyPlanData.thu || dayKey == DailyPlanData.fri);
+    
+    if (showBeefAlert) stickyHeight += 64.0;
+    if (showBananaAlert) stickyHeight += 64.0;
+    // end removal
     if (_showWater) stickyHeight += 165.0;
     if (_showSupp) stickyHeight += 165.0;
     if (incompleteReminders.isNotEmpty) {
@@ -553,6 +560,54 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // these lines to be removed after June 14.
+                    if (showBeefAlert)
+                      Container(
+                        height: 56.0,
+                        margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.amberAccent, width: 1.5),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.warning_amber_rounded, color: Colors.amberAccent),
+                            SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                "Eat pasta with beef... no quinoa.",
+                                style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (showBananaAlert)
+                      Container(
+                        height: 56.0,
+                        margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.blue.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.blueAccent, width: 1.5),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.info_outline, color: Colors.blueAccent),
+                            SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                "one banana... not two.",
+                                style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 13),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    // end removal
                     if (_showWater)
                       Container(
                         height: 165.0,
