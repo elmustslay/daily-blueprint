@@ -117,7 +117,7 @@ class DailyPlanData {
       icon: '🧼',
       details: [
         'Set Dehumidifier to 40% -> Brush teeth',
-        'Face & neck: Wet clean microfiber cloth with lukewarm water, wring so it\'s not dripping but still wetting face, and gently wipe',
+        'Face & neck: Wet new microfiber cloth with lukewarm water, wring so it\'s not dripping but still wetting face, and gently wipe',
         'Ascorbyl 12% (Apply to slightly damp skin): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
         clothes,
@@ -139,7 +139,7 @@ class DailyPlanData {
         'Body: Hold Washcloth under water until SOAKING wet. Pump 1 pump of Lipikar AP+ into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and, once done/rinsed another 1 pump for lower body (for frictionless gym maintenance)',
         'Face: Lather 1 pump of Lipikar AP+ in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)',
         'Finish: Lukewarm rinse',
-        'Pat face & beard completely dry with fresh Washcloth #2 (Do Skincare immediately while bathroom is humid)'
+        'Pat face & beard completely dry with a new microfiber cloth (Do Skincare immediately while bathroom is humid)'
       ],
     );
   }
@@ -162,12 +162,17 @@ class DailyPlanData {
     bool zinc = false,
     int eggs = 3,
     int bananas = 1,
-    bool husk = false,
     int calciumCaps = 0,
+    bool omega3 = true,
   }) {
-    final List<String> supplements = ['D3/K2', 'K2', 'Omega-3', 'Biotin+Keratin'];
-    if (zinc) supplements.add('Zinc Picolinate');
-    if (calciumCaps > 0) supplements.add('Calcium Citrate');
+    final List<String> supplements = [
+      'D3/K2',
+      'K2',
+      if (omega3) 'Omega-3',
+      'Biotin+Keratin',
+      if (zinc) 'Zinc Picolinate',
+      if (calciumCaps > 0) 'Calcium Citrate',
+    ];
 
     return TimelineItem(
       time: time,
@@ -179,10 +184,9 @@ class DailyPlanData {
         'airpods',
         'apple watch',
         'gym outfit',
+        'Supplements (${supplements.join(", ")})',
         'Pasta lunch',
         '$eggs Boiled Eggs',
-        'Supplements (${supplements.join(", ")})',
-        if (husk) 'Dry Mix: 2 tsp husk + 1/8 tsp Morton Lite Salt',
         if (bananas > 0) '${bananas == 1 ? "1 banana" : "$bananas bananas"}',
         'water bottle'
       ],
@@ -259,7 +263,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true, bool vitaminE = false}) {
+  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true, bool vitaminE = false, bool omega3 = true}) {
     return TimelineItem(
       time: time,
       title: 'Afternoon Snack',
@@ -267,7 +271,7 @@ class DailyPlanData {
       details: [
         if (eggs > 0) '$eggs Boiled Eggs',
         if (vitamins) ...[
-          '3 softgel omega-3',
+          if (omega3) '3 softgel omega-3',
           '1 D3-K2',
           '1 standalone K2 (100mcg)',
           '1 cap Biotin+Keratin (10mg/500mg)',
@@ -279,7 +283,10 @@ class DailyPlanData {
       ],
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
-        if (vitamins) ..._Portions.coreVitamins,
+        if (vitamins && omega3) _Portions.omega3,
+        if (vitamins) _Portions.d3K2,
+        if (vitamins) _Portions.standaloneK2,
+        if (vitamins) _Portions.biotin,
         if (vitamins && vitaminE) _Portions.vitaminE,
         if (zinc) _Portions.zinc,
         if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1.5),
@@ -461,7 +468,7 @@ class DailyPlanData {
       _work('8:30-12:00 pm', details: ['Boil 18 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
-      _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true),
+      _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true, omega3: false),
       _work('4:00-4:45 pm'),
       _preWorkoutBanana1('4:45-4:50 pm'),
       _work('4:50-5:00 pm'),
@@ -478,12 +485,12 @@ class DailyPlanData {
       _wakeup('7:50-8:00 am', copper: true),
       _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:20-8:30 am'),
-      _grabThings('8:30-8:35 am', zinc: true, bananas: 2),
+      _grabThings('8:30-8:35 am', zinc: true, bananas: 2, omega3: false),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true, omega3: false),
       _work('3:45-4:45 pm'),
       _preWorkoutBanana1('4:45-4:50 pm'),
       _work('4:50-5:00 pm'),
@@ -500,12 +507,12 @@ class DailyPlanData {
       _wakeup('7:50-8:00 am', nac: true),
       _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningReading('8:20-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
-      _grabThings('8:30-8:35 am', zinc: false, eggs: 3, bananas: 0, calciumCaps: 3),
+      _grabThings('8:30-8:35 am', zinc: false, eggs: 3, bananas: 0, calciumCaps: 3, omega3: false),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm'),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false, omega3: false),
       _work('3:45-5:00 pm'),
       _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false, applySunscreen: false),
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
