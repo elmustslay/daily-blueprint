@@ -48,6 +48,32 @@ void main() {
     print('Successfully exported nutrition data to mynutrition.json');
     expect(file.existsSync(), isTrue);
 
+    // Generate mydetailednutrition.json
+    final Map<String, dynamic> detailedExport = {};
+    for (int i = 0; i < 7; i++) {
+      final dayKey = days[i];
+      final dayItems = DailyPlanData.schedules[dayKey] ?? [];
+      final Map<String, dynamic> timePeriods = {};
+      
+      for (var item in dayItems) {
+        if (item.mealRecord != null) {
+          final nutrition = item.mealRecord!.totalNutrition;
+          if (nutrition.calories > 0 || nutrition.protein > 0 || nutrition.carbs > 0 || nutrition.fat > 0 || nutrition.microNutrients.isNotEmpty) {
+            timePeriods[item.time] = {
+              'title': item.title,
+              'nutrition': nutrition.toJson(),
+            };
+          }
+        }
+      }
+      detailedExport[dayKey] = timePeriods;
+    }
+    
+    final detailedJsonString = const JsonEncoder.withIndent('    ').convert(detailedExport);
+    final detailedFile = File('mydetailednutrition.json');
+    await detailedFile.writeAsString(detailedJsonString);
+    print('Successfully exported detailed nutrition data to mydetailednutrition.json');
+
     // Trigger python script to update CSV, or fallback to generating it in Dart
     bool csvUpdatedByPython = false;
     try {

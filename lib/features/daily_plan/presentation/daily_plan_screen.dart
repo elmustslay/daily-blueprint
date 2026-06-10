@@ -537,10 +537,8 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     double stickyHeight = 0;
     // these lines to be removed after June 14.
     bool showBeefAlert = DailyPlanData.isCheatMealRecoveryWeek && (dayKey == DailyPlanData.thu || dayKey == DailyPlanData.fri || dayKey == DailyPlanData.sat || dayKey == DailyPlanData.sun);
-    bool showBananaAlert = DailyPlanData.isCheatMealRecoveryWeek && (dayKey == DailyPlanData.tue || dayKey == DailyPlanData.thu || dayKey == DailyPlanData.fri);
     
     if (showBeefAlert) stickyHeight += 64.0;
-    if (showBananaAlert) stickyHeight += 64.0;
     // end removal
     if (_showWater) stickyHeight += 165.0;
     if (_showSupp) stickyHeight += 165.0;
@@ -579,29 +577,6 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                               child: Text(
                                 "Eat pasta with beef... no quinoa.",
                                 style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (showBananaAlert)
-                      Container(
-                        height: 56.0,
-                        margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: Colors.blue.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.blueAccent, width: 1.5),
-                        ),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.info_outline, color: Colors.blueAccent),
-                            SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                "one banana... not two.",
-                                style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 13),
                               ),
                             ),
                           ],
@@ -701,19 +676,52 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text('Daily Summaries', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-            IconButton(
-              icon: const Icon(Icons.copy, color: Colors.white),
-              tooltip: 'Copy JSON for AI',
-              onPressed: () {
-                final exportData = {
-                  'weeklyTotals': weeklyTotals.toJson(),
-                  'dailyTotals': dailyTotalsMap.map((k, v) => MapEntry(k, v.toJson())),
-                };
-                Clipboard.setData(ClipboardData(text: jsonEncode(exportData)));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Nutrition JSON copied to clipboard')),
-                );
-              },
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.copy, color: Colors.white),
+                  tooltip: 'Copy JSON for AI',
+                  onPressed: () {
+                    final exportData = {
+                      'weeklyTotals': weeklyTotals.toJson(),
+                      'dailyTotals': dailyTotalsMap.map((k, v) => MapEntry(k, v.toJson())),
+                    };
+                    Clipboard.setData(ClipboardData(text: jsonEncode(exportData)));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Nutrition JSON copied to clipboard')),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.receipt_long, color: Colors.white),
+                  tooltip: 'Copy Detailed JSON',
+                  onPressed: () {
+                    final Map<String, dynamic> detailedExport = {};
+                    for (int i = 0; i < 7; i++) {
+                      final dayKey = days[i];
+                      final dayItems = DailyPlanData.schedules[dayKey] ?? [];
+                      final Map<String, dynamic> timePeriods = {};
+                      
+                      for (var item in dayItems) {
+                        if (item.mealRecord != null) {
+                          final nutrition = item.mealRecord!.totalNutrition;
+                          if (nutrition.calories > 0 || nutrition.protein > 0 || nutrition.carbs > 0 || nutrition.fat > 0 || nutrition.microNutrients.isNotEmpty) {
+                            timePeriods[item.time] = {
+                              'title': item.title,
+                              'nutrition': nutrition.toJson(),
+                            };
+                          }
+                        }
+                      }
+                      detailedExport[dayKey] = timePeriods;
+                    }
+                    Clipboard.setData(ClipboardData(text: const JsonEncoder.withIndent('    ').convert(detailedExport)));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Detailed Nutrition JSON copied to clipboard')),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

@@ -433,13 +433,13 @@ class DailyPlanData {
   static String get _laundryBathTowels => 'Laundry Cycle 2: Bath Towels & Washcloths (5/5 warmness) -> 2 tbsp Arm&Hammer w/ OxiClean + 1/3 cup Bleach + EXTRA RINSE (Dry on LOW heat)';
   static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> Arm&Hammer w/ OxiClean';
 
-  static TimelineItem _preWorkoutBanana1(String time) {
+  static TimelineItem _preWorkoutBanana(String time) {
     return TimelineItem(
       time: time,
-      title: 'Pre-Workout Banana 1',
+      title: 'Pre-Workout Banana',
       icon: '🍌',
       details: [
-        'Eat 1st banana (45m pre-workout)',
+        'Eat banana (30-45m pre-workout)',
       ],
       mealRecord: const MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.banana, amount: 1)
@@ -447,16 +447,14 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _commuteToGym(String time, {bool preWorkoutBanana = false, bool applySunscreen = true}) {
+  static TimelineItem _commuteToGym(String time, {bool applySunscreen = false}) {
     return TimelineItem(
       time: time,
       title: 'Commute to Gym',
       icon: '🚗',
       details: [
         if (applySunscreen) _sunscreen,
-        if (preWorkoutBanana) 'Eat 2nd banana (15m pre-workout)',
       ],
-      mealRecord: preWorkoutBanana ? const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)]) : null,
     );
   }
 
@@ -470,9 +468,9 @@ class DailyPlanData {
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true, omega3: false),
       _work('4:00-4:45 pm'),
-      _preWorkoutBanana1('4:45-4:50 pm'),
+      _preWorkoutBanana('4:45-4:50 pm'),
       _work('4:50-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true),
+      _commuteToGym('5:00-5:30 pm', applySunscreen: true),
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
       _salmonDinner('7:00-7:30 pm', withWheyCreatine: true, cook: true),
       _chores('7:30-8:00 pm'),
@@ -485,16 +483,16 @@ class DailyPlanData {
       _wakeup('7:50-8:00 am', copper: true),
       _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:20-8:30 am'),
-      _grabThings('8:30-8:35 am', zinc: true, bananas: 2, omega3: false),
+      _grabThings('8:30-8:35 am', zinc: true, omega3: false),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true, omega3: false),
       _work('3:45-4:45 pm'),
-      _preWorkoutBanana1('4:45-4:50 pm'),
+      _preWorkoutBanana('4:45-4:50 pm'),
       _work('4:50-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
+      _commuteToGym('5:00-5:30 pm'),
       _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
       _salmonDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
@@ -514,7 +512,7 @@ class DailyPlanData {
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false, omega3: false),
       _work('3:45-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: false, applySunscreen: false),
+      _commuteToGym('5:00-5:30 pm'),
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       _salmonDinner('6:30-7:30 pm', withWheyCreatine: true),
       _chores('7:30-8:00 pm'),
@@ -533,9 +531,9 @@ class DailyPlanData {
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
       _work('3:45-4:45 pm'),
-      _preWorkoutBanana1('4:45-4:50 pm'),
+      _preWorkoutBanana('4:45-4:50 pm'),
       _work('4:50-5:15 pm'),
-      _commuteToGym('5:15-5:30 pm', preWorkoutBanana: true),
+      _commuteToGym('5:15-5:30 pm', applySunscreen: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _beefDinner('7:15-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
@@ -547,16 +545,16 @@ class DailyPlanData {
       _wakeup('7:50-8:00 am', copper: true),
       _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
       _morningReading('8:20-8:30 am'),
-      _grabThings('8:30-8:35 am', bananas: 2),
+      _grabThings('8:30-8:35 am'),
       _commuteToWork('8:35-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3),
       _work('3:45-4:45 pm'),
-      _preWorkoutBanana1('4:45-4:50 pm'),
+      _preWorkoutBanana('4:45-4:50 pm'),
       _work('4:50-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', preWorkoutBanana: true, applySunscreen: false),
+      _commuteToGym('5:00-5:30 pm'),
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
       _beefDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
@@ -581,7 +579,7 @@ class DailyPlanData {
       _study('4:00-4:50 pm'),
       TimelineItem(time: '4:50-5:10 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
       _study('5:10-6:00 pm'),
-      _commuteToGym('6:00-6:20 pm', preWorkoutBanana: false),
+      _commuteToGym('6:00-6:20 pm', applySunscreen: true),
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:30-8:00 pm', withWheyCreatine: false),

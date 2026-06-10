@@ -79,9 +79,75 @@ class DashboardScreen extends ConsumerWidget {
                   ],
                 ),
               ),
+              _buildProgressBar(context),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildProgressBar(BuildContext context) {
+    final startDate = DateTime(2026, 5, 1);
+    final now = DateTime.now();
+    
+    int daysElapsed = now.difference(startDate).inDays + 1;
+    if (daysElapsed < 1) daysElapsed = 1;
+    if (daysElapsed > 200) daysElapsed = 200;
+    
+    double progress = daysElapsed / 200.0;
+    
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Theme.of(context).dividerColor, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          )
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Expanded(
+                child: Text(
+                  'The 200-Day Grind',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                '$daysElapsed / 200',
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 12,
+              backgroundColor: Colors.blueAccent.withValues(alpha: 0.2),
+              color: Colors.blueAccent,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '${200 - daysElapsed} days remaining to achieve 13% body fat.',
+            style: const TextStyle(fontSize: 12, color: Colors.white70),
+          ),
+        ],
       ),
     );
   }

@@ -24,26 +24,14 @@ void main() {
     expect(bathTowelsDetail, contains('Dry on LOW heat'));
   });
 
-  test('Bath towels alternate between Bleach and OxiClean based on week parity', () {
-    // Week 1 (Odd Week): planStartDate is 2026-04-13.
-    // 2026-04-15 is diff of 2 days -> diff ~/ 7 = 0 -> week 1 (Odd)
+  test('Bath towels use Bleach and OxiClean', () {
     DailyPlanData.mockCurrentDate = DateTime(2026, 4, 15);
-    final monScheduleOdd = DailyPlanData.schedules[DailyPlanData.mon]!;
-    final bathTowelsItemOdd = monScheduleOdd.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
-    final bathTowelsDetailOdd = bathTowelsItemOdd.details.firstWhere((d) => d.contains('Bath Towels'));
+    final monSchedule = DailyPlanData.schedules[DailyPlanData.mon]!;
+    final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
+    final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.contains('Bath Towels'));
     
-    expect(bathTowelsDetailOdd, contains('OxiClean'));
-    expect(bathTowelsDetailOdd, isNot(contains('Bleach')));
-
-    // Week 2 (Even Week):
-    // 2026-04-22 is diff of 9 days -> diff ~/ 7 = 1 -> week 2 (Even)
-    DailyPlanData.mockCurrentDate = DateTime(2026, 4, 22);
-    final monScheduleEven = DailyPlanData.schedules[DailyPlanData.mon]!;
-    final bathTowelsItemEven = monScheduleEven.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
-    final bathTowelsDetailEven = bathTowelsItemEven.details.firstWhere((d) => d.contains('Bath Towels'));
-
-    expect(bathTowelsDetailEven, contains('1/3 cup Bleach'));
-    expect(bathTowelsDetailEven, contains('OxiClean'));
+    expect(bathTowelsDetail, contains('OxiClean'));
+    expect(bathTowelsDetail, contains('Bleach'));
   });
 
   test('Wednesday grab list contains Calcium Citrate capsules', () {
@@ -66,34 +54,34 @@ void main() {
   });
 
   test('Banana counts and presence in grab lists are correct', () {
-    // Tue: 2 bananas
+    // Tue: 1 banana
     final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
     final tueGrab = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(tueGrab.details, contains('2 bananas'));
+    expect(tueGrab.details, contains('1 banana'));
 
     // Wed: 0 bananas
     final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
     final wedGrab = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
     expect(wedGrab.details.any((d) => d.contains('banana')), isFalse);
 
-    // Fri: 2 bananas
+    // Fri: 1 banana
     final friSchedule = DailyPlanData.schedules[DailyPlanData.fri]!;
     final friGrab = friSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(friGrab.details, contains('2 bananas'));
+    expect(friGrab.details, contains('1 banana'));
   });
 
   test('Pre-workout banana schedule timing is correct on gym days', () {
     for (final day in [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.thu, DailyPlanData.fri]) {
       final schedule = DailyPlanData.schedules[day]!;
       
-      // Banana 1 should be at 4:45 pm
-      final banana1 = schedule.firstWhere((item) => item.title == 'Pre-Workout Banana 1');
-      expect(banana1.time, '4:45-4:50 pm');
-      expect(banana1.details, contains('Eat 1st banana (45m pre-workout)'));
+      // Banana should be at 4:45 pm
+      final banana = schedule.firstWhere((item) => item.title == 'Pre-Workout Banana');
+      expect(banana.time, '4:45-4:50 pm');
+      expect(banana.details, contains('Eat banana (30-45m pre-workout)'));
 
-      // Banana 2 should be in commute details
+      // Commute should NOT have a second banana
       final commute = schedule.firstWhere((item) => item.title == 'Commute to Gym');
-      expect(commute.details, contains('Eat 2nd banana (15m pre-workout)'));
+      expect(commute.details.any((d) => d.contains('banana')), isFalse);
     }
   });
 
