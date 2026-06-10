@@ -14,7 +14,7 @@ class DashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Time to slay'),
+        title: const Text('Welcome back, El!'),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -23,58 +23,86 @@ class DashboardScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                'Welcome back, El',
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 28),
-              ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
               Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
+                child: Column(
                   children: [
-                    _buildDashboardCard(
-                      context,
-                      title: 'Daily Plan',
-                      icon: Icons.calendar_today_rounded,
-                      color: Colors.blueAccent,
-                      destination: const DailyPlanScreen(),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Daily Plan',
+                              icon: Icons.calendar_today_rounded,
+                              color: Colors.blueAccent,
+                              destination: const DailyPlanScreen(),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Gym Plan',
+                              icon: Icons.fitness_center_rounded,
+                              color: Colors.redAccent,
+                              destination: const GymPlanScreen(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    _buildDashboardCard(
-                      context,
-                      title: 'Gym Plan',
-                      icon: Icons.fitness_center_rounded,
-                      color: Colors.redAccent,
-                      destination: const GymPlanScreen(),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Recipes',
+                              icon: Icons.restaurant_menu_rounded,
+                              color: Colors.orangeAccent,
+                              destination: const RecipeScreen(),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Shopping List',
+                              icon: Icons.shopping_cart_rounded,
+                              color: Colors.greenAccent,
+                              destination: const ShoppingListScreen(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    _buildDashboardCard(
-                      context,
-                      title: 'Recipes',
-                      icon: Icons.restaurant_menu_rounded,
-                      color: Colors.orangeAccent,
-                      destination: const RecipeScreen(),
-                    ),
-                    _buildDashboardCard(
-                      context,
-                      title: 'Shopping List',
-                      icon: Icons.shopping_cart_rounded,
-                      color: Colors.greenAccent,
-                      destination: const ShoppingListScreen(),
-                    ),
-                    _buildDashboardCard(
-                      context,
-                      title: 'Book Plan',
-                      icon: Icons.book_rounded,
-                      color: Colors.purpleAccent,
-                      destination: const BookPlanScreen(),
-                    ),
-                    _buildDashboardCard(
-                      context,
-                      title: 'Weight',
-                      icon: Icons.monitor_weight_rounded,
-                      color: Colors.tealAccent,
-                      destination: const WeightTrackScreen(),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Book Plan',
+                              icon: Icons.book_rounded,
+                              color: Colors.purpleAccent,
+                              destination: const BookPlanScreen(),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Weight',
+                              icon: Icons.monitor_weight_rounded,
+                              color: Colors.tealAccent,
+                              destination: const WeightTrackScreen(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -98,8 +126,8 @@ class DashboardScreen extends ConsumerWidget {
     double progress = daysElapsed / 200.0;
     
     return Container(
-      margin: const EdgeInsets.only(top: 16),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
@@ -113,6 +141,7 @@ class DashboardScreen extends ConsumerWidget {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -121,7 +150,7 @@ class DashboardScreen extends ConsumerWidget {
               const Expanded(
                 child: Text(
                   'The 200-Day Grind',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -132,17 +161,17 @@ class DashboardScreen extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
               value: progress,
-              minHeight: 12,
+              minHeight: 10,
               backgroundColor: Colors.blueAccent.withValues(alpha: 0.2),
               color: Colors.blueAccent,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           Text(
             '${200 - daysElapsed} days remaining to achieve 13% body fat.',
             style: const TextStyle(fontSize: 12, color: Colors.white70),
