@@ -41,7 +41,7 @@ class _Portions {
 class _Recipes {
   static final pasta = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1);
   static final salmon = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1);
-  static final beef = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa_beef'), servings: 1);
+  static final beef = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 1);
 }
 
 class DailyPlanData {
@@ -57,9 +57,6 @@ class DailyPlanData {
 
   static DateTime? mockCurrentDate;
 
-  // these lines to be removed after June 14.
-  static bool get isCheatMealRecoveryWeek => (mockCurrentDate ?? DateTime.now()).isBefore(DateTime(2026, 6, 15));
-  // end removal
 
   static int get _currentWeekNumber {
     final now = mockCurrentDate ?? DateTime.now();
@@ -117,7 +114,8 @@ class DailyPlanData {
       icon: '🧼',
       details: [
         'Set Dehumidifier to 40% -> Brush teeth',
-        'Face & neck: Wet new microfiber cloth with lukewarm water, wring so it\'s not dripping but still wetting face, and gently wipe',
+        'Face & neck: Use 1 Blotting Sheet to press against oily areas (forehead/nose) for 3s each to absorb overnight oil ->' , 
+        'Wet new microfiber cloth with lukewarm water (leave SOAKING wet to prevent friction) and gently wipe',
         'Ascorbyl 12% (Apply to slightly damp skin): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
         clothes,
@@ -125,14 +123,13 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage', bool cetirizine = false, bool newBathTowel = false}) {
+  static TimelineItem _bedPrep(String time, {String hair = '60s warm massage', bool newBathTowel = false}) {
     return TimelineItem(
       time: time,
       title: 'Shower & Bed Prep',
       icon: '🚿',
       details: [
         if (newBathTowel) '🛑 Grab a FRESH Bath Towel for the new rotation!',
-        if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
         'Set Dehumidifier to 40% -> Brush teeth -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
         'Hair: $hair',
@@ -209,14 +206,12 @@ class DailyPlanData {
   static TimelineItem _study(String time, {
     List<String> details = const [],
     bool calcium = false,
-    bool cetirizine = false,
   }) {
     return TimelineItem(
       time: time,
       title: 'Study Time',
       icon: '📚',
       details: [
-        if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
         ...details
       ],
     );
@@ -358,7 +353,7 @@ class DailyPlanData {
       details: [
         if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
         if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
-        '1/4 cup quinoa + 1/4 pound ground beef', 
+        '1/4 pound ground beef', 
         if (showAshwagandha) '2 cap Ashwagandha',
       ],
       mealRecord: MealRecord(items: [
@@ -369,13 +364,12 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _chores(String time, {bool cetirizine = false}) {
+  static TimelineItem _chores(String time) {
     return TimelineItem(
       time: time,
       title: 'Chores & Clean Up',
       icon: '🧼',
       details: [
-        if (cetirizine) '8:30 PM: Take 10mg Cetirizine (Zyrtec)',
         '1 scoop Casein + 1 tbsp Chia in 16oz water',
         'The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.',
       ], 
@@ -474,7 +468,7 @@ class DailyPlanData {
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
       _salmonDinner('7:00-7:30 pm', withWheyCreatine: true, cook: true),
       _chores('7:30-8:00 pm'),
-      _study('8:00-9:00 pm', cetirizine: true),
+      _study('8:00-9:00 pm'),
       _bedPrep('9:00-10:00 pm', newBathTowel: true),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
@@ -496,7 +490,7 @@ class DailyPlanData {
       _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
       _salmonDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
-      _study('8:30-9:30 pm', cetirizine: true),
+      _study('8:30-9:30 pm'),
       _bedPrep('9:30-10:00 pm'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
       _fallAsleep('10:30-11:00 pm'),
@@ -516,7 +510,7 @@ class DailyPlanData {
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       _salmonDinner('6:30-7:30 pm', withWheyCreatine: true),
       _chores('7:30-8:00 pm'),
-      _study('8:00-9:30 pm', cetirizine: true),
+      _study('8:00-9:30 pm'),
       _bedPrep('9:30-10:00 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
       _nightSupplement('10:00-10:30 pm', magAmount: 2, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
@@ -525,7 +519,7 @@ class DailyPlanData {
       _wakeup('7:50-8:00 am'),
       _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:20-8:30 am'),
-      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1cup quinoa + 1lb ground beef (divide in 4, 4 fridge)']),
+      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1lb ground beef (divide in 4, 4 fridge)']),
       _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
@@ -537,7 +531,7 @@ class DailyPlanData {
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _beefDinner('7:15-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
-      _bedPrep('8:30-9:15 pm', cetirizine: true, newBathTowel: true),
+      _bedPrep('8:30-9:15 pm', newBathTowel: true),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
     ],
@@ -558,7 +552,7 @@ class DailyPlanData {
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
       _beefDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
-      _study('8:30-9:30 pm', cetirizine: true),
+      _study('8:30-9:30 pm'),
       _bedPrep('9:30-10:00 pm'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
       _fallAsleep('10:30-11:00 pm'),
@@ -583,7 +577,7 @@ class DailyPlanData {
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:30-8:00 pm', withWheyCreatine: false),
-      _chores('8:00-9:00 pm', cetirizine: true),
+      _chores('8:00-9:00 pm'),
       _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
       _fallAsleep('10:15-10:45 pm'),
@@ -596,13 +590,13 @@ class DailyPlanData {
       _study('9:30-11:00 am', details: ['20mg adderall IR at 9:30am']),
       TimelineItem(time: '11:00-11:30 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
       _study('11:30-1:00 pm'),
-      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 cup quinoa + 1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
+      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta (6 portions)', 'Put ground beef in freezer']),
       _relaxOrCatchUp('6:00-7:00 pm', title: 'Rest / Weekly Reflection'),
-      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal brown rice/black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal brown rice, extra black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm'),
-      _bedPrep('8:00-9:00 pm', cetirizine: true),
+      _bedPrep('8:00-9:00 pm'),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
       _relaxOrCatchUp('9:15-10:00 pm'),
       _fallAsleep('10:00-10:30 pm'),

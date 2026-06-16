@@ -20,7 +20,6 @@ Dinner:
 
 Night:
 - Magnesium Glycinate: 2-3 capsules providing 180mg-270mg elemental magnesium (90mg elemental per capsule from 500mg mag glycinate). (Completely safe, well below the 350mg supplement upper limit).
-- Cetirizine (Zyrtec): 10mg (Taken daily at 8:30 PM. Gold-standard treatment for physical urticarias/itching triggered by temperature shifts, cold air drafts, and water evaporation. Evening dosing minimizes daytime sedation).
 
 ---
 

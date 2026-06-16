@@ -47,36 +47,36 @@ class IngredientsData {
     name: 'Chipotle Chicken Bowl',
     baseUnit: 'bowl',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 740,
-      protein: 78,
-      carbs: 68,
-      fat: 22,
+      calories: 870,
+      protein: 86,
+      carbs: 90,
+      fat: 23,
       microNutrients: {
         'Saturated Fat (g)': 7,
-        'Fiber (g)': 11,
-        'Sugar (g)': 6,
-        'Sodium (mg)': 1320,
-        'Calcium (Food) (mg)': 195,
-        'Iron (Food) (mg)': 6.12,
-        'Vitamin A (Food) (mcg)': 108,
-        'Vitamin C (mg)': 115.2,
-        'Potassium (mg)': 1245.5, // #this is default assumed value
-        'Magnesium (mg)': 193.0, // #this is default assumed value
-        'Zinc (Food) (mg)': 6.5, // #this is default assumed value
-        'Copper (mg)': 0.71, // #this is default assumed value
-        'Selenium (Food) (mcg)': 71.6, // #this is default assumed value
-        'Vitamin K (mcg)': 13.6, // #this is default assumed value
-        'Vitamin E (Food) (mg)': 2.5, // #this is default assumed value
+        'Fiber (g)': 18,
+        'Sugar (g)': 8,
+        'Sodium (mg)': 1530,
+        'Calcium (Food) (mg)': 247,
+        'Iron (Food) (mg)': 7.92,
+        'Vitamin A (Food) (mcg)': 126,
+        'Vitamin C (mg)': 117,
+        'Potassium (mg)': 1550.5, // #this is default assumed value (added +305 for extra beans)
+        'Magnesium (mg)': 253.0, // #this is default assumed value (added +60 for extra beans)
+        'Zinc (Food) (mg)': 7.5, // #this is default assumed value (added +1.0 for extra beans)
+        'Copper (mg)': 0.92, // #this is default assumed value (added +0.21 for extra beans)
+        'Selenium (Food) (mcg)': 73.2, // #this is default assumed value (added +1.6 for extra beans)
+        'Vitamin K (mcg)': 17.9, // #this is default assumed value (added +4.3 for extra beans)
+        'Vitamin E (Food) (mg)': 2.6, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.9, // #this is default assumed value
-        'Thiamin (mg)': 0.64, // #this is default assumed value
-        'Riboflavin (mg)': 0.6, // #this is default assumed value
-        'Niacin (mg)': 17.2, // #this is default assumed value
-        'Vitamin B5 (mg)': 3.6, // #this is default assumed value
-        'Vitamin B6 (mg)': 1.4, // #this is default assumed value
-        'Folate (Food) (mcg)': 219.7, // #this is default assumed value
+        'Thiamin (mg)': 0.85, // #this is default assumed value (added +0.21 for extra beans)
+        'Riboflavin (mg)': 0.65, // #this is default assumed value (added +0.05 for extra beans)
+        'Niacin (mg)': 17.87, // #this is default assumed value (added +0.67 for extra beans)
+        'Vitamin B5 (mg)': 3.9, // #this is default assumed value (added +0.3 for extra beans)
+        'Vitamin B6 (mg)': 1.49, // #this is default assumed value (added +0.09 for extra beans)
+        'Folate (Food) (mcg)': 347.7, // #this is default assumed value (added +128 for extra beans)
         'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 199.5, // #this is default assumed value
-        'Tyrosine (Food) (mg)': 2180, // #this is default assumed value
+        'Choline (mg)': 225.5, // #this is default assumed value (added +26 for extra beans)
+        'Tyrosine (Food) (mg)': 2398.0, // #this is default assumed value (added +218 for extra beans)
       },
     ),
   );

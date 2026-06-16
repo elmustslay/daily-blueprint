@@ -7,9 +7,6 @@ class RecipeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // these lines to be removed after June 14.
-    final isCheatMealRecoveryWeek = DateTime.now().isBefore(DateTime(2026, 6, 15));
-    // end removal
 
     return Scaffold(
       appBar: AppBar(
@@ -18,27 +15,7 @@ class RecipeScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: 
-        // these lines to be removed after June 14.
-        isCheatMealRecoveryWeek ? [
-          Container(
-            width: double.infinity,
-            color: Colors.redAccent,
-            padding: const EdgeInsets.all(12),
-            child: const Text(
-              "don't add quinoa to beef + pasta",
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 16),
-          ...RecipeData.recipes.where((r) => !r.isOutdated).map((recipe) => Column(
-            children: [
-              _buildRecipeCard(context, recipe),
-              const SizedBox(height: 16),
-            ],
-          ))
-        ] :
-        // end removal
+
         RecipeData.recipes.where((r) => !r.isOutdated).map((recipe) => Column(
           children: [
             _buildRecipeCard(context, recipe),
