@@ -932,6 +932,25 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
+  static const Ingredient kiwi = Ingredient(
+    id: 'kiwi',
+    name: 'Trader Joe\'s Kiwi',
+    baseUnit: 'kiwi',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 50,
+      protein: 1,
+      carbs: 13,
+      fat: 0,
+      microNutrients: {
+        'Fiber (g)': 1,
+        'Sugar (g)': 1,
+        'Calcium (Food) (mg)': 14,
+        'Potassium (mg)': 255,
+        'Vitamin C (mg)': 130.5,
+      },
+    ),
+  );
+
   static const Ingredient vitaminE = Ingredient(
     id: 'vitaminE',
     name: 'Vitamin E',
@@ -989,5 +1008,6 @@ static const Ingredient marinaraSauce = Ingredient(
     standaloneK2,
     vitaminE,
     calciumCitrate,
+    kiwi,
   ];
 }

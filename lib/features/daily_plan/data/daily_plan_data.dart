@@ -113,12 +113,13 @@ class DailyPlanData {
       title: 'Get Ready',
       icon: '🧼',
       details: [
-        'Set Dehumidifier to 40% -> Brush teeth',
+        'Set Dehumidifier to 55% -> Brush teeth',
         'Face & neck: Use 1 Blotting Sheet to press against oily areas (forehead/nose) for 3s each to absorb overnight oil ->' , 
         'Wet new microfiber cloth with lukewarm water (leave SOAKING wet to prevent friction) and gently wipe',
         'Ascorbyl 12% (Apply to slightly damp skin): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
         clothes,
+        'Set Dehumidifier to 45% (to prevent mold)',
       ],
     );
   }
@@ -130,7 +131,7 @@ class DailyPlanData {
       icon: '🚿',
       details: [
         if (newBathTowel) '🛑 Grab a FRESH Bath Towel for the new rotation!',
-        'Set Dehumidifier to 40% -> Brush teeth -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
+        'Set Dehumidifier to 55% -> Brush teeth -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
         'Hair: $hair',
         'Body: Hold Washcloth under water until SOAKING wet. Pump 1 pump of Lipikar AP+ into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and, once done/rinsed another 1 pump for lower body (for frictionless gym maintenance)',
@@ -150,7 +151,6 @@ class DailyPlanData {
       details: [
         'Turn on Verilux HappyLight (45-degree angle to face)',
         if (additional.isNotEmpty) additional,
-        'Set Dehumidifier to 40%',
       ],
     );
   }
@@ -206,14 +206,17 @@ class DailyPlanData {
   static TimelineItem _study(String time, {
     List<String> details = const [],
     bool calcium = false,
+    bool sleepKiwi = false,
   }) {
     return TimelineItem(
       time: time,
       title: 'Study Time',
       icon: '📚',
       details: [
-        ...details
+        ...details,
+        if (sleepKiwi) 'Halfway through (30m before bed prep): Eat 1 Kiwi & Swish water (protect enamel)',
       ],
+      mealRecord: sleepKiwi ? const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.kiwi, amount: 1)]) : null,
     );
   }
 
@@ -364,7 +367,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _chores(String time) {
+  static TimelineItem _chores(String time, {bool sleepKiwi = false}) {
     return TimelineItem(
       time: time,
       title: 'Chores & Clean Up',
@@ -372,10 +375,12 @@ class DailyPlanData {
       details: [
         '1 scoop Casein + 1 tbsp Chia in 16oz water',
         'The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.',
+        if (sleepKiwi) 'Eat 1 Kiwi now (30m before bed prep to protect enamel)',
       ], 
-      mealRecord: const MealRecord(items: [
-        IngredientPortion(ingredient: IngredientsData.casein, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1)
+      mealRecord: MealRecord(items: [
+        const IngredientPortion(ingredient: IngredientsData.casein, amount: 1),
+        const IngredientPortion(ingredient: IngredientsData.chiaSeeds, amount: 1),
+        if (sleepKiwi) const IngredientPortion(ingredient: IngredientsData.kiwi, amount: 1),
       ]),
     );
   }
@@ -395,7 +400,7 @@ class DailyPlanData {
         skincare,
         'Apply 5% AHA to underarms (Deodorant - Apply to BONE DRY skin)',
         'Moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT to dry',
-        'Set Dehumidifier to 40%',
+        'Set Dehumidifier to 45% (to prevent mold)',
       ],
       mealRecord: MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: magAmount.toDouble()),
@@ -457,10 +462,10 @@ class DailyPlanData {
       _wakeup('7:50-8:00 am'),
       _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningReading('8:20-8:30 am'),
-      _work('8:30-12:00 pm', details: ['Boil 18 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
+      _work('8:30-12:00 pm', details: ['Boil 24 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
-      _afternoonSnack('3:30-4:00 pm', eggs: 2, zinc: true, vitaminE: true, omega3: false),
+      _afternoonSnack('3:30-4:00 pm', eggs: 3, zinc: true, vitaminE: true, omega3: false),
       _work('4:00-4:45 pm'),
       _preWorkoutBanana('4:45-4:50 pm'),
       _work('4:50-5:00 pm'),
@@ -468,7 +473,7 @@ class DailyPlanData {
       _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
       _salmonDinner('7:00-7:30 pm', withWheyCreatine: true, cook: true),
       _chores('7:30-8:00 pm'),
-      _study('8:00-9:00 pm'),
+      _study('8:00-9:00 pm', sleepKiwi: true),
       _bedPrep('9:00-10:00 pm', newBathTowel: true),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
@@ -490,7 +495,7 @@ class DailyPlanData {
       _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
       _salmonDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
-      _study('8:30-9:30 pm'),
+      _study('8:30-9:30 pm', sleepKiwi: true),
       _bedPrep('9:30-10:00 pm'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
       _fallAsleep('10:30-11:00 pm'),
@@ -510,7 +515,7 @@ class DailyPlanData {
       _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       _salmonDinner('6:30-7:30 pm', withWheyCreatine: true),
       _chores('7:30-8:00 pm'),
-      _study('8:00-9:30 pm'),
+      _study('8:00-9:30 pm', sleepKiwi: true),
       _bedPrep('9:30-10:00 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
       _nightSupplement('10:00-10:30 pm', magAmount: 2, skincare: _retinol),
       _fallAsleep('10:30-11:00 pm'),
@@ -530,7 +535,7 @@ class DailyPlanData {
       _commuteToGym('5:15-5:30 pm', applySunscreen: true),
       _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
       _beefDinner('7:15-8:00 pm', withWheyCreatine: true),
-      _chores('8:00-8:30 pm'),
+      _chores('8:00-8:30 pm', sleepKiwi: true),
       _bedPrep('8:30-9:15 pm', newBathTowel: true),
       _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:30-11:00 pm'),
@@ -552,7 +557,7 @@ class DailyPlanData {
       _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
       _beefDinner('7:30-8:00 pm', withWheyCreatine: true),
       _chores('8:00-8:30 pm'),
-      _study('8:30-9:30 pm'),
+      _study('8:30-9:30 pm', sleepKiwi: true),
       _bedPrep('9:30-10:00 pm'),
       _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
       _fallAsleep('10:30-11:00 pm'),
@@ -569,7 +574,7 @@ class DailyPlanData {
       _study('12:30-1:45 pm'),
       TimelineItem(time: '1:45-2:00 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('2:00-3:30 pm'),
-      _afternoonSnack('3:30-4:00 pm', eggs: 0, whey: true, vitamins: false),
+      _afternoonSnack('3:30-4:00 pm', eggs: 2, whey: true, vitamins: false),
       _study('4:00-4:50 pm'),
       TimelineItem(time: '4:50-5:10 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
       _study('5:10-6:00 pm'),
@@ -577,7 +582,7 @@ class DailyPlanData {
       _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
       TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:30-8:00 pm', withWheyCreatine: false),
-      _chores('8:00-9:00 pm'),
+      _chores('8:00-9:00 pm', sleepKiwi: true),
       _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha),
       _fallAsleep('10:15-10:45 pm'),
@@ -590,12 +595,12 @@ class DailyPlanData {
       _study('9:30-11:00 am', details: ['20mg adderall IR at 9:30am']),
       TimelineItem(time: '11:00-11:30 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
       _study('11:30-1:00 pm'),
-      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 pound ground beef', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate], recipeItems: [_Recipes.beef])),
+      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 pound ground beef', '3 Boiled Eggs', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate, const IngredientPortion(ingredient: IngredientsData.egg, amount: 3)], recipeItems: [_Recipes.beef])),
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta (6 portions)', 'Put ground beef in freezer']),
       _relaxOrCatchUp('6:00-7:00 pm', title: 'Rest / Weekly Reflection'),
       TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal brown rice, extra black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
-      _chores('7:25-8:00 pm'),
+      _chores('7:25-8:00 pm', sleepKiwi: true),
       _bedPrep('8:00-9:00 pm'),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),
       _relaxOrCatchUp('9:15-10:00 pm'),

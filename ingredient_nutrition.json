@@ -906,5 +906,22 @@
                 "Calcium (Supplement) (mg)": 146.66
             }
         }
+    },
+    "kiwi": {
+        "name": "Trader Joe's Kiwi",
+        "baseUnit": "kiwi",
+        "nutrition": {
+            "Calories": 50.0,
+            "Protein": 1.0,
+            "Carbs": 13.0,
+            "Fat": 0.0,
+            "Micros": {
+                "Fiber (g)": 1.0,
+                "Sugar (g)": 1.0,
+                "Calcium (Food) (mg)": 14.0,
+                "Potassium (mg)": 255.0,
+                "Vitamin C (mg)": 130.5
+            }
+        }
     }
 }
