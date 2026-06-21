@@ -49,17 +49,17 @@ class IngredientsData {
     nutritionPerBaseUnit: NutritionFact(
       calories: 870,
       protein: 86,
-      carbs: 90,
-      fat: 23,
+      carbs: 94,
+      fat: 21,
       microNutrients: {
         'Saturated Fat (g)': 7,
-        'Fiber (g)': 18,
+        'Fiber (g)': 17,
         'Sugar (g)': 8,
-        'Sodium (mg)': 1530,
+        'Sodium (mg)': 1690,
         'Calcium (Food) (mg)': 247,
-        'Iron (Food) (mg)': 7.92,
-        'Vitamin A (Food) (mcg)': 126,
-        'Vitamin C (mg)': 117,
+        'Iron (Food) (mg)': 7.74,
+        'Vitamin A (Food) (mcg)': 117,
+        'Vitamin C (mg)': 118,
         'Potassium (mg)': 1550.5, // #this is default assumed value (added +305 for extra beans)
         'Magnesium (mg)': 253.0, // #this is default assumed value (added +60 for extra beans)
         'Zinc (Food) (mg)': 7.5, // #this is default assumed value (added +1.0 for extra beans)
@@ -225,7 +225,7 @@ class IngredientsData {
         'Calcium (Supplement) (mg)': 11,
       },
     ),
-  );
+  ); // not taken anymore
 
   static const Ingredient salmon = Ingredient(
     id: 'salmon',
@@ -979,7 +979,6 @@ static const Ingredient marinaraSauce = Ingredient(
     egg,
     avocadoOil,
     banana,
-    psylliumHusk,
     salmon,
     wheyIsolate,
     creatine,

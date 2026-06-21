@@ -42,17 +42,17 @@
         "nutrition": {
             "Calories": 870.0,
             "Protein": 86.0,
-            "Carbs": 90.0,
-            "Fat": 23.0,
+            "Carbs": 94.0,
+            "Fat": 21.0,
             "Micros": {
                 "Saturated Fat (g)": 7.0,
-                "Fiber (g)": 18.0,
+                "Fiber (g)": 17.0,
                 "Sugar (g)": 8.0,
-                "Sodium (mg)": 1530.0,
+                "Sodium (mg)": 1690.0,
                 "Calcium (Food) (mg)": 247.0,
-                "Iron (Food) (mg)": 7.92,
-                "Vitamin A (Food) (mcg)": 126.0,
-                "Vitamin C (mg)": 117.0,
+                "Iron (Food) (mg)": 7.74,
+                "Vitamin A (Food) (mcg)": 117.0,
+                "Vitamin C (mg)": 118.0,
                 "Potassium (mg)": 1550.5,
                 "Magnesium (mg)": 253.0,
                 "Zinc (Food) (mg)": 7.5,
@@ -185,24 +185,6 @@
                 "Tyrosine (Food) (mg)": 10.0,
                 "EPA (Food) (mg)": 0.0,
                 "DHA (Food) (mg)": 0.0
-            }
-        }
-    },
-    "husk": {
-        "name": "Psyllium Husk",
-        "baseUnit": "tsp",
-        "nutrition": {
-            "Calories": 10.0,
-            "Protein": 0.0,
-            "Carbs": 4.0,
-            "Fat": 0.0,
-            "Micros": {
-                "Fiber (g)": 4.0,
-                "Soluble Fiber (g)": 4.0,
-                "Sodium (mg)": 0.0,
-                "Iron (Supplement) (mg)": 1.8,
-                "Potassium (mg)": 46.0,
-                "Calcium (Supplement) (mg)": 11.0
             }
         }
     },

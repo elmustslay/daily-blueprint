@@ -113,7 +113,8 @@ class DailyPlanData {
       title: 'Get Ready',
       icon: '🧼',
       details: [
-        'Set Dehumidifier to 55% -> Brush teeth',
+        'Set Dehumidifier to 55%',
+        'Brush teeth',
         'Face & neck: Use 1 Blotting Sheet to press against oily areas (forehead/nose) for 3s each to absorb overnight oil ->' , 
         'Wet new microfiber cloth with lukewarm water (leave SOAKING wet to prevent friction) and gently wipe',
         'Ascorbyl 12% (Apply to slightly damp skin): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
@@ -131,7 +132,9 @@ class DailyPlanData {
       icon: '🚿',
       details: [
         if (newBathTowel) '🛑 Grab a FRESH Bath Towel for the new rotation!',
-        'Set Dehumidifier to 55% -> Brush teeth -> Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
+        'Set Dehumidifier to 55%',
+        'Brush teeth (safe since 30m since kiwi)',
+        'Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat',
         'In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly',
         'Hair: $hair',
         'Body: Hold Washcloth under water until SOAKING wet. Pump 1 pump of Lipikar AP+ into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and, once done/rinsed another 1 pump for lower body (for frictionless gym maintenance)',
@@ -228,18 +231,6 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _preLunchFiber(String time) {
-    return TimelineItem(
-      time: time,
-      title: 'Pre-Lunch Fiber',
-      icon: '🥤',
-      details: ['2 tsp husk + 1/8 tsp Morton Lite Salt in 16oz water (Drink 30m before lunch)'],
-      mealRecord: const MealRecord(items: [
-        IngredientPortion(ingredient: IngredientsData.psylliumHusk, amount: 2),
-        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.125)
-      ]),
-    );
-  }
 
   static TimelineItem _pastaLunch(String time, {int calciumCaps = 0}) {
     return TimelineItem(
@@ -276,8 +267,9 @@ class DailyPlanData {
           if (vitaminE) '1 softgel Vitamin E (267mg)',
         ],
         if (zinc) '1 cap Zinc Picolinate (30mg)',
-        if (whey) '1.5 scoops whey isolate (45g protein)',
+        if (whey) '1 scoop whey isolate (30g protein)',
         if (whey) '1 scoop creatine monohydrate (5g)',
+        'Swish/drink water after eating/drinking to clear mouth',
       ],
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
@@ -287,7 +279,7 @@ class DailyPlanData {
         if (vitamins) _Portions.biotin,
         if (vitamins && vitaminE) _Portions.vitaminE,
         if (zinc) _Portions.zinc,
-        if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1.5),
+        if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1),
         if (whey) _Portions.creatine,
       ]),
     );
@@ -373,7 +365,7 @@ class DailyPlanData {
       title: 'Chores & Clean Up',
       icon: '🧼',
       details: [
-        '1 scoop Casein + 1 tbsp Chia in 16oz water',
+        '1 scoop Casein + 1 tbsp Chia in 16oz water -> Swish/drink water after',
         'The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.',
         if (sleepKiwi) 'Eat 1 Kiwi now (30m before bed prep to protect enamel)',
       ], 
@@ -438,7 +430,7 @@ class DailyPlanData {
       title: 'Pre-Workout Banana',
       icon: '🍌',
       details: [
-        'Eat banana (30-45m pre-workout)',
+        'Eat banana (30-45m pre-workout) -> Swish/drink water after',
       ],
       mealRecord: const MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.banana, amount: 1)
@@ -599,7 +591,7 @@ class DailyPlanData {
       TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
       TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta (6 portions)', 'Put ground beef in freezer']),
       _relaxOrCatchUp('6:00-7:00 pm', title: 'Rest / Weekly Reflection'),
-      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal brown rice, extra black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
+      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal white rice, extra black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
       _chores('7:25-8:00 pm', sleepKiwi: true),
       _bedPrep('8:00-9:00 pm'),
       _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement'),

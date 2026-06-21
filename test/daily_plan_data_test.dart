@@ -77,7 +77,7 @@ void main() {
       // Banana should be at 4:45 pm
       final banana = schedule.firstWhere((item) => item.title == 'Pre-Workout Banana');
       expect(banana.time, '4:45-4:50 pm');
-      expect(banana.details, contains('Eat banana (30-45m pre-workout)'));
+      expect(banana.details, contains('Eat banana (30-45m pre-workout) -> Swish/drink water after'));
 
       // Commute should NOT have a second banana
       final commute = schedule.firstWhere((item) => item.title == 'Commute to Gym');
