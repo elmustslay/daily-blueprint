@@ -480,7 +480,7 @@ class ExerciseCard extends ConsumerWidget {
               ],
             ),
             const Divider(height: 32),
-            if (todayLogCount == 0 && !isPrimed && exercise.primaryMuscleGroup != 'Mobility')
+            if (todayLogCount == 0 && !isPrimed && exercise.primaryMuscleGroup != 'Mobility' && exercise.primaryMuscleGroup != 'Abs')
               _buildWarmupSuggestion(workingWeight),
             weightsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),

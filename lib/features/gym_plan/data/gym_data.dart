@@ -296,8 +296,8 @@ class GymData {
       tip: '🎯 Focus: Upper back and rear shoulders (delts).\n\n💡 How to do it: Pull higher towards the upper chest, keeping elbows flared out slightly wider than a traditional lat-focused row.\n\n⚠️ Common Pitfall: Shrugging your shoulders up into your ears. Actively push your shoulders down and back during the pull.',
     ),
     Exercise(
-      id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: '15', rest: '1-2 min', primaryMuscleGroup: 'Triceps',
-      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it (at 50): On an assisted machine, more weight counter-balances you and makes it easier. Set it to easily get 15 reps with good form first.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
+      id: 'push_6', name: 'Machine Assisted Dip', sets: '3', reps: '8-12', rest: '1-2 min', primaryMuscleGroup: 'Triceps',
+      tip: '🎯 Focus: Triceps and lower chest.\n\n💡 How to do it: Adjust the counter-weight so that you reach failure between 8-12 reps. Remember, less weight on the machine makes it harder, as you are lifting more of your body weight.\n\n⚠️ Common Pitfall: Going too fast and using momentum. Control the negative (way down), get a full stretch at the bottom, and a hard squeeze at the top lockout.',
     ),
     Exercise(
       id: 'pull_2', name: 'Machine Seated Row', sets: '3', reps: '8-12', rest: '2-3 min', primaryMuscleGroup: 'Mid-Back',
