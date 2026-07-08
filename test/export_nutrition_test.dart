@@ -28,8 +28,21 @@ void main() {
       
       for (var item in dayItems) {
         if (item.mealRecord != null) {
-          dayTotal += item.mealRecord!.totalNutrition;
-          weeklyTotals += item.mealRecord!.totalNutrition;
+          var nutrition = item.mealRecord!.totalNutrition;
+          double absorbedIron = item.mealRecord!.calculateAbsorbedIron();
+          if (absorbedIron > 0) {
+            var newMicros = Map<String, double>.from(nutrition.microNutrients);
+            newMicros['Absorbed Iron (mg)'] = absorbedIron;
+            nutrition = NutritionFact(
+              calories: nutrition.calories,
+              protein: nutrition.protein,
+              carbs: nutrition.carbs,
+              fat: nutrition.fat,
+              microNutrients: newMicros,
+            );
+          }
+          dayTotal += nutrition;
+          weeklyTotals += nutrition;
         }
       }
       dailyTotalsMap[dayKey] = dayTotal;
@@ -57,7 +70,19 @@ void main() {
       
       for (var item in dayItems) {
         if (item.mealRecord != null) {
-          final nutrition = item.mealRecord!.totalNutrition;
+          var nutrition = item.mealRecord!.totalNutrition;
+          double absorbedIron = item.mealRecord!.calculateAbsorbedIron();
+          if (absorbedIron > 0) {
+            var newMicros = Map<String, double>.from(nutrition.microNutrients);
+            newMicros['Absorbed Iron (mg)'] = absorbedIron;
+            nutrition = NutritionFact(
+              calories: nutrition.calories,
+              protein: nutrition.protein,
+              carbs: nutrition.carbs,
+              fat: nutrition.fat,
+              microNutrients: newMicros,
+            );
+          }
           if (nutrition.calories > 0 || nutrition.protein > 0 || nutrition.carbs > 0 || nutrition.fat > 0 || nutrition.microNutrients.isNotEmpty) {
             timePeriods[item.time] = {
               'title': item.title,

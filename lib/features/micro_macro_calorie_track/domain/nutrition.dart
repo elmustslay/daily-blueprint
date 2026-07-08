@@ -143,4 +143,63 @@ class MealRecord {
     }
     return total;
   }
+
+  double calculateAbsorbedIron() {
+    double hemeIron = 0.0;
+    double nonHemeIron = 0.0;
+    final totalNut = totalNutrition;
+    
+    double calcium = (totalNut.microNutrients['Calcium (Food) (mg)'] ?? 0.0) +
+        (totalNut.microNutrients['Calcium (Supplement) (mg)'] ?? 0.0);
+    double vitaminC = totalNut.microNutrients['Vitamin C (mg)'] ?? 0.0;
+
+    final hemeIds = {'salmon', 'ground_turkey', 'ground_beef_96', 'chipotle_bowl'};
+
+    void processPortion(IngredientPortion portion, double scale) {
+      double ironFood = (portion.ingredient.nutritionPerBaseUnit.microNutrients['Iron (Food) (mg)'] ?? 0.0) * scale;
+      double ironSupp = (portion.ingredient.nutritionPerBaseUnit.microNutrients['Iron (Supplement) (mg)'] ?? 0.0) * scale;
+      double iron = ironFood + ironSupp;
+      
+      if (iron > 0) {
+        if (hemeIds.contains(portion.ingredient.id)) {
+          hemeIron += iron;
+        } else {
+          nonHemeIron += iron;
+        }
+      }
+    }
+
+    for (var portion in items) {
+      processPortion(portion, portion.amount);
+    }
+
+    for (var rPortion in recipeItems) {
+      if (rPortion.recipe.servings > 0) {
+        double recipeScale = rPortion.servings / rPortion.recipe.servings;
+        for (var portion in rPortion.recipe.ingredients) {
+          processPortion(portion, portion.amount * recipeScale);
+        }
+      }
+    }
+
+    double baseHemeAbsorbed = hemeIron * 0.20;
+
+    double vitCModifier = 1.0;
+    if (vitaminC > 0) {
+      vitCModifier += (vitaminC / 10.0) * 0.05;
+      if (vitCModifier > 3.0) vitCModifier = 3.0;
+    }
+    double baseNonHemeAbsorbed = nonHemeIron * 0.05 * vitCModifier;
+
+    double totalAbsorbed = baseHemeAbsorbed + baseNonHemeAbsorbed;
+
+    double inhibitionFactor = 0.0;
+    if (calcium >= 50 && calcium <= 300) {
+      inhibitionFactor = ((calcium - 50) / 250) * 0.50;
+    } else if (calcium > 300) {
+      inhibitionFactor = 0.50;
+    }
+
+    return totalAbsorbed * (1.0 - inhibitionFactor);
+  }
 }

@@ -32,16 +32,22 @@ final todayLogCountProvider = FutureProvider.family<int, String>((ref, exerciseI
   return count;
 });
 
-class SelectedFirstExerciseNotifier extends Notifier<String?> {
-  @override
-  String? build() => null;
+final primedMuscleGroupsProvider = FutureProvider<Set<String>>((ref) async {
+  final repo = ref.watch(gymRepoProvider);
+  final allLogs = await repo.getAllLogs();
+  final today = DateTime.now();
+  final primed = <String>{};
   
-  void setExercise(String id) {
-    state = id;
+  for (var log in allLogs) {
+    if (log.date.year == today.year && log.date.month == today.month && log.date.day == today.day) {
+      final ex = GymData.getExerciseById(log.exerciseId);
+      if (ex != null) {
+        primed.add(ex.primaryMuscleGroup);
+      }
+    }
   }
-}
-
-final selectedFirstExerciseProvider = NotifierProvider<SelectedFirstExerciseNotifier, String?>(SelectedFirstExerciseNotifier.new);
+  return primed;
+});
 
 class GymPlanScreen extends ConsumerStatefulWidget {
   const GymPlanScreen({super.key});
@@ -110,6 +116,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
               ).then((_) {
                 ref.invalidate(pastWeightsProvider);
                 ref.invalidate(todayLogCountProvider);
+                ref.invalidate(primedMuscleGroupsProvider);
               });
             },
           ),
@@ -166,8 +173,6 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
   }
 
   Widget _buildWorkoutList(List<Exercise> exercises) {
-    bool hasStartedWorkout = false;
-    
     int getCategory(Exercise exercise) {
       int numSets = 3;
       final match = RegExp(r'(\d+)').allMatches(exercise.sets);
@@ -175,7 +180,6 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
         numSets = int.parse(match.last.group(0)!);
       }
       final count = ref.watch(todayLogCountProvider(exercise.id)).value ?? 0;
-      if (count > 0) hasStartedWorkout = true;
       
       if (count >= numSets) return 2; // completed
       if (count > 0) return 0; // active
@@ -206,7 +210,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
           return _buildGymDeloadAlert();
         }
         final exerciseIndex = DailyPlanData.isDeloadWeek() ? index - 1 : index;
-        return ExerciseCard(exercise: finalExercises[exerciseIndex], hasStartedWorkout: hasStartedWorkout);
+        return ExerciseCard(exercise: finalExercises[exerciseIndex]);
       },
     );
   }
@@ -404,9 +408,8 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
 
 class ExerciseCard extends ConsumerWidget {
   final Exercise exercise;
-  final bool hasStartedWorkout;
 
-  const ExerciseCard({super.key, required this.exercise, this.hasStartedWorkout = false});
+  const ExerciseCard({super.key, required this.exercise});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -428,8 +431,9 @@ class ExerciseCard extends ConsumerWidget {
     final baselinePrevW = baselineWeightsAsync.value?['prev'];
     final workingWeight = baselinePrevW ?? baselineWeightsAsync.value?['max'];
 
-    final selectedStartId = ref.watch(selectedFirstExerciseProvider);
-    final isPrimaryWarmup = selectedStartId == exercise.id;
+    final primedGroupsAsync = ref.watch(primedMuscleGroupsProvider);
+    final primedGroups = primedGroupsAsync.value ?? <String>{};
+    final isPrimed = primedGroups.contains(exercise.primaryMuscleGroup);
 
     return Opacity(
       opacity: isCompleted ? 0.6 : 1.0,
@@ -476,21 +480,8 @@ class ExerciseCard extends ConsumerWidget {
               ],
             ),
             const Divider(height: 32),
-            if (todayLogCount == 0 && !hasStartedWorkout) ...[
-              if (isPrimaryWarmup)
-                _buildWarmupSuggestion(workingWeight),
-              if (!isPrimaryWarmup)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton.icon(
-                    onPressed: () {
-                      ref.read(selectedFirstExerciseProvider.notifier).setExercise(exercise.id);
-                    },
-                    icon: const Icon(Icons.local_fire_department, size: 16, color: Colors.orangeAccent),
-                    label: const Text('Set as Start', style: TextStyle(color: Colors.orangeAccent)),
-                  ),
-                ),
-            ],
+            if (todayLogCount == 0 && !isPrimed && exercise.primaryMuscleGroup != 'Mobility')
+              _buildWarmupSuggestion(workingWeight),
             weightsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('Error: $err'),
@@ -555,9 +546,9 @@ class ExerciseCard extends ConsumerWidget {
               ],
             ),
             SizedBox(height: 8),
-            Text('1. Very light weight for 10-15 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
+            Text('1. Very light weight for 10 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
             SizedBox(height: 4),
-            Text('2. Moderate light weight for 8-10 reps', style: TextStyle(fontSize: 13, color: Colors.white)),
+            Text('2. Moderate light weight for 6 reps', style: TextStyle(fontSize: 13, color: Colors.white)),
           ],
         ),
       );
@@ -565,10 +556,9 @@ class ExerciseCard extends ConsumerWidget {
 
     double roundTo5(double w) => (w / 5).round() * 5.0;
 
-    final w0 = roundTo5(workingWeight * 0.3);
-    final w1 = roundTo5(workingWeight * 0.5);
-    final w2 = roundTo5(workingWeight * 0.7);
-    final w3 = roundTo5(workingWeight * 0.85);
+    final w1 = roundTo5(workingWeight * 0.4);
+    final w2 = roundTo5(workingWeight * 0.6);
+    final w3 = roundTo5(workingWeight * 0.8);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -589,13 +579,11 @@ class ExerciseCard extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Text('1. ~${w0.toStringAsFixed(0)} lbs for 10-15 reps (30%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          Text('1. ~${w1.toStringAsFixed(0)} lbs for 10 reps (40%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
-          Text('2. ~${w1.toStringAsFixed(0)} lbs for 8-10 reps (50%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          Text('2. ~${w2.toStringAsFixed(0)} lbs for 6 reps (60%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
-          Text('3. ~${w2.toStringAsFixed(0)} lbs for 4-6 reps (70%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
-          const SizedBox(height: 4),
-          Text('4. ~${w3.toStringAsFixed(0)} lbs for 1-2 reps (Primer)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          Text('3. ~${w3.toStringAsFixed(0)} lbs for 3 reps (80%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
         ],
       ),
     );
@@ -647,6 +635,7 @@ class ExerciseCard extends ConsumerWidget {
                 await ref.read(gymRepoProvider).logWeights(exercise.id, weights, startIndex: loggedToday + 1);
                 ref.invalidate(pastWeightsProvider);
                 ref.invalidate(todayLogCountProvider(exercise.id));
+                ref.invalidate(primedMuscleGroupsProvider);
                 // ignore: invalid_use_of_visible_for_testing_member
                 try {
                   ref.invalidate(exerciseLogsProvider(exercise.id));
