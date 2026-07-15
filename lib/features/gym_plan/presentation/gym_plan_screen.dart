@@ -549,6 +549,8 @@ class ExerciseCard extends ConsumerWidget {
             Text('1. Very light weight for 10 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
             SizedBox(height: 4),
             Text('2. Moderate light weight for 6 reps', style: TextStyle(fontSize: 13, color: Colors.white)),
+            SizedBox(height: 8),
+            Text('⏳ Rest ~1 min between warmups, 2 mins before working set.', style: TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
           ],
         ),
       );
@@ -584,6 +586,8 @@ class ExerciseCard extends ConsumerWidget {
           Text('2. ~${w2.toStringAsFixed(0)} lbs for 6 reps (60%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
           Text('3. ~${w3.toStringAsFixed(0)} lbs for 3 reps (80%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          const SizedBox(height: 8),
+          const Text('⏳ Rest ~1 min between warmups, 2 mins before working set.', style: TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
         ],
       ),
     );

@@ -169,5 +169,45 @@
                 "DHA (Food) (mg)": 30.0
             }
         }
+    },
+    "quinoa": {
+        "name": "Refeed Quinoa",
+        "servings": 7,
+        "nutrition": {
+            "Calories": 300.0,
+            "Protein": 12.0,
+            "Carbs": 54.0,
+            "Fat": 5.0,
+            "Micros": {
+                "Saturated Fat (g)": 0.0,
+                "Sodium (mg)": 165.71,
+                "Fiber (g)": 6.0,
+                "Sugar (g)": 2.0,
+                "Calcium (Food) (mg)": 40.0,
+                "Iron (Food) (mg)": 3.8,
+                "Potassium (mg)": 680.0,
+                "Zinc (Food) (mg)": 0.65,
+                "Copper (mg)": 0.13,
+                "Selenium (Food) (mcg)": 1.8,
+                "Vitamin A (Food) (mcg)": 0.5,
+                "Vitamin C (mg)": 0.0,
+                "Vitamin D3 (Food) (mcg)": 0.0,
+                "Vitamin K (mcg)": 0.0,
+                "Vitamin E (Food) (mg)": 0.5,
+                "Vitamin B12 (mcg)": 0.0,
+                "Thiamin (mg)": 0.07,
+                "Riboflavin (mg)": 0.07,
+                "Niacin (mg)": 0.3,
+                "Vitamin B5 (mg)": 0.15,
+                "Vitamin B6 (mg)": 0.1,
+                "Folate (Food) (mcg)": 39.0,
+                "Folic Acid (Supplement) (mcg)": 0.0,
+                "Choline (mg)": 15.0,
+                "Tyrosine (Food) (mg)": 75.0,
+                "EPA (Food) (mg)": 0.0,
+                "DHA (Food) (mg)": 0.0,
+                "Iodine (mcg)": 34.29
+            }
+        }
     }
 }

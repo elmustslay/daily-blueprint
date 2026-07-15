@@ -42,6 +42,7 @@ class _Recipes {
   static final pasta = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1);
   static final salmon = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1);
   static final beef = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 1);
+  static final quinoa = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa'), servings: 1);
 }
 
 class DailyPlanData {
@@ -72,6 +73,16 @@ class DailyPlanData {
   static bool isAshwagandhaOff() {
     if (_currentWeekNumber == 0) return false;
     return ((_currentWeekNumber - 1) % 12) + 1 > 8;
+  }
+
+  static bool isRefeedWeek() {
+    if (_currentWeekNumber == 0) return false;
+    return (_currentWeekNumber - 1) % 6 == 5; // 5 weeks cut, 1 week refeed
+  }
+
+  static bool isNextWeekRefeedWeek() {
+    if (_currentWeekNumber == 0) return false;
+    return (_currentWeekNumber) % 6 == 5; 
   }
 
   static const Map<String, int> waterBottles = {
@@ -144,26 +155,30 @@ class DailyPlanData {
   }
 
 
-  static TimelineItem _morningReading(String time, {String additional = ''}) {
+  static TimelineItem _morningReading(String time, {String additional = '', bool includeBagel = true}) {
+    final bool showBagel = includeBagel && isRefeedWeek();
     return TimelineItem(
       time: time,
-      title: 'Morning Reading',
+      title: 'Morning Reading' + (showBagel ? ' & Bagel' : ''),
       icon: '📖',
       details: [
         'Turn on Verilux HappyLight (45-degree angle to face)',
+        if (showBagel) '🥯 REFEED WEEK: Eat 1 Plain Bagel',
         if (additional.isNotEmpty) additional,
       ],
+      mealRecord: showBagel ? const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.bagel, amount: 1)]) : null,
     );
   }
 
   static TimelineItem _grabThings(String time, {
     bool zinc = false,
     int eggs = 3,
-    int bananas = 1,
+    int bananas = 0,
     int calciumCaps = 0,
     bool omega3 = true,
     bool copper = false,
   }) {
+    final effectiveBananas = bananas + (isRefeedWeek() ? 2 : 0);
     final List<String> supplements = [
       'K2 (x2)',
       if (omega3) 'Omega-3',
@@ -182,11 +197,10 @@ class DailyPlanData {
         '2 key/wallet/phone',
         'airpods',
         'apple watch',
-        'gym outfit',
         'Supplements (${supplements.join(", ")})',
         'Pasta lunch',
         '$eggs Boiled Eggs',
-        if (bananas > 0) '${bananas == 1 ? "1 banana" : "$bananas bananas"}',
+        if (effectiveBananas > 0) '${effectiveBananas == 1 ? "1 banana" : "$effectiveBananas bananas"}',
         'water bottle'
       ],
     );
@@ -251,13 +265,15 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true, bool vitaminE = false, bool omega3 = true, bool copper = false}) {
+  static TimelineItem _afternoonSnack(String time, {required int eggs, bool zinc = false, bool whey = false, bool vitamins = true, bool vitaminE = false, bool omega3 = true, bool copper = false, int bananaCount = 0}) {
+    final effectiveBananaCount = bananaCount + (isRefeedWeek() ? 2 : 0);
     return TimelineItem(
       time: time,
       title: 'Afternoon Snack',
       icon: eggs > 0 ? '🥚' : '🥤',
       details: [
         if (eggs > 0) '$eggs Boiled Eggs',
+        if (effectiveBananaCount > 0) '$effectiveBananaCount Banana${effectiveBananaCount > 1 ? 's' : ''}',
         if (vitamins) ...[
           if (omega3) '3 softgel omega-3',
           '2 standalone K2 (100mcg each)',
@@ -272,6 +288,7 @@ class DailyPlanData {
       ],
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
+        if (effectiveBananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: effectiveBananaCount.toDouble()),
         if (vitamins && omega3) _Portions.omega3,
         if (vitamins) const IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 2),
         if (vitamins) _Portions.biotin,
@@ -318,7 +335,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _salmonDinner(String time, {bool withWheyCreatine = false, bool cook = false, bool copper = false}) {
+  static TimelineItem _salmonDinner(String time, {bool withWheyCreatine = false, bool cook = false, bool copper = false, int bananaCount = 0}) {
     final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
@@ -327,20 +344,26 @@ class DailyPlanData {
       details: [
         if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
         if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
+        if (bananaCount > 0) '$bananaCount Banana${bananaCount > 1 ? 's' : ''}',
         if (copper) 'Take 1 cap Copper Glycinate (3mg)',
         if (cook) 'Cook Salmon (3 portions)' else '1/3 lb Wild Sockeye Salmon', 
         if (showAshwagandha) '2 cap Ashwagandha',
+        if (isRefeedWeek()) '🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa',
       ],
       mealRecord: MealRecord(items: [
         if (withWheyCreatine) _Portions.whey,
         if (withWheyCreatine) _Portions.creatine,
+        if (bananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
         if (copper) const IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1),
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
-      ], recipeItems: [_Recipes.salmon]),
+      ], recipeItems: [
+        _Recipes.salmon,
+        if (isRefeedWeek()) _Recipes.quinoa,
+      ]),
     );
   }
 
-  static TimelineItem _beefDinner(String time, {bool withWheyCreatine = false}) {
+  static TimelineItem _beefDinner(String time, {bool withWheyCreatine = false, int bananaCount = 0}) {
     final showAshwagandha = !isAshwagandhaOff();
     return TimelineItem(
       time: time,
@@ -349,14 +372,20 @@ class DailyPlanData {
       details: [
         if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
         if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
+        if (bananaCount > 0) '$bananaCount Banana${bananaCount > 1 ? 's' : ''}',
         '1/4 pound ground beef', 
         if (showAshwagandha) '2 cap Ashwagandha',
+        if (isRefeedWeek()) '🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa',
       ],
       mealRecord: MealRecord(items: [
         if (withWheyCreatine) _Portions.whey,
         if (withWheyCreatine) _Portions.creatine,
+        if (bananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
-      ], recipeItems: [_Recipes.beef]),
+      ], recipeItems: [
+        _Recipes.beef,
+        if (isRefeedWeek()) _Recipes.quinoa,
+      ]),
     );
   }
 
@@ -394,7 +423,7 @@ class DailyPlanData {
         if (nac) 'Take 600mg NAC + 25mcg Selenium (Combo Pill)',
         skincare,
         'Apply 5% AHA to underarms (Deodorant - Apply to BONE DRY skin)',
-        'Moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) -> WAIT to dry',
+        'Moisturizer (CeraVe PM): 3.5 pumps (1 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 ears, 1 neck) + Cetaphil Hydrating Eye Gel-Cream -> WAIT to dry',
         'Set Dehumidifier to 45% (to prevent mold)',
       ],
       mealRecord: MealRecord(items: [
@@ -417,8 +446,8 @@ class DailyPlanData {
     );
   }
 
-  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 2 pumps (0.5 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 neck & ears) -> WAIT 30s';
-  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM): 2 pumps (0.5 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 neck & ears) -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
+  static const String _morningMoisturizer = 'Moisturizer (CeraVe PM): 2 pumps (0.5 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 neck & ears) + Cetaphil Hydrating Eye Gel-Cream -> WAIT 30s';
+  static const String _moisturizerAndSunscreen = 'Apply morning moisturizer (CeraVe PM) + Cetaphil Hydrating Eye Gel-Cream: 2 pumps (0.5 forehead, 0.5 left cheek, 0.5 right cheek, 0.5 neck & ears) -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
   static const String _retinol = 'Retinol (Apply to BONE DRY skin to prevent irritation): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA (Apply to BONE DRY skin to prevent irritation): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m';
@@ -455,152 +484,218 @@ class DailyPlanData {
 
   static Map<String, List<TimelineItem>> get schedules => {
     mon: [
-      _wakeup('7:50-8:00 am'),
-      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
-      _morningReading('8:20-8:30 am'),
-      _work('8:30-12:00 pm', details: ['Boil 24 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
+      _wakeup('8:10-8:20 am'),
+      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
+      _morningReading('8:40-8:50 am'),
+      _work('8:50-12:00 pm', details: ['Boil 24 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm', details: [_laundryBathTowels]),
       _afternoonSnack('3:30-4:00 pm', eggs: 3, zinc: true, vitaminE: true, omega3: false),
-      _work('4:00-4:45 pm'),
-      _preWorkoutBanana('4:45-4:50 pm'),
-      _work('4:50-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm', applySunscreen: true),
-      _gym('5:30-7:00 pm', 'Gym Session (Upper A)'),
-      _salmonDinner('7:00-7:30 pm', withWheyCreatine: true, cook: true),
-      _chores('7:30-8:00 pm'),
-      _study('8:00-9:00 pm', sleepKiwiCount: 1),
-      _bedPrep('9:00-10:00 pm', newBathTowel: true),
-      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _retinol),
-      _fallAsleep('10:30-11:00 pm'),
+      _work('4:00-5:00 pm'),
+      TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
+      _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
+      TimelineItem(time: '5:55-6:10 pm', title: 'Pre-Workout Banana & Get Dressed', icon: '🍌', details: ['Eat banana (30-45m pre-workout) -> Swish/drink water after', 'Get dressed for gym'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
+      _commuteToGym('6:10-6:30 pm', applySunscreen: true),
+      _gym('6:30-8:30 pm', 'Gym Session (Upper A)'),
+      TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
+      _salmonDinner('8:50-9:20 pm', withWheyCreatine: true, cook: true, bananaCount: 1),
+      _chores('9:20-9:50 pm', sleepKiwiCount: 1),
+      _bedPrep('9:50-10:20 pm', newBathTowel: true),
+      _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: _retinol),
+      _fallAsleep('10:50-11:20 pm'),
     ],
     tue: [
-      _wakeup('7:50-8:00 am'),
-      _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
-      _morningReading('8:20-8:30 am'),
-      _grabThings('8:30-8:35 am', zinc: true, omega3: false),
-      _commuteToWork('8:35-9:00 am'),
+      _wakeup('8:10-8:20 am'),
+      _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:40-8:50 am'),
+      _grabThings('8:50-8:55 am', zinc: true, omega3: false),
+      _commuteToWork('8:55-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: true, omega3: false),
-      _work('3:45-4:45 pm'),
-      _preWorkoutBanana('4:45-4:50 pm'),
-      _work('4:50-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm'),
-      _gym('5:30-7:30 pm', 'Gym Session (Lower A)'),
-      _salmonDinner('7:30-8:00 pm', withWheyCreatine: true, copper: true),
-      _chores('8:00-8:30 pm'),
-      _study('8:30-9:30 pm', sleepKiwiCount: 2),
-      _bedPrep('9:30-10:00 pm'),
-      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
-      _fallAsleep('10:30-11:00 pm'),
+      _work('3:45-5:00 pm'),
+      TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
+      _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
+      TimelineItem(time: '5:55-6:10 pm', title: 'Pre-Workout Banana & Get Dressed', icon: '🍌', details: ['Eat banana (30-45m pre-workout) -> Swish/drink water after', 'Get dressed for gym'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
+      _commuteToGym('6:10-6:30 pm'),
+      _gym('6:30-8:30 pm', 'Gym Session (Lower A)'),
+      TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
+      _salmonDinner('8:50-9:20 pm', withWheyCreatine: true, copper: true, bananaCount: 1),
+      _chores('9:20-9:50 pm', sleepKiwiCount: 2),
+      _bedPrep('9:50-10:20 pm'),
+      _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: _joseon),
+      _fallAsleep('10:50-11:20 pm'),
     ],
     wed: [
-      _wakeup('7:50-8:00 am', nac: true),
-      _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
-      _morningReading('8:20-8:30 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
-      _grabThings('8:30-8:35 am', zinc: false, eggs: 3, bananas: 0, calciumCaps: 3, omega3: false),
-      _commuteToWork('8:35-9:00 am'),
+      _wakeup('8:10-8:20 am', nac: true),
+      _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
+      _morningReading('8:40-8:50 am', additional: 'Take ground beef out of freezer to thaw in fridge'),
+      _grabThings('8:50-8:55 am', zinc: false, eggs: 3, bananas: 1, calciumCaps: 3, omega3: false),
+      _commuteToWork('8:55-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
       _work('12:30-3:30 pm'),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false, omega3: false),
+      _afternoonSnack('3:30-3:45 pm', eggs: 3, zinc: false, vitaminE: false, omega3: false, bananaCount: 1),
       _work('3:45-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm'),
-      _gym('5:30-6:30 pm', 'Cardio (LISS) / Haircut', isCardio: true),
-      _salmonDinner('6:30-7:30 pm', withWheyCreatine: true),
-      _chores('7:30-8:00 pm'),
-      _study('8:00-9:30 pm', sleepKiwiCount: 1),
-      _bedPrep('9:30-10:00 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
-      _nightSupplement('10:00-10:30 pm', magAmount: 2, skincare: _retinol),
-      _fallAsleep('10:30-11:00 pm'),
+      TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
+      _study('5:10-6:05 pm', details: ['Study (Beat traffic before gym)']),
+      TimelineItem(time: '6:05-6:20 pm', title: 'Get Dressed', icon: '👕', details: ['Get dressed for gym']),
+      _commuteToGym('6:20-6:25 pm'),
+      _gym('6:25-7:15 pm', 'Cardio (LISS) / Haircut', isCardio: true),
+      TimelineItem(time: '7:15-7:20 pm', title: 'Commute Home', icon: '🚗'),
+      _salmonDinner('7:20-8:20 pm', withWheyCreatine: true, bananaCount: 1),
+      _chores('8:20-8:50 pm'),
+      _study('8:50-9:20 pm', sleepKiwiCount: 1),
+      _relaxOrCatchUp('9:20-9:50 pm'),
+      _bedPrep('9:50-10:20 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
+      _nightSupplement('10:20-10:50 pm', magAmount: 2, skincare: _retinol),
+      _fallAsleep('10:50-11:20 pm'),
     ],
     thu: [
-      _wakeup('7:50-8:00 am'),
-      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
-      _morningReading('8:20-8:30 am'),
-      TimelineItem(time: '8:30-9:05 am', title: 'Cook', icon: '🧑‍🍳', details: ['1lb ground beef (divide in 4, 4 fridge)']),
-      _work('9:05-12:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
-      _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
-      _work('12:30-3:30 pm', details: ['Fold & Put Away Laundry']),
-      _afternoonSnack('3:30-3:45 pm', eggs: 3, vitaminE: true),
-      _work('3:45-4:45 pm'),
-      _preWorkoutBanana('4:45-4:50 pm'),
-      _work('4:50-5:15 pm'),
-      _commuteToGym('5:15-5:30 pm', applySunscreen: true),
-      _gym('5:30-7:15 pm', 'Gym Session (Upper B)'),
-      _beefDinner('7:15-8:00 pm', withWheyCreatine: true),
-      _chores('8:00-8:30 pm', sleepKiwiCount: 1),
-      _bedPrep('8:30-9:15 pm', newBathTowel: true),
-      _nightSupplement('9:15-10:30 pm', magAmount: 2, skincare: _bha),
-      _fallAsleep('10:30-11:00 pm'),
+      _wakeup('8:10-8:20 am'),
+      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
+      _morningReading('8:40-8:50 am'),
+      TimelineItem(time: '8:50-9:25 am', title: 'Cook', icon: '🧑‍🍳', details: ['1lb ground beef (divide in 4, 4 fridge)']),
+      _work('9:25-12:20 pm', details: [_laundryRegular, 'Run Dishwasher']),
+      _pastaLunch('12:20-12:50 pm', calciumCaps: 3),
+      _work('12:50-3:50 pm', details: ['Fold & Put Away Laundry']),
+      _afternoonSnack('3:50-4:05 pm', eggs: 3, vitaminE: true),
+      _work('4:05-5:35 pm'),
+      TimelineItem(time: '5:35-5:50 pm', title: 'Pre-Workout Banana & Get Dressed', icon: '🍌', details: ['Eat banana (30-45m pre-workout) -> Swish/drink water after', 'Get dressed for gym'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
+      _commuteToGym('5:50-6:10 pm', applySunscreen: true),
+      _gym('6:10-8:10 pm', 'Gym Session (Upper B)'),
+      TimelineItem(time: '8:10-8:30 pm', title: 'Commute Home', icon: '🚗'),
+      _beefDinner('8:30-9:00 pm', withWheyCreatine: true, bananaCount: 1),
+      _chores('9:00-9:30 pm', sleepKiwiCount: 1),
+      _bedPrep('9:30-10:00 pm', newBathTowel: true),
+      _nightSupplement('10:00-10:50 pm', magAmount: 2, skincare: _bha),
+      _fallAsleep('10:50-11:20 pm'),
     ],
     fri: [
-      _wakeup('7:50-8:00 am'),
-      _getReady('8:00-8:20 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
-      _morningReading('8:20-8:30 am'),
-      _grabThings('8:30-8:35 am', copper: true),
-      _commuteToWork('8:35-9:00 am'),
+      _wakeup('8:10-8:20 am'),
+      _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
+      _morningReading('8:40-8:50 am'),
+      _grabThings('8:50-8:55 am', copper: true),
+      _commuteToWork('8:55-9:00 am'),
       _work('9:00-12:00 pm'),
       _pastaLunch('12:00-12:30 pm'),
       _work('12:30-3:30 pm'),
       _afternoonSnack('3:30-3:45 pm', eggs: 3, copper: true),
-      _work('3:45-4:45 pm'),
-      _preWorkoutBanana('4:45-4:50 pm'),
-      _work('4:50-5:00 pm'),
-      _commuteToGym('5:00-5:30 pm'),
-      _gym('5:30-7:30 pm', 'Gym Session (Lower B)'),
-      _beefDinner('7:30-8:00 pm', withWheyCreatine: true),
-      _chores('8:00-8:30 pm'),
-      _study('8:30-9:30 pm', sleepKiwiCount: 2),
-      _bedPrep('9:30-10:00 pm'),
-      _nightSupplement('10:00-10:30 pm', magAmount: 3, skincare: _joseon),
-      _fallAsleep('10:30-11:00 pm'),
+      _work('3:45-5:00 pm'),
+      TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
+      _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
+      TimelineItem(time: '5:55-6:10 pm', title: 'Pre-Workout Banana & Get Dressed', icon: '🍌', details: ['Eat banana (30-45m pre-workout) -> Swish/drink water after', 'Get dressed for gym'], mealRecord: const MealRecord(items: [IngredientPortion(ingredient: IngredientsData.banana, amount: 1)])),
+      _commuteToGym('6:10-6:30 pm'),
+      _gym('6:30-8:30 pm', 'Gym Session (Lower B)'),
+      TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
+      _beefDinner('8:50-9:20 pm', withWheyCreatine: true, bananaCount: 1),
+      _chores('9:20-9:50 pm', sleepKiwiCount: 2),
+      _bedPrep('9:50-10:20 pm'),
+      _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: _joseon),
+      _fallAsleep('10:50-11:20 pm'),
     ],
     sat: [
-      _wakeup('7:50-8:00 am'),
-      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
-      _preMedicationBuffer('8:20-8:25 am'),
-      _morningReading('8:25-8:45 am', additional: '20mg adderall IR'),
-      _study('8:45-10:15 am'),
-      TimelineItem(time: '10:15-10:35 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
-      _study('10:35-12:00 pm'),
-      _pastaLunch('12:00-12:30 pm', calciumCaps: 3),
-      _study('12:30-1:45 pm'),
-      TimelineItem(time: '1:45-2:00 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
-      _study('2:00-3:30 pm'),
-      _afternoonSnack('3:30-4:00 pm', eggs: 2, whey: true, vitamins: false),
-      _study('4:00-4:50 pm'),
-      TimelineItem(time: '4:50-5:10 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
-      _study('5:10-6:00 pm'),
-      _commuteToGym('6:00-6:20 pm', applySunscreen: true),
-      _gym('6:20-7:20 pm', 'Cardio (LISS)', isCardio: true),
-      TimelineItem(time: '7:20-7:30 pm', title: 'Commute Home', icon: '🚗'),
-      _beefDinner('7:30-8:00 pm', withWheyCreatine: false),
-      _chores('8:00-9:00 pm', sleepKiwiCount: 1),
-      _bedPrep('9:15-10:00 pm', hair: 'Nizoral 1% (5m lather)'),
-      _nightSupplement('10:00-10:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha, nac: true),
-      _fallAsleep('10:15-10:45 pm'),
+      _wakeup('8:10-8:20 am'),
+      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
+      _preMedicationBuffer('8:40-8:45 am'),
+      _morningReading('8:45-9:05 am', additional: '20mg adderall IR'),
+      _study('9:05-10:35 am'),
+      TimelineItem(time: '10:35-10:55 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
+      _study('10:55-12:20 pm'),
+      _pastaLunch('12:20-12:50 pm', calciumCaps: 3),
+      _study('12:50-2:05 pm'),
+      TimelineItem(time: '2:05-2:20 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
+      _study('2:20-3:50 pm'),
+      _afternoonSnack('3:50-4:20 pm', eggs: 2, whey: true, vitamins: false, bananaCount: 1),
+      _study('4:20-5:10 pm'),
+      TimelineItem(time: '5:10-5:30 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
+      _study('5:30-6:20 pm'),
+      _commuteToGym('6:20-6:25 pm', applySunscreen: true),
+      _gym('6:25-7:15 pm', 'Cardio (LISS)', isCardio: true),
+      TimelineItem(time: '7:15-7:20 pm', title: 'Commute Home', icon: '🚗'),
+      _beefDinner('7:20-7:50 pm', withWheyCreatine: false, bananaCount: 1),
+      _chores('7:50-8:50 pm', sleepKiwiCount: 1),
+      _relaxOrCatchUp('8:50-9:35 pm'),
+      _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
+      _nightSupplement('10:20-10:35 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha, nac: true),
+      _fallAsleep('10:35-11:05 pm'),
     ],
     sun: [
-      _wakeup('7:50-8:00 am'),
-      _getReady('8:00-8:20 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
-      _morningReading('8:20-9:15 am'),
-      _preMedicationBuffer('9:15-9:30 am'),
-      _study('9:30-11:00 am', details: ['20mg adderall IR at 9:30am']),
-      TimelineItem(time: '11:00-11:30 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
-      _study('11:30-1:00 pm'),
-      TimelineItem(time: '1:00-1:30 pm', title: 'Lunch', icon: '🍛', details: ['1/4 pound ground beef', '3 Boiled Eggs', 'Take 3 Calcium Citrate capsules (438mg) with meal'], mealRecord: MealRecord(items: [_Portions.calciumCitrate, const IngredientPortion(ingredient: IngredientsData.egg, amount: 3)], recipeItems: [_Recipes.beef])),
-      TimelineItem(time: '1:30-3:30 pm', title: 'Grocery Shop', icon: '🛒', details: [_sunscreen, 'check what I have before going', "Trader Joe's (all groceries are bought there)"]),
-      TimelineItem(time: '3:30-6:00 pm', title: 'Cooking / Meal Prep', icon: '🧑‍🍳', details: ['Meal Prep: Pasta (6 portions)', 'Put ground beef in freezer']),
-      _relaxOrCatchUp('6:00-7:00 pm', title: 'Rest / Weekly Reflection'),
-      TimelineItem(time: '7:00-7:25 pm', title: 'Dinner & Post-Workout Shake', icon: '🌯', details: ['1 scoop whey isolate (30g protein)', '1 scoop creatine monohydrate (5g)', 'Chipotle Bowl: double chicken, normal white rice, extra black beans, extra fajita veggies', if (!isAshwagandhaOff()) '2 cap Ashwagandha'], mealRecord: MealRecord(items: [_Portions.whey, _Portions.creatine, const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2)])),
-      _chores('7:25-8:00 pm'),
-      _bedPrep('8:00-9:00 pm'),
-      _nightSupplement('9:00-9:15 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement', nac: true),
-      _relaxOrCatchUp('9:15-10:00 pm'),
-      _fallAsleep('10:00-10:30 pm'),
+      _wakeup('8:10-8:20 am'),
+      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
+      _morningReading('8:40-9:35 am', includeBagel: false),
+      _preMedicationBuffer('9:35-9:50 am'),
+      _study('9:50-11:20 am', details: ['20mg adderall IR at 9:50am']),
+      TimelineItem(time: '11:20-11:50 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
+      _study('11:50-1:20 pm'),
+      TimelineItem(
+        time: '1:20-1:50 pm', 
+        title: 'Lunch', 
+        icon: '🍛', 
+        details: [
+          '1/4 pound ground beef', 
+          '3 Boiled Eggs', 
+          'Take 3 Calcium Citrate capsules (438mg) with meal', 
+          '1 banana' + (isRefeedWeek() ? ' (+ 2 EXTRA Bananas for Refeed)' : '')
+        ], 
+        mealRecord: MealRecord(
+          items: [
+            _Portions.calciumCitrate, 
+            const IngredientPortion(ingredient: IngredientsData.egg, amount: 3), 
+            IngredientPortion(ingredient: IngredientsData.banana, amount: isRefeedWeek() ? 3 : 1)
+          ], 
+          recipeItems: [_Recipes.beef]
+        )
+      ),
+      TimelineItem(
+        time: '1:50-4:15 pm', 
+        title: 'Grocery Shop & Pick up Chipotle', 
+        icon: '🛒', 
+        details: [
+          _sunscreen, 
+          'check what I have before going', 
+          "Trader Joe's (all groceries are bought there)", 
+          if (isNextWeekRefeedWeek()) '🛒 UPCOMING REFEED WEEK: Buy 1 pack of Plain Bagels, 14 extra Bananas (2/day), and 1 bag of Quinoa (if out)',
+          'Pick up Chipotle for dinner so it\'s one trip'
+        ]
+      ),
+      TimelineItem(
+        time: '4:15-6:45 pm', 
+        title: 'Cooking / Meal Prep', 
+        icon: '🧑‍🍳', 
+        details: [
+          'Meal Prep: Pasta (6 portions)', 
+          if (isNextWeekRefeedWeek()) '🧑‍🍳 UPCOMING REFEED WEEK: Cook a batch of Quinoa for the week\'s dinners',
+          'Put ground beef in freezer'
+        ]
+      ),
+      _relaxOrCatchUp('6:45-7:45 pm', title: 'Rest / Weekly Reflection'),
+      TimelineItem(
+        time: '7:45-8:15 pm', 
+        title: 'Dinner (Heat up Chipotle)', 
+        icon: '🌯', 
+        details: [
+          '1 scoop creatine monohydrate (5g)', 
+          'Chipotle Bowl: double chicken, DOUBLE white rice, extra black beans, extra fajita veggies', 
+          '1 banana', 
+          if (!isAshwagandhaOff()) '2 cap Ashwagandha',
+          if (isRefeedWeek()) '🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa',
+        ], 
+        mealRecord: MealRecord(items: [
+          _Portions.creatine, 
+          const IngredientPortion(ingredient: IngredientsData.banana, amount: 1), 
+          const IngredientPortion(ingredient: IngredientsData.chipotleBowl, amount: 1), 
+          if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
+        ], recipeItems: [
+          if (isRefeedWeek()) _Recipes.quinoa,
+        ])
+      ),
+      _chores('8:15-8:50 pm'),
+      _bedPrep('8:50-9:50 pm'),
+      _nightSupplement('9:50-10:05 pm', magAmount: 2, magName: 'Magnesium', skincare: _joseon, title: 'Night Supplement', nac: true),
+      _relaxOrCatchUp('10:05-10:50 pm'),
+      _fallAsleep('10:50-11:20 pm'),
     ],
   };
 }

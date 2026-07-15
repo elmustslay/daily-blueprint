@@ -116,14 +116,20 @@ class DashboardScreen extends ConsumerWidget {
   }
 
   Widget _buildProgressBar(BuildContext context) {
-    final startDate = DateTime(2026, 5, 1);
+    final startDate = DateTime(2026, 7, 22);
+    final targetDate = DateTime(2026, 12, 5); // Target Dec 5th for maintenance
     final now = DateTime.now();
+    
+    final totalDays = targetDate.difference(startDate).inDays;
     
     int daysElapsed = now.difference(startDate).inDays + 1;
     if (daysElapsed < 1) daysElapsed = 1;
-    if (daysElapsed > 200) daysElapsed = 200;
+    if (daysElapsed > totalDays) daysElapsed = totalDays;
     
-    double progress = daysElapsed / 200.0;
+    double progress = daysElapsed / totalDays.toDouble();
+    
+    int daysTillMaintenance = targetDate.difference(now).inDays;
+    if (daysTillMaintenance < 0) daysTillMaintenance = 0;
     
     return GestureDetector(
       onTap: () {
@@ -139,7 +145,7 @@ class DashboardScreen extends ConsumerWidget {
                 children: [
                   Text('Trigger 1: The Biofeedback Dashboard', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.redAccent)),
                   SizedBox(height: 8),
-                  Text('Hitting these signals means your body has shifted from optimally burning fat to starvation-induced panic. However, you must differentiate between a false alarm and a true failure:', style: TextStyle(color: Colors.white70)),
+                  Text('Even with cyclic refeeds, a 136-day deep deficit carries risks. Hitting these signals means your body has shifted from optimally burning fat to starvation-induced panic. However, you must differentiate between a false alarm and a true failure:', style: TextStyle(color: Colors.white70)),
                   SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -176,14 +182,14 @@ class DashboardScreen extends ConsumerWidget {
                   Text('3. The Joint/Libido Crash', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent)),
                   Text('This is the endocrine system waving a white flag. When energy availability drops too low for too long, your body downregulates testosterone production and decreases the synovial fluid that lubricates your joints to conserve energy.', style: TextStyle(color: Colors.white70, height: 1.4)),
                   SizedBox(height: 16),
-                  Text('The Fix (Bump to ~1,900 Calories)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
-                  Text('Adding ~450 calories (primarily from carbohydrates) the second one of these lights turns red is the perfect biological intervention. It refills your glycogen, drops your cortisol, restores your sleep, and allows you to keep losing fat—just at a slightly slower, sustainable rate.', style: TextStyle(color: Colors.white70, height: 1.4)),
+                  Text('The Fix (Bump to ~1,900 Calories or Maintenance)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
+                  Text('Adding ~450 calories (primarily from carbohydrates) or dropping entirely into maintenance for a week the second one of these lights turns red is the perfect biological intervention. It refills your glycogen, drops your cortisol, restores your sleep, and allows you to keep losing fat—just at a slightly slower, sustainable rate.', style: TextStyle(color: Colors.white70, height: 1.4)),
                   SizedBox(height: 24),
                   Divider(color: Colors.white24),
                   SizedBox(height: 24),
-                  Text('Trigger 2: The Finish Line (15% Body Fat)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.greenAccent)),
+                  Text('Trigger 2: The Finish Line (12-15% Body Fat)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.greenAccent)),
                   SizedBox(height: 8),
-                  Text('At ~15% body fat, the upper two abdominals become clearly visible, and the linea alba (the vertical line down the stomach) pulls tight. Dropping below 15% usually requires extreme suffering and massive risk to your lean mass. 15% is the sweet spot where you look highly athletic but hormones function perfectly.', style: TextStyle(color: Colors.white70, height: 1.4)),
+                  Text('At ~12-15% body fat, the upper two abdominals become clearly visible, and the linea alba pulls tight. 12-15% is the sweet spot where you look highly athletic but hormones function perfectly.', style: TextStyle(color: Colors.white70, height: 1.4)),
                   SizedBox(height: 12),
                   Text('The Fix (Bump to ~2,200+ Maintenance)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
                   Text('Bumping up to a maintenance intake the second you see those top two abs in the mirror is the ultimate endgame. Your metabolism will roar back to life, your strength in the gym will skyrocket, and your body will be perfectly primed to "recomp"—building dense, new muscle while staying lean all year round.', style: TextStyle(color: Colors.white70, height: 1.4)),
@@ -201,7 +207,7 @@ class DashboardScreen extends ConsumerWidget {
       },
       child: Container(
         margin: const EdgeInsets.only(top: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
@@ -221,16 +227,16 @@ class DashboardScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'The 200-Day Grind',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  'Dec 5th Target ($daysTillMaintenance Days till Maintenance)',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 8),
               Text(
-                '$daysElapsed / 200',
+                '$daysElapsed / $totalDays',
                 style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blueAccent),
               ),
             ],
@@ -247,7 +253,7 @@ class DashboardScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '${200 - daysElapsed} days remaining to achieve 15% body fat.',
+            '${totalDays - daysElapsed} days remaining to achieve ~13-15% body fat and switch to maintenance.',
             style: const TextStyle(fontSize: 12, color: Colors.white70),
           ),
         ],

@@ -1,0 +1,50 @@
+00:00 +0: loading /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/gym_plan_screen_test.dart
+00:00 +0: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic expectedProgressForWeek correctly calculates weekly bounds
+00:00 +1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic calculateProgressForDay calculates correct daily interpolation
+00:00 +2: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic Testing different weekly goal percents and clamping
+00:00 +3: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic Black Skin (b25) progress calculations
+00:00 +4: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic Bigger Leaner Stronger (b26) progress calculations
+00:00 +5: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic Dopamine Nation (b27) progress calculations
+00:00 +6: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/book_domain_test.dart: Book Domain Logic Breaking the Cycle (b28) progress calculations
+00:00 +7: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/gym_plan_screen_test.dart: Renders Smart Warm-up by default if prevMax exists
+00:00 +7: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/export_nutrition_test.dart: Calculate and export nutrition to mynutrition.json
+Successfully exported nutrition data to mynutrition.json
+Successfully exported detailed nutrition data to mydetailednutrition.json
+Success: Spreadsheet updated at /Users/elyirdaw/Desktop/Fix-ur-life/my_app/mynutrition.csv
+Successfully exported recipe nutrition to recipe_nutrition.json
+Successfully exported ingredient nutrition to ingredient_nutrition.json
+00:00 +8: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/gym_plan_screen_test.dart: Renders Smart Warm-up by default if prevMax exists
+00:01 +9: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +10: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +11: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +12: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +13: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +14: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +15: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +16: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +16 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +16 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/daily_plan_data_test.dart: Pre-workout banana schedule timing is correct on gym days [E]
+  Bad state: No element
+  dart:collection                       ListBase.firstWhere
+  test/daily_plan_data_test.dart 78:31  main.<fn>
+  
+00:01 +17 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +18 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +19 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:01 +20 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +21 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +22 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +23 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +24 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +25 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +26 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/widget_test.dart: Dashboard smoke test — all feature cards render
+00:02 +27 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/gym_plan_screen_test.dart: GymPlanScreen sorts active workouts to top, untouched in middle, completed at bottom
+00:02 +28 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/gym_plan_screen_test.dart: GymPlanScreen opens to the correct default tab based on current weekday
+00:02 +29 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 1: Calcium explicitly at Lunch (to bind oxalates) and Whey explicitly at Dinner (to block iron)
+00:02 +30 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 2: 0 calcium capsules on Tue/Fri
+00:02 +31 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 3: Copper vs Zinc isolation
+00:02 +32 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 4: NAC separated from Copper/Zinc by at least 2 hours
+00:02 +33 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 5: Calcium vs Bedtime Magnesium separated by at least 1.5 hours
+00:02 +34 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 6: Calcium vs Adderall IR by > 3 hours on Sat/Sun
+00:02 +35 -1: /Users/elyirdaw/Desktop/Fix-ur-life/my_app/test/protocol_rules_test.dart: Protocol Rules based on reasoning.txt Rule 7: Psyllium Husk vs Any Supplement by > 1 hour before or 2 hours after
+00:02 +36 -1: Some tests failed.

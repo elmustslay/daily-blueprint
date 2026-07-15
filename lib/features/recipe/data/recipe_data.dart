@@ -131,5 +131,32 @@ class RecipeData {
         'Peeling Hack: When you are at work and ready to eat, crack the egg all over by rolling it on your desk under your palm. The shell will slide off in one or two large pieces.',
       ],
     ),
+    const Recipe(
+      id: 'quinoa',
+      name: 'Refeed Quinoa',
+      icon: '🍚',
+      yields: '7 Portions (7 Fridge)',
+      textIngredients: [
+        '3.5 cups dry Quinoa',
+        '7 cups water or bone broth',
+        '1 tsp Morton Lite Salt (optional)',
+      ],
+      servings: 7,
+      ingredients: [
+        IngredientPortion(ingredient: IngredientsData.quinoa, amount: 3.5),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 1),
+      ],
+      equipment: [
+        'Medium Saucepan or Rice Cooker',
+        'Fine mesh strainer',
+      ],
+      instructions: [
+        'Rinse: Rinse the 3.5 cups of dry quinoa thoroughly in a fine mesh strainer under cold water to remove saponins (which cause bitterness).',
+        'Cook: Combine the rinsed quinoa, 7 cups of liquid (water or broth), and salt in the saucepan. Bring to a rolling boil.',
+        'Simmer: Reduce heat to low, cover, and simmer for 15 minutes until the liquid is absorbed and the quinoa germs have popped out (little white tails).',
+        'Rest: Remove from heat and let it sit covered for 5 minutes. Fluff with a fork.',
+        'Store: Divide into 7 containers (each containing ~0.5 cups dry equivalent). During Refeed Weeks, add one portion to your Salmon, Beef, or Chipotle dinners!',
+      ],
+    ),
   ];
 }

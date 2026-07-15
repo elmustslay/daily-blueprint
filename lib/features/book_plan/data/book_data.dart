@@ -66,7 +66,8 @@ class BookData {
           name: 'Physical & Health Optimization Track',
           books: [
             Book(id: 'b25', title: 'Black Skin: The Definitive Skincare Guide', author: 'Dija Ayodele', weeklyGoalPercent: 25, startWeek: 13, expectedDurationWeeks: 4),
-            Book(id: 'b26', title: 'Bigger Leaner Stronger', author: 'Michael Matthews', weeklyGoalPercent: 17, startWeek: 18, expectedDurationWeeks: 6),
+            Book(id: 'b26', title: 'Scientific Principles of Hypertrophy Training', author: 'Mike Israetel', weeklyGoalPercent: 33, startWeek: 18, expectedDurationWeeks: 3),
+            Book(id: 'b29', title: 'The Renaissance Diet 2.0', author: 'Mike Israetel', weeklyGoalPercent: 33, startWeek: 21, expectedDurationWeeks: 3),
           ],
         ),
       ],

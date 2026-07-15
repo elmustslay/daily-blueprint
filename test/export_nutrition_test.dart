@@ -7,7 +7,14 @@ import 'package:my_app/features/micro_macro_calorie_track/data/ingredients_data.
 import 'package:my_app/features/recipe/data/recipe_data.dart';
 
 void main() {
-  test('Calculate and export nutrition to mynutrition.json', () async {
+  Future<void> generateNutritionFiles(String prefix, {bool isRefeed = false}) async {
+    if (isRefeed) {
+      // Mock date to Week 6 (Refeed Week)
+      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 35)); // 5 weeks * 7 days
+    } else {
+      DailyPlanData.mockCurrentDate = null;
+    }
+
     NutritionFact weeklyTotals = const NutritionFact();
     final Map<String, NutritionFact> dailyTotalsMap = {};
     
@@ -53,15 +60,15 @@ void main() {
       'dailyTotals': dailyTotalsMap.map((k, v) => MapEntry(k, v.toJson())),
     };
     
-    // Write formatted JSON to mynutrition.json
+    // Write formatted JSON
     final jsonString = const JsonEncoder.withIndent('    ').convert(exportData);
-    final file = File('mynutrition.json');
+    final file = File('${prefix}nutrition.json');
     await file.writeAsString(jsonString);
     
-    print('Successfully exported nutrition data to mynutrition.json');
+    print('Successfully exported nutrition data to ${prefix}nutrition.json');
     expect(file.existsSync(), isTrue);
 
-    // Generate mydetailednutrition.json
+    // Generate detailed nutrition
     final Map<String, dynamic> detailedExport = {};
     for (int i = 0; i < 7; i++) {
       final dayKey = days[i];
@@ -95,9 +102,11 @@ void main() {
     }
     
     final detailedJsonString = const JsonEncoder.withIndent('    ').convert(detailedExport);
-    final detailedFile = File('mydetailednutrition.json');
+    final detailedFile = File('${prefix}detailednutrition.json');
     await detailedFile.writeAsString(detailedJsonString);
-    print('Successfully exported detailed nutrition data to mydetailednutrition.json');
+    print('Successfully exported detailed nutrition data to ${prefix}detailednutrition.json');
+
+    if (isRefeed) return; // Skip CSV for refeed week to avoid complexity
 
     // Trigger python script to update CSV, or fallback to generating it in Dart
     bool csvUpdatedByPython = false;
@@ -161,13 +170,21 @@ void main() {
           csvBuffer.writeln(row.join(','));
         }
         
-        final csvFile = File('mynutrition.csv');
+        final csvFile = File('${prefix}nutrition.csv');
         await csvFile.writeAsString(csvBuffer.toString());
         print('Success: Spreadsheet updated at ${csvFile.absolute.path}');
       } catch (e) {
-        print('Error: Failed to generate mynutrition.csv directly: $e');
+        print('Error: Failed to generate ${prefix}nutrition.csv directly: $e');
       }
     }
+  }
+
+  test('Calculate and export nutrition to JSON files', () async {
+    await generateNutritionFiles('my');
+    await generateNutritionFiles('myrefeed', isRefeed: true);
+
+    // Reset mock date
+    DailyPlanData.mockCurrentDate = null;
 
     // Export Recipes Nutrition
     try {

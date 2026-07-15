@@ -40,19 +40,19 @@
         "name": "Chipotle Chicken Bowl",
         "baseUnit": "bowl",
         "nutrition": {
-            "Calories": 870.0,
-            "Protein": 86.0,
-            "Carbs": 94.0,
-            "Fat": 21.0,
+            "Calories": 1080.0,
+            "Protein": 90.0,
+            "Carbs": 134.0,
+            "Fat": 25.0,
             "Micros": {
-                "Saturated Fat (g)": 7.0,
-                "Fiber (g)": 17.0,
+                "Saturated Fat (g)": 8.0,
+                "Fiber (g)": 18.0,
                 "Sugar (g)": 8.0,
-                "Sodium (mg)": 1690.0,
-                "Calcium (Food) (mg)": 247.0,
-                "Iron (Food) (mg)": 7.74,
-                "Vitamin A (Food) (mcg)": 117.0,
-                "Vitamin C (mg)": 118.0,
+                "Sodium (mg)": 2040.0,
+                "Calcium (Food) (mg)": 260.0,
+                "Iron (Food) (mg)": 8.28,
+                "Vitamin A (Food) (mcg)": 126.0,
+                "Vitamin C (mg)": 120.7,
                 "Potassium (mg)": 1550.5,
                 "Magnesium (mg)": 253.0,
                 "Zinc (Food) (mg)": 7.5,
@@ -903,6 +903,24 @@
                 "Calcium (Food) (mg)": 14.0,
                 "Potassium (mg)": 255.0,
                 "Vitamin C (mg)": 130.5
+            }
+        }
+    },
+    "bagel": {
+        "name": "Plain Bagel",
+        "baseUnit": "bagel",
+        "nutrition": {
+            "Calories": 270.0,
+            "Protein": 9.0,
+            "Carbs": 54.0,
+            "Fat": 1.5,
+            "Micros": {
+                "Fiber (g)": 2.0,
+                "Sugar (g)": 5.0,
+                "Sodium (mg)": 450.0,
+                "Calcium (Food) (mg)": 20.0,
+                "Iron (Food) (mg)": 3.0,
+                "Potassium (mg)": 100.0
             }
         }
     }

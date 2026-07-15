@@ -47,19 +47,19 @@ class IngredientsData {
     name: 'Chipotle Chicken Bowl',
     baseUnit: 'bowl',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 870,
-      protein: 86,
-      carbs: 94,
-      fat: 21,
+      calories: 1080,
+      protein: 90,
+      carbs: 134,
+      fat: 25,
       microNutrients: {
-        'Saturated Fat (g)': 7,
-        'Fiber (g)': 17,
+        'Saturated Fat (g)': 8,
+        'Fiber (g)': 18,
         'Sugar (g)': 8,
-        'Sodium (mg)': 1690,
-        'Calcium (Food) (mg)': 247,
-        'Iron (Food) (mg)': 7.74,
-        'Vitamin A (Food) (mcg)': 117,
-        'Vitamin C (mg)': 118,
+        'Sodium (mg)': 2040,
+        'Calcium (Food) (mg)': 260,
+        'Iron (Food) (mg)': 8.28,
+        'Vitamin A (Food) (mcg)': 126,
+        'Vitamin C (mg)': 120.7,
         'Potassium (mg)': 1550.5, // #this is default assumed value (added +305 for extra beans)
         'Magnesium (mg)': 253.0, // #this is default assumed value (added +60 for extra beans)
         'Zinc (Food) (mg)': 7.5, // #this is default assumed value (added +1.0 for extra beans)
@@ -951,6 +951,26 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
+  static const Ingredient bagel = Ingredient(
+    id: 'bagel',
+    name: 'Plain Bagel',
+    baseUnit: 'bagel',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 270,
+      protein: 9,
+      carbs: 54,
+      fat: 1.5,
+      microNutrients: {
+        'Fiber (g)': 2,
+        'Sugar (g)': 5,
+        'Sodium (mg)': 450,
+        'Calcium (Food) (mg)': 20,
+        'Iron (Food) (mg)': 3,
+        'Potassium (mg)': 100,
+      },
+    ),
+  );
+
   static const Ingredient vitaminE = Ingredient(
     id: 'vitaminE',
     name: 'Vitamin E',
@@ -976,6 +996,7 @@ static const Ingredient marinaraSauce = Ingredient(
   static const List<Ingredient> allIngredients = [
     spinach,
     chipotleBowl,
+
     egg,
     avocadoOil,
     banana,
@@ -1008,5 +1029,6 @@ static const Ingredient marinaraSauce = Ingredient(
     vitaminE,
     calciumCitrate,
     kiwi,
+    bagel,
   ];
 }

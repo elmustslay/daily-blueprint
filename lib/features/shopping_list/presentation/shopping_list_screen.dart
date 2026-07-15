@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/storage/shared_prefs.dart';
+import '../../daily_plan/data/daily_plan_data.dart';
 
 // --- Domain & State ---
 class ShoppingItem {
@@ -24,12 +25,13 @@ class ShoppingItem {
 class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
   @override
   List<ShoppingItem> build() {
+    final isNextWeekRefeed = DailyPlanData.isNextWeekRefeedWeek();
     final initialItems = [
       // Produce
       ShoppingItem(id: 'prod-3', name: 'Bell Peppers', subtext: '4 red, 2 orange'),
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
-      ShoppingItem(id: 'prod-7', name: 'Bananas', subtext: '1 bunches (need 4/week)'),
-      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: 'u need 8'),
+      ShoppingItem(id: 'prod-7', name: 'Bananas', subtext: isNextWeekRefeed ? 'need 28/week (REFEED WEEK)' : 'need 14/week'),
+      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: 'need 8/week'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),
@@ -39,8 +41,9 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'dairy-1', name: 'Organic Pasture Raised Large Brown Eggs', subtext: '2 dozen (need 24/week)'),
 
       // Others
+      if (isNextWeekRefeed) ShoppingItem(id: 'oth-1', name: 'Plain Bagels', subtext: 'need 6/week (REFEED WEEK)'),
       ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1 box (need 12oz)'),
-      // ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (need 1 cup)'),
+      if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 jar (48 oz)'),
 
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 4tbsp)'),
@@ -69,6 +72,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-14', name: 'Chia Seeds'),
       ShoppingItem(id: 'amz-15', name: 'Anua Heartleaf Pore Control Cleansing Oil', subtext: 'Sunscreen Remover'),
       ShoppingItem(id: 'amz-16', name: 'La Roche-Posay Lipikar Wash AP+', subtext: 'Moisturizing Body Wash (for 2x daily showers)'),
+      ShoppingItem(id: 'amz-17', name: 'Hydrating Eye Gel-Cream', subtext: 'Skincare'),
     ];
 
     final prefs = SharedPrefsLogic.instance;

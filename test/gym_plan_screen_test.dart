@@ -46,7 +46,7 @@ class FakeGymRepository implements GymRepository {
 }
 
 void main() {
-  Widget buildTestableWidget(FakeGymRepository repo, Exercise exercise, {bool hasStartedWorkout = false}) {
+  Widget buildTestableWidget(FakeGymRepository repo, Exercise exercise) {
     return ProviderScope(
       overrides: [
         gymRepoProvider.overrideWithValue(repo),
@@ -55,7 +55,6 @@ void main() {
         home: Scaffold(
           body: ExerciseCard(
             exercise: exercise,
-            hasStartedWorkout: hasStartedWorkout,
           ),
         ),
       ),
@@ -69,42 +68,34 @@ void main() {
     sets: '3',
     reps: '10-12',
     rest: '1 min',
+    primaryMuscleGroup: 'Chest',
   );
 
-  testWidgets('Renders Set as Start button by default and triggers Smart Warm-up on tap', (WidgetTester tester) async {
+  testWidgets('Renders Smart Warm-up by default if prevMax exists', (WidgetTester tester) async {
     final repo = FakeGymRepository();
     repo.mockedPrev = 200.0; 
 
     await tester.pumpWidget(buildTestableWidget(repo, testExercise));
     await tester.pumpAndSettle();
 
-    expect(find.text('Set as Start'), findsOneWidget);
-    expect(find.text('Smart Warm-up'), findsNothing);
-
-    await tester.tap(find.text('Set as Start'));
-    await tester.pumpAndSettle();
-
     expect(find.text('Smart Warm-up'), findsOneWidget);
-    // 50% of 200 = 100
-    expect(find.textContaining('100 lbs'), findsOneWidget);
-    // 70% of 200 = 140
-    expect(find.textContaining('140 lbs'), findsOneWidget);
-    // 85% of 200 = 170
-    expect(find.textContaining('170 lbs'), findsOneWidget);
-    
-    expect(find.text('Set as Start'), findsNothing);
+    // 40% of 200 = 80
+    expect(find.textContaining('80 lbs'), findsOneWidget);
+    // 60% of 200 = 120
+    expect(find.textContaining('120 lbs'), findsOneWidget);
+    // 80% of 200 = 160
+    expect(find.textContaining('160 lbs'), findsOneWidget);
   });
 
-  testWidgets('Does NOT display Smart Warm-up or Set as Start if todayLogCount > 0', (WidgetTester tester) async {
+  testWidgets('Does NOT display Smart Warm-up if todayLogCount > 0', (WidgetTester tester) async {
     final repo = FakeGymRepository();
     repo.mockedPrev = 200.0;
     repo.logsTodayMap[testExercise.id] = 1;
 
-    await tester.pumpWidget(buildTestableWidget(repo, testExercise, hasStartedWorkout: true));
+    await tester.pumpWidget(buildTestableWidget(repo, testExercise));
     await tester.pumpAndSettle();
 
     expect(find.text('Smart Warm-up'), findsNothing);
-    expect(find.text('Set as Start'), findsNothing);
   });
 
   testWidgets('Card fades (Opacity 0.6) and button disables with label Completed when sets are fulfilled', (WidgetTester tester) async {
