@@ -38,6 +38,7 @@ class IngredientsData {
         'Tyrosine (Food) (mg)': 340, // #this is default assumed value
         'EPA (Food) (mg)': 0, // #this is default assumed value
         'DHA (Food) (mg)': 0, // #this is default assumed value
+        'Lutein & Zeaxanthin (mcg)': 15000, 
       },
     ),
   );
@@ -47,36 +48,36 @@ class IngredientsData {
     name: 'Chipotle Chicken Bowl',
     baseUnit: 'bowl',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 1080,
-      protein: 90,
-      carbs: 134,
-      fat: 25,
+      calories: 560,
+      protein: 46,
+      carbs: 72,
+      fat: 13,
       microNutrients: {
-        'Saturated Fat (g)': 8,
-        'Fiber (g)': 18,
-        'Sugar (g)': 8,
-        'Sodium (mg)': 2040,
+        'Saturated Fat (g)': 4,
+        'Fiber (g)': 10,
+        'Sugar (g)': 6,
+        'Sodium (mg)': 1170,
         'Calcium (Food) (mg)': 260,
         'Iron (Food) (mg)': 8.28,
         'Vitamin A (Food) (mcg)': 126,
         'Vitamin C (mg)': 120.7,
-        'Potassium (mg)': 1550.5, // #this is default assumed value (added +305 for extra beans)
-        'Magnesium (mg)': 253.0, // #this is default assumed value (added +60 for extra beans)
-        'Zinc (Food) (mg)': 7.5, // #this is default assumed value (added +1.0 for extra beans)
-        'Copper (mg)': 0.92, // #this is default assumed value (added +0.21 for extra beans)
-        'Selenium (Food) (mcg)': 73.2, // #this is default assumed value (added +1.6 for extra beans)
-        'Vitamin K (mcg)': 17.9, // #this is default assumed value (added +4.3 for extra beans)
-        'Vitamin E (Food) (mg)': 2.6, // #this is default assumed value
-        'Vitamin B12 (mcg)': 0.9, // #this is default assumed value
-        'Thiamin (mg)': 0.85, // #this is default assumed value (added +0.21 for extra beans)
-        'Riboflavin (mg)': 0.65, // #this is default assumed value (added +0.05 for extra beans)
-        'Niacin (mg)': 17.87, // #this is default assumed value (added +0.67 for extra beans)
-        'Vitamin B5 (mg)': 3.9, // #this is default assumed value (added +0.3 for extra beans)
-        'Vitamin B6 (mg)': 1.49, // #this is default assumed value (added +0.09 for extra beans)
-        'Folate (Food) (mcg)': 347.7, // #this is default assumed value (added +128 for extra beans)
+        'Potassium (mg)': 1170.5, // #this is default assumed value
+        'Magnesium (mg)': 222.0, // #this is default assumed value
+        'Zinc (Food) (mg)': 5.8, // #this is default assumed value
+        'Copper (mg)': 0.86, // #this is default assumed value
+        'Selenium (Food) (mcg)': 47.2, // #this is default assumed value
+        'Vitamin K (mcg)': 16.9, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 2.2, // #this is default assumed value
+        'Vitamin B12 (mcg)': 0.3, // #this is default assumed value
+        'Thiamin (mg)': 0.75, // #this is default assumed value
+        'Riboflavin (mg)': 0.35, // #this is default assumed value
+        'Niacin (mg)': 10.82, // #this is default assumed value
+        'Vitamin B5 (mg)': 2.5, // #this is default assumed value
+        'Vitamin B6 (mg)': 0.97, // #this is default assumed value
+        'Folate (Food) (mcg)': 336.7, // #this is default assumed value
         'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 225.5, // #this is default assumed value (added +26 for extra beans)
-        'Tyrosine (Food) (mg)': 2398.0, // #this is default assumed value (added +218 for extra beans)
+        'Choline (mg)': 141.5, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 1348.0, // #this is default assumed value
       },
     ),
   );
@@ -120,6 +121,7 @@ class IngredientsData {
         'Choline (mg)': 147, // #this is default assumed value
         'EPA (Food) (mg)': 0, // #this is default assumed value
         'DHA (Food) (mg)': 30, // #this is default assumed value
+        'Lutein & Zeaxanthin (mcg)': 260, 
       },
     ), // #default value
   );
@@ -167,6 +169,25 @@ class IngredientsData {
   );
 
 
+
+  static const Ingredient clusterDextrin = Ingredient(
+    id: 'cluster_dextrin',
+    name: 'Cluster Dextrin (Unflavored)',
+    baseUnit: 'scoop (25g)',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 100,
+      protein: 0,
+      carbs: 25,
+      fat: 0,
+      microNutrients: {
+        'Calcium (Food) (mg)': 95,
+        'Phosphorus (mg)': 81,
+        'Magnesium (mg)': 28,
+        'Sodium (mg)': 50,
+        'Potassium (mg)': 80,
+      },
+    ),
+  );
 
   static const Ingredient banana = Ingredient(
     id: 'banana',
@@ -951,26 +972,6 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
-  static const Ingredient bagel = Ingredient(
-    id: 'bagel',
-    name: 'Plain Bagel',
-    baseUnit: 'bagel',
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 270,
-      protein: 9,
-      carbs: 54,
-      fat: 1.5,
-      microNutrients: {
-        'Fiber (g)': 2,
-        'Sugar (g)': 5,
-        'Sodium (mg)': 450,
-        'Calcium (Food) (mg)': 20,
-        'Iron (Food) (mg)': 3,
-        'Potassium (mg)': 100,
-      },
-    ),
-  );
-
   static const Ingredient vitaminE = Ingredient(
     id: 'vitaminE',
     name: 'Vitamin E',
@@ -993,12 +994,69 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
+  static const Ingredient smokedPaprika = Ingredient(
+    id: 'smoked_paprika',
+    name: 'Smoked Paprika',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 6.0,
+      protein: 0.3,
+      carbs: 1.2,
+      fat: 0.3,
+      microNutrients: {
+        'Fiber (g)': 0.8,
+        'Sugar (g)': 0.2,
+        'Vitamin A (Food) (mcg)': 50.0,
+        'Capsanthin & Capsorubin (mg)': 10.0,
+        'Potassium (mg)': 50.0,
+      },
+    ),
+  );
+
+  static const Ingredient garlicPowder = Ingredient(
+    id: 'garlic_powder',
+    name: 'Garlic Powder',
+    baseUnit: 'tbsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 32.0,
+      protein: 1.6,
+      carbs: 7.0,
+      fat: 0.1,
+      microNutrients: {
+        'Fiber (g)': 0.9,
+        'Sodium (mg)': 6.0,
+        'Potassium (mg)': 115.0,
+        'Vitamin B6 (mg)': 0.16,
+        'Iron (Food) (mg)': 0.5,
+      },
+    ),
+  );
+
+  static const Ingredient babyCarrots = Ingredient(
+    id: 'baby_carrots',
+    name: 'Baby Carrots',
+    baseUnit: 'oz',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 10.0,
+      protein: 0.2,
+      carbs: 2.3,
+      fat: 0.0,
+      microNutrients: {
+        'Fiber (g)': 0.8,
+        'Sugar (g)': 1.3,
+        'Vitamin A (Food) (mcg)': 196.0,
+        'Potassium (mg)': 67.0,
+      },
+    ),
+  );
+
   static const List<Ingredient> allIngredients = [
     spinach,
     chipotleBowl,
 
     egg,
     avocadoOil,
+    clusterDextrin,
     banana,
     salmon,
     wheyIsolate,
@@ -1029,6 +1087,8 @@ static const Ingredient marinaraSauce = Ingredient(
     vitaminE,
     calciumCitrate,
     kiwi,
-    bagel,
+    smokedPaprika,
+    garlicPowder,
+    babyCarrots,
   ];
 }

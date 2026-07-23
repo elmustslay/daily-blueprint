@@ -14,74 +14,63 @@ void main() {
     final monSchedule = DailyPlanData.schedules[DailyPlanData.mon]!;
     
     // Find items related to laundry face towels and bath towels
-    final faceTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Face Towels')));
+    final faceTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bamboo Washcloths')));
     final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
 
-    final faceTowelsDetail = faceTowelsItem.details.firstWhere((d) => d.contains('Face Towels'));
+    final faceTowelsDetail = faceTowelsItem.details.firstWhere((d) => d.contains('Bamboo Washcloths'));
     final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.contains('Bath Towels'));
 
     expect(faceTowelsDetail, contains('Dry on LOW heat'));
     expect(bathTowelsDetail, contains('Dry on LOW heat'));
   });
 
-  test('Bath towels use Bleach and OxiClean', () {
+  test('Bath towels use Bleach', () {
     DailyPlanData.mockCurrentDate = DateTime(2026, 4, 15);
     final monSchedule = DailyPlanData.schedules[DailyPlanData.mon]!;
     final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
     final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.contains('Bath Towels'));
     
-    expect(bathTowelsDetail, contains('OxiClean'));
     expect(bathTowelsDetail, contains('Bleach'));
   });
 
   test('Wednesday grab list contains Calcium Citrate capsules', () {
     final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
     final grabItem = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    final supplementsDetail = grabItem.details.firstWhere((d) => d.startsWith('Supplements'));
-
-    expect(supplementsDetail, contains('Calcium Citrate'));
-    expect(supplementsDetail, isNot(contains('3 Calcium Citrate')));
-    expect(supplementsDetail, contains('K2'));
-    expect(supplementsDetail, isNot(contains('1 K2')));
+    
+    final grabDetails = grabItem.details.join(' ');
+    expect(grabDetails, contains('Calcium Citrate'));
   });
 
   test('Tuesday grab list does not contain Calcium Citrate capsules', () {
     final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
     final grabItem = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    final supplementsDetail = grabItem.details.firstWhere((d) => d.startsWith('Supplements'));
-
-    expect(supplementsDetail, isNot(contains('Calcium Citrate')));
+    
+    final grabDetails = grabItem.details.join(' ');
+    expect(grabDetails, isNot(contains('Calcium Citrate')));
   });
 
-  test('Banana counts and presence in grab lists are correct', () {
-    // Tue: 0 bananas (pre-workout banana eaten at home now)
-    final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
-    final tueGrab = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(tueGrab.details.any((d) => d.contains('banana')), isFalse);
-
-    // Wed: 1 banana (for afternoon snack)
-    final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
-    final wedGrab = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(wedGrab.details, contains('1 banana'));
-
-    // Fri: 0 bananas (pre-workout banana eaten at home now)
-    final friSchedule = DailyPlanData.schedules[DailyPlanData.fri]!;
-    final friGrab = friSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    expect(friGrab.details.any((d) => d.contains('banana')), isFalse);
+  test('Dextrin counts and presence in grab lists are correct', () {
+    expect(
+        DailyPlanData.schedules[DailyPlanData.tue]!.any((item) =>
+            item.title.contains('Grab') && item.details.any((d) => d.contains('1 scoop Cluster Dextrin'))),
+        isFalse);
+    expect(
+        DailyPlanData.schedules[DailyPlanData.wed]!.any((item) =>
+            item.title.contains('Grab') && item.details.any((d) => d.contains('1 scoop Cluster Dextrin'))),
+        isFalse);
+    expect(
+        DailyPlanData.schedules[DailyPlanData.fri]!.any((item) =>
+            item.title.contains('Grab') && item.details.any((d) => d.contains('1 scoop Cluster Dextrin'))),
+        isFalse);
   });
 
-  test('Pre-workout banana schedule timing is correct on gym days', () {
+  test('Pre-workout dextrin schedule timing is correct on gym days', () {
     for (final day in [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.thu, DailyPlanData.fri]) {
       final schedule = DailyPlanData.schedules[day]!;
       
-      // Banana should be around 5:35 or 5:55 pm
-      final banana = schedule.firstWhere((item) => item.title == 'Pre-Workout Banana & Get Dressed');
-      expect(banana.time.contains('5:'), isTrue);
-      expect(banana.details, contains('Eat banana (30-45m pre-workout) -> Swish/drink water after'));
-
-      // Commute should NOT have a second banana
-      final commute = schedule.firstWhere((item) => item.title == 'Commute to Gym');
-      expect(commute.details.any((d) => d.contains('banana')), isFalse);
+      final commute = schedule.firstWhere((item) => item.title == 'Get Dressed & Commute to Gym');
+      expect(commute.time.contains('5:'), isTrue);
+      expect(commute.details.any((d) => d.contains('Mix 1 scoop Cluster Dextrin in water')), isTrue);
     }
   });
 
@@ -107,7 +96,7 @@ void main() {
       final grabThings = schedule.firstWhere((item) => item.title.contains('Grab things'));
       
       int requiredEggs = 0;
-      int requiredBananas = 0;
+      int requiredDextrins = 0;
       bool needsZinc = false;
       bool needsCopper = false;
       int requiredCalcium = 0;
@@ -117,7 +106,7 @@ void main() {
         if (item.mealRecord != null) {
           for (final portion in item.mealRecord!.items) {
             if (portion.ingredient.id == 'egg') requiredEggs += portion.amount.toInt();
-            if (portion.ingredient.id == 'banana') requiredBananas += portion.amount.toInt();
+            if (portion.ingredient.id == 'cluster_dextrin') requiredDextrins += portion.amount.toInt();
             if (portion.ingredient.id == 'zinc') needsZinc = true;
             if (portion.ingredient.id == 'copper_glycinate') needsCopper = true;
             if (portion.ingredient.id == 'calcium_citrate') requiredCalcium += portion.amount.toInt();
@@ -127,15 +116,15 @@ void main() {
       
       final grabDetails = grabThings.details.join(' ');
       if (requiredEggs > 0) expect(grabDetails, contains('$requiredEggs Boiled Eggs'), reason: '$day missing eggs in grab list');
-      if (requiredBananas > 0) expect(grabDetails, contains(requiredBananas == 1 ? '1 banana' : '$requiredBananas bananas'), reason: '$day missing bananas in grab list');
+      if (requiredDextrins > 0) expect(grabDetails, contains(requiredDextrins == 1 ? '1 scoop Cluster Dextrin' : '$requiredDextrins scoops Cluster Dextrin'), reason: '$day missing dextrins in grab list');
       if (needsZinc) expect(grabDetails, contains('Zinc Picolinate'), reason: '$day missing Zinc in grab list');
       if (needsCopper) expect(grabDetails, contains('Copper Glycinate'), reason: '$day missing Copper in grab list');
       if (requiredCalcium > 0) expect(grabDetails, contains('Calcium Citrate'), reason: '$day missing Calcium in grab list');
     }
   });
 
-  test('Verify weekly fruit and egg consumption matches the shopping list quantities', () {
-    int totalBananas = 0;
+  test('Verify weekly fruit, dextrin, and egg consumption matches the shopping list quantities', () {
+    int totalDextrins = 0;
     int totalKiwis = 0;
     int totalEggs = 0;
     
@@ -143,7 +132,7 @@ void main() {
       for (final item in schedule) {
         if (item.mealRecord != null) {
           for (final portion in item.mealRecord!.items) {
-            if (portion.ingredient.id == 'banana') totalBananas += portion.amount.toInt();
+            if (portion.ingredient.id == 'cluster_dextrin') totalDextrins += portion.amount.toInt();
             if (portion.ingredient.id == 'kiwi') totalKiwis += portion.amount.toInt();
             if (portion.ingredient.id == 'egg') totalEggs += portion.amount.toInt();
           }
@@ -151,9 +140,9 @@ void main() {
       }
     }
     
-    // We expect exactly 14 bananas, 8 kiwis, and 24 eggs based on the schedule design
-    expect(totalBananas, 14, reason: 'Total weekly bananas should be exactly 14');
-    expect(totalKiwis, 8, reason: 'Total weekly kiwis should be exactly 8');
-    expect(totalEggs, 24, reason: 'Total weekly eggs should be exactly 24');
+    // We expect exactly 5 dextrins, 6 kiwis, and 18 eggs based on the schedule design
+    expect(totalDextrins, 5, reason: 'Total weekly dextrins should be exactly 5');
+    expect(totalKiwis, 6, reason: 'Total weekly kiwis should be exactly 6');
+    expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
   });
 }

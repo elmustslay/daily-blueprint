@@ -116,8 +116,8 @@ class DashboardScreen extends ConsumerWidget {
   }
 
   Widget _buildProgressBar(BuildContext context) {
-    final startDate = DateTime(2026, 7, 22);
-    final targetDate = DateTime(2026, 12, 5); // Target Dec 5th for maintenance
+    final startDate = DateTime(2026, 7, 27);
+    final targetDate = DateTime(2026, 12, 12); // Target Dec 12th for maintenance
     final now = DateTime.now();
     
     final totalDays = targetDate.difference(startDate).inDays;

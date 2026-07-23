@@ -28,20 +28,20 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
     final isNextWeekRefeed = DailyPlanData.isNextWeekRefeedWeek();
     final initialItems = [
       // Produce
-      ShoppingItem(id: 'prod-3', name: 'Bell Peppers', subtext: '4 red, 2 orange'),
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
-      ShoppingItem(id: 'prod-7', name: 'Bananas', subtext: isNextWeekRefeed ? 'need 28/week (REFEED WEEK)' : 'need 14/week'),
-      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: 'need 8/week'),
+
+      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: 'need 6/week'),
+      ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 bag - eat 1/7th of bag (~10 carrots) /day'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),
       ShoppingItem(id: 'meat-2', name: '96% Lean Ground Beef', subtext: '1 lb'),
       ShoppingItem(id: 'meat-3', name: 'Sockeye Salmon Fillet', subtext: '1 lb (hard min 0.82 lb)'),
       // Dairy
-      ShoppingItem(id: 'dairy-1', name: 'Organic Pasture Raised Large Brown Eggs', subtext: '2 dozen (need 24/week)'),
+      ShoppingItem(id: 'dairy-1', name: 'Organic Pasture Raised Large Brown Eggs', subtext: '2 dozen (need 18/week)'),
 
       // Others
-      if (isNextWeekRefeed) ShoppingItem(id: 'oth-1', name: 'Plain Bagels', subtext: 'need 6/week (REFEED WEEK)'),
+
       ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1 box (need 12oz)'),
       if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 jar (48 oz)'),
@@ -59,7 +59,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       // Amazon
       ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'),
-      ShoppingItem(id: 'amz-3', name: 'Multivitamins'),
       ShoppingItem(id: 'amz-4', name: 'D3-K2 Supplement'),
       ShoppingItem(id: 'amz-5', name: 'Omega-3 Supplement'),
       ShoppingItem(id: 'amz-6', name: 'Whey Isolate Protein'),
@@ -71,8 +70,12 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-13', name: 'Ashwagandha'),
       ShoppingItem(id: 'amz-14', name: 'Chia Seeds'),
       ShoppingItem(id: 'amz-15', name: 'Anua Heartleaf Pore Control Cleansing Oil', subtext: 'Sunscreen Remover'),
-      ShoppingItem(id: 'amz-16', name: 'La Roche-Posay Lipikar Wash AP+', subtext: 'Moisturizing Body Wash (for 2x daily showers)'),
-      ShoppingItem(id: 'amz-17', name: 'Hydrating Eye Gel-Cream', subtext: 'Skincare'),
+      ShoppingItem(id: 'amz-16', name: 'Dove Deep Moisture Body Wash', subtext: 'Prevents ashiness without lotion'),
+      ShoppingItem(id: 'amz-17', name: 'Vanicream Gentle Facial Cleanser', subtext: 'Face Wash (Foams beautifully, zero stripping)'),
+      ShoppingItem(id: 'amz-19', name: 'The Ordinary Caffeine Solution 5% + EGCG', subtext: 'For dark circles and bags'),
+      ShoppingItem(id: 'amz-18', name: 'All Free Clear (Liquid)', subtext: 'Laundry Detergent'),
+      ShoppingItem(id: 'amz-20', name: '100% Cotton Percale Pillowcases', subtext: 'Highly breathable, prevents closed comedones'),
+      ShoppingItem(id: 'amz-21', name: 'Cluster Dextrin (Unflavored)', subtext: 'Intra-workout & Refeed supplement'),
     ];
 
     final prefs = SharedPrefsLogic.instance;
