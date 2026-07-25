@@ -938,6 +938,7 @@ static const Ingredient marinaraSauce = Ingredient(
     nutritionPerBaseUnit: NutritionFact(
       microNutrients: {
         'Magnesium (mg)': 90,
+        'Vitamin C (mg)': 40,
       },
     ),
   );

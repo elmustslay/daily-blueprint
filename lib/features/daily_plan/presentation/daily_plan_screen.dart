@@ -1164,7 +1164,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
             Text('Deload Protocol', style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
-        content: const SingleChildScrollView(
+        content: SingleChildScrollView(
           child: Text(
             '🔴 DELOAD WEEK — Intensity-Preservation\n'
             'Because you are on a caloric deficit, dropping weight will signal your body to shed muscle. Drop fatigue, not intensity.\n\n'
@@ -1182,7 +1182,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
             '━━━━━━━━━━━━━━━━━━━━\n'
             'CARDIO (Tue / Sat):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Keep your 40-minute LISS schedule exactly same.\n'
+            '• Keep your ${DailyPlanData.isRefeedWeek() ? "40-minute" : "1-hour"} LISS schedule exactly same.\n'
             '• Since you track HR, just stay strictly in your target zone.\n'
             '• LISS does not tax the CNS, so no deload is needed here. Keep burning the fat.\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'

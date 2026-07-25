@@ -249,20 +249,24 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
                 const SizedBox(height: 12),
                 const Text('Step-by-Step Execution:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
                 const SizedBox(height: 8),
-                const Text(
-                  '1️⃣ THE SETUP (40 mins)\n'
+                Text(
+                  '1️⃣ THE SETUP (${DailyPlanData.isRefeedWeek() ? "40 mins" : "1 hour"})\n'
                   '   • Machine: Incline Treadmill\n'
                   '   • Incline: 10% - 15% (as high as comfortable)\n'
                   '   • Speed: 2.5 - 3.2 mph (Do NOT jog, just a brisk walk)\n\n'
-                  '2️⃣ THE GOLDEN RULES (Aesthetics)\n'
+                  '2️⃣ WARM-UP & TIMING\n'
+                  '   • DO NOT start your timer immediately.\n'
+                  '   • Walk until your heart rate reaches strictly 130-140 bpm.\n'
+                  '   • ONCE you hit the zone, START the ${DailyPlanData.isRefeedWeek() ? "40-minute" : "1-hour"} timer. The goal is to spend the entire duration strictly in this zone.\n\n'
+                  '3️⃣ THE GOLDEN RULES (Aesthetics)\n'
                   '   • 🚫 DO NOT hold the handrails. Pump your arms. Holding on burns 30% fewer calories.\n'
                   '   • Swipe left on your Apple Watch to view the live Heart Rate Zones.\n'
-                  '   • Your target is strictly Zone 2 (120 - 140 bpm).\n\n'
-                  '3️⃣ LIVE TROUBLESHOOTING\n'
-                  '   • If your HR hits 145+ (Zone 3), flatten the incline slightly or slow down.\n'
-                  '   • If your HR drops to 110 (Zone 1), crank the incline to MAX.\n'
+                  '   • Your target is strictly Zone 2 (130 - 140 bpm).\n\n'
+                  '4️⃣ LIVE TROUBLESHOOTING\n'
+                  '   • If your HR hits 145+ (Zone 3), flatten the incline slightly to bring it back to ~135 bpm (don\'t drop it too low, you want to hover near the top).\n'
+                  '   • If your HR drops below 130, crank the incline to MAX.\n'
                   '   • Result: You will sweat heavily but be able to hold a conversation without gasping. This strips pure facial/belly fat without burning muscle or causing cortisol bloating.',
-                  style: TextStyle(color: Colors.white70, height: 1.6),
+                  style: const TextStyle(color: Colors.white70, height: 1.6),
                 ),
               ],
             ),
@@ -359,7 +363,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
             Text('Deload Protocol', style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
-        content: const SingleChildScrollView(
+        content: SingleChildScrollView(
           child: Text(
             '🔴 DELOAD WEEK — Intensity-Preservation\n'
             'Because you are on a caloric deficit, dropping weight will signal your body to shed muscle. Drop fatigue, not intensity.\n\n'
@@ -377,7 +381,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
             '━━━━━━━━━━━━━━━━━━━━\n'
             'CARDIO (Wed / Sat):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Keep your 40-minute LISS schedule exactly same.\n'
+            '• Keep your ${DailyPlanData.isRefeedWeek() ? "40-minute" : "1-hour"} LISS schedule exactly same.\n'
             '• Since you track HR, just stay strictly in your target zone.\n'
             '• LISS does not tax the CNS, so no deload is needed here. Keep burning the fat.\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
@@ -481,7 +485,7 @@ class ExerciseCard extends ConsumerWidget {
             ),
             const Divider(height: 32),
             if (todayLogCount == 0 && !isPrimed && exercise.primaryMuscleGroup != 'Mobility' && exercise.primaryMuscleGroup != 'Abs')
-              _buildWarmupSuggestion(workingWeight),
+              _buildWarmupSuggestion(exercise, workingWeight),
             weightsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('Error: $err'),
@@ -525,7 +529,7 @@ class ExerciseCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildWarmupSuggestion(double? workingWeight) {
+  Widget _buildWarmupSuggestion(Exercise exercise, double? workingWeight) {
     if (workingWeight == null) {
       return Container(
         margin: const EdgeInsets.only(bottom: 16),
@@ -558,9 +562,16 @@ class ExerciseCard extends ConsumerWidget {
 
     double roundTo5(double w) => (w / 5).round() * 5.0;
 
-    final w1 = roundTo5(workingWeight * 0.4);
-    final w2 = roundTo5(workingWeight * 0.6);
-    final w3 = roundTo5(workingWeight * 0.8);
+    bool isAssisted = exercise.name.contains('Assisted');
+    // If assisted, higher weight is easier (more assistance). 
+    // Working weight of 30 lbs means 30 lbs of assistance.
+    // Warmup 1 (very light) -> needs MORE assistance (e.g., 2.0x working assistance)
+    // Warmup 2 (moderate light) -> needs moderately more assistance (e.g., 1.5x working assistance)
+    // Warmup 3 (heavy warmup) -> needs slightly more assistance (e.g., 1.2x working assistance)
+    
+    final w1 = isAssisted ? roundTo5(workingWeight * 2.0) : roundTo5(workingWeight * 0.4);
+    final w2 = isAssisted ? roundTo5(workingWeight * 1.5) : roundTo5(workingWeight * 0.6);
+    final w3 = isAssisted ? roundTo5(workingWeight * 1.2) : roundTo5(workingWeight * 0.8);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -581,11 +592,11 @@ class ExerciseCard extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Text('1. ~${w1.toStringAsFixed(0)} lbs for 10 reps (40%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          Text('1. ~${w1.toStringAsFixed(0)} lbs ${isAssisted ? 'Assistance ' : ''}for 10 reps (40%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
-          Text('2. ~${w2.toStringAsFixed(0)} lbs for 6 reps (60%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          Text('2. ~${w2.toStringAsFixed(0)} lbs ${isAssisted ? 'Assistance ' : ''}for 6 reps (60%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 4),
-          Text('3. ~${w3.toStringAsFixed(0)} lbs for 3 reps (80%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          Text('3. ~${w3.toStringAsFixed(0)} lbs ${isAssisted ? 'Assistance ' : ''}for 3 reps (80%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
           const SizedBox(height: 8),
           const Text('⏳ Rest ~1 min between warmups, 2 mins before working set.', style: TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
         ],

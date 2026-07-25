@@ -41,7 +41,9 @@ class _Portions {
 class _Recipes {
   static final pasta = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1);
   static final salmon = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1);
+  static final salmonHalf = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 0.5);
   static final beef = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 1);
+  static final beefHalf = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 0.5);
   static final quinoa = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa'), servings: 1);
 }
 
@@ -66,7 +68,7 @@ class DailyPlanData {
     return (diff ~/ 7) + 1;
   }
 
-  static bool isDeloadWeek() => _currentWeekNumber > 1 && (_currentWeekNumber - 1) % 6 == 0;
+  static bool isDeloadWeek() => isRefeedWeek();
   static bool shouldScaleUpCardio() => _currentWeekNumber >= 17;
   static bool isBloodDonationWeek() => _currentWeekNumber > 0 && _currentWeekNumber % 22 == 0;
   
@@ -106,10 +108,16 @@ class DailyPlanData {
       details: [
         'Use bathroom',
         'Weight (Step on scale)',
+        if (isRefeedWeek())
+          'Drink cold water with a heavy pinch (0.5 tsp) of Lite Salt + 2 scoops Cluster Dextrin (REFEED CARBS)'
+        else
+          'Drink cold water with a heavy pinch (0.5 tsp) of Lite Salt',
         if (nac) 'Take 600mg NAC + 25mcg Selenium (Combo Pill)',
         'Take 250mg Citicoline (w/ 25mg Tyrosine)',
       ],
       mealRecord: MealRecord(items: [
+        const IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
+        if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: 2),
         if (nac) const IngredientPortion(ingredient: IngredientsData.nac, amount: 1),
         const IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1),
       ]),
@@ -157,14 +165,25 @@ class DailyPlanData {
   }
 
 
-  static TimelineItem _morningDine(String time, {String additional = '', int eggs = 3, bool zinc = false, bool vitamins = true, bool vitaminE = false, bool omega3 = true, bool copper = false}) {
+  static TimelineItem _morningDine(String time, {
+    String additional = '', 
+    int eggs = 3, 
+    bool zinc = false, 
+    bool vitamins = true, 
+    bool vitaminE = false, 
+    bool omega3 = true, 
+    bool copper = false,
+    bool eatSalmon = false,
+    bool eatBeef = false,
+  }) {
     return TimelineItem(
       time: time,
       title: 'Morning Dine',
       icon: '🍳',
       details: [
         'Eat in front of Verilux HappyLight (45-degree angle to face):',
-        if (isRefeedWeek()) 'Drink 2 scoops Cluster Dextrin (REFEED WEEK CARBS)',
+        if (eatSalmon) 'Eat 0.5 portion of Salmon',
+        if (eatBeef) 'Eat 0.5 portion of Ground Beef',
         if (eggs > 0) '$eggs Boiled Eggs',
         '🥕 Eat 1/7th of a bag (~10 baby carrots)',
         if (vitamins) ...[
@@ -181,24 +200,22 @@ class DailyPlanData {
       mealRecord: MealRecord(items: [
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
         const IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 3.4),
-        if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: 2),
         if (vitamins && omega3) _Portions.omega3,
         if (vitamins) const IngredientPortion(ingredient: IngredientsData.standaloneK2, amount: 2),
         if (vitamins) _Portions.biotin,
         if (vitamins && vitaminE) _Portions.vitaminE,
         if (zinc) _Portions.zinc,
         if (copper) const IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1),
+      ], recipeItems: [
+        if (eatSalmon) _Recipes.salmonHalf,
+        if (eatBeef) _Recipes.beefHalf,
       ]),
     );
   }
 
   static TimelineItem _grabThings(String time, {
-    int dextrins = 0,
     int calciumCaps = 0,
   }) {
-    int effectiveDextrins = dextrins + (isRefeedWeek() ? 2 : 0);
-    if (isRefeedWeek() && effectiveDextrins > 2) effectiveDextrins = 2;
-
     return TimelineItem(
       time: time,
       title: 'Grab things to take to work',
@@ -210,7 +227,6 @@ class DailyPlanData {
         'apple watch',
         if (calciumCaps > 0) 'Calcium Citrate (${calciumCaps}x capsules)',
         'Pasta lunch',
-        if (effectiveDextrins > 0) '${effectiveDextrins == 1 ? "1 scoop Cluster Dextrin" : "$effectiveDextrins scoops Cluster Dextrin"}',
         'water bottle'
       ],
     );
@@ -220,12 +236,17 @@ class DailyPlanData {
     return TimelineItem(time: time, title: 'Commute to Work', icon: '🚗');
   }
 
-  static TimelineItem _work(String time, {List<String> details = const [], String title = 'Work', bool calcium = false}) {
+  static TimelineItem _work(String time, {List<String> details = const [], String title = 'Work', bool calcium = false, bool standingDesk = false, bool caffeine = false, bool sparklingWater = false}) {
     return TimelineItem(
       time: time, 
       title: title, 
       icon: '💻', 
-      details: details,
+      details: [
+        if (caffeine) '☕️ Drink Caffeine around 9:30 am',
+        if (sparklingWater) 'Drink Sparkling Water',
+        if (standingDesk && !isRefeedWeek()) '🧍‍♂️ Use Standing Desk for 3-4 hours',
+        ...details
+      ],
     );
   }
 
@@ -275,27 +296,6 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _afternoonSnack(String time, {bool whey = false, int dextrinCount = 0}) {
-    int effectiveBananaCount = dextrinCount + (isRefeedWeek() ? 2 : 0);
-    if (isRefeedWeek() && effectiveBananaCount > 2) effectiveBananaCount = 2;
-    return TimelineItem(
-      time: time,
-      title: 'Afternoon Snack',
-      icon: '💧',
-      details: [
-        if (effectiveBananaCount > 0) '$effectiveBananaCount Banana${effectiveBananaCount > 1 ? 's' : ''}',
-        if (whey) '1 scoop whey isolate (30g protein)',
-        if (whey) '1 scoop creatine monohydrate (5g)',
-        'Swish/drink water after eating/drinking to clear mouth',
-      ],
-      mealRecord: MealRecord(items: [
-        if (effectiveBananaCount > 0) IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: effectiveBananaCount.toDouble()),
-        if (whey) const IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1),
-        if (whey) _Portions.creatine,
-      ]),
-    );
-  }
-
   static TimelineItem _preMedicationBuffer(String time, {bool zinc = false, bool vitaminE = true}) {
     return TimelineItem(
       time: time,
@@ -322,6 +322,15 @@ class DailyPlanData {
 
 
   static TimelineItem _gym(String time, String title, {bool isCardio = false}) {
+    if (isCardio && isRefeedWeek()) {
+      return TimelineItem(
+        time: time,
+        title: 'Haircut / Rest (Refeed Week)',
+        icon: '🛋️',
+        details: ['Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.'],
+        isCardio: false,
+      );
+    }
     return TimelineItem(
       time: time,
       title: title,
@@ -341,7 +350,7 @@ class DailyPlanData {
         if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
         if (dextrinCount > 0) '$dextrinCount Banana${dextrinCount > 1 ? 's' : ''}',
         if (copper) 'Take 1 cap Copper Glycinate (3mg)',
-        if (cook) 'Cook Salmon (3 portions)' else '1/3 lb Wild Sockeye Salmon', 
+        if (cook) 'Cook Salmon (3 portions) and eat 0.5 portion' else 'Eat 0.5 portion of Salmon', 
         if (showAshwagandha) '2 cap Ashwagandha',
         if (isRefeedWeek()) '🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa',
       ],
@@ -352,7 +361,7 @@ class DailyPlanData {
         if (copper) const IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1),
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
       ], recipeItems: [
-        _Recipes.salmon,
+        _Recipes.salmonHalf,
         if (isRefeedWeek()) _Recipes.quinoa,
       ]),
     );
@@ -368,7 +377,7 @@ class DailyPlanData {
         if (withWheyCreatine) '1 scoop whey isolate (30g protein)',
         if (withWheyCreatine) '1 scoop creatine monohydrate (5g)',
         if (dextrinCount > 0) '$dextrinCount Banana${dextrinCount > 1 ? 's' : ''}',
-        '1/4 pound ground beef', 
+        'Eat 0.5 portion of Ground Beef', 
         if (showAshwagandha) '2 cap Ashwagandha',
         if (isRefeedWeek()) '🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa',
       ],
@@ -378,7 +387,7 @@ class DailyPlanData {
         if (dextrinCount > 0) IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: dextrinCount.toDouble()),
         if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
       ], recipeItems: [
-        _Recipes.beef,
+        _Recipes.beefHalf,
         if (isRefeedWeek()) _Recipes.quinoa,
       ]),
     );
@@ -472,11 +481,10 @@ class DailyPlanData {
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
       _morningDine('8:40-8:50 am', eggs: 2, zinc: true, vitaminE: true, omega3: false),
-      _work('8:50-1:00 pm', details: ['Boil 24 eggs (warm on counter 10m first)', _laundryFaceTowels, 'Run Dishwasher']),
+      _work('8:50-1:00 pm', details: [_laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('1:00-1:30 pm', calciumCaps: 3),
       _work('1:30-5:00 pm', details: [_laundryBathTowels]),
-      TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
-      _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
+      _study('5:00-5:55 pm', details: ['Study (Beat traffic before gym)']),
       _commuteToGym('5:55-6:30 pm', applySunscreen: true),
       _gym('6:30-8:30 pm', 'Gym Session (Upper A)'),
       TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
@@ -489,12 +497,12 @@ class DailyPlanData {
     tue: [
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
-      _morningDine('8:40-8:50 am', eggs: 2, zinc: true, omega3: false),
+      _morningDine('8:40-8:50 am', eggs: 2, zinc: true, omega3: false, eatSalmon: true),
       _grabThings('8:50-8:55 am'),
       _commuteToWork('8:55-9:00 am'),
-      _work('9:00-1:00 pm'),
+      _work('9:00-1:00 pm', caffeine: true, sparklingWater: true, standingDesk: true),
       _pastaLunch('1:00-1:30 pm'),
-      _work('1:30-5:00 pm'),
+      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true),
       TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
       _commuteToGym('5:55-6:30 pm'),
@@ -509,20 +517,18 @@ class DailyPlanData {
     wed: [
       _wakeup('8:10-8:20 am', nac: true),
       _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
-      _morningDine('8:40-8:50 am', additional: 'Take ground beef out of freezer to thaw in fridge', eggs: 2, zinc: false, vitaminE: false, omega3: false),
-      _grabThings('8:50-8:55 am', dextrins: 0, calciumCaps: 3),
+      _morningDine('8:40-8:50 am', additional: 'Take ground beef out of freezer to thaw in fridge', eggs: 2, zinc: false, vitaminE: false, omega3: false, eatSalmon: true),
+      _grabThings('8:50-8:55 am', calciumCaps: 3),
       _commuteToWork('8:55-9:00 am'),
-      _work('9:00-1:00 pm'),
+      _work('9:00-1:00 pm', caffeine: true, sparklingWater: true, standingDesk: true),
       _pastaLunch('1:00-1:30 pm', calciumCaps: 3),
-      _work('1:30-4:00 pm'),
-      if (isRefeedWeek()) _afternoonSnack('4:00-4:15 pm', dextrinCount: 0),
-      _work('4:15-5:00 pm'),
+      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true),
       TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study('5:10-6:05 pm', details: ['Study (Beat traffic before gym)']),
-      _commuteToGym('6:05-6:25 pm', withDextrin: false),
-      _gym('6:25-7:15 pm', 'Cardio (LISS) / Haircut', isCardio: true),
-      TimelineItem(time: '7:15-7:20 pm', title: 'Commute Home', icon: '🚗'),
-      _salmonDinner('7:20-8:20 pm', withWheyCreatine: true, dextrinCount: isRefeedWeek() ? 1 : 0),
+      _commuteToGym('6:05-6:15 pm', withDextrin: false),
+      _gym('6:15-7:25 pm', 'Cardio (LISS) / Haircut', isCardio: true),
+      TimelineItem(time: '7:25-7:35 pm', title: 'Commute Home', icon: '🚗'),
+      _salmonDinner('7:40-8:20 pm', withWheyCreatine: true, dextrinCount: isRefeedWeek() ? 1 : 0),
       _chores('8:20-8:50 pm'),
       _study('8:50-9:20 pm', sleepKiwiCount: 1),
       _relaxOrCatchUp('9:20-9:50 pm'),
@@ -533,7 +539,7 @@ class DailyPlanData {
     thu: [
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
-      _morningDine('8:40-8:50 am', eggs: 2, vitaminE: true),
+      _morningDine('8:40-8:50 am', eggs: 2, vitaminE: true, eatSalmon: true),
       TimelineItem(time: '8:50-9:25 am', title: 'Cook', icon: '🧑‍🍳', details: ['1lb ground beef (divide in 4, 4 fridge)']),
       _work('9:25-1:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
       _pastaLunch('1:00-1:30 pm', calciumCaps: 3),
@@ -550,12 +556,12 @@ class DailyPlanData {
     fri: [
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
-      _morningDine('8:40-8:50 am', eggs: 2, copper: true),
+      _morningDine('8:40-8:50 am', eggs: 2, copper: true, eatBeef: true),
       _grabThings('8:50-8:55 am'),
       _commuteToWork('8:55-9:00 am'),
-      _work('9:00-1:00 pm'),
+      _work('9:00-1:00 pm', caffeine: true, sparklingWater: true, standingDesk: true),
       _pastaLunch('1:00-1:30 pm'),
-      _work('1:30-5:00 pm'),
+      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true),
       TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
       _commuteToGym('5:55-6:30 pm'),
@@ -571,7 +577,7 @@ class DailyPlanData {
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:40-8:45 am'),
-      _morningDine('8:45-9:05 am', additional: '20mg adderall IR', eggs: 2, vitamins: false),
+      _morningDine('8:45-9:05 am', additional: '20mg adderall IR', eggs: 2, vitamins: false, eatBeef: true),
       _study('9:05-10:35 am'),
       TimelineItem(time: '10:35-10:55 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('10:55-12:20 pm'),
@@ -584,10 +590,10 @@ class DailyPlanData {
       TimelineItem(time: '5:10-5:30 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
       _study('5:30-6:20 pm'),
       _commuteToGym('6:20-6:25 pm', applySunscreen: true, withDextrin: false),
-      _gym('6:25-7:15 pm', 'Cardio (LISS)', isCardio: true),
-      TimelineItem(time: '7:15-7:20 pm', title: 'Commute Home', icon: '🚗'),
-      _beefDinner('7:20-7:50 pm', withWheyCreatine: false, dextrinCount: isRefeedWeek() ? 1 : 0),
-      _chores('7:50-8:50 pm', sleepKiwiCount: 1),
+      _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
+      TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
+      _beefDinner('7:45-8:00 pm', withWheyCreatine: false, dextrinCount: isRefeedWeek() ? 1 : 0),
+      _chores('8:00-8:50 pm', sleepKiwiCount: 1),
       _relaxOrCatchUp('8:50-9:35 pm'),
       _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:20-10:35 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha, nac: true),
@@ -596,7 +602,7 @@ class DailyPlanData {
     sun: [
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
-      _morningDine('8:40-9:35 am', eggs: 2, vitamins: true),
+      _morningDine('8:40-9:35 am', eggs: 2, vitamins: true, eatBeef: true),
       _preMedicationBuffer('9:35-9:50 am'),
       _study('9:50-11:20 am', details: ['20mg adderall IR at 9:50am']),
       TimelineItem(time: '11:20-11:50 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
@@ -637,7 +643,8 @@ class DailyPlanData {
         details: [
           'Meal Prep: Pasta (6 portions)', 
           if (isNextWeekRefeedWeek()) '🧑‍🍳 UPCOMING REFEED WEEK: Cook a batch of Quinoa for the week\'s dinners',
-          'Put ground beef in freezer'
+          'Put ground beef in freezer',
+          'Boil 18 eggs for the week (warm on counter 10m first)'
         ]
       ),
       _relaxOrCatchUp('6:45-7:45 pm', title: 'Rest / Weekly Reflection'),

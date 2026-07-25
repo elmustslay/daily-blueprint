@@ -865,7 +865,8 @@
             "Carbs": 0.0,
             "Fat": 0.0,
             "Micros": {
-                "Magnesium (mg)": 90.0
+                "Magnesium (mg)": 90.0,
+                "Vitamin C (mg)": 40.0
             }
         }
     },

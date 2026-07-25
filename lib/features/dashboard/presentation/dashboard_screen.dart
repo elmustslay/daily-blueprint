@@ -117,7 +117,7 @@ class DashboardScreen extends ConsumerWidget {
 
   Widget _buildProgressBar(BuildContext context) {
     final startDate = DateTime(2026, 7, 27);
-    final targetDate = DateTime(2026, 12, 12); // Target Dec 12th for maintenance
+    final targetDate = DateTime(2026, 12, 17); // Target Dec 17th for maintenance
     final now = DateTime.now();
     
     final totalDays = targetDate.difference(startDate).inDays;
@@ -187,12 +187,12 @@ class DashboardScreen extends ConsumerWidget {
                   SizedBox(height: 24),
                   Divider(color: Colors.white24),
                   SizedBox(height: 24),
-                  Text('Trigger 2: The Finish Line (12-15% Body Fat)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.greenAccent)),
+                  Text('Trigger 2: The Finish Line (21.2% Body Fat)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.greenAccent)),
                   SizedBox(height: 8),
-                  Text('At ~12-15% body fat, the upper two abdominals become clearly visible, and the linea alba pulls tight. 12-15% is the sweet spot where you look highly athletic but hormones function perfectly.', style: TextStyle(color: Colors.white70, height: 1.4)),
+                  Text('At 21.2% body fat, you will be significantly leaner, your clothes will fit much better, and you will have lost over 20 lbs of pure fat. This is the perfect springboard for the next phase.', style: TextStyle(color: Colors.white70, height: 1.4)),
                   SizedBox(height: 12),
                   Text('The Fix (Bump to ~2,200+ Maintenance)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
-                  Text('Bumping up to a maintenance intake the second you see those top two abs in the mirror is the ultimate endgame. Your metabolism will roar back to life, your strength in the gym will skyrocket, and your body will be perfectly primed to "recomp"—building dense, new muscle while staying lean all year round.', style: TextStyle(color: Colors.white70, height: 1.4)),
+                  Text('Bumping up to a maintenance intake once you hit this target on December 17th is the ultimate endgame for this cycle. Your metabolism will roar back to life, your strength in the gym will skyrocket, and your body will be perfectly primed to "recomp" during your maintenance phase.', style: TextStyle(color: Colors.white70, height: 1.4)),
                 ]
               ),
             ),
@@ -229,7 +229,7 @@ class DashboardScreen extends ConsumerWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Dec 5th Target ($daysTillMaintenance Days till Maintenance)',
+                  'Dec 17th Target ($daysTillMaintenance Days till Maintenance)',
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                 ),

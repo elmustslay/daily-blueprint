@@ -48,6 +48,14 @@ class GymStatsScreen extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
+                if (exercise.name.contains('Assisted')) ...[
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Note: Since this is an assisted machine, the line trending DOWN means you are getting stronger (using less assistance).',
+                    style: TextStyle(color: Colors.orangeAccent, fontSize: 13, fontStyle: FontStyle.italic),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
                 const SizedBox(height: 32),
                 Expanded(
                   child: LineChart(
