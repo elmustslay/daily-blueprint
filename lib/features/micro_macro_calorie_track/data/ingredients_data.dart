@@ -956,19 +956,40 @@ static const Ingredient marinaraSauce = Ingredient(
 
   static const Ingredient kiwi = Ingredient(
     id: 'kiwi',
-    name: 'Trader Joe\'s Kiwi',
+    name: 'Trader Joe\'s Kiwi (Skin-On)',
     baseUnit: 'kiwi',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 50,
+      calories: 45,
       protein: 1,
-      carbs: 13,
-      fat: 0,
+      carbs: 11,
+      fat: 0.5,
       microNutrients: {
-        'Fiber (g)': 1,
-        'Sugar (g)': 1,
-        'Calcium (Food) (mg)': 14,
-        'Potassium (mg)': 255,
-        'Vitamin C (mg)': 130.5,
+        'Fiber (g)': 3, // Box says 2g (peeled), skin adds ~1g extra!
+        'Sugar (g)': 6.5,
+        'Calcium (Food) (mg)': 25,
+        'Potassium (mg)': 231,
+        'Vitamin C (mg)': 68.5,
+        'Vitamin E (Food) (mg)': 1.5, // Skin is rich in Vitamin E
+        'Folate (Food) (mcg)': 30, // Skin provides extra folate
+      },
+    ),
+  );
+
+  static const Ingredient blueberries = Ingredient(
+    id: 'blueberries', //this entire listing is only estimate (real value unknown)
+    name: 'Trader Joe\'s Blueberries',
+    baseUnit: 'cup',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 84,
+      protein: 1.1,
+      carbs: 21.4,
+      fat: 0.5,
+      microNutrients: {
+        'Fiber (g)': 3.6,
+        'Sugar (g)': 14.7,
+        'Vitamin C (mg)': 14.4,
+        'Vitamin K (mcg)': 28.6,
+        'Potassium (mg)': 114,
       },
     ),
   );
@@ -1088,6 +1109,7 @@ static const Ingredient marinaraSauce = Ingredient(
     vitaminE,
     calciumCitrate,
     kiwi,
+    blueberries,
     smokedPaprika,
     garlicPowder,
     babyCarrots,

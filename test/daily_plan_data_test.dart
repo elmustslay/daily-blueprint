@@ -141,8 +141,8 @@ void main() {
     }
     
     // We expect exactly 5 dextrins, 6 kiwis, and 18 eggs based on the schedule design
-    expect(totalDextrins, 5, reason: 'Total weekly dextrins should be exactly 5');
-    expect(totalKiwis, 6, reason: 'Total weekly kiwis should be exactly 6');
+    expect(totalDextrins, 4, reason: 'Total weekly dextrins should be exactly 4');
+    expect(totalKiwis, 5, reason: 'Total weekly kiwis should be exactly 5 (Mon-Thu, 2 on Thu)');
     expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
   });
 }

@@ -30,7 +30,8 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Produce
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
-      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: 'need 6/week'),
+      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
+      ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (1 US Dry Pint)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 bag - eat 1/7th of bag (~10 carrots) /day'),
       
       // Poultry & Meat
@@ -44,7 +45,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1 box (need 12oz)'),
       if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK)'),
-      ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 jar (48 oz)'),
+      ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 JARS (48 oz)'),
 
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 4tbsp)'),
       ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
@@ -54,6 +55,10 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.5tsp'),
       ShoppingItem(id: 'spc-3', name: 'Onion Powder', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-4', name: 'Dried Oregano', subtext: 'need 1tsp'),
+      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: 'CRITICAL for potassium!'),
+      ShoppingItem(id: 'spc-6', name: 'Black Pepper'),
+      ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
+      ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
 
 
 

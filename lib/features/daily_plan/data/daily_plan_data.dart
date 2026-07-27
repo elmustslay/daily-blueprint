@@ -132,8 +132,7 @@ class DailyPlanData {
       details: [
         'Set Dehumidifier to 55%',
         'Brush teeth',
-        'Face & neck: Use 1 Blotting Sheet to press against oily areas (forehead/nose) for 3s each to absorb overnight oil ->' , 
-        'Wet new bamboo baby washcloth with lukewarm water (leave SOAKING wet to prevent friction) and gently wipe',
+        'Wash face/neck with bare hands using 0.5 pump of Gentle Cleanser for 15s to remove overnight sweat -> Rinse -> Pat dry with new bamboo baby washcloth',
         'Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
         clothes,
@@ -175,6 +174,7 @@ class DailyPlanData {
     bool copper = false,
     bool eatSalmon = false,
     bool eatBeef = false,
+    String blueberryText = '',
   }) {
     return TimelineItem(
       time: time,
@@ -182,6 +182,7 @@ class DailyPlanData {
       icon: '🍳',
       details: [
         'Eat in front of Verilux HappyLight (45-degree angle to face):',
+        if (blueberryText.isNotEmpty) '🫐 $blueberryText',
         if (eatSalmon) 'Eat 0.5 portion of Salmon',
         if (eatBeef) 'Eat 0.5 portion of Ground Beef',
         if (eggs > 0) '$eggs Boiled Eggs',
@@ -198,6 +199,7 @@ class DailyPlanData {
         if (additional.isNotEmpty) additional,
       ],
       mealRecord: MealRecord(items: [
+        if (blueberryText.isNotEmpty) const IngredientPortion(ingredient: IngredientsData.blueberries, amount: 0.66),
         if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
         const IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 3.4),
         if (vitamins && omega3) _Portions.omega3,
@@ -393,7 +395,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _chores(String time, {int sleepKiwiCount = 0}) {
+  static TimelineItem _chores(String time, {int sleepKiwiCount = 0, String blueberryText = ''}) {
     return TimelineItem(
       time: time,
       title: 'Chores & Clean Up',
@@ -402,10 +404,12 @@ class DailyPlanData {
         '1 scoop Casein in 16oz water -> Swish/drink water after',
         'The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.',
         if (sleepKiwiCount > 0) 'Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (30m before bed prep to protect enamel)',
+        if (blueberryText.isNotEmpty) '🫐 $blueberryText',
       ], 
       mealRecord: MealRecord(items: [
         const IngredientPortion(ingredient: IngredientsData.casein, amount: 1),
         if (sleepKiwiCount > 0) IngredientPortion(ingredient: IngredientsData.kiwi, amount: sleepKiwiCount.toDouble()),
+        if (blueberryText.isNotEmpty) const IngredientPortion(ingredient: IngredientsData.blueberries, amount: 0.66),
       ]),
     );
   }
@@ -548,7 +552,7 @@ class DailyPlanData {
       _gym('6:10-8:10 pm', 'Gym Session (Upper B)'),
       TimelineItem(time: '8:10-8:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('8:30-9:00 pm', withWheyCreatine: true, dextrinCount: isRefeedWeek() ? 1 : 0),
-      _chores('9:00-9:30 pm', sleepKiwiCount: 1),
+      _chores('9:00-9:30 pm', sleepKiwiCount: 2),
       _bedPrep('9:30-10:00 pm', newBathTowel: true),
       _nightSupplement('10:00-10:50 pm', magAmount: 2, skincare: _bha),
       _fallAsleep('10:50-11:20 pm'),
@@ -568,7 +572,7 @@ class DailyPlanData {
       _gym('6:30-8:30 pm', 'Gym Session (Lower B)'),
       TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('8:50-9:20 pm', withWheyCreatine: true, dextrinCount: isRefeedWeek() ? 1 : 0),
-      _chores('9:20-9:50 pm', sleepKiwiCount: 1),
+      _chores('9:20-9:50 pm', blueberryText: 'Eat 1/3 of the box of Blueberries'),
       _bedPrep('9:50-10:20 pm'),
       _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: _joseon),
       _fallAsleep('10:50-11:20 pm'),
@@ -577,7 +581,7 @@ class DailyPlanData {
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _preMedicationBuffer('8:40-8:45 am'),
-      _morningDine('8:45-9:05 am', additional: '20mg adderall IR', eggs: 2, vitamins: false, eatBeef: true),
+      _morningDine('8:45-9:05 am', additional: '20mg adderall IR', eggs: 2, vitamins: false, eatBeef: true, blueberryText: 'Eat 1/2 of the remaining box of Blueberries'),
       _study('9:05-10:35 am'),
       TimelineItem(time: '10:35-10:55 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
       _study('10:55-12:20 pm'),
@@ -593,7 +597,7 @@ class DailyPlanData {
       _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:45-8:00 pm', withWheyCreatine: false, dextrinCount: isRefeedWeek() ? 1 : 0),
-      _chores('8:00-8:50 pm', sleepKiwiCount: 1),
+      _chores('8:00-8:50 pm'),
       _relaxOrCatchUp('8:50-9:35 pm'),
       _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
       _nightSupplement('10:20-10:35 pm', magAmount: 2, magName: 'Magnesium', skincare: _bha, nac: true),
@@ -602,7 +606,7 @@ class DailyPlanData {
     sun: [
       _wakeup('8:10-8:20 am'),
       _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
-      _morningDine('8:40-9:35 am', eggs: 2, vitamins: true, eatBeef: true),
+      _morningDine('8:40-9:35 am', eggs: 2, vitamins: true, eatBeef: true, blueberryText: 'Eat the rest of the Blueberries'),
       _preMedicationBuffer('9:35-9:50 am'),
       _study('9:50-11:20 am', details: ['20mg adderall IR at 9:50am']),
       TimelineItem(time: '11:20-11:50 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
@@ -614,12 +618,12 @@ class DailyPlanData {
         details: [
           '1/4 pound ground beef', 
           'Take 3 Calcium Citrate capsules (438mg) with meal', 
-          if (isRefeedWeek()) '2 scoops Dextrin' else '1 scoop Dextrin'
+          if (isRefeedWeek()) '2 scoops Dextrin (REFEED WEEK)'
         ], 
         mealRecord: MealRecord(
           items: [
             _Portions.calciumCitrate, 
-            IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: isRefeedWeek() ? 2 : 1)
+            if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: 2)
           ], 
           recipeItems: [_Recipes.beef]
         )

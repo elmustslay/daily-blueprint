@@ -910,19 +910,38 @@
         }
     },
     "kiwi": {
-        "name": "Trader Joe's Kiwi",
+        "name": "Trader Joe's Kiwi (Skin-On)",
         "baseUnit": "kiwi",
         "nutrition": {
-            "Calories": 50.0,
+            "Calories": 45.0,
             "Protein": 1.0,
-            "Carbs": 13.0,
-            "Fat": 0.0,
+            "Carbs": 11.0,
+            "Fat": 0.5,
             "Micros": {
-                "Fiber (g)": 1.0,
-                "Sugar (g)": 1.0,
-                "Calcium (Food) (mg)": 14.0,
-                "Potassium (mg)": 255.0,
-                "Vitamin C (mg)": 130.5
+                "Fiber (g)": 3.0,
+                "Sugar (g)": 6.5,
+                "Calcium (Food) (mg)": 25.0,
+                "Potassium (mg)": 231.0,
+                "Vitamin C (mg)": 68.5,
+                "Vitamin E (Food) (mg)": 1.5,
+                "Folate (Food) (mcg)": 30.0
+            }
+        }
+    },
+    "blueberries": {
+        "name": "Trader Joe's Blueberries",
+        "baseUnit": "cup",
+        "nutrition": {
+            "Calories": 84.0,
+            "Protein": 1.1,
+            "Carbs": 21.4,
+            "Fat": 0.5,
+            "Micros": {
+                "Fiber (g)": 3.6,
+                "Sugar (g)": 14.7,
+                "Vitamin C (mg)": 14.4,
+                "Vitamin K (mcg)": 28.6,
+                "Potassium (mg)": 114.0
             }
         }
     },

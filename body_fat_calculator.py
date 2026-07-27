@@ -19,6 +19,10 @@ OVERRIDES = {
     'ref': {'prot': None, 'carb': None, 'fat': None, 'cal': None}
 }
 
+# TRACKING ERROR: Set these to simulate accidentally eating extra macros/calories per day
+# (e.g., getting a heavy hand of rice at Chipotle or forgetting to track cooking oil)
+TRACKING_ERROR = {'cal': 0, 'prot': 0, 'carb': 0, 'fat': 0}
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(BASE_DIR, 'mynutrition.json'), 'r') as f: cut_data = json.load(f)
 with open(os.path.join(BASE_DIR, 'myrefeednutrition.json'), 'r') as f: ref_data = json.load(f)
@@ -27,7 +31,7 @@ DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 def get_macros(is_ref, day_str):
     d = (ref_data if is_ref else cut_data)['dailyTotals'][day_str]
     ov = globals().get('OVERRIDES', {}).get('ref' if is_ref else 'cut', {})
-    val = lambda k, fk: ov.get(k) if ov.get(k) is not None else d[fk]
+    val = lambda k, fk: (ov.get(k) if ov.get(k) is not None else d[fk]) + globals().get('TRACKING_ERROR', {}).get(k, 0)
     return (val('cal','Calories'), val('prot','Protein'), val('carb','Carbs'), val('fat','Fat'), RT_DAYS_REFEED if is_ref else RT_DAYS_CUT)
 
 def run_simulation():
