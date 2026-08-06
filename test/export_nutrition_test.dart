@@ -9,8 +9,8 @@ import 'package:my_app/features/recipe/data/recipe_data.dart';
 void main() {
   Future<void> generateNutritionFiles(String prefix, {bool isRefeed = false}) async {
     if (isRefeed) {
-      // Mock date to Week 6 (Refeed Week)
-      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 35)); // 5 weeks * 7 days
+      // Mock date to Week 5 (Refeed Week)
+      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28)); // 4 weeks * 7 days
     } else {
       DailyPlanData.mockCurrentDate = null;
     }
@@ -220,6 +220,60 @@ void main() {
       print('Successfully exported ingredient nutrition to ingredient_nutrition.json');
     } catch (e) {
       print('Error: Failed to export ingredient nutrition: $e');
+    }
+
+    // Export day-by-day simulation timeline directly from DailyPlanData
+    try {
+      final startDate = DateTime(2026, 7, 27);
+      final targetDate = DateTime(2026, 12, 17);
+      final totalDays = targetDate.difference(startDate).inDays;
+      
+      final List<Map<String, dynamic>> timeline = [];
+      final dayNames = [
+        DailyPlanData.mon,
+        DailyPlanData.tue,
+        DailyPlanData.wed,
+        DailyPlanData.thu,
+        DailyPlanData.fri,
+        DailyPlanData.sat,
+        DailyPlanData.sun
+      ];
+
+      for (int d = 0; d < totalDays; d++) {
+        final date = startDate.add(Duration(days: d));
+        DailyPlanData.mockCurrentDate = date;
+        final dayKey = dayNames[date.weekday - 1];
+        final isRefeed = DailyPlanData.isRefeedWeek();
+        final schedule = DailyPlanData.schedules[dayKey] ?? [];
+        
+        NutritionFact dayTotal = const NutritionFact();
+        for (var item in schedule) {
+          if (item.mealRecord != null) {
+            dayTotal += item.mealRecord!.totalNutrition;
+          }
+        }
+        
+        timeline.add({
+          'day': d,
+          'date': '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
+          'dayName': dayKey,
+          'weekNumber': DailyPlanData.currentWeekNumber,
+          'isRefeed': isRefeed,
+          'cal': dayTotal.calories,
+          'prot': dayTotal.protein,
+          'carb': dayTotal.carbs,
+          'fat': dayTotal.fat,
+        });
+      }
+      
+      final timelineJson = const JsonEncoder.withIndent('    ').convert(timeline);
+      final timelineFile = File('simulation_timeline.json');
+      await timelineFile.writeAsString(timelineJson);
+      print('Successfully exported simulation timeline to simulation_timeline.json (${timeline.length} days)');
+    } catch (e) {
+      print('Error: Failed to export simulation timeline: $e');
+    } finally {
+      DailyPlanData.mockCurrentDate = null;
     }
   });
 }

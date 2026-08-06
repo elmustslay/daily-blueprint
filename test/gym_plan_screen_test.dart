@@ -139,12 +139,12 @@ void main() {
     // [1] pull_1: 'Lat Pulldown Machine'
     // [2] push_3: 'Pec Deck / Machine Fly' (we will set to ACTIVE)
     // [3] pull_4: 'Machine Reverse Fly / Rear Delt'
-    // [4] push_2: 'Dumbbell Lateral Raise' (we will set to COMPLETED)
+    // [4] push_4: 'Machine Lateral Raise' (we will set to COMPLETED)
     // [5] push_5: 'Tricep Pushdown/Press'
     // [6] pull_5: 'Machine Bicep Curl'
     // [7] stretch_upper_a: 'Post-Workout Mobility'
     
-    repo.logsTodayMap['push_2'] = 3; // Completed (3 sets)
+    repo.logsTodayMap['push_4'] = 3; // Completed (3 sets)
     repo.logsTodayMap['push_3'] = 1; // Active (1 set out of 3)
 
     tester.view.physicalSize = const Size(1080, 4800);
@@ -178,7 +178,7 @@ void main() {
     expect(titles[4], 'Tricep Pushdown/Press');
     expect(titles[5], 'Machine Bicep Curl');
     expect(titles[6], 'Post-Workout Mobility');
-    expect(titles.last, 'Dumbbell Lateral Raise'); 
+    expect(titles.last, 'Machine Lateral Raise'); 
 
     addTearDown(tester.view.resetPhysicalSize);
   });

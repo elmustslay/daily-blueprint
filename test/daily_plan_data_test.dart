@@ -1,5 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_app/core/storage/shared_prefs.dart';
 import 'package:my_app/features/daily_plan/data/daily_plan_data.dart';
+import 'package:my_app/features/shopping_list/presentation/shopping_list_screen.dart';
 
 void main() {
   setUp(() {
@@ -83,43 +86,58 @@ void main() {
     }
   });
 
-  test('Verify work snacks and supplements are accurately packed in _grabThings', () {
-    for (final day in DailyPlanData.schedules.keys) {
-      final schedule = DailyPlanData.schedules[day]!;
-      
-      final commuteToWorkIdx = schedule.indexWhere((item) => item.title == 'Commute to Work');
-      if (commuteToWorkIdx == -1) continue; // WFH or weekend
-      
-      final endWorkIdx = schedule.indexWhere((item) => item.title.startsWith('Commute to Gym') || item.title == 'Commute Home');
-      final workEnd = endWorkIdx != -1 ? endWorkIdx : schedule.length;
-      
-      final grabThings = schedule.firstWhere((item) => item.title.contains('Grab things'));
-      
-      int requiredEggs = 0;
-      int requiredDextrins = 0;
-      bool needsZinc = false;
-      bool needsCopper = false;
-      int requiredCalcium = 0;
-      
-      for (int i = commuteToWorkIdx + 1; i < workEnd; i++) {
-        final item = schedule[i];
-        if (item.mealRecord != null) {
-          for (final portion in item.mealRecord!.items) {
-            if (portion.ingredient.id == 'egg') requiredEggs += portion.amount.toInt();
-            if (portion.ingredient.id == 'cluster_dextrin') requiredDextrins += portion.amount.toInt();
-            if (portion.ingredient.id == 'zinc') needsZinc = true;
-            if (portion.ingredient.id == 'copper_glycinate') needsCopper = true;
-            if (portion.ingredient.id == 'calcium_citrate') requiredCalcium += portion.amount.toInt();
-          }
+  test('Verify work snacks and supplements are accurately packed in _grabThings for cut and refeed weeks', () {
+    for (final isRefeed in [false, true]) {
+      try {
+        if (isRefeed) {
+          DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
+        } else {
+          DailyPlanData.mockCurrentDate = null;
         }
+
+        for (final day in DailyPlanData.schedules.keys) {
+          final schedule = DailyPlanData.schedules[day]!;
+          
+          final commuteToWorkIdx = schedule.indexWhere((item) => item.title == 'Commute to Work');
+          if (commuteToWorkIdx == -1) continue; // WFH or weekend
+          
+          final endWorkIdx = schedule.indexWhere((item) => item.title.startsWith('Commute to Gym') || item.title == 'Commute Home');
+          final workEnd = endWorkIdx != -1 ? endWorkIdx : schedule.length;
+          
+          final grabThings = schedule.firstWhere((item) => item.title.contains('Grab things'));
+          
+          int requiredEggs = 0;
+          int requiredDextrins = 0;
+          int requiredBananas = 0;
+          bool needsZinc = false;
+          bool needsCopper = false;
+          int requiredCalcium = 0;
+          
+          for (int i = commuteToWorkIdx + 1; i < workEnd; i++) {
+            final item = schedule[i];
+            if (item.mealRecord != null) {
+              for (final portion in item.mealRecord!.items) {
+                if (portion.ingredient.id == 'egg') requiredEggs += portion.amount.toInt();
+                if (portion.ingredient.id == 'cluster_dextrin') requiredDextrins += portion.amount.toInt();
+                if (portion.ingredient.id == 'banana') requiredBananas += portion.amount.toInt();
+                if (portion.ingredient.id == 'zinc') needsZinc = true;
+                if (portion.ingredient.id == 'copper_glycinate') needsCopper = true;
+                if (portion.ingredient.id == 'calcium_citrate') requiredCalcium += portion.amount.toInt();
+              }
+            }
+          }
+          
+          final grabDetails = grabThings.details.join(' ');
+          if (requiredEggs > 0) expect(grabDetails, contains('$requiredEggs Boiled Eggs'), reason: '$day (refeed=$isRefeed) missing eggs in grab list');
+          if (requiredDextrins > 0) expect(grabDetails, contains(requiredDextrins == 1 ? '1 scoop Cluster Dextrin' : '$requiredDextrins scoops Cluster Dextrin'), reason: '$day (refeed=$isRefeed) missing dextrins in grab list');
+          if (requiredBananas > 0) expect(grabDetails, contains('Banana'), reason: '$day (refeed=$isRefeed) missing Banana in grab list');
+          if (needsZinc) expect(grabDetails, contains('Zinc Picolinate'), reason: '$day (refeed=$isRefeed) missing Zinc in grab list');
+          if (needsCopper) expect(grabDetails, contains('Copper Glycinate'), reason: '$day (refeed=$isRefeed) missing Copper in grab list');
+          if (requiredCalcium > 0) expect(grabDetails, contains('Calcium Citrate'), reason: '$day (refeed=$isRefeed) missing Calcium in grab list');
+        }
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
       }
-      
-      final grabDetails = grabThings.details.join(' ');
-      if (requiredEggs > 0) expect(grabDetails, contains('$requiredEggs Boiled Eggs'), reason: '$day missing eggs in grab list');
-      if (requiredDextrins > 0) expect(grabDetails, contains(requiredDextrins == 1 ? '1 scoop Cluster Dextrin' : '$requiredDextrins scoops Cluster Dextrin'), reason: '$day missing dextrins in grab list');
-      if (needsZinc) expect(grabDetails, contains('Zinc Picolinate'), reason: '$day missing Zinc in grab list');
-      if (needsCopper) expect(grabDetails, contains('Copper Glycinate'), reason: '$day missing Copper in grab list');
-      if (requiredCalcium > 0) expect(grabDetails, contains('Calcium Citrate'), reason: '$day missing Calcium in grab list');
     }
   });
 
@@ -127,6 +145,7 @@ void main() {
     int totalDextrins = 0;
     int totalKiwis = 0;
     int totalEggs = 0;
+    int totalBananas = 0;
     
     for (final schedule in DailyPlanData.schedules.values) {
       for (final item in schedule) {
@@ -135,14 +154,95 @@ void main() {
             if (portion.ingredient.id == 'cluster_dextrin') totalDextrins += portion.amount.toInt();
             if (portion.ingredient.id == 'kiwi') totalKiwis += portion.amount.toInt();
             if (portion.ingredient.id == 'egg') totalEggs += portion.amount.toInt();
+            if (portion.ingredient.id == 'banana') totalBananas += portion.amount.toInt();
           }
         }
       }
     }
     
-    // We expect exactly 5 dextrins, 6 kiwis, and 18 eggs based on the schedule design
     expect(totalDextrins, 4, reason: 'Total weekly dextrins should be exactly 4');
     expect(totalKiwis, 5, reason: 'Total weekly kiwis should be exactly 5 (Mon-Thu, 2 on Thu)');
     expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
+    expect(totalBananas, 0, reason: 'Total weekly bananas on regular cut weeks should be 0');
+  });
+
+  test('Verify weekly fruit, dextrin, and egg consumption on Refeed Week matches shopping list', () {
+    try {
+      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
+      int totalDextrins = 0;
+      int totalKiwis = 0;
+      int totalEggs = 0;
+      int totalBananas = 0;
+      
+      for (final day in DailyPlanData.schedules.keys) {
+        final schedule = DailyPlanData.schedules[day]!;
+        int dayBananas = 0;
+        for (final item in schedule) {
+          if (item.mealRecord != null) {
+            for (final portion in item.mealRecord!.items) {
+              if (portion.ingredient.id == 'cluster_dextrin') totalDextrins += portion.amount.toInt();
+              if (portion.ingredient.id == 'kiwi') totalKiwis += portion.amount.toInt();
+              if (portion.ingredient.id == 'egg') totalEggs += portion.amount.toInt();
+              if (portion.ingredient.id == 'banana') {
+                totalBananas += portion.amount.toInt();
+                dayBananas += portion.amount.toInt();
+              }
+            }
+          }
+        }
+        expect(dayBananas, 3, reason: '$day should have exactly 3 bananas on Refeed Week');
+      }
+      
+      expect(totalDextrins, 4, reason: 'Workout dextrins remain 4 on lift days');
+      expect(totalKiwis, 5, reason: 'Total weekly kiwis should be exactly 5');
+      expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
+      expect(totalBananas, 21, reason: 'Total weekly bananas on Refeed Week should be exactly 21 (3/day across all 7 days)');
+    } finally {
+      DailyPlanData.mockCurrentDate = null;
+    }
+  });
+
+  test('LISS Cardio is skipped on Refeed Weeks', () {
+    try {
+      // Set date to a known refeed week (Week 5: 28 days from plan start)
+      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
+      
+      // Check Wednesday
+      final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
+      final wedCardio = wedSchedule.firstWhere((item) => item.title.contains('Haircut / Rest (Refeed Week)'));
+      expect(wedCardio.details.join(' '), contains('Skip LISS cardio'));
+      
+      // Check Saturday
+      final satSchedule = DailyPlanData.schedules[DailyPlanData.sat]!;
+      final satCardio = satSchedule.firstWhere((item) => item.title.contains('Haircut / Rest (Refeed Week)'));
+      expect(satCardio.details.join(' '), contains('Skip LISS cardio'));
+    } finally {
+      DailyPlanData.mockCurrentDate = null;
+    }
+  });
+
+  test('Shopping list includes 21 Bananas and Quinoa for upcoming Refeed weeks', () async {
+    SharedPreferences.setMockInitialValues({});
+    await SharedPrefsLogic.init();
+
+    // 1. Normal cut week (e.g. Week 1 -> Week 2 is NOT refeed)
+    DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate;
+    final normalItems = ShoppingListNotifier().build();
+    expect(normalItems.any((item) => item.name == 'Quinoa'), isFalse, reason: 'Quinoa should not appear on normal cut weeks');
+    expect(normalItems.any((item) => item.name == 'Bananas'), isFalse, reason: 'Bananas should not appear on normal cut weeks');
+
+    // 2. Upcoming Refeed week (e.g. Sunday of Week 4 -> Week 5 IS refeed, so day 27 from plan start)
+    try {
+      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 27));
+      final refeedItems = ShoppingListNotifier().build();
+      
+      final bananaItem = refeedItems.firstWhere((item) => item.name == 'Bananas');
+      expect(bananaItem.subtext, contains('21 Bananas (3/day) (REFEED WEEK)'));
+
+      final quinoaItem = refeedItems.firstWhere((item) => item.name == 'Quinoa');
+      expect(quinoaItem.subtext, contains('1 bag (REFEED WEEK)'));
+    } finally {
+      DailyPlanData.mockCurrentDate = null;
+    }
   });
 }

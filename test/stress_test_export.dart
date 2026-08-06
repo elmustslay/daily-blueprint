@@ -67,11 +67,11 @@ void main() {
   await db.insert('logs', {'exercise_id': 'pull_1', 'weight': 145.0, 'date': '2026-04-12T09:15:00Z', 'set_index': 3});
 
   // Day 4: Weirdly high sets (Did 5 sets instead of 3!) 
-  await db.insert('logs', {'exercise_id': 'push_2', 'weight': 50.0, 'date': '2026-04-13T10:00:00Z', 'set_index': 1});
-  await db.insert('logs', {'exercise_id': 'push_2', 'weight': 55.0, 'date': '2026-04-13T10:05:00Z', 'set_index': 2});
-  await db.insert('logs', {'exercise_id': 'push_2', 'weight': 60.0, 'date': '2026-04-13T10:10:00Z', 'set_index': 3});
-  await db.insert('logs', {'exercise_id': 'push_2', 'weight': 65.0, 'date': '2026-04-13T10:15:00Z', 'set_index': 4});
-  await db.insert('logs', {'exercise_id': 'push_2', 'weight': 70.0, 'date': '2026-04-13T10:20:00Z', 'set_index': 5});
+  await db.insert('logs', {'exercise_id': 'push_4', 'weight': 50.0, 'date': '2026-04-13T10:00:00Z', 'set_index': 1});
+  await db.insert('logs', {'exercise_id': 'push_4', 'weight': 55.0, 'date': '2026-04-13T10:05:00Z', 'set_index': 2});
+  await db.insert('logs', {'exercise_id': 'push_4', 'weight': 60.0, 'date': '2026-04-13T10:10:00Z', 'set_index': 3});
+  await db.insert('logs', {'exercise_id': 'push_4', 'weight': 65.0, 'date': '2026-04-13T10:15:00Z', 'set_index': 4});
+  await db.insert('logs', {'exercise_id': 'push_4', 'weight': 70.0, 'date': '2026-04-13T10:20:00Z', 'set_index': 5});
 
   print('\\n--- 📡 STRESS TEST: EXTRACTING DATA ---\\n');
 

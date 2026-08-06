@@ -33,6 +33,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
       ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (1 US Dry Pint)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 bag - eat 1/7th of bag (~10 carrots) /day'),
+      if (isNextWeekRefeed) ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: '21 Bananas (3/day) (REFEED WEEK)'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),

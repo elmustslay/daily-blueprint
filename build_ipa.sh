@@ -15,6 +15,11 @@
 ###############################################################################
 set -euo pipefail
 
+# ── Ensure PATH has Flutter and Homebrew/CocoaPods ─────────────────────────
+export PATH="$HOME/development/flutter/bin:$HOME/flutter/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/.pub-cache/bin:$PATH"
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 red()   { printf '\033[1;31m%s\033[0m\n' "$*"; }
 green() { printf '\033[1;32m%s\033[0m\n' "$*"; }
 cyan()  { printf '\033[1;36m%s\033[0m\n' "$*"; }
