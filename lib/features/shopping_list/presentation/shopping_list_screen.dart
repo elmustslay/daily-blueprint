@@ -33,7 +33,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
       ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (1 US Dry Pint)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 bag - eat 1/7th of bag (~10 carrots) /day'),
-      if (isNextWeekRefeed) ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: '21 Bananas (3/day) (REFEED WEEK)'),
+      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '28 Bananas (4/day) (REFEED WEEK)' : '7 Bananas (1/day)'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),
@@ -44,7 +44,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       // Others
 
-      ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1 box (need 12oz)'),
+      ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1.5 boxes (need 18oz)'),
       if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 JARS (48 oz)'),
 

@@ -247,9 +247,22 @@ void main() {
         final schedule = DailyPlanData.schedules[dayKey] ?? [];
         
         NutritionFact dayTotal = const NutritionFact();
+        List<Map<String, dynamic>> meals = [];
         for (var item in schedule) {
           if (item.mealRecord != null) {
-            dayTotal += item.mealRecord!.totalNutrition;
+            final nutrition = item.mealRecord!.totalNutrition;
+            dayTotal += nutrition;
+            if (nutrition.calories > 0 || nutrition.protein > 0 || nutrition.carbs > 0 || nutrition.fat > 0) {
+              meals.add({
+                'time': item.time,
+                'title': item.title,
+                'cal': nutrition.calories,
+                'prot': nutrition.protein,
+                'carb': nutrition.carbs,
+                'fiber': nutrition.microNutrients['Fiber (g)'] ?? 0.0,
+                'fat': nutrition.fat,
+              });
+            }
           }
         }
         
@@ -262,7 +275,9 @@ void main() {
           'cal': dayTotal.calories,
           'prot': dayTotal.protein,
           'carb': dayTotal.carbs,
+          'fiber': dayTotal.microNutrients['Fiber (g)'] ?? 0.0,
           'fat': dayTotal.fat,
+          'meals': meals,
         });
       }
       

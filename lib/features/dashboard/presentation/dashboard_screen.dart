@@ -256,6 +256,20 @@ class DashboardScreen extends ConsumerWidget {
             '${totalDays - daysElapsed} days remaining to achieve ~13-15% body fat and switch to maintenance.',
             style: const TextStyle(fontSize: 12, color: Colors.white70),
           ),
+          if (totalDays - daysElapsed <= 7)
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: Colors.greenAccent.withValues(alpha: 0.1), border: Border.all(color: Colors.greenAccent), borderRadius: BorderRadius.circular(8)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('🌟 FINISH LINE: ETHIOPIA PREP', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.greenAccent)),
+                  SizedBox(height: 8),
+                  Text('Good job making it this far. Now for maintenance:\n\n1. Take 1/4 tsp Potassium Chloride (like "No Salt") in water morning and night to flush restaurant sodium. Do NOT chug it all at once.\n2. Drink over 4 liters a day.\n3. Aim for ~2,120 calories (this is true maintenance, fixing your metabolism).\n4. Macros: 140g Protein, 75g Fat, 220g Carb (fuels brain + resistance training).\n5. Keep up the resistance training (no LISS needed)!\n6. Stick to tequila and vodka and count a shot as 25g carb, 100 calories.', style: TextStyle(color: Colors.white, height: 1.5, fontSize: 13)),
+                ],
+              ),
+            ),
         ],
       ),
     ));

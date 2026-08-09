@@ -1312,9 +1312,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
           child: Text(
             '🩸 BLOOD DRAW PREP PROTOCOL (Quest @ 8:30 AM)\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            'THURSDAY (AUG 27) – SUNDAY (AUG 30):\n'
+            'WEDNESDAY (AUG 26) – SUNDAY (AUG 30):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Skip Biotin starting Thursday morning (gives 4 full days / >72h washout to protect Thyroid, Testosterone & Estradiol immunoassay accuracy).\n\n'
+            '• Skip Biotin starting Wednesday morning (gives 5 full days / >72h washout to protect Thyroid, Testosterone & Estradiol immunoassay accuracy).\n\n'
             '━━━━━━━━━━━━━━━━━━━━\n'
             'SUNDAY (AUG 30):\n'
             '━━━━━━━━━━━━━━━━━━━━\n'

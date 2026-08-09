@@ -48,36 +48,75 @@ class IngredientsData {
     name: 'Chipotle Chicken Bowl',
     baseUnit: 'bowl',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 560,
-      protein: 46,
-      carbs: 72,
-      fat: 13,
+      calories: 770,
+      protein: 50,
+      carbs: 112,
+      fat: 17,
       microNutrients: {
         'Saturated Fat (g)': 4,
-        'Fiber (g)': 10,
+        'Fiber (g)': 11,
         'Sugar (g)': 6,
-        'Sodium (mg)': 1170,
-        'Calcium (Food) (mg)': 260,
-        'Iron (Food) (mg)': 8.28,
-        'Vitamin A (Food) (mcg)': 126,
-        'Vitamin C (mg)': 120.7,
-        'Potassium (mg)': 1170.5, // #this is default assumed value
-        'Magnesium (mg)': 222.0, // #this is default assumed value
-        'Zinc (Food) (mg)': 5.8, // #this is default assumed value
-        'Copper (mg)': 0.86, // #this is default assumed value
-        'Selenium (Food) (mcg)': 47.2, // #this is default assumed value
-        'Vitamin K (mcg)': 16.9, // #this is default assumed value
-        'Vitamin E (Food) (mg)': 2.2, // #this is default assumed value
+        'Sodium (mg)': 1520,
+        'Calcium (Food) (mg)': 170,
+        'Iron (Food) (mg)': 5.0,
+        'Vitamin A (Food) (mcg)': 108,
+        'Vitamin C (mg)': 117,
+        'Potassium (mg)': 1500.0, // #this is default assumed value
+        'Magnesium (mg)': 250.0, // #this is default assumed value
+        'Zinc (Food) (mg)': 6.0, // #this is default assumed value
+        'Copper (mg)': 0.9, // #this is default assumed value
+        'Selenium (Food) (mcg)': 45.0, // #this is default assumed value
+        'Vitamin K (mcg)': 20.0, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 3.0, // #this is default assumed value
         'Vitamin B12 (mcg)': 0.3, // #this is default assumed value
-        'Thiamin (mg)': 0.75, // #this is default assumed value
-        'Riboflavin (mg)': 0.35, // #this is default assumed value
-        'Niacin (mg)': 10.82, // #this is default assumed value
-        'Vitamin B5 (mg)': 2.5, // #this is default assumed value
-        'Vitamin B6 (mg)': 0.97, // #this is default assumed value
-        'Folate (Food) (mcg)': 336.7, // #this is default assumed value
+        'Thiamin (mg)': 1.0, // #this is default assumed value
+        'Riboflavin (mg)': 0.4, // #this is default assumed value
+        'Niacin (mg)': 12.0, // #this is default assumed value
+        'Vitamin B5 (mg)': 2.8, // #this is default assumed value
+        'Vitamin B6 (mg)': 1.1, // #this is default assumed value
+        'Folate (Food) (mcg)': 400.0, // #this is default assumed value
         'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
-        'Choline (mg)': 141.5, // #this is default assumed value
-        'Tyrosine (Food) (mg)': 1348.0, // #this is default assumed value
+        'Choline (mg)': 150.0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 1500.0, // #this is default assumed value
+      },
+    ),
+  );
+
+  static const Ingredient chipotleBowlRefeed = Ingredient(
+    id: 'chipotle_bowl_refeed',
+    name: 'Chipotle Chicken Bowl (Refeed)',
+    baseUnit: 'bowl',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 900,
+      protein: 58,
+      carbs: 134,
+      fat: 18,
+      microNutrients: {
+        'Saturated Fat (g)': 4,
+        'Fiber (g)': 18,
+        'Sugar (g)': 8,
+        'Sodium (mg)': 1730,
+        'Calcium (Food) (mg)': 221,
+        'Iron (Food) (mg)': 6.84,
+        'Vitamin A (Food) (mcg)': 126,
+        'Vitamin C (mg)': 118.8,
+        'Potassium (mg)': 1850.0, // #this is default assumed value
+        'Magnesium (mg)': 310.0, // #this is default assumed value
+        'Zinc (Food) (mg)': 7.2, // #this is default assumed value
+        'Copper (mg)': 1.1, // #this is default assumed value
+        'Selenium (Food) (mcg)': 55.0, // #this is default assumed value
+        'Vitamin K (mcg)': 20.0, // #this is default assumed value
+        'Vitamin E (Food) (mg)': 3.0, // #this is default assumed value
+        'Vitamin B12 (mcg)': 0.3, // #this is default assumed value
+        'Thiamin (mg)': 1.1, // #this is default assumed value
+        'Riboflavin (mg)': 0.45, // #this is default assumed value
+        'Niacin (mg)': 14.0, // #this is default assumed value
+        'Vitamin B5 (mg)': 3.2, // #this is default assumed value
+        'Vitamin B6 (mg)': 1.3, // #this is default assumed value
+        'Folate (Food) (mcg)': 480.0, // #this is default assumed value
+        'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
+        'Choline (mg)': 175.0, // #this is default assumed value
+        'Tyrosine (Food) (mg)': 1750.0, // #this is default assumed value
       },
     ),
   );
@@ -609,43 +648,43 @@ class IngredientsData {
 static const Ingredient marinaraSauce = Ingredient(
   id: 'marinara',
   name: 'Marinara Sauce',
-  baseUnit: 'oz', // Scaled exactly from a 125g (4.4092 oz) label serving
+  baseUnit: 'jar', // Scaled exactly to a 24oz jar
   nutritionPerBaseUnit: NutritionFact(
-    calories: 20.4117,
-    protein: 0.4536,
-    carbs: 2.2680,
-    fat: 1.1340,
+    calories: 489.8808,
+    protein: 10.8864,
+    carbs: 54.432,
+    fat: 27.216,
     microNutrients: {
-      'Saturated Fat (g)': 0.2268,
-      'Sodium (mg)': 124.7379,
-      'Fiber (g)': 0.4536,
-      'Sugar (g)': 1.3608,
-      'Added Sugar (g)': 0.2268,
-      'Calcium (Food) (mg)': 9.0718,
-      'Iron (Food) (mg)': 0.1361,
-      'Potassium (mg)': 95.2544,
+      'Saturated Fat (g)': 5.4432,
+      'Sodium (mg)': 2993.7096,
+      'Fiber (g)': 10.8864,
+      'Sugar (g)': 32.6592,
+      'Added Sugar (g)': 5.4432,
+      'Calcium (Food) (mg)': 217.7232,
+      'Iron (Food) (mg)': 3.2664,
+      'Potassium (mg)': 2286.1056,
     
-      'Magnesium (mg)': 3.17, // #this is default assumed value
-      'Zinc (Food) (mg)': 0.05, // #this is default assumed value
-      'Copper (mg)': 0.03, // #this is default assumed value
-      'Selenium (Food) (mcg)': 0.1, // #this is default assumed value
-      'Vitamin A (Food) (mcg)': 11.0, // #this is default assumed value
-      'Vitamin C (mg)': 1.6, // #this is default assumed value
-      'Vitamin D3 (Food) (mcg)': 0.0, // #this is default assumed value
-      'Vitamin K (mcg)': 1.2, // #this is default assumed value
-      'Vitamin E (Food) (mg)': 0.35, // #this is default assumed value
-      'Vitamin B12 (mcg)': 0.0, // #this is default assumed value
-      'Thiamin (mg)': 0.01, // #this is default assumed value
-      'Riboflavin (mg)': 0.02, // #this is default assumed value
-      'Niacin (mg)': 0.27, // #this is default assumed value
-      'Vitamin B5 (mg)': 0.09, // #this is default assumed value
-      'Vitamin B6 (mg)': 0.03, // #this is default assumed value
-      'Folate (Food) (mcg)': 2.2, // #this is default assumed value
-      'Folic Acid (Supplement) (mcg)': 0.0, // #this is default assumed value
-      'Choline (mg)': 2.72, // #this is default assumed value
-      'Tyrosine (Food) (mg)': 10.8, // #this is default assumed value
-      'EPA (Food) (mg)': 0.0, // #this is default assumed value
-      'DHA (Food) (mg)': 0.0, // #this is default assumed value
+      'Magnesium (mg)': 76.08, // #this is default assumed value
+      'Zinc (Food) (mg)': 1.2, // #this is default assumed value
+      'Copper (mg)': 0.72, // #this is default assumed value
+      'Selenium (Food) (mcg)': 2.4, // #this is default assumed value
+      'Vitamin A (Food) (mcg)': 264, // #this is default assumed value
+      'Vitamin C (mg)': 38.4, // #this is default assumed value
+      'Vitamin D3 (Food) (mcg)': 0, // #this is default assumed value
+      'Vitamin K (mcg)': 28.8, // #this is default assumed value
+      'Vitamin E (Food) (mg)': 8.4, // #this is default assumed value
+      'Vitamin B12 (mcg)': 0, // #this is default assumed value
+      'Thiamin (mg)': 0.24, // #this is default assumed value
+      'Riboflavin (mg)': 0.48, // #this is default assumed value
+      'Niacin (mg)': 6.48, // #this is default assumed value
+      'Vitamin B5 (mg)': 2.16, // #this is default assumed value
+      'Vitamin B6 (mg)': 0.72, // #this is default assumed value
+      'Folate (Food) (mcg)': 52.8, // #this is default assumed value
+      'Folic Acid (Supplement) (mcg)': 0, // #this is default assumed value
+      'Choline (mg)': 65.28, // #this is default assumed value
+      'Tyrosine (Food) (mg)': 259.2, // #this is default assumed value
+      'EPA (Food) (mg)': 0, // #this is default assumed value
+      'DHA (Food) (mg)': 0, // #this is default assumed value
     },
   ),
 );
@@ -1075,6 +1114,7 @@ static const Ingredient marinaraSauce = Ingredient(
   static const List<Ingredient> allIngredients = [
     spinach,
     chipotleBowl,
+    chipotleBowlRefeed,
 
     egg,
     avocadoOil,

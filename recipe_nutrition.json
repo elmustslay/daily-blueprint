@@ -3,18 +3,18 @@
         "name": "Pasta Recipe",
         "servings": 6,
         "nutrition": {
-            "Calories": 626.3,
-            "Protein": 59.3,
-            "Carbs": 62.8,
-            "Fat": 28.0,
+            "Calories": 681.3,
+            "Protein": 63.3,
+            "Carbs": 82.8,
+            "Fat": 28.2,
             "Micros": {
                 "Saturated Fat (g)": 2.06,
-                "Sodium (mg)": 1757.24,
-                "Fiber (g)": 29.91,
+                "Sodium (mg)": 1794.74,
+                "Fiber (g)": 41.91,
                 "Sugar (g)": 10.92,
                 "Added Sugar (g)": 1.81,
                 "Calcium (Food) (mg)": 161.74,
-                "Iron (Food) (mg)": 5.81,
+                "Iron (Food) (mg)": 6.16,
                 "Potassium (mg)": 2212.87,
                 "Polyunsaturated Fat (g)": 0.34,
                 "Monounsaturated Fat (g)": 1.67,
@@ -176,7 +176,7 @@
     },
     "quinoa": {
         "name": "Refeed Quinoa",
-        "servings": 7,
+        "servings": 6,
         "nutrition": {
             "Calories": 300.0,
             "Protein": 12.0,
@@ -184,12 +184,12 @@
             "Fat": 5.0,
             "Micros": {
                 "Saturated Fat (g)": 0.0,
-                "Sodium (mg)": 165.71,
+                "Sodium (mg)": 193.33,
                 "Fiber (g)": 6.0,
                 "Sugar (g)": 2.0,
                 "Calcium (Food) (mg)": 40.0,
                 "Iron (Food) (mg)": 3.8,
-                "Potassium (mg)": 680.0,
+                "Potassium (mg)": 713.33,
                 "Zinc (Food) (mg)": 0.65,
                 "Copper (mg)": 0.13,
                 "Selenium (Food) (mcg)": 1.8,
@@ -210,7 +210,7 @@
                 "Tyrosine (Food) (mg)": 75.0,
                 "EPA (Food) (mg)": 0.0,
                 "DHA (Food) (mg)": 0.0,
-                "Iodine (mcg)": 34.29
+                "Iodine (mcg)": 40.0
             }
         }
     }
