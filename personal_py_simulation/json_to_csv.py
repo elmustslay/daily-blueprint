@@ -2,10 +2,10 @@ import json
 import csv
 import os
 
-# Get the directory where the script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-input_file = os.path.join(script_dir, "mynutrition.json")
-output_file = os.path.join(script_dir, "mynutrition.csv")
+# Get the project root directory (one level up)
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+input_file = os.path.join(project_root, "mynutrition.json")
+output_file = os.path.join(project_root, "mynutrition.csv")
 
 def convert():
     if not os.path.exists(input_file):

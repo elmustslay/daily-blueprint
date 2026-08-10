@@ -111,9 +111,9 @@ void main() {
     // Trigger python script to update CSV, or fallback to generating it in Dart
     bool csvUpdatedByPython = false;
     try {
-      ProcessResult result = await Process.run('python3', ['json_to_csv.py']);
+      ProcessResult result = await Process.run('python3', ['personal_py_simulation/json_to_csv.py']);
       if (result.exitCode != 0) {
-        result = await Process.run('python', ['json_to_csv.py']);
+        result = await Process.run('python', ['personal_py_simulation/json_to_csv.py']);
       }
       if (result.exitCode == 0) {
         print(result.stdout.toString().trim());

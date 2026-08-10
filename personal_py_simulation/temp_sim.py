@@ -42,7 +42,7 @@ FAT_ENERGY_DENSITY_KCAL = 3500.0   # Adipose tissue energy density
 # It requires ~1.6g of glucogenic amino acids to synthesize 1.0g of blood glucose via hepatic deamination & Cori cycle
 GNG_EFFICIENCY_RATIO = 1.6
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def sync_from_dart():
     """Robust cross-platform resolution of Flutter binary to sync Dart plan to JSON."""
@@ -135,6 +135,23 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         fiber = (ov.get('fiber') if ov.get('fiber') is not None else fiber_val) + TRACKING_ERROR.get('fiber', 0)
         fat = (ov.get('fat') if ov.get('fat') is not None else fat_val) + TRACKING_ERROR.get('fat', 0)
         alcohol = ov.get('alcohol') if ov.get('alcohol') is not None else day_info.get('alcohol', 0.0)
+        
+        # progressive banana logic
+        week = day // 7
+        if week < 3:
+            banana_deficit_per_week = 7
+        elif week < 6:
+            banana_deficit_per_week = 3
+        else:
+            banana_deficit_per_week = 0
+
+        # Subtract macros for missing bananas
+        daily_banana_deficit = banana_deficit_per_week / 7.0
+        
+        logged_cal = max(0, logged_cal - (daily_banana_deficit * 105.0))
+        prot = max(0, prot - (daily_banana_deficit * 1.3))
+        carb = max(0, carb - (daily_banana_deficit * 27.0))
+        fat = max(0, fat - (daily_banana_deficit * 0.3))
         
         sodium = day_info.get('sodium', 0.0) + ov.get('sodium', 0.0)
         potassium = day_info.get('potassium', 0.0) + ov.get('potassium', 0.0)

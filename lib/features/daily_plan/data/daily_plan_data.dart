@@ -138,13 +138,11 @@ class DailyPlanData {
       title: 'Get Ready',
       icon: '🧼',
       details: [
-        'Set Dehumidifier to 55%',
         'Brush teeth',
         'Wash face/neck with bare hands using 0.5 pump of Gentle Cleanser for 15s to remove overnight sweat -> Rinse -> Pat dry with new bamboo baby washcloth',
         'Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s',
         skincare,
         clothes,
-        'Set Dehumidifier to 45% (to prevent mold)',
       ],
     );
   }
@@ -447,12 +445,12 @@ class DailyPlanData {
       title: title,
       icon: '🌙',
       details: [
-        'Take $magAmount $magName + 1 tablet Finasteride (1mg)',
-        if (nac) 'Take 600mg NAC + 25mcg Selenium (Combo Pill)',
         skincare,
         'Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant',
-        'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> THEN Moisturizer (Vanicream Daily Facial): Squeeze exactly 1 DIME-SIZED amount (total) onto fingertip, dot it evenly across face/neck/orbital bone, then rub in -> WAIT to dry',
-        'Set Dehumidifier to 45% (to prevent mold)',
+        'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone',
+        'Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry',
+        'Take $magAmount $magName + 1 tablet Finasteride (1mg)',
+        if (nac) 'Take 600mg NAC + 25mcg Selenium (Combo Pill)',
       ],
       mealRecord: MealRecord(items: [
         IngredientPortion(ingredient: IngredientsData.rMagnesium, amount: magAmount.toDouble()),

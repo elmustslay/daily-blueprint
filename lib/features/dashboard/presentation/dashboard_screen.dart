@@ -7,6 +7,7 @@ import '../../shopping_list/presentation/shopping_list_screen.dart';
 import '../../book_plan/presentation/book_plan_screen.dart';
 import '../../weight_track/presentation/weight_track_screen.dart';
 import '../../micro_macro_calorie_track/presentation/ingredients_screen.dart';
+import '../data/steps_provider.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -15,7 +16,30 @@ class DashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome back, El!'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Welcome back, El!'),
+            Consumer(builder: (context, ref, child) {
+              final stepsAsync = ref.watch(stepsProvider);
+              return stepsAsync.when(
+                data: (data) {
+                  if (data.errorMessage != null) {
+                    return Text('Health Error: ${data.errorMessage}', style: const TextStyle(fontSize: 12, color: Colors.redAccent));
+                  } else if (data.isLissDay) {
+                    return const Text('LISS Day: Steps Optional', style: TextStyle(fontSize: 12, color: Colors.grey));
+                  } else if (data.stepsRemaining > 0) {
+                    return Text('${data.stepsRemaining} steps left today!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent));
+                  } else {
+                    return const Text('Step goal reached!', style: TextStyle(fontSize: 12, color: Colors.greenAccent));
+                  }
+                },
+                loading: () => const Text('Loading steps...', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                error: (err, stack) => const Text('Error loading steps', style: TextStyle(fontSize: 12, color: Colors.redAccent)),
+              );
+            }),
+          ],
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
