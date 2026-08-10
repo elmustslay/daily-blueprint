@@ -71,7 +71,7 @@ void main() {
     for (final day in [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.thu, DailyPlanData.fri]) {
       final schedule = DailyPlanData.schedules[day]!;
       
-      final commute = schedule.firstWhere((item) => item.title == 'Get Dressed & Commute to Gym');
+      final commute = schedule.firstWhere((item) => item.title.contains('Commute to Gym'));
       expect(commute.time.contains('5:'), isTrue);
       expect(commute.details.any((d) => d.contains('Mix 1 scoop Cluster Dextrin in water')), isTrue);
     }

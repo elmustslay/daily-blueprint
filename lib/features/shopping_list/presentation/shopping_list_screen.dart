@@ -36,7 +36,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '28 Bananas (4/day) (REFEED WEEK)' : '7 Bananas (1/day)'),
       
       // Poultry & Meat
-      ShoppingItem(id: 'meat-1', name: 'Ground Turkey', subtext: '3 lbs'),
+      ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '3 lbs'),
       ShoppingItem(id: 'meat-2', name: '96% Lean Ground Beef', subtext: '1 lb'),
       ShoppingItem(id: 'meat-3', name: 'Sockeye Salmon Fillet', subtext: '1 lb (hard min 0.82 lb)'),
       // Dairy

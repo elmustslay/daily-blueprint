@@ -261,6 +261,8 @@ void main() {
                 'carb': nutrition.carbs,
                 'fiber': nutrition.microNutrients['Fiber (g)'] ?? 0.0,
                 'fat': nutrition.fat,
+                'sodium': nutrition.microNutrients['Sodium (mg)'] ?? 0.0,
+                'potassium': nutrition.microNutrients['Potassium (mg)'] ?? 0.0,
               });
             }
           }
@@ -277,6 +279,8 @@ void main() {
           'carb': dayTotal.carbs,
           'fiber': dayTotal.microNutrients['Fiber (g)'] ?? 0.0,
           'fat': dayTotal.fat,
+          'sodium': dayTotal.microNutrients['Sodium (mg)'] ?? 0.0,
+          'potassium': dayTotal.microNutrients['Potassium (mg)'] ?? 0.0,
           'meals': meals,
         });
       }

@@ -226,6 +226,7 @@ class DailyPlanData {
 
   static TimelineItem _grabThings(String time, {
     int calciumCaps = 0,
+    bool takeSunscreen = true,
   }) {
     return TimelineItem(
       time: time,
@@ -236,6 +237,8 @@ class DailyPlanData {
         '2 key/wallet/phone',
         'airpods',
         'apple watch',
+        if (takeSunscreen) 'Haruharu Wonder Sunscreen',
+        if (takeSunscreen) 'Oil-Absorbing Blotting Sheets',
         if (calciumCaps > 0) 'Calcium Citrate (${calciumCaps}x capsules)',
         if (isRefeedWeek()) '🍌 1 Medium Banana (Afternoon snack)',
         'Pasta lunch',
@@ -256,6 +259,7 @@ class DailyPlanData {
     bool caffeine = false, 
     bool sparklingWater = false,
     bool banana = false,
+    String? afternoonSunscreen,
   }) {
     return TimelineItem(
       time: time, 
@@ -266,6 +270,7 @@ class DailyPlanData {
         if (sparklingWater) 'Drink Sparkling Water',
         if (standingDesk && !isRefeedWeek()) '🧍‍♂️ Use Standing Desk for 3-4 hours',
         if (banana) '🍌 3:30-4:00 pm: Eat 1 Medium Banana (Afternoon Snack)',
+        if (afternoonSunscreen != null) '4:00 pm Touch-up: $afternoonSunscreen',
         ...details
       ],
       mealRecord: banana ? const MealRecord(items: [
@@ -469,27 +474,28 @@ class DailyPlanData {
     );
   }
 
-  static const String _morningMoisturizer = 'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> THEN Moisturizer (Vanicream Daily Facial): Squeeze exactly 1 PEA-SIZED amount (total) onto fingertip, dot it across face/orbital bone, then rub in -> WAIT 30s';
-  static const String _moisturizerAndSunscreen = 'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> THEN Moisturizer (Vanicream): Squeeze exactly 1 PEA-SIZED amount (total) onto fingertip, dot it across face/orbital bone, then rub in -> WAIT 3m -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total, then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
+  static const String _morningSkin1004 = 'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply 2 finger-lengths for full face/neck -> WAIT 3m';
+  static const String _morningHaruharu = 'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply 2 finger-lengths for full face/neck -> WAIT 3m';
+  static const String _reapplyHur = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> House of Hur Sun Fluid: Apply 2 finger-lengths for full face/neck -> WAIT 3m';
+  static const String _reapplyHaruharu = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Haruharu Wonder Sunscreen: Apply 2 finger-lengths for full face/neck -> WAIT 3m';
   static const String _retinol = 'Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m';
   static const String _bha = 'Paula\'s Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m';
   static const String _joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m';
-  static const String _sunscreen = 'Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Supergoop Matte Mineral (Layer 1: 1/8 tsp total (dots on forehead, left cheek, right cheek, ears), then 1/8 tsp to neck -> WAIT 30s -> Layer 2: Repeat)';
 
   static String get _laundryFaceTowels => 'Laundry Cycle 1: Bamboo Washcloths & Cotton Pillowcases (3/5 warmness) -> 1-2 tbsp All Free Clear (Liquid). NO Fabric Softener (Dry on LOW heat)';
   static String get _laundryBathTowels => 'Laundry Cycle 2: Bath Towels & Body Washcloths (5/5 warmness) -> Wash 1: 2 tbsp All Free Clear (Liquid) + 1/3 cup Bleach -> Wash 2: Full Cycle (WATER ONLY - no detergent) to lift bleach residue (Dry on LOW heat)';
   static const String _laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)';
 
 
-  static TimelineItem _commuteToGym(String time, {bool applySunscreen = false, bool takeGymGloves = false, bool withDextrin = true}) {
+  static TimelineItem _commuteToGym(String time, {String? reapplySunscreen, bool takeGymGloves = false, bool withDextrin = true}) {
     return TimelineItem(
       time: time,
-      title: 'Get Dressed & Commute to Gym',
+      title: 'Get Dressed & Commute to Gym${withDextrin ? " (Resistance)" : " (LISS)"}',
       icon: '🚗',
       details: [
         'Get dressed for gym',
         if (withDextrin) 'Mix 1 scoop Cluster Dextrin in water bottle (+ 1/3 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout',
-        if (applySunscreen) _sunscreen,
+        if (reapplySunscreen != null) reapplySunscreen,
         if (takeGymGloves) '🧤 Grab Gym Gloves',
       ],
       mealRecord: withDextrin ? const MealRecord(items: [
@@ -502,13 +508,13 @@ class DailyPlanData {
   static Map<String, List<TimelineItem>> get schedules => {
     mon: [
       _wakeup('8:10-8:20 am'),
-      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
+      _getReady('8:20-8:40 am', skincare: _morningSkin1004, clothes: 'Get dressed'),
       _morningDine('8:40-8:50 am', eggs: 2, zinc: true, vitaminE: true, omega3: false),
       _work('8:50-1:00 pm', details: [_laundryFaceTowels, 'Run Dishwasher']),
       _pastaLunch('1:00-1:30 pm', calciumCaps: 3),
-      _work('1:30-5:00 pm', details: [_laundryBathTowels], banana: isRefeedWeek()),
+      _work('1:30-5:00 pm', details: [_laundryBathTowels], banana: isRefeedWeek(), afternoonSunscreen: _reapplyHur),
       _study('5:00-5:55 pm', details: ['Study (Beat traffic before gym)']),
-      _commuteToGym('5:55-6:30 pm', applySunscreen: true),
+      _commuteToGym('5:55-6:30 pm'),
       _gym('6:30-8:30 pm', 'Gym Session (Upper A)'),
       TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
       _salmonDinner('8:50-9:20 pm', withWhey: true, cook: true, banana: isRefeedWeek()),
@@ -519,13 +525,13 @@ class DailyPlanData {
     ],
     tue: [
       _wakeup('8:10-8:20 am'),
-      _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
+      _getReady('8:20-8:40 am', skincare: _morningHaruharu, clothes: 'Get dressed (cloud x 4)'),
       _morningDine('8:40-8:50 am', eggs: 2, zinc: true, omega3: false, eatSalmon: true),
       _grabThings('8:50-8:55 am'),
       _commuteToWork('8:55-9:00 am'),
       _work('9:00-1:00 pm', caffeine: true, sparklingWater: true, standingDesk: true),
       _pastaLunch('1:00-1:30 pm'),
-      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true, banana: isRefeedWeek()),
+      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true, banana: isRefeedWeek(), afternoonSunscreen: _reapplyHaruharu),
       TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
       _commuteToGym('5:55-6:30 pm'),
@@ -539,13 +545,13 @@ class DailyPlanData {
     ],
     wed: [
       _wakeup('8:10-8:20 am', nac: true),
-      _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (NK 9060/Bondi)'),
+      _getReady('8:20-8:40 am', skincare: _morningHaruharu, clothes: 'Get dressed (NK 9060/Bondi)'),
       _morningDine('8:40-8:50 am', additional: 'Take ground beef out of freezer to thaw in fridge', eggs: 2, zinc: false, vitaminE: false, omega3: false, eatSalmon: true),
       _grabThings('8:50-8:55 am', calciumCaps: 3),
       _commuteToWork('8:55-9:00 am'),
       _work('9:00-1:00 pm', caffeine: true, sparklingWater: true, standingDesk: true),
       _pastaLunch('1:00-1:30 pm', calciumCaps: 3),
-      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true, banana: isRefeedWeek()),
+      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true, banana: isRefeedWeek(), afternoonSunscreen: _reapplyHaruharu),
       TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study('5:10-6:05 pm', details: ['Study (Beat traffic before gym)'], withWhey: true, withCreatine: true),
       _commuteToGym('6:05-6:15 pm', withDextrin: false),
@@ -561,14 +567,14 @@ class DailyPlanData {
     ],
     thu: [
       _wakeup('8:10-8:20 am'),
-      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed'),
+      _getReady('8:20-8:40 am', skincare: _morningSkin1004, clothes: 'Get dressed'),
       _morningDine('8:40-8:50 am', eggs: 2, vitaminE: true, omega3: false, eatSalmon: true),
       TimelineItem(time: '8:50-9:25 am', title: 'Cook', icon: '🧑‍🍳', details: ['1lb ground beef (divide in 4, 4 fridge)']),
       _work('9:25-1:00 pm', details: [_laundryRegular, 'Run Dishwasher']),
       _pastaLunch('1:00-1:30 pm', calciumCaps: 3),
-      _work('1:30-5:00 pm', details: ['Work'], banana: isRefeedWeek()),
+      _work('1:30-5:00 pm', details: ['Work'], banana: isRefeedWeek(), afternoonSunscreen: _reapplyHur),
       _study('5:00-5:55 pm', details: ['Study (Beat traffic before gym)']),
-      _commuteToGym('5:55-6:20 pm', applySunscreen: true, takeGymGloves: true),
+      _commuteToGym('5:55-6:20 pm', takeGymGloves: true),
       _gym('6:10-8:10 pm', 'Gym Session (Upper B)'),
       TimelineItem(time: '8:10-8:30 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('8:30-9:00 pm', withWhey: true, banana: isRefeedWeek()),
@@ -579,13 +585,13 @@ class DailyPlanData {
     ],
     fri: [
       _wakeup('8:10-8:20 am'),
-      _getReady('8:20-8:40 am', skincare: _moisturizerAndSunscreen, clothes: 'Get dressed (cloud x 4)'),
+      _getReady('8:20-8:40 am', skincare: _morningHaruharu, clothes: 'Get dressed (cloud x 4)'),
       _morningDine('8:40-8:50 am', eggs: 2, copper: true, omega3: false, eatBeef: true),
       _grabThings('8:50-8:55 am'),
       _commuteToWork('8:55-9:00 am'),
       _work('9:00-1:00 pm', caffeine: true, sparklingWater: true, standingDesk: true),
       _pastaLunch('1:00-1:30 pm'),
-      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true, banana: isRefeedWeek()),
+      _work('1:30-5:00 pm', sparklingWater: true, standingDesk: true, banana: isRefeedWeek(), afternoonSunscreen: _reapplyHaruharu),
       TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study('5:10-5:55 pm', details: ['Study (Beat traffic before gym)']),
       _commuteToGym('5:55-6:30 pm'),
@@ -599,7 +605,7 @@ class DailyPlanData {
     ],
     sat: [
       _wakeup('8:10-8:20 am'),
-      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
+      _getReady('8:20-8:40 am', skincare: _morningSkin1004, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
       _morningDine('8:40-9:05 am', additional: '20mg adderall IR', eggs: 4, vitamins: true, useD3K2: true, vitaminE: true, eatBeef: true),
       _study('9:05-10:35 am'),
       TimelineItem(time: '10:35-10:55 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
@@ -610,7 +616,7 @@ class DailyPlanData {
       _study('2:20-5:10 pm', banana: isRefeedWeek()),
       TimelineItem(time: '5:10-5:30 pm', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Let mind wander completely.']),
       _study('5:30-6:20 pm'),
-      _commuteToGym('6:20-6:25 pm', applySunscreen: true, withDextrin: false),
+      _commuteToGym('6:20-6:25 pm', reapplySunscreen: _reapplyHur, withDextrin: false),
       _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
       TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
       _beefDinner('7:45-8:00 pm', withWhey: false, banana: isRefeedWeek()),
@@ -622,7 +628,7 @@ class DailyPlanData {
     ],
     sun: [
       _wakeup('8:10-8:20 am'),
-      _getReady('8:20-8:40 am', skincare: _morningMoisturizer, clothes: 'Get dressed for shopping (NK 9060)'),
+      _getReady('8:20-8:40 am', skincare: _morningSkin1004, clothes: 'Get dressed for shopping (NK 9060)'),
       _morningDine('8:40-9:35 am', eggs: 4, vitamins: true, useD3K2: true, vitaminE: true, omega3: false, eatBeef: true),
       _study('9:50-11:20 am', details: ['20mg adderall IR at 9:50am']),
       TimelineItem(time: '11:20-11:50 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
@@ -649,7 +655,7 @@ class DailyPlanData {
         title: 'Grocery Shop & Pick up Chipotle', 
         icon: '🛒', 
         details: [
-          _sunscreen, 
+          _reapplyHaruharu, 
           'check what I have before going', 
           "Trader Joe's (all groceries are bought there)", 
           if (isNextWeekRefeedWeek()) '🛒 UPCOMING REFEED WEEK: Buy 21 Bananas (3/day: morning, afternoon snack, dinner), and 1 bag of Quinoa (if out)',

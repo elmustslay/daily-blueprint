@@ -550,20 +550,22 @@ class IngredientsData {
     name: 'Ground Turkey (93% Lean)',
     baseUnit: 'lb',
     nutritionPerBaseUnit: NutritionFact( // #default value
-      calories: 600,
-      protein: 88,
+      calories: 640,
+      protein: 84,
       carbs: 0,
       fat: 32,
       microNutrients: {
-        'Iron (Food) (mg)': 4.4,
-        'Sodium (mg)': 300,
-        'Potassium (mg)': 920,
+        'Saturated Fat (g)': 10,
+        'Cholesterol (mg)': 340,
+        'Iron (Food) (mg)': 4.0,
+        'Sodium (mg)': 600,
+        'Potassium (mg)': 952,
         'Zinc (Food) (mg)': 10.0, // #this is default assumed value
         'Magnesium (mg)': 110, // #this is default assumed value
         'Vitamin B12 (mcg)': 6.0, // #this is default assumed value
         'Tyrosine (Food) (mg)': 5171, // #this is default assumed value
       
-        'Calcium (Food) (mg)': 65, // #this is default assumed value
+        'Calcium (Food) (mg)': 92, // #this is default assumed value
         'Copper (mg)': 0.3, // #this is default assumed value
         'Selenium (Food) (mcg)': 110, // #this is default assumed value
         'Vitamin A (Food) (mcg)': 0, // #this is default assumed value

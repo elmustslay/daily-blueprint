@@ -5,7 +5,7 @@ TARGET_DATE = datetime.date(2026, 12, 17)
 
 STARTING_WEIGHT = 156.0
 STARTING_BF_PCT = 31.2
-
+AGE = 23
 
 # 1.54 = Cut Week (4 days Resistance training, 2 days LISS (130-140bpm for 1 hr), 3 days Standing Desk (for 3-4 hrs), High Water Intake)
 # 1.375 = Refeed Week (4 days Resistance training, NO LISS, NO Standing Desk -- actively avoid unnecessary exertion)
@@ -103,6 +103,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     total_catabolized = 0.0
     consecutive_disuse_days = 0
     ketone_adaptation_days = 0
+    fat_history = []
+    mineral_water_retention = 0.0
     
     # 1. Sleep Modifiers (Clinical data: ~5.5 hrs sleep = -55% fat oxidation in deficit, +impaired P-ratio in surplus)
     sleep_deficit = max(0.0, 7.5 - SLEEP_HOURS)
@@ -134,6 +136,20 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         fat = (ov.get('fat') if ov.get('fat') is not None else fat_val) + TRACKING_ERROR.get('fat', 0)
         alcohol = ov.get('alcohol') if ov.get('alcohol') is not None else day_info.get('alcohol', 0.0)
         
+        sodium = day_info.get('sodium', 0.0) + ov.get('sodium', 0.0)
+        potassium = day_info.get('potassium', 0.0) + ov.get('potassium', 0.0)
+        
+        fat_history.append(fat)
+        if len(fat_history) > 3:
+            fat_history.pop(0)
+            
+        avg_fat = sum(fat_history) / len(fat_history)
+        fat_minimum = current_weight * 0.30
+        hormonal_fat_penalty = 1.0
+        if avg_fat < fat_minimum:
+            deficit_g = fat_minimum - avg_fat
+            hormonal_fat_penalty = max(0.85, 1.0 - (deficit_g * 0.01))
+            
         # Net Carbs for CNS & Glycogen (Fiber does not produce free glucose for brain/glycogen)
         net_carb = max(0.0, carb - fiber)
         
@@ -148,6 +164,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         meals = day_info.get('meals', [])
         hourly_insulin = [0.0] * 24
         hourly_mps = [0.0] * 24
+        gym_hours = []
+        has_liss = False
         
         for meal in meals:
             try:
@@ -166,9 +184,15 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             except:
                 hour = 12 # fallback
                 
+            title = meal.get('title', '').lower()
+            if 'commute to gym (resistance)' in title:
+                # Commute is usually hour 17 (5 PM). Gym is roughly hours 18, 19, 20 (6 PM - 8 PM).
+                gym_hours.extend([(hour+1)%24, (hour+2)%24, (hour+3)%24])
+            if 'commute to gym (liss)' in title:
+                has_liss = True
+                
             meal_carb = meal.get('carb', 0.0)
             meal_prot = meal.get('prot', 0.0)
-            title = meal.get('title', '').lower()
             
             # Insulin pulse (Carbs stimulate insulin, blocking MPB)
             if meal_carb > 5.0:
@@ -178,7 +202,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
                     hourly_insulin[idx] = max(hourly_insulin[idx], pulse_strength * (1.0 - (h * 0.25)))
             
             # MPS Leucine Trigger (Protein spikes Muscle Protein Synthesis)
-            if meal_prot > 20.0:
+            age_leucine_threshold = max(20.0, 20.0 + (AGE - 35) * 0.5)
+            if meal_prot > age_leucine_threshold:
                 # Casein or late-night chores provide 7-8 hour slow drip
                 duration = 8 if ('casein' in title or 'chore' in title or 'night' in title) else 3
                 for h in range(duration):
@@ -189,6 +214,26 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         avg_mps_activation = sum(hourly_mps) / 24.0
         
         leucine_distribution_efficiency = min(1.0, 0.50 + (0.50 * avg_mps_activation))
+        
+        # Pre-Workout Synergy: Insulin + MPS spikes immediately preceding the gym
+        pre_workout_synergy = 1.0
+        if gym_hours:
+            start_gym = gym_hours[0]
+            pre_hours = [(start_gym - 2) % 24, (start_gym - 1) % 24] # 2 hours before gym
+            pre_insulin = sum(hourly_insulin[h] for h in pre_hours) / 2.0
+            pre_mps = sum(hourly_mps[h] for h in pre_hours) / 2.0
+            # Up to a 5% synergy bonus to muscle synthesis if both are fully active pre-workout
+            pre_workout_synergy += (pre_insulin * pre_mps) * 0.05
+            
+        # Post-Workout Synergy: Insulin + MPS spikes immediately following the gym
+        post_workout_synergy = 1.0
+        if gym_hours:
+            end_gym = gym_hours[-1]
+            pw_hours = [(end_gym + 1) % 24, (end_gym + 2) % 24] # Next 2 hours after gym
+            pw_insulin = sum(hourly_insulin[h] for h in pw_hours) / 2.0
+            pw_mps = sum(hourly_mps[h] for h in pw_hours) / 2.0
+            # Up to a 5% synergy bonus to muscle synthesis if both are fully active post-workout
+            post_workout_synergy += (pw_insulin * pw_mps) * 0.05
         # =========================================================================
         
         # BMR & TEF (Protein: 25%, Carbs: 8%, Fat: 2%, Alcohol: 15%)
@@ -261,10 +306,14 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         muscle_gain, muscle_atrophy = 0.0, 0.0
         if rt >= 2:
             consecutive_disuse_days = 0
-            p_factor = min(1.0, effective_prot / current_lean)
+            
+            interference_penalty = 0.90 if (gym_hours and has_liss) else 1.0
+            
+            p_factor = min(1.0, effective_prot / current_lean) * hormonal_fat_penalty
             muscle_gain = ((0.15 / 7.0) * bf_factor * p_factor * (rt / 4.0) * 
                            sleep_mps_multiplier * glycogen_performance_factor * 
-                           carb_mpb_factor * leucine_distribution_efficiency)
+                           carb_mpb_factor * leucine_distribution_efficiency * 
+                           pre_workout_synergy * post_workout_synergy * interference_penalty)
         else:
             consecutive_disuse_days += 1
             if consecutive_disuse_days <= 7:
@@ -322,7 +371,7 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             rt_surplus_factor = min(1.0, rt / 4.0)
             
             # Sleep deprivation causes peripheral insulin resistance, directing more surplus into adipose tissue
-            effective_p_lean = base_p_lean * rt_surplus_factor * sleep_mps_multiplier
+            effective_p_lean = base_p_lean * rt_surplus_factor * sleep_mps_multiplier * hormonal_fat_penalty
             
             surplus_to_lean = surplus * effective_p_lean
             surplus_to_fat = surplus - surplus_to_lean
@@ -343,7 +392,14 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     # Sodium-induced fluid retention during Refeed Weeks
     refeed_sodium_water = 2.5 if is_ref else 0.0
     
-    scale_w = tissue_w + glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water
+    # Dynamic mineral hydration (Sodium:Potassium bloat)
+    na_k_ratio = sodium / potassium if potassium > 0 else 1.0
+    if na_k_ratio > 1.0:
+        mineral_water_retention = (na_k_ratio - 1.0) * 1.5
+    elif na_k_ratio < 0.5:
+        mineral_water_retention = -0.5
+    
+    scale_w = tissue_w + glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water + mineral_water_retention
     
     print("="*50)
     print(f"PROJECTION FOR: {TARGET_DATE.strftime('%b %d, %Y')} ({days} days)")
