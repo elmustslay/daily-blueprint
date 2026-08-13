@@ -230,7 +230,7 @@ void main() {
     final normalItems = ShoppingListNotifier().build();
     expect(normalItems.any((item) => item.name == 'Quinoa'), isFalse, reason: 'Quinoa should not appear on normal cut weeks');
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');
-    expect(bananaItemNormal.subtext, contains('7 Bananas (1/day)'));
+    expect(bananaItemNormal.subtext, contains('4 Bananas (1/day on lift days)'));
 
     // 2. Upcoming Refeed week (e.g. Sunday of Week 4 -> Week 5 IS refeed, so day 27 from plan start)
     try {

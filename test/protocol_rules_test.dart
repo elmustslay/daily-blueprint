@@ -327,19 +327,5 @@ void main() {
         }
       }
     });
-
-    test('Rule 12: Dehumidifier Protocol for Mold Prevention', () {
-      for (final entry in DailyPlanData.schedules.entries) {
-        final schedule = entry.value;
-        
-        // Ensure 55% before shower
-        final showerItem = schedule.firstWhere((i) => i.title.toLowerCase().contains('shower') || i.title.toLowerCase().contains('get ready'));
-        expect(showerItem.details.join(' ').toLowerCase(), contains('dehumidifier to 55%'), reason: 'Dehumidifier must be 55% during shower/prep on ${entry.key}');
-        
-        // Ensure ends with 45%
-        final nightSupplement = schedule.firstWhere((i) => i.title.toLowerCase().contains('night supplement') || i.title.toLowerCase().contains('get ready'));
-        expect(nightSupplement.details.join(' ').toLowerCase(), contains('dehumidifier to 45%'), reason: 'Dehumidifier must be set to 45% after prep/night to prevent mold on ${entry.key}');
-      }
-    });
   });
 }

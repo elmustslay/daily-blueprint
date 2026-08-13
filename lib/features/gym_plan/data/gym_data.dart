@@ -253,7 +253,7 @@ class GymData {
   static const List<Exercise> lowerADay = [
     Exercise(
       id: 'legs_1a', name: 'Leg Press Machine', sets: '4', reps: '6-8', rest: '2-3 min', primaryMuscleGroup: 'Quads',
-      tip: '🎯 Focus: Big compound lift for quads and glutes.\n\n💡 How to do it: Place feet shoulder-width apart. As you lower the weight, aim to bring knees towards your chest. Push through the whole foot (especially the heel) to drive up.\n\n⚠️ Common Pitfall: "Butt wink" – lifting your lower back/hips off the seat at the bottom. Only go as deep as you can before your hips peel off the pad.',
+      tip: '🎯 Focus: Big compound lift for quads and glutes.\n\n💡 How to do it: Try seat 3. Place feet shoulder-width apart. As you lower the weight, aim to bring knees towards your chest. Push through the whole foot (especially the heel) to drive up.\n\n⚠️ Common Pitfall: "Butt wink" – lifting your lower back/hips off the seat at the bottom. Only go as deep as you can before your hips peel off the pad.',
     ),
     Exercise(
       id: 'legs_4a', name: 'Dumbbell Reverse Lunges', sets: '3', reps: '10-12', rest: '1-2 min', primaryMuscleGroup: 'Glutes',
@@ -265,11 +265,11 @@ class GymData {
     ),
     Exercise(
       id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min', primaryMuscleGroup: 'Quads',
-      tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
+      tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Set it to 2. Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
     ),
     Exercise(
       id: 'legs_6a', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min', primaryMuscleGroup: 'Calves',
-      tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it: Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
+      tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it: Try seat 4 (where u can see 3 from top, look a bit down for 4 and bend to blow for 5).\n Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
     ),
     Exercise(
       id: 'abs_1_high', name: 'Abdominal Crunch Machine', sets: '3', reps: '15-20', rest: '1 min', primaryMuscleGroup: 'Abs',
@@ -316,7 +316,7 @@ class GymData {
       tip: '🎯 Focus: The Brachialis (pushes bicep up) and Brachioradialis (forearm chunk).\n\n💡 How to do it: Use a neutral grip (palms facing body). Pin elbows strictly to your ribs. Curl weight toward the shoulder leading with the thumb. Grip the dumbbell tight to heavily activate the forearm. 3-seconds slow on the way down.\n\n⚠️ Common Pitfall: "The Elbow Drift". Letting elbows swing forward or outward to cheat the weight up. Drop the weight if your hips are swinging.',
     ),
     Exercise(
-      id: 'stretch_upper_b', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None', primaryMuscleGroup: 'Mobility',
+      id: 'stretch_upper_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None', primaryMuscleGroup: 'Mobility',
       tip: 'Upper Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Pec/Chest Stretch: Place forearm on a doorframe/rack at 90 degrees and lean forward until you feel a deep stretch in your chest.\n2️⃣ Lat/Back Stretch: Grab a vertical pole with one hand, sit hips back, and let it pull your arm overhead.\n3️⃣ Tricep Stretch: Reach hand behind your neck and gently pull the elbow back with your other hand.\n4️⃣ Posture Reset: Dead hang from a pull-up bar for 30-45 seconds to decompress your spine.',
     ),
   ];
@@ -340,11 +340,11 @@ class GymData {
       tip: '🎯 Focus: Gluteus Maximus (the main butt muscle).\n\n💡 How to do it: Lie flat on your back, knees bent, feet flat on the floor (as far possible from butt -- think 90 deg) shoulder-width apart. Rest a heavy dumbbell or barbell across your hip crease. Drive through your heels to thrust your hips straight up into the air. Squeeze your glutes at the absolute top for a full 1-2 seconds.\n\n⚠️ Common Pitfall: Hyperextending your lower back. Your ribs should stay tucked down. The movement comes entirely from squeezing the glutes, not arching your spine.',
     ),
     Exercise(
-      id: 'legs_5b', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min', primaryMuscleGroup: 'Quads',
-      tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
+      id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '1-2 min', primaryMuscleGroup: 'Quads',
+      tip: '🎯 Focus: Isolating the quads (front of thighs).\n\n💡 How to do it: Set it to 2. Line up knee joint with pivot point. Pad should lie on your lower shins. Squeeze quads hard at the top for a 1-second pause.\n\n⚠️ Common Pitfall: Swinging weight up with momentum (bad for knees). Control the movement, especially returning down. Focus on the muscle contraction rather than sheer weight.',
     ),
     Exercise(
-      id: 'legs_6b', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min', primaryMuscleGroup: 'Calves',
+      id: 'legs_6a', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '1 min', primaryMuscleGroup: 'Calves',
       tip: '🎯 Focus: Gastrocnemius and Soleus (targeting the visible "heart" shaped muscle and the deeper inner calf).\n\n💡 How to do it (at 6, with 4 visible): Place the balls of your feet on the bottom edge of the platform/sled. Keep your legs straight with a *soft* bend in the knee (never fully locked). Let the weight push your heels down for a massive stretch and pause for 2 full seconds at the bottom. Push up onto your big toes as high as possible and squeeze for 1 second at the top.\n\n⚠️ Common Pitfall: "Bouncing" at the bottom. If you bounce, your Achilles tendon acts like a rubber band and takes the load instead of your muscles. Maintain a full range of motion and pause at the deepest stretch to ensure the calves do the work.',
     ),
     Exercise(
@@ -352,11 +352,11 @@ class GymData {
       tip: '🎯 Focus: Obliques and overall core definition without widening the waist.\n\n💡 How to do it: Keep your lower back pressed firmly into the floor. Bring your opposite elbow to your opposite knee, fully extending the other leg straight out. Move slowly and control the twist.\n\n⚠️ Common Pitfall: Pulling on your neck or rushing through the reps. The slower you twist, the harder the obliques have to work to stabilize you.',
     ),
     Exercise(
-      id: 'bw_1c', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min', primaryMuscleGroup: 'Abs',
+      id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '1 min', primaryMuscleGroup: 'Abs',
       tip: '🎯 Focus: Deep core stability — transverse abdominis, obliques, and lower back.\n\n💡 How to do it: Rest on your forearms in a push-up position. Keep your body in a perfectly straight line from head to heels. Squeeze your glutes, brace your abs like you\'re about to get punched, and breathe steadily.\n\n⚠️ Common Pitfall: Letting your hips sag (stresses lower back) or piking them up (too easy). Your body should be one straight plank. Film yourself from the side to check.',
     ),
     Exercise(
-      id: 'stretch_lower_b', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None', primaryMuscleGroup: 'Mobility',
+      id: 'stretch_lower_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None', primaryMuscleGroup: 'Mobility',
       tip: 'Lower Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Hip Flexor Lunge: Kneel on one knee, squeeze the glute on the grounded leg, and push hips forward.\n2️⃣ Hamstring Stretch: Put foot on a low bench and gently hinge forward at the hips with a flat back.\n3️⃣ Couch Stretch (Quads): Put shin against a wall/bench, knee on the floor, and sit upright.\n4️⃣ Calf/Ankle Mobilization: Stand on a ledge, let heels drop deep, and hold the stretch to prevent Achilles tightness.',
     ),
   ];

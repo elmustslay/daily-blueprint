@@ -27,11 +27,11 @@ class DashboardScreen extends ConsumerWidget {
                   if (data.errorMessage != null) {
                     return Text('Health Error: ${data.errorMessage}', style: const TextStyle(fontSize: 12, color: Colors.redAccent));
                   } else if (data.isLissDay) {
-                    return const Text('LISS Day: Steps Optional', style: TextStyle(fontSize: 12, color: Colors.grey));
-                  } else if (data.stepsRemaining > 0) {
-                    return Text('${data.stepsRemaining} steps left today!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent));
+                    return Text('LISS Day: ${data.stepsRemainingWeekly} steps left this week', style: const TextStyle(fontSize: 12, color: Colors.grey));
+                  } else if (data.stepsRemainingWeekly > 0) {
+                    return Text('${data.stepsRemainingWeekly} steps left this week!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent));
                   } else {
-                    return const Text('Step goal reached!', style: TextStyle(fontSize: 12, color: Colors.greenAccent));
+                    return const Text('Weekly step goal reached!', style: const TextStyle(fontSize: 12, color: Colors.greenAccent));
                   }
                 },
                 loading: () => const Text('Loading steps...', style: TextStyle(fontSize: 12, color: Colors.grey)),
