@@ -202,4 +202,44 @@ class MealRecord {
 
     return totalAbsorbed * (1.0 - inhibitionFactor);
   }
+
+  Map<String, double> calculateAbsorbedVitamins({double? windowFat}) {
+    final totalNut = totalNutrition;
+    double fat = windowFat ?? totalNut.fat;
+
+    // Linearly scale absorption from 10% (0g fat) to 100% (10g+ fat)
+    double absorptionMultiplier = 0.1 + (fat / 10.0) * 0.9;
+    if (absorptionMultiplier > 1.0) {
+      absorptionMultiplier = 1.0;
+    }
+
+    double vitaminAFood = totalNut.microNutrients['Vitamin A (Food) (mcg)'] ?? 0.0;
+    double vitaminD3Food = totalNut.microNutrients['Vitamin D3 (Food) (mcg)'] ?? 0.0;
+    double vitaminD3Supp = totalNut.microNutrients['Vitamin D3 (Supplement) (mcg)'] ?? 0.0;
+    double vitaminK = totalNut.microNutrients['Vitamin K (mcg)'] ?? 0.0;
+    double vitaminK2 = totalNut.microNutrients['Vitamin K2 (mcg)'] ?? 0.0;
+    double vitaminEFood = totalNut.microNutrients['Vitamin E (Food) (mg)'] ?? 0.0;
+    double vitaminESupp = totalNut.microNutrients['Vitamin E (Supplement) (mg)'] ?? 0.0;
+
+    double totalA = vitaminAFood;
+    double totalD3 = vitaminD3Food + vitaminD3Supp;
+    double totalK = vitaminK + vitaminK2;
+    double totalE = vitaminEFood + vitaminESupp;
+
+    Map<String, double> absorbedVitamins = {};
+    if (totalA > 0) {
+      absorbedVitamins['Absorbed Vitamin A (mcg)'] = totalA * absorptionMultiplier;
+    }
+    if (totalD3 > 0) {
+      absorbedVitamins['Absorbed Vitamin D3 (mcg)'] = totalD3 * absorptionMultiplier;
+    }
+    if (totalK > 0) {
+      absorbedVitamins['Absorbed Vitamin K (mcg)'] = totalK * absorptionMultiplier;
+    }
+    if (totalE > 0) {
+      absorbedVitamins['Absorbed Vitamin E (mg)'] = totalE * absorptionMultiplier;
+    }
+
+    return absorbedVitamins;
+  }
 }

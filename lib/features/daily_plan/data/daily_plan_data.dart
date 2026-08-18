@@ -44,12 +44,12 @@ class _Portions {
 }
 
 class _Recipes {
-  static final pasta = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1);
-  static final salmon = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1);
-  static final salmonHalf = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 0.5);
-  static final beef = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 1);
-  static final beefHalf = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 0.5);
-  static final quinoa = RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa'), servings: 1);
+  static RecipePortion get pasta => RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'pasta'), servings: 1);
+  static RecipePortion get salmon => RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 1);
+  static RecipePortion get salmonHalf => RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'salmon'), servings: 0.5);
+  static RecipePortion get beef => RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 1);
+  static RecipePortion get beefHalf => RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'beef'), servings: 0.5);
+  static RecipePortion get quinoa => RecipePortion(recipe: RecipeData.recipes.firstWhere((r) => r.id == 'quinoa'), servings: 1);
 }
 
 // ==========================================
@@ -164,14 +164,15 @@ class DailyPlanData {
     return currentWeekNumber == 5 || currentWeekNumber == 12 || currentWeekNumber == 18;
   }
 
+  static bool isPastAug24() {
+    final now = mockCurrentDate ?? DateTime.now();
+    final start = DateTime(2026, 8, 24);
+    return !now.isBefore(start);
+  }
+
   static bool isNextWeekRefeedWeek() {
     if (currentWeekNumber == 0) return false;
     return currentWeekNumber == 4 || currentWeekNumber == 11 || currentWeekNumber == 17;
-  }
-
-  static bool get isNewBananaSchedule {
-    final now = mockCurrentDate ?? DateTime.now();
-    return now.isAfter(DateTime(2026, 8, 16, 23, 59, 59));
   }
 
   static List<String> getReminders(String dayKey) {
@@ -229,6 +230,7 @@ class DailyPlanData {
     bool eatSalmon = false,
     bool eatBeef = false,
     String blueberryText = '',
+    bool banana = false,
   }) {
     final omega3 = supplements.contains(MorningSupplement.omega3);
     final useD3K2 = supplements.contains(MorningSupplement.d3K2);
@@ -242,6 +244,7 @@ class DailyPlanData {
       icon: '🍳',
       details: [
         'Eat in front of Verilux HappyLight (45-degree angle to face):',
+        if (banana) '🍌 Eat 1 Medium Banana',
         if (blueberryText.isNotEmpty) '🫐 $blueberryText',
         if (eatSalmon) 'Finish leftover 0.5 portion of Salmon (from fridge)',
         if (eatBeef) 'Finish leftover 0.5 portion of Ground Beef (from fridge)',
@@ -258,6 +261,7 @@ class DailyPlanData {
       ],
       mealRecord: MealRecord(
         items: [
+          if (banana) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
           if (blueberryText.isNotEmpty) const IngredientPortion(ingredient: IngredientsData.blueberries, amount: 0.66),
           if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
           if (omega3) _Portions.omega3,
@@ -591,8 +595,8 @@ class DailyPlanData {
     _commuteToGym('5:55-6:30 pm'),
     _gym('6:30-8:30 pm', 'Gym Session (Upper A)'),
     TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
-    _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.whey, NutritionAddOn.creatine, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek() && isNewBananaSchedule) NutritionAddOn.postWorkoutBanana}, modifiers: {RoutineModifier.cookSalmon}),
-    _chores('9:20-9:50 pm', sleepKiwiCount: 1, nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.whey, NutritionAddOn.creatine, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek()) NutritionAddOn.postWorkoutBanana}, modifiers: {RoutineModifier.cookSalmon}),
+    _chores('9:20-9:50 pm', sleepKiwiCount: 1, nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _bedPrep('9:50-10:20 pm', modifiers: {RoutineModifier.newBathTowel}),
     _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: isWinter() ? _Routines.retinol : _Routines.bha),
     _fallAsleep('10:50-11:20 pm'),
@@ -601,7 +605,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildTuesday() => [
     _wakeup('8:10-8:20 am'),
     _getReady('8:20-8:40 am', skincare: _Routines.morningHaruharu, clothes: 'Get dressed (cloud x 4)'),
-    _morningDine('8:40-8:50 am', eggs: 2, eatSalmon: true, supplements: {MorningSupplement.zinc}),
+    _morningDine('8:40-8:50 am', eggs: 2, eatSalmon: true, supplements: {MorningSupplement.zinc}, banana: isPastAug24()),
     _grabThings('8:50-8:55 am'),
     _commuteToWork('8:55-9:00 am'),
     _work('9:00-1:00 pm', modifiers: {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk}),
@@ -612,8 +616,8 @@ class DailyPlanData {
     _commuteToGym('5:55-6:30 pm'),
     _gym('6:30-8:30 pm', 'Gym Session (Lower A)'),
     TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
-    _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.whey, NutritionAddOn.creatine, NutritionAddOn.copper, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek() && isNewBananaSchedule) NutritionAddOn.postWorkoutBanana}),
-    _chores('9:20-9:50 pm', sleepKiwiCount: 1, nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.whey, NutritionAddOn.creatine, NutritionAddOn.copper, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek()) NutritionAddOn.postWorkoutBanana}),
+    _chores('9:20-9:50 pm', sleepKiwiCount: 1, nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _bedPrep('9:50-10:20 pm'),
     _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: _Routines.joseon),
     _fallAsleep('10:50-11:20 pm'),
@@ -622,7 +626,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildWednesday() => [
     _wakeup('8:10-8:20 am', nutrition: {NutritionAddOn.nac}),
     _getReady('8:20-8:40 am', skincare: _Routines.morningHaruharu, clothes: 'Get dressed (NK 9060/Bondi)'),
-    _morningDine('8:40-8:50 am', additional: 'Take ground beef out of freezer to thaw in fridge', eggs: 2, eatSalmon: true, supplements: {}),
+    _morningDine('8:40-8:50 am', additional: 'Take ground beef out of freezer to thaw in fridge', eggs: 2, eatSalmon: true, supplements: {}, banana: isPastAug24()),
     _grabThings('8:50-8:55 am', calciumCaps: 3),
     _commuteToWork('8:55-9:00 am'),
     _work('9:00-1:00 pm', modifiers: {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk}),
@@ -634,7 +638,7 @@ class DailyPlanData {
     _gym('6:15-7:25 pm', 'Cardio (LISS) / Haircut', isCardio: true),
     TimelineItem(time: '7:25-7:35 pm', title: 'Commute Home', icon: '🚗'),
     _salmonDinner('7:40-8:20 pm', nutrition: {if (isRefeedWeek()) NutritionAddOn.banana}),
-    _chores('8:20-8:50 pm', nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _chores('8:20-8:50 pm', nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _study('8:50-9:20 pm', sleepKiwiCount: 1),
     _relaxOrCatchUp('9:20-9:50 pm'),
     _bedPrep('9:50-10:20 pm', hair: 'CeraVe Gentle Shampoo (45s lather)'),
@@ -654,8 +658,8 @@ class DailyPlanData {
     _commuteToGym('5:55-6:20 pm', modifiers: {RoutineModifier.takeGymGloves}),
     _gym('6:10-8:10 pm', 'Gym Session (Upper B)'),
     TimelineItem(time: '8:10-8:30 pm', title: 'Commute Home', icon: '🚗'),
-    _beefDinner('8:30-9:00 pm', nutrition: {NutritionAddOn.whey, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek() && isNewBananaSchedule) NutritionAddOn.postWorkoutBanana}),
-    _chores('9:00-9:30 pm', sleepKiwiCount: 2, nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _beefDinner('8:30-9:00 pm', nutrition: {NutritionAddOn.whey, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek()) NutritionAddOn.postWorkoutBanana}),
+    _chores('9:00-9:30 pm', sleepKiwiCount: 2, nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _bedPrep('9:30-10:00 pm', modifiers: {RoutineModifier.newBathTowel}),
     _nightSupplement('10:00-10:50 pm', magAmount: 2, skincare: _Routines.bha),
     _fallAsleep('10:50-11:20 pm'),
@@ -664,7 +668,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildFriday() => [
     _wakeup('8:10-8:20 am'),
     _getReady('8:20-8:40 am', skincare: _Routines.morningHaruharu, clothes: 'Get dressed (cloud x 4)'),
-    _morningDine('8:40-8:50 am', eggs: 2, eatBeef: true, supplements: {MorningSupplement.copper}),
+    _morningDine('8:40-8:50 am', eggs: 2, eatBeef: true, supplements: {MorningSupplement.copper}, banana: isPastAug24()),
     _grabThings('8:50-8:55 am'),
     _commuteToWork('8:55-9:00 am'),
     _work('9:00-1:00 pm', modifiers: {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk}),
@@ -675,8 +679,8 @@ class DailyPlanData {
     _commuteToGym('5:55-6:30 pm'),
     _gym('6:30-8:30 pm', 'Gym Session (Lower B)'),
     TimelineItem(time: '8:30-8:50 pm', title: 'Commute Home', icon: '🚗'),
-    _beefDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.whey, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek() && isNewBananaSchedule) NutritionAddOn.postWorkoutBanana}),
-    _chores('9:20-9:50 pm', blueberryText: 'Eat 1/2 of the box of Blueberries', nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _beefDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.whey, if (isRefeedWeek()) NutritionAddOn.banana, if (!isRefeedWeek()) NutritionAddOn.postWorkoutBanana}),
+    _chores('9:20-9:50 pm', blueberryText: 'Eat 1/2 of the box of Blueberries', nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _bedPrep('9:50-10:20 pm'),
     _nightSupplement('10:20-10:50 pm', magAmount: 3, skincare: _Routines.retinol),
     _fallAsleep('10:50-11:20 pm'),
@@ -685,7 +689,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildSaturday() => [
     _wakeup('8:10-8:20 am'),
     _getReady('8:20-8:40 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
-    _morningDine('8:40-9:05 am', additional: '20mg adderall IR', eggs: 4, eatBeef: true, supplements: {MorningSupplement.omega3, MorningSupplement.d3K2, MorningSupplement.vitaminE}),
+    _morningDine('8:40-9:05 am', additional: '20mg adderall IR', eggs: 4, eatBeef: true, supplements: {MorningSupplement.omega3, MorningSupplement.d3K2, MorningSupplement.vitaminE}, banana: isPastAug24()),
     _study('9:05-10:35 am'),
     TimelineItem(time: '10:35-10:55 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.']),
     _study('10:55-12:20 pm'),
@@ -699,7 +703,7 @@ class DailyPlanData {
     _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
     TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
     _beefDinner('7:45-8:00 pm', nutrition: {if (isRefeedWeek()) NutritionAddOn.banana}),
-    _chores('8:00-8:50 pm', blueberryText: 'Eat the rest of the box of Blueberries', nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _chores('8:00-8:50 pm', blueberryText: 'Eat the rest of the box of Blueberries', nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _relaxOrCatchUp('8:50-9:35 pm'),
     _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
     _nightSupplement('10:20-10:35 pm', magAmount: 2, magName: 'Magnesium', skincare: _Routines.bha, nutrition: {NutritionAddOn.nac}),
@@ -709,7 +713,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildSunday() => [
     _wakeup('8:10-8:20 am'),
     _getReady('8:20-8:40 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for shopping (NK 9060)'),
-    _morningDine('8:40-9:35 am', eggs: 4, eatBeef: true, supplements: {MorningSupplement.d3K2, MorningSupplement.vitaminE}),
+    _morningDine('8:40-9:35 am', eggs: 4, eatBeef: true, supplements: {MorningSupplement.d3K2, MorningSupplement.vitaminE}, banana: isPastAug24()),
     _study('9:50-11:20 am', details: ['20mg adderall IR at 9:50am']),
     TimelineItem(time: '11:20-11:50 am', title: 'Diffuse Brain Rest', icon: '🧠', details: ['NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.']),
     _study('11:50-1:20 pm'),
@@ -783,7 +787,7 @@ class DailyPlanData {
       ]
     ),
     _relaxOrCatchUp('7:30-8:15 pm', title: 'Rest / Weekly Reflection'),
-    _chores('8:15-8:50 pm', nutrition: {if (isRefeedWeek() || !isNewBananaSchedule) NutritionAddOn.choreBanana}),
+    _chores('8:15-8:50 pm', nutrition: {if (isRefeedWeek()) NutritionAddOn.choreBanana}),
     _bedPrep('8:50-9:50 pm'),
     _nightSupplement('9:50-10:05 pm', magAmount: 2, magName: 'Magnesium', skincare: _Routines.joseon, title: 'Night Supplement', nutrition: {NutritionAddOn.nac}),
     _relaxOrCatchUp('10:05-10:50 pm'),

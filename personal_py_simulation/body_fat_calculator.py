@@ -7,8 +7,8 @@ STARTING_WEIGHT = 156.0
 STARTING_BF_PCT = 31.2
 AGE = 23
 
-# 1.50 = Cut Week (4 days Resistance training, 2 days LISS (135-145bpm for 1 hr), 4L Water, meet ~8k steps/day for non-LISS days on Apple Watch)
-# 1.375 = Refeed Week (4 days Resistance training, 4L Water, NO LISS, meet ~6k steps/day everyday on Apple Watch)
+# 1.50 = Cut Week (4 days Resistance training, 2 days LISS (135-145bpm for 1 hr), 4L Water, meet ~8k steps/day for non-LISS days on Apple Watch, no excersise otherwise.)
+# 1.375 = Refeed Week (4 days Resistance training, 4L Water, NO LISS, meet ~6k steps/day everyday on Apple Watch, no excersise otherwise)
 CUT_ACT = 1.50
 REFEED_ACT = 1.375
 RT_DAYS_CUT = 4

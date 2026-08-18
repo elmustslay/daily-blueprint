@@ -1,9 +1,10 @@
 import '../../micro_macro_calorie_track/domain/nutrition.dart';
 import '../../micro_macro_calorie_track/data/ingredients_data.dart';
+import '../../daily_plan/data/daily_plan_data.dart';
 
 class RecipeData {
-  static final List<Recipe> recipes = [
-    const Recipe(
+  static List<Recipe> get recipes => [
+    Recipe(
       id: 'pasta',
       name: 'Pasta Recipe',
       icon: '🍝',
@@ -11,7 +12,7 @@ class RecipeData {
       textIngredients: [
         '18 oz Carbe Diem Pasta (1.5 boxes)',
         '1 tbsp avocado oil',
-        '3 lb ground turkey',
+        '2 lb ground turkey',
         '2.5 tsp Morton Lite Salt',
         '1 tbsp garlic powder, 1 tbsp Italian seasoning, 1 tsp Smoked Paprika',
         'Pepper to taste',
@@ -23,7 +24,7 @@ class RecipeData {
       ingredients: [
         IngredientPortion(ingredient: IngredientsData.carbeDiemPasta, amount: 18),
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 3),
-        IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: 3),
+        IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: DailyPlanData.isPastAug24() ? 2 : 3),
         IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 2.5),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 2),
         IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 4),

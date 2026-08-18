@@ -6,6 +6,29 @@ import 'package:my_app/features/micro_macro_calorie_track/domain/nutrition.dart'
 import 'package:my_app/features/micro_macro_calorie_track/data/ingredients_data.dart';
 import 'package:my_app/features/recipe/data/recipe_data.dart';
 
+int _parseTime(String timeString) {
+  final regex = RegExp(r'(\d+):(\d+)(?:.*?)\s*(am|pm)?', caseSensitive: false);
+  final match = regex.firstMatch(timeString);
+  if (match != null) {
+    int hour = int.parse(match.group(1)!);
+    int minute = int.parse(match.group(2)!);
+    
+    String ampm = 'am';
+    final ampmMatch = RegExp(r'(am|pm)', caseSensitive: false).firstMatch(timeString);
+    if (ampmMatch != null) {
+      ampm = ampmMatch.group(1)!.toLowerCase();
+    }
+    
+    if (ampm == 'pm' && hour != 12) {
+      hour += 12;
+    } else if (ampm == 'am' && hour == 12) {
+      hour = 0;
+    }
+    return hour * 60 + minute;
+  }
+  return -1;
+}
+
 void main() {
   Future<void> generateNutritionFiles(String prefix, {bool isRefeed = false}) async {
     if (isRefeed) {
@@ -37,9 +60,28 @@ void main() {
         if (item.mealRecord != null) {
           var nutrition = item.mealRecord!.totalNutrition;
           double absorbedIron = item.mealRecord!.calculateAbsorbedIron();
-          if (absorbedIron > 0) {
+          
+          double windowFat = nutrition.fat;
+          int currentMin = _parseTime(item.time);
+          if (currentMin >= 0) {
+            for (var otherItem in dayItems) {
+              if (otherItem != item && otherItem.mealRecord != null) {
+                int otherMin = _parseTime(otherItem.time);
+                if (otherMin >= 0 && (currentMin - otherMin).abs() <= 30) {
+                  windowFat += otherItem.mealRecord!.totalNutrition.fat;
+                }
+              }
+            }
+          }
+          
+          var absorbedVitamins = item.mealRecord!.calculateAbsorbedVitamins(windowFat: windowFat);
+          
+          if (absorbedIron > 0 || absorbedVitamins.isNotEmpty) {
             var newMicros = Map<String, double>.from(nutrition.microNutrients);
-            newMicros['Absorbed Iron (mg)'] = absorbedIron;
+            if (absorbedIron > 0) {
+              newMicros['Absorbed Iron (mg)'] = absorbedIron;
+            }
+            newMicros.addAll(absorbedVitamins);
             nutrition = NutritionFact(
               calories: nutrition.calories,
               protein: nutrition.protein,
@@ -79,9 +121,28 @@ void main() {
         if (item.mealRecord != null) {
           var nutrition = item.mealRecord!.totalNutrition;
           double absorbedIron = item.mealRecord!.calculateAbsorbedIron();
-          if (absorbedIron > 0) {
+          
+          double windowFat = nutrition.fat;
+          int currentMin = _parseTime(item.time);
+          if (currentMin >= 0) {
+            for (var otherItem in dayItems) {
+              if (otherItem != item && otherItem.mealRecord != null) {
+                int otherMin = _parseTime(otherItem.time);
+                if (otherMin >= 0 && (currentMin - otherMin).abs() <= 30) {
+                  windowFat += otherItem.mealRecord!.totalNutrition.fat;
+                }
+              }
+            }
+          }
+          
+          var absorbedVitamins = item.mealRecord!.calculateAbsorbedVitamins(windowFat: windowFat);
+          
+          if (absorbedIron > 0 || absorbedVitamins.isNotEmpty) {
             var newMicros = Map<String, double>.from(nutrition.microNutrients);
-            newMicros['Absorbed Iron (mg)'] = absorbedIron;
+            if (absorbedIron > 0) {
+              newMicros['Absorbed Iron (mg)'] = absorbedIron;
+            }
+            newMicros.addAll(absorbedVitamins);
             nutrition = NutritionFact(
               calories: nutrition.calories,
               protein: nutrition.protein,

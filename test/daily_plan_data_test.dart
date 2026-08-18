@@ -163,7 +163,7 @@ void main() {
     expect(totalDextrins, 4, reason: 'Total weekly dextrins should be exactly 4');
     expect(totalKiwis, 5, reason: 'Total weekly kiwis should be exactly 5 (Mon-Thu, 2 on Thu)');
     expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
-    expect(totalBananas, 7, reason: 'Total weekly bananas on regular cut weeks should be 7');
+    expect(totalBananas, 4, reason: 'Total weekly bananas on regular cut weeks should be 4');
   });
 
   test('Verify weekly fruit, dextrin, and egg consumption on Refeed Week matches shopping list', () {
@@ -225,8 +225,8 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     await SharedPrefsLogic.init();
 
-    // 1. Normal cut week (e.g. Week 1 -> Week 2 is NOT refeed)
-    DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate;
+    // 1. Normal cut week
+    DailyPlanData.mockCurrentDate = DateTime(2026, 8, 15);
     final normalItems = ShoppingListNotifier().build();
     expect(normalItems.any((item) => item.name == 'Quinoa'), isFalse, reason: 'Quinoa should not appear on normal cut weeks');
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');

@@ -32,11 +32,11 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
       ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (1 US Dry Pint)'),
-      ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 bag - eat 1/7th of bag (~10 carrots) /day'),
-      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '28 Bananas (4/day) (REFEED WEEK)' : '4 Bananas (1/day on lift days)'),
+      ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 24oz bag - eat 1/7th of bag (~10 carrots) /day'),
+      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '33 Bananas (REFEED WEEK)' : '9 Bananas (4 PW + 5 Morning)'),
       
       // Poultry & Meat
-      ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '3 lbs'),
+      ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '2 lbs'),
       ShoppingItem(id: 'meat-2', name: '96% Lean Ground Beef', subtext: '1 lb'),
       ShoppingItem(id: 'meat-3', name: 'Sockeye Salmon Fillet', subtext: '1 lb (hard min 0.82 lb)'),
       // Dairy
