@@ -24,7 +24,7 @@ class RecipeData {
       ingredients: [
         IngredientPortion(ingredient: IngredientsData.carbeDiemPasta, amount: 18),
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 3),
-        IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: DailyPlanData.isPastAug24() ? 2 : 3),
+        IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: 2),
         IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 2.5),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 2),
         IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 4),

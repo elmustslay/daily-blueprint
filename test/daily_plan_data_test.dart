@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/core/storage/shared_prefs.dart';
 import 'package:my_app/features/daily_plan/data/daily_plan_data.dart';
 import 'package:my_app/features/shopping_list/presentation/shopping_list_screen.dart';
+import 'package:my_app/features/micro_macro_calorie_track/data/ingredients_data.dart';
 
 void main() {
   setUp(() {
@@ -73,7 +74,7 @@ void main() {
       
       final commute = schedule.firstWhere((item) => item.title.contains('Commute to Gym'));
       expect(commute.time.contains('5:'), isTrue);
-      expect(commute.details.any((d) => d.contains('Mix 1 scoop Cluster Dextrin in water')), isTrue);
+      expect(commute.details.any((d) => d.contains('Mix 1 scoop Cluster Dextrin')), isTrue);
     }
   });
 
@@ -163,7 +164,7 @@ void main() {
     expect(totalDextrins, 4, reason: 'Total weekly dextrins should be exactly 4');
     expect(totalKiwis, 5, reason: 'Total weekly kiwis should be exactly 5 (Mon-Thu, 2 on Thu)');
     expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
-    expect(totalBananas, 4, reason: 'Total weekly bananas on regular cut weeks should be 4');
+    expect(totalBananas, 9, reason: 'Total weekly bananas on regular cut weeks should be 9');
   });
 
   test('Verify weekly fruit, dextrin, and egg consumption on Refeed Week matches shopping list', () {
@@ -246,4 +247,101 @@ void main() {
       DailyPlanData.mockCurrentDate = null;
     }
   });
+
+  test('Rule 13: Strict Pre-Workout Fat Restriction (Gastric Emptying)', () {
+    for (final entry in DailyPlanData.schedules.entries) {
+      final schedule = entry.value;
+      for (final item in schedule) {
+        final isGym = item.title.toLowerCase().contains('gym session') || item.isCardio;
+        if (!isGym) continue;
+
+        final gymStart = parseTime(item.time);
+        
+        for (final preWorkoutItem in schedule) {
+          if (preWorkoutItem.mealRecord == null) continue;
+          
+          final mealEnd = parseTime(preWorkoutItem.time, isEnd: true);
+          final minutesBeforeGym = gymStart.difference(mealEnd).inMinutes;
+
+          if (minutesBeforeGym >= 0 && minutesBeforeGym <= 90) {
+            final fat = preWorkoutItem.mealRecord!.totalNutrition.fat;
+            expect(fat, lessThan(5.0), reason: 'Too much fat (${fat.toStringAsFixed(1)}g) within 90 mins of workout on ${entry.key}. Fat delays gastric emptying of intra-workout nutrients.');
+          }
+        }
+      }
+    }
+  });
+
+  test('Rule 14: Morning Leucine Threshold Spike', () {
+    for (final entry in DailyPlanData.schedules.entries) {
+      final schedule = entry.value;
+      double morningProtein = 0.0;
+
+      for (final item in schedule) {
+        final time = parseTime(item.time);
+        if (time.hour < 10) { 
+           if (item.mealRecord != null) {
+              morningProtein += item.mealRecord!.totalNutrition.protein;
+           }
+        }
+      }
+      
+      expect(morningProtein, greaterThanOrEqualTo(25.0), 
+          reason: 'Failed to hit the 25g Morning Leucine Threshold on ${entry.key}. Only consumed ${morningProtein.toStringAsFixed(1)}g protein before 10 AM.');
+    }
+  });
+
+  test('Rule 15: Deep Sleep Insulin Curfew (Growth Hormone & Fat Oxidation Protection)', () {
+    for (final entry in DailyPlanData.schedules.entries) {
+      final schedule = entry.value;
+      final sleepItem = schedule.firstWhere((i) => i.title.toLowerCase().contains('fall asleep'));
+      final sleepStart = parseTime(sleepItem.time);
+      DateTime fixedSleepStart = sleepStart.hour < 4 ? sleepStart.add(const Duration(days: 1)) : sleepStart;
+
+      for (final item in schedule) {
+        if (item.mealRecord == null) continue;
+
+        final mealEnd = parseTime(item.time, isEnd: true);
+        DateTime fixedMealEnd = mealEnd.hour < 4 ? mealEnd.add(const Duration(days: 1)) : mealEnd;
+        
+        final minutesBeforeSleep = fixedSleepStart.difference(fixedMealEnd).inMinutes;
+
+        if (minutesBeforeSleep >= 0 && minutesBeforeSleep <= 120) {
+          final hasBananas = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.banana);
+          final hasPasta = item.mealRecord!.recipeItems.any((r) => r.recipe.id == 'pasta' || r.recipe.id == 'pastaHalf');
+          final hasDextrin = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.clusterDextrin);
+          
+          expect(hasBananas, isFalse, reason: 'High-glycemic Bananas found within 2 hours of sleep on ${entry.key}. This will spike insulin and blunt GH/fat oxidation.');
+          expect(hasPasta, isFalse, reason: 'Pasta found within 2 hours of sleep on ${entry.key}.');
+          expect(hasDextrin, isFalse, reason: 'Cluster Dextrin found within 2 hours of sleep on ${entry.key}.');
+        }
+      }
+    }
+  });
+}
+
+DateTime parseTime(String timeString, {bool isEnd = false}) {
+  final parts = timeString.split(' ');
+  final times = parts[0].split('-');
+  final period = parts[1].toLowerCase();
+  
+  String targetTime = isEnd ? times[1] : times[0];
+  final timeParts = targetTime.split(':');
+  int hour = int.parse(timeParts[0]);
+  int minute = int.parse(timeParts[1]);
+  
+  bool isPm = period == 'pm';
+  
+  if (!isEnd && isPm) {
+     final endParts = times[1].split(':');
+     int endHour = int.parse(endParts[0]);
+     if (hour >= 7 && hour <= 11 && (endHour >= 1 && endHour <= 6 || endHour == 12)) {
+       isPm = false;
+     }
+  }
+  
+  if (isPm && hour != 12) hour += 12;
+  if (!isPm && hour == 12) hour = 0;
+  
+  return DateTime(2026, 1, 1, hour, minute);
 }

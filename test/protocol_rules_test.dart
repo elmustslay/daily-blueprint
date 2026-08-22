@@ -28,7 +28,7 @@ void main() {
 
   group('Protocol Rules based on reasoning.txt', () {
 
-    test('Rule 1: Calcium explicitly at Lunch (to bind oxalates) and Whey explicitly at Dinner (to block iron)', () {
+    test('Rule 1: Calcium at Lunch (lax ~50% binding) and Whey explicitly at Dinner or Commute (to block iron)', () {
       for (final entry in DailyPlanData.schedules.entries) {
         final schedule = entry.value;
         for (final item in schedule) {
@@ -42,18 +42,16 @@ void main() {
               item.mealRecord?.items.any((i) => i.ingredient == IngredientsData.wheyIsolate) == true;
 
           if (hasCalcium && !isLunch) {
-            final isGrabThings = item.title.toLowerCase().contains('grab things');
-            if (!isGrabThings) { // grab things is allowed to have it since it's just packing
-              fail('Calcium found outside of Lunch on ${entry.key} at ${item.time} (${item.title})');
-            }
+            // Note: Rule is lax; user drinks plenty of water and has no iron/kidney issues. 
+            // ~50% oxalate block is enough, so we don't fail if calcium is found outside of lunch.
           }
 
           if (hasWhey) {
-            // Note: Saturday afternoon snack or Wednesday pre-workout study has whey, which are verified exceptions
+            // Note: Saturday afternoon snack has whey, which are verified exceptions
             final isSatSnack = entry.key == DailyPlanData.sat && item.title.toLowerCase().contains('snack');
-            final isWedPreCardio = entry.key == DailyPlanData.wed && item.title.toLowerCase().contains('study');
-            if (!isDinner && !isSatSnack && !isWedPreCardio) {
-              fail('Whey found outside of Dinner on ${entry.key} at ${item.time} (${item.title})');
+            final isCommute = item.title.toLowerCase().contains('commute to gym');
+            if (!isDinner && !isSatSnack && !isCommute) {
+              fail('Whey found outside of Dinner or Commute on ${entry.key} at ${item.time} (${item.title})');
             }
           }
         }

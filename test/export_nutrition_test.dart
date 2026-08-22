@@ -365,6 +365,26 @@ void main() {
         });
       }
       
+      StringBuffer textDump = StringBuffer();
+      for (int d = 0; d < totalDays; d++) {
+        final date = startDate.add(Duration(days: d));
+        DailyPlanData.mockCurrentDate = date;
+        final dayKey = dayNames[date.weekday - 1];
+        final isRefeed = DailyPlanData.isRefeedWeek();
+        final schedule = DailyPlanData.schedules[dayKey] ?? [];
+
+        textDump.writeln('=== Day $d: ${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ($dayKey) [Refeed: $isRefeed] ===');
+        for (var item in schedule) {
+          textDump.writeln('[${item.time}] ${item.title}');
+          for (var detail in item.details) {
+            textDump.writeln('  - $detail');
+          }
+        }
+        textDump.writeln('');
+      }
+      final textFile = File('simulation_ui_text.txt');
+      await textFile.writeAsString(textDump.toString());
+      print('Successfully exported UI text timeline to simulation_ui_text.txt');
       final timelineJson = const JsonEncoder.withIndent('    ').convert(timeline);
       final timelineFile = File('simulation_timeline.json');
       await timelineFile.writeAsString(timelineJson);

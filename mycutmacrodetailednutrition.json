@@ -1,39 +1,39 @@
 {
     "mon": {
-        "8:40-8:50 am": {
+        "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 140.0,
-                "Protein": 12.0,
-                "Carbs": 0.0,
-                "Fat": 10.0
+                "Calories": 338.2089777777777,
+                "Protein": 27.7596,
+                "Carbs": 27.614666666666665,
+                "Fat": 17.630111111111113
             }
         },
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 701.2936,
-                "Protein": 61.278800000000004,
-                "Carbs": 82.844,
-                "Fat": 28.223666666666666
+                "Calories": 396.41795555555547,
+                "Protein": 31.5192,
+                "Carbs": 55.22933333333333,
+                "Fat": 15.260222222222222
             }
         },
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 100.0,
-                "Protein": 0.0,
-                "Carbs": 25.0,
-                "Fat": 0.0
+                "Calories": 335.0,
+                "Protein": 31.3,
+                "Carbs": 53.0,
+                "Fat": 0.8
             }
         },
         "8:50-9:20 pm": {
-            "title": "Dinner & Post-Workout Shake",
+            "title": "Dinner",
             "nutrition": {
-                "Calories": 380.95238095238096,
-                "Protein": 47.31904761904762,
-                "Carbs": 35.885714285714286,
-                "Fat": 6.050416666666666
+                "Calories": 145.95238095238093,
+                "Protein": 16.01904761904762,
+                "Carbs": 7.885714285714284,
+                "Fat": 5.250416666666666
             }
         },
         "9:20-9:50 pm": {
@@ -47,40 +47,40 @@
         }
     },
     "tue": {
-        "8:40-8:50 am": {
+        "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 251.66666666666666,
-                "Protein": 27.333333333333332,
-                "Carbs": 0.0,
-                "Fat": 15.250416666666666
+                "Calories": 554.8756444444443,
+                "Protein": 44.39293333333333,
+                "Carbs": 54.614666666666665,
+                "Fat": 23.180527777777776
             }
         },
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 701.2936,
-                "Protein": 61.278800000000004,
-                "Carbs": 82.844,
-                "Fat": 28.223666666666666
+                "Calories": 396.41795555555547,
+                "Protein": 31.5192,
+                "Carbs": 55.22933333333333,
+                "Fat": 15.260222222222222
             }
         },
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 100.0,
-                "Protein": 0.0,
-                "Carbs": 25.0,
-                "Fat": 0.0
+                "Calories": 335.0,
+                "Protein": 31.3,
+                "Carbs": 53.0,
+                "Fat": 0.8
             }
         },
         "8:50-9:20 pm": {
-            "title": "Dinner & Post-Workout Shake",
+            "title": "Dinner",
             "nutrition": {
-                "Calories": 380.95238095238096,
-                "Protein": 47.31904761904762,
-                "Carbs": 35.885714285714286,
-                "Fat": 6.050416666666666
+                "Calories": 145.95238095238093,
+                "Protein": 16.01904761904762,
+                "Carbs": 7.885714285714284,
+                "Fat": 5.250416666666666
             }
         },
         "9:20-9:50 pm": {
@@ -94,26 +94,26 @@
         }
     },
     "wed": {
-        "8:40-8:50 am": {
+        "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 251.66666666666666,
-                "Protein": 27.333333333333332,
-                "Carbs": 0.0,
-                "Fat": 15.250416666666666
+                "Calories": 554.8756444444443,
+                "Protein": 44.39293333333333,
+                "Carbs": 54.614666666666665,
+                "Fat": 23.180527777777776
             }
         },
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 701.2936,
-                "Protein": 61.278800000000004,
-                "Carbs": 82.844,
-                "Fat": 28.223666666666666
+                "Calories": 396.41795555555547,
+                "Protein": 31.5192,
+                "Carbs": 55.22933333333333,
+                "Fat": 15.260222222222222
             }
         },
-        "5:10-6:05 pm": {
-            "title": "Study Time",
+        "6:05-6:15 pm": {
+            "title": "Get Dressed & Commute to Gym (LISS)",
             "nutrition": {
                 "Calories": 130.0,
                 "Protein": 30.0,
@@ -150,40 +150,40 @@
         }
     },
     "thu": {
-        "8:40-8:50 am": {
+        "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 251.66666666666666,
-                "Protein": 27.333333333333332,
-                "Carbs": 0.0,
-                "Fat": 15.250416666666666
+                "Calories": 449.8756444444444,
+                "Protein": 43.092933333333335,
+                "Carbs": 27.614666666666665,
+                "Fat": 22.88052777777778
             }
         },
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 701.2936,
-                "Protein": 61.278800000000004,
-                "Carbs": 82.844,
-                "Fat": 28.223666666666666
+                "Calories": 396.41795555555547,
+                "Protein": 31.5192,
+                "Carbs": 55.22933333333333,
+                "Fat": 15.260222222222222
             }
         },
         "5:55-6:20 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 100.0,
-                "Protein": 0.0,
-                "Carbs": 25.0,
-                "Fat": 0.0
+                "Calories": 335.0,
+                "Protein": 31.3,
+                "Carbs": 53.0,
+                "Fat": 0.8
             }
         },
         "8:30-9:00 pm": {
-            "title": "Dinner & Post-Workout Shake",
+            "title": "Dinner",
             "nutrition": {
-                "Calories": 342.11771428571427,
-                "Protein": 42.627314285714284,
-                "Carbs": 36.477089285714285,
-                "Fat": 3.4629125000000007
+                "Calories": 107.11771428571427,
+                "Protein": 11.327314285714284,
+                "Carbs": 8.477089285714284,
+                "Fat": 2.6629125000000005
             }
         },
         "9:00-9:30 pm": {
@@ -197,40 +197,40 @@
         }
     },
     "fri": {
-        "8:40-8:50 am": {
+        "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 212.832,
-                "Protein": 22.641599999999997,
-                "Carbs": 0.591375,
-                "Fat": 12.662912500000001
+                "Calories": 516.0409777777777,
+                "Protein": 39.7012,
+                "Carbs": 55.206041666666664,
+                "Fat": 20.593023611111114
             }
         },
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 701.2936,
-                "Protein": 61.278800000000004,
-                "Carbs": 82.844,
-                "Fat": 28.223666666666666
+                "Calories": 396.41795555555547,
+                "Protein": 31.5192,
+                "Carbs": 55.22933333333333,
+                "Fat": 15.260222222222222
             }
         },
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 100.0,
-                "Protein": 0.0,
-                "Carbs": 25.0,
-                "Fat": 0.0
+                "Calories": 335.0,
+                "Protein": 31.3,
+                "Carbs": 53.0,
+                "Fat": 0.8
             }
         },
         "8:50-9:20 pm": {
-            "title": "Dinner & Post-Workout Shake",
+            "title": "Dinner",
             "nutrition": {
-                "Calories": 342.11771428571427,
-                "Protein": 42.627314285714284,
-                "Carbs": 36.477089285714285,
-                "Fat": 3.4629125000000007
+                "Calories": 107.11771428571427,
+                "Protein": 11.327314285714284,
+                "Carbs": 8.477089285714284,
+                "Fat": 2.6629125000000005
             }
         },
         "9:20-9:50 pm": {
@@ -244,22 +244,22 @@
         }
     },
     "sat": {
-        "8:40-9:05 am": {
+        "8:30-9:05 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 382.832,
-                "Protein": 34.6416,
-                "Carbs": 0.591375,
-                "Fat": 26.1729125
+                "Calories": 686.0409777777777,
+                "Protein": 51.7012,
+                "Carbs": 55.206041666666664,
+                "Fat": 34.10302361111111
             }
         },
         "1:50-2:20 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 701.2936,
-                "Protein": 61.278800000000004,
-                "Carbs": 82.844,
-                "Fat": 28.223666666666666
+                "Calories": 396.41795555555547,
+                "Protein": 31.5192,
+                "Carbs": 55.22933333333333,
+                "Fat": 15.260222222222222
             }
         },
         "7:45-8:00 pm": {
@@ -282,13 +282,13 @@
         }
     },
     "sun": {
-        "8:40-9:35 am": {
+        "8:30-9:35 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 352.832,
-                "Protein": 34.6416,
-                "Carbs": 0.591375,
-                "Fat": 22.6629125
+                "Calories": 457.832,
+                "Protein": 35.9416,
+                "Carbs": 27.591375,
+                "Fat": 22.9629125
             }
         },
         "1:20-1:50 pm": {
