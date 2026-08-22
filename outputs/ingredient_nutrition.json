@@ -1039,5 +1039,70 @@
                 "Potassium (mg)": 67.0
             }
         }
+    },
+    "onion_powder": {
+        "name": "Onion Powder",
+        "baseUnit": "tsp",
+        "nutrition": {
+            "Calories": 8.0,
+            "Protein": 0.2,
+            "Carbs": 1.9,
+            "Fat": 0.0,
+            "Micros": {
+                "Potassium (mg)": 24.0
+            }
+        }
+    },
+    "dried_oregano": {
+        "name": "Dried Oregano",
+        "baseUnit": "tsp",
+        "nutrition": {
+            "Calories": 3.0,
+            "Protein": 0.1,
+            "Carbs": 0.7,
+            "Fat": 0.0,
+            "Micros": {
+                "Potassium (mg)": 17.0
+            }
+        }
+    },
+    "black_pepper": {
+        "name": "Black Pepper",
+        "baseUnit": "tsp",
+        "nutrition": {
+            "Calories": 6.0,
+            "Protein": 0.2,
+            "Carbs": 1.4,
+            "Fat": 0.1,
+            "Micros": {
+                "Potassium (mg)": 29.0
+            }
+        }
+    },
+    "italian_seasoning": {
+        "name": "Italian Seasoning",
+        "baseUnit": "tsp",
+        "nutrition": {
+            "Calories": 4.0,
+            "Protein": 0.1,
+            "Carbs": 0.9,
+            "Fat": 0.1,
+            "Micros": {
+                "Potassium (mg)": 20.0
+            }
+        }
+    },
+    "ground_cumin": {
+        "name": "Ground Cumin",
+        "baseUnit": "tsp",
+        "nutrition": {
+            "Calories": 8.0,
+            "Protein": 0.4,
+            "Carbs": 0.9,
+            "Fat": 0.5,
+            "Micros": {
+                "Potassium (mg)": 38.0
+            }
+        }
     }
 }

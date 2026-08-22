@@ -1119,11 +1119,75 @@ static const Ingredient marinaraSauce = Ingredient(
     ),
   );
 
+  static const Ingredient onionPowder = Ingredient(
+    id: 'onion_powder',
+    name: 'Onion Powder',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 8.0,
+      protein: 0.2,
+      carbs: 1.9,
+      fat: 0.0,
+      microNutrients: {'Potassium (mg)': 24.0},
+    ),
+  );
+
+  static const Ingredient driedOregano = Ingredient(
+    id: 'dried_oregano',
+    name: 'Dried Oregano',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 3.0,
+      protein: 0.1,
+      carbs: 0.7,
+      fat: 0.0,
+      microNutrients: {'Potassium (mg)': 17.0},
+    ),
+  );
+
+  static const Ingredient blackPepper = Ingredient(
+    id: 'black_pepper',
+    name: 'Black Pepper',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 6.0,
+      protein: 0.2,
+      carbs: 1.4,
+      fat: 0.1,
+      microNutrients: {'Potassium (mg)': 29.0},
+    ),
+  );
+
+  static const Ingredient italianSeasoning = Ingredient(
+    id: 'italian_seasoning',
+    name: 'Italian Seasoning',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 4.0,
+      protein: 0.1,
+      carbs: 0.9,
+      fat: 0.1,
+      microNutrients: {'Potassium (mg)': 20.0},
+    ),
+  );
+
+  static const Ingredient groundCumin = Ingredient(
+    id: 'ground_cumin',
+    name: 'Ground Cumin',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 8.0,
+      protein: 0.4,
+      carbs: 0.9,
+      fat: 0.5,
+      microNutrients: {'Potassium (mg)': 38.0},
+    ),
+  );
+
   static const List<Ingredient> allIngredients = [
     spinach,
     chipotleBowl,
     chipotleBowlRefeed,
-
     egg,
     avocadoOil,
     clusterDextrin,
@@ -1161,5 +1225,10 @@ static const Ingredient marinaraSauce = Ingredient(
     smokedPaprika,
     garlicPowder,
     babyCarrots,
+    onionPowder,
+    driedOregano,
+    blackPepper,
+    italianSeasoning,
+    groundCumin,
   ];
 }

@@ -30,6 +30,7 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 4),
         IngredientPortion(ingredient: IngredientsData.spinach, amount: 1),
         IngredientPortion(ingredient: IngredientsData.garlicPowder, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.italianSeasoning, amount: 3),
         IngredientPortion(ingredient: IngredientsData.smokedPaprika, amount: 1),
       ],
       equipment: [
@@ -66,6 +67,10 @@ class RecipeData {
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 1),
         IngredientPortion(ingredient: IngredientsData.garlicPowder, amount: 0.333),
         IngredientPortion(ingredient: IngredientsData.smokedPaprika, amount: 2.0),
+        IngredientPortion(ingredient: IngredientsData.blackPepper, amount: 1.0),
+        IngredientPortion(ingredient: IngredientsData.groundCumin, amount: 1.0),
+        IngredientPortion(ingredient: IngredientsData.onionPowder, amount: 1.0),
+        IngredientPortion(ingredient: IngredientsData.driedOregano, amount: 1.0),
       ],
       equipment: [
         'Large Stainless Steel Sauté Pan',

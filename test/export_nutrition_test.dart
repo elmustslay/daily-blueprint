@@ -104,10 +104,10 @@ void main() {
     
     // Write formatted JSON
     final jsonString = const JsonEncoder.withIndent('    ').convert(exportData);
-    final file = File('${prefix}nutrition.json');
+    final file = File('outputs/${prefix}nutrition.json');
     await file.writeAsString(jsonString);
     
-    print('Successfully exported nutrition data to ${prefix}nutrition.json');
+    print('Successfully exported nutrition data to outputs/${prefix}nutrition.json');
     expect(file.existsSync(), isTrue);
 
     // Generate detailed nutrition
@@ -177,23 +177,23 @@ void main() {
     }
     
     final detailedJsonString = const JsonEncoder.withIndent('    ').convert(detailedExport);
-    final detailedFile = File('${prefix}detailednutrition.json');
+    final detailedFile = File('outputs/${prefix}detailednutrition.json');
     await detailedFile.writeAsString(detailedJsonString);
-    print('Successfully exported detailed nutrition data to ${prefix}detailednutrition.json');
+    print('Successfully exported detailed nutrition data to outputs/${prefix}detailednutrition.json');
 
     final macroDetailedJsonString = const JsonEncoder.withIndent('    ').convert(macroDetailedExport);
-    final macroDetailedFile = File('${prefix}macrodetailednutrition.json');
+    final macroDetailedFile = File('outputs/${prefix}macrodetailednutrition.json');
     await macroDetailedFile.writeAsString(macroDetailedJsonString);
-    print('Successfully exported macro detailed nutrition data to ${prefix}macrodetailednutrition.json');
+    print('Successfully exported macro detailed nutrition data to outputs/${prefix}macrodetailednutrition.json');
 
     if (isRefeed) return; // Skip CSV for refeed week to avoid complexity
 
     // Trigger python script to update CSV, or fallback to generating it in Dart
     bool csvUpdatedByPython = false;
     try {
-      ProcessResult result = await Process.run('python3', ['personal_py_simulation/json_to_csv.py', prefix]);
+      ProcessResult result = await Process.run('python3', ['personal_py_simulation/json_to_csv.py', 'outputs/$prefix']);
       if (result.exitCode != 0) {
-        result = await Process.run('python', ['personal_py_simulation/json_to_csv.py', prefix]);
+        result = await Process.run('python', ['personal_py_simulation/json_to_csv.py', 'outputs/$prefix']);
       }
       if (result.exitCode == 0) {
         print(result.stdout.toString().trim());
@@ -206,7 +206,7 @@ void main() {
     }
 
     if (!csvUpdatedByPython) {
-      print('Generating ${prefix}nutrition.csv directly via Dart fallback...');
+      print('Generating outputs/${prefix}nutrition.csv directly via Dart fallback...');
       try {
         final metrics = ['Calories', 'Protein', 'Carbs', 'Fat'];
         final Set<String> allMicros = {};
@@ -250,11 +250,11 @@ void main() {
           csvBuffer.writeln(row.join(','));
         }
         
-        final csvFile = File('${prefix}nutrition.csv');
+        final csvFile = File('outputs/${prefix}nutrition.csv');
         await csvFile.writeAsString(csvBuffer.toString());
         print('Success: Spreadsheet updated at ${csvFile.absolute.path}');
       } catch (e) {
-        print('Error: Failed to generate ${prefix}nutrition.csv directly: $e');
+        print('Error: Failed to generate outputs/${prefix}nutrition.csv directly: $e');
       }
     }
   }
@@ -277,9 +277,9 @@ void main() {
         };
       }
       final recipeJsonString = const JsonEncoder.withIndent('    ').convert(recipeExport);
-      final recipeJsonFile = File('recipe_nutrition.json');
+      final recipeJsonFile = File('outputs/recipe_nutrition.json');
       await recipeJsonFile.writeAsString(recipeJsonString);
-      print('Successfully exported recipe nutrition to recipe_nutrition.json');
+      print('Successfully exported recipe nutrition to outputs/recipe_nutrition.json');
     } catch (e) {
       print('Error: Failed to export recipe nutrition: $e');
     }
@@ -295,9 +295,9 @@ void main() {
         };
       }
       final ingredientJsonString = const JsonEncoder.withIndent('    ').convert(ingredientExport);
-      final ingredientJsonFile = File('ingredient_nutrition.json');
+      final ingredientJsonFile = File('outputs/ingredient_nutrition.json');
       await ingredientJsonFile.writeAsString(ingredientJsonString);
-      print('Successfully exported ingredient nutrition to ingredient_nutrition.json');
+      print('Successfully exported ingredient nutrition to outputs/ingredient_nutrition.json');
     } catch (e) {
       print('Error: Failed to export ingredient nutrition: $e');
     }
@@ -382,13 +382,13 @@ void main() {
         }
         textDump.writeln('');
       }
-      final textFile = File('simulation_ui_text.txt');
+      final textFile = File('outputs/simulation_ui_text.txt');
       await textFile.writeAsString(textDump.toString());
-      print('Successfully exported UI text timeline to simulation_ui_text.txt');
+      print('Successfully exported UI text timeline to outputs/simulation_ui_text.txt');
       final timelineJson = const JsonEncoder.withIndent('    ').convert(timeline);
-      final timelineFile = File('simulation_timeline.json');
+      final timelineFile = File('outputs/simulation_timeline.json');
       await timelineFile.writeAsString(timelineJson);
-      print('Successfully exported simulation timeline to simulation_timeline.json (${timeline.length} days)');
+      print('Successfully exported simulation timeline to outputs/simulation_timeline.json (${timeline.length} days)');
     } catch (e) {
       print('Error: Failed to export simulation timeline: $e');
     } finally {

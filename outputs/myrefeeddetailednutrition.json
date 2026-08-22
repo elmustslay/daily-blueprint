@@ -45,15 +45,15 @@
         "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 338.2,
+                "Calories": 338.9,
                 "Protein": 27.8,
-                "Carbs": 27.6,
+                "Carbs": 27.8,
                 "Fat": 17.6,
                 "Micros": {
                     "Saturated Fat (g)": 4.8,
                     "Cholesterol (mg)": 407.78,
                     "Sodium (mg)": 754.91,
-                    "Potassium (mg)": 690.07,
+                    "Potassium (mg)": 693.4,
                     "Magnesium (mg)": 50.9,
                     "Calcium (Food) (mg)": 105.3,
                     "Iron (Food) (mg)": 3.2,
@@ -102,9 +102,9 @@
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 396.4,
-                "Protein": 31.5,
-                "Carbs": 55.2,
+                "Calories": 397.8,
+                "Protein": 31.6,
+                "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
                     "Calcium (Supplement) (mg)": 439.98,
@@ -115,7 +115,7 @@
                     "Added Sugar (g)": 1.21,
                     "Calcium (Food) (mg)": 106.61,
                     "Iron (Food) (mg)": 3.53,
-                    "Potassium (mg)": 1380.13,
+                    "Potassium (mg)": 1386.8,
                     "Polyunsaturated Fat (g)": 0.22,
                     "Monounsaturated Fat (g)": 1.11,
                     "Magnesium (mg)": 77.8,
@@ -350,13 +350,13 @@
         "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 554.9,
+                "Calories": 555.5,
                 "Protein": 44.4,
-                "Carbs": 54.6,
+                "Carbs": 54.8,
                 "Fat": 23.2,
                 "Micros": {
                     "Sugar (g)": 18.12,
-                    "Potassium (mg)": 1479.4,
+                    "Potassium (mg)": 1482.73,
                     "Magnesium (mg)": 104.56,
                     "Calcium (Food) (mg)": 111.3,
                     "Iron (Food) (mg)": 3.98,
@@ -406,9 +406,9 @@
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 396.4,
-                "Protein": 31.5,
-                "Carbs": 55.2,
+                "Calories": 397.8,
+                "Protein": 31.6,
+                "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
@@ -418,7 +418,7 @@
                     "Added Sugar (g)": 1.21,
                     "Calcium (Food) (mg)": 106.61,
                     "Iron (Food) (mg)": 3.53,
-                    "Potassium (mg)": 1380.13,
+                    "Potassium (mg)": 1386.8,
                     "Polyunsaturated Fat (g)": 0.22,
                     "Monounsaturated Fat (g)": 1.11,
                     "Magnesium (mg)": 77.8,
@@ -655,13 +655,13 @@
         "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 554.9,
+                "Calories": 555.5,
                 "Protein": 44.4,
-                "Carbs": 54.6,
+                "Carbs": 54.8,
                 "Fat": 23.2,
                 "Micros": {
                     "Sugar (g)": 18.12,
-                    "Potassium (mg)": 1479.4,
+                    "Potassium (mg)": 1482.73,
                     "Magnesium (mg)": 104.56,
                     "Calcium (Food) (mg)": 111.3,
                     "Iron (Food) (mg)": 3.98,
@@ -710,9 +710,9 @@
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 396.4,
-                "Protein": 31.5,
-                "Carbs": 55.2,
+                "Calories": 397.8,
+                "Protein": 31.6,
+                "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
                     "Calcium (Supplement) (mg)": 439.98,
@@ -723,7 +723,7 @@
                     "Added Sugar (g)": 1.21,
                     "Calcium (Food) (mg)": 106.61,
                     "Iron (Food) (mg)": 3.53,
-                    "Potassium (mg)": 1380.13,
+                    "Potassium (mg)": 1386.8,
                     "Polyunsaturated Fat (g)": 0.22,
                     "Monounsaturated Fat (g)": 1.11,
                     "Magnesium (mg)": 77.8,
@@ -986,15 +986,15 @@
         "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 449.9,
+                "Calories": 450.5,
                 "Protein": 43.1,
-                "Carbs": 27.6,
+                "Carbs": 27.8,
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 6.53,
                     "Cholesterol (mg)": 447.78,
                     "Sodium (mg)": 904.91,
-                    "Potassium (mg)": 1057.4,
+                    "Potassium (mg)": 1060.73,
                     "Magnesium (mg)": 72.56,
                     "Calcium (Food) (mg)": 105.3,
                     "Iron (Food) (mg)": 3.68,
@@ -1042,9 +1042,9 @@
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 396.4,
-                "Protein": 31.5,
-                "Carbs": 55.2,
+                "Calories": 397.8,
+                "Protein": 31.6,
+                "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
                     "Calcium (Supplement) (mg)": 439.98,
@@ -1055,7 +1055,7 @@
                     "Added Sugar (g)": 1.21,
                     "Calcium (Food) (mg)": 106.61,
                     "Iron (Food) (mg)": 3.53,
-                    "Potassium (mg)": 1380.13,
+                    "Potassium (mg)": 1386.8,
                     "Polyunsaturated Fat (g)": 0.22,
                     "Monounsaturated Fat (g)": 1.11,
                     "Magnesium (mg)": 77.8,
@@ -1139,16 +1139,16 @@
         "8:30-9:00 pm": {
             "title": "Dinner",
             "nutrition": {
-                "Calories": 407.1,
-                "Protein": 23.3,
-                "Carbs": 62.5,
+                "Calories": 410.2,
+                "Protein": 23.4,
+                "Carbs": 63.1,
                 "Fat": 7.7,
                 "Micros": {
                     "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 8.98,
                     "Sugar (g)": 6.52,
                     "Vitamin A (Food) (mcg)": 685.0,
-                    "Potassium (mg)": 1497.83,
+                    "Potassium (mg)": 1511.33,
                     "Ashwagandha Extract (mg)": 500.0,
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 1.06,
@@ -1181,8 +1181,8 @@
                     "Monounsaturated Fat (g)": 0.42,
                     "Capsanthin & Capsorubin (mg)": 2.5,
                     "Absorbed Iron (mg)": 0.46,
-                    "Absorbed Vitamin A (mcg)": 633.39,
-                    "Absorbed Vitamin K (mcg)": 0.46,
+                    "Absorbed Vitamin A (mcg)": 638.02,
+                    "Absorbed Vitamin K (mcg)": 0.47,
                     "Absorbed Vitamin E (mg)": 0.86
                 }
             }
@@ -1224,7 +1224,7 @@
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
                     "Absorbed Iron (mg)": 0.05,
-                    "Absorbed Vitamin E (mg)": 2.77
+                    "Absorbed Vitamin E (mg)": 2.79
                 }
             }
         },
@@ -1289,13 +1289,13 @@
         "8:30-8:50 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 516.0,
-                "Protein": 39.7,
-                "Carbs": 55.2,
-                "Fat": 20.6,
+                "Calories": 519.8,
+                "Protein": 39.8,
+                "Carbs": 56.0,
+                "Fat": 20.7,
                 "Micros": {
                     "Sugar (g)": 18.18,
-                    "Potassium (mg)": 1666.85,
+                    "Potassium (mg)": 1683.69,
                     "Magnesium (mg)": 95.4,
                     "Calcium (Food) (mg)": 115.05,
                     "Iron (Food) (mg)": 4.87,
@@ -1344,9 +1344,9 @@
         "1:00-1:30 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 396.4,
-                "Protein": 31.5,
-                "Carbs": 55.2,
+                "Calories": 397.8,
+                "Protein": 31.6,
+                "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
@@ -1356,7 +1356,7 @@
                     "Added Sugar (g)": 1.21,
                     "Calcium (Food) (mg)": 106.61,
                     "Iron (Food) (mg)": 3.53,
-                    "Potassium (mg)": 1380.13,
+                    "Potassium (mg)": 1386.8,
                     "Polyunsaturated Fat (g)": 0.22,
                     "Monounsaturated Fat (g)": 1.11,
                     "Magnesium (mg)": 77.8,
@@ -1440,16 +1440,16 @@
         "8:50-9:20 pm": {
             "title": "Dinner",
             "nutrition": {
-                "Calories": 407.1,
-                "Protein": 23.3,
-                "Carbs": 62.5,
+                "Calories": 410.2,
+                "Protein": 23.4,
+                "Carbs": 63.1,
                 "Fat": 7.7,
                 "Micros": {
                     "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 8.98,
                     "Sugar (g)": 6.52,
                     "Vitamin A (Food) (mcg)": 685.0,
-                    "Potassium (mg)": 1497.83,
+                    "Potassium (mg)": 1511.33,
                     "Ashwagandha Extract (mg)": 500.0,
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 1.06,
@@ -1482,9 +1482,9 @@
                     "Monounsaturated Fat (g)": 0.42,
                     "Capsanthin & Capsorubin (mg)": 2.5,
                     "Absorbed Iron (mg)": 0.46,
-                    "Absorbed Vitamin A (mcg)": 602.57,
+                    "Absorbed Vitamin A (mcg)": 607.19,
                     "Absorbed Vitamin K (mcg)": 0.44,
-                    "Absorbed Vitamin E (mg)": 0.81
+                    "Absorbed Vitamin E (mg)": 0.82
                 }
             }
         },
@@ -1525,7 +1525,7 @@
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
                     "Absorbed Iron (mg)": 0.03,
-                    "Absorbed Vitamin K (mcg)": 25.16
+                    "Absorbed Vitamin K (mcg)": 25.35
                 }
             }
         },
@@ -1590,13 +1590,13 @@
         "8:30-9:05 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 686.0,
-                "Protein": 51.7,
-                "Carbs": 55.2,
-                "Fat": 34.1,
+                "Calories": 689.8,
+                "Protein": 51.8,
+                "Carbs": 56.0,
+                "Fat": 34.2,
                 "Micros": {
                     "Sugar (g)": 18.18,
-                    "Potassium (mg)": 1666.85,
+                    "Potassium (mg)": 1683.69,
                     "Magnesium (mg)": 107.4,
                     "Calcium (Food) (mg)": 167.05,
                     "Iron (Food) (mg)": 6.31,
@@ -1650,9 +1650,9 @@
         "1:50-2:20 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 396.4,
-                "Protein": 31.5,
-                "Carbs": 55.2,
+                "Calories": 397.8,
+                "Protein": 31.6,
+                "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
                     "Calcium (Supplement) (mg)": 439.98,
@@ -1663,7 +1663,7 @@
                     "Added Sugar (g)": 1.21,
                     "Calcium (Food) (mg)": 106.61,
                     "Iron (Food) (mg)": 3.53,
-                    "Potassium (mg)": 1380.13,
+                    "Potassium (mg)": 1386.8,
                     "Polyunsaturated Fat (g)": 0.22,
                     "Monounsaturated Fat (g)": 1.11,
                     "Magnesium (mg)": 77.8,
@@ -1742,16 +1742,16 @@
         "7:45-8:00 pm": {
             "title": "Dinner",
             "nutrition": {
-                "Calories": 407.1,
-                "Protein": 23.3,
-                "Carbs": 62.5,
+                "Calories": 410.2,
+                "Protein": 23.4,
+                "Carbs": 63.1,
                 "Fat": 7.7,
                 "Micros": {
                     "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 8.98,
                     "Sugar (g)": 6.52,
                     "Vitamin A (Food) (mcg)": 685.0,
-                    "Potassium (mg)": 1497.83,
+                    "Potassium (mg)": 1511.33,
                     "Ashwagandha Extract (mg)": 500.0,
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 1.06,
@@ -1784,9 +1784,9 @@
                     "Monounsaturated Fat (g)": 0.42,
                     "Capsanthin & Capsorubin (mg)": 2.5,
                     "Absorbed Iron (mg)": 0.46,
-                    "Absorbed Vitamin A (mcg)": 602.57,
+                    "Absorbed Vitamin A (mcg)": 607.19,
                     "Absorbed Vitamin K (mcg)": 0.44,
-                    "Absorbed Vitamin E (mg)": 0.81
+                    "Absorbed Vitamin E (mg)": 0.82
                 }
             }
         },
@@ -1827,7 +1827,7 @@
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
                     "Absorbed Iron (mg)": 0.03,
-                    "Absorbed Vitamin K (mcg)": 25.16
+                    "Absorbed Vitamin K (mcg)": 25.35
                 }
             }
         },
@@ -1894,13 +1894,13 @@
         "8:30-9:35 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 457.8,
-                "Protein": 35.9,
-                "Carbs": 27.6,
+                "Calories": 461.0,
+                "Protein": 36.1,
+                "Carbs": 28.2,
                 "Fat": 23.0,
                 "Micros": {
                     "Sugar (g)": 14.46,
-                    "Potassium (mg)": 976.79,
+                    "Potassium (mg)": 990.29,
                     "Magnesium (mg)": 68.5,
                     "Calcium (Food) (mg)": 113.75,
                     "Iron (Food) (mg)": 4.55,
@@ -1950,14 +1950,14 @@
         "1:20-1:50 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 355.7,
-                "Protein": 23.9,
-                "Carbs": 55.2,
-                "Fat": 5.9,
+                "Calories": 361.9,
+                "Protein": 24.1,
+                "Carbs": 56.4,
+                "Fat": 6.1,
                 "Micros": {
                     "Calcium (Supplement) (mg)": 439.98,
                     "Sugar (g)": 28.92,
-                    "Potassium (mg)": 1953.57,
+                    "Potassium (mg)": 1980.57,
                     "Magnesium (mg)": 89.0,
                     "Calcium (Food) (mg)": 19.5,
                     "Iron (Food) (mg)": 3.34,
@@ -1990,9 +1990,9 @@
                     "Fiber (g)": 0.47,
                     "Capsanthin & Capsorubin (mg)": 5.0,
                     "Absorbed Iron (mg)": 0.29,
-                    "Absorbed Vitamin A (mcg)": 19.63,
-                    "Absorbed Vitamin K (mcg)": 1.39,
-                    "Absorbed Vitamin E (mg)": 0.66
+                    "Absorbed Vitamin A (mcg)": 20.05,
+                    "Absorbed Vitamin K (mcg)": 1.42,
+                    "Absorbed Vitamin E (mg)": 0.68
                 }
             }
         },

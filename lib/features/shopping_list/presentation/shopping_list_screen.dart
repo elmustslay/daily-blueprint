@@ -52,12 +52,12 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
       
       // Spices
-      ShoppingItem(id: 'spc-1', name: 'Smoked Paprika', subtext: 'need 2tsp'),
-      ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.5tsp'),
+      ShoppingItem(id: 'spc-1', name: 'Smoked Paprika', subtext: 'need 3tsp'),
+      ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.33 tbsp (~4 tsp)'),
       ShoppingItem(id: 'spc-3', name: 'Onion Powder', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-4', name: 'Dried Oregano', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: 'CRITICAL for potassium!'),
-      ShoppingItem(id: 'spc-6', name: 'Black Pepper'),
+      ShoppingItem(id: 'spc-6', name: 'Black Pepper', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
       ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
 
