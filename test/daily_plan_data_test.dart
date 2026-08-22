@@ -190,13 +190,13 @@ void main() {
             }
           }
         }
-        expect(dayBananas, 4, reason: '$day should have exactly 4 bananas on Refeed Week');
+        expect(dayBananas, (day == DailyPlanData.mon || day == DailyPlanData.thu) ? 4 : 5, reason: '$day should have 4 or 5 bananas on Refeed Week');
       }
       
       expect(totalDextrins, 4, reason: 'Workout dextrins remain 4 on lift days');
       expect(totalKiwis, 5, reason: 'Total weekly kiwis should be exactly 5');
       expect(totalEggs, 18, reason: 'Total weekly eggs should be exactly 18');
-      expect(totalBananas, 28, reason: 'Total weekly bananas on Refeed Week should be exactly 28 (4/day across all 7 days)');
+      expect(totalBananas, 33, reason: 'Total weekly bananas on Refeed Week should be exactly 33');
     } finally {
       DailyPlanData.mockCurrentDate = null;
     }
@@ -230,7 +230,7 @@ void main() {
     final normalItems = ShoppingListNotifier().build();
     expect(normalItems.any((item) => item.name == 'Quinoa'), isFalse, reason: 'Quinoa should not appear on normal cut weeks');
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');
-    expect(bananaItemNormal.subtext, contains('4 Bananas (1/day on lift days)'));
+    expect(bananaItemNormal.subtext, contains('9 Bananas (4 PW + 5 Morning)'));
 
     // 2. Upcoming Refeed week (e.g. Sunday of Week 4 -> Week 5 IS refeed, so day 27 from plan start)
     try {
@@ -238,7 +238,7 @@ void main() {
       final refeedItems = ShoppingListNotifier().build();
       
       final bananaItem = refeedItems.firstWhere((item) => item.name == 'Bananas');
-      expect(bananaItem.subtext, contains('28 Bananas (4/day) (REFEED WEEK)'));
+      expect(bananaItem.subtext, contains('33 Bananas (REFEED WEEK)'));
 
       final quinoaItem = refeedItems.firstWhere((item) => item.name == 'Quinoa');
       expect(quinoaItem.subtext, contains('1 bag (REFEED WEEK)'));

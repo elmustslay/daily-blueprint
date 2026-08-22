@@ -12,6 +12,7 @@ class IngredientsData {
       carbs: 12, 
       fat: 0,
       microNutrients: {
+        'Sugar (g)': 1.2,
         'Sodium (mg)': 260,
         'Potassium (mg)': 1880,
         'Fiber (g)': 8,
@@ -219,6 +220,7 @@ class IngredientsData {
       carbs: 25,
       fat: 0,
       microNutrients: {
+        'Sugar (g)': 0.0,
         'Calcium (Food) (mg)': 95,
         'Phosphorus (mg)': 81,
         'Magnesium (mg)': 28,
@@ -238,6 +240,7 @@ class IngredientsData {
       carbs: 27, 
       fat: 0.3,
       microNutrients: {
+        'Sugar (g)': 14.4,
         'Potassium (mg)': 422,
         'Magnesium (mg)': 32,
       
@@ -787,6 +790,7 @@ static const Ingredient marinaraSauce = Ingredient(
       carbs: 7.2, 
       fat: 0.36,
       microNutrients: {
+        'Sugar (g)': 5.0,
         'Sodium (mg)': 4.8, // #this is default assumed value
         'Vitamin C (mg)': 152, // #this is default assumed value
         'Fiber (g)': 2.5, // #this is default assumed value
@@ -830,6 +834,7 @@ static const Ingredient marinaraSauce = Ingredient(
       carbs: 7, 
       fat: 0.25,
       microNutrients: {
+        'Sugar (g)': 5.0,
         'Sodium (mg)': 5, // #this is default assumed value
         'Vitamin C (mg)': 150, // #this is default assumed value
         'Fiber (g)': 2.5, // #this is default assumed value
@@ -1086,6 +1091,7 @@ static const Ingredient marinaraSauce = Ingredient(
       carbs: 7.0,
       fat: 0.1,
       microNutrients: {
+        'Sugar (g)': 0.2,
         'Fiber (g)': 0.9,
         'Sodium (mg)': 6.0,
         'Potassium (mg)': 115.0,

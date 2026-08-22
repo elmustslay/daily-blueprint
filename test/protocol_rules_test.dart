@@ -327,5 +327,75 @@ void main() {
         }
       }
     });
+    test('Rule 12: Electrolyte Pacing (Safe Sodium and Potassium Integration)', () {
+      void checkElectrolytesForWeek(bool isRefeed) {
+        DailyPlanData.mockCurrentDate = isRefeed ? DailyPlanData.planStartDate.add(const Duration(days: 28)) : DateTime(2026, 8, 15);
+        for (final entry in DailyPlanData.schedules.entries) {
+          final schedule = entry.value;
+          for (int i = 0; i < schedule.length; i++) {
+            final item = schedule[i];
+            if (item.mealRecord == null) continue;
+
+            final timeA = parseTime(item.time);
+            DateTime fixedTimeA = timeA;
+            if (fixedTimeA.hour < 4) fixedTimeA = fixedTimeA.add(const Duration(days: 1));
+
+            double totalPotassium = 0;
+            double fastPotassium = 0;
+            double totalSodium = 0;
+
+            for (int j = i; j < schedule.length; j++) {
+              final otherItem = schedule[j];
+              if (otherItem.mealRecord == null) continue;
+
+              final timeB = parseTime(otherItem.time);
+              DateTime fixedTimeB = timeB;
+              if (fixedTimeB.hour < 4) fixedTimeB = fixedTimeB.add(const Duration(days: 1));
+              
+              if (fixedTimeB.difference(fixedTimeA).inMinutes >= 0 && fixedTimeB.difference(fixedTimeA).inMinutes <= 150) {
+                for (final portion in otherItem.mealRecord!.items) {
+                  final k = portion.totalNutrition.microNutrients['Potassium (mg)'] ?? 0.0;
+                  final na = portion.totalNutrition.microNutrients['Sodium (mg)'] ?? 0.0;
+                  totalPotassium += (k as num).toDouble();
+                  if (portion.ingredient.id == 'lite_salt') fastPotassium += (k as num).toDouble();
+                  totalSodium += (na as num).toDouble();
+                }
+                for (final recipePortion in otherItem.mealRecord!.recipeItems) {
+                  final k = recipePortion.totalNutrition.microNutrients['Potassium (mg)'] ?? 0.0;
+                  final na = recipePortion.totalNutrition.microNutrients['Sodium (mg)'] ?? 0.0;
+                  totalPotassium += (k as num).toDouble();
+                  totalSodium += (na as num).toDouble();
+                  
+                  // Extract fast potassium from Lite Salt hidden inside the recipe (e.g. Beef Recipe)
+                  for (final ingredientPortion in recipePortion.recipe.ingredients) {
+                    if (ingredientPortion.ingredient.id == 'lite_salt') {
+                      final liteSaltK = ingredientPortion.ingredient.nutritionPerBaseUnit.microNutrients['Potassium (mg)'] ?? 0.0;
+                      double amountInPortion = (ingredientPortion.amount / recipePortion.recipe.servings) * recipePortion.servings;
+                      fastPotassium += (liteSaltK as num).toDouble() * amountInPortion;
+                    }
+                  }
+                }
+              }
+            }
+
+            expect(fastPotassium, lessThanOrEqualTo(780.0), 
+              reason: 'Fast-digesting supplemental potassium (Lite Salt) within a 2.5-hour window exceeded the clinical 780mg safe threshold on ${entry.key} at ${item.time} (${isRefeed ? "Refeed" : "Normal"} Week)');
+            
+            expect(totalPotassium, lessThanOrEqualTo(4500.0), 
+              reason: 'Total potassium (fast + slow) within a 2.5-hour window exceeded 4500mg safe threshold on ${entry.key} at ${item.time} (${isRefeed ? "Refeed" : "Normal"} Week)');
+            
+            expect(totalSodium, lessThanOrEqualTo(3000.0), 
+              reason: 'Total sodium (food + supplement) within a 2.5-hour window exceeded 3000mg safe threshold on ${entry.key} at ${item.time} (${isRefeed ? "Refeed" : "Normal"} Week)');
+          }
+        }
+      }
+      
+      try {
+        checkElectrolytesForWeek(false);
+        checkElectrolytesForWeek(true);
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
+      }
+    });
   });
 }

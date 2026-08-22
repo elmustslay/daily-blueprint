@@ -112,10 +112,12 @@ void main() {
 
     // Generate detailed nutrition
     final Map<String, dynamic> detailedExport = {};
+    final Map<String, dynamic> macroDetailedExport = {};
     for (int i = 0; i < 7; i++) {
       final dayKey = days[i];
       final dayItems = DailyPlanData.schedules[dayKey] ?? [];
       final Map<String, dynamic> timePeriods = {};
+      final Map<String, dynamic> macroTimePeriods = {};
       
       for (var item in dayItems) {
         if (item.mealRecord != null) {
@@ -157,9 +159,21 @@ void main() {
               'nutrition': nutrition.toJson(),
             };
           }
+          if (nutrition.calories > 0 || nutrition.protein > 0 || nutrition.carbs > 0 || nutrition.fat > 0) {
+            macroTimePeriods[item.time] = {
+              'title': item.title,
+              'nutrition': {
+                'Calories': nutrition.calories,
+                'Protein': nutrition.protein,
+                'Carbs': nutrition.carbs,
+                'Fat': nutrition.fat,
+              },
+            };
+          }
         }
       }
       detailedExport[dayKey] = timePeriods;
+      macroDetailedExport[dayKey] = macroTimePeriods;
     }
     
     final detailedJsonString = const JsonEncoder.withIndent('    ').convert(detailedExport);
@@ -167,14 +181,19 @@ void main() {
     await detailedFile.writeAsString(detailedJsonString);
     print('Successfully exported detailed nutrition data to ${prefix}detailednutrition.json');
 
+    final macroDetailedJsonString = const JsonEncoder.withIndent('    ').convert(macroDetailedExport);
+    final macroDetailedFile = File('${prefix}macrodetailednutrition.json');
+    await macroDetailedFile.writeAsString(macroDetailedJsonString);
+    print('Successfully exported macro detailed nutrition data to ${prefix}macrodetailednutrition.json');
+
     if (isRefeed) return; // Skip CSV for refeed week to avoid complexity
 
     // Trigger python script to update CSV, or fallback to generating it in Dart
     bool csvUpdatedByPython = false;
     try {
-      ProcessResult result = await Process.run('python3', ['personal_py_simulation/json_to_csv.py']);
+      ProcessResult result = await Process.run('python3', ['personal_py_simulation/json_to_csv.py', prefix]);
       if (result.exitCode != 0) {
-        result = await Process.run('python', ['personal_py_simulation/json_to_csv.py']);
+        result = await Process.run('python', ['personal_py_simulation/json_to_csv.py', prefix]);
       }
       if (result.exitCode == 0) {
         print(result.stdout.toString().trim());
@@ -187,7 +206,7 @@ void main() {
     }
 
     if (!csvUpdatedByPython) {
-      print('Generating mynutrition.csv directly via Dart fallback...');
+      print('Generating ${prefix}nutrition.csv directly via Dart fallback...');
       try {
         final metrics = ['Calories', 'Protein', 'Carbs', 'Fat'];
         final Set<String> allMicros = {};
@@ -241,7 +260,7 @@ void main() {
   }
 
   test('Calculate and export nutrition to JSON files', () async {
-    await generateNutritionFiles('my');
+    await generateNutritionFiles('mycut');
     await generateNutritionFiles('myrefeed', isRefeed: true);
 
     // Reset mock date

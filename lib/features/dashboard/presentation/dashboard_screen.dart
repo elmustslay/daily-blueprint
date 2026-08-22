@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../daily_plan/presentation/daily_plan_screen.dart';
@@ -26,13 +27,35 @@ class DashboardScreen extends ConsumerWidget {
                 data: (data) {
                   if (data.errorMessage != null) {
                     return Text('Health Error: ${data.errorMessage}', style: const TextStyle(fontSize: 12, color: Colors.redAccent));
-                  } else if (data.isLissDay) {
-                    return Text('LISS Day: ${data.stepsRemainingWeekly} steps left this week', style: const TextStyle(fontSize: 12, color: Colors.grey));
-                  } else if (data.stepsRemainingWeekly > 0) {
-                    return Text('${data.stepsRemainingWeekly} steps left this week!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent));
-                  } else {
-                    return const Text('Weekly step goal reached!', style: const TextStyle(fontSize: 12, color: Colors.greenAccent));
                   }
+                  
+                  Widget textWidget;
+                  if (data.stepsRemainingWeekly > 0) {
+                    textWidget = Text('${data.stepsRemainingWeekly} steps left this week!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent, fontWeight: FontWeight.bold));
+                  } else {
+                    textWidget = const Text('Weekly step goal reached!', style: TextStyle(fontSize: 12, color: Colors.greenAccent, fontWeight: FontWeight.bold));
+                  }
+                  
+                  return GestureDetector(
+                    onTap: () {
+                      _showBalanceSheet(context, data);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          textWidget,
+                          const SizedBox(width: 6),
+                          const Icon(Icons.info_outline, size: 14, color: Colors.blueAccent),
+                        ],
+                      ),
+                    ),
+                  );
                 },
                 loading: () => const Text('Loading steps...', style: TextStyle(fontSize: 12, color: Colors.grey)),
                 error: (err, stack) => const Text('Error loading steps', style: TextStyle(fontSize: 12, color: Colors.redAccent)),
@@ -156,7 +179,86 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProgressBar(BuildContext context) {
+  
+  void _showBalanceSheet(BuildContext context, StepsData data) {
+    
+    String formatLog(WorkoutLog log) {
+      final dayStr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][log.date.weekday - 1];
+      final timeStr = "${log.date.hour > 12 ? log.date.hour - 12 : log.date.hour == 0 ? 12 : log.date.hour}:${log.date.minute.toString().padLeft(2, '0')}${log.date.hour >= 12 ? 'pm' : 'am'}";
+      return '${log.stepsEquivalent} on $dayStr';
+    }
+    
+    String formatLastRecorded(List<WorkoutLog> logs) {
+      if (logs.isEmpty) return 'None recorded yet';
+      final log = logs.first;
+      final dayStr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][log.date.weekday - 1];
+      final timeStr = "${log.date.hour > 12 ? log.date.hour - 12 : log.date.hour == 0 ? 12 : log.date.hour}:${log.date.minute.toString().padLeft(2, '0')}${log.date.hour >= 12 ? 'pm' : 'am'}";
+      return 'Last recorded $dayStr at $timeStr';
+    }
+
+    String danceHistory = data.danceWorkouts.isEmpty ? '' : data.danceWorkouts.map((l) => formatLog(l)).join(' + ');
+    String lissHistory = data.lissWorkouts.isEmpty ? '' : data.lissWorkouts.map((l) => formatLog(l)).join(' + ');
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).cardColor,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Aerobic Balance Sheet 📊', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+              const SizedBox(height: 16),
+              
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Weekly Goal:', style: TextStyle(color: Colors.white70)),
+                Text('${data.targetWeeklySteps}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+              ]),
+              const Divider(color: Colors.white24, height: 24),
+              
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Natural Steps:', style: TextStyle(color: Colors.white70)),
+                Text('${data.naturalSteps}', style: const TextStyle(color: Colors.greenAccent)),
+              ]),
+              const SizedBox(height: 16),
+              
+              const Text('Dance Equivalent:', style: TextStyle(color: Colors.white70)),
+              Text('${data.totalDanceSteps} steps', style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              if (data.danceWorkouts.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text('($danceHistory)\n${formatLastRecorded(data.danceWorkouts)}', style: const TextStyle(fontSize: 12, color: Colors.white38)),
+                ),
+              const SizedBox(height: 16),
+
+              const Text('LISS Equivalent:', style: TextStyle(color: Colors.white70)),
+              Text('${data.totalLissSteps} steps', style: const TextStyle(color: Colors.purpleAccent, fontWeight: FontWeight.bold)),
+              if (data.lissWorkouts.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text('($lissHistory)\n${formatLastRecorded(data.lissWorkouts)}', style: const TextStyle(fontSize: 12, color: Colors.white38)),
+                ),
+              const Divider(color: Colors.white24, height: 24),
+              
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Remaining:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                Text('${data.stepsRemainingWeekly}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+              ]),
+              
+              const SizedBox(height: 24),
+              const Text('Note: 1 Active Calorie = 20 Steps (Conservative multiplier to guarantee fat loss). Resistance training is purposefully excluded to protect muscle repair calculations (EPOC).', style: TextStyle(fontSize: 11, color: Colors.white38, fontStyle: FontStyle.italic)),
+              const SizedBox(height: 24),
+            ],
+          ),
+        );
+      }
+    );
+  }
+Widget _buildProgressBar(BuildContext context) {
     final startDate = DateTime(2026, 7, 27);
     final targetDate = DateTime(2026, 12, 17); // Target Dec 17th for maintenance
     final now = DateTime.now();

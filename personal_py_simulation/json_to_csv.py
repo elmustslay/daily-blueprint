@@ -2,10 +2,17 @@ import json
 import csv
 import os
 
+import sys
+
 # Get the project root directory (one level up)
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-input_file = os.path.join(project_root, "mynutrition.json")
-output_file = os.path.join(project_root, "mynutrition.csv")
+
+prefix = "mycut"
+if len(sys.argv) > 1:
+    prefix = sys.argv[1]
+
+input_file = os.path.join(project_root, f"{prefix}nutrition.json")
+output_file = os.path.join(project_root, f"{prefix}nutrition.csv")
 
 def convert():
     if not os.path.exists(input_file):
