@@ -6,7 +6,6 @@
 - Banana: 9 medium (Standard), 33 medium (Refeed)
 - Biotin+Keratin: 7 capsule
 - Black Pepper: 1 tsp
-- Calcium Citrate: 15 capsule
 - Carbe Diem Pasta: 18 oz
 - Casein: 7 scoop
 - Chipotle Chicken Bowl: 1 bowl (Standard), 0 bowl (Refeed)
@@ -36,7 +35,7 @@
 - Spinach: 1 bag
 - Trader Joe's Blueberries: 2 cup
 - Trader Joe's Kiwi (Skin-On): 5 kiwi
-- Vitamin E: 4 capsule
+- Vitamin E: 1 capsule
 - Vitamin K2 (MK-7): 12 capsule
 - Whey Isolate: 5 scoop
 - Wild Sockeye Salmon: 1 lb

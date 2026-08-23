@@ -53,7 +53,6 @@
                     "Vitamin K2 (mcg)": 200.0,
                     "Biotin (mg)": 10.0,
                     "Keratin (mg)": 500.0,
-                    "Vitamin E (Supplement) (mg)": 267.0,
                     "Zinc (Supplement) (mg)": 30.0,
                     "Fiber (g)": 13.97,
                     "Sugar (g)": 3.72,
@@ -66,7 +65,7 @@
                     "Absorbed Vitamin A (mcg)": 279.89,
                     "Absorbed Vitamin D3 (mcg)": 2.51,
                     "Absorbed Vitamin K (mcg)": 294.51,
-                    "Absorbed Vitamin E (mg)": 269.8
+                    "Absorbed Vitamin E (mg)": 2.8
                 }
             }
         },
@@ -78,7 +77,6 @@
                 "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
-                    "Calcium (Supplement) (mg)": 439.98,
                     "Saturated Fat (g)": 3.6,
                     "Sodium (mg)": 1229.82,
                     "Fiber (g)": 27.94,
@@ -114,7 +112,7 @@
                     "Iodine (mcg)": 66.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
-                    "Absorbed Iron (mg)": 0.16,
+                    "Absorbed Iron (mg)": 0.29,
                     "Absorbed Vitamin A (mcg)": 239.78,
                     "Absorbed Vitamin D3 (mcg)": 0.22,
                     "Absorbed Vitamin K (mcg)": 188.62,
@@ -630,7 +628,6 @@
                 "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
-                    "Calcium (Supplement) (mg)": 439.98,
                     "Saturated Fat (g)": 3.6,
                     "Sodium (mg)": 1229.82,
                     "Fiber (g)": 27.94,
@@ -666,7 +663,7 @@
                     "Iodine (mcg)": 66.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
-                    "Absorbed Iron (mg)": 0.16,
+                    "Absorbed Iron (mg)": 0.29,
                     "Absorbed Vitamin A (mcg)": 239.78,
                     "Absorbed Vitamin D3 (mcg)": 0.22,
                     "Absorbed Vitamin K (mcg)": 188.62,
@@ -906,7 +903,6 @@
                     "Vitamin K2 (mcg)": 200.0,
                     "Biotin (mg)": 10.0,
                     "Keratin (mg)": 500.0,
-                    "Vitamin E (Supplement) (mg)": 267.0,
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Iodine (mcg)": 53.33,
@@ -918,7 +914,7 @@
                     "Absorbed Vitamin A (mcg)": 313.22,
                     "Absorbed Vitamin D3 (mcg)": 13.18,
                     "Absorbed Vitamin K (mcg)": 294.59,
-                    "Absorbed Vitamin E (mg)": 271.04
+                    "Absorbed Vitamin E (mg)": 4.04
                 }
             }
         },
@@ -930,7 +926,6 @@
                 "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
-                    "Calcium (Supplement) (mg)": 439.98,
                     "Saturated Fat (g)": 3.6,
                     "Sodium (mg)": 1229.82,
                     "Fiber (g)": 27.94,
@@ -966,7 +961,7 @@
                     "Iodine (mcg)": 66.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
-                    "Absorbed Iron (mg)": 0.16,
+                    "Absorbed Iron (mg)": 0.29,
                     "Absorbed Vitamin A (mcg)": 239.78,
                     "Absorbed Vitamin D3 (mcg)": 0.22,
                     "Absorbed Vitamin K (mcg)": 188.62,
@@ -1482,7 +1477,6 @@
                 "Carbs": 55.5,
                 "Fat": 15.3,
                 "Micros": {
-                    "Calcium (Supplement) (mg)": 439.98,
                     "Saturated Fat (g)": 3.6,
                     "Sodium (mg)": 1229.82,
                     "Fiber (g)": 27.94,
@@ -1518,7 +1512,7 @@
                     "Iodine (mcg)": 66.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
-                    "Absorbed Iron (mg)": 0.16,
+                    "Absorbed Iron (mg)": 0.29,
                     "Absorbed Vitamin A (mcg)": 239.78,
                     "Absorbed Vitamin D3 (mcg)": 0.22,
                     "Absorbed Vitamin K (mcg)": 188.62,
@@ -1691,7 +1685,6 @@
                     "Vitamin K2 (mcg)": 200.0,
                     "Biotin (mg)": 10.0,
                     "Keratin (mg)": 500.0,
-                    "Vitamin E (Supplement) (mg)": 267.0,
                     "Iodine (mcg)": 60.0,
                     "Polyunsaturated Fat (g)": 0.08,
                     "Monounsaturated Fat (g)": 0.42,
@@ -1701,7 +1694,7 @@
                     "Absorbed Vitamin A (mcg)": 335.5,
                     "Absorbed Vitamin D3 (mcg)": 129.8,
                     "Absorbed Vitamin K (mcg)": 201.5,
-                    "Absorbed Vitamin E (mg)": 269.52
+                    "Absorbed Vitamin E (mg)": 2.52
                 }
             }
         },
@@ -1713,7 +1706,6 @@
                 "Carbs": 2.4,
                 "Fat": 5.5,
                 "Micros": {
-                    "Calcium (Supplement) (mg)": 439.98,
                     "Saturated Fat (g)": 2.13,
                     "Cholesterol (mg)": 60.0,
                     "Sodium (mg)": 645.5,
@@ -1747,7 +1739,7 @@
                     "Sugar (g)": 0.12,
                     "Fiber (g)": 0.47,
                     "Capsanthin & Capsorubin (mg)": 5.0,
-                    "Absorbed Iron (mg)": 0.27,
+                    "Absorbed Iron (mg)": 0.54,
                     "Absorbed Vitamin A (mcg)": 14.82,
                     "Absorbed Vitamin K (mcg)": 0.59,
                     "Absorbed Vitamin E (mg)": 0.5

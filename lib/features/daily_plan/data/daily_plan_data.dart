@@ -282,7 +282,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _grabThings(String time, {int calciumCaps = 0, Set<RoutineModifier> modifiers = const {RoutineModifier.takeSunscreen}}) {
+  static TimelineItem _grabThings(String time, {Set<RoutineModifier> modifiers = const {RoutineModifier.takeSunscreen}}) {
     final takeSunscreen = modifiers.contains(RoutineModifier.takeSunscreen);
     return TimelineItem(
       time: time,
@@ -295,7 +295,7 @@ class DailyPlanData {
         'apple watch',
         if (takeSunscreen) 'Haruharu Wonder Sunscreen',
         if (takeSunscreen) 'Oil-Absorbing Blotting Sheets',
-        if (calciumCaps > 0) 'Calcium Citrate (${calciumCaps}x capsules)',
+
 
         'Pasta lunch',
         'water bottle'
@@ -338,18 +338,18 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _pastaLunch(String time, {int calciumCaps = 0}) {
+  static TimelineItem _pastaLunch(String time) {
     return TimelineItem(
       time: time,
       title: 'Lunch',
       icon: '🍝',
       details: [
         '2/3 serving of my pasta',
-        if (calciumCaps > 0) 'Take $calciumCaps cap${calciumCaps > 1 ? "s" : ""} Calcium Citrate',
+
       ],
       mealRecord: MealRecord(
         items: [
-          if (calciumCaps > 0) IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: calciumCaps.toDouble()),
+
         ],
         recipeItems: [_Recipes.pastaTwoThirds],
       ),
@@ -601,9 +601,9 @@ class DailyPlanData {
     bool eatBeef = false,
     String morningAdditional = '',
     bool isOfficeDay = false,
-    int grabCalciumCaps = 0,
+
     List<String> amWorkDetails = const [],
-    int lunchCalciumCaps = 0,
+
     List<String> pmWorkDetails = const [],
     String? preGymStudyTime,
     Set<NutritionAddOn> preGymStudyNutrition = const {},
@@ -637,10 +637,10 @@ class DailyPlanData {
       _wakeup('8:00-8:10 am', nutrition: wakeupNutrition),
       _getReady('8:10-8:30 am', skincare: effectiveSkincare, clothes: clothes),
       _morningDine('8:30-8:50 am', eatPastaThird: true, eggs: eggs, supplements: morningSupplements, banana: morningBanana, eatSalmon: eatSalmon, eatBeef: eatBeef, additional: morningAdditional),
-      if (isOfficeDay) _grabThings('8:50-8:55 am', calciumCaps: grabCalciumCaps),
+      if (isOfficeDay) _grabThings('8:50-8:55 am'),
       if (isOfficeDay) _commuteToWork('8:55-9:00 am'),
       _work(isOfficeDay ? '9:00-1:00 pm' : '8:50-1:00 pm', details: amWorkDetails, modifiers: isOfficeDay ? {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, nutrition: {}),
-      _pastaLunch('1:00-1:30 pm', calciumCaps: lunchCalciumCaps),
+      _pastaLunch('1:00-1:30 pm'),
       _work('1:30-5:00 pm', details: pmWorkDetails, modifiers: isOfficeDay ? {RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, nutrition: {}, afternoonSunscreen: effectiveSunscreen),
       if (isOfficeDay) TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
       _study(effectiveStudyTime, details: ['Study (Beat traffic before gym)'], nutrition: preGymStudyNutrition),
@@ -662,9 +662,9 @@ class DailyPlanData {
 
   static List<TimelineItem> _buildMonday() => _buildStandardWeekday(
     clothes: 'Get dressed',
-    morningSupplements: {MorningSupplement.zinc, MorningSupplement.vitaminE},
+    morningSupplements: {MorningSupplement.zinc},
     amWorkDetails: [_Routines.laundryFaceTowels, 'Run Dishwasher'],
-    lunchCalciumCaps: 3,
+
     pmWorkDetails: [_Routines.laundryBathTowels],
     gymTitle: 'Legs (Hamstrings / Glutes)',
     dinner: _salmonDinner('8:50-9:20 pm', modifiers: {RoutineModifier.cookSalmon}),
@@ -696,8 +696,8 @@ class DailyPlanData {
     eatSalmon: true,
     morningAdditional: 'Take ground beef out of freezer to thaw in fridge',
     isOfficeDay: true,
-    grabCalciumCaps: 3,
-    lunchCalciumCaps: 3,
+
+
     preGymStudyTime: '5:10-6:05 pm',
     preGymStudyNutrition: {NutritionAddOn.creatine},
     commuteToGymTime: '6:05-6:15 pm',
@@ -720,10 +720,10 @@ class DailyPlanData {
 
   static List<TimelineItem> _buildThursday() => _buildStandardWeekday(
     clothes: 'Get dressed',
-    morningSupplements: {MorningSupplement.vitaminE},
+    morningSupplements: {},
     eatSalmon: true,
     amWorkDetails: [_Routines.laundryRegular, 'Run Dishwasher'],
-    lunchCalciumCaps: 3,
+
     pmWorkDetails: ['Cook 1lb ground beef (divide in 4, 4 fridge) while working'],
     commuteToGymTime: '5:55-6:20 pm',
     commuteToGymModifiers: {RoutineModifier.takeGymGloves},
@@ -762,7 +762,7 @@ class DailyPlanData {
     ..._buildStudyCycle('9:05-10:35 am', '10:35-10:55 am'),
     ..._buildStudyCycle('10:55-12:20 pm', '12:20-12:35 pm', studyNutrition: {}),
     _study('12:35-1:50 pm'),
-    _pastaLunch('1:50-2:20 pm', calciumCaps: 3),
+    _pastaLunch('1:50-2:20 pm'),
     ..._buildStudyCycle('2:20-5:10 pm', '5:10-5:30 pm', studyNutrition: {}, restMessage: 'NO PHONE. Relax or nap on bed/chair. Let mind wander completely.'),
     _study('5:30-6:20 pm'),
     _commuteToGym('6:20-6:25 pm', reapplySunscreen: _Routines.reapplyHur, nutrition: {}),
@@ -779,7 +779,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildSunday() => [
     _wakeup('8:00-8:10 am'),
     _getReady('8:10-8:30 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for shopping (NK 9060)'),
-    _morningDine('8:30-9:35 am', eggs: 4, eatBeef: true, supplements: {MorningSupplement.d3K2, MorningSupplement.vitaminE}, banana: true),
+    _morningDine('8:30-9:35 am', eggs: 4, eatBeef: true, supplements: {MorningSupplement.d3K2}, banana: true),
     ..._buildStudyCycle('9:50-11:20 am', '11:20-11:50 am', studyDetails: ['20mg adderall IR at 9:50am'], studyNutrition: {}, restMessage: 'NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.'),
     _study('11:50-1:20 pm'),
     TimelineItem(
@@ -788,12 +788,12 @@ class DailyPlanData {
       icon: '🍛', 
       details: [
         'Eat the remaining full portion of Ground Beef from fridge', 
-        'Take 3 Calcium Citrate capsules (438mg) with meal', 
+
         if (isRefeedWeek()) '🍌 2 Medium Bananas (Pre-Workout Boost)'
       ], 
       mealRecord: MealRecord(
         items: [
-          _Portions.calciumCitrate, 
+
           if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.banana, amount: 2)
         ], 
         recipeItems: [_Recipes.beef]

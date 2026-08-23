@@ -354,6 +354,10 @@ void main() {
           'dayName': dayKey,
           'weekNumber': DailyPlanData.currentWeekNumber,
           'isRefeed': isRefeed,
+          'isRefeedWeek': isRefeed,
+          'isWinter': DailyPlanData.isWinter(),
+          'isAshwagandhaOff': DailyPlanData.isAshwagandhaOff(),
+          'isNextWeekRefeedWeek': DailyPlanData.isNextWeekRefeedWeek(),
           'cal': dayTotal.calories,
           'prot': dayTotal.protein,
           'carb': dayTotal.carbs,
@@ -366,6 +370,7 @@ void main() {
       }
       
       StringBuffer textDump = StringBuffer();
+      Set<String> uniqueDays = {};
       for (int d = 0; d < totalDays; d++) {
         final date = startDate.add(Duration(days: d));
         DailyPlanData.mockCurrentDate = date;
@@ -373,14 +378,21 @@ void main() {
         final isRefeed = DailyPlanData.isRefeedWeek();
         final schedule = DailyPlanData.schedules[dayKey] ?? [];
 
-        textDump.writeln('=== Day $d: ${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ($dayKey) [Refeed: $isRefeed] ===');
+        StringBuffer dayContent = StringBuffer();
         for (var item in schedule) {
-          textDump.writeln('[${item.time}] ${item.title}');
+          dayContent.writeln('[${item.time}] ${item.title}');
           for (var detail in item.details) {
-            textDump.writeln('  - $detail');
+            dayContent.writeln('  - $detail');
           }
         }
-        textDump.writeln('');
+
+        String contentString = dayContent.toString();
+        if (!uniqueDays.contains(contentString)) {
+          uniqueDays.add(contentString);
+          textDump.writeln('=== Day $d: ${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ($dayKey) [Refeed: $isRefeed] ===');
+          textDump.write(contentString);
+          textDump.writeln('');
+        }
       }
       final textFile = File('outputs/simulation_ui_text.txt');
       await textFile.writeAsString(textDump.toString());

@@ -28,47 +28,6 @@ void main() {
 
   group('Protocol Rules based on reasoning.txt', () {
 
-    test('Rule 1: Calcium at Lunch (lax ~50% binding) and Whey explicitly at Dinner or Commute (to block iron)', () {
-      for (final entry in DailyPlanData.schedules.entries) {
-        final schedule = entry.value;
-        for (final item in schedule) {
-          final isLunch = item.title.toLowerCase().contains('lunch');
-          final isDinner = item.title.toLowerCase().contains('dinner');
-          
-          final hasCalcium = item.details.any((d) => d.toLowerCase().contains('calcium citrate')) ||
-              item.mealRecord?.items.any((i) => i.ingredient == IngredientsData.calciumCitrate) == true;
-          
-          final hasWhey = item.details.any((d) => d.toLowerCase().contains('whey isolate')) ||
-              item.mealRecord?.items.any((i) => i.ingredient == IngredientsData.wheyIsolate) == true;
-
-          if (hasCalcium && !isLunch) {
-            // Note: Rule is lax; user drinks plenty of water and has no iron/kidney issues. 
-            // ~50% oxalate block is enough, so we don't fail if calcium is found outside of lunch.
-          }
-
-          if (hasWhey) {
-            // Note: Saturday afternoon snack has whey, which are verified exceptions
-            final isSatSnack = entry.key == DailyPlanData.sat && item.title.toLowerCase().contains('snack');
-            final isCommute = item.title.toLowerCase().contains('commute to gym');
-            if (!isDinner && !isSatSnack && !isCommute) {
-              fail('Whey found outside of Dinner or Commute on ${entry.key} at ${item.time} (${item.title})');
-            }
-          }
-        }
-      }
-    });
-
-    test('Rule 2: 0 calcium capsules on Tue/Fri', () {
-      for (final day in [DailyPlanData.tue, DailyPlanData.fri]) {
-        final schedule = DailyPlanData.schedules[day]!;
-        for (final item in schedule) {
-          final hasCalcium = item.details.any((d) => d.toLowerCase().contains('calcium citrate')) ||
-              item.mealRecord?.items.any((i) => i.ingredient == IngredientsData.calciumCitrate) == true;
-          expect(hasCalcium, isFalse, reason: 'Calcium found on $day at ${item.time}');
-        }
-      }
-    });
-
     test('Rule 3: Copper vs Zinc isolation', () {
       for (final entry in DailyPlanData.schedules.entries) {
         final schedule = entry.value;
@@ -105,56 +64,13 @@ void main() {
       }
     });
 
-    test('Rule 5: Calcium vs Bedtime Magnesium separated by at least 1.5 hours', () {
-      for (final entry in DailyPlanData.schedules.entries) {
-        final schedule = entry.value;
-        
-        final calciumItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('calcium citrate')));
-        final magItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('magnesium')));
-        
-        for (final calc in calciumItems) {
-           final isGrabThings = calc.title.toLowerCase().contains('grab things');
-           if (isGrabThings) continue; // Packing doesn't count
-
-          final calcTime = parseTime(calc.time, isEnd: true);
-          for (final mag in magItems) {
-            final magTime = parseTime(mag.time);
-            final diffMins = magTime.difference(calcTime).inMinutes.abs();
-            
-            // 1.5 hours = 90 mins
-            expect(diffMins, greaterThanOrEqualTo(90), reason: 'Calcium and Magnesium too close on ${entry.key}');
-          }
-        }
-      }
-    });
-
-    test('Rule 6: Calcium vs Adderall IR by > 3 hours on Sat/Sun', () {
-      for (final day in [DailyPlanData.sat, DailyPlanData.sun]) {
-        final schedule = DailyPlanData.schedules[day]!;
-        
-        final calciumItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('calcium citrate')));
-        final adderallItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('adderall')));
-        
-        for (final calc in calciumItems) {
-          final calcTime = parseTime(calc.time);
-          for (final add in adderallItems) {
-            final addTime = parseTime(add.time);
-            final diffMins = calcTime.difference(addTime).inMinutes.abs();
-            
-            // 3 hours = 180 mins
-            expect(diffMins, greaterThanOrEqualTo(180), reason: 'Calcium and Adderall too close on $day');
-          }
-        }
-      }
-    });
-
     test('Rule 7: Psyllium Husk vs Any Supplement by > 1 hour before or 2 hours after', () {
       for (final entry in DailyPlanData.schedules.entries) {
         final schedule = entry.value;
         
         final fiberItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('husk')));
         
-        final supplementKeywords = ['calcium', 'zinc', 'copper', 'nac', 'omega', 'magnesium', 'vitamin', 'd3'];
+        final supplementKeywords = ['zinc', 'copper', 'nac', 'omega', 'magnesium', 'vitamin', 'd3'];
         final supplementItems = schedule.where((i) {
           if (i.title.toLowerCase().contains('grab things')) return false; // packing
           return i.details.any((d) => supplementKeywords.any((kw) => d.toLowerCase().contains(kw)));

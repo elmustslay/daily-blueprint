@@ -37,21 +37,7 @@ void main() {
     expect(bathTowelsDetail, contains('Bleach'));
   });
 
-  test('Wednesday grab list contains Calcium Citrate capsules', () {
-    final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
-    final grabItem = wedSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    
-    final grabDetails = grabItem.details.join(' ');
-    expect(grabDetails, contains('Calcium Citrate'));
-  });
 
-  test('Tuesday grab list does not contain Calcium Citrate capsules', () {
-    final tueSchedule = DailyPlanData.schedules[DailyPlanData.tue]!;
-    final grabItem = tueSchedule.firstWhere((item) => item.title.contains('Grab things'));
-    
-    final grabDetails = grabItem.details.join(' ');
-    expect(grabDetails, isNot(contains('Calcium Citrate')));
-  });
 
   test('Dextrin counts and presence in grab lists are correct', () {
     expect(
@@ -112,7 +98,7 @@ void main() {
           int requiredBananas = 0;
           bool needsZinc = false;
           bool needsCopper = false;
-          int requiredCalcium = 0;
+
           
           for (int i = commuteToWorkIdx + 1; i < workEnd; i++) {
             final item = schedule[i];
@@ -123,7 +109,7 @@ void main() {
                 if (portion.ingredient.id == 'banana') requiredBananas += portion.amount.toInt();
                 if (portion.ingredient.id == 'zinc') needsZinc = true;
                 if (portion.ingredient.id == 'copper_glycinate') needsCopper = true;
-                if (portion.ingredient.id == 'calcium_citrate') requiredCalcium += portion.amount.toInt();
+
               }
             }
           }
@@ -134,7 +120,7 @@ void main() {
           if (requiredBananas > 0) expect(grabDetails, contains('Banana'), reason: '$day (refeed=$isRefeed) missing Banana in grab list');
           if (needsZinc) expect(grabDetails, contains('Zinc Picolinate'), reason: '$day (refeed=$isRefeed) missing Zinc in grab list');
           if (needsCopper) expect(grabDetails, contains('Copper Glycinate'), reason: '$day (refeed=$isRefeed) missing Copper in grab list');
-          if (requiredCalcium > 0) expect(grabDetails, contains('Calcium Citrate'), reason: '$day (refeed=$isRefeed) missing Calcium in grab list');
+
         }
       } finally {
         DailyPlanData.mockCurrentDate = null;
