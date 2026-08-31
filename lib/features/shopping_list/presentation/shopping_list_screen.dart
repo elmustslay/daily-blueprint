@@ -24,15 +24,14 @@ class ShoppingItem {
 
 class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
   @override
-  List<ShoppingItem> build() {
-    final isNextWeekRefeed = DailyPlanData.isNextWeekRefeedWeek();
-    final initialItems = [
+  static List<ShoppingItem> getInitialItems(bool isNextWeekRefeed) {
+    return [
       // Produce
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
       ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
       ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (1 US Dry Pint)'),
-      ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '1 24oz bag - eat 1/7th of bag (~10 carrots) /day'),
+      ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '24oz bag (for 7 servings)'),
       ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '33 Bananas (REFEED WEEK)' : '9 Bananas (4 PW + 5 Morning)'),
       
       // Poultry & Meat
@@ -45,11 +44,11 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Others
 
       ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1.5 boxes (need 18oz)'),
-      if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK)'),
+      if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK: need 3 cups dry)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 JARS (48 oz)'),
 
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 4tbsp)'),
-      ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle'),
+      ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle (need 4.75 tsp)'),
       
       // Spices
       ShoppingItem(id: 'spc-1', name: 'Smoked Paprika', subtext: 'need 3tsp'),
@@ -83,7 +82,12 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-20', name: '100% Cotton Percale Pillowcases', subtext: 'Highly breathable, prevents closed comedones'),
       ShoppingItem(id: 'amz-21', name: 'Cluster Dextrin (Unflavored)', subtext: 'Intra-workout & Refeed supplement'),
     ];
+  }
 
+  @override
+  List<ShoppingItem> build() {
+    final isNextWeekRefeed = DailyPlanData.isNextWeekRefeedWeek();
+    final initialItems = getInitialItems(isNextWeekRefeed);
     final prefs = SharedPrefsLogic.instance;
     return initialItems.map((item) {
       final isChecked = prefs.getBool('shop_${item.id}') ?? false;

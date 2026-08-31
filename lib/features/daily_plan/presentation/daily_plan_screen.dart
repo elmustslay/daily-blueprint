@@ -616,7 +616,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                   String keyStr = '${dayKey}_$idx';
                   _itemKeys[keyStr] ??= GlobalKey();
                   
-                  return _buildTimelineItem(item, _itemKeys[keyStr]!);
+                  return _buildTimelineItem(item, _itemKeys[keyStr]!, dayKey);
                 }),
                 const SizedBox(height: 32),
               ],
@@ -976,7 +976,37 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
-  Widget _buildTimelineItem(TimelineItem item, GlobalKey key) {
+  Widget _buildTimelineItem(TimelineItem item, GlobalKey key, String dayKey) {
+    Widget _buildHighlightedText(String text, TextStyle baseStyle) {
+      final bool isSunday = dayKey == 'sun';
+      final words = <String>[];
+      if (isSunday && DailyPlanData.isBloodTestPrepWeek()) {
+        words.addAll(['Ashwagandha', 'Ashwaganda', 'Creatine', 'Biotin', 'Magnesium', 'Morning Dine']);
+      }
+      
+      if (words.isEmpty) {
+        return Text(text, style: baseStyle);
+      }
+      
+      final RegExp highlightRegex = RegExp('(${words.join('|')})', caseSensitive: false);
+      final spans = <InlineSpan>[];
+      text.splitMapJoin(
+        highlightRegex,
+        onMatch: (m) {
+          spans.add(TextSpan(
+            text: m.group(0),
+            style: baseStyle.copyWith(color: Colors.redAccent, fontWeight: FontWeight.bold),
+          ));
+          return '';
+        },
+        onNonMatch: (m) {
+          spans.add(TextSpan(text: m));
+          return '';
+        },
+      );
+      return Text.rich(TextSpan(style: baseStyle, children: spans));
+    }
+
     return Padding(
       key: key,
       padding: const EdgeInsets.only(top: 16, bottom: 8),
@@ -1014,9 +1044,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                       child: Row(
                         children: [
                           Flexible(
-                            child: Text(
+                            child: _buildHighlightedText(
                               item.title,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                              const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                             ),
                           ),
                           if (item.isCardio && DailyPlanData.shouldScaleUpCardio()) ...[
@@ -1071,14 +1101,14 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('• ', style: TextStyle(color: Colors.grey, fontSize: (item.title == 'Get Ready' || item.title == 'Shower & Bed Prep') ? 18 : null)),
+                            Text('• ', style: TextStyle(color: Colors.grey, fontSize: (item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement')) ? 18 : null)),
                             Expanded(
-                              child: Text(
-                                detail, 
-                                style: TextStyle(
-                                  color: Colors.white70, 
-                                  fontSize: (item.title == 'Get Ready' || item.title == 'Shower & Bed Prep') ? 18 : null,
-                                  height: (item.title == 'Get Ready' || item.title == 'Shower & Bed Prep') ? 1.4 : null,
+                              child: _buildHighlightedText(
+                                detail,
+                                TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: (item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement')) ? 18 : null,
+                                  height: (item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement')) ? 1.4 : null,
                                 ),
                               ),
                             ),
@@ -1308,28 +1338,29 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
             Text('Blood Draw Protocol (Aug 31)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ],
         ),
-        content: const SingleChildScrollView(
-          child: Text(
-            '🩸 BLOOD DRAW PREP PROTOCOL (Quest @ 8:30 AM)\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'WEDNESDAY (AUG 26) – SUNDAY (AUG 30):\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Skip Biotin starting Wednesday morning (gives 5 full days / >72h washout to protect Thyroid, Testosterone & Estradiol immunoassay accuracy).\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'SUNDAY (AUG 30):\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Fasting Cutoff: Finish all food/protein intake by 7:30 PM (after that, WATER ONLY).\n'
-            '• Finasteride: Take earlier during the day.\n'
-            '• Magnesium: Skip Sunday night magnesium to keep baseline electrolytes clean.\n'
-            '• Sleep: Get a full 7.5–8 hrs of sleep (do not stay up late).\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'MONDAY MORNING (AUG 31 - TEST DAY):\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• 7:45 AM: Wake up & drink 21 oz plain water (NO salt, electrolytes, or lemon).\n'
-            '• Hold Supplements & Coffee: NO morning vitamins, NAC, Citicoline, or caffeine before draw.\n'
-            '• 8:05 AM: Drive over for your 8:30 AM appointment at Quest.\n'
-            '• Post-Draw: Eat breakfast, take all morning vitamins/supplements, and enjoy your coffee!',
-            style: TextStyle(height: 1.5, fontSize: 14),
+        content: SingleChildScrollView(
+          child: Text.rich(
+            TextSpan(
+              style: const TextStyle(height: 1.5, fontSize: 14),
+              children: _parseRedText(
+                '🩸 BLOOD DRAW PREP PROTOCOL (Quest @ 8:30 AM)\n\n'
+                '━━━━━━━━━━━━━━━━━━━━\n'
+                'SUNDAY (AUG 30):\n'
+                '━━━━━━━━━━━━━━━━━━━━\n'
+                '• Fasting Cutoff: Finish all food/protein intake by 7:30 PM (after that, WATER ONLY).\n'
+                '• Finasteride: Take earlier during the day.\n'
+                '• <red>Magnesium</red>: Skip Sunday night magnesium to keep baseline electrolytes clean.\n'
+                '• Sleep: Get a full 7.5–8 hrs of sleep (do not stay up late).\n'
+                '• <red>Morning Dine</red>: Remember to prep your post-draw meal in advance so you can eat right after the blood draw.\n\n'
+                '━━━━━━━━━━━━━━━━━━━━\n'
+                'MONDAY MORNING (AUG 31 - TEST DAY):\n'
+                '━━━━━━━━━━━━━━━━━━━━\n'
+                '• 7:45 AM: Wake up & drink 21 oz plain water (NO salt, electrolytes, or lemon).\n'
+                '• Hold Supplements & Coffee: NO morning vitamins, NAC, Citicoline, or caffeine before draw.\n'
+                '• 8:05 AM: Drive over for your 8:30 AM appointment at Quest.\n'
+                '• Post-Draw: Eat breakfast, take all morning vitamins/supplements, and enjoy your coffee!'
+              ),
+            ),
           ),
         ),
         actions: [
@@ -1340,6 +1371,25 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         ],
       ),
     );
+  }
+
+  List<InlineSpan> _parseRedText(String text) {
+    final spans = <InlineSpan>[];
+    text.splitMapJoin(
+      RegExp(r'<red>(.*?)</red>', caseSensitive: false),
+      onMatch: (m) {
+        spans.add(TextSpan(
+          text: m.group(1),
+          style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+        ));
+        return '';
+      },
+      onNonMatch: (m) {
+        spans.add(TextSpan(text: m));
+        return '';
+      },
+    );
+    return spans;
   }
 }
 

@@ -35,7 +35,8 @@ void main() {
       // Mock date to Week 5 (Refeed Week)
       DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28)); // 4 weeks * 7 days
     } else {
-      DailyPlanData.mockCurrentDate = null;
+      // Mock date to Week 1 (Standard Cut Week) to prevent real-world dates from shifting the cut export into a refeed week
+      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 0));
     }
 
     NutritionFact weeklyTotals = const NutritionFact();

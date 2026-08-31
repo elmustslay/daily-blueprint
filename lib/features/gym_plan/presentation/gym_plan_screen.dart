@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
@@ -6,6 +7,10 @@ import '../../daily_plan/data/daily_plan_data.dart';
 import 'gym_stats_screen.dart';
 import 'gym_logs_editor_screen.dart';
 import '../../../core/storage/shared_prefs.dart';
+
+
+
+
 
 
 // Provides max and prev weight tuple
@@ -30,6 +35,22 @@ final todayLogCountProvider = FutureProvider.family<int, String>((ref, exerciseI
     }
   }
   return count;
+});
+
+final todayLastLogTimeProvider = FutureProvider.family<DateTime?, String>((ref, exerciseId) async {
+  final repo = ref.watch(gymRepoProvider);
+  final logs = await repo.getLogs(exerciseId);
+  final today = DateTime.now().toIso8601String().split('T')[0];
+  
+  DateTime? lastTime;
+  for (var log in logs) {
+    if (log.date.toIso8601String().split('T')[0] == today) {
+      if (lastTime == null || log.date.isAfter(lastTime)) {
+        lastTime = log.date;
+      }
+    }
+  }
+  return lastTime;
 });
 
 final primedMuscleGroupsProvider = FutureProvider<Set<String>>((ref) async {
@@ -116,6 +137,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
               ).then((_) {
                 ref.invalidate(pastWeightsProvider);
                 ref.invalidate(todayLogCountProvider);
+                ref.invalidate(todayLastLogTimeProvider);
                 ref.invalidate(primedMuscleGroupsProvider);
               });
             },
@@ -166,6 +188,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
 
   Widget _buildLongPressTab(String label, int index, String title, String advice) {
     return GestureDetector(
+      onTap: () => _tabController.animateTo(index),
       onLongPress: () => _showDayAdvice(context, title, advice),
       behavior: HitTestBehavior.opaque,
       child: Tab(text: label),
@@ -188,14 +211,29 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
 
     final indexedExercises = exercises.asMap().entries.toList();
     final categories = <int, int>{};
+    final lastLogTimes = <int, DateTime?>{};
     for (var entry in indexedExercises) {
       categories[entry.key] = getCategory(entry.value);
+      lastLogTimes[entry.key] = ref.watch(todayLastLogTimeProvider(entry.value.id)).value;
     }
 
     indexedExercises.sort((a, b) {
       final catA = categories[a.key]!;
       final catB = categories[b.key]!;
       if (catA != catB) return catA.compareTo(catB);
+      
+      // If both are in the same category, push the most recently used to the bottom
+      final timeA = lastLogTimes[a.key];
+      final timeB = lastLogTimes[b.key];
+      
+      if (timeA != null && timeB != null) {
+        return timeA.compareTo(timeB);
+      } else if (timeA != null) {
+        return 1;
+      } else if (timeB != null) {
+        return -1;
+      }
+      
       return a.key.compareTo(b.key);
     });
 
@@ -410,34 +448,135 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
   }
 }
 
-class ExerciseCard extends ConsumerWidget {
+class ExerciseCard extends ConsumerStatefulWidget {
   final Exercise exercise;
 
   const ExerciseCard({super.key, required this.exercise});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ExerciseCard> createState() => _ExerciseCardState();
+}
+
+class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBindingObserver {
+  static const _restKeyPrefix = 'rest_end_';
+  Timer? _timer;
+  int _restRemaining = 0;
+  DateTime? _endTime;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _checkPersistedTimer();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _checkPersistedTimer();
+    }
+  }
+
+  void _checkPersistedTimer() {
+    final endTimeStr = SharedPrefsLogic.instance.getString('$_restKeyPrefix${widget.exercise.id}');
+    if (endTimeStr != null) {
+      final endTime = DateTime.tryParse(endTimeStr);
+      if (endTime != null) {
+        final remaining = endTime.difference(DateTime.now()).inSeconds;
+        if (remaining > 0) {
+          _startTimerWithEndTime(endTime);
+        } else {
+          _cancelTimer();
+        }
+      }
+    }
+  }
+
+  void _startTimer(int seconds) {
+    final endTime = DateTime.now().add(Duration(seconds: seconds));
+    SharedPrefsLogic.instance.setString('$_restKeyPrefix${widget.exercise.id}', endTime.toIso8601String());
+    _startTimerWithEndTime(endTime);
+  }
+
+  void _startTimerWithEndTime(DateTime endTime) {
+    _timer?.cancel();
+    _endTime = endTime;
+    
+    _syncTimer();
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) => _syncTimer());
+  }
+
+  void _syncTimer() {
+    if (!mounted || _endTime == null) return;
+    
+    final remaining = _endTime!.difference(DateTime.now()).inSeconds;
+    if (remaining > 0) {
+      setState(() {
+        _restRemaining = remaining;
+      });
+    } else {
+      _cancelTimer();
+    }
+  }
+
+  void _cancelTimer() {
+    _timer?.cancel();
+    _endTime = null;
+    SharedPrefsLogic.instance.remove('$_restKeyPrefix${widget.exercise.id}');
+    if (mounted && _restRemaining > 0) {
+      setState(() {
+        _restRemaining = 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen<AsyncValue<int>>(todayLogCountProvider(widget.exercise.id), (previous, next) {
+      final prevCount = previous?.value ?? 0;
+      final nextCount = next.value ?? 0;
+      if (nextCount < prevCount) {
+        _cancelTimer();
+      }
+    });
+
     int numSets = 3;
-    final match = RegExp(r'(\d+)').allMatches(exercise.sets);
+    final match = RegExp(r'(\d+)').allMatches(widget.exercise.sets);
     if (match.isNotEmpty) {
       numSets = int.parse(match.last.group(0)!);
     }
 
-    final todayLogCountAsync = ref.watch(todayLogCountProvider(exercise.id));
+    final todayLogCountAsync = ref.watch(todayLogCountProvider(widget.exercise.id));
     final todayLogCount = todayLogCountAsync.value ?? 0;
     
     final isCompleted = todayLogCount >= numSets;
     final nextSetIndex = isCompleted ? numSets : (todayLogCount + 1);
 
-    final weightsAsync = ref.watch(pastWeightsProvider((exerciseId: exercise.id, setIndex: nextSetIndex)));
+    final weightsAsync = ref.watch(pastWeightsProvider((exerciseId: widget.exercise.id, setIndex: nextSetIndex)));
     
-    final baselineWeightsAsync = ref.watch(pastWeightsProvider((exerciseId: exercise.id, setIndex: 1)));
+    final baselineWeightsAsync = ref.watch(pastWeightsProvider((exerciseId: widget.exercise.id, setIndex: 1)));
     final baselinePrevW = baselineWeightsAsync.value?['prev'];
     final workingWeight = baselinePrevW ?? baselineWeightsAsync.value?['max'];
 
     final primedGroupsAsync = ref.watch(primedMuscleGroupsProvider);
     final primedGroups = primedGroupsAsync.value ?? <String>{};
-    final isPrimed = primedGroups.contains(exercise.primaryMuscleGroup);
+    final isPrimed = primedGroups.contains(widget.exercise.primaryMuscleGroup);
+
+    String restDisplay = widget.exercise.rest;
+    bool isResting = _restRemaining > 0;
+    
+    if (isResting) {
+      final mins = _restRemaining ~/ 60;
+      final secs = _restRemaining % 60;
+      restDisplay = '$mins:${secs.toString().padLeft(2, '0')}';
+    }
 
     return Opacity(
       opacity: isCompleted ? 0.6 : 1.0,
@@ -445,7 +584,7 @@ class ExerciseCard extends ConsumerWidget {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: InkWell(
-          onTap: exercise.tip != null ? () => _showTipDialog(context) : null,
+          onTap: widget.exercise.tip != null ? () => _showTipDialog(context) : null,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -456,7 +595,7 @@ class ExerciseCard extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    exercise.name,
+                    widget.exercise.name,
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -464,28 +603,28 @@ class ExerciseCard extends ConsumerWidget {
                   icon: const Icon(Icons.show_chart, color: Colors.blueAccent),
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => GymStatsScreen(exercise: exercise)),
+                      MaterialPageRoute(builder: (_) => GymStatsScreen(exercise: widget.exercise)),
                     );
                   },
                 )
               ],
             ),
-            if (exercise.note != null) ...[
+            if (widget.exercise.note != null) ...[
               const SizedBox(height: 4),
-              Text(exercise.note!, style: const TextStyle(color: Colors.orangeAccent, fontSize: 13)),
+              Text(widget.exercise.note!, style: const TextStyle(color: Colors.orangeAccent, fontSize: 13)),
             ],
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildStat('SETS', exercise.sets),
-                _buildStat('REPS', exercise.reps),
-                _buildStat('REST', exercise.rest),
+                _buildStat('SETS', widget.exercise.sets),
+                _buildStat('REPS', widget.exercise.reps),
+                _buildStat('REST', restDisplay, isRed: isResting),
               ],
             ),
             const Divider(height: 32),
-            if (todayLogCount == 0 && !isPrimed && exercise.primaryMuscleGroup != 'Mobility' && exercise.primaryMuscleGroup != 'Abs')
-              _buildWarmupSuggestion(exercise, workingWeight),
+            if (todayLogCount == 0 && !isPrimed && widget.exercise.primaryMuscleGroup != 'Mobility' && widget.exercise.primaryMuscleGroup != 'Abs')
+              _buildWarmupSuggestion(widget.exercise, workingWeight),
             weightsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('Error: $err'),
@@ -519,12 +658,12 @@ class ExerciseCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildStat(String label, String value) {
+  Widget _buildStat(String label, String value, {bool isRed = false}) {
     return Column(
       children: [
         Text(label, style: const TextStyle(color: Colors.blueAccent, fontSize: 12, fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
-        Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: isRed ? Colors.redAccent : null)),
       ],
     );
   }
@@ -613,7 +752,7 @@ class ExerciseCard extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Log ${exercise.name}'),
+        title: Text('Log ${widget.exercise.name}'),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -647,13 +786,24 @@ class ExerciseCard extends ConsumerWidget {
                 if (w != null) weights.add(w);
               }
               if (weights.isNotEmpty) {
-                await ref.read(gymRepoProvider).logWeights(exercise.id, weights, startIndex: loggedToday + 1);
+                await ref.read(gymRepoProvider).logWeights(widget.exercise.id, weights, startIndex: loggedToday + 1);
+                
+                int restSeconds = 0;
+                final match = RegExp(r'(\d+)').firstMatch(widget.exercise.rest);
+                if (match != null) {
+                  restSeconds = int.parse(match.group(0)!) * 60;
+                }
+                if (restSeconds > 0) {
+                  _startTimer(restSeconds);
+                }
+
                 ref.invalidate(pastWeightsProvider);
-                ref.invalidate(todayLogCountProvider(exercise.id));
+                ref.invalidate(todayLogCountProvider(widget.exercise.id));
+                ref.invalidate(todayLastLogTimeProvider(widget.exercise.id));
                 ref.invalidate(primedMuscleGroupsProvider);
                 // ignore: invalid_use_of_visible_for_testing_member
                 try {
-                  ref.invalidate(exerciseLogsProvider(exercise.id));
+                  ref.invalidate(exerciseLogsProvider(widget.exercise.id));
                 } catch (_) {}
                 if (ctx.mounted) Navigator.of(ctx).pop();
               }
@@ -666,10 +816,10 @@ class ExerciseCard extends ConsumerWidget {
   }
 
   void _showTipDialog(BuildContext context) {
-    if (exercise.tip == null) return;
+    if (widget.exercise.tip == null) return;
     showDialog(
       context: context,
-      builder: (ctx) => TipDialog(exercise: exercise),
+      builder: (ctx) => TipDialog(exercise: widget.exercise),
     );
   }
 }

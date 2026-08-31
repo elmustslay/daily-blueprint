@@ -84,7 +84,7 @@ def sync_from_dart():
 
 sync_from_dart()
 
-timeline_path = os.path.join(BASE_DIR, 'simulation_timeline.json')
+timeline_path = os.path.join(BASE_DIR, 'outputs', 'simulation_timeline.json')
 if not os.path.exists(timeline_path):
     raise FileNotFoundError("simulation_timeline.json was not found. Please ensure flutter test exports it.")
 

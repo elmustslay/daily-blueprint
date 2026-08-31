@@ -17,15 +17,16 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed
+  - Get dressed for the gym
 [8:30-8:50 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 1/3 serving of my pasta
-  - 2 Boiled Eggs
+  - 3 Boiled Eggs
   - 2 standalone K2 (100mcg each)
   - 1 cap Biotin+Keratin (10mg/500mg)
   - 1 cap Zinc Picolinate (30mg)
@@ -34,9 +35,10 @@
   - Laundry Cycle 1: Bamboo Washcloths & Cotton Pillowcases (3/5 warmness) -> 1-2 tbsp All Free Clear (Liquid). NO Fabric Softener (Dry on LOW heat)
   - Run Dishwasher
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
+{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
-  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Laundry Cycle 2: Bath Towels & Body Washcloths (5/5 warmness) -> Wash 1: 2 tbsp All Free Clear (Liquid) + 1/3 cup Bleach -> Wash 2: Full Cycle (WATER ONLY - no detergent) to lift bleach residue (Dry on LOW heat)
 [5:00-5:55 pm] Study Time
   - Study (Beat traffic before gym)
@@ -44,30 +46,34 @@
   - Get dressed for gym
   - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle{{isRefeedWeek ? "" : " (+ 0.5 tsp Lite Salt electrolytes)"}}. Drink 1/3 on commute, sip rest during workout
-[6:30-8:00 pm] Legs (Hamstrings / Glutes)
+[6:30-8:00 pm] Chest, Shoulders & Triceps
 [8:00-8:30 pm] Commute Home
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Cook Salmon (3 portions): start 1st portion (eat 1/2, save 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 {{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 1 Kiwi now (30m before bed prep to protect enamel) & Swish water
-[9:50-10:20 pm] Shower & Bed Prep
-  - 🛑 Grab a FRESH Bath Towel for the new rotation; use instead of bamboo!
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - 📱 Final check of phone/messages before Screen Curfew starts.
+[9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - 🛑 Grab a FRESH Bath Towel for the new rotation; skip the bamboo!
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with the FRESH Bath Towel (Do Skincare immediately while bathroom is humid, before drying your body)
-[10:20-10:50 pm] Night Supplement + Read/Reflect
+[10:20-10:50 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
 {{#if !isWinter}}  - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m{{/if}}
 {{#if isWinter}}  - Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m{{/if}}
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
@@ -75,8 +81,9 @@
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
   - Take 3 Magnesium Glycinate + 1 tablet Finasteride (1mg)
 [10:50-11:20 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Tuesday ===
 [Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
@@ -88,16 +95,17 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed (cloud x 4)
+  - Get dressed for work (cloud x 4)
 [8:30-8:50 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Salmon (from fridge)
-  - 1/3 serving of my pasta
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
   - 1 cap Biotin+Keratin (10mg/500mg)
@@ -118,11 +126,12 @@
   - Drink Sparkling Water
 {{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
+{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
 {{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
-  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
@@ -130,38 +139,43 @@
   - Get dressed for gym
   - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle{{isRefeedWeek ? "" : " (+ 0.5 tsp Lite Salt electrolytes)"}}. Drink 1/3 on commute, sip rest during workout
-[6:30-8:00 pm] Back, Biceps & Forearms
+[6:30-8:00 pm] Legs (Quads & Calves)
 [8:00-8:30 pm] Commute Home
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Take 1 cap Copper Glycinate (3mg)
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 {{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 1 Kiwi now (30m before bed prep to protect enamel) & Swish water
-[9:50-10:20 pm] Shower & Bed Prep
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - 📱 Final check of phone/messages before Screen Curfew starts.
+[9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
-[10:20-10:50 pm] Night Supplement + Read/Reflect
+[10:20-10:50 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
   - Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
   - Take 3 Magnesium Glycinate + 1 tablet Finasteride (1mg)
 [10:50-11:20 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Wednesday ===
 [Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
@@ -174,21 +188,22 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed (NK 9060/Bondi)
+  - Get dressed for work (NK 9060/Bondi)
 [8:30-8:50 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Salmon (from fridge)
-  - 1/3 serving of my pasta
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
   - 1 cap Biotin+Keratin (10mg/500mg)
   - Swish/drink water after eating/drinking to clear mouth
-  - Take ground beef out of freezer to thaw in fridge
+  - 🥩 Take ground beef out of freezer to thaw in fridge
 [8:50-8:55 am] Grab things to take to work
   - kindle/laptop
   - 2 key/wallet/phone
@@ -204,11 +219,12 @@
   - Drink Sparkling Water
 {{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
+{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
 {{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
-  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-6:05 pm] Study Time
   - 🥤 Pre-Workout Shake: 1 scoop creatine monohydrate (5g)
@@ -223,25 +239,29 @@
 [7:40-8:20 pm] Dinner
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 {{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [8:20-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
+{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:20 pm] Study Time
   - Halfway through (30m before bed prep): Eat 1 Kiwi & Swish water (protect enamel)
 [9:20-9:50 pm] Relax / Catch up on reading
-[9:50-10:20 pm] Shower & Bed Prep
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+[9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: CeraVe Gentle Shampoo (45s lather)
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
-[10:20-10:50 pm] Night Supplement + Read/Reflect
+[10:20-10:50 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
 {{#if !isWinter}}  - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m{{/if}}
 {{#if isWinter}}  - Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m{{/if}}
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
@@ -249,8 +269,9 @@
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
   - Take 2 Magnesium Glycinate + 1 tablet Finasteride (1mg)
 [10:50-11:20 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Thursday ===
 [Active variables: isRefeedWeek, isAshwagandhaOff]
@@ -262,15 +283,16 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed
+  - Get dressed for the gym
 [8:30-8:50 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - Finish leftover 0.5 portion of Salmon (from fridge)
-  - 1/3 serving of my pasta
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
   - 1 cap Biotin+Keratin (10mg/500mg)
@@ -279,9 +301,10 @@
   - Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)
   - Run Dishwasher
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
+{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
-  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Cook 1lb ground beef (divide in 4, 4 fridge) while working
 [5:00-5:55 pm] Study Time
   - Study (Beat traffic before gym)
@@ -290,38 +313,43 @@
   - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle{{isRefeedWeek ? "" : " (+ 0.5 tsp Lite Salt electrolytes)"}}. Drink 1/3 on commute, sip rest during workout
   - 🧤 Grab Gym Gloves
-[6:20-7:50 pm] Legs (Quads & Calves)
+[6:20-7:50 pm] Back, Biceps & Forearms
 [7:50-8:20 pm] Commute Home
 [8:30-9:00 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 {{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [9:00-9:30 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (30m before bed prep to protect enamel) & Swish water
-[9:30-10:00 pm] Shower & Bed Prep
-  - 🛑 Grab a FRESH Bath Towel for the new rotation; use instead of bamboo!
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - 📱 Final check of phone/messages before Screen Curfew starts.
+[9:30-10:00 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - 🛑 Grab a FRESH Bath Towel for the new rotation; skip the bamboo!
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with the FRESH Bath Towel (Do Skincare immediately while bathroom is humid, before drying your body)
-[10:00-10:50 pm] Night Supplement + Read/Reflect
+[10:00-10:50 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
   - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
   - Take 2 Magnesium Glycinate + 1 tablet Finasteride (1mg)
 [10:50-11:20 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Friday ===
 [Active variables: isRefeedWeek, isAshwagandhaOff]
@@ -333,16 +361,17 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed (cloud x 4)
+  - Get dressed for work (cloud x 4)
 [8:30-8:50 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
-  - 1/3 serving of my pasta
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
   - 1 cap Biotin+Keratin (10mg/500mg)
@@ -363,11 +392,12 @@
   - Drink Sparkling Water
 {{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
+{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
 {{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
-  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
@@ -375,37 +405,42 @@
   - Get dressed for gym
   - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle{{isRefeedWeek ? "" : " (+ 0.5 tsp Lite Salt electrolytes)"}}. Drink 1/3 on commute, sip rest during workout
-[6:30-8:00 pm] Chest, Shoulders & Triceps
+[6:30-8:00 pm] Legs (Hamstrings / Glutes)
 [8:00-8:30 pm] Commute Home
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 {{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - 🫐 Eat 1/2 of the box of Blueberries
-[9:50-10:20 pm] Shower & Bed Prep
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - 📱 Final check of phone/messages before Screen Curfew starts.
+[9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
-[10:20-10:50 pm] Night Supplement + Read/Reflect
+[10:20-10:50 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
   - Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
   - Take 3 Magnesium Glycinate + 1 tablet Finasteride (1mg)
 [10:50-11:20 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Saturday ===
 [Active variables: isRefeedWeek, isAshwagandhaOff]
@@ -417,16 +452,17 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Get dressed for gym (Hoka Bondi 8)
 [8:30-9:05 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
-  - 1/3 serving of my pasta
   - 4 Boiled Eggs
   - 3 softgel omega-3
   - 1 D3-K2
@@ -443,15 +479,16 @@
   - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
 [12:35-1:50 pm] Study Time
 [1:50-2:20 pm] Lunch
-  - 2/3 serving of my pasta
+{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
+{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [2:20-5:10 pm] Study Time
 [5:10-5:30 pm] Diffuse Brain Rest
-  - NO PHONE. Relax or nap on bed/chair. Let mind wander completely.
+  - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
 [5:30-6:20 pm] Study Time
 [6:20-6:25 pm] Get Dressed & Commute to Gym (LISS)
   - Get dressed for gym
 {{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout){{/if}}
-  - Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [6:25-7:35 pm] {{isRefeedWeek ? "Haircut / Rest (Refeed Week)" : "Cardio (LISS) / Haircut"}}
 {{#if isRefeedWeek}}  - Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.{{/if}}
 [7:35-7:45 pm] Commute Home
@@ -459,33 +496,37 @@
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 {{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [8:00-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - 🫐 Eat the rest of the box of Blueberries
+  - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:35 pm] Relax / Catch up on reading
-[9:35-10:20 pm] Shower & Bed Prep
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+[9:35-10:20 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: Nizoral 1% (5m lather)
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
-[10:20-10:35 pm] Night Supplement + Read/Reflect
+[10:20-10:35 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
   - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
-  - Take 2 Magnesium + 1 tablet Finasteride (1mg)
+  - Take 2 Magnesium Glycinate + 1 tablet Finasteride (1mg)
   - Take 600mg NAC + 25mcg Selenium (Combo Pill)
 [10:35-11:05 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Sunday ===
 [Active variables: isRefeedWeek, isWinter, isAshwagandhaOff, isNextWeekRefeedWeek]
@@ -497,16 +538,18 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Get Ready
   - Brush teeth
-  - Blotting Sheet (Place over oily areas and press against skin for 3s, lift and press - no rubbing ever) to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat -> Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck) -> WAIT 90s
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Get dressed for shopping (NK 9060)
 [8:30-9:35 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
-  - 4 Boiled Eggs
+  - 3 Boiled Eggs
   - 1 D3-K2
   - 1 standalone K2 (100mcg)
   - 1 cap Biotin+Keratin (10mg/500mg)
@@ -514,15 +557,15 @@
 [9:50-11:20 am] Study Time
   - 20mg adderall IR at 9:50am
 [11:20-11:50 am] Diffuse Brain Rest
-  - NO PHONE. Relax or nap on bed/chair to hit "save" on encoded information.
+  - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
 [11:50-1:20 pm] Study Time
 [1:20-1:50 pm] Lunch
-  - Eat the remaining full portion of Ground Beef from fridge
+  - Eat the last full Ground Beef from fridge
 {{#if isRefeedWeek}}  - 🍌 2 Medium Bananas (Pre-Workout Boost){{/if}}
 [1:50-4:00 pm] Grocery Shop & Pick up Chipotle
-  - Wash hands -> Blotting Sheet (Place over oily area and press against skin for 3s, lift and press - no rubbing ever) -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - check what I have before going
-  - Trader Joe's (all groceries are bought there)
+  - Take both your TJ's shopping bags
 {{#if isNextWeekRefeedWeek}}  - 🛒 UPCOMING REFEED WEEK: Buy 21 Bananas (3/day: morning, afternoon snack, dinner), and 1 bag of Quinoa (if out){{/if}}
   - Pick up Chipotle for dinner ({{isRefeedWeek ? "REFEED: Double white rice, DOUB" : "MINI-REFEED: Double white rice, SING"}}LE black beans, extra fajita veggies - NO SOUR CREAM)
 [4:00-4:30 pm] Dinner (Eat fresh Chipotle)
@@ -536,29 +579,33 @@
 {{#if isNextWeekRefeedWeek}}  - 🧑‍🍳 UPCOMING REFEED WEEK: Cook a batch of Quinoa for Mon-Sat dinners (divide into 3 containers){{/if}}
   - Put ground beef in freezer
   - Boil 18 eggs for the week (warm on counter 10m first)
-[7:30-8:15 pm] Rest / Weekly Reflection
+[7:30-8:15 pm] Relax / Catch up on reading
 [8:15-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-[8:50-9:50 pm] Shower & Bed Prep
-  - Set Dehumidifier to 55%
-  - Brush teeth (safe since 30m since kiwi)
+  - kiwi @ 8:15-8:20 if box u bought has 6
+  - 📱 Final check of phone/messages before Screen Curfew starts.
+[8:50-9:50 pm] Shower & Bed Prep (Wind Down Starts)
+  - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
+  - Brush teeth
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
-  - Finish: Lukewarm rinse
+  - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
-[9:50-10:05 pm] Night Supplement
+[9:50-10:05 pm] Night Supplement & Wind Down
+  - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
   - Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
-  - Take 2 Magnesium + 1 tablet Finasteride (1mg)
+  - Take 2 Magnesium Glycinate + 1 tablet Finasteride (1mg)
   - Take 600mg NAC + 25mcg Selenium (Combo Pill)
 [10:05-10:50 pm] Relax / Catch up on reading
 [10:50-11:20 pm] Fall Asleep
-  - Come up with todo list for tom
-  - Lights out, try to fall asleep within 30 min
+  - 📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren't thinking about it in bed.
+  - 🌡️ Ensure room temperature drops to ~65°F (18°C) to facilitate sleep onset.
+  - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 

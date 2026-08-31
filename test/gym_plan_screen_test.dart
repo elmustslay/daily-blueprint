@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/features/gym_plan/presentation/gym_plan_screen.dart';
 import 'package:my_app/features/gym_plan/data/gym_data.dart';
 import 'package:my_app/features/daily_plan/data/daily_plan_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_app/core/storage/shared_prefs.dart';
 
 class FakeGymRepository implements GymRepository {
   Map<String, int> logsTodayMap = {};
@@ -46,6 +48,11 @@ class FakeGymRepository implements GymRepository {
 }
 
 void main() {
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+    await SharedPrefsLogic.init();
+  });
+
   Widget buildTestableWidget(FakeGymRepository repo, Exercise exercise) {
     return ProviderScope(
       overrides: [
@@ -168,6 +175,9 @@ void main() {
     await tester.pumpAndSettle();
     
     final exerciseCards = tester.widgetList<ExerciseCard>(find.byType(ExerciseCard)).toList();
+    print('FOUND CARDS: ${exerciseCards.length}');
+    if (exerciseCards.isEmpty) debugDumpApp();
+    
     final titles = exerciseCards.map((card) => card.exercise.name).toList();
     
     // We expect the new sorted sequence based on Active -> Untouched -> Completed
