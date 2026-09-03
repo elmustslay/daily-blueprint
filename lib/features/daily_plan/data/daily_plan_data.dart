@@ -150,12 +150,6 @@ class DailyPlanData {
     return false;
   }
   
-  static bool isBloodTestPrepWeek() {
-    final now = mockCurrentDate ?? DateTime.now();
-    final start = DateTime(2026, 8, 24);
-    final end = DateTime(2026, 8, 31, 23, 59, 59);
-    return now.isAfter(start.subtract(const Duration(seconds: 1))) && now.isBefore(end);
-  }
 
   static bool isAshwagandhaOff() {
     if (currentWeekNumber == 0) return false;
@@ -395,7 +389,7 @@ class DailyPlanData {
       details: [
         'Get dressed for gym',
         if (preWorkoutBanana) '🍌 Eat ${isRefeedWeek() ? "3" : "1"} Medium Banana${isRefeedWeek() ? "s" : ""} (Pre-Workout)',
-        if (withDextrin || withWhey) 'Mix ${[if (withDextrin) '1 scoop Cluster Dextrin', if (withWhey) '1 scoop whey isolate (30g protein)'].join(' + ')} in water bottle${withDextrin && !isRefeedWeek() ? ' (+ 0.5 tsp Lite Salt electrolytes)' : ''}. Drink 1/3 on commute, sip rest during workout',
+        if (withDextrin || withWhey) 'Mix ${[if (withDextrin) '1 scoop Cluster Dextrin', if (withWhey) '1 scoop whey isolate (30g protein)'].join(' + ')} in water bottle${withDextrin ? ' (+ 0.5 tsp Lite Salt electrolytes)' : ''}. Drink 1/3 on commute, sip rest during workout',
         if (reapplySunscreen != null) reapplySunscreen,
         if (takeGymGloves) '🧤 Grab Gym Gloves',
       ],
@@ -403,7 +397,7 @@ class DailyPlanData {
         if (preWorkoutBanana) IngredientPortion(ingredient: IngredientsData.banana, amount: isRefeedWeek() ? 3 : 1),
         if (withDextrin) const IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: 1),
         if (withWhey) _Portions.whey,
-        if (withDextrin && !isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
+        if (withDextrin) const IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
       ]) : null,
     );
   }

@@ -605,10 +605,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                   _buildBloodDonationAlert(),
                   const SizedBox(height: 12),
                 ],
-                if (DailyPlanData.isBloodTestPrepWeek()) ...[
-                  _buildBloodTestAlert(),
-                  const SizedBox(height: 12),
-                ],
+
                 const SizedBox(height: 16),
                 ...items.asMap().entries.map((entry) {
                   int idx = entry.key;
@@ -978,11 +975,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
 
   Widget _buildTimelineItem(TimelineItem item, GlobalKey key, String dayKey) {
     Widget _buildHighlightedText(String text, TextStyle baseStyle) {
-      final bool isSunday = dayKey == 'sun';
       final words = <String>[];
-      if (isSunday && DailyPlanData.isBloodTestPrepWeek()) {
-        words.addAll(['Ashwagandha', 'Ashwaganda', 'Creatine', 'Biotin', 'Magnesium', 'Morning Dine']);
-      }
       
       if (words.isEmpty) {
         return Text(text, style: baseStyle);
@@ -1295,102 +1288,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
-  Widget _buildBloodTestAlert() {
-    return GestureDetector(
-      onTap: () => _showBloodTestDialog(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.purple.withValues(alpha: 0.15),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.purpleAccent, width: 2),
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.biotech_rounded, color: Colors.purpleAccent, size: 22),
-            SizedBox(width: 8),
-            Text(
-              '🩸 BLOOD TEST MONDAY',
-              style: TextStyle(
-                color: Colors.purpleAccent,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.8,
-              ),
-            ),
-            SizedBox(width: 8),
-            Text('Tap for details', style: TextStyle(color: Colors.purpleAccent, fontSize: 12)),
-          ],
-        ),
-      ),
-    );
-  }
 
-  void _showBloodTestDialog() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Row(
-          children: [
-            Icon(Icons.biotech_rounded, color: Colors.purpleAccent),
-            SizedBox(width: 8),
-            Text('Blood Draw Protocol (Aug 31)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-          ],
-        ),
-        content: SingleChildScrollView(
-          child: Text.rich(
-            TextSpan(
-              style: const TextStyle(height: 1.5, fontSize: 14),
-              children: _parseRedText(
-                '🩸 BLOOD DRAW PREP PROTOCOL (Quest @ 8:30 AM)\n\n'
-                '━━━━━━━━━━━━━━━━━━━━\n'
-                'SUNDAY (AUG 30):\n'
-                '━━━━━━━━━━━━━━━━━━━━\n'
-                '• Fasting Cutoff: Finish all food/protein intake by 7:30 PM (after that, WATER ONLY).\n'
-                '• Finasteride: Take earlier during the day.\n'
-                '• <red>Magnesium</red>: Skip Sunday night magnesium to keep baseline electrolytes clean.\n'
-                '• Sleep: Get a full 7.5–8 hrs of sleep (do not stay up late).\n'
-                '• <red>Morning Dine</red>: Remember to prep your post-draw meal in advance so you can eat right after the blood draw.\n\n'
-                '━━━━━━━━━━━━━━━━━━━━\n'
-                'MONDAY MORNING (AUG 31 - TEST DAY):\n'
-                '━━━━━━━━━━━━━━━━━━━━\n'
-                '• 7:45 AM: Wake up & drink 21 oz plain water (NO salt, electrolytes, or lemon).\n'
-                '• Hold Supplements & Coffee: NO morning vitamins, NAC, Citicoline, or caffeine before draw.\n'
-                '• 8:05 AM: Drive over for your 8:30 AM appointment at Quest.\n'
-                '• Post-Draw: Eat breakfast, take all morning vitamins/supplements, and enjoy your coffee!'
-              ),
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Got it! 🩸'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  List<InlineSpan> _parseRedText(String text) {
-    final spans = <InlineSpan>[];
-    text.splitMapJoin(
-      RegExp(r'<red>(.*?)</red>', caseSensitive: false),
-      onMatch: (m) {
-        spans.add(TextSpan(
-          text: m.group(1),
-          style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
-        ));
-        return '';
-      },
-      onNonMatch: (m) {
-        spans.add(TextSpan(text: m));
-        return '';
-      },
-    );
-    return spans;
-  }
 }
 
 class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {

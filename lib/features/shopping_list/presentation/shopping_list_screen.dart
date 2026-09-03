@@ -30,7 +30,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
       ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
-      ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (1 US Dry Pint)'),
+      ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (need 2 cups)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '24oz bag (for 7 servings)'),
       ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '33 Bananas (REFEED WEEK)' : '9 Bananas (4 PW + 5 Morning)'),
       
@@ -55,7 +55,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.33 tbsp (~4 tsp)'),
       ShoppingItem(id: 'spc-3', name: 'Onion Powder', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-4', name: 'Dried Oregano', subtext: 'need 1tsp'),
-      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: 'CRITICAL for potassium!'),
+      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: isNextWeekRefeed ? 'CRITICAL for potassium! (need 8 tsp)' : 'CRITICAL for potassium! (need 7 tsp)'),
       ShoppingItem(id: 'spc-6', name: 'Black Pepper', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
       ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
@@ -64,23 +64,23 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       // Amazon
       ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'),
-      ShoppingItem(id: 'amz-4', name: 'D3-K2 Supplement'),
-      ShoppingItem(id: 'amz-5', name: 'Omega-3 Supplement'),
-      ShoppingItem(id: 'amz-6', name: 'Whey Isolate Protein'),
-      ShoppingItem(id: 'amz-7', name: 'Creatine Monohydrate'),
-      ShoppingItem(id: 'amz-8', name: 'Casein Protein Powder'),
-      ShoppingItem(id: 'amz-9', name: 'Magnesium Glycinate'),
-      ShoppingItem(id: 'amz-10', name: 'Citicoline'),
-      ShoppingItem(id: 'amz-11', name: 'NAC + Selenium'),
-      ShoppingItem(id: 'amz-13', name: 'Ashwagandha'),
-      ShoppingItem(id: 'amz-14', name: 'Chia Seeds'),
+      ShoppingItem(id: 'amz-4', name: 'D3-K2 Supplement', subtext: 'need 2 capsules'),
+      ShoppingItem(id: 'amz-5', name: 'Omega-3 Supplement', subtext: 'need 3 softgels'),
+      ShoppingItem(id: 'amz-6', name: 'Whey Isolate Protein', subtext: 'need 5 scoops'),
+      ShoppingItem(id: 'amz-7', name: 'Creatine Monohydrate', subtext: 'need 7 scoops'),
+      ShoppingItem(id: 'amz-8', name: 'Casein Protein Powder', subtext: 'need 7 scoops'),
+      ShoppingItem(id: 'amz-9', name: 'Magnesium Glycinate', subtext: 'need 17 capsules'),
+      ShoppingItem(id: 'amz-10', name: 'Citicoline', subtext: 'need 7 capsules'),
+      ShoppingItem(id: 'amz-11', name: 'NAC + Selenium', subtext: 'need 3 capsules'),
+      ShoppingItem(id: 'amz-13', name: 'Ashwagandha', subtext: '14 capsules (On), 0 (Off)'),
+
       ShoppingItem(id: 'amz-15', name: 'Anua Heartleaf Pore Control Cleansing Oil', subtext: 'Sunscreen Remover'),
       ShoppingItem(id: 'amz-16', name: 'Dove Deep Moisture Body Wash', subtext: 'Prevents ashiness without lotion'),
       ShoppingItem(id: 'amz-17', name: 'Vanicream Gentle Facial Cleanser', subtext: 'Face Wash (Foams beautifully, zero stripping)'),
       ShoppingItem(id: 'amz-19', name: 'The Ordinary Caffeine Solution 5% + EGCG', subtext: 'For dark circles and bags'),
       ShoppingItem(id: 'amz-18', name: 'All Free Clear (Liquid)', subtext: 'Laundry Detergent'),
-      ShoppingItem(id: 'amz-20', name: '100% Cotton Percale Pillowcases', subtext: 'Highly breathable, prevents closed comedones'),
-      ShoppingItem(id: 'amz-21', name: 'Cluster Dextrin (Unflavored)', subtext: 'Intra-workout & Refeed supplement'),
+
+      ShoppingItem(id: 'amz-21', name: 'Cluster Dextrin (Unflavored)', subtext: 'Intra-workout & Refeed supplement (need 4 scoops)'),
     ];
   }
 

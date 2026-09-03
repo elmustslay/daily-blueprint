@@ -311,5 +311,52 @@ void main() {
         DailyPlanData.mockCurrentDate = null;
       }
     });
+
+    test('Rule 13: Pre-workout (Gym) Nutrition (>= 50g carbs, >= 400mg sodium)', () {
+      void checkPreWorkoutForWeek(bool isRefeed) {
+        DailyPlanData.mockCurrentDate = isRefeed ? DailyPlanData.planStartDate.add(const Duration(days: 28)) : DateTime(2026, 8, 15);
+        for (final entry in DailyPlanData.schedules.entries) {
+          final schedule = entry.value;
+          
+          for (final item in schedule) {
+            if (!item.title.toLowerCase().contains('gym')) continue;
+            if (!item.title.toLowerCase().contains('resistance')) continue; // LISS doesn't require this level of mechanical tension prep
+            
+            final gymTime = parseTime(item.time);
+            DateTime fixedGymTime = gymTime;
+            if (fixedGymTime.hour < 4) fixedGymTime = fixedGymTime.add(const Duration(days: 1));
+
+            double totalCarbs = 0;
+            double totalSodium = 0;
+
+            for (final otherItem in schedule) {
+              if (otherItem.mealRecord == null) continue;
+              final mealTime = parseTime(otherItem.time);
+              DateTime fixedMealTime = mealTime;
+              if (fixedMealTime.hour < 4) fixedMealTime = fixedMealTime.add(const Duration(days: 1));
+              
+              final diff = fixedGymTime.difference(fixedMealTime).inMinutes;
+              // Include any meal eaten exactly at the start of the gym block (0) up to 60 mins before.
+              if (diff >= 0 && diff <= 60) {
+                 totalCarbs += otherItem.mealRecord!.totalNutrition.carbs;
+                 totalSodium += (otherItem.mealRecord!.totalNutrition.microNutrients['Sodium (mg)'] ?? 0.0).toDouble();
+              }
+            }
+
+            expect(totalCarbs, greaterThanOrEqualTo(50.0), 
+              reason: 'Pre-workout carbs for ${item.title} on ${entry.key} was ${totalCarbs}g, which is less than the required 50g for mechanical tension.');
+            expect(totalSodium, greaterThanOrEqualTo(700.0),
+              reason: 'Pre-workout sodium for ${item.title} on ${entry.key} was ${totalSodium}mg, which is less than the required 700mg for acute blood volume.');
+          }
+        }
+      }
+      
+      try {
+        checkPreWorkoutForWeek(false);
+        checkPreWorkoutForWeek(true);
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
+      }
+    });
   });
 }

@@ -35,6 +35,13 @@ SLEEP_HOURS = 7.5
 # MEAL DISTRIBUTION: Number of protein-rich meals reaching the leucine threshold (~2.5-3.0g leucine / ~25-35g protein)
 MEALS_PER_DAY = 4
 
+# HORMONAL CALIBRATION (from blood work drawn post-refeed)
+# Total T: 533 ng/dL at age 23 (~40th percentile; but irrelevant — muscle uses Free T)
+# Free T: 132.7 pg/mL (85th percentile bioavailable androgens; ref 35-155)
+# TSH: 4.44 mIU/L while ON ashwagandha (suggests subclinical hypothyroid tendency)
+TESTOSTERONE_FACTOR = 1.0   # Free T is 85th percentile — no MPS penalty warranted
+THYROID_TDEE_PENALTY = 0.13  # TSH 4.44 on Ash = true baseline likely >5.0; model -13% max TDEE drop
+
 # ESSENTIAL FAT MINIMUM: Biological floor where survival mechanisms shut down fat oxidation entirely
 ESSENTIAL_BF_PCT = 5.0 # ~5.0% in adult males
 ESSENTIAL_FAT_LBS = 6.0
@@ -110,7 +117,10 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     consecutive_disuse_days = 0
     ketone_adaptation_days = 0
     fat_history = []
-    mineral_water_retention = 0.0
+    consecutive_deficit_days = 0
+    cns_tdee_factor = 1.0
+    refeed_sodium_water = 0.0
+    na_k_water = 0.0
     
     # 1. Sleep Modifiers (Clinical data: ~5.5 hrs sleep = -55% fat oxidation in deficit, +impaired P-ratio in surplus)
     sleep_deficit = max(0.0, 7.5 - SLEEP_HOURS)
@@ -172,6 +182,7 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         hourly_mps = [0.0] * 24
         gym_hours = []
         has_liss = False
+        meal_carb_schedule = []
         
         for meal in meals:
             try:
@@ -199,6 +210,7 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
                 
             meal_carb = meal.get('carb', 0.0)
             meal_prot = meal.get('prot', 0.0)
+            meal_carb_schedule.append((hour, meal_carb))
             
             # Insulin pulse (Carbs stimulate insulin, blocking MPB)
             if meal_carb > 5.0:
@@ -242,6 +254,18 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             post_workout_synergy += (pw_insulin * pw_mps) * 0.05
         # =========================================================================
         
+        # Partition carbs into pre-workout vs post-workout for glycogen modeling
+        if gym_hours and meal_carb_schedule:
+            gym_start = gym_hours[0]
+            total_meal_carbs = sum(mc for _, mc in meal_carb_schedule)
+            pre_gym_carbs = sum(mc for h, mc in meal_carb_schedule if h <= gym_start)
+            pre_workout_fraction = (pre_gym_carbs / total_meal_carbs) if total_meal_carbs > 0 else 0.5
+            pre_workout_net_carb = net_carb * pre_workout_fraction
+            post_workout_net_carb = net_carb * (1.0 - pre_workout_fraction)
+        else:
+            pre_workout_net_carb = net_carb
+            post_workout_net_carb = 0.0
+        
         # BMR & TEF (Protein: 25%, Carbs: 8%, Fat: 2%, Alcohol: 15%)
         rmr = 370 + (21.6 * (current_lean / 2.20462))
         exact_tef = (prot * 4 * 0.25) + (carb * 4 * 0.08) + (fat * 9 * 0.02) + (alcohol * 7 * 0.15)
@@ -263,8 +287,20 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             current_cortisol_water += max(0.0, (cal_val / 2000.0) * 0.015) * (1.0 + (sleep_deficit * 0.25))
             current_cortisol_water = min(4.5, current_cortisol_water) # Cap realistic water retention at ~4.5 lbs
         
-        tdee = (rmr * (REFEED_ACT if is_ref else CUT_ACT) * scaling) + max(0.0, exact_tef - (cal * 0.10)) - neat_bf_drop
+        # CNS & Thyroid fatigue (computed from previous day's consecutive_deficit_days before TDEE)
+        cns_fatigue_penalty = max(0.50, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * 0.50)
+        cns_tdee_factor = max(1.0 - THYROID_TDEE_PENALTY, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * THYROID_TDEE_PENALTY)
+        
+        tdee = (rmr * (REFEED_ACT if is_ref else CUT_ACT) * scaling * cns_tdee_factor) + (exact_tef - (cal * 0.10)) - neat_bf_drop
         deficit = tdee - cal
+        
+        # Track prolonged deficit fatigue (CNS and Endocrine strain)
+        if deficit > (tdee * 0.25):
+            consecutive_deficit_days += 1
+        else:
+            # CNS recovery from chronic deficit takes 2-6 weeks at maintenance (research-backed).
+            # Each refeed day restores ~2 days' worth of accumulated fatigue, not 7.
+            consecutive_deficit_days = max(0, consecutive_deficit_days - 2)
         
         if day == 0: initial_tdee = tdee
         if day == days - 1: final_tdee = tdee
@@ -294,8 +330,13 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         carb_mpb_factor = 0.75 + (0.25 * avg_insulin_protection)
         
         # 4. Glycogen-Driven Resistance Training Stimulus Factor
+        # Only pre-workout carbs are available for glycogen loading before performance is evaluated
+        # Floor at 20g: reflects real-world depletion under sustained low-carb + heavy lifting
+        # (previous 100g floor was artificially protecting performance during deep depletion)
+        current_glycogen = max(20.0, min(500.0, current_glycogen + pre_workout_net_carb))
+        
         # Intramuscular glycogen < 250g impairs calcium release and high-intensity force output
-        glycogen_performance_factor = max(0.70, min(1.0, current_glycogen / 250.0))
+        glycogen_performance_factor = max(0.08, min(1.0, current_glycogen / 250.0))
         
         # 5. Optimal P-Ratio Anabolic Window (Biphasic Curve for Body Fat vs MPS)
         # Peak anabolic sensitivity is between 10% and 22% BF.
@@ -319,7 +360,12 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             muscle_gain = ((0.15 / 7.0) * bf_factor * p_factor * (rt / 4.0) * 
                            sleep_mps_multiplier * glycogen_performance_factor * 
                            carb_mpb_factor * leucine_distribution_efficiency * 
-                           pre_workout_synergy * post_workout_synergy * interference_penalty)
+                           pre_workout_synergy * post_workout_synergy * interference_penalty * 
+                           cns_fatigue_penalty * TESTOSTERONE_FACTOR)
+            # MPS Daily Ceiling: Natural lifters have a practical maximum rate of muscle
+            # protein synthesis (~0.04 lbs/day). Prevents unrealistic "catch-up" rebound
+            # during diet breaks where all multipliers are at 1.0.
+            muscle_gain = min(muscle_gain, 0.04)
         else:
             consecutive_disuse_days += 1
             if consecutive_disuse_days <= 7:
@@ -389,23 +435,31 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             current_lean += (surplus_lean_gain + muscle_gain)
             catabolized = 0.0
         
-        # Glycogen turnover (intramuscular pool: 100g - 500g)
-        current_glycogen = max(100.0, min(500.0, current_glycogen + net_carb - (130.0 if is_ref else 180.0)))
+        # Glycogen turnover: subtract daily expenditure, add post-workout carbs
+        current_glycogen = max(20.0, min(500.0, current_glycogen + post_workout_net_carb - (130.0 if is_ref else 180.0)))
+        
+        # Sodium-based fluid retention (refeeds spike aldosterone transiently)
+        if is_ref:
+            refeed_sodium_water = min(2.5, refeed_sodium_water + 0.5)
+        else:
+            refeed_sodium_water = max(0.0, refeed_sodium_water - 0.3)
+        
+        # Dynamic mineral hydration (Na:K rolling state)
+        if potassium > 0:
+            day_na_k = sodium / potassium
+            if day_na_k > 1.0:
+                na_k_water = min(2.0, na_k_water * 0.7 + (day_na_k - 1.0) * 0.45)
+            elif day_na_k < 0.5:
+                na_k_water = max(-0.5, na_k_water * 0.7 - 0.15)
+            else:
+                na_k_water *= 0.85
 
     tissue_w = current_fat + current_lean
     glycogen_mass_lbs = ((current_glycogen * 5.0) / 453.592) - ((500.0 * 5.0) / 453.592)
     
-    # Sodium-induced fluid retention during Refeed Weeks
-    refeed_sodium_water = 2.5 if is_ref else 0.0
+    # refeed_sodium_water and na_k_water are now accumulated inside the daily loop
     
-    # Dynamic mineral hydration (Sodium:Potassium bloat)
-    na_k_ratio = sodium / potassium if potassium > 0 else 1.0
-    if na_k_ratio > 1.0:
-        mineral_water_retention = (na_k_ratio - 1.0) * 1.5
-    elif na_k_ratio < 0.5:
-        mineral_water_retention = -0.5
-    
-    scale_w = tissue_w + glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water + mineral_water_retention
+    scale_w = tissue_w + glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water + na_k_water
     
     print("="*50)
     print(f"PROJECTION FOR: {TARGET_DATE.strftime('%b %d, %Y')} ({days} days)")
