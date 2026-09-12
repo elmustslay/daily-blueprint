@@ -9,25 +9,49 @@ final exerciseLogsProvider = FutureProvider.family<List<ExerciseLog>, String>((r
   return repo.getLogs(exerciseId);
 });
 
-class GymStatsScreen extends ConsumerWidget {
+class GymStatsScreen extends ConsumerStatefulWidget {
   final Exercise exercise;
 
   const GymStatsScreen({super.key, required this.exercise});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final logsAsync = ref.watch(exerciseLogsProvider(exercise.id));
+  ConsumerState<GymStatsScreen> createState() => _GymStatsScreenState();
+}
+
+class _GymStatsScreenState extends ConsumerState<GymStatsScreen> {
+  String _selectedSeat = 'Seat 3';
+
+  @override
+  Widget build(BuildContext context) {
+    final logsAsync = ref.watch(exerciseLogsProvider(widget.exercise.id));
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${exercise.name} Stats'),
+        title: Text('${widget.exercise.name} Stats'),
       ),
       body: logsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
-        data: (logs) {
+        data: (allLogs) {
+          List<ExerciseLog> logs = allLogs;
+          final isLegPress = widget.exercise.id == 'legs_1a';
+
+          if (isLegPress) {
+            final cutoff = DateTime(2026, 9, 7);
+            if (_selectedSeat == 'Seat 3') {
+              logs = allLogs.where((l) => l.date.isAfter(cutoff)).toList();
+            } else {
+              logs = allLogs.where((l) => !l.date.isAfter(cutoff)).toList();
+            }
+          }
+
           if (logs.isEmpty) {
-            return const Center(child: Text('No logs yet. Start lifting!'));
+            return Column(
+              children: [
+                if (isLegPress) _buildSeatToggle(),
+                const Expanded(child: Center(child: Text('No logs yet. Start lifting!'))),
+              ],
+            );
           }
 
           // Generate spots for the chart
@@ -43,12 +67,14 @@ class GymStatsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                if (isLegPress) _buildSeatToggle(),
+                const SizedBox(height: 16),
                 Text(
                   'Weight Progression',
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
-                if (exercise.name.contains('Assisted')) ...[
+                if (widget.exercise.name.contains('Assisted')) ...[
                   const SizedBox(height: 8),
                   const Text(
                     'Note: Since this is an assisted machine, the line trending DOWN means you are getting stronger (using less assistance).',
@@ -107,6 +133,24 @@ class GymStatsScreen extends ConsumerWidget {
               ],
             ),
           );
+        },
+      ),
+    );
+  }
+
+  Widget _buildSeatToggle() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: SegmentedButton<String>(
+        segments: const [
+          ButtonSegment(value: 'Seat 3', label: Text('Seat 3')),
+          ButtonSegment(value: 'Seat 4', label: Text('Seat 4')),
+        ],
+        selected: {_selectedSeat},
+        onSelectionChanged: (Set<String> newSelection) {
+          setState(() {
+            _selectedSeat = newSelection.first;
+          });
         },
       ),
     );

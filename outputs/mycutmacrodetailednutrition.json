@@ -1,6 +1,6 @@
 {
     "mon": {
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 210.0,
@@ -47,7 +47,7 @@
         }
     },
     "tue": {
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 356.66666666666663,
@@ -94,7 +94,7 @@
         }
     },
     "wed": {
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 356.66666666666663,
@@ -150,7 +150,7 @@
         }
     },
     "thu": {
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 251.66666666666666,
@@ -197,7 +197,7 @@
         }
     },
     "fri": {
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 320.957,
@@ -244,7 +244,7 @@
         }
     },
     "sat": {
-        "8:30-9:05 am": {
+        "8:10-8:45 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 490.957,
@@ -282,7 +282,7 @@
         }
     },
     "sun": {
-        "8:30-9:35 am": {
+        "8:10-9:15 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 390.957,

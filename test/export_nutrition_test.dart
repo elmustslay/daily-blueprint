@@ -187,8 +187,6 @@ void main() {
     await macroDetailedFile.writeAsString(macroDetailedJsonString);
     print('Successfully exported macro detailed nutrition data to outputs/${prefix}macrodetailednutrition.json');
 
-    if (isRefeed) return; // Skip CSV for refeed week to avoid complexity
-
     // Trigger python script to update CSV, or fallback to generating it in Dart
     bool csvUpdatedByPython = false;
     try {

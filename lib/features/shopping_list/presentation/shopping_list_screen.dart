@@ -59,9 +59,8 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'spc-6', name: 'Black Pepper', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
       ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
-
-
-
+      ShoppingItem(id: 'spc-9', name: 'Iodized Table Salt (or Sea Salt)', subtext: 'need 2.75 tsp (Morning water & pasta)'),
+      
       // Amazon
       ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'),
       ShoppingItem(id: 'amz-4', name: 'D3-K2 Supplement', subtext: 'need 2 capsules'),

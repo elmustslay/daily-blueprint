@@ -76,6 +76,7 @@ void main() {
     verifyItemExact(standardItems, 'Morton Lite Salt', 'Morton Lite Salt', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp\s*\(standard\)'));
     verifyItemExact(standardItems, 'Black Pepper', 'Black Pepper', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp'));
     verifyItemExact(standardItems, 'Ground Cumin', 'Ground Cumin', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp'));
+    verifyItemExact(standardItems, 'Iodized Table Salt (or Sea Salt)', 'Iodized Table Salt', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp\s*\(standard\)'));
 
     verifyItemExact(standardItems, 'Blueberries', 'Trader Joe\'s Blueberries', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*cups?'), RegExp(r'(\d+(?:\.\d+)?)\s*cup'));
     verifyItemExact(standardItems, 'D3-K2 Supplement', 'D3-K2', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*capsules?'), RegExp(r'(\d+(?:\.\d+)?)\s*capsule'));

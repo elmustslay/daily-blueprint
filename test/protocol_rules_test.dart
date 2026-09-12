@@ -32,8 +32,8 @@ void main() {
       for (final entry in DailyPlanData.schedules.entries) {
         final schedule = entry.value;
         for (final item in schedule) {
-          final hasCopper = item.details.any((d) => d.toLowerCase().contains('copper'));
-          final hasZinc = item.details.any((d) => d.toLowerCase().contains('zinc'));
+          final hasCopper = item.details.any((d) => d.text.toLowerCase().contains('copper'));
+          final hasZinc = item.details.any((d) => d.text.toLowerCase().contains('zinc'));
           if (hasCopper && hasZinc) {
             fail('Copper and Zinc taken in the same time block on ${entry.key} at ${item.time}');
           }
@@ -45,8 +45,8 @@ void main() {
       for (final entry in DailyPlanData.schedules.entries) {
         final schedule = entry.value;
         
-        final nacItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('nac')));
-        final mineralItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('copper') || d.toLowerCase().contains('zinc')));
+        final nacItems = schedule.where((i) => i.details.any((d) => d.text.toLowerCase().contains('nac')));
+        final mineralItems = schedule.where((i) => i.details.any((d) => d.text.toLowerCase().contains('copper') || d.text.toLowerCase().contains('zinc')));
         
         for (final nac in nacItems) {
           final nacTime = parseTime(nac.time, isEnd: true);
@@ -68,12 +68,12 @@ void main() {
       for (final entry in DailyPlanData.schedules.entries) {
         final schedule = entry.value;
         
-        final fiberItems = schedule.where((i) => i.details.any((d) => d.toLowerCase().contains('husk')));
+        final fiberItems = schedule.where((i) => i.details.any((d) => d.text.toLowerCase().contains('husk')));
         
         final supplementKeywords = ['zinc', 'copper', 'nac', 'omega', 'magnesium', 'vitamin', 'd3'];
         final supplementItems = schedule.where((i) {
           if (i.title.toLowerCase().contains('grab things')) return false; // packing
-          return i.details.any((d) => supplementKeywords.any((kw) => d.toLowerCase().contains(kw)));
+          return i.details.any((d) => supplementKeywords.any((kw) => d.text.toLowerCase().contains(kw)));
         });
 
         for (final fiber in fiberItems) {

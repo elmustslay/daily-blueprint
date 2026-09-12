@@ -9,11 +9,13 @@
                 "Fat": 0.0,
                 "Micros": {
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 210.0,
@@ -71,7 +73,7 @@
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
-                    "Sodium (mg)": 1229.82,
+                    "Sodium (mg)": 1492.05,
                     "Fiber (g)": 27.94,
                     "Sugar (g)": 7.44,
                     "Added Sugar (g)": 1.21,
@@ -102,7 +104,7 @@
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
                     "Cholesterol (mg)": 75.56,
-                    "Iodine (mcg)": 66.67,
+                    "Iodine (mcg)": 96.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
                     "Absorbed Iron (mg)": 0.29,
@@ -176,7 +178,7 @@
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 3.53,
                     "Cholesterol (mg)": 77.78,
-                    "Sodium (mg)": 764.91,
+                    "Sodium (mg)": 896.02,
                     "Magnesium (mg)": 60.56,
                     "Vitamin D3 (Food) (mcg)": 10.78,
                     "Vitamin B12 (mcg)": 5.0,
@@ -202,7 +204,7 @@
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Calcium (Food) (mg)": 53.3,
-                    "Iodine (mcg)": 53.33,
+                    "Iodine (mcg)": 68.33,
                     "Added Sugar (g)": 0.6,
                     "Lutein & Zeaxanthin (mcg)": 833.33,
                     "Capsanthin & Capsorubin (mg)": 0.56,
@@ -280,11 +282,13 @@
                 "Fat": 0.0,
                 "Micros": {
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 356.7,
@@ -346,7 +350,7 @@
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
-                    "Sodium (mg)": 1229.82,
+                    "Sodium (mg)": 1492.05,
                     "Fiber (g)": 27.94,
                     "Sugar (g)": 7.44,
                     "Added Sugar (g)": 1.21,
@@ -377,7 +381,7 @@
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
                     "Cholesterol (mg)": 75.56,
-                    "Iodine (mcg)": 66.67,
+                    "Iodine (mcg)": 96.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
                     "Absorbed Iron (mg)": 0.29,
@@ -452,7 +456,7 @@
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 3.53,
                     "Cholesterol (mg)": 77.78,
-                    "Sodium (mg)": 764.91,
+                    "Sodium (mg)": 896.02,
                     "Magnesium (mg)": 60.56,
                     "Vitamin D3 (Food) (mcg)": 10.78,
                     "Vitamin B12 (mcg)": 5.0,
@@ -477,7 +481,7 @@
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Calcium (Food) (mg)": 53.3,
-                    "Iodine (mcg)": 53.33,
+                    "Iodine (mcg)": 68.33,
                     "Added Sugar (g)": 0.6,
                     "Lutein & Zeaxanthin (mcg)": 833.33,
                     "Capsanthin & Capsorubin (mg)": 0.56,
@@ -557,11 +561,13 @@
                     "NAC (mg)": 600.0,
                     "Selenium (Supplement) (mcg)": 25.0,
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 356.7,
@@ -622,7 +628,7 @@
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
-                    "Sodium (mg)": 1229.82,
+                    "Sodium (mg)": 1492.05,
                     "Fiber (g)": 27.94,
                     "Sugar (g)": 7.44,
                     "Added Sugar (g)": 1.21,
@@ -653,7 +659,7 @@
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
                     "Cholesterol (mg)": 75.56,
-                    "Iodine (mcg)": 66.67,
+                    "Iodine (mcg)": 96.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
                     "Absorbed Iron (mg)": 0.29,
@@ -733,7 +739,7 @@
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 3.53,
                     "Cholesterol (mg)": 77.78,
-                    "Sodium (mg)": 764.91,
+                    "Sodium (mg)": 896.02,
                     "Magnesium (mg)": 60.56,
                     "Vitamin D3 (Food) (mcg)": 10.78,
                     "Vitamin B12 (mcg)": 5.0,
@@ -759,7 +765,7 @@
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Calcium (Food) (mg)": 53.3,
-                    "Iodine (mcg)": 53.33,
+                    "Iodine (mcg)": 68.33,
                     "Added Sugar (g)": 0.6,
                     "Lutein & Zeaxanthin (mcg)": 833.33,
                     "Capsanthin & Capsorubin (mg)": 0.56,
@@ -855,11 +861,13 @@
                 "Fat": 0.0,
                 "Micros": {
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 251.7,
@@ -919,7 +927,7 @@
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
-                    "Sodium (mg)": 1229.82,
+                    "Sodium (mg)": 1492.05,
                     "Fiber (g)": 27.94,
                     "Sugar (g)": 7.44,
                     "Added Sugar (g)": 1.21,
@@ -950,7 +958,7 @@
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
                     "Cholesterol (mg)": 75.56,
-                    "Iodine (mcg)": 66.67,
+                    "Iodine (mcg)": 96.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
                     "Absorbed Iron (mg)": 0.29,
@@ -1024,7 +1032,7 @@
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 2.86,
                     "Cholesterol (mg)": 67.78,
-                    "Sodium (mg)": 937.66,
+                    "Sodium (mg)": 1068.77,
                     "Iron (Food) (mg)": 3.13,
                     "Zinc (Food) (mg)": 4.54,
                     "Magnesium (mg)": 51.4,
@@ -1047,7 +1055,7 @@
                     "Choline (mg)": 98.23,
                     "EPA (Food) (mg)": 2.99,
                     "DHA (Food) (mg)": 2.36,
-                    "Iodine (mcg)": 93.33,
+                    "Iodine (mcg)": 108.33,
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Capsanthin & Capsorubin (mg)": 3.06,
@@ -1127,11 +1135,13 @@
                 "Fat": 0.0,
                 "Micros": {
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 321.0,
@@ -1194,7 +1204,7 @@
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
-                    "Sodium (mg)": 1229.82,
+                    "Sodium (mg)": 1492.05,
                     "Fiber (g)": 27.94,
                     "Sugar (g)": 7.44,
                     "Added Sugar (g)": 1.21,
@@ -1225,7 +1235,7 @@
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
                     "Cholesterol (mg)": 75.56,
-                    "Iodine (mcg)": 66.67,
+                    "Iodine (mcg)": 96.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
                     "Absorbed Iron (mg)": 0.29,
@@ -1299,7 +1309,7 @@
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 2.86,
                     "Cholesterol (mg)": 67.78,
-                    "Sodium (mg)": 937.66,
+                    "Sodium (mg)": 1068.77,
                     "Iron (Food) (mg)": 3.13,
                     "Zinc (Food) (mg)": 4.54,
                     "Magnesium (mg)": 51.4,
@@ -1322,7 +1332,7 @@
                     "Choline (mg)": 98.23,
                     "EPA (Food) (mg)": 2.99,
                     "DHA (Food) (mg)": 2.36,
-                    "Iodine (mcg)": 93.33,
+                    "Iodine (mcg)": 108.33,
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Capsanthin & Capsorubin (mg)": 3.06,
@@ -1402,11 +1412,13 @@
                 "Fat": 0.0,
                 "Micros": {
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-9:05 am": {
+        "8:10-8:45 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 491.0,
@@ -1474,7 +1486,7 @@
                 "Fat": 15.3,
                 "Micros": {
                     "Saturated Fat (g)": 3.6,
-                    "Sodium (mg)": 1229.82,
+                    "Sodium (mg)": 1492.05,
                     "Fiber (g)": 27.94,
                     "Sugar (g)": 7.44,
                     "Added Sugar (g)": 1.21,
@@ -1505,7 +1517,7 @@
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
                     "Cholesterol (mg)": 75.56,
-                    "Iodine (mcg)": 66.67,
+                    "Iodine (mcg)": 96.67,
                     "Lutein & Zeaxanthin (mcg)": 1666.67,
                     "Capsanthin & Capsorubin (mg)": 1.11,
                     "Absorbed Iron (mg)": 0.29,
@@ -1533,7 +1545,7 @@
                     "Black Pepper Extract (mg)": 5.0,
                     "Saturated Fat (g)": 2.86,
                     "Cholesterol (mg)": 67.78,
-                    "Sodium (mg)": 937.66,
+                    "Sodium (mg)": 1068.77,
                     "Iron (Food) (mg)": 3.13,
                     "Zinc (Food) (mg)": 4.54,
                     "Magnesium (mg)": 51.4,
@@ -1556,7 +1568,7 @@
                     "Choline (mg)": 98.23,
                     "EPA (Food) (mg)": 2.99,
                     "DHA (Food) (mg)": 2.36,
-                    "Iodine (mcg)": 93.33,
+                    "Iodine (mcg)": 108.33,
                     "Polyunsaturated Fat (g)": 0.2,
                     "Monounsaturated Fat (g)": 0.97,
                     "Capsanthin & Capsorubin (mg)": 3.06,
@@ -1638,11 +1650,13 @@
                 "Fat": 0.0,
                 "Micros": {
                     "Citicoline (mg)": 250.0,
-                    "Tyrosine (Supplement) (mg)": 25.0
+                    "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5
                 }
             }
         },
-        "8:30-9:35 am": {
+        "8:10-9:15 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 391.0,

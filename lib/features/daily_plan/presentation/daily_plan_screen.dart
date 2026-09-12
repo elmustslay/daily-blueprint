@@ -7,11 +7,11 @@ import '../data/daily_plan_data.dart';
 import '../../micro_macro_calorie_track/domain/nutrition.dart';
 
 // --- State ---
-class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
+class DetailStrikethroughNotifier extends Notifier<Map<String, Set<int>>> {
   @override
-  Map<String, List<bool>> build() {
+  Map<String, Set<int>> build() {
     final prefs = SharedPrefsLogic.instance;
-    final Map<String, List<bool>> stateMap = {};
+    final Map<String, Set<int>> stateMap = {};
 
     final now = DateTime.now().subtract(const Duration(hours: 2));
     final currentWeekday = now.weekday;
@@ -20,7 +20,7 @@ class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
 
     for (int i = 0; i < 7; i++) {
       final dayKey = dayKeys[i];
-      final tabWeekday = i + 1; // 1 to 7
+      final tabWeekday = i + 1;
 
       DateTime targetDate;
       final differenceInDays = tabWeekday <= currentWeekday
@@ -34,19 +34,19 @@ class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
       }
 
       final targetDateStr = '${targetDate.year}-${targetDate.month.toString().padLeft(2, '0')}-${targetDate.day.toString().padLeft(2, '0')}';
-      
-      final savedTargetDateStr = prefs.getString('supp_target_date_$dayKey');
-      
-      if (savedTargetDateStr != targetDateStr || differenceInDays > 4) {
-        prefs.remove('supp_$dayKey');
-        prefs.setString('supp_target_date_$dayKey', targetDateStr);
-        stateMap[dayKey] = [false, false];
+
+      final savedTargetDateStr = prefs.getString('strike_target_date_$dayKey');
+
+      if (savedTargetDateStr != targetDateStr || differenceInDays > 5) {
+        prefs.remove('strike_$dayKey');
+        prefs.setString('strike_target_date_$dayKey', targetDateStr);
+        stateMap[dayKey] = {};
       } else {
-        final keys = prefs.getStringList('supp_$dayKey');
-        if (keys != null && keys.length == 2) {
-          stateMap[dayKey] = keys.map((e) => e == 'true').toList();
+        final saved = prefs.getStringList('strike_$dayKey');
+        if (saved != null) {
+          stateMap[dayKey] = saved.map((e) => int.tryParse(e) ?? -1).where((e) => e >= 0).toSet();
         } else {
-          stateMap[dayKey] = [false, false];
+          stateMap[dayKey] = {};
         }
       }
     }
@@ -54,19 +54,24 @@ class SupplementTrackerNotifier extends Notifier<Map<String, List<bool>>> {
     return stateMap;
   }
 
-  void toggleSupplement(String dayKey, int index) {
-    if (!state.containsKey(dayKey)) return;
-    final newStateMap = Map<String, List<bool>>.from(state);
-    final dayList = List<bool>.from(newStateMap[dayKey]!);
-    dayList[index] = !dayList[index];
-    newStateMap[dayKey] = dayList;
+  /// Toggle strikethrough for a specific detail bullet.
+  /// [compositeIndex] is a unique int encoding: itemIndex * 100 + detailIndex
+  void toggleDetail(String dayKey, int compositeIndex) {
+    final newStateMap = Map<String, Set<int>>.from(state.map((k, v) => MapEntry(k, Set<int>.from(v))));
+    final daySet = newStateMap[dayKey] ?? {};
+    if (daySet.contains(compositeIndex)) {
+      daySet.remove(compositeIndex);
+    } else {
+      daySet.add(compositeIndex);
+    }
+    newStateMap[dayKey] = daySet;
     state = newStateMap;
-    
-    SharedPrefsLogic.instance.setStringList('supp_$dayKey', dayList.map((e) => e.toString()).toList());
+
+    SharedPrefsLogic.instance.setStringList('strike_$dayKey', daySet.map((e) => e.toString()).toList());
   }
 }
 
-final supplementTrackerProvider = NotifierProvider<SupplementTrackerNotifier, Map<String, List<bool>>>(SupplementTrackerNotifier.new);
+final detailStrikethroughProvider = NotifierProvider<DetailStrikethroughNotifier, Map<String, Set<int>>>(DetailStrikethroughNotifier.new);
 
 class WaterTrackerNotifier extends Notifier<Map<String, List<bool>>> {
   @override
@@ -162,7 +167,7 @@ class ReminderTrackerNotifier extends Notifier<Map<String, List<bool>>> {
       final savedTargetDateStr = prefs.getString('reminders_target_date_$dayKey');
       final remindersCount = DailyPlanData.getReminders(dayKey).length;
       
-      if (savedTargetDateStr != targetDateStr || differenceInDays > 4) {
+      if (savedTargetDateStr != targetDateStr || differenceInDays > 5) {
         prefs.remove('reminders_$dayKey');
         prefs.setString('reminders_target_date_$dayKey', targetDateStr);
         stateMap[dayKey] = List.filled(remindersCount, false);
@@ -208,7 +213,6 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
   final Map<String, GlobalKey> _itemKeys = {};
   
   bool _showWater = false;
-  bool _showSupp = false;
 
   @override
   void initState() {
@@ -219,6 +223,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     _tabController.index = currentDayIndex;
 
     _tabController.addListener(() {
+      setState(() {});
       if (!_tabController.indexIsChanging) {
         WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrentTime());
       }
@@ -359,10 +364,9 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         ),
         title: const Text('Daily Plan'),
         actions: [
-          _buildToggleButton('Supps', _showSupp, Colors.greenAccent, () {
-            setState(() { _showSupp = !_showSupp; });
-          }),
-          const SizedBox(width: 16),
+          if (_tabController.index < 7)
+            _buildTrackableStatsButton(days[_tabController.index]),
+          const SizedBox(width: 8),
         ],
         bottom: TabBar(
           controller: _tabController,
@@ -397,6 +401,131 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
           children: days.map((day) => day == 'nutrition' ? _buildNutritionTab() : _buildDayContent(day)).toList(),
         ),
       ),
+    );
+  }
+
+  bool _isTimePassed(String dayKey, String timeString) {
+    final int currentWeekday = DateTime.now().weekday; // 1 (Mon) to 7 (Sun)
+    final int tabWeekday = days.indexOf(dayKey) + 1; // 1 to 7
+    
+    // The days in the tab layout always refer to today or a past day in the rolling 7-day window.
+    if (tabWeekday != currentWeekday) {
+       return true;
+    }
+
+    final startMins = _parseStartTimeMins(timeString);
+    if (startMins == null) return false;
+    final now = DateTime.now();
+    final currentMins = now.hour * 60 + now.minute;
+    return currentMins >= startMins;
+  }
+
+  Widget _buildTrackableStatsButton(String dayKey) {
+    int total = 0;
+    int completed = 0;
+    
+    final items = DailyPlanData.schedules[dayKey] ?? [];
+    final strikeState = ref.watch(detailStrikethroughProvider);
+    final dayStrikes = strikeState[dayKey] ?? {};
+
+    for (int i = 0; i < items.length; i++) {
+      for (int j = 0; j < items[i].details.length; j++) {
+        if (items[i].details[j].isTrackable) {
+          total++;
+          if (dayStrikes.contains(i * 100 + j)) {
+            completed++;
+          }
+        }
+      }
+    }
+
+    if (total == 0) return const SizedBox.shrink();
+
+    return Center(
+      child: GestureDetector(
+        onTap: () => _showTrackableDetailsDialog(dayKey),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Colors.blueAccent,
+              width: 1.5,
+            ),
+          ),
+          child: Text(
+            '$completed / $total',
+            style: const TextStyle(
+              color: Colors.blueAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showTrackableDetailsDialog(String dayKey) {
+    final items = DailyPlanData.schedules[dayKey] ?? [];
+    final strikeState = ref.read(detailStrikethroughProvider);
+    final dayStrikes = strikeState[dayKey] ?? {};
+
+    List<String> completedList = [];
+    List<Map<String, dynamic>> leftoverList = []; 
+
+    for (int i = 0; i < items.length; i++) {
+      for (int j = 0; j < items[i].details.length; j++) {
+        if (items[i].details[j].isTrackable) {
+          final text = items[i].details[j].text;
+          if (dayStrikes.contains(i * 100 + j)) {
+            completedList.add(text);
+          } else {
+            final isRed = _isTimePassed(dayKey, items[i].time);
+            leftoverList.add({ 'text': text, 'isRed': isRed });
+          }
+        }
+      }
+    }
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Trackable Items', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+              const SizedBox(height: 16),
+              if (leftoverList.isNotEmpty) ...[
+                const Text('Leftovers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
+                const SizedBox(height: 8),
+                ...leftoverList.map((item) => Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Text('• ${item['text']}', style: TextStyle(color: item['isRed'] ? Colors.redAccent : Colors.white70)),
+                )),
+                const SizedBox(height: 16),
+              ],
+              if (completedList.isNotEmpty) ...[
+                const Text('Completed', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.greenAccent)),
+                const SizedBox(height: 8),
+                ...completedList.map((text) => Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Text('• $text', style: TextStyle(color: Colors.grey.withValues(alpha: 0.5), decoration: TextDecoration.lineThrough)),
+                )),
+              ],
+              if (completedList.isEmpty && leftoverList.isEmpty)
+                const Text('No trackable items for this day.', style: TextStyle(color: Colors.grey)),
+            ],
+          ),
+        );
+      }
     );
   }
 
@@ -534,10 +663,25 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
       }
     }
 
+    int totalTrackable = 0;
+    int completedTrackable = 0;
+    final strikeState = ref.watch(detailStrikethroughProvider);
+    final dayStrikes = strikeState[dayKey] ?? {};
+
+    for (int i = 0; i < items.length; i++) {
+      for (int j = 0; j < items[i].details.length; j++) {
+        if (items[i].details[j].isTrackable) {
+          totalTrackable++;
+          if (dayStrikes.contains(i * 100 + j)) {
+            completedTrackable++;
+          }
+        }
+      }
+    }
+
     double stickyHeight = 0;
 
     if (_showWater) stickyHeight += 165.0;
-    if (_showSupp) stickyHeight += 165.0;
     if (incompleteReminders.isNotEmpty) {
       stickyHeight += 16.0 + (incompleteReminders.length * 68.0);
     }
@@ -554,18 +698,11 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-
                     if (_showWater)
                       Container(
                         height: 165.0,
                         padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
                         child: _buildWaterTracker(dayKey),
-                      ),
-                    if (_showSupp)
-                      Container(
-                        height: 165.0,
-                        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-                        child: _buildSupplementTracker(dayKey),
                       ),
                     if (incompleteReminders.isNotEmpty)
                       Container(
@@ -613,7 +750,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                   String keyStr = '${dayKey}_$idx';
                   _itemKeys[keyStr] ??= GlobalKey();
                   
-                  return _buildTimelineItem(item, _itemKeys[keyStr]!, dayKey);
+                  return _buildTimelineItem(item, _itemKeys[keyStr]!, dayKey, idx);
                 }),
                 const SizedBox(height: 32),
               ],
@@ -731,54 +868,6 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
-  Widget _buildSupplementTracker(String dayKey) {
-    final suppState = ref.watch(supplementTrackerProvider);
-    final dayChecks = suppState[dayKey] ?? [false, false];
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).dividerColor),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Daily Supplements', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
-          const SizedBox(height: 12),
-          _buildSuppCheckboxRow('Creatine (5g)', dayKey, 0, dayChecks[0]),
-          const SizedBox(height: 12),
-          _buildSuppCheckboxRow('Finasteride (1mg)', dayKey, 1, dayChecks[1]),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSuppCheckboxRow(String title, String dayKey, int index, bool isChecked) {
-    return GestureDetector(
-      onTap: () => ref.read(supplementTrackerProvider.notifier).toggleSupplement(dayKey, index),
-      child: Row(
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: 28,
-            height: 28,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isChecked ? Colors.green.withValues(alpha: 0.2) : Colors.transparent,
-              border: Border.all(color: isChecked ? Colors.greenAccent : Colors.grey.withValues(alpha: 0.5), width: 2),
-            ),
-            child: Center(
-              child: isChecked ? const Icon(Icons.check, size: 16, color: Colors.greenAccent) : null,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text(title, style: const TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.w500)),
-        ],
-      ),
-    );
-  }
 
   Widget _buildDailyNutritionSummary(NutritionFact total, {String title = 'Daily Nutrition Goal'}) {
     return Container(
@@ -973,7 +1062,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
     );
   }
 
-  Widget _buildTimelineItem(TimelineItem item, GlobalKey key, String dayKey) {
+  Widget _buildTimelineItem(TimelineItem item, GlobalKey key, String dayKey, int itemIndex) {
     Widget _buildHighlightedText(String text, TextStyle baseStyle) {
       final words = <String>[];
       
@@ -1081,40 +1170,77 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
                 ),
                 if (item.details.isNotEmpty) ...[
                   const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor.withValues(alpha: 0.5),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: item.details.map((detail) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('• ', style: TextStyle(color: Colors.grey, fontSize: (item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement')) ? 18 : null)),
-                            Expanded(
-                              child: _buildHighlightedText(
-                                detail,
-                                TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: (item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement')) ? 18 : null,
-                                  height: (item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement')) ? 1.4 : null,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )).toList(),
-                    ),
-                  ),
+                  _buildDetailsList(item, dayKey, itemIndex),
                 ],
               ],
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildDetailsList(TimelineItem item, String dayKey, int itemIndex) {
+    final strikeState = ref.watch(detailStrikethroughProvider);
+    final dayStrikes = strikeState[dayKey] ?? {};
+    final isLargeText = item.title.startsWith('Shower & Bed Prep') || item.title.startsWith('Night Supplement');
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: item.details.asMap().entries.map((entry) {
+          final detailIndex = entry.key;
+          final detail = entry.value;
+          final compositeIndex = itemIndex * 100 + detailIndex;
+          final isStruck = detail.isTrackable && dayStrikes.contains(compositeIndex);
+          final showRed = !isStruck && detail.isTrackable && _isTimePassed(dayKey, item.time);
+
+          Widget content = Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('• ', style: TextStyle(
+                color: isStruck ? Colors.grey.withValues(alpha: 0.4) : (showRed ? Colors.redAccent : Colors.grey),
+                fontSize: isLargeText ? 18 : null,
+              )),
+              Expanded(
+                child: AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 200),
+                  style: TextStyle(
+                    color: isStruck ? Colors.grey.withValues(alpha: 0.35) : (showRed ? Colors.redAccent : Colors.white70),
+                    fontSize: isLargeText ? 18 : null,
+                    height: isLargeText ? 1.4 : null,
+                    decoration: isStruck ? TextDecoration.lineThrough : null,
+                    decorationColor: Colors.grey.withValues(alpha: 0.6),
+                    decorationThickness: 2,
+                  ),
+                  child: Text(detail.text),
+                ),
+              ),
+            ],
+          );
+
+          if (!detail.isTrackable) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3),
+              child: content,
+            );
+          }
+
+          return GestureDetector(
+            onTap: () => ref.read(detailStrikethroughProvider.notifier).toggleDetail(dayKey, compositeIndex),
+            behavior: HitTestBehavior.opaque,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(vertical: 3),
+              child: content,
+            ),
+          );
+        }).toList(),
       ),
     );
   }

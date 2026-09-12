@@ -649,6 +649,22 @@ class IngredientsData {
     ),
   );
 
+  static const Ingredient iodizedTableSalt = Ingredient(
+    id: 'iodized_table_salt',
+    name: 'Iodized Table Salt',
+    baseUnit: 'tsp',
+    nutritionPerBaseUnit: NutritionFact(
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fat: 0,
+      microNutrients: {
+        'Sodium (mg)': 2360,
+        'Iodine (mcg)': 270,
+      },
+    ),
+  );
+
 
 static const Ingredient marinaraSauce = Ingredient(
   id: 'marinara',
@@ -1230,5 +1246,6 @@ static const Ingredient marinaraSauce = Ingredient(
     blackPepper,
     italianSeasoning,
     groundCumin,
+    iodizedTableSalt,
   ];
 }

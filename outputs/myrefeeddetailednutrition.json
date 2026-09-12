@@ -35,6 +35,8 @@
                     "DHA (Food) (mg)": 0.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -42,7 +44,7 @@
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 210.0,
@@ -100,7 +102,7 @@
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 5.4,
-                    "Sodium (mg)": 1844.74,
+                    "Sodium (mg)": 2238.07,
                     "Fiber (g)": 41.91,
                     "Sugar (g)": 11.15,
                     "Added Sugar (g)": 1.81,
@@ -131,7 +133,7 @@
                     "EPA (Food) (mg)": 3.33,
                     "DHA (Food) (mg)": 3.33,
                     "Cholesterol (mg)": 113.33,
-                    "Iodine (mcg)": 100.0,
+                    "Iodine (mcg)": 145.0,
                     "Lutein & Zeaxanthin (mcg)": 2500.0,
                     "Capsanthin & Capsorubin (mg)": 1.67,
                     "Absorbed Iron (mg)": 0.38,
@@ -332,6 +334,8 @@
                     "DHA (Food) (mg)": 0.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -339,7 +343,7 @@
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 356.7,
@@ -401,7 +405,7 @@
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 5.4,
-                    "Sodium (mg)": 1844.74,
+                    "Sodium (mg)": 2238.07,
                     "Fiber (g)": 41.91,
                     "Sugar (g)": 11.15,
                     "Added Sugar (g)": 1.81,
@@ -432,7 +436,7 @@
                     "EPA (Food) (mg)": 3.33,
                     "DHA (Food) (mg)": 3.33,
                     "Cholesterol (mg)": 113.33,
-                    "Iodine (mcg)": 100.0,
+                    "Iodine (mcg)": 145.0,
                     "Lutein & Zeaxanthin (mcg)": 2500.0,
                     "Capsanthin & Capsorubin (mg)": 1.67,
                     "Absorbed Iron (mg)": 0.38,
@@ -635,6 +639,8 @@
                     "Selenium (Supplement) (mcg)": 25.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -642,7 +648,7 @@
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 356.7,
@@ -703,7 +709,7 @@
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 5.4,
-                    "Sodium (mg)": 1844.74,
+                    "Sodium (mg)": 2238.07,
                     "Fiber (g)": 41.91,
                     "Sugar (g)": 11.15,
                     "Added Sugar (g)": 1.81,
@@ -734,7 +740,7 @@
                     "EPA (Food) (mg)": 3.33,
                     "DHA (Food) (mg)": 3.33,
                     "Cholesterol (mg)": 113.33,
-                    "Iodine (mcg)": 100.0,
+                    "Iodine (mcg)": 145.0,
                     "Lutein & Zeaxanthin (mcg)": 2500.0,
                     "Capsanthin & Capsorubin (mg)": 1.67,
                     "Absorbed Iron (mg)": 0.38,
@@ -962,6 +968,8 @@
                     "DHA (Food) (mg)": 0.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -969,7 +977,7 @@
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 251.7,
@@ -1029,7 +1037,7 @@
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 5.4,
-                    "Sodium (mg)": 1844.74,
+                    "Sodium (mg)": 2238.07,
                     "Fiber (g)": 41.91,
                     "Sugar (g)": 11.15,
                     "Added Sugar (g)": 1.81,
@@ -1060,7 +1068,7 @@
                     "EPA (Food) (mg)": 3.33,
                     "DHA (Food) (mg)": 3.33,
                     "Cholesterol (mg)": 113.33,
-                    "Iodine (mcg)": 100.0,
+                    "Iodine (mcg)": 145.0,
                     "Lutein & Zeaxanthin (mcg)": 2500.0,
                     "Capsanthin & Capsorubin (mg)": 1.67,
                     "Absorbed Iron (mg)": 0.38,
@@ -1260,6 +1268,8 @@
                     "DHA (Food) (mg)": 0.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -1267,7 +1277,7 @@
                 }
             }
         },
-        "8:30-8:50 am": {
+        "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 321.0,
@@ -1330,7 +1340,7 @@
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 5.4,
-                    "Sodium (mg)": 1844.74,
+                    "Sodium (mg)": 2238.07,
                     "Fiber (g)": 41.91,
                     "Sugar (g)": 11.15,
                     "Added Sugar (g)": 1.81,
@@ -1361,7 +1371,7 @@
                     "EPA (Food) (mg)": 3.33,
                     "DHA (Food) (mg)": 3.33,
                     "Cholesterol (mg)": 113.33,
-                    "Iodine (mcg)": 100.0,
+                    "Iodine (mcg)": 145.0,
                     "Lutein & Zeaxanthin (mcg)": 2500.0,
                     "Capsanthin & Capsorubin (mg)": 1.67,
                     "Absorbed Iron (mg)": 0.38,
@@ -1561,6 +1571,8 @@
                     "DHA (Food) (mg)": 0.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -1568,7 +1580,7 @@
                 }
             }
         },
-        "8:30-9:05 am": {
+        "8:10-8:45 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 491.0,
@@ -1636,7 +1648,7 @@
                 "Fat": 22.9,
                 "Micros": {
                     "Saturated Fat (g)": 5.4,
-                    "Sodium (mg)": 1844.74,
+                    "Sodium (mg)": 2238.07,
                     "Fiber (g)": 41.91,
                     "Sugar (g)": 11.15,
                     "Added Sugar (g)": 1.81,
@@ -1667,7 +1679,7 @@
                     "EPA (Food) (mg)": 3.33,
                     "DHA (Food) (mg)": 3.33,
                     "Cholesterol (mg)": 113.33,
-                    "Iodine (mcg)": 100.0,
+                    "Iodine (mcg)": 145.0,
                     "Lutein & Zeaxanthin (mcg)": 2500.0,
                     "Capsanthin & Capsorubin (mg)": 1.67,
                     "Absorbed Iron (mg)": 0.38,
@@ -1863,6 +1875,8 @@
                     "DHA (Food) (mg)": 0.0,
                     "Citicoline (mg)": 250.0,
                     "Tyrosine (Supplement) (mg)": 25.0,
+                    "Sodium (mg)": 590.0,
+                    "Iodine (mcg)": 67.5,
                     "Absorbed Iron (mg)": 0.02,
                     "Absorbed Vitamin A (mcg)": 3.0,
                     "Absorbed Vitamin K (mcg)": 0.6,
@@ -1870,7 +1884,7 @@
                 }
             }
         },
-        "8:30-9:35 am": {
+        "8:10-9:15 am": {
             "title": "Morning Dine",
             "nutrition": {
                 "Calories": 391.0,

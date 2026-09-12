@@ -128,6 +128,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
       appBar: AppBar(
         title: const Text('El\'s Workout Plan'),
         actions: [
+          const WarmupTimerWidget(),
           IconButton(
             icon: const Icon(Icons.edit),
             tooltip: 'Edit Logs',
@@ -921,6 +922,105 @@ class _TipDialogState extends State<TipDialog> {
             child: const Text('Got it!'),
           )
       ],
+    );
+  }
+}
+
+class WarmupTimerWidget extends StatefulWidget {
+  const WarmupTimerWidget({super.key});
+
+  @override
+  State<WarmupTimerWidget> createState() => _WarmupTimerWidgetState();
+}
+
+class _WarmupTimerWidgetState extends State<WarmupTimerWidget> {
+  Timer? _timer;
+  int _seconds = 60;
+  int _clicks = 0; // 0: idle, 1: 60s, 2: 120s
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _onTap() {
+    setState(() {
+      if (_clicks == 0) {
+        _clicks = 1;
+        _seconds = 60;
+        _startTimer();
+      } else if (_clicks == 1) {
+        _clicks = 2;
+        _seconds += 60;
+      } else {
+        _reset();
+      }
+    });
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) return;
+      setState(() {
+        if (_seconds > 0) {
+          _seconds--;
+        } else {
+          _reset();
+        }
+      });
+    });
+  }
+
+  void _reset() {
+    _timer?.cancel();
+    _clicks = 0;
+    _seconds = 60;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color color;
+    if (_clicks == 0) {
+      color = Colors.white;
+    } else if (_clicks == 1) {
+      color = Colors.greenAccent;
+    } else {
+      color = Colors.redAccent;
+    }
+
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: InkWell(
+          onTap: _onTap,
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              border: Border.all(color: color.withValues(alpha: 0.5)),
+              borderRadius: BorderRadius.circular(8),
+              color: color.withValues(alpha: 0.1),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.timer, color: color, size: 16),
+                const SizedBox(width: 4),
+                Text(
+                  '$_seconds',
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -18,23 +18,23 @@ void main() {
     final monSchedule = DailyPlanData.schedules[DailyPlanData.mon]!;
     
     // Find items related to laundry face towels and bath towels
-    final faceTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bamboo Washcloths')));
-    final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
+    final faceTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.text.contains('Bamboo Washcloths')));
+    final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.text.contains('Bath Towels')));
 
-    final faceTowelsDetail = faceTowelsItem.details.firstWhere((d) => d.contains('Bamboo Washcloths'));
-    final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.contains('Bath Towels'));
+    final faceTowelsDetail = faceTowelsItem.details.firstWhere((d) => d.text.contains('Bamboo Washcloths'));
+    final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.text.contains('Bath Towels'));
 
-    expect(faceTowelsDetail, contains('Dry on LOW heat'));
-    expect(bathTowelsDetail, contains('Dry on LOW heat'));
+    expect(faceTowelsDetail.text, contains('Dry on LOW heat'));
+    expect(bathTowelsDetail.text, contains('Dry on LOW heat'));
   });
 
   test('Bath towels use Bleach', () {
     DailyPlanData.mockCurrentDate = DateTime(2026, 4, 15);
     final monSchedule = DailyPlanData.schedules[DailyPlanData.mon]!;
-    final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.contains('Bath Towels')));
-    final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.contains('Bath Towels'));
+    final bathTowelsItem = monSchedule.firstWhere((item) => item.details.any((d) => d.text.contains('Bath Towels')));
+    final bathTowelsDetail = bathTowelsItem.details.firstWhere((d) => d.text.contains('Bath Towels'));
     
-    expect(bathTowelsDetail, contains('Bleach'));
+    expect(bathTowelsDetail.text, contains('Bleach'));
   });
 
 
@@ -42,15 +42,15 @@ void main() {
   test('Dextrin counts and presence in grab lists are correct', () {
     expect(
         DailyPlanData.schedules[DailyPlanData.tue]!.any((item) =>
-            item.title.contains('Grab') && item.details.any((d) => d.contains('1 scoop Cluster Dextrin'))),
+            item.title.contains('Grab') && item.details.any((d) => d.text.contains('1 scoop Cluster Dextrin'))),
         isFalse);
     expect(
         DailyPlanData.schedules[DailyPlanData.wed]!.any((item) =>
-            item.title.contains('Grab') && item.details.any((d) => d.contains('1 scoop Cluster Dextrin'))),
+            item.title.contains('Grab') && item.details.any((d) => d.text.contains('1 scoop Cluster Dextrin'))),
         isFalse);
     expect(
         DailyPlanData.schedules[DailyPlanData.fri]!.any((item) =>
-            item.title.contains('Grab') && item.details.any((d) => d.contains('1 scoop Cluster Dextrin'))),
+            item.title.contains('Grab') && item.details.any((d) => d.text.contains('1 scoop Cluster Dextrin'))),
         isFalse);
   });
 
@@ -60,7 +60,7 @@ void main() {
       
       final commute = schedule.firstWhere((item) => item.title.contains('Commute to Gym'));
       expect(commute.time.contains('5:'), isTrue);
-      expect(commute.details.any((d) => d.contains('Mix 1 scoop Cluster Dextrin')), isTrue);
+      expect(commute.details.any((d) => d.text.contains('Mix 1 scoop Cluster Dextrin')), isTrue);
     }
   });
 
@@ -68,8 +68,8 @@ void main() {
     for (final day in DailyPlanData.schedules.keys) {
       final schedule = DailyPlanData.schedules[day]!;
       final fallAsleep = schedule.firstWhere((item) => item.title == 'Fall Asleep');
-      expect(fallAsleep.details, contains('Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.'));
-      expect(fallAsleep.details, contains('📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren\'t thinking about it in bed.'));
+      expect(fallAsleep.details.map((d) => d.text), contains('Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.'));
+      expect(fallAsleep.details.map((d) => d.text), contains('📝 Brain dump: Write down your to-do list for tomorrow on paper so you aren\'t thinking about it in bed.'));
     }
   });
 
@@ -114,7 +114,7 @@ void main() {
             }
           }
           
-          final grabDetails = grabThings.details.join(' ');
+          final grabDetails = grabThings.details.map((d) => d.text).join(' ');
           if (requiredEggs > 0) expect(grabDetails, contains('$requiredEggs Boiled Eggs'), reason: '$day (refeed=$isRefeed) missing eggs in grab list');
           if (requiredDextrins > 0) expect(grabDetails, contains(requiredDextrins == 1 ? '1 scoop Cluster Dextrin' : '$requiredDextrins scoops Cluster Dextrin'), reason: '$day (refeed=$isRefeed) missing dextrins in grab list');
           if (requiredBananas > 0) expect(grabDetails, contains('Banana'), reason: '$day (refeed=$isRefeed) missing Banana in grab list');
@@ -137,12 +137,12 @@ void main() {
       // Check Wednesday
       final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
       final wedCardio = wedSchedule.firstWhere((item) => item.title.contains('Haircut / Rest (Refeed Week)'));
-      expect(wedCardio.details.join(' '), contains('Skip LISS cardio'));
+      expect(wedCardio.details.map((d) => d.text).join(' '), contains('Skip LISS cardio'));
       
       // Check Saturday
       final satSchedule = DailyPlanData.schedules[DailyPlanData.sat]!;
       final satCardio = satSchedule.firstWhere((item) => item.title.contains('Haircut / Rest (Refeed Week)'));
-      expect(satCardio.details.join(' '), contains('Skip LISS cardio'));
+      expect(satCardio.details.map((d) => d.text).join(' '), contains('Skip LISS cardio'));
     } finally {
       DailyPlanData.mockCurrentDate = null;
     }
@@ -175,82 +175,154 @@ void main() {
   });
 
   test('Rule 13: Strict Pre-Workout Fat Restriction (Gastric Emptying)', () {
-    for (final entry in DailyPlanData.schedules.entries) {
-      final schedule = entry.value;
-      for (final item in schedule) {
-        final isGym = item.title.toLowerCase().contains('gym session') || item.isCardio;
-        if (!isGym) continue;
+    for (final isRefeed in [false, true]) {
+      try {
+        if (isRefeed) {
+          DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
+        } else {
+          DailyPlanData.mockCurrentDate = null;
+        }
+        for (final entry in DailyPlanData.schedules.entries) {
+          final schedule = entry.value;
+          for (final item in schedule) {
+            final isGym = item.title.toLowerCase().contains('gym session') || item.isCardio;
+            if (!isGym) continue;
 
-        final gymStart = parseTime(item.time);
-        
-        for (final preWorkoutItem in schedule) {
-          if (preWorkoutItem.mealRecord == null) continue;
-          
-          final mealEnd = parseTime(preWorkoutItem.time, isEnd: true);
-          final minutesBeforeGym = gymStart.difference(mealEnd).inMinutes;
+            final gymStart = parseTime(item.time);
+            
+            for (final preWorkoutItem in schedule) {
+              if (preWorkoutItem.mealRecord == null) continue;
+              
+              final mealEnd = parseTime(preWorkoutItem.time, isEnd: true);
+              final minutesBeforeGym = gymStart.difference(mealEnd).inMinutes;
 
-          if (minutesBeforeGym >= 0 && minutesBeforeGym <= 90) {
-            final fat = preWorkoutItem.mealRecord!.totalNutrition.fat;
-            expect(fat, lessThan(5.0), reason: 'Too much fat (${fat.toStringAsFixed(1)}g) within 90 mins of workout on ${entry.key}. Fat delays gastric emptying of intra-workout nutrients.');
+              if (minutesBeforeGym >= 0 && minutesBeforeGym <= 90) {
+                final fat = preWorkoutItem.mealRecord!.totalNutrition.fat;
+                expect(fat, lessThan(5.0), reason: 'Too much fat (${fat.toStringAsFixed(1)}g) within 90 mins of workout on ${entry.key} (refeed: $isRefeed). Fat delays gastric emptying of intra-workout nutrients.');
+              }
+            }
           }
         }
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
       }
     }
   });
 
   test('Rule 14: Morning Leucine Threshold Spike', () {
-    int daysHittingThreshold = 0;
-    List<String> failedDays = [];
-
-    for (final entry in DailyPlanData.schedules.entries) {
-      final schedule = entry.value;
-      double morningProtein = 0.0;
-
-      for (final item in schedule) {
-        final time = parseTime(item.time);
-        if (time.hour < 10) { 
-           if (item.mealRecord != null) {
-              morningProtein += item.mealRecord!.totalNutrition.protein;
-           }
+    for (final isRefeed in [false, true]) {
+      try {
+        if (isRefeed) {
+          DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
+        } else {
+          DailyPlanData.mockCurrentDate = null;
         }
+        int daysHittingThreshold = 0;
+        List<String> failedDays = [];
+
+        for (final entry in DailyPlanData.schedules.entries) {
+          final schedule = entry.value;
+          double morningProtein = 0.0;
+
+          for (final item in schedule) {
+            final time = parseTime(item.time);
+            if (time.hour < 10) { 
+               if (item.mealRecord != null) {
+                  morningProtein += item.mealRecord!.totalNutrition.protein;
+               }
+            }
+          }
+          
+          if (morningProtein >= 25.0) {
+            daysHittingThreshold++;
+          } else {
+            failedDays.add('${entry.key} (${morningProtein.toStringAsFixed(1)}g)');
+          }
+          
+          expect(morningProtein, greaterThanOrEqualTo(18.0), 
+              reason: 'Morning protein fell below the absolute minimum of 18g on ${entry.key} (refeed: $isRefeed). Only consumed ${morningProtein.toStringAsFixed(1)}g.');
+        }
+        
+        expect(daysHittingThreshold, greaterThanOrEqualTo(5), 
+            reason: 'Failed to hit the optimal 25g Morning Leucine Threshold on at least 5 days (refeed: $isRefeed). Failed days: ${failedDays.join(', ')}');
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
       }
-      
-      if (morningProtein >= 25.0) {
-        daysHittingThreshold++;
-      } else {
-        failedDays.add('${entry.key} (${morningProtein.toStringAsFixed(1)}g)');
-      }
-      
-      expect(morningProtein, greaterThanOrEqualTo(18.0), 
-          reason: 'Morning protein fell below the absolute minimum of 18g on ${entry.key}. Only consumed ${morningProtein.toStringAsFixed(1)}g.');
     }
-    
-    expect(daysHittingThreshold, greaterThanOrEqualTo(5), 
-        reason: 'Failed to hit the optimal 25g Morning Leucine Threshold on at least 5 days. Failed days: ${failedDays.join(', ')}');
   });
 
   test('Rule 15: Deep Sleep Insulin Curfew (Growth Hormone & Fat Oxidation Protection)', () {
-    for (final entry in DailyPlanData.schedules.entries) {
-      final schedule = entry.value;
-      final sleepItem = schedule.firstWhere((i) => i.title.toLowerCase().contains('fall asleep'));
-      final sleepStart = parseTime(sleepItem.time);
-      DateTime fixedSleepStart = sleepStart.hour < 4 ? sleepStart.add(const Duration(days: 1)) : sleepStart;
-
-      for (final item in schedule) {
-        if (item.mealRecord == null) continue;
-
-        final mealEnd = parseTime(item.time, isEnd: true);
-        DateTime fixedMealEnd = mealEnd.hour < 4 ? mealEnd.add(const Duration(days: 1)) : mealEnd;
-        
-        final minutesBeforeSleep = fixedSleepStart.difference(fixedMealEnd).inMinutes;
-
-        if (minutesBeforeSleep >= 0 && minutesBeforeSleep <= 120) {
-          final hasBananas = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.banana);
-          final hasDextrin = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.clusterDextrin);
-          
-          expect(hasBananas, isFalse, reason: 'High-glycemic Bananas found within 2 hours of sleep on ${entry.key}. This will spike insulin and blunt GH/fat oxidation.');
-          expect(hasDextrin, isFalse, reason: 'Cluster Dextrin found within 2 hours of sleep on ${entry.key}.');
+    for (final isRefeed in [false, true]) {
+      try {
+        if (isRefeed) {
+          DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
+        } else {
+          DailyPlanData.mockCurrentDate = null;
         }
+        for (final entry in DailyPlanData.schedules.entries) {
+          final schedule = entry.value;
+          final sleepItem = schedule.firstWhere((i) => i.title.toLowerCase().contains('fall asleep'));
+          final sleepStart = parseTime(sleepItem.time);
+          DateTime fixedSleepStart = sleepStart.hour < 4 ? sleepStart.add(const Duration(days: 1)) : sleepStart;
+
+          for (final item in schedule) {
+            if (item.mealRecord == null) continue;
+
+            final mealEnd = parseTime(item.time, isEnd: true);
+            DateTime fixedMealEnd = mealEnd.hour < 4 ? mealEnd.add(const Duration(days: 1)) : mealEnd;
+            
+            final minutesBeforeSleep = fixedSleepStart.difference(fixedMealEnd).inMinutes;
+
+            if (minutesBeforeSleep >= 0 && minutesBeforeSleep <= 120) {
+              final hasBananas = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.banana);
+              final hasDextrin = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.clusterDextrin);
+              
+              expect(hasBananas, isFalse, reason: 'High-glycemic Bananas found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed). This will spike insulin and blunt GH/fat oxidation.');
+              expect(hasDextrin, isFalse, reason: 'Cluster Dextrin found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed).');
+            }
+          }
+        }
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
+      }
+    }
+  });
+
+  test('Rule 16: Pre-workout must contain carb, water, and sodium on resistance training days', () {
+    for (final isRefeed in [false, true]) {
+      try {
+        if (isRefeed) {
+          DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28)); // Week 5
+        } else {
+          DailyPlanData.mockCurrentDate = null; // Normal week
+        }
+
+        final resistanceDays = [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.thu, DailyPlanData.fri];
+        for (final day in resistanceDays) {
+          final schedule = DailyPlanData.schedules[day]!;
+          final commute = schedule.firstWhere((item) => item.title.contains('Commute to Gym (Resistance)'));
+          
+          final detailsString = commute.details.map((d) => d.text.toLowerCase()).join(' ');
+          
+          // Carb check
+          double totalCarbs = 0.0;
+          if (commute.mealRecord != null) {
+            totalCarbs = commute.mealRecord!.totalNutrition.carbs;
+          }
+          expect(totalCarbs, greaterThanOrEqualTo(50.0), reason: '$day missing pre-workout carb (>50g) during ${isRefeed ? 'refeed' : 'cut'}');
+          
+          // Water check
+          expect(detailsString, contains('21oz water bottle'), reason: '$day missing pre-workout water during ${isRefeed ? 'refeed' : 'cut'}');
+          
+          // Sodium check
+          double totalSodium = 0.0;
+          if (commute.mealRecord != null) {
+            totalSodium = commute.mealRecord!.totalNutrition.microNutrients['Sodium (mg)'] ?? 0.0;
+          }
+          expect(totalSodium, greaterThanOrEqualTo(600.0), reason: '$day missing adequate pre-workout sodium (>=600mg) during ${isRefeed ? 'refeed' : 'cut'}');
+        }
+      } finally {
+        DailyPlanData.mockCurrentDate = null;
       }
     }
   });
@@ -281,3 +353,4 @@ DateTime parseTime(String timeString, {bool isEnd = false}) {
   
   return DateTime(2026, 1, 1, hour, minute);
 }
+

@@ -12,11 +12,18 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
+[8:10-8:30 am] Morning Dine
+  - Eat in front of Verilux HappyLight (45-degree angle to face):
+  - 3 Boiled Eggs
+  - 2 standalone K2 (100mcg each)
+  - 1 cap Biotin+Keratin (10mg/500mg)
+  - 1 cap Zinc Picolinate (30mg)
+  - Swish/drink water after eating/drinking to clear mouth
+[8:30-8:50 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
   - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
   - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
   - Pat dry with new bamboo baby washcloth
@@ -24,13 +31,6 @@
   - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Get dressed for the gym
-[8:30-8:50 am] Morning Dine
-  - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 3 Boiled Eggs
-  - 2 standalone K2 (100mcg each)
-  - 1 cap Biotin+Keratin (10mg/500mg)
-  - 1 cap Zinc Picolinate (30mg)
-  - Swish/drink water after eating/drinking to clear mouth
 [8:50-1:00 pm] Work
   - Laundry Cycle 1: Bamboo Washcloths & Cotton Pillowcases (3/5 warmness) -> 1-2 tbsp All Free Clear (Liquid). NO Fabric Softener (Dry on LOW heat)
   - Run Dishwasher
@@ -44,7 +44,7 @@
   - Study (Beat traffic before gym)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
+  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout) + drink one 21oz water bottle
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle (+ 0.5 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
 [6:30-8:00 pm] Chest, Shoulders & Triceps
 [8:00-8:30 pm] Commute Home
@@ -64,7 +64,7 @@
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - 🛑 Grab a FRESH Bath Towel for the new rotation; skip the bamboo!
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
@@ -90,19 +90,10 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
-  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
-  - Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
-  - WAIT 90s
-  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed for work (cloud x 4)
-[8:30-8:50 am] Morning Dine
+[8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Salmon (from fridge)
@@ -111,6 +102,15 @@
   - 1 cap Biotin+Keratin (10mg/500mg)
   - 1 cap Zinc Picolinate (30mg)
   - Swish/drink water after eating/drinking to clear mouth
+[8:30-8:50 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
+  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Get dressed for work (cloud x 4)
 [8:50-8:55 am] Grab things to take to work
   - kindle/laptop
   - 2 key/wallet/phone
@@ -124,20 +124,20 @@
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
+{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
 [1:00-1:30 pm] Lunch
 {{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
 {{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
+{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
+  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout) + drink one 21oz water bottle
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle (+ 0.5 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
 [6:30-8:00 pm] Legs (Quads & Calves)
 [8:00-8:30 pm] Commute Home
@@ -157,7 +157,7 @@
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
@@ -182,20 +182,11 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 600mg NAC + 25mcg Selenium (Combo Pill)
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
-  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
-  - Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
-  - WAIT 90s
-  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed for work (NK 9060/Bondi)
-[8:30-8:50 am] Morning Dine
+[8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Salmon (from fridge)
@@ -204,6 +195,15 @@
   - 1 cap Biotin+Keratin (10mg/500mg)
   - Swish/drink water after eating/drinking to clear mouth
   - 🥩 Take ground beef out of freezer to thaw in fridge
+[8:30-8:50 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
+  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Get dressed for work (NK 9060/Bondi)
 [8:50-8:55 am] Grab things to take to work
   - kindle/laptop
   - 2 key/wallet/phone
@@ -217,13 +217,13 @@
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
+{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
 [1:00-1:30 pm] Lunch
 {{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
 {{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
+{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-6:05 pm] Study Time
@@ -231,7 +231,7 @@
   - Study (Beat traffic before gym)
 [6:05-6:15 pm] Get Dressed & Commute to Gym (LISS)
   - Get dressed for gym
-{{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout){{/if}}
+{{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout) + drink one 21oz water bottle{{/if}}
   - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
 [6:15-7:25 pm] {{isRefeedWeek ? "Haircut / Rest (Refeed Week)" : "Cardio (LISS) / Haircut"}}
 {{#if isRefeedWeek}}  - Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.{{/if}}
@@ -252,7 +252,7 @@
 [9:20-9:50 pm] Relax / Catch up on reading
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: CeraVe Gentle Shampoo (45s lather)
@@ -278,11 +278,18 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
+[8:10-8:30 am] Morning Dine
+  - Eat in front of Verilux HappyLight (45-degree angle to face):
+  - Finish leftover 0.5 portion of Salmon (from fridge)
+  - 2 Boiled Eggs
+  - 2 standalone K2 (100mcg each)
+  - 1 cap Biotin+Keratin (10mg/500mg)
+  - Swish/drink water after eating/drinking to clear mouth
+[8:30-8:50 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
   - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
   - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
   - Pat dry with new bamboo baby washcloth
@@ -290,13 +297,6 @@
   - WAIT 90s
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Get dressed for the gym
-[8:30-8:50 am] Morning Dine
-  - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - Finish leftover 0.5 portion of Salmon (from fridge)
-  - 2 Boiled Eggs
-  - 2 standalone K2 (100mcg each)
-  - 1 cap Biotin+Keratin (10mg/500mg)
-  - Swish/drink water after eating/drinking to clear mouth
 [8:50-1:00 pm] Work
   - Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)
   - Run Dishwasher
@@ -310,7 +310,7 @@
   - Study (Beat traffic before gym)
 [5:55-6:20 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
+  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout) + drink one 21oz water bottle
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle (+ 0.5 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
   - 🧤 Grab Gym Gloves
 [6:20-7:50 pm] Back, Biceps & Forearms
@@ -331,7 +331,7 @@
 [9:30-10:00 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - 🛑 Grab a FRESH Bath Towel for the new rotation; skip the bamboo!
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
@@ -356,19 +356,10 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
-  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
-  - Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
-  - WAIT 90s
-  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed for work (cloud x 4)
-[8:30-8:50 am] Morning Dine
+[8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
@@ -377,6 +368,15 @@
   - 1 cap Biotin+Keratin (10mg/500mg)
   - 1 cap Copper Glycinate (3mg)
   - Swish/drink water after eating/drinking to clear mouth
+[8:30-8:50 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
+  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Get dressed for work (cloud x 4)
 [8:50-8:55 am] Grab things to take to work
   - kindle/laptop
   - 2 key/wallet/phone
@@ -390,20 +390,20 @@
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
+{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
 [1:00-1:30 pm] Lunch
 {{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
 {{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍♂️ Use Standing Desk for 3-4 hours{{/if}}
+{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout)
+  - 🍌 Eat {{isRefeedWeek ? "3 Medium Bananas" : "1 Medium Banana"}} (Pre-Workout) + drink one 21oz water bottle
   - Mix 1 scoop Cluster Dextrin + 1 scoop whey isolate (30g protein) in water bottle (+ 0.5 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
 [6:30-8:00 pm] Legs (Hamstrings / Glutes)
 [8:00-8:30 pm] Commute Home
@@ -422,7 +422,7 @@
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
@@ -447,19 +447,10 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
-  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
-  - Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
-  - WAIT 90s
-  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed for gym (Hoka Bondi 8)
-[8:30-9:05 am] Morning Dine
+[8:10-8:45 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
@@ -471,6 +462,15 @@
   - 1 softgel Vitamin E (267mg)
   - Swish/drink water after eating/drinking to clear mouth
   - 20mg adderall IR
+[8:45-9:05 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
+  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Get dressed for gym (Hoka Bondi 8)
 [9:05-10:35 am] Study Time
 [10:35-10:55 am] Diffuse Brain Rest
   - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
@@ -487,7 +487,7 @@
 [5:30-6:20 pm] Study Time
 [6:20-6:25 pm] Get Dressed & Commute to Gym (LISS)
   - Get dressed for gym
-{{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout){{/if}}
+{{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout) + drink one 21oz water bottle{{/if}}
   - Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [6:25-7:35 pm] {{isRefeedWeek ? "Haircut / Rest (Refeed Week)" : "Cardio (LISS) / Haircut"}}
 {{#if isRefeedWeek}}  - Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.{{/if}}
@@ -507,7 +507,7 @@
 [8:50-9:35 pm] Relax / Catch up on reading
 [9:35-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: Nizoral 1% (5m lather)
@@ -533,19 +533,10 @@
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
-  - Drink cold water
+  - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
 {{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
-[8:10-8:30 am] Get Ready
-  - Brush teeth
-  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
-  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
-  - Pat dry with new bamboo baby washcloth
-  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
-  - WAIT 90s
-  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-  - Get dressed for shopping (NK 9060)
-[8:30-9:35 am] Morning Dine
+[8:10-9:15 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
   - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
@@ -554,6 +545,15 @@
   - 1 standalone K2 (100mcg)
   - 1 cap Biotin+Keratin (10mg/500mg)
   - Swish/drink water after eating/drinking to clear mouth
+[9:15-9:35 am] Get Ready
+  - Brush teeth (Colgate Optic White) -> Spit, do not rinse. Wait 30m before drinking.
+  - Blotting Sheet: Use 2-3 sheets to absorb heavy overnight sebum
+  - Gently splash face/neck with water for 5-10s to rinse off overnight sweat
+  - Pat dry with new bamboo baby washcloth
+  - Ascorbyl 12% (Apply to slightly damp skin, AVOID orbital bone): 5 drops (1 forehead, 1 left cheek, 1 right cheek, 2 neck)
+  - WAIT 90s
+  - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
+  - Get dressed for shopping (NK 9060)
 [9:50-11:20 am] Study Time
   - 20mg adderall IR at 9:50am
 [11:20-11:50 am] Diffuse Brain Rest
@@ -587,7 +587,7 @@
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:50 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
-  - Brush teeth
+  - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage

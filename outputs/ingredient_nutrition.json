@@ -1104,5 +1104,19 @@
                 "Potassium (mg)": 38.0
             }
         }
+    },
+    "iodized_table_salt": {
+        "name": "Iodized Table Salt",
+        "baseUnit": "tsp",
+        "nutrition": {
+            "Calories": 0.0,
+            "Protein": 0.0,
+            "Carbs": 0.0,
+            "Fat": 0.0,
+            "Micros": {
+                "Sodium (mg)": 2360.0,
+                "Iodine (mcg)": 270.0
+            }
+        }
     }
 }
