@@ -8,7 +8,7 @@
 #   {{VAR ? "trueText" : "falseText"}}  - inline substitution
 
 === Monday ===
-[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
+[Active variables: isRefeedWeek, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
@@ -65,17 +65,16 @@
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - 🛑 Grab a FRESH Bath Towel for the new rotation; skip the bamboo!
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with the FRESH Bath Towel (Do Skincare immediately while bathroom is humid, before drying your body)
 [10:20-10:50 pm] Night Supplement & Wind Down
   - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
-{{#if !isWinter}}  - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m{{/if}}
-{{#if isWinter}}  - Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m{{/if}}
+  - Paula's Choice 2% BHA (CRUCIAL: Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
@@ -158,11 +157,11 @@
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
 [10:20-10:50 pm] Night Supplement & Wind Down
@@ -178,7 +177,7 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Wednesday ===
-[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
+[Active variables: isRefeedWeek, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
@@ -253,17 +252,16 @@
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: CeraVe Gentle Shampoo (45s lather)
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
 [10:20-10:50 pm] Night Supplement & Wind Down
   - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
-{{#if !isWinter}}  - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m{{/if}}
-{{#if isWinter}}  - Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m{{/if}}
+  - Retinol (CRUCIAL: Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
@@ -274,7 +272,7 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Thursday ===
-[Active variables: isRefeedWeek, isAshwagandhaOff]
+[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
@@ -332,16 +330,16 @@
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - 🛑 Grab a FRESH Bath Towel for the new rotation; skip the bamboo!
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with the FRESH Bath Towel (Do Skincare immediately while bathroom is humid, before drying your body)
 [10:00-10:50 pm] Night Supplement & Wind Down
   - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
-  - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m
+  - Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
@@ -423,16 +421,16 @@
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
 [10:20-10:50 pm] Night Supplement & Wind Down
   - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
-  - Retinol (Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m
+  - Paula's Choice 2% BHA (CRUCIAL: Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
@@ -443,7 +441,7 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Saturday ===
-[Active variables: isRefeedWeek, isAshwagandhaOff]
+[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
@@ -508,16 +506,16 @@
 [9:35-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: Nizoral 1% (5m lather)
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
 [10:20-10:35 pm] Night Supplement & Wind Down
   - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
-  - Paula's Choice 2% BHA (Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m
+  - Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry
@@ -529,7 +527,7 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Sunday ===
-[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff, isNextWeekRefeedWeek]
+[Active variables: isRefeedWeek, isAshwagandhaOff, isNextWeekRefeedWeek]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
@@ -588,16 +586,16 @@
 [8:50-9:50 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
-  - Pre-Shower: Rub 2-3 pumps dedicated Cleansing Oil on DRY face (30s) to melt sunscreen/sweat
+  - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
   - Hair: 60s warm massage
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
-  - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water for EXACTLY 30s (then rinse)
+  - Face: Lather 1 pump of Lipikar AP+ (Barrier Shield) in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
   - Pat face & beard completely dry with a new bamboo baby washcloth (Do Skincare immediately while bathroom is humid)
 [9:50-10:05 pm] Night Supplement & Wind Down
   - 📖 WIND DOWN: Read a physical book, use a Kindle (warm light/dark mode), or stretch. strictly NO phone scrolling or videos.
-  - Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m
+  - Retinol (CRUCIAL: Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m
   - Underarms: Ensure pits are BONE DRY -> Moisturize with face moisturizer (Vanicream Daily Facial) -> WAIT to dry -> Apply 5% AHA Deodorant
   - Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone
   - Moisturizer (Cetaphil Hydrating Lotion): Apply 1.5 pumps for face, 1.5 pumps for neck, and 0.5 pumps for ears, then rub in -> WAIT to dry

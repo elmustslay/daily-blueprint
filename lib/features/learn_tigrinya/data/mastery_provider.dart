@@ -92,6 +92,49 @@ class MasteryStorage {
   }
 }
 
+/// Tracks chunk-level progression within modules.
+///
+/// For large modules (e.g. Noun Suffixes with 43 items), items are split into
+/// chunks of 6-10. The learner must pass each chunk at ≥85% before moving on.
+/// The overall module mastery is updated as completedChunks / totalChunks,
+/// so the module only counts as "passed" when all chunks are complete.
+class ChunkStorage {
+  static String _chunkKey(String moduleId, DrillStage stage) =>
+      'tigrinya_chunk_${moduleId}_${stage.name}';
+
+  /// Returns the number of chunks the learner has completed for this module+stage.
+  static int getChunksCompleted(String moduleId, DrillStage stage) {
+    final prefs = SharedPrefsLogic.instance;
+    return prefs.getInt(_chunkKey(moduleId, stage)) ?? 0;
+  }
+
+  /// Marks a chunk as completed and updates the overall mastery score.
+  /// The mastery score = completedChunks / totalChunks.
+  static Future<void> completeChunk(
+    String moduleId,
+    Tense tense,
+    DrillStage stage,
+    int newCompletedCount,
+    int totalChunks,
+  ) async {
+    final prefs = SharedPrefsLogic.instance;
+    final current = getChunksCompleted(moduleId, stage);
+    if (newCompletedCount > current) {
+      await prefs.setInt(_chunkKey(moduleId, stage), newCompletedCount);
+    }
+    // Update overall mastery as fraction of chunks completed
+    final effectiveCompleted = newCompletedCount > current ? newCompletedCount : current;
+    final mastery = effectiveCompleted / totalChunks;
+    await MasteryStorage.setMastery(moduleId, tense, stage, mastery);
+  }
+
+  /// Returns the current chunk index the learner should work on (0-indexed).
+  /// If all chunks are complete, returns totalChunks (meaning done).
+  static int getCurrentChunkIndex(String moduleId, DrillStage stage) {
+    return getChunksCompleted(moduleId, stage);
+  }
+}
+
 /// Riverpod provider that exposes mastery data reactively.
 class MasteryNotifier extends Notifier<Map<String, double>> {
   @override

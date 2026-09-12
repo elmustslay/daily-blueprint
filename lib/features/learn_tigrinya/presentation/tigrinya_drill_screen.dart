@@ -304,6 +304,28 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
       listItems = TigrinyaDrillsData.intimatePhraseItems.map((i) {
         return _buildTeachRow(i.english, i.amharic, i.tigrinya);
       }).toList();
+    } else if (widget.module.type == DrillModuleType.identityToBe) {
+      listItems.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 8, bottom: 4),
+          child: Text('✅ I Am... (ኣነ ... እየ)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.greenAccent), textAlign: TextAlign.center),
+        ),
+      );
+      for (final item in TigrinyaDrillsData.identityItems) {
+        listItems.add(_buildTeachRow(item.english, item.amharic, item.tigrinya));
+      }
+    } else if (widget.module.type == DrillModuleType.emotion) {
+      listItems = TigrinyaDrillsData.emotionItems.map((e) {
+        return _buildTeachRow(e.english, e.amharic, e.tigrinya);
+      }).toList();
+    } else if (widget.module.type == DrillModuleType.withConstruction) {
+      listItems = TigrinyaDrillsData.withConstructionItems.map((w) {
+        return _buildTeachRow(w.english, w.amharic, w.tigrinya);
+      }).toList();
+    } else if (widget.module.type == DrillModuleType.questionWordBasic) {
+      listItems = TigrinyaDrillsData.questionWordBasicItems.map((q) {
+        return _buildTeachRow(q.english, q.amharic, q.tigrinya);
+      }).toList();
     }
     
     return Padding(
@@ -983,13 +1005,54 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
 
     final percent = (session.scorePercent * 100).toInt();
     final passed = session.scorePercent >= 0.85;
+    final isChunked = session.totalChunks > 1;
+    final isLastChunk = session.chunkIndex >= session.totalChunks - 1;
+    final hasMoreChunks = isChunked && passed && !isLastChunk;
 
-    // Save mastery
+    // Save mastery (and chunk progress for chunked modules)
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(masteryProvider.notifier)
-          .saveMastery(widget.module.id, widget.tense, session.stage, session.scorePercent);
+      if (isChunked && passed) {
+        // Save chunk completion + update overall mastery
+        ChunkStorage.completeChunk(
+          widget.module.id,
+          widget.tense,
+          session.stage,
+          session.chunkIndex + 1,
+          session.totalChunks,
+        );
+        ref.read(masteryProvider.notifier).saveMastery(
+          widget.module.id,
+          widget.tense,
+          session.stage,
+          (session.chunkIndex + 1) / session.totalChunks,
+        );
+      } else {
+        ref
+            .read(masteryProvider.notifier)
+            .saveMastery(widget.module.id, widget.tense, session.stage, session.scorePercent);
+      }
     });
+
+    // Build chunk status text
+    String statusText;
+    String titleText;
+    if (isChunked) {
+      if (passed) {
+        if (isLastChunk) {
+          titleText = 'All Chunks Complete! 🎉';
+          statusText = 'Module mastered — all ${session.totalChunks} chunks done!';
+        } else {
+          titleText = 'Chunk ${session.chunkIndex + 1} of ${session.totalChunks} Passed!';
+          statusText = 'Next chunk ready. Keep going!';
+        }
+      } else {
+        titleText = 'Keep Practicing!';
+        statusText = 'Chunk ${session.chunkIndex + 1} of ${session.totalChunks} — ${(0.85 * 100).toInt()}% needed';
+      }
+    } else {
+      titleText = passed ? 'Module Mastered! 🎉' : 'Keep Practicing!';
+      statusText = passed ? 'Progress Saved! 🔓' : '${(0.85 * 100).toInt()}% needed to pass';
+    }
 
     return Center(
       child: Padding(
@@ -1004,11 +1067,12 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
             ),
             const SizedBox(height: 20),
             Text(
-              passed ? 'Module Mastered! 🎉' : 'Keep Practicing!',
+              titleText,
               style: const TextStyle(
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
@@ -1024,21 +1088,37 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
               '${session.totalCorrect} correct out of ${session.totalAnswered}',
               style: const TextStyle(fontSize: 14, color: Colors.white70),
             ),
-            if (passed) ...[
-              const SizedBox(height: 8),
-              const Text(
-                'Progress Saved! 🔓',
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.greenAccent,
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-            if (!passed) ...[
-              const SizedBox(height: 8),
-              Text(
-                '${(0.85 * 100).toInt()}% needed to pass',
-                style: const TextStyle(fontSize: 13, color: Colors.white54),
+            const SizedBox(height: 8),
+            Text(
+              statusText,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: passed ? Colors.greenAccent : Colors.white54,
+                  fontWeight: passed ? FontWeight.w600 : FontWeight.normal),
+              textAlign: TextAlign.center,
+            ),
+            // Chunk progress dots
+            if (isChunked) ...[
+              const SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(session.totalChunks, (i) {
+                  final isDone = i < session.chunkIndex + (passed ? 1 : 0);
+                  final isCurrent = i == session.chunkIndex;
+                  return Container(
+                    width: 10,
+                    height: 10,
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: isDone
+                          ? Colors.greenAccent
+                          : isCurrent
+                              ? Colors.amberAccent
+                              : Colors.white24,
+                    ),
+                  );
+                }),
               ),
             ],
             const SizedBox(height: 32),
@@ -1059,21 +1139,38 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
                   ),
                 ),
                 const SizedBox(width: 16),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    ref.read(drillSessionProvider.notifier).startSession(
-                        widget.module, widget.tense, widget.initialStage);
-                  },
-                  icon: const Icon(Icons.refresh_rounded),
-                  label: const Text('Retry'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlueAccent,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                if (hasMoreChunks)
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      ref.read(drillSessionProvider.notifier).startSession(
+                          widget.module, widget.tense, widget.initialStage);
+                    },
+                    icon: const Icon(Icons.arrow_forward_rounded),
+                    label: const Text('Next Chunk'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.greenAccent.shade700,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                  )
+                else
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      ref.read(drillSessionProvider.notifier).startSession(
+                          widget.module, widget.tense, widget.initialStage);
+                    },
+                    icon: const Icon(Icons.refresh_rounded),
+                    label: const Text('Retry'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.lightBlueAccent,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
                   ),
-                ),
               ],
             ),
           ],

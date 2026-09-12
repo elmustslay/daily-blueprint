@@ -46,26 +46,16 @@ fi
 green "Found device: $DEVICE_ID"
 
 # ── Build & install ───────────────────────────────────────────────────────
-cyan "Building and installing to iPhone (this takes ~90 seconds)..."
+cyan "Building the app (this takes ~90 seconds)..."
+
+# Build the release bundle explicitly
+flutter build ios --release
+
+cyan "Installing the app to your iPhone via devicectl..."
 cyan "Keep your phone UNLOCKED during installation."
 
-flutter run --release -d "$DEVICE_ID" &
-FLUTTER_PID=$!
-
-# Wait for the app to be installed and launched, then kill flutter run
-# (flutter run stays open for hot-reload, but we don't need that in release)
-while kill -0 "$FLUTTER_PID" 2>/dev/null; do
-  if grep -q "Installing and launching" /tmp/flutter_install_$$.log 2>/dev/null; then
-    sleep 3
-    break
-  fi
-  sleep 2
-done
-
-# Give it a moment to finish launching, then terminate flutter run
-sleep 5
-kill "$FLUTTER_PID" 2>/dev/null || true
-wait "$FLUTTER_PID" 2>/dev/null || true
+# Use devicectl to directly push the .app bundle, avoiding flutter run's flaky wireless debugger
+xcrun devicectl device install app --device "$DEVICE_ID" build/ios/iphoneos/Runner.app
 
 green ""
 green "============================================"

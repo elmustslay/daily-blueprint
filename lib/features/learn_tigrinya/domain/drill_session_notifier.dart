@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'tigrinya_models.dart';
 import 'drill_engine.dart';
 import '../data/tigrinya_drills_data.dart';
+import '../data/mastery_provider.dart';
 
 class DrillSessionState {
   final DrillModule? module;
@@ -18,6 +19,10 @@ class DrillSessionState {
   final int totalCorrect;
   final double progress;
   final bool isComplete;
+  
+  // Chunk tracking
+  final int chunkIndex;
+  final int totalChunks;
   
   // Data for Teach stage
   final List<Pronoun> studyPronouns;
@@ -36,6 +41,8 @@ class DrillSessionState {
     this.totalCorrect = 0,
     this.progress = 0.0,
     this.isComplete = false,
+    this.chunkIndex = 0,
+    this.totalChunks = 1,
     this.studyPronouns = const [],
     this.studyMap,
   });
@@ -53,6 +60,8 @@ class DrillSessionState {
     int? totalCorrect,
     double? progress,
     bool? isComplete,
+    int? chunkIndex,
+    int? totalChunks,
     List<Pronoun>? studyPronouns,
     ConjugationMap? studyMap,
   }) {
@@ -69,6 +78,8 @@ class DrillSessionState {
       totalCorrect: totalCorrect ?? this.totalCorrect,
       progress: progress ?? this.progress,
       isComplete: isComplete ?? this.isComplete,
+      chunkIndex: chunkIndex ?? this.chunkIndex,
+      totalChunks: totalChunks ?? this.totalChunks,
       studyPronouns: studyPronouns ?? this.studyPronouns,
       studyMap: studyMap ?? this.studyMap,
     );
@@ -86,7 +97,18 @@ class DrillSessionNotifier extends Notifier<DrillSessionState> {
   }
 
   void startSession(DrillModule module, Tense tense, DrillStage stage, {bool isReview = false}) {
-    _engine = DrillEngine(module: module, tense: tense);
+    // Determine chunk info
+    final totalChunks = DrillEngine.getTotalChunks(module.type);
+    final currentChunk = totalChunks > 1
+        ? ChunkStorage.getCurrentChunkIndex(module.id, stage)
+        : 0;
+    
+    _engine = DrillEngine(
+      module: module,
+      tense: tense,
+      chunkIndex: currentChunk,
+      totalChunks: totalChunks,
+    );
     
     if (isReview) {
       _engine!.generateReviewDeck();
@@ -109,6 +131,8 @@ class DrillSessionNotifier extends Notifier<DrillSessionState> {
       currentCard: _engine!.currentCard,
       mcqOptions: stage == DrillStage.mcq ? _engine!.generateMcqOptions() : [],
       progress: 0.0,
+      chunkIndex: currentChunk,
+      totalChunks: totalChunks,
       studyPronouns: TigrinyaDrillsData.pronouns,
       studyMap: map,
     );

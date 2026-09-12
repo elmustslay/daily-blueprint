@@ -11,6 +11,8 @@ import 'conjugator.dart';
 class DrillEngine {
   final DrillModule module;
   final Tense tense;
+  final int chunkIndex;
+  final int totalChunks;
   final Random _rng = Random();
 
   /// The main card deck (includes retry insertions).
@@ -28,7 +30,101 @@ class DrillEngine {
   int _totalAnswered = 0;
   int _totalCorrect = 0;
 
-  DrillEngine({required this.module, required this.tense});
+  DrillEngine({required this.module, required this.tense, this.chunkIndex = 0, this.totalChunks = 1});
+
+  // ───────────────── CHUNK DEFINITIONS ─────────────────
+  // Returns list of (startIndex, endIndex) pairs for each chunk.
+  // Modules with ≤10 items return a single chunk.
+
+  /// Returns the list of items and their chunk boundaries for a given module.
+  /// Returns null if the module doesn't use the chunked flashcard system.
+  static ({List<TigrinyaObject> items, List<List<int>> chunks})? getChunkInfo(DrillModuleType type) {
+    switch (type) {
+      // ── Noun Suffixes: 43 items → 7 semantic chunks ──
+      case DrillModuleType.nounPossession:
+        final items = TigrinyaDrillsData.nounPossessionItems;
+        return (items: items, chunks: [
+          [0, 7],    // House (8 items)
+          [8, 13],   // Father (6 items)
+          [14, 18],  // Mother (5 items)
+          [19, 23],  // Brother (5 items)
+          [24, 28],  // Sister (5 items)
+          [29, 33],  // Head (5 items)
+          [34, 42],  // Car + Friend (9 items)
+        ]);
+
+      // ── Numbers: 19 items → 2 chunks ──
+      case DrillModuleType.number:
+        final items = TigrinyaDrillsData.numbers;
+        return (items: items, chunks: [
+          [0, 9],    // 1-10
+          [10, 18],  // 20-1000
+        ]);
+
+      // ── Time/Days: 17 items → 2 chunks ──
+      case DrillModuleType.time:
+        final items = TigrinyaDrillsData.timeWords;
+        return (items: items, chunks: [
+          [0, 8],    // Days + basic time words
+          [9, 16],   // Months & more time words
+        ]);
+
+      // ── Greetings: 12 items → 2 chunks ──
+      case DrillModuleType.greeting:
+        final items = TigrinyaDrillsData.greetings;
+        return (items: items, chunks: [
+          [0, 5],    // Core greetings
+          [6, 11],   // Extended greetings
+        ]);
+
+      // ── Verb Object Suffixes: 30 items → 4 chunks ──
+      case DrillModuleType.verbObjectSuffix:
+        final items = TigrinyaDrillsData.verbObjectSuffixItems;
+        return (items: items, chunks: [
+          [0, 7],    // "He gave" forms (8 items)
+          [8, 13],   // "He saw" forms (6 items)
+          [14, 18],  // "He told" forms (5 items)
+          [19, 29],  // "I gave/saw/told" forms (11 items)
+        ]);
+
+      // ── Imperatives: 16 items → 2 chunks ──
+      case DrillModuleType.imperative:
+        final items = TigrinyaDrillsData.imperativeItems;
+        return (items: items, chunks: [
+          [0, 7],    // First group
+          [8, 15],   // Second group
+        ]);
+
+      // ── Compound Subjects: 18 items → 3 chunks (by subject type) ──
+      case DrillModuleType.compoundSubject:
+        final items = TigrinyaDrillsData.compoundSubjectItems;
+        return (items: items, chunks: [
+          [0, 5],    // I + family → We
+          [6, 11],   // You + someone → You pl.
+          [12, 17],  // He/She + someone → They
+        ]);
+
+      // ── Identity Items: 12 items → 2 chunks ──
+      case DrillModuleType.identityToBe:
+        final items = TigrinyaDrillsData.identityItems;
+        return (items: items, chunks: [
+          [0, 7],    // Positive identity
+          [8, 11],   // Negative identity
+        ]);
+
+      // ── Existential: 10 items → single chunk (small enough) ──
+      // ── All other flashcard modules ≤10 items: single chunk ──
+      default:
+        return null; // No chunking needed
+    }
+  }
+
+  /// Returns total number of chunks for this module type.
+  /// Returns 1 for modules that don't need chunking.
+  static int getTotalChunks(DrillModuleType type) {
+    final info = getChunkInfo(type);
+    return info?.chunks.length ?? 1;
+  }
 
   // ───────────────────── PUBLIC API ─────────────────────
 
@@ -90,9 +186,23 @@ class DrillEngine {
       _generateExistentialDeck();
     } else if (module.type == DrillModuleType.intimatePhrase) {
       _generateIntimatePhraseDeck();
+    } else if (module.type == DrillModuleType.compoundSubject) {
+      _generateCompoundSubjectDeck();
+    } else if (module.type == DrillModuleType.identityToBe) {
+      _generateIdentityDeck();
+    } else if (module.type == DrillModuleType.emotion) {
+      _generateEmotionDeck();
+    } else if (module.type == DrillModuleType.withConstruction) {
+      _generateWithConstructionDeck();
+    } else if (module.type == DrillModuleType.questionWordBasic) {
+      _generateQuestionWordBasicDeck();
     } else {
       _generateVerbDeck();
     }
+
+    // Sprinkle in 3-4 review cards from previously completed modules
+    _interleaveGlobalReview();
+
     _deck.shuffle(_rng);
 
     final vocabToUnlock = <String>{};
@@ -455,6 +565,26 @@ class DrillEngine {
       allItems.remove(correct);
       allItems.shuffle(_rng);
       distractors.addAll(allItems.take(7));
+    } else if (module.type == DrillModuleType.identityToBe) {
+      final allItems = TigrinyaDrillsData.identityItems.map((i) => i.tigrinya).toList();
+      allItems.remove(correct);
+      allItems.shuffle(_rng);
+      distractors.addAll(allItems.take(7));
+    } else if (module.type == DrillModuleType.emotion) {
+      final allItems = TigrinyaDrillsData.emotionItems.map((i) => i.tigrinya).toList();
+      allItems.remove(correct);
+      allItems.shuffle(_rng);
+      distractors.addAll(allItems.take(7));
+    } else if (module.type == DrillModuleType.withConstruction) {
+      final allItems = TigrinyaDrillsData.withConstructionItems.map((i) => i.tigrinya).toList();
+      allItems.remove(correct);
+      allItems.shuffle(_rng);
+      distractors.addAll(allItems.take(7));
+    } else if (module.type == DrillModuleType.questionWordBasic) {
+      final allItems = TigrinyaDrillsData.questionWordBasicItems.map((i) => i.tigrinya).toList();
+      allItems.remove(correct);
+      allItems.shuffle(_rng);
+      distractors.addAll(allItems.take(7));
     } else {
       // Distractors from the same verb's conjugation table
       final verb = card.verb;
@@ -489,8 +619,10 @@ class DrillEngine {
     }
 
     final maxDistractors = 7;
+    int blankCount = 1;
     while (distractors.length < maxDistractors) {
-      distractors.add('—');
+      distractors.add('—${' ' * blankCount}');
+      blankCount++;
     }
 
     final options = [correct, ...distractors.take(maxDistractors)];
@@ -501,7 +633,7 @@ class DrillEngine {
   // ───────────────────── PRIVATE ─────────────────────
 
   void _generatePronounDeck() {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 30; i++) {
       final pronoun = TigrinyaDrillsData.pronouns[_rng.nextInt(TigrinyaDrillsData.pronouns.length)];
       _deck.add(DrillCard(
         pronoun: pronoun,
@@ -512,36 +644,144 @@ class DrillEngine {
     }
   }
 
-  void _generateNumberDeck() {
-    for (final number in TigrinyaDrillsData.numbers) {
+  /// Unified chunked deck generator for flashcard-style modules.
+  /// Serves only the current chunk's items + interleaved review from prior chunks.
+  void _generateChunkedDeck(List<TigrinyaObject> allItems, List<List<int>> chunks) {
+    if (chunkIndex >= chunks.length) {
+      // All chunks done — generate a cumulative review of 12 random items
+      final shuffled = List<TigrinyaObject>.from(allItems)..shuffle(_rng);
+      for (final item in shuffled.take(12)) {
+        _deck.add(DrillCard(
+          tense: tense,
+          correctAnswer: item.tigrinya,
+          promptText: '${item.english} / ${item.amharic}',
+          object: item,
+        ));
+      }
+      return;
+    }
+
+    final range = chunks[chunkIndex];
+    final chunkItems = allItems.sublist(range[0], range[1] + 1);
+
+    // Add all new items from this chunk
+    for (final item in chunkItems) {
       _deck.add(DrillCard(
         tense: tense,
-        correctAnswer: number.tigrinya,
-        promptText: '${number.english} / ${number.amharic}',
-        object: number,
+        correctAnswer: item.tigrinya,
+        promptText: '${item.english} / ${item.amharic}',
+        object: item,
       ));
+    }
+
+    // Interleave 3-4 review items from prior chunks (if any)
+    if (chunkIndex > 0) {
+      final reviewPool = <TigrinyaObject>[];
+      for (int i = 0; i < chunkIndex; i++) {
+        final prevRange = chunks[i];
+        reviewPool.addAll(allItems.sublist(prevRange[0], prevRange[1] + 1));
+      }
+      reviewPool.shuffle(_rng);
+      final reviewCount = min(4, reviewPool.length);
+      for (final item in reviewPool.take(reviewCount)) {
+        _deck.add(DrillCard(
+          tense: tense,
+          correctAnswer: item.tigrinya,
+          promptText: '${item.english} / ${item.amharic}',
+          object: item,
+        ));
+      }
+    }
+  }
+
+  /// Adds 3-4 review cards from previously completed flashcard-style modules.
+  /// This ensures items from past modules keep resurfacing (spaced repetition
+  /// across the entire course, not just within one module).
+  void _interleaveGlobalReview() {
+    final moduleIndex = TigrinyaDrillsData.modules.indexOf(module);
+    if (moduleIndex <= 0) return; // Nothing to review on the very first module
+
+    // Collect items from all completed flashcard modules before this one
+    final reviewPool = <TigrinyaObject>[];
+
+    // Map of module types to their item lists
+    final flashcardSources = <DrillModuleType, List<TigrinyaObject>>{
+      DrillModuleType.greeting: TigrinyaDrillsData.greetings,
+      DrillModuleType.family: TigrinyaDrillsData.compatibleObjects['family'] ?? [],
+      DrillModuleType.demonstrative: TigrinyaDrillsData.demonstratives,
+      DrillModuleType.preposition: TigrinyaDrillsData.prepositions,
+      DrillModuleType.phrase: TigrinyaDrillsData.commonPhrases,
+      DrillModuleType.nounPossession: TigrinyaDrillsData.nounPossessionItems,
+      DrillModuleType.verbObjectSuffix: TigrinyaDrillsData.verbObjectSuffixItems,
+      DrillModuleType.imperative: TigrinyaDrillsData.imperativeItems,
+      DrillModuleType.existential: TigrinyaDrillsData.existentialItems,
+      DrillModuleType.locationWord: TigrinyaDrillsData.locationWords,
+      DrillModuleType.compoundSubject: TigrinyaDrillsData.compoundSubjectItems,
+      DrillModuleType.intimatePhrase: TigrinyaDrillsData.intimatePhraseItems,
+      DrillModuleType.identityToBe: TigrinyaDrillsData.identityItems,
+      DrillModuleType.emotion: TigrinyaDrillsData.emotionItems,
+      DrillModuleType.withConstruction: TigrinyaDrillsData.withConstructionItems,
+      DrillModuleType.questionWordBasic: TigrinyaDrillsData.questionWordBasicItems,
+    };
+
+    for (int i = 0; i < moduleIndex; i++) {
+      final prevModule = TigrinyaDrillsData.modules[i];
+      // Only pull from modules that have been passed at MCQ level
+      if (!MasteryStorage.isMcqPassed(prevModule.id, Tense.present)) continue;
+      // Skip the current module type (we already have its items in the deck)
+      if (prevModule.type == module.type) continue;
+
+      final items = flashcardSources[prevModule.type];
+      if (items != null && items.isNotEmpty) {
+        reviewPool.addAll(items);
+      }
+    }
+
+    // Also add pronouns if pronoun module is passed
+    if (MasteryStorage.isMcqPassed('mod_pronouns', Tense.present) &&
+        module.type != DrillModuleType.pronoun) {
+      for (final p in TigrinyaDrillsData.pronouns) {
+        reviewPool.add(TigrinyaObject(
+          tigrinya: p.tigrinya,
+          amharic: p.amharic,
+          english: p.english,
+        ));
+      }
+    }
+
+    if (reviewPool.isEmpty) return;
+
+    // Pick 3-4 random review items
+    reviewPool.shuffle(_rng);
+    final reviewCount = min(4, reviewPool.length);
+    for (final item in reviewPool.take(reviewCount)) {
+      _deck.add(DrillCard(
+        tense: tense,
+        correctAnswer: item.tigrinya,
+        promptText: '🔄 ${item.english} / ${item.amharic}',
+        object: item,
+      ));
+    }
+  }
+
+  void _generateNumberDeck() {
+    final info = DrillEngine.getChunkInfo(DrillModuleType.number);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
     }
   }
 
   void _generateTimeDeck() {
-    for (final timeWord in TigrinyaDrillsData.timeWords) {
-      _deck.add(DrillCard(
-        tense: tense,
-        correctAnswer: timeWord.tigrinya,
-        promptText: '${timeWord.english} / ${timeWord.amharic}',
-        object: timeWord,
-      ));
+    final info = DrillEngine.getChunkInfo(DrillModuleType.time);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
     }
   }
 
   void _generateGreetingDeck() {
-    for (final greeting in TigrinyaDrillsData.greetings) {
-      _deck.add(DrillCard(
-        tense: tense,
-        correctAnswer: greeting.tigrinya,
-        promptText: '${greeting.english} / ${greeting.amharic}',
-        object: greeting,
-      ));
+    final info = DrillEngine.getChunkInfo(DrillModuleType.greeting);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
     }
   }
 
@@ -832,35 +1072,23 @@ class DrillEngine {
   }
 
   void _generateNounPossessionDeck() {
-    for (final item in TigrinyaDrillsData.nounPossessionItems) {
-      _deck.add(DrillCard(
-        tense: tense,
-        correctAnswer: item.tigrinya,
-        promptText: '${item.english} / ${item.amharic}',
-        object: item,
-      ));
+    final info = DrillEngine.getChunkInfo(DrillModuleType.nounPossession);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
     }
   }
 
   void _generateVerbObjectSuffixDeck() {
-    for (final item in TigrinyaDrillsData.verbObjectSuffixItems) {
-      _deck.add(DrillCard(
-        tense: tense,
-        correctAnswer: item.tigrinya,
-        promptText: '${item.english} / ${item.amharic}',
-        object: item,
-      ));
+    final info = DrillEngine.getChunkInfo(DrillModuleType.verbObjectSuffix);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
     }
   }
 
   void _generateImperativeDeck() {
-    for (final item in TigrinyaDrillsData.imperativeItems) {
-      _deck.add(DrillCard(
-        tense: tense,
-        correctAnswer: item.tigrinya,
-        promptText: '${item.english} / ${item.amharic}',
-        object: item,
-      ));
+    final info = DrillEngine.getChunkInfo(DrillModuleType.imperative);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
     }
   }
 
@@ -888,6 +1116,53 @@ class DrillEngine {
 
   void _generateIntimatePhraseDeck() {
     for (final item in TigrinyaDrillsData.intimatePhraseItems) {
+      _deck.add(DrillCard(
+        tense: tense,
+        correctAnswer: item.tigrinya,
+        promptText: '${item.english} / ${item.amharic}',
+        object: item,
+      ));
+    }
+  }
+
+  void _generateCompoundSubjectDeck() {
+    final info = DrillEngine.getChunkInfo(DrillModuleType.compoundSubject);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
+    }
+  }
+
+  void _generateIdentityDeck() {
+    final info = DrillEngine.getChunkInfo(DrillModuleType.identityToBe);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
+    }
+  }
+
+  void _generateEmotionDeck() {
+    for (final item in TigrinyaDrillsData.emotionItems) {
+      _deck.add(DrillCard(
+        tense: tense,
+        correctAnswer: item.tigrinya,
+        promptText: '${item.english} / ${item.amharic}',
+        object: item,
+      ));
+    }
+  }
+
+  void _generateWithConstructionDeck() {
+    for (final item in TigrinyaDrillsData.withConstructionItems) {
+      _deck.add(DrillCard(
+        tense: tense,
+        correctAnswer: item.tigrinya,
+        promptText: '${item.english} / ${item.amharic}',
+        object: item,
+      ));
+    }
+  }
+
+  void _generateQuestionWordBasicDeck() {
+    for (final item in TigrinyaDrillsData.questionWordBasicItems) {
       _deck.add(DrillCard(
         tense: tense,
         correctAnswer: item.tigrinya,

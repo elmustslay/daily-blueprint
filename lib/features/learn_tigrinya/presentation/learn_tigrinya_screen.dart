@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/tigrinya_drills_data.dart';
 import '../data/mastery_provider.dart';
 import '../domain/tigrinya_models.dart';
+import '../domain/drill_engine.dart';
 import 'tigrinya_drill_screen.dart';
 import 'word_bank_screen.dart';
 
@@ -110,7 +111,7 @@ class LearnTigranyaScreen extends ConsumerWidget {
       child: const Column(
         children: [
           Text(
-            'ትግሪኛ ንመሃር 🇪🇷',
+            'ትግሪኛ ንመሃር 💊',
             style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -144,6 +145,8 @@ class LearnTigranyaScreen extends ConsumerWidget {
       DrillModuleType.time, DrillModuleType.greeting, DrillModuleType.possession,
       DrillModuleType.adjective, DrillModuleType.demonstrative, DrillModuleType.family,
       DrillModuleType.preposition, DrillModuleType.phrase, DrillModuleType.possessivePronoun,
+      DrillModuleType.compoundSubject, DrillModuleType.identityToBe, DrillModuleType.emotion,
+      DrillModuleType.withConstruction, DrillModuleType.questionWordBasic,
     };
     bool isFullyMastered = false;
     if (isUnlocked) {
@@ -233,6 +236,47 @@ class LearnTigranyaScreen extends ConsumerWidget {
               if (isUnlocked) ...[
                 const SizedBox(height: 14),
 
+                // Chunk progress indicator for chunked modules
+                if (DrillEngine.getTotalChunks(module.type) > 1) ...[
+                  Builder(builder: (context) {
+                    final totalChunks = DrillEngine.getTotalChunks(module.type);
+                    final mcqDone = ChunkStorage.getChunksCompleted(module.id, DrillStage.mcq);
+                    return Container(
+                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.03),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.view_module_rounded, size: 14, color: Colors.white54),
+                          const SizedBox(width: 6),
+                          Text(
+                            'Chunk ${mcqDone < totalChunks ? mcqDone + 1 : totalChunks} of $totalChunks',
+                            style: const TextStyle(fontSize: 11, color: Colors.white54),
+                          ),
+                          const SizedBox(width: 8),
+                          ...List.generate(totalChunks, (i) {
+                            return Container(
+                              width: 8,
+                              height: 8,
+                              margin: const EdgeInsets.only(right: 3),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: i < mcqDone
+                                    ? Colors.greenAccent
+                                    : i == mcqDone
+                                        ? Colors.amberAccent
+                                        : Colors.white24,
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    );
+                  }),
+                  const SizedBox(height: 10),
+                ],
                 if (singleTenseTypes.contains(module.type))
                   _buildTenseRow(context, ref, module, Tense.present, "Standard")
                 else ...[ 

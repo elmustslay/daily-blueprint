@@ -1,0 +1,64 @@
+TIGRINYA 102-LEVEL FEATURES — NOT YET IMPLEMENTED
+===================================================
+Target: Tigray Tigrinya (Ethiopian variety)
+
+These features are needed to go beyond 101 (CEFR A2) and reach
+full 102 (CEFR B1 / Intermediate-Low). Add these after completing
+the current curriculum and verifying foundational mastery.
+
+1. RELATIVE CLAUSES
+   "The man who came" → ዝመጸ ሰብ
+   "The food that I ate" → ዝበላዕኩዎ መግቢ
+   Relative marker: ዝ- (zi-) prefix on verbs
+   This is one of the biggest structural differences from Amharic
+   (which uses የ- and -ው suffix patterns).
+
+2. CONDITIONAL SENTENCES
+   "If you go" → እንተ ከይድካ
+   "If he comes" → እንተ መጺኡ
+   Conditional marker: እንተ (ente)
+   Also: "If...then" → እንተ...ድማ
+
+3. PASSIVE VOICE BASICS
+   "The book was read" → እቲ መጽሐፍ ተነቢቡ
+   Passive prefix: ተ- (te-)
+   Many verbs already use ተ- in their base form (e.g. ተዛረብ),
+   so this requires teaching the distinction.
+
+4. MORE COMPLEX NEGATION
+   Past negative: ኣይ + past stem + ን
+   Future negative: ኣይክ- + stem + ን + እዩ
+   Negative imperative: ኣይት- + stem (Don't do X!)
+
+5. ADVANCED VERB FORMS
+   - Causative: ኣ- prefix (ኣበልዐ = "He fed / made eat")
+   - Reciprocal: ተ- prefix with plural (ተፋቲዎም = "They loved each other")
+   - Frequentative/Intensive: Gemination patterns
+
+6. SUBORDINATE CLAUSES
+   "Because I went" → ስለ ዝኸድኩ
+   "When he comes" → ምስ ዝመጽእ
+   "Before I eat" → ቅድሚ ዝበልዕ
+   Uses ዝ- relative marker + preposition
+
+7. COMPARATIVE & SUPERLATIVE
+   "Bigger than" → ካብ... ዝዓበየ
+   "The biggest" → እቲ ዝዓበየ
+
+8. REPORTED SPEECH
+   "He said that..." → ...ኢሉ ተዛሪቡ
+   "She asked if..." → ...ድያ ኢላ ሓቲታ
+
+9. EXPANDED VOCABULARY (~500+ words for B1)
+   - Professions (25+ terms)
+   - Weather vocabulary
+   - Health/medical terms
+   - Shopping/commerce expanded
+   - Technology terms
+   - Abstract concepts (justice, freedom, truth)
+
+10. DISCOURSE MARKERS & FILLERS
+    - ማለት (that is to say)
+    - ብርግጽ (certainly)
+    - ብሓቂ (really/truly)
+    - ግን ድማ (however/but then)
