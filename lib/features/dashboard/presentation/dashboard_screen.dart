@@ -8,6 +8,7 @@ import '../../shopping_list/presentation/shopping_list_screen.dart';
 import '../../book_plan/presentation/book_plan_screen.dart';
 import '../../weight_track/presentation/weight_track_screen.dart';
 import '../../micro_macro_calorie_track/presentation/ingredients_screen.dart';
+import '../../learn_tigrinya/presentation/learn_tigrinya_screen.dart';
 import '../data/steps_provider.dart';
 
 class DashboardScreen extends ConsumerWidget {
@@ -163,6 +164,16 @@ class DashboardScreen extends ConsumerWidget {
                               icon: Icons.kitchen_rounded,
                               color: Colors.amberAccent,
                               destination: const IngredientsScreen(),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildDashboardCard(
+                              context,
+                              title: 'Learn Tigranya',
+                              icon: Icons.language_rounded,
+                              color: Colors.lightBlueAccent,
+                              destination: const LearnTigranyaScreen(),
                             ),
                           ),
                         ],
