@@ -5,6 +5,7 @@ import '../domain/drill_session_notifier.dart';
 import '../data/mastery_provider.dart';
 import '../data/tigrinya_drills_data.dart';
 import '../domain/conjugator.dart';
+import '../domain/tigrinya_tts_service.dart';
 import 'scaffolded_text.dart';
 class TigrinyaDrillScreen extends ConsumerStatefulWidget {
   final DrillModule module;
@@ -415,16 +416,42 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ScaffoldedText(
-                text: highlightText,
-                baseStyle: const TextStyle(fontSize: 20, color: Colors.white),
-                highlightColor: Colors.lightBlueAccent,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ScaffoldedText(
+                    text: highlightText,
+                    baseStyle: const TextStyle(fontSize: 20, color: Colors.white),
+                    highlightColor: Colors.lightBlueAccent,
+                  ),
+                  if (translit != null)
+                    Text(translit, style: const TextStyle(fontSize: 12, color: Colors.white54, fontStyle: FontStyle.italic)),
+                ],
               ),
-              if (translit != null)
-                Text(translit, style: const TextStyle(fontSize: 12, color: Colors.white54, fontStyle: FontStyle.italic)),
+              InkResponse(
+                radius: 24,
+                onTap: () {
+                  TigrinyaTtsService().speak(
+                    fidelText: highlightText,
+                    transliteration: translit,
+                    forceRefresh: false,
+                  );
+                },
+                onLongPress: () {
+                  TigrinyaTtsService().speak(
+                    fidelText: highlightText,
+                    transliteration: translit,
+                    forceRefresh: true,
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(Icons.volume_up_rounded, color: Colors.cyanAccent, size: 22),
+                ),
+              ),
             ],
           ),
         ],
@@ -501,7 +528,7 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
       ),
       child: Column(
         children: [
-          if (card.questionWord != null) ...[
+              if (card.questionWord != null) ...[
             Text(
               card.promptText,
               textAlign: TextAlign.center,

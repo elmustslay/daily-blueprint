@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme.dart';
 import 'core/storage/shared_prefs.dart';
@@ -7,6 +8,11 @@ import 'features/learn_tigrinya/data/mastery_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (_) {
+    // Ignore if .env is missing
+  }
   await SharedPrefsLogic.init();
   MasteryStorage.loadAuditorMode();
   runApp(

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/mastery_provider.dart';
 import '../data/tigrinya_drills_data.dart';
 import '../domain/tigrinya_models.dart';
+import '../domain/tigrinya_tts_service.dart';
 
 class WordBankScreen extends ConsumerStatefulWidget {
   const WordBankScreen({super.key});
@@ -284,6 +285,27 @@ class _VocabTile extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+        trailing: InkResponse(
+          radius: 24,
+          onTap: () {
+            TigrinyaTtsService().speak(
+              fidelText: tigrinya,
+              transliteration: translit,
+              forceRefresh: false,
+            );
+          },
+          onLongPress: () {
+            TigrinyaTtsService().speak(
+              fidelText: tigrinya,
+              transliteration: translit,
+              forceRefresh: true,
+            );
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.volume_up_rounded, color: Colors.cyanAccent),
           ),
         ),
       ),
