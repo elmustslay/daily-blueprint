@@ -2,6 +2,7 @@ import 'dart:math';
 import 'tigrinya_models.dart';
 import '../data/tigrinya_drills_data.dart';
 import '../data/mastery_provider.dart';
+import '../data/srs_storage.dart';
 import 'conjugator.dart';
 
 /// Pure-Dart drill engine. No Flutter dependency.
@@ -368,6 +369,9 @@ class DrillEngine {
     }
 
     _totalAnswered++;
+
+    // Record SRS review for this card
+    SrsStorage.recordReview(cardKey, isCorrect);
 
     // Build diff highlight for wrong answers
     String? diffHighlight;
@@ -751,10 +755,44 @@ class DrillEngine {
 
     if (reviewPool.isEmpty) return;
 
-    // Pick 3-4 random review items
-    reviewPool.shuffle(_rng);
+    // Bias towards struggling cards using SRS data
+    final strugglingKeys = SrsStorage.getStrugglingCardKeys(maxCount: 20);
+
+    // Separate pool into struggling and normal
+    final strugglingItems = <TigrinyaObject>[];
+    final normalItems = <TigrinyaObject>[];
+    for (final item in reviewPool) {
+      // Check if this item's key pattern appears in struggling keys
+      final isStruggling = strugglingKeys.any((k) => k.contains(item.tigrinya));
+      if (isStruggling) {
+        strugglingItems.add(item);
+      } else {
+        normalItems.add(item);
+      }
+    }
+
+    // Prioritize struggling items: pick from struggling first, then fill with random
+    strugglingItems.shuffle(_rng);
+    normalItems.shuffle(_rng);
+
     final reviewCount = min(4, reviewPool.length);
-    for (final item in reviewPool.take(reviewCount)) {
+    final selected = <TigrinyaObject>[];
+
+    // Take up to 2 struggling items first (if available)
+    final maxStruggling = min(2, strugglingItems.length);
+    selected.addAll(strugglingItems.take(maxStruggling));
+
+    // Fill remaining with normal items
+    final remaining = reviewCount - selected.length;
+    selected.addAll(normalItems.take(remaining));
+
+    // If still not enough, add more from whatever's left
+    if (selected.length < reviewCount) {
+      final allLeft = [...strugglingItems.skip(maxStruggling), ...normalItems.skip(remaining)];
+      selected.addAll(allLeft.take(reviewCount - selected.length));
+    }
+
+    for (final item in selected) {
       _deck.add(DrillCard(
         tense: tense,
         correctAnswer: item.tigrinya,

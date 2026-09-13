@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/storage/shared_prefs.dart';
 import '../domain/tigrinya_models.dart';
+import 'srs_storage.dart';
 
 /// Persists per-module, per-tense, per-stage mastery scores.
 ///
@@ -167,12 +168,15 @@ class MasteryNotifier extends Notifier<Map<String, double>> {
 
   Future<void> resetAllProgress() async {
     final prefs = SharedPrefsLogic.instance;
-    final allKeys = prefs.getKeys();
+    final allKeys = prefs.getKeys().toList();
     for (final key in allKeys) {
-      if (key.startsWith('tigrinya_mastery_')) {
+      if (key.startsWith('tigrinya_mastery_') ||
+          key.startsWith('tigrinya_chunk_')) {
         await prefs.remove(key);
       }
     }
+    // Clear SRS data
+    await SrsStorage.resetAll();
     state = {}; // Clear state
   }
 }

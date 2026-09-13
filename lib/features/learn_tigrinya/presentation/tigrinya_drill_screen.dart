@@ -4,6 +4,7 @@ import '../domain/tigrinya_models.dart';
 import '../domain/drill_session_notifier.dart';
 import '../data/mastery_provider.dart';
 import '../data/tigrinya_drills_data.dart';
+import '../data/srs_storage.dart';
 import '../domain/conjugator.dart';
 import '../domain/tigrinya_tts_service.dart';
 import 'scaffolded_text.dart';
@@ -694,6 +695,14 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
   // ────────────────────── OBJECT TOOLTIP ──────────────────────
 
   void _showObjectTooltip(TigrinyaObject obj) {
+    // Track hint peek in SRS
+    final session = ref.read(drillSessionProvider);
+    final card = session.currentCard;
+    if (card != null) {
+      final cardKey = '${card.pronoun?.id ?? 'flashcard'}_${card.object?.tigrinya ?? ''}_${card.verb?.id ?? 'pronoun'}_${card.tense.name}_${card.questionWord?.id ?? ''}';
+      SrsStorage.recordHintPeek(cardKey);
+    }
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Theme.of(context).cardColor,

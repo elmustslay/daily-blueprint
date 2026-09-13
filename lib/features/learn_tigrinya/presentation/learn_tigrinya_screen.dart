@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/tigrinya_drills_data.dart';
 import '../data/mastery_provider.dart';
+import '../data/srs_storage.dart';
 import '../domain/tigrinya_models.dart';
 import '../domain/drill_engine.dart';
 import 'tigrinya_drill_screen.dart';
 import 'word_bank_screen.dart';
+import 'srs_review_screen.dart';
+import 'integration_drill_screen.dart';
 
 class LearnTigranyaScreen extends ConsumerWidget {
   const LearnTigranyaScreen({super.key});
@@ -56,6 +59,7 @@ class LearnTigranyaScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildHeader(context),
+          _buildDailyReviewCard(context),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
@@ -85,7 +89,7 @@ class LearnTigranyaScreen extends ConsumerWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Reset All Progress?'),
-        content: const Text('This will delete all mastery data. This cannot be undone.'),
+        content: const Text('This will delete all mastery data, SRS review history, and chunk progress. This cannot be undone.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
@@ -128,6 +132,85 @@ class LearnTigranyaScreen extends ConsumerWidget {
     );
   }
 
+  Widget _buildDailyReviewCard(BuildContext context) {
+    final dueCount = SrsStorage.getDueCardCount();
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const SrsReviewScreen()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.purpleAccent.withValues(alpha: 0.15),
+              Colors.deepPurpleAccent.withValues(alpha: 0.1),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.purpleAccent.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.purpleAccent.withValues(alpha: 0.2),
+                shape: BoxShape.circle,
+              ),
+              child: const Center(
+                child: Icon(Icons.psychology_rounded, color: Colors.purpleAccent, size: 22),
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Daily Review',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  Text(
+                    dueCount > 0
+                        ? '$dueCount card${dueCount == 1 ? '' : 's'} due for review'
+                        : 'All caught up!',
+                    style: const TextStyle(fontSize: 12, color: Colors.white54),
+                  ),
+                ],
+              ),
+            ),
+            if (dueCount > 0)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.purpleAccent.withValues(alpha: 0.3),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  '$dueCount',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            else
+              const Icon(Icons.check_circle_outline_rounded, color: Colors.greenAccent, size: 22),
+            const SizedBox(width: 8),
+            Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.white.withValues(alpha: 0.3)),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildModuleCard(
     BuildContext context,
     WidgetRef ref, {
@@ -146,31 +229,41 @@ class LearnTigranyaScreen extends ConsumerWidget {
       DrillModuleType.adjective, DrillModuleType.demonstrative, DrillModuleType.family,
       DrillModuleType.preposition, DrillModuleType.phrase, DrillModuleType.possessivePronoun,
       DrillModuleType.compoundSubject, DrillModuleType.identityToBe, DrillModuleType.emotion,
-      DrillModuleType.withConstruction, DrillModuleType.questionWordBasic,
+      DrillModuleType.withConstruction, DrillModuleType.questionWordBasic, DrillModuleType.integration,
     };
     bool isFullyMastered = false;
     if (isUnlocked) {
-      if (singleTenseTypes.contains(module.type)) {
+      if (module.type == DrillModuleType.integration) {
+        // Integration modules pass when selfGrade stage >= 85%
+        isFullyMastered = MasteryStorage.getMastery(module.id, Tense.present, DrillStage.selfGrade) >= 0.85;
+      } else if (singleTenseTypes.contains(module.type)) {
         isFullyMastered = MasteryStorage.isTypingPassed(module.id, Tense.present);
       } else {
         isFullyMastered = Tense.values.every((t) => MasteryStorage.isTypingPassed(module.id, t));
       }
     }
 
+    final isIntegration = module.type == DrillModuleType.integration;
+    final accentColor = isIntegration ? Colors.deepPurpleAccent : Colors.lightBlueAccent;
+
     return Opacity(
       opacity: isUnlocked ? 1.0 : 0.5,
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: cardColor,
+          color: isIntegration && isUnlocked
+              ? Colors.deepPurpleAccent.withValues(alpha: 0.06)
+              : cardColor,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isUnlocked
                 ? (isFullyMastered
                     ? Colors.greenAccent.withValues(alpha: 0.6)
-                    : Theme.of(context).dividerColor)
+                    : isIntegration
+                        ? Colors.deepPurpleAccent.withValues(alpha: 0.4)
+                        : Theme.of(context).dividerColor)
                 : Theme.of(context).dividerColor.withValues(alpha: 0.3),
-            width: isFullyMastered ? 1.5 : 1,
+            width: isFullyMastered ? 1.5 : isIntegration ? 1.5 : 1,
           ),
         ),
         child: Padding(
@@ -186,20 +279,22 @@ class LearnTigranyaScreen extends ConsumerWidget {
                     height: 36,
                     decoration: BoxDecoration(
                       color: isUnlocked
-                          ? Colors.lightBlueAccent.withValues(alpha: 0.15)
+                          ? accentColor.withValues(alpha: 0.15)
                           : Colors.grey.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: isUnlocked
-                          ? Text(
-                              '${index + 1}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.lightBlueAccent,
-                                fontSize: 16,
-                              ),
-                            )
+                          ? (isIntegration
+                              ? Icon(Icons.extension_rounded, size: 18, color: accentColor)
+                              : Text(
+                                  '${index + 1}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: accentColor,
+                                    fontSize: 16,
+                                  ),
+                                ))
                           : const Icon(Icons.lock_rounded,
                               size: 18, color: Colors.grey),
                     ),
@@ -235,6 +330,11 @@ class LearnTigranyaScreen extends ConsumerWidget {
 
               if (isUnlocked) ...[
                 const SizedBox(height: 14),
+
+                // Integration module: special rendering
+                if (module.type == DrillModuleType.integration) ...[
+                  _buildIntegrationContent(context, ref, module, isFullyMastered),
+                ] else ...[
 
                 // Chunk progress indicator for chunked modules
                 if (DrillEngine.getTotalChunks(module.type) > 1) ...[
@@ -319,6 +419,7 @@ class LearnTigranyaScreen extends ConsumerWidget {
                      ),
                    ),
                 ],
+                ], // end else (non-integration)
               ],
               
               if (!isUnlocked && module.type == DrillModuleType.questionWord) ...[
@@ -462,14 +563,86 @@ class LearnTigranyaScreen extends ConsumerWidget {
 
   void _startDrill(BuildContext context, WidgetRef ref, DrillModule module,
       Tense tense, DrillStage stage) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => TigrinyaDrillScreen(
-          module: module,
-          tense: tense,
-          initialStage: stage,
+    if (module.type == DrillModuleType.integration) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => IntegrationDrillScreen(module: module),
         ),
-      ),
+      );
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => TigrinyaDrillScreen(
+            module: module,
+            tense: tense,
+            initialStage: stage,
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget _buildIntegrationContent(BuildContext context, WidgetRef ref, DrillModule module, bool isFullyMastered) {
+    final mastery = MasteryStorage.getMastery(module.id, Tense.present, DrillStage.selfGrade);
+    final hasTried = mastery > 0;
+
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.deepPurpleAccent.withValues(alpha: 0.06),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.deepPurpleAccent.withValues(alpha: 0.2)),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                isFullyMastered ? Icons.check_circle_rounded : Icons.extension_rounded,
+                size: 20,
+                color: isFullyMastered ? Colors.greenAccent : Colors.deepPurpleAccent,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isFullyMastered
+                          ? 'Mastered! \u2014 ${(mastery * 100).toInt()}%'
+                          : hasTried
+                              ? 'Best score: ${(mastery * 100).toInt()}% \u2014 85% needed'
+                              : 'Combine everything from this unit!',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isFullyMastered ? Colors.greenAccent : Colors.white54,
+                        fontWeight: isFullyMastered ? FontWeight.w600 : FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton.icon(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => IntegrationDrillScreen(module: module),
+              ),
+            );
+          },
+          icon: const Icon(Icons.play_arrow_rounded),
+          label: Text(isFullyMastered ? 'Practice Again' : 'Start Integration'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurpleAccent,
+            minimumSize: const Size.fromHeight(42),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        ),
+      ],
     );
   }
   

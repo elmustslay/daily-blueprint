@@ -862,6 +862,15 @@ class TigrinyaDrillsData {
       type: DrillModuleType.number,
     ),
 
+    // ── INTEGRATION 1: Unit 1 Review ──
+    DrillModule(
+      id: 'mod_integration_1',
+      name: '🧩 Integration 1',
+      description: 'Combine Greetings + Pronouns + Demonstratives + Prepositions + Numbers',
+      type: DrillModuleType.integration,
+      integrationLevel: 1,
+    ),
+
     // ── UNIT 2: FIRST VERBS (Weeks 3-4) ──
     DrillModule(
       id: 'mod_4',
@@ -884,6 +893,15 @@ class TigrinyaDrillsData {
       name: 'Family Vocab',
       description: 'Mother, father, brother, sister...',
       type: DrillModuleType.family,
+    ),
+
+    // ── INTEGRATION 2: Unit 2 Review ──
+    DrillModule(
+      id: 'mod_integration_2',
+      name: '🧩 Integration 2',
+      description: 'Combine verbs (eat, drink, go, come, wait) with pronouns + objects',
+      type: DrillModuleType.integration,
+      integrationLevel: 2,
     ),
 
     // ── UNIT 3: BUILDING SENTENCES (Weeks 5-6) ──
@@ -926,6 +944,15 @@ class TigrinyaDrillsData {
       type: DrillModuleType.questionWordBasic,
     ),
 
+    // ── INTEGRATION 3: Unit 3 Review ──
+    DrillModule(
+      id: 'mod_integration_3',
+      name: '🧩 Integration 3',
+      description: 'Build sentences with adjectives, possession, identity, SOV, existentials',
+      type: DrillModuleType.integration,
+      integrationLevel: 3,
+    ),
+
     // ── UNIT 4: EXPANDING VERBS (Weeks 7-8) ──
     DrillModule(
       id: 'mod_7',
@@ -950,6 +977,15 @@ class TigrinyaDrillsData {
       type: DrillModuleType.questionWord,
       verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_wait', 'v_speak', 'v_hear', 'v_know', 'v_read', 'v_write'],
       patternRules: defaultPatternRules,
+    ),
+
+    // ── INTEGRATION 4: Unit 4 Review ──
+    DrillModule(
+      id: 'mod_integration_4',
+      name: '🧩 Integration 4',
+      description: 'Question words + verbs + pronouns in full sentences',
+      type: DrillModuleType.integration,
+      integrationLevel: 4,
     ),
 
     // ── UNIT 5: OWNERSHIP & TIME (Weeks 9-10) ──
@@ -982,6 +1018,15 @@ class TigrinyaDrillsData {
       name: 'Compound Subjects: ኣነን ኣቦይን',
       description: 'Combine subjects with "ን...ን" and conjugate as we/you(pl.)/they',
       type: DrillModuleType.compoundSubject,
+    ),
+
+    // ── INTEGRATION 5: Unit 5 Review ──
+    DrillModule(
+      id: 'mod_integration_5',
+      name: '🧩 Integration 5',
+      description: 'Time + possessives + location + compound subjects in sentences',
+      type: DrillModuleType.integration,
+      integrationLevel: 5,
     ),
 
     // ── UNIT 6: DAILY LIFE & TENSES (Weeks 11-12) ──
@@ -1046,6 +1091,15 @@ class TigrinyaDrillsData {
       type: DrillModuleType.imperative,
     ),
 
+    // ── INTEGRATION 6: Unit 6 Review ──
+    DrillModule(
+      id: 'mod_integration_6',
+      name: '🧩 Integration 6',
+      description: 'Full sentences with tenses, emotions, imperatives, and social verbs',
+      type: DrillModuleType.integration,
+      integrationLevel: 6,
+    ),
+
     // ── UNIT 7: ADVANCED (Weeks 13-14) ──
     DrillModule(
       id: 'mod_hl',
@@ -1094,6 +1148,15 @@ class TigrinyaDrillsData {
       name: 'Intimate Commands 🔥',
       description: 'Passionate phrases: Kiss me deeply!, Hold me tight!, Don\'t stop!',
       type: DrillModuleType.intimatePhrase,
+    ),
+
+    // ── INTEGRATION 7: Final Review ──
+    DrillModule(
+      id: 'mod_integration_7',
+      name: '🧩 Integration 7: Final',
+      description: 'Everything combined — advanced verbs, with-constructions, verb suffixes, phrases',
+      type: DrillModuleType.integration,
+      integrationLevel: 7,
     ),
   ];
 

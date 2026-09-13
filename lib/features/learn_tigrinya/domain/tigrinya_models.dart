@@ -2,7 +2,7 @@
 
 enum Tense { present, past, continuous, future, negative }
 
-enum DrillStage { teach, mcq, typing }
+enum DrillStage { teach, mcq, typing, selfGrade }
 
 class Pronoun {
   final String id;
@@ -151,7 +151,7 @@ class Verb {
   }
 }
 
-enum DrillModuleType { pronoun, verb, questionWord, number, time, adjective, greeting, possession, demonstrative, phrase, preposition, family, possessivePronoun, sentence, nounPossession, verbObjectSuffix, imperative, locationWord, existential, intimatePhrase, compoundSubject, identityToBe, emotion, withConstruction, questionWordBasic }
+enum DrillModuleType { pronoun, verb, questionWord, number, time, adjective, greeting, possession, demonstrative, phrase, preposition, family, possessivePronoun, sentence, nounPossession, verbObjectSuffix, imperative, locationWord, existential, intimatePhrase, compoundSubject, identityToBe, emotion, withConstruction, questionWordBasic, integration }
 
 class DrillModule {
   final String id;
@@ -160,6 +160,7 @@ class DrillModule {
   final DrillModuleType type;
   final List<String> verbIds;
   final Map<Tense, String> patternRules;
+  final int integrationLevel; // 0 = not an integration module, 1-7 for i1-i7
 
   const DrillModule({
     required this.id,
@@ -168,6 +169,7 @@ class DrillModule {
     required this.type,
     this.verbIds = const [],
     this.patternRules = const {},
+    this.integrationLevel = 0,
   });
 }
 
