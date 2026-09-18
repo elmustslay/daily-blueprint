@@ -58,7 +58,7 @@ class LearnTigranyaScreen extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildHeader(context),
+          _buildHeader(context, ref),
           _buildDailyReviewCard(context),
           Expanded(
             child: ListView.builder(
@@ -108,21 +108,37 @@ class LearnTigranyaScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
+  Widget _buildHeader(BuildContext context, WidgetRef ref) {
+    final showFemPlural = MasteryStorage.showFemininePlurals;
     return Container(
       color: Colors.lightBlueAccent.withValues(alpha: 0.08),
       padding: const EdgeInsets.all(16),
-      child: const Column(
+      child: Column(
         children: [
-          Text(
-            'ትግሪኛ ንመሃር 💊',
-            style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.lightBlueAccent),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'ትግሪኛ ንመሃር ',
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.lightBlueAccent),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await MasteryStorage.setFemininePlurals(!showFemPlural);
+                  ref.invalidate(masteryProvider);
+                },
+                child: RotatedBox(
+                  quarterTurns: showFemPlural ? 2 : 0,
+                  child: const Text('💊', style: TextStyle(fontSize: 22)),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 4),
-          Text(
+          const SizedBox(height: 4),
+          const Text(
             'Master pronouns, then verbs one-by-one. 85% unlocks the next stage.',
             style: TextStyle(color: Colors.white70, fontSize: 13),
             textAlign: TextAlign.center,

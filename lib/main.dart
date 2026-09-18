@@ -14,7 +14,7 @@ void main() async {
     // Ignore if .env is missing
   }
   await SharedPrefsLogic.init();
-  MasteryStorage.loadAuditorMode();
+  MasteryStorage.loadSettings();
   runApp(
     const ProviderScope(
       child: MyApp(),

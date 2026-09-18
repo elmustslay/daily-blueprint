@@ -202,7 +202,7 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
       );
       for (final p in TigrinyaDrillsData.pronouns) {
         final bePlain = VerbConjugator.bePositive[p.id]!.replaceAll('{', '').replaceAll('}', '');
-        listItems.add(_buildTeachRow(p.english, p.amharic, bePlain));
+        listItems.add(_buildTeachRow(p.tigrinya, '${p.english} / ${p.amharic}', bePlain));
       }
       // Teach the "not to be" verbs
       listItems.add(
@@ -213,7 +213,7 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
       );
       for (final p in TigrinyaDrillsData.pronouns) {
         final beNeg = VerbConjugator.beNegative[p.id]!.replaceAll('{', '').replaceAll('}', '');
-        listItems.add(_buildTeachRow(p.english, p.amharic, beNeg));
+        listItems.add(_buildTeachRow(p.tigrinya, '${p.english} / ${p.amharic}', beNeg));
       }
     } else if (widget.module.type == DrillModuleType.number) {
       listItems = TigrinyaDrillsData.numbers.map((n) {
@@ -260,7 +260,7 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
       );
       for (final p in TigrinyaDrillsData.pronouns) {
         final form = TigrinyaDrillsData.possession['positive']![p.id]!;
-        listItems.add(_buildTeachRow('${p.english} have', p.amharic, form));
+        listItems.add(_buildTeachRow(p.tigrinya, '${p.english} have / ${p.amharic}', form));
       }
       listItems.add(
         const Padding(
@@ -270,7 +270,7 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
       );
       for (final p in TigrinyaDrillsData.pronouns) {
         final form = TigrinyaDrillsData.possession['negative']![p.id]!;
-        listItems.add(_buildTeachRow('${p.english} don\'t have', p.amharic, form));
+        listItems.add(_buildTeachRow(p.tigrinya, '${p.english} don\'t have / ${p.amharic}', form));
       }
     } else if (widget.module.type == DrillModuleType.sentence) {
       listItems.add(

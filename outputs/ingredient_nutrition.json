@@ -460,23 +460,23 @@
             }
         }
     },
-    "carbe_diem_pasta": {
-        "name": "Carbe Diem Pasta",
+    "barilla_protein_plus": {
+        "name": "Barilla Protein+ Pasta",
         "baseUnit": "oz",
         "nutrition": {
-            "Calories": 55.0,
-            "Protein": 4.0,
-            "Carbs": 20.0,
-            "Fat": 0.3,
+            "Calories": 95.0,
+            "Protein": 5.0,
+            "Carbs": 19.0,
+            "Fat": 0.5,
             "Micros": {
                 "Saturated Fat (g)": 0.0,
-                "Sodium (mg)": 37.5,
-                "Fiber (g)": 12.0,
-                "Sugar (g)": 0.0,
+                "Sodium (mg)": 0.0,
+                "Fiber (g)": 2.5,
+                "Sugar (g)": 1.0,
                 "Added Sugar (g)": 0.0,
                 "Calcium (Food) (mg)": 0.0,
-                "Iron (Food) (mg)": 0.35,
-                "Potassium (mg)": 0.0
+                "Iron (Food) (mg)": 0.9,
+                "Potassium (mg)": 118.0
             }
         }
     },

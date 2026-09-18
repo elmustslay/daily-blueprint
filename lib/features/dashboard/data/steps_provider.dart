@@ -54,6 +54,11 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
   bool isLissDay = !isRefeed && (dayOfWeek == DateTime.wednesday || dayOfWeek == DateTime.saturday);
   int weeklyTarget = isRefeed ? 27000 : 55000;
 
+  // 🍕 Pizza Offset: Adding 20,000 steps this week to cleanly wipe out 1,000 calories (at 1:20 ratio)
+  if (now.isAfter(DateTime(2026, 9, 15)) && now.isBefore(DateTime(2026, 9, 21))) {
+    weeklyTarget = 75000;
+  }
+
   int naturalSteps = 0;
   List<WorkoutLog> danceWorkouts = [];
   List<WorkoutLog> lissWorkouts = [];

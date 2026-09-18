@@ -1,5 +1,6 @@
 import 'package:my_app/features/learn_tigrinya/domain/tigrinya_models.dart';
 import 'package:my_app/features/learn_tigrinya/domain/conjugator.dart';
+import 'package:my_app/features/learn_tigrinya/data/mastery_provider.dart';
 
 /// All static drill data: pronouns, objects, question words, verbs, and modules.
 class TigrinyaDrillsData {
@@ -7,7 +8,7 @@ class TigrinyaDrillsData {
 
   // ───────────────────────── PRONOUNS ─────────────────────────
 
-  static const List<Pronoun> pronouns = [
+  static const List<Pronoun> _allPronouns = [
     Pronoun(id: 'p1', tigrinya: 'ኣነ', translit: 'Ane', amharic: 'እኔ', english: 'I'),
     Pronoun(id: 'p2', tigrinya: 'ንስኻ', translit: 'Nsakha', amharic: 'አንተ', english: 'You (m.)'),
     Pronoun(id: 'p3', tigrinya: 'ንስኺ', translit: 'Nsakhi', amharic: 'አንቺ', english: 'You (f.)'),
@@ -20,8 +21,13 @@ class TigrinyaDrillsData {
     Pronoun(id: 'p10', tigrinya: 'ንሳተን', translit: 'Nsaten', amharic: 'እነሱ (ሴ)', english: 'They (f.)'),
   ];
 
+  static List<Pronoun> get pronouns {
+    if (MasteryStorage.showFemininePlurals) return _allPronouns.toList();
+    return _allPronouns.where((p) => p.id != 'p8' && p.id != 'p10').toList();
+  }
+
   static Pronoun getPronounById(String id) =>
-      pronouns.firstWhere((p) => p.id == id);
+      _allPronouns.firstWhere((p) => p.id == id);
 
   // ───────────────────────── QUESTION WORDS ─────────────────────────
 
@@ -79,14 +85,21 @@ class TigrinyaDrillsData {
 
   // ───────────────────────── DEMONSTRATIVES ─────────────────────────
 
-  static const List<TigrinyaObject> demonstratives = [
+  static const List<TigrinyaObject> _allDemonstratives = [
     TigrinyaObject(tigrinya: 'እዚ', amharic: 'ይህ', english: 'this (m.)'),
     TigrinyaObject(tigrinya: 'እዛ', amharic: 'ይቺ', english: 'this (f.)'),
     TigrinyaObject(tigrinya: 'እቲ', amharic: 'ያ', english: 'that (m.)'),
     TigrinyaObject(tigrinya: 'እታ', amharic: 'ያቺ', english: 'that (f.)'),
     TigrinyaObject(tigrinya: 'እዚኣቶም', amharic: 'እነዚህ', english: 'these (m.)'),
     TigrinyaObject(tigrinya: 'እዚኣተን', amharic: 'እነዚህ (ሴ)', english: 'these (f.)'),
+    TigrinyaObject(tigrinya: 'እቲኣቶም', amharic: 'እነዚያ', english: 'those (m.)'),
+    TigrinyaObject(tigrinya: 'እቲኣተን', amharic: 'እነዚያ (ሴ)', english: 'those (f.)'),
   ];
+
+  static List<TigrinyaObject> get demonstratives {
+    if (MasteryStorage.showFemininePlurals) return _allDemonstratives.toList();
+    return _allDemonstratives.where((d) => d.english != 'these (f.)' && d.english != 'those (f.)').toList();
+  }
 
   // ───────────────────────── PREPOSITIONS & CONNECTORS ─────────────────────────
 

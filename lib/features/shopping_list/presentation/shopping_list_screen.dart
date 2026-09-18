@@ -29,10 +29,10 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Produce
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
-      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (5 kiwis)'),
+      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (6 kiwis)'),
       ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (need 2 cups)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '24oz bag (for 7 servings)'),
-      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '33 Bananas (REFEED WEEK)' : '9 Bananas (4 PW + 5 Morning)'),
+      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '36 Bananas (REFEED WEEK)' : '12 Bananas (8 PW + 4 Morning)'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '2 lbs'),
@@ -43,19 +43,19 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       // Others
 
-      ShoppingItem(id: 'oth-2', name: 'Carbe Diem Pasta', subtext: '1.5 boxes (need 18oz)'),
+      ShoppingItem(id: 'oth-2', name: 'Barilla Protein+ Pasta', subtext: '1 box (14.5 oz)'),
       if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK: need 3 cups dry)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 JARS (48 oz)'),
 
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 4tbsp)'),
-      ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle (need 4.75 tsp)'),
-      
+      ShoppingItem(id: 'oth-8', name: 'Avocado Oil', subtext: '1 bottle (need 1.75 tsp)'),
+
       // Spices
       ShoppingItem(id: 'spc-1', name: 'Smoked Paprika', subtext: 'need 3tsp'),
       ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.33 tbsp (~4 tsp)'),
       ShoppingItem(id: 'spc-3', name: 'Onion Powder', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-4', name: 'Dried Oregano', subtext: 'need 1tsp'),
-      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: isNextWeekRefeed ? 'CRITICAL for potassium! (need 8 tsp)' : 'CRITICAL for potassium! (need 7 tsp)'),
+      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: isNextWeekRefeed ? 'CRITICAL for potassium! (need 8.2 tsp)' : 'CRITICAL for potassium! (need 7.2 tsp)'),
       ShoppingItem(id: 'spc-6', name: 'Black Pepper', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
       ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
@@ -79,7 +79,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-19', name: 'The Ordinary Caffeine Solution 5% + EGCG', subtext: 'For dark circles and bags'),
       ShoppingItem(id: 'amz-18', name: 'All Free Clear (Liquid)', subtext: 'Laundry Detergent'),
 
-      ShoppingItem(id: 'amz-21', name: 'Cluster Dextrin (Unflavored)', subtext: 'Intra-workout & Refeed supplement (need 4 scoops)'),
     ];
   }
 

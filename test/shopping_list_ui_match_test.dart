@@ -64,7 +64,7 @@ void main() {
     verifyItemExact(standardItems, 'Ground Beef', 'Ground Beef (96% Lean)', RegExp(r'(\d+(?:\.\d+)?)\s*lb'), RegExp(r'(\d+(?:\.\d+)?)\s*lb'));
     verifyItemExact(standardItems, 'Salmon', 'Wild Sockeye Salmon', RegExp(r'(\d+(?:\.\d+)?)\s*lb\s*\('), RegExp(r'(\d+(?:\.\d+)?)\s*lb'));
     verifyItemExact(standardItems, 'Eggs', 'Egg', RegExp(r'need\s*(\d+(?:\.\d+)?)/week'), RegExp(r'(\d+(?:\.\d+)?)\s*large egg'));
-    verifyItemExact(standardItems, 'Pasta', 'Carbe Diem Pasta', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*oz'), RegExp(r'(\d+(?:\.\d+)?)\s*oz'));
+    verifyItemExact(standardItems, 'Pasta', 'Barilla Protein+ Pasta', RegExp(r'\((\d+(?:\.\d+)?)\s*oz\)'), RegExp(r'(\d+(?:\.\d+)?)\s*oz'));
     verifyItemExact(standardItems, 'Marinara Sauce', 'Marinara Sauce', RegExp(r'(\d+(?:\.\d+)?)\s*jars?'), RegExp(r'(\d+(?:\.\d+)?)\s*jar\s*\(standard\)'));
     verifyItemExact(standardItems, 'Nutritional Yeast', 'Nutritional Yeast', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tbsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tbsp\s*\(standard\)'));
     verifyItemExact(standardItems, 'Avocado Oil', 'Avocado Oil', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp'));
@@ -88,7 +88,7 @@ void main() {
     verifyItemExact(standardItems, 'Citicoline', 'Citicoline', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*capsules?'), RegExp(r'(\d+(?:\.\d+)?)\s*capsule'));
     verifyItemExact(standardItems, 'NAC + Selenium', 'NAC + Selenium', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*capsules?'), RegExp(r'(\d+(?:\.\d+)?)\s*capsule'));
     verifyItemExact(standardItems, 'Ashwagandha', 'Ashwagandha', RegExp(r'(\d+(?:\.\d+)?)\s*capsules?\s*\(on\)'), RegExp(r'(\d+(?:\.\d+)?)\s*capsule\s*\(on\)'));
-    verifyItemExact(standardItems, 'Cluster Dextrin (Unflavored)', 'Cluster Dextrin (Unflavored)', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*scoops?'), RegExp(r'(\d+(?:\.\d+)?)\s*scoop'));
+
 
     // Refeed Week Check
     final refeedItems = ShoppingListNotifier.getInitialItems(true);

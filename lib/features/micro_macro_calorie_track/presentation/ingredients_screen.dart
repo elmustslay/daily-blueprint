@@ -21,7 +21,7 @@ class IngredientsScreen extends StatelessWidget {
       
       IngredientsData.egg,
       
-      IngredientsData.carbeDiemPasta,
+      IngredientsData.barillaProteinPlus,
       IngredientsData.quinoa,
       IngredientsData.marinaraSauce,
       IngredientsData.nutritionalYeast,

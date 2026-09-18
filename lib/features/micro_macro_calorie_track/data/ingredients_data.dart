@@ -526,24 +526,24 @@ class IngredientsData {
   
 
 
-  static const Ingredient carbeDiemPasta = Ingredient(
-    id: 'carbe_diem_pasta',
-    name: 'Carbe Diem Pasta',
+  static const Ingredient barillaProteinPlus = Ingredient(
+    id: 'barilla_protein_plus',
+    name: 'Barilla Protein+ Pasta',
     baseUnit: 'oz',
     nutritionPerBaseUnit: NutritionFact(
-      calories: 55.0,
-      protein: 4.0,
-      carbs: 20.0,
-      fat: 0.25,
+      calories: 95.0,
+      protein: 5.0,
+      carbs: 19.0,
+      fat: 0.5,
       microNutrients: {
         'Saturated Fat (g)': 0.0,
-        'Sodium (mg)': 37.5,
-        'Fiber (g)': 12.0,
-        'Sugar (g)': 0.0,
+        'Sodium (mg)': 0.0,
+        'Fiber (g)': 2.5,
+        'Sugar (g)': 1.0,
         'Added Sugar (g)': 0.0,
         'Calcium (Food) (mg)': 0.0,
-        'Iron (Food) (mg)': 0.35,
-        'Potassium (mg)': 0.0,
+        'Iron (Food) (mg)': 0.9,
+        'Potassium (mg)': 118.0,
       },
     ),
   );
@@ -1214,7 +1214,7 @@ static const Ingredient marinaraSauce = Ingredient(
     casein,
     chiaSeeds,
     quinoa,
-    carbeDiemPasta,
+    barillaProteinPlus,
     groundTurkey,
     leanGroundBeef96,
     liteSalt,

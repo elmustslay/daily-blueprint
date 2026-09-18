@@ -10,8 +10,7 @@ class RecipeData {
       icon: '🍝',
       yields: '6 Portions (6 Fridge)',
       textIngredients: [
-        '18 oz Carbe Diem Pasta (1.5 boxes)',
-        '1 tbsp avocado oil',
+        '14.5 oz Barilla Protein+ Pasta (1 Full Box)',
         '2 lb ground turkey',
         '2.5 tsp Morton Lite Salt',
         '1 tsp Iodized Table Salt',
@@ -23,8 +22,7 @@ class RecipeData {
       ],
       servings: 6,
       ingredients: [
-        IngredientPortion(ingredient: IngredientsData.carbeDiemPasta, amount: 18),
-        IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 3),
+        IngredientPortion(ingredient: IngredientsData.barillaProteinPlus, amount: 14.5),
         IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: 2),
         IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 2.5),
         IngredientPortion(ingredient: IngredientsData.iodizedTableSalt, amount: 1),
@@ -42,10 +40,10 @@ class RecipeData {
       ],
       instructions: [
         'Preheat Pan: Preheat dry 12 qt sauté pan on medium-high for 2-3 mins.',
-        'Sear Turkey: Add 1 tbsp avocado oil, then immediately add 2 lb ground turkey.',
+        'Sear Turkey: Add 2 lb ground turkey directly to the dry pan. (No oil needed, the turkey will render enough fat to prevent sticking).',
         'Seasoning: Sprinkle 2.5 tsp Lite Salt, 1 tsp Table Salt, 1 tbsp garlic powder, 1 tbsp Italian seasoning, 1 tsp smoked paprika, and pepper. Sauté and break apart until browned (~8 mins).',
         'Liquid: Pour in 2 cups water and 48 oz marinara sauce. Bring to a boil.',
-        'Pasta Simmer: Submerge the 18 oz dry pasta. Reduce heat to medium-low, cover, and simmer for 6 minutes (stir occasionally).',
+        'Pasta Simmer: Submerge the 14.5 oz dry pasta. Reduce heat to medium-low, cover, and simmer for 6-8 minutes (stir occasionally).',
         'Add Yeast: Uncover, stir in 4 tbsp nutritional yeast. Cover and cook another 3-5 mins until al dente.',
         'Wilt Spinach: Uncover, stir in spinach. Cook 2 mins over low heat until wilted.',
         'Store: Divide into 6 containers. Cool uncovered for 20-30 mins to prevent mushiness, then seal.',

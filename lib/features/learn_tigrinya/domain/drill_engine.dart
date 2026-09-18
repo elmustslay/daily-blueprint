@@ -30,6 +30,7 @@ class DrillEngine {
   int _currentIndex = 0;
   int _totalAnswered = 0;
   int _totalCorrect = 0;
+  bool _isReviewDeck = false;
 
   DrillEngine({required this.module, required this.tense, this.chunkIndex = 0, this.totalChunks = 1});
 
@@ -148,6 +149,7 @@ class DrillEngine {
     _totalCorrect = 0;
     _retryCorrectStreak.clear();
     _pendingRetries.clear();
+    _isReviewDeck = false;
 
     if (module.type == DrillModuleType.pronoun) {
       _generatePronounDeck();
@@ -224,6 +226,7 @@ class DrillEngine {
     _totalCorrect = 0;
     _retryCorrectStreak.clear();
     _pendingRetries.clear();
+    _isReviewDeck = true;
 
     final allVerbs = TigrinyaDrillsData.verbs;
     final allTenses = Tense.values;
@@ -413,7 +416,59 @@ class DrillEngine {
     final correct = card.correctAnswer;
     final distractors = <String>{};
 
-    if (module.type == DrillModuleType.pronoun) {
+    if (_isReviewDeck) {
+      if (card.verb != null && card.pronoun != null && correct.contains(' ')) {
+        final allVerbs = TigrinyaDrillsData.verbs;
+        for (int i = 0; i < 50; i++) {
+          final rv = allVerbs[_rng.nextInt(allVerbs.length)];
+          final conj = rv.conjugate(card.pronoun!.id, card.tense)?.replaceAll('{', '').replaceAll('}', '');
+          if (conj == null) continue;
+          final objTigrinya = card.object?.tigrinya ?? 'ማይ';
+          final distractor = '${card.pronoun!.tigrinya} $objTigrinya $conj';
+          if (distractor != correct && !distractors.contains(distractor)) {
+            distractors.add(distractor);
+            if (distractors.length >= 7) break;
+          }
+        }
+      } else if (card.verb != null && card.pronoun != null) {
+        final verb = card.verb!;
+        final conjugationMap = verb.getMap(card.tense);
+        final allForms = conjugationMap.allForms.toList();
+        allForms.remove(correct);
+        final uniqueDistractors = allForms.toSet().toList();
+        uniqueDistractors.remove(correct);
+        uniqueDistractors.shuffle(_rng);
+        distractors.addAll(uniqueDistractors.take(7));
+
+        if (distractors.length < 7) {
+          final allVerbs = TigrinyaDrillsData.verbs;
+          for (int i = 0; i < 20; i++) {
+            if (distractors.length >= 7) break;
+            final otherVerb = allVerbs[_rng.nextInt(allVerbs.length)];
+            if (otherVerb.id == verb.id) continue;
+            final otherMap = otherVerb.getMap(card.tense);
+            final otherForms = otherMap.allForms.toSet().toList();
+            otherForms.shuffle(_rng);
+            for (final f in otherForms) {
+              if (f != correct && !distractors.contains(f)) {
+                distractors.add(f);
+                if (distractors.length >= 7) break;
+              }
+            }
+          }
+        }
+      } else if (TigrinyaDrillsData.nounPossessionItems.contains(card.object)) {
+        final allItems = TigrinyaDrillsData.nounPossessionItems.map((n) => n.tigrinya).toList();
+        allItems.remove(correct);
+        allItems.shuffle(_rng);
+        distractors.addAll(allItems.take(7));
+      } else if (TigrinyaDrillsData.verbObjectSuffixItems.contains(card.object)) {
+        final allItems = TigrinyaDrillsData.verbObjectSuffixItems.map((v) => v.tigrinya).toList();
+        allItems.remove(correct);
+        allItems.shuffle(_rng);
+        distractors.addAll(allItems.take(7));
+      }
+    } else if (module.type == DrillModuleType.pronoun) {
       final allForms =
           TigrinyaDrillsData.pronouns.map((p) => p.tigrinya).toList();
       allForms.remove(correct);
@@ -514,26 +569,15 @@ class DrillEngine {
         }
       }
     } else if (module.type == DrillModuleType.sentence) {
-      final allPronouns = TigrinyaDrillsData.pronouns;
       final allVerbs = TigrinyaDrillsData.verbs;
 
       for (int i = 0; i < 50; i++) {
-        final rp = allPronouns[_rng.nextInt(allPronouns.length)];
         final rv = allVerbs[_rng.nextInt(allVerbs.length)];
-        final conj = rv.conjugate(rp.id, card.tense)?.replaceAll('{', '').replaceAll('}', '');
+        final conj = rv.conjugate(card.pronoun!.id, card.tense)?.replaceAll('{', '').replaceAll('}', '');
         if (conj == null) continue;
 
-        TigrinyaObject? obj;
-        if (rv.categories.isNotEmpty) {
-          final cat = rv.categories[_rng.nextInt(rv.categories.length)];
-          final objs = TigrinyaDrillsData.compatibleObjects[cat] ?? [];
-          if (objs.isNotEmpty) {
-            obj = objs[_rng.nextInt(objs.length)];
-          }
-        }
-        obj ??= card.object ?? const TigrinyaObject(tigrinya: 'ማይ', amharic: 'ውሃ', english: 'water');
-
-        final distractor = '${rp.tigrinya} ${obj.tigrinya} $conj';
+        final objTigrinya = card.object?.tigrinya ?? 'ማይ';
+        final distractor = '${card.pronoun!.tigrinya} $objTigrinya $conj';
         if (distractor != correct && !distractors.contains(distractor)) {
           distractors.add(distractor);
           if (distractors.length >= 7) break;

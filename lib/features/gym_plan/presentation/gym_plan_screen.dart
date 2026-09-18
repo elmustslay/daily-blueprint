@@ -624,8 +624,8 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
               ],
             ),
             const Divider(height: 32),
-            if (todayLogCount == 0 && !isPrimed && widget.exercise.primaryMuscleGroup != 'Mobility' && widget.exercise.primaryMuscleGroup != 'Abs')
-              _buildWarmupSuggestion(widget.exercise, workingWeight),
+            if (todayLogCount == 0 && widget.exercise.primaryMuscleGroup != 'Mobility' && widget.exercise.primaryMuscleGroup != 'Abs')
+              _buildWarmupSuggestion(widget.exercise, workingWeight, isPrimed),
             weightsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('Error: $err'),
@@ -669,49 +669,39 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
     );
   }
 
-  Widget _buildWarmupSuggestion(Exercise exercise, double? workingWeight) {
-    if (workingWeight == null) {
-      return Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.orangeAccent.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.5)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Row(
-              children: [
-                Icon(Icons.local_fire_department, color: Colors.orangeAccent, size: 18),
-                SizedBox(width: 8),
-                Text('Smart Warm-up', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
-              ],
-            ),
-            SizedBox(height: 8),
-            Text('1. Very light weight for 10 reps', style: TextStyle(fontSize: 13, color: Colors.white70)),
-            SizedBox(height: 4),
-            Text('2. Moderate light weight for 6 reps', style: TextStyle(fontSize: 13, color: Colors.white)),
-            SizedBox(height: 8),
-            Text('⏳ Rest ~1 min between warmups, 2 mins before working set.', style: TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
-          ],
-        ),
-      );
+  Widget _buildWarmupSuggestion(Exercise exercise, double? workingWeight, bool isPrimed) {
+    final targetWarmups = isPrimed ? exercise.secondaryWarmupSets : exercise.warmupSets;
+    if (targetWarmups == null || targetWarmups.isEmpty) {
+      return const SizedBox.shrink();
     }
 
     double roundTo5(double w) => (w / 5).round() * 5.0;
 
-    bool isAssisted = exercise.name.contains('Assisted');
-    // If assisted, higher weight is easier (more assistance). 
-    // Working weight of 30 lbs means 30 lbs of assistance.
-    // Warmup 1 (very light) -> needs MORE assistance (e.g., 2.0x working assistance)
-    // Warmup 2 (moderate light) -> needs moderately more assistance (e.g., 1.5x working assistance)
-    // Warmup 3 (heavy warmup) -> needs slightly more assistance (e.g., 1.2x working assistance)
+    List<Widget> warmupLines = [];
     
-    final w1 = isAssisted ? roundTo5(workingWeight * 2.0) : roundTo5(workingWeight * 0.4);
-    final w2 = isAssisted ? roundTo5(workingWeight * 1.5) : roundTo5(workingWeight * 0.6);
-    final w3 = isAssisted ? roundTo5(workingWeight * 1.2) : roundTo5(workingWeight * 0.8);
+    for (int i = 0; i < targetWarmups.length; i++) {
+      final set = targetWarmups[i];
+      String weightStr = '';
+      
+      if (set.weightOverride != null) {
+        weightStr = set.weightOverride!;
+      } else if (set.weightFactor != null) {
+        if (workingWeight != null) {
+          final w = roundTo5(workingWeight * set.weightFactor!);
+          weightStr = '~${w.toStringAsFixed(0)} lbs (${(set.weightFactor! * 100).toInt()}%)';
+        } else {
+          weightStr = '${(set.weightFactor! * 100).toInt()}% of working weight';
+        }
+      }
+      
+      String note = set.note != null ? ' - ${set.note}' : '';
+      warmupLines.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: Text('${i + 1}. $weightStr for ${set.reps} reps$note', style: const TextStyle(fontSize: 13, color: Colors.white)),
+        )
+      );
+    }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -724,21 +714,17 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.local_fire_department, color: Colors.orangeAccent, size: 18),
-              SizedBox(width: 8),
-              Text('Smart Warm-up', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
+              const Icon(Icons.local_fire_department, color: Colors.orangeAccent, size: 18),
+              const SizedBox(width: 8),
+              Text(isPrimed ? 'Feeder Warm-up' : 'Smart Warm-up', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
             ],
           ),
           const SizedBox(height: 8),
-          Text('1. ~${w1.toStringAsFixed(0)} lbs ${isAssisted ? 'Assistance ' : ''}for 10 reps (40%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
-          const SizedBox(height: 4),
-          Text('2. ~${w2.toStringAsFixed(0)} lbs ${isAssisted ? 'Assistance ' : ''}for 6 reps (60%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
-          const SizedBox(height: 4),
-          Text('3. ~${w3.toStringAsFixed(0)} lbs ${isAssisted ? 'Assistance ' : ''}for 3 reps (80%)', style: const TextStyle(fontSize: 13, color: Colors.white)),
+          ...warmupLines,
           const SizedBox(height: 8),
-          const Text('⏳ Rest ~1 min between warmups, 2 mins before working set.', style: TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
+          Text('⏳ ${exercise.warmupRest ?? 'Rest 1 min between warmups.'}', style: const TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
         ],
       ),
     );

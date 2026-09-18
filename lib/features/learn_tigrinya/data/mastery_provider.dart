@@ -10,20 +10,32 @@ import 'srs_storage.dart';
 class MasteryStorage {
   static const double unlockThreshold = 0.85;
   static const String _auditorKey = 'tigrinya_auditor_mode';
+  static const String _femininePluralsKey = 'tigrinya_show_feminine_plurals';
 
   /// Auditor mode: when true, all modules and tenses are unlocked.
   static bool _auditorMode = false;
   static bool get auditorMode => _auditorMode;
 
-  static void loadAuditorMode() {
+  /// Feminine plurals mode: when true, p8 and p10 are visible.
+  static bool _showFemininePlurals = false;
+  static bool get showFemininePlurals => _showFemininePlurals;
+
+  static void loadSettings() {
     final prefs = SharedPrefsLogic.instance;
     _auditorMode = prefs.getBool(_auditorKey) ?? false;
+    _showFemininePlurals = prefs.getBool(_femininePluralsKey) ?? false;
   }
 
   static Future<void> setAuditorMode(bool value) async {
     _auditorMode = value;
     final prefs = SharedPrefsLogic.instance;
     await prefs.setBool(_auditorKey, value);
+  }
+
+  static Future<void> setFemininePlurals(bool value) async {
+    _showFemininePlurals = value;
+    final prefs = SharedPrefsLogic.instance;
+    await prefs.setBool(_femininePluralsKey, value);
   }
 
   static String _key(String moduleId, Tense tense, DrillStage stage) =>
