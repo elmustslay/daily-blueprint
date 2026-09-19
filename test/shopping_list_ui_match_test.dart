@@ -57,9 +57,9 @@ void main() {
     final standardItems = ShoppingListNotifier.getInitialItems(false);
     
     verifyItemExact(standardItems, 'Spinach', 'Spinach', RegExp(r'(\d+(?:\.\d+)?)\s*bag'), RegExp(r'(\d+(?:\.\d+)?)\s*bag\s*\(standard\)'));
-    verifyItemExact(standardItems, 'Kiwis', 'Trader Joe\'s Kiwi (Skin-On)', RegExp(r'\((\d+(?:\.\d+)?)\s*kiwis\)'), RegExp(r'(\d+(?:\.\d+)?)\s*kiwi'));
+    verifyItemExact(standardItems, 'Kiwis', 'Trader Joe\'s Kiwi (Skin-On)', RegExp(r'(\d+(?:\.\d+)?)\s*kiwis', caseSensitive: false), RegExp(r'(\d+(?:\.\d+)?)\s*kiwi'));
     verifyItemExact(standardItems, 'Baby Carrots', 'Baby Carrots', RegExp(r'(\d+(?:\.\d+)?)\s*oz'), RegExp(r'(\d+(?:\.\d+)?)\s*oz'));
-    verifyItemExact(standardItems, 'Bananas', 'Banana', RegExp(r'(\d+(?:\.\d+)?)\s*bananas'), RegExp(r'(\d+(?:\.\d+)?)\s*medium\s*\(standard\)'));
+    verifyItemExact(standardItems, 'Bananas', 'Banana', RegExp(r'(\d+(?:\.\d+)?)\s*bananas', caseSensitive: false), RegExp(r'(\d+(?:\.\d+)?)\s*medium\s*\(standard\)'));
     verifyItemExact(standardItems, 'Ground Turkey', 'Ground Turkey (93% Lean)', RegExp(r'(\d+(?:\.\d+)?)\s*lbs?'), RegExp(r'(\d+(?:\.\d+)?)\s*lb\s*\(standard\)'));
     verifyItemExact(standardItems, 'Ground Beef', 'Ground Beef (96% Lean)', RegExp(r'(\d+(?:\.\d+)?)\s*lb'), RegExp(r'(\d+(?:\.\d+)?)\s*lb'));
     verifyItemExact(standardItems, 'Salmon', 'Wild Sockeye Salmon', RegExp(r'(\d+(?:\.\d+)?)\s*lb\s*\('), RegExp(r'(\d+(?:\.\d+)?)\s*lb'));
@@ -92,7 +92,7 @@ void main() {
     // Refeed Week Check
     final refeedItems = ShoppingListNotifier.getInitialItems(true);
     verifyItemExact(refeedItems, 'Morton Lite Salt', 'Morton Lite Salt', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp\s*\(refeed\)'));
-    verifyItemExact(refeedItems, 'Bananas', 'Banana', RegExp(r'(\d+(?:\.\d+)?)\s*bananas'), RegExp(r'(\d+(?:\.\d+)?)\s*medium\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Bananas', 'Banana', RegExp(r'(\d+(?:\.\d+)?)\s*bananas', caseSensitive: false), RegExp(r'(\d+(?:\.\d+)?)\s*medium\s*\(refeed\)'));
     verifyItemExact(refeedItems, 'Blueberries', 'Trader Joe\'s Blueberries', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*cups?'), RegExp(r'(\d+(?:\.\d+)?)\s*cup\s*\(refeed\)'));
     verifyItemExact(refeedItems, 'Quinoa', 'Quinoa', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*cups'), RegExp(r'(\d+(?:\.\d+)?)\s*cup\s*\(dry\)\s*\(refeed\)'));
 

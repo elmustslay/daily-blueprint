@@ -95,7 +95,8 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🍌 Eat {{isRefeedWeek ? "2 Medium Bananas" : "1 Medium Banana"}}
+{{#if isRefeedWeek}}  - 🍌 Eat 1 Medium Banana{{/if}}
+  - 🥝 Eat 2 Kiwis
   - Finish leftover 0.5 portion of Salmon (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -152,6 +153,7 @@
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
+  - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
 {{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
@@ -187,7 +189,7 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🍌 Eat 1 Medium Banana
+  - 🥝 Eat 2 Kiwis
   - Finish leftover 0.5 portion of Salmon (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -359,7 +361,8 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🍌 Eat {{isRefeedWeek ? "2 Medium Bananas" : "1 Medium Banana"}}
+{{#if isRefeedWeek}}  - 🍌 Eat 1 Medium Banana{{/if}}
+  - 🥝 Eat 2 Kiwis
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -450,7 +453,7 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:45 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🍌 Eat 1 Medium Banana
+  - 🥝 Eat 2 Kiwis
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
   - 4 Boiled Eggs
   - 3 softgel omega-3
@@ -536,7 +539,7 @@
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-9:15 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🍌 Eat 1 Medium Banana
+  - 🥝 Eat 2 Kiwis
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
   - 3 Boiled Eggs
   - 1 D3-K2

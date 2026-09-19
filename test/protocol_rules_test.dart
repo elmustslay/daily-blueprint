@@ -236,7 +236,7 @@ void main() {
           final hasKiwi = item.mealRecord?.items.any((i) => i.ingredient.id == 'kiwi') ?? false;
           
           if (hasKiwi) {
-            expect(details, contains('swish water'), reason: 'Eating kiwi must be followed by swishing water to protect tooth enamel from acidity on ${entry.key} at ${item.time}');
+            expect(details.contains('swish water') || details.contains('swish/drink water'), isTrue, reason: 'Eating kiwi must be followed by swishing water to protect tooth enamel from acidity on ${entry.key} at ${item.time}');
           }
         }
       }

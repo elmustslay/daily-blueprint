@@ -68,10 +68,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 461.66666666666663,
-                "Protein": 29.93333333333333,
-                "Carbs": 54.0,
-                "Fat": 15.850416666666666
+                "Calories": 446.66666666666663,
+                "Protein": 30.633333333333333,
+                "Carbs": 49.0,
+                "Fat": 16.550416666666667
             }
         },
         "1:00-1:30 pm": {
@@ -104,10 +104,10 @@
         "9:20-9:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 120.0,
-                "Protein": 25.0,
-                "Carbs": 3.0,
-                "Fat": 0.5
+                "Calories": 210.0,
+                "Protein": 27.0,
+                "Carbs": 25.0,
+                "Fat": 1.5
             }
         }
     },
@@ -124,10 +124,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 356.66666666666663,
-                "Protein": 28.633333333333333,
-                "Carbs": 27.0,
-                "Fat": 15.550416666666667
+                "Calories": 341.66666666666663,
+                "Protein": 29.333333333333332,
+                "Carbs": 22.0,
+                "Fat": 16.250416666666666
             }
         },
         "1:00-1:30 pm": {
@@ -245,10 +245,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 425.957,
-                "Protein": 25.3541,
-                "Carbs": 55.203875,
-                "Fat": 13.3379125
+                "Calories": 410.957,
+                "Protein": 26.0541,
+                "Carbs": 50.203875,
+                "Fat": 14.037912500000001
             }
         },
         "1:00-1:30 pm": {
@@ -301,10 +301,10 @@
         "8:10-8:45 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 490.957,
-                "Protein": 36.0541,
-                "Carbs": 28.203875,
-                "Fat": 26.547912500000002
+                "Calories": 475.957,
+                "Protein": 36.7541,
+                "Carbs": 23.203875,
+                "Fat": 27.247912499999998
             }
         },
         "1:50-2:20 pm": {
@@ -357,10 +357,10 @@
         "8:10-9:15 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 390.957,
-                "Protein": 30.0541,
-                "Carbs": 28.203875,
-                "Fat": 18.0379125
+                "Calories": 375.957,
+                "Protein": 30.7541,
+                "Carbs": 23.203875,
+                "Fat": 18.7379125
             }
         },
         "1:20-1:50 pm": {

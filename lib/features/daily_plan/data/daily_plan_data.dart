@@ -273,7 +273,7 @@ class DailyPlanData {
     int eggs = 3, 
     Set<MorningSupplement> supplements = const { MorningSupplement.omega3 },
     ProteinSource protein = ProteinSource.none,
-    bool banana = false,
+    int kiwiCount = 0,
     bool isResistanceDay = true,
   }) {
     final omega3 = supplements.contains(MorningSupplement.omega3);
@@ -282,7 +282,7 @@ class DailyPlanData {
     final zinc = supplements.contains(MorningSupplement.zinc);
     final copper = supplements.contains(MorningSupplement.copper);
     final extraRefeedBanana = isResistanceDay && isRefeedWeek();
-    final bananaCount = (banana ? 1 : 0) + (extraRefeedBanana ? 1 : 0);
+    final bananaCount = (extraRefeedBanana ? 1 : 0);
 
     return TimelineItem(
       time: time,
@@ -291,6 +291,7 @@ class DailyPlanData {
       details: [
         const DetailItem('Eat in front of Verilux HappyLight (45-degree angle to face):'),
         if (bananaCount > 0) DetailItem('🍌 Eat $bananaCount Medium Banana${bananaCount > 1 ? "s" : ""}'),
+        if (kiwiCount > 0) DetailItem('🥝 Eat $kiwiCount Kiwi${kiwiCount > 1 ? "s" : ""}'),
         if (protein == ProteinSource.salmon) const DetailItem('Finish leftover 0.5 portion of Salmon (from fridge)'),
         if (protein == ProteinSource.beef) const DetailItem('Finish leftover 0.5 portion of Ground Beef (from fridge)'),
         if (eggs > 0) DetailItem('$eggs Boiled Eggs'),
@@ -307,6 +308,7 @@ class DailyPlanData {
       mealRecord: MealRecord(
         items: [
           if (bananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
+          if (kiwiCount > 0) IngredientPortion(ingredient: IngredientsData.kiwi, amount: kiwiCount.toDouble()),
           if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
           if (omega3) _Portions.omega3,
           if (useD3K2) _Portions.d3K2,
@@ -647,7 +649,7 @@ class DailyPlanData {
     ProteinSource morningProtein = ProteinSource.none,
     int eggs = 2,
     Set<MorningSupplement> morningSupplements = const {},
-    bool morningBanana = false,
+    int morningKiwi = 0,
     String morningAdditional = '',
     String? morningSkincare,
     List<DetailItem> amWorkDetails = const [],
@@ -668,7 +670,7 @@ class DailyPlanData {
         '8:10-8:30 am', 
         eggs: eggs, 
         supplements: morningSupplements, 
-        banana: morningBanana, 
+        kiwiCount: morningKiwi, 
         protein: morningProtein, 
         additional: morningAdditional, 
         isResistanceDay: gym.isResistance
@@ -738,12 +740,12 @@ class DailyPlanData {
   static List<TimelineItem> _buildTuesday() => _buildStandardWeekday(
     clothes: 'Get dressed for work (cloud x 4)',
     morningSupplements: {MorningSupplement.zinc},
-    morningBanana: true,
+    morningKiwi: 2,
     morningProtein: ProteinSource.salmon,
     isOfficeDay: true,
     gym: const GymConfig(title: 'Legs (Quads & Calves)'),
     dinner: _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.creatine, NutritionAddOn.copper}),
-    chores: const ChoresConfig(),
+    chores: const ChoresConfig(sleepKiwiCount: 2),
     magAmount: 3,
     nightSkincare: _Routines.joseon,
   );
@@ -751,7 +753,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildWednesday() => _buildStandardWeekday(
     wakeupNutrition: {NutritionAddOn.nac},
     clothes: 'Get dressed for work (NK 9060/Bondi)',
-    morningBanana: true,
+    morningKiwi: 2,
     morningProtein: ProteinSource.salmon,
     morningAdditional: '🥩 Take ground beef out of freezer to thaw in fridge',
     isOfficeDay: true,
@@ -808,7 +810,7 @@ class DailyPlanData {
   static List<TimelineItem> _buildFriday() => _buildStandardWeekday(
     clothes: 'Get dressed for work (cloud x 4)',
     morningSupplements: {MorningSupplement.copper},
-    morningBanana: true,
+    morningKiwi: 2,
     morningProtein: ProteinSource.beef,
     isOfficeDay: true,
     gym: const GymConfig(title: 'Legs (Hamstrings / Glutes)'),
@@ -821,7 +823,7 @@ class DailyPlanData {
 
   static List<TimelineItem> _buildSaturday() => [
     _wakeup('8:00-8:10 am'),
-    _morningDine('8:10-8:45 am', additional: '20mg adderall IR', eggs: 4, protein: ProteinSource.beef, supplements: {MorningSupplement.omega3, MorningSupplement.d3K2, MorningSupplement.vitaminE}, banana: true, isResistanceDay: false),
+    _morningDine('8:10-8:45 am', additional: '20mg adderall IR', eggs: 4, protein: ProteinSource.beef, supplements: {MorningSupplement.omega3, MorningSupplement.d3K2, MorningSupplement.vitaminE}, kiwiCount: 2, isResistanceDay: false),
     _getReady('8:45-9:05 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
     ..._buildStudyCycle('9:05-10:35 am', '10:35-10:55 am'),
     ..._buildStudyCycle('10:55-12:20 pm', '12:20-12:35 pm', studyNutrition: {}),
@@ -833,7 +835,7 @@ class DailyPlanData {
     _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
     TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
     _beefDinner('7:45-8:00 pm'),
-    _chores('8:00-8:50 pm', blueberryText: isRefeedWeek() ? 'Eat the rest of the box of Blueberries' : '', nutrition: {}),
+    _chores('8:00-8:50 pm', blueberryText: isRefeedWeek() ? 'Eat the rest of the box of Blueberries' : '', nutrition: {}, sleepKiwiCount: 0),
     _relaxOrCatchUp('8:50-9:35 pm'),
     _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
     _nightSupplement('10:20-10:35 pm', magAmount: 2, skincare: _Routines.joseon, nutrition: {NutritionAddOn.nac}),
@@ -842,7 +844,7 @@ class DailyPlanData {
 
   static List<TimelineItem> _buildSunday() => [
     _wakeup('8:00-8:10 am'),
-    _morningDine('8:10-9:15 am', eggs: 3, protein: ProteinSource.beef, supplements: {MorningSupplement.d3K2}, banana: true, isResistanceDay: false),
+    _morningDine('8:10-9:15 am', eggs: 3, protein: ProteinSource.beef, supplements: {MorningSupplement.d3K2}, kiwiCount: 2, isResistanceDay: false),
     _getReady('9:15-9:35 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for shopping (NK 9060)'),
     ..._buildStudyCycle('9:50-11:20 am', '11:20-11:50 am', studyDetails: [const DetailItem.trackable('20mg adderall IR at 9:50am')], studyNutrition: {}),
     _study('11:50-1:20 pm'),

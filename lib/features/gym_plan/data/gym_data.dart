@@ -339,7 +339,7 @@ class GymData {
     ),
     Exercise(
       id: 'legs_6a', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '2 min', primaryMuscleGroup: 'Calves',
-      tip: '🎯 Focus: Gastrocnemius and Soleus.\n\n💡 How to do it: Try seat 4. Balls of feet on bottom edge. Soft knee bend.\n\n🔒 NON-NEGOTIABLE: A full 2-second dead-stop pause at the absolute deepest stretch at the bottom of EVERY rep.\n\n⚠️ Common Pitfall: Bouncing at the bottom. Your Achilles tendon acts like a giant rubber band. If you bounce, the tendon reflects the weight back up, making the exercise feel easier because the calf muscle is literally bypassed.',
+      tip: '🎯 Focus: Gastrocnemius and Soleus.\n\n💡 How to do it: Try seat 4 (visible when looking down seated). Balls of feet on bottom edge. Soft knee bend.\n\n🔒 NON-NEGOTIABLE: A full 2-second dead-stop pause at the absolute deepest stretch at the bottom of EVERY rep.\n\n⚠️ Common Pitfall: Bouncing at the bottom. Your Achilles tendon acts like a giant rubber band. If you bounce, the tendon reflects the weight back up, making the exercise feel easier because the calf muscle is literally bypassed.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5)],
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
@@ -412,7 +412,7 @@ class GymData {
       id: 'push_8', name: 'Flat Machine Press', sets: '3', reps: '10-12', rest: '3 min', primaryMuscleGroup: 'Chest',
       tier: 1,
       synergisticMuscleGroups: const ['Triceps', 'Front Delts'],
-      tip: '🎯 Focus: Mid and lower chest.\n\n💡 How to do it: Align handles with mid-chest.\n\n🔒 NON-NEGOTIABLE: Shoulder blades tightly pinched and pressed into the pad.\n\n⚠️ Common Pitfall: Rolling the shoulders forward at the top of the press.',
+      tip: '🎯 Focus: Mid and lower chest.\n\n💡 How to do it: Set the back pad straight/upright. Align handles with mid-chest and keep elbows tucked at a 45-degree angle.\n\n🔒 NON-NEGOTIABLE: Shoulder blades tightly pinched and pressed into the pad.\n\n⚠️ Common Pitfall: Flaring elbows to 90 degrees or rolling shoulders forward at the top.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5), WarmupSet(reps: 4, weightFactor: 0.75)],
       secondaryWarmupSets: [WarmupSet(reps: 4, weightFactor: 0.75, note: 'Feeder set')],
       warmupRest: 'Rest 1 min.',
@@ -474,7 +474,7 @@ class GymData {
     ),
     Exercise(
       id: 'legs_6a', name: 'Seated Calf Press', sets: '4', reps: '15-20', rest: '2 min', primaryMuscleGroup: 'Calves',
-      tip: '🎯 Focus: Gastrocnemius and Soleus.\n\n💡 How to do it (at 6, 4 visible): Balls of feet on bottom edge.\n\n🔒 NON-NEGOTIABLE: A full 2-second dead-stop pause at the absolute deepest stretch at the bottom of EVERY rep.\n\n⚠️ Common Pitfall: Bouncing at the bottom. The Achilles tendon recoils the weight back up, meaning the calf muscle is literally bypassed and does no work.',
+      tip: '🎯 Focus: Gastrocnemius and Soleus.\n\n💡 How to do it (at 6, 4 visible when looking down seated): Balls of feet on bottom edge.\n\n🔒 NON-NEGOTIABLE: A full 2-second dead-stop pause at the absolute deepest stretch at the bottom of EVERY rep.\n\n⚠️ Common Pitfall: Bouncing at the bottom. The Achilles tendon recoils the weight back up, meaning the calf muscle is literally bypassed and does no work.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5)],
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
