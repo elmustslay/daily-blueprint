@@ -64,6 +64,7 @@ final primedMuscleGroupsProvider = FutureProvider<Set<String>>((ref) async {
       final ex = GymData.getExerciseById(log.exerciseId);
       if (ex != null) {
         primed.add(ex.primaryMuscleGroup);
+        primed.addAll(ex.synergisticMuscleGroups);
       }
     }
   }
@@ -122,13 +123,116 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
     );
   }
 
+  void _showAdvisorBottomSheet(BuildContext context) {
+    List<Exercise> currentExercises = [];
+    if (_tabController.index == 0) currentExercises = GymData.upperADay;
+    else if (_tabController.index == 1) currentExercises = GymData.lowerADay;
+    else if (_tabController.index == 2) currentExercises = GymData.upperBDay;
+    else if (_tabController.index == 3) currentExercises = GymData.lowerBDay;
+    else return;
+
+    final List<Exercise> uncompleted = [];
+    for (final ex in currentExercises) {
+      if (ex.primaryMuscleGroup == 'Mobility') continue;
+      
+      int numSets = 3;
+      final match = RegExp(r'(\d+)').allMatches(ex.sets);
+      if (match.isNotEmpty) {
+        numSets = int.parse(match.last.group(0)!);
+      }
+      final count = ref.read(todayLogCountProvider(ex.id)).value ?? 0;
+      if (count < numSets) {
+        uncompleted.add(ex);
+      }
+    }
+
+    final available1 = <Exercise>[];
+    final available2 = <Exercise>[];
+    final available3 = <Exercise>[];
+    final unavailable = <Exercise>[];
+
+    for (final ex in uncompleted) {
+      bool prereqsMet = true;
+      for (final prereqId in ex.prerequisiteExerciseIds) {
+        final count = ref.read(todayLogCountProvider(prereqId)).value ?? 0;
+        if (count == 0) {
+          prereqsMet = false;
+          break;
+        }
+      }
+      if (prereqsMet) {
+        if (ex.tier == 1) available1.add(ex);
+        else if (ex.tier == 2) available2.add(ex);
+        else available3.add(ex);
+      } else {
+        unavailable.add(ex);
+      }
+    }
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 32.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.assistant, color: Colors.blueAccent),
+                    SizedBox(width: 8),
+                    Text('Optimal Next Workout', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                if (available1.isNotEmpty) ...[
+                  const Text('✅ Available Tier 1 (Heavy Compounds)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                  ...available1.map((e) => Text('• ${e.name}')),
+                  const SizedBox(height: 8),
+                ],
+                if (available2.isNotEmpty) ...[
+                  const Text('✅ Available Tier 2 (Heavy Isolations)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.lightGreen)),
+                  ...available2.map((e) => Text('• ${e.name}')),
+                  const SizedBox(height: 8),
+                ],
+                if (available3.isNotEmpty) ...[
+                  const Text('✅ Available Tier 3 (Accessories)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+                  ...available3.map((e) => Text('• ${e.name}')),
+                  const SizedBox(height: 8),
+                ],
+                if (unavailable.isNotEmpty) ...[
+                  const Divider(),
+                  const Text('🚫 Detrimental / Pre-exhaust', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)),
+                  const Text('Do not do these until their prerequisites are met.', style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey)),
+                  const SizedBox(height: 4),
+                  ...unavailable.map((e) => Text('• ${e.name}')),
+                ],
+                if (uncompleted.isEmpty)
+                  const Text('You have completed all exercises for this routine!', style: TextStyle(fontStyle: FontStyle.italic)),
+              ],
+            ),
+          ),
+        );
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showAdvisorBottomSheet(context),
+        icon: const Icon(Icons.assistant),
+        label: const Text('Next?'),
+        backgroundColor: Colors.blueAccent,
+      ),
       appBar: AppBar(
         title: const Text('El\'s Workout Plan'),
         actions: [
-          const WarmupTimerWidget(),
           IconButton(
             icon: const Icon(Icons.edit),
             tooltip: 'Edit Logs',
@@ -579,13 +683,51 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
       restDisplay = '$mins:${secs.toString().padLeft(2, '0')}';
     }
 
+    bool prerequisitesMet = true;
+    String? missingPrereqName;
+    for (final prereqId in widget.exercise.prerequisiteExerciseIds) {
+      final count = ref.watch(todayLogCountProvider(prereqId)).value ?? 0;
+      if (count == 0) {
+        prerequisitesMet = false;
+        missingPrereqName = GymData.getExerciseName(prereqId);
+        break;
+      }
+    }
+
+    void handleInteraction(VoidCallback proceed) {
+      if (prerequisitesMet) {
+        proceed();
+      } else {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('⚠️ Pre-exhaust Warning', style: TextStyle(color: Colors.orangeAccent)),
+            content: Text("Wait! You haven't done $missingPrereqName yet.\n\nDoing ${widget.exercise.name} now will pre-exhaust your muscles and could compromise your heavier lifts."),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  proceed();
+                },
+                child: const Text('I Understand, Proceed', style: TextStyle(color: Colors.redAccent)),
+              ),
+            ],
+          )
+        );
+      }
+    }
+
     return Opacity(
       opacity: isCompleted ? 0.6 : 1.0,
       child: Card(
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: InkWell(
-          onTap: widget.exercise.tip != null ? () => _showTipDialog(context) : null,
+          onTap: widget.exercise.tip != null ? () => handleInteraction(() => _showTipDialog(context)) : null,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -643,7 +785,7 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
                       ],
                     ),
                     ElevatedButton.icon(
-                      onPressed: isCompleted ? null : () => _showLogDialog(context, ref, todayLogCount, numSets),
+                      onPressed: isCompleted ? null : () => handleInteraction(() => _showLogDialog(context, ref, todayLogCount, numSets)),
                       icon: Icon(isCompleted ? Icons.check : Icons.add),
                       label: Text(isCompleted ? 'Completed' : 'Log Weight'),
                     )
@@ -673,6 +815,29 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
     final targetWarmups = isPrimed ? exercise.secondaryWarmupSets : exercise.warmupSets;
     if (targetWarmups == null || targetWarmups.isEmpty) {
       return const SizedBox.shrink();
+    }
+
+    final restStr = exercise.warmupRest ?? '1 min';
+    int warmupSecs = 60;
+    int workingSecs = 60;
+
+    final regExp = RegExp(r'(?:(\d+)-)?(\d+)\s*(s|sec|m|min)');
+    final matches = regExp.allMatches(restStr.toLowerCase()).toList();
+
+    int parseMatch(RegExpMatch m) {
+      final val = int.parse(m.group(2)!);
+      final unit = m.group(3)!;
+      if (unit.startsWith('m')) return val * 60;
+      return val;
+    }
+
+    if (matches.isNotEmpty) {
+      warmupSecs = parseMatch(matches[0]);
+      if (matches.length > 1) {
+        workingSecs = parseMatch(matches[1]);
+      } else {
+        workingSecs = warmupSecs;
+      }
     }
 
     double roundTo5(double w) => (w / 5).round() * 5.0;
@@ -725,6 +890,34 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
           ...warmupLines,
           const SizedBox(height: 8),
           Text('⏳ ${exercise.warmupRest ?? 'Rest 1 min between warmups.'}', style: const TextStyle(fontSize: 12, color: Colors.orangeAccent, fontStyle: FontStyle.italic)),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              OutlinedButton.icon(
+                onPressed: () => _startTimer(warmupSecs),
+                icon: const Icon(Icons.timer, size: 16),
+                label: Text('${warmupSecs}s', style: const TextStyle(fontSize: 12)),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.orangeAccent,
+                  side: const BorderSide(color: Colors.orangeAccent),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                  minimumSize: const Size(0, 32),
+                ),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton.icon(
+                onPressed: () => _startTimer(workingSecs),
+                icon: const Icon(Icons.timer, size: 16),
+                label: Text('Before Work (${workingSecs}s)', style: const TextStyle(fontSize: 12)),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.orangeAccent,
+                  side: const BorderSide(color: Colors.orangeAccent),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                  minimumSize: const Size(0, 32),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -908,105 +1101,6 @@ class _TipDialogState extends State<TipDialog> {
             child: const Text('Got it!'),
           )
       ],
-    );
-  }
-}
-
-class WarmupTimerWidget extends StatefulWidget {
-  const WarmupTimerWidget({super.key});
-
-  @override
-  State<WarmupTimerWidget> createState() => _WarmupTimerWidgetState();
-}
-
-class _WarmupTimerWidgetState extends State<WarmupTimerWidget> {
-  Timer? _timer;
-  int _seconds = 60;
-  int _clicks = 0; // 0: idle, 1: 60s, 2: 120s
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  void _onTap() {
-    setState(() {
-      if (_clicks == 0) {
-        _clicks = 1;
-        _seconds = 60;
-        _startTimer();
-      } else if (_clicks == 1) {
-        _clicks = 2;
-        _seconds += 60;
-      } else {
-        _reset();
-      }
-    });
-  }
-
-  void _startTimer() {
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted) return;
-      setState(() {
-        if (_seconds > 0) {
-          _seconds--;
-        } else {
-          _reset();
-        }
-      });
-    });
-  }
-
-  void _reset() {
-    _timer?.cancel();
-    _clicks = 0;
-    _seconds = 60;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Color color;
-    if (_clicks == 0) {
-      color = Colors.white;
-    } else if (_clicks == 1) {
-      color = Colors.greenAccent;
-    } else {
-      color = Colors.redAccent;
-    }
-
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(right: 8.0),
-        child: InkWell(
-          onTap: _onTap,
-          borderRadius: BorderRadius.circular(8),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              border: Border.all(color: color.withValues(alpha: 0.5)),
-              borderRadius: BorderRadius.circular(8),
-              color: color.withValues(alpha: 0.1),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.timer, color: color, size: 16),
-                const SizedBox(width: 4),
-                Text(
-                  '$_seconds',
-                  style: TextStyle(
-                    color: color,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
