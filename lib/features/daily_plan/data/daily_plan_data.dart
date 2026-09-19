@@ -109,6 +109,7 @@ class GymConfig {
   final Set<RoutineModifier> modifiers;
   final Set<NutritionAddOn> commuteNutrition;
   final String? preGymStudyTime;
+  final bool isWednesday;
   final Set<NutritionAddOn> preGymStudyNutrition;
 
   const GymConfig({
@@ -120,6 +121,7 @@ class GymConfig {
     this.isResistance = true,
     this.modifiers = const {},
     this.commuteNutrition = const {NutritionAddOn.whey},
+    this.isWednesday = false,
     this.preGymStudyTime,
     this.preGymStudyNutrition = const {},
   });
@@ -411,7 +413,7 @@ class DailyPlanData {
         ...details,
         if (midMorningBanana) const DetailItem('🍌 11:30 am: Eat 1 Medium Banana (Mid-Morning)'),
         if (banana) const DetailItem('🍌 3:30-4:00 pm: Eat 1 Medium Banana (Afternoon Snack)'),
-        if (sleepKiwiCount > 0) DetailItem('Halfway through (~1hr before sleep): Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} & brush 20 min after'),
+        if (sleepKiwiCount > 0) DetailItem('Halfway through (~1hr before sleep): Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} & swish water (brush 20 min after)'),
       ],
       mealRecord: (sleepKiwiCount > 0 || bananaCount > 0 || withCreatine) ? MealRecord(items: [
         if (withCreatine) _Portions.creatine,
@@ -451,14 +453,18 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _gym(String time, String title, {bool isCardio = false}) {
+  static TimelineItem _gym(String time, String title, {bool isCardio = false, bool isWednesday = false}) {
     if (isCardio && isRefeedWeek()) {
       return TimelineItem(
         time: time,
-        title: 'Haircut / Rest (Refeed Week)',
-        icon: '🛋️',
-        details: [const DetailItem('Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.')],
-        isCardio: false,
+        title: 'Recovery Walk / Haircut (Refeed)',
+        icon: '🚶‍♂️',
+        details: [
+          DetailItem(isWednesday 
+            ? 'Check weekly steps: If you are UNDER 15k steps so far, do a Zone 1 Recovery Walk (< 120bpm). Otherwise, skip LISS and rest!'
+            : 'Check weekly steps: If you are UNDER 26k steps for the week (assuming 1k tomorrow), do a Zone 1 Recovery Walk (< 120bpm) to hit your 27k target. Otherwise, rest!')
+        ],
+        isCardio: true,
       );
     }
     return TimelineItem(time: time, title: title, icon: isCardio ? '🏃' : '🏋️', isCardio: isCardio);
@@ -538,7 +544,7 @@ class DailyPlanData {
       details: [
         const DetailItem('1 scoop Casein in 16oz water -> Swish/drink water after'),
         const DetailItem('The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.'),
-        if (sleepKiwiCount > 0) DetailItem('Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (~1hr before sleep) & brush 20 min after'),
+        if (sleepKiwiCount > 0) DetailItem('Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (~1hr before sleep) & swish water (brush 20 min after)'),
         if (blueberryText.isNotEmpty) DetailItem('🫐 $blueberryText'),
         ...extraDetails,
         const DetailItem('📱 Final check of phone/messages before Screen Curfew starts.'),
@@ -692,7 +698,7 @@ class DailyPlanData {
         modifiers: gym.modifiers, 
         isResistanceDay: gym.isResistance
       ),
-      _gym(gym.time, gym.title, isCardio: gym.isCardio),
+      _gym(gym.time, gym.title, isCardio: gym.isCardio, isWednesday: gym.isWednesday),
       TimelineItem(time: gym.commuteHomeTime, title: 'Commute Home', icon: '🚗'),
       dinner,
       _chores(
@@ -756,6 +762,7 @@ class DailyPlanData {
       commuteHomeTime: '7:25-7:35 pm',
       isCardio: true,
       isResistance: false,
+      isWednesday: true,
       preGymStudyTime: '5:10-6:05 pm',
       preGymStudyNutrition: {NutritionAddOn.creatine},
     ),

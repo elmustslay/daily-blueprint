@@ -51,7 +51,7 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
   // Wait! The user's goal was 56,000 steps/week for Cut (8k * 7 days). 
   // CUT: 55,000 unified steps maps to ~1.55 multiplier (above 1.50, extra fat loss, 0 catabolism per py sim)
   // REFEED: 27,000 unified steps maps to ~1.375 multiplier (perfect hormonal reset)
-  bool isLissDay = !isRefeed && (dayOfWeek == DateTime.wednesday || dayOfWeek == DateTime.saturday);
+  bool isLissDay = (dayOfWeek == DateTime.wednesday || dayOfWeek == DateTime.saturday);
   int weeklyTarget = isRefeed ? 27000 : 55000;
 
   // 🍕 Pizza Offset: Adding 20,000 steps this week to cleanly wipe out 1,000 calories (at 1:20 ratio)

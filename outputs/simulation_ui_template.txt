@@ -59,7 +59,7 @@
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-  - Eat 2 Kiwis now (~1hr before sleep) & brush 20 min after
+  - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
 {{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
@@ -232,8 +232,8 @@
   - Get dressed for gym
 {{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle{{/if}}
   - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
-[6:15-7:25 pm] {{isRefeedWeek ? "Haircut / Rest (Refeed Week)" : "Cardio (LISS) / Haircut"}}
-{{#if isRefeedWeek}}  - Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.{{/if}}
+[6:15-7:25 pm] {{isRefeedWeek ? "Recovery Walk / Haircut (Refeed)" : "Cardio (LISS) / Haircut"}}
+{{#if isRefeedWeek}}  - Check weekly steps: If you are UNDER 15k steps so far, do a Zone 1 Recovery Walk (< 120bpm). Otherwise, skip LISS and rest!{{/if}}
 [7:25-7:35 pm] Commute Home
 [7:40-8:20 pm] Dinner
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
@@ -247,7 +247,7 @@
 {{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:20 pm] Study Time
-  - Halfway through (~1hr before sleep): Eat 2 Kiwis & brush 20 min after
+  - Halfway through (~1hr before sleep): Eat 2 Kiwis & swish water (brush 20 min after)
 [9:20-9:50 pm] Relax / Catch up on reading
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -487,8 +487,8 @@
   - Get dressed for gym
 {{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle{{/if}}
   - Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-[6:25-7:35 pm] {{isRefeedWeek ? "Haircut / Rest (Refeed Week)" : "Cardio (LISS) / Haircut"}}
-{{#if isRefeedWeek}}  - Skip LISS cardio to allow CNS to recover and muscles to fully replenish glycogen.{{/if}}
+[6:25-7:35 pm] {{isRefeedWeek ? "Recovery Walk / Haircut (Refeed)" : "Cardio (LISS) / Haircut"}}
+{{#if isRefeedWeek}}  - Check weekly steps: If you are UNDER 26k steps for the week (assuming 1k tomorrow), do a Zone 1 Recovery Walk (< 120bpm) to hit your 27k target. Otherwise, rest!{{/if}}
 [7:35-7:45 pm] Commute Home
 [7:45-8:00 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
@@ -581,7 +581,7 @@
 [8:15-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-  - Eat 2 Kiwis now (~1hr before sleep) & brush 20 min after
+  - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:50 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).

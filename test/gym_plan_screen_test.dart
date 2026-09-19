@@ -76,6 +76,11 @@ void main() {
     reps: '10-12',
     rest: '1 min',
     primaryMuscleGroup: 'Chest',
+    warmupSets: [
+      WarmupSet(weightFactor: 0.4, reps: 10),
+      WarmupSet(weightFactor: 0.6, reps: 5),
+      WarmupSet(weightFactor: 0.8, reps: 2),
+    ],
   );
 
   testWidgets('Renders Smart Warm-up by default if prevMax exists', (WidgetTester tester) async {

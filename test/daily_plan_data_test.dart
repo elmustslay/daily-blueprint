@@ -129,20 +129,20 @@ void main() {
   });
 
 
-  test('LISS Cardio is skipped on Refeed Weeks', () {
+  test('LISS Cardio becomes Zone 1 Recovery Walk on Refeed Weeks', () {
     try {
       // Set date to a known refeed week (Week 5: 28 days from plan start)
       DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
       
       // Check Wednesday
       final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
-      final wedCardio = wedSchedule.firstWhere((item) => item.title.contains('Haircut / Rest (Refeed Week)'));
-      expect(wedCardio.details.map((d) => d.text).join(' '), contains('Skip LISS cardio'));
+      final wedCardio = wedSchedule.firstWhere((item) => item.title.contains('Recovery Walk / Haircut (Refeed)'));
+      expect(wedCardio.details.map((d) => d.text).join(' '), contains('UNDER 15k steps'));
       
       // Check Saturday
       final satSchedule = DailyPlanData.schedules[DailyPlanData.sat]!;
-      final satCardio = satSchedule.firstWhere((item) => item.title.contains('Haircut / Rest (Refeed Week)'));
-      expect(satCardio.details.map((d) => d.text).join(' '), contains('Skip LISS cardio'));
+      final satCardio = satSchedule.firstWhere((item) => item.title.contains('Recovery Walk / Haircut (Refeed)'));
+      expect(satCardio.details.map((d) => d.text).join(' '), contains('UNDER 26k steps'));
     } finally {
       DailyPlanData.mockCurrentDate = null;
     }
