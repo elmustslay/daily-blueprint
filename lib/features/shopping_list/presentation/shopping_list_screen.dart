@@ -30,9 +30,9 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
       ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '1 box (6 kiwis)'),
-      ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (need 2 cups)'),
+      if (isNextWeekRefeed) ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (need 2 cups)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '24oz bag (for 7 servings)'),
-      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '36 Bananas (REFEED WEEK)' : '12 Bananas (8 PW + 4 Morning)'),
+      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '37 Bananas (REFEED WEEK)' : '13 Bananas (8 PW + 5 Snack/Morning)'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '2 lbs'),
@@ -62,7 +62,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'spc-9', name: 'Iodized Table Salt (or Sea Salt)', subtext: 'need 2.75 tsp (Morning water & pasta)'),
       
       // Amazon
-      ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'),
+      // ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'), // Outdated, not used anymore
       ShoppingItem(id: 'amz-4', name: 'D3-K2 Supplement', subtext: 'need 2 capsules'),
       ShoppingItem(id: 'amz-5', name: 'Omega-3 Supplement', subtext: 'need 3 softgels'),
       ShoppingItem(id: 'amz-6', name: 'Whey Isolate Protein', subtext: 'need 5 scoops'),

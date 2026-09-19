@@ -12,10 +12,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 210.0,
-                "Protein": 18.0,
-                "Carbs": 0.0,
-                "Fat": 15.0
+                "Calories": 315.0,
+                "Protein": 19.3,
+                "Carbs": 27.0,
+                "Fat": 15.3
             }
         },
         "1:00-1:30 pm": {
@@ -30,9 +30,9 @@
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 545.0,
+                "Calories": 445.0,
                 "Protein": 33.9,
-                "Carbs": 107.0,
+                "Carbs": 82.0,
                 "Fat": 1.4
             }
         },
@@ -48,10 +48,10 @@
         "9:20-9:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 165.0,
-                "Protein": 26.0,
-                "Carbs": 14.0,
-                "Fat": 1.0
+                "Calories": 210.0,
+                "Protein": 27.0,
+                "Carbs": 25.0,
+                "Fat": 1.5
             }
         }
     },
@@ -68,10 +68,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 356.66666666666663,
-                "Protein": 28.633333333333333,
-                "Carbs": 27.0,
-                "Fat": 15.550416666666667
+                "Calories": 461.66666666666663,
+                "Protein": 29.93333333333333,
+                "Carbs": 54.0,
+                "Fat": 15.850416666666666
             }
         },
         "1:00-1:30 pm": {
@@ -86,9 +86,9 @@
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 545.0,
+                "Calories": 445.0,
                 "Protein": 33.9,
-                "Carbs": 107.0,
+                "Carbs": 82.0,
                 "Fat": 1.4
             }
         },
@@ -104,10 +104,10 @@
         "9:20-9:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 165.0,
-                "Protein": 26.0,
-                "Carbs": 14.0,
-                "Fat": 1.0
+                "Calories": 120.0,
+                "Protein": 25.0,
+                "Carbs": 3.0,
+                "Fat": 0.5
             }
         }
     },
@@ -169,10 +169,10 @@
         "8:50-9:20 pm": {
             "title": "Study Time",
             "nutrition": {
-                "Calories": 45.0,
-                "Protein": 1.0,
-                "Carbs": 11.0,
-                "Fat": 0.5
+                "Calories": 90.0,
+                "Protein": 2.0,
+                "Carbs": 22.0,
+                "Fat": 1.0
             }
         }
     },
@@ -189,10 +189,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 251.66666666666666,
-                "Protein": 27.333333333333332,
-                "Carbs": 0.0,
-                "Fat": 15.250416666666666
+                "Calories": 356.66666666666663,
+                "Protein": 28.633333333333333,
+                "Carbs": 27.0,
+                "Fat": 15.550416666666667
             }
         },
         "1:00-1:30 pm": {
@@ -207,9 +207,9 @@
         "5:55-6:20 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 545.0,
+                "Calories": 445.0,
                 "Protein": 33.9,
-                "Carbs": 107.0,
+                "Carbs": 82.0,
                 "Fat": 1.4
             }
         },
@@ -225,10 +225,10 @@
         "9:00-9:30 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 210.0,
-                "Protein": 27.0,
-                "Carbs": 25.0,
-                "Fat": 1.5
+                "Calories": 120.0,
+                "Protein": 25.0,
+                "Carbs": 3.0,
+                "Fat": 0.5
             }
         }
     },
@@ -245,10 +245,10 @@
         "8:10-8:30 am": {
             "title": "Morning Dine",
             "nutrition": {
-                "Calories": 320.957,
-                "Protein": 24.0541,
-                "Carbs": 28.203875,
-                "Fat": 13.037912500000001
+                "Calories": 425.957,
+                "Protein": 25.3541,
+                "Carbs": 55.203875,
+                "Fat": 13.3379125
             }
         },
         "1:00-1:30 pm": {
@@ -263,9 +263,9 @@
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 545.0,
+                "Calories": 445.0,
                 "Protein": 33.9,
-                "Carbs": 107.0,
+                "Carbs": 82.0,
                 "Fat": 1.4
             }
         },
@@ -384,10 +384,10 @@
         "8:15-8:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 120.0,
-                "Protein": 25.0,
-                "Carbs": 3.0,
-                "Fat": 0.5
+                "Calories": 210.0,
+                "Protein": 27.0,
+                "Carbs": 25.0,
+                "Fat": 1.5
             }
         }
     }

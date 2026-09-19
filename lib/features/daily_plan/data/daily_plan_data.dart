@@ -65,15 +65,21 @@ class _Recipes {
 }
 
 // ==========================================
-// ROUTINE CONSTANTS (Skincare & Laundry)
+// ROUTINE CONSTANTS & ENUMS
 // ==========================================
 
 class _Routines {
-  // Skincare
-  static const String morningSkin1004 = 'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Skin1004 Centella Sun Serum: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m';
-  static const String morningHaruharu = 'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m';
-  static const String reapplyHur = 'Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m';
-  static const String reapplyHaruharu = 'Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m';
+  // Skincare Helpers (Reduces duplicate strings)
+  static String morningRoutine(String sunscreen) => 
+      'Eye Serum FIRST: Gently tap 1 drop of The Ordinary Caffeine Solution across orbital bone -> $sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m';
+  static String reapplySunscreen(String sunscreen) => 
+      'Wash hands -> Blotting Sheet  -> Wash hands -> $sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m';
+
+  static final String morningSkin1004 = morningRoutine('Skin1004 Centella Sun Serum');
+  static final String morningHaruharu = morningRoutine('Haruharu Wonder Sunscreen');
+  static final String reapplyHur = reapplySunscreen('House of Hur Sun Fluid');
+  static final String reapplyHaruharu = reapplySunscreen('Haruharu Wonder Sunscreen');
+  
   static const String retinol = 'Retinol (CRUCIAL: Apply to BONE DRY skin to prevent irritation, STRICTLY AVOID orbital bone/eyelids): 1.5 pumps (0.5 forehead, 0.25 left cheek, 0.25 right cheek, 0.5 neck) -> WAIT 1-2m';
   static const String bha = 'Paula\'s Choice 2% BHA (CRUCIAL: Apply to BONE DRY skin to prevent irritation, AVOID orbital bone): 3 drops (1 forehead, 1 left cheek, 1 right cheek) -> WAIT 1-2m';
   static const String joseon = 'Joseon Alpha-Arbutin (Apply to slightly damp skin, AVOID orbital bone): 4 drops (1 forehead, 1 left cheek, 1 right cheek, 1 neck) -> WAIT 1-2m';
@@ -84,35 +90,69 @@ class _Routines {
   static const String laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)';
 }
 
-enum MorningSupplement {
-  omega3,
-  d3K2,
-  vitaminE,
-  zinc,
-  copper,
+enum ProteinSource { salmon, beef, none }
+enum MorningSupplement { omega3, d3K2, vitaminE, zinc, copper }
+enum NutritionAddOn { whey, creatine, calcium, copper, nac, banana, postWorkoutBanana, midMorningBanana, preWorkoutBanana, dextrin }
+enum RoutineModifier { caffeine, sparklingWater, standingDesk, cookSalmon, takeSunscreen, takeGymGloves, newBathTowel }
+
+// ==========================================
+// CONFIGURATION CLASSES
+// ==========================================
+
+class GymConfig {
+  final String title;
+  final String time;
+  final String commuteTime;
+  final String commuteHomeTime;
+  final bool isCardio;
+  final bool isResistance;
+  final Set<RoutineModifier> modifiers;
+  final Set<NutritionAddOn> commuteNutrition;
+  final String? preGymStudyTime;
+  final Set<NutritionAddOn> preGymStudyNutrition;
+
+  const GymConfig({
+    required this.title,
+    this.time = '6:30-8:00 pm',
+    this.commuteTime = '5:55-6:30 pm',
+    this.commuteHomeTime = '8:00-8:30 pm',
+    this.isCardio = false,
+    this.isResistance = true,
+    this.modifiers = const {},
+    this.commuteNutrition = const {NutritionAddOn.whey},
+    this.preGymStudyTime,
+    this.preGymStudyNutrition = const {},
+  });
 }
 
-enum NutritionAddOn {
-  whey,
-  creatine,
-  calcium,
-  copper,
-  nac,
-  banana,
-  postWorkoutBanana,
-  midMorningBanana,
-  preWorkoutBanana,
-  dextrin,
+class ChoresConfig {
+  final String time;
+  final int sleepKiwiCount;
+  final String blueberryText;
+  final List<TimelineItem> extraPostChoresItems;
+
+  const ChoresConfig({
+    this.time = '9:20-9:50 pm',
+    this.sleepKiwiCount = 0,
+    this.blueberryText = '',
+    this.extraPostChoresItems = const [],
+  });
 }
 
-enum RoutineModifier {
-  caffeine,
-  sparklingWater,
-  standingDesk,
-  cookSalmon,
-  takeSunscreen,
-  takeGymGloves,
-  newBathTowel,
+class BedPrepConfig {
+  final String time;
+  final String hair;
+  final Set<RoutineModifier> modifiers;
+  final bool isHarshActiveNight;
+  final String nightSupplementTime;
+
+  const BedPrepConfig({
+    this.time = '9:50-10:20 pm',
+    this.hair = '60s warm massage',
+    this.modifiers = const {},
+    this.isHarshActiveNight = false,
+    this.nightSupplementTime = '10:20-10:50 pm',
+  });
 }
 
 // ==========================================
@@ -149,7 +189,6 @@ class DailyPlanData {
 
   static bool isDeloadWeek() => isRefeedWeek();
   static bool shouldScaleUpCardio() => currentWeekNumber >= 17;
-  
   static bool isBloodDonationWeek() => currentWeekNumber > 0 && currentWeekNumber % 22 == 0;
 
   static bool isWinter() {
@@ -159,7 +198,6 @@ class DailyPlanData {
     if (now.month == 3 && now.day <= 15) return true;
     return false;
   }
-  
 
   static bool isAshwagandhaOff() {
     if (currentWeekNumber == 0) return false;
@@ -188,6 +226,7 @@ class DailyPlanData {
 
   static TimelineItem _wakeup(String time, {Set<NutritionAddOn> nutrition = const {}}) {
     final nac = nutrition.contains(NutritionAddOn.nac);
+    final bananaCount = isRefeedWeek() ? 1 : 0;
     return TimelineItem(
       time: time,
       title: 'Wakeup',
@@ -196,12 +235,12 @@ class DailyPlanData {
         const DetailItem('Use bathroom'),
         const DetailItem.trackable('Weight (Step on scale)'),
         const DetailItem('Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)'),
-        if (isRefeedWeek()) const DetailItem('🍌 REFEED WEEK: Eat 1 Medium Banana'),
+        if (bananaCount > 0) DetailItem('🍌 REFEED WEEK: Eat $bananaCount Medium Banana'),
         if (nac) const DetailItem.trackable('Take 600mg NAC + 25mcg Selenium (Combo Pill)'),
         const DetailItem.trackable('Take 250mg Citicoline (w/ 25mg Tyrosine)'),
       ],
       mealRecord: MealRecord(items: [
-        if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
+        if (bananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
         if (nac) const IngredientPortion(ingredient: IngredientsData.nac, amount: 1),
         const IngredientPortion(ingredient: IngredientsData.citicoline, amount: 1),
         const IngredientPortion(ingredient: IngredientsData.iodizedTableSalt, amount: 0.25),
@@ -231,16 +270,17 @@ class DailyPlanData {
     String additional = '', 
     int eggs = 3, 
     Set<MorningSupplement> supplements = const { MorningSupplement.omega3 },
-    bool eatSalmon = false,
-    bool eatBeef = false,
-    String blueberryText = '',
+    ProteinSource protein = ProteinSource.none,
     bool banana = false,
+    bool isResistanceDay = true,
   }) {
     final omega3 = supplements.contains(MorningSupplement.omega3);
     final useD3K2 = supplements.contains(MorningSupplement.d3K2);
     final vitaminE = supplements.contains(MorningSupplement.vitaminE);
     final zinc = supplements.contains(MorningSupplement.zinc);
     final copper = supplements.contains(MorningSupplement.copper);
+    final extraRefeedBanana = isResistanceDay && isRefeedWeek();
+    final bananaCount = (banana ? 1 : 0) + (extraRefeedBanana ? 1 : 0);
 
     return TimelineItem(
       time: time,
@@ -248,10 +288,9 @@ class DailyPlanData {
       icon: '🍳',
       details: [
         const DetailItem('Eat in front of Verilux HappyLight (45-degree angle to face):'),
-        if (banana) const DetailItem('🍌 Eat 1 Medium Banana'),
-        if (blueberryText.isNotEmpty) DetailItem('🫐 $blueberryText'),
-        if (eatSalmon) const DetailItem('Finish leftover 0.5 portion of Salmon (from fridge)'),
-        if (eatBeef) const DetailItem('Finish leftover 0.5 portion of Ground Beef (from fridge)'),
+        if (bananaCount > 0) DetailItem('🍌 Eat $bananaCount Medium Banana${bananaCount > 1 ? "s" : ""}'),
+        if (protein == ProteinSource.salmon) const DetailItem('Finish leftover 0.5 portion of Salmon (from fridge)'),
+        if (protein == ProteinSource.beef) const DetailItem('Finish leftover 0.5 portion of Ground Beef (from fridge)'),
         if (eggs > 0) DetailItem('$eggs Boiled Eggs'),
         if (omega3) const DetailItem.trackable('3 softgel omega-3'),
         if (useD3K2) const DetailItem.trackable('1 D3-K2'),
@@ -265,8 +304,7 @@ class DailyPlanData {
       ],
       mealRecord: MealRecord(
         items: [
-          if (banana) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
-          if (blueberryText.isNotEmpty) const IngredientPortion(ingredient: IngredientsData.blueberries, amount: 0.66),
+          if (bananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
           if (eggs > 0) IngredientPortion(ingredient: IngredientsData.egg, amount: eggs.toDouble()),
           if (omega3) _Portions.omega3,
           if (useD3K2) _Portions.d3K2,
@@ -277,8 +315,8 @@ class DailyPlanData {
           if (copper) const IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1),
         ], 
         recipeItems: [
-          if (eatSalmon) _Recipes.salmonHalf,
-          if (eatBeef) _Recipes.beefHalf,
+          if (protein == ProteinSource.salmon) _Recipes.salmonHalf,
+          if (protein == ProteinSource.beef) _Recipes.beefHalf,
         ]
       ),
     );
@@ -317,6 +355,7 @@ class DailyPlanData {
     final standingDesk = modifiers.contains(RoutineModifier.standingDesk);
     final banana = nutrition.contains(NutritionAddOn.banana);
     final midMorningBanana = nutrition.contains(NutritionAddOn.midMorningBanana);
+    final bananaCount = (banana ? 1 : 0) + (midMorningBanana ? 1 : 0);
 
     return TimelineItem(
       time: time, 
@@ -331,9 +370,8 @@ class DailyPlanData {
         if (afternoonSunscreen != null) DetailItem('4:00 pm Touch-up: $afternoonSunscreen'),
         ...details
       ],
-      mealRecord: (banana || midMorningBanana) ? MealRecord(items: [
-        if (midMorningBanana) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
-        if (banana) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
+      mealRecord: (bananaCount > 0) ? MealRecord(items: [
+        IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
       ]) : null,
     );
   }
@@ -361,6 +399,7 @@ class DailyPlanData {
   }) {
     final banana = nutrition.contains(NutritionAddOn.banana);
     final midMorningBanana = nutrition.contains(NutritionAddOn.midMorningBanana);
+    final bananaCount = (banana ? 1 : 0) + (midMorningBanana ? 1 : 0);
     final withCreatine = nutrition.contains(NutritionAddOn.creatine);
 
     return TimelineItem(
@@ -372,12 +411,11 @@ class DailyPlanData {
         ...details,
         if (midMorningBanana) const DetailItem('🍌 11:30 am: Eat 1 Medium Banana (Mid-Morning)'),
         if (banana) const DetailItem('🍌 3:30-4:00 pm: Eat 1 Medium Banana (Afternoon Snack)'),
-        if (sleepKiwiCount > 0) DetailItem('Halfway through (30m before bed prep): Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} & Swish water (protect enamel)'),
+        if (sleepKiwiCount > 0) DetailItem('Halfway through (~1hr before sleep): Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} & brush 20 min after'),
       ],
-      mealRecord: (sleepKiwiCount > 0 || banana || midMorningBanana || withCreatine) ? MealRecord(items: [
+      mealRecord: (sleepKiwiCount > 0 || bananaCount > 0 || withCreatine) ? MealRecord(items: [
         if (withCreatine) _Portions.creatine,
-        if (midMorningBanana) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
-        if (banana) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
+        if (bananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: bananaCount.toDouble()),
         if (sleepKiwiCount > 0) IngredientPortion(ingredient: IngredientsData.kiwi, amount: sleepKiwiCount.toDouble()),
       ]) : null,
     );
@@ -387,28 +425,28 @@ class DailyPlanData {
     return TimelineItem(time: time, title: title, icon: icon);
   }
 
-  static TimelineItem _commuteToGym(String time, {String? reapplySunscreen, Set<RoutineModifier> modifiers = const {}, Set<NutritionAddOn> nutrition = const {NutritionAddOn.dextrin}}) {
+  static TimelineItem _commuteToGym(String time, {String? reapplySunscreen, Set<RoutineModifier> modifiers = const {}, Set<NutritionAddOn> nutrition = const {NutritionAddOn.whey}, bool isResistanceDay = true}) {
     final takeGymGloves = modifiers.contains(RoutineModifier.takeGymGloves);
     final withDextrin = nutrition.contains(NutritionAddOn.dextrin);
     final withWhey = nutrition.contains(NutritionAddOn.whey);
-    // Internalized: resistance days (with dextrin) always get banana, LISS days only on refeed
-    final preWorkoutBanana = withDextrin || isRefeedWeek();
+    final preWorkoutBananaCount = (isResistanceDay || isRefeedWeek()) ? (isRefeedWeek() ? 3 : 2) : 0;
+    
     return TimelineItem(
       time: time,
-      title: 'Get Dressed & Commute to Gym${withDextrin ? " (Resistance)" : " (LISS)"}',
+      title: 'Get Dressed & Commute to Gym${isResistanceDay ? " (Resistance)" : " (LISS)"}',
       icon: '🚗',
       details: [
         const DetailItem('Get dressed for gym'),
-        if (preWorkoutBanana) DetailItem('🍌 Eat ${isRefeedWeek() ? "3" : "1"} Medium Banana${isRefeedWeek() ? "s" : ""} (Pre-Workout) + drink one 21oz water bottle'),
-        if (withDextrin || withWhey) DetailItem.trackable('Mix ${[if (withDextrin) '1 scoop Cluster Dextrin', if (withWhey) '1 scoop whey isolate (30g protein)'].join(' + ')} in water bottle${withDextrin ? ' (+ 0.5 tsp Lite Salt electrolytes)' : ''}. Drink 1/3 on commute, sip rest during workout'),
+        if (preWorkoutBananaCount > 0) DetailItem('🍌 Eat $preWorkoutBananaCount Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle'),
+        if (withDextrin || withWhey || isResistanceDay) DetailItem.trackable('Mix ${[if (withDextrin) '1 scoop Cluster Dextrin', if (withWhey) '1 scoop whey isolate (30g protein)'].where((e) => e.isNotEmpty).join(' + ')} in water bottle${isResistanceDay ? ' (+ 0.55 tsp Lite Salt electrolytes)' : ''}. Drink 1/3 on commute, sip rest during workout'),
         if (reapplySunscreen != null) DetailItem(reapplySunscreen),
         if (takeGymGloves) const DetailItem('🧤 Grab Gym Gloves'),
       ],
-      mealRecord: (withDextrin || preWorkoutBanana || withWhey) ? MealRecord(items: [
-        if (preWorkoutBanana) IngredientPortion(ingredient: IngredientsData.banana, amount: isRefeedWeek() ? 3 : 1),
+      mealRecord: (withDextrin || preWorkoutBananaCount > 0 || withWhey || isResistanceDay) ? MealRecord(items: [
+        if (preWorkoutBananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: preWorkoutBananaCount.toDouble()),
         if (withDextrin) const IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: 1),
         if (withWhey) _Portions.whey,
-        if (withDextrin) const IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.5),
+        if (isResistanceDay) const IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 0.55),
       ]) : null,
     );
   }
@@ -432,6 +470,7 @@ class DailyPlanData {
     final cook = modifiers.contains(RoutineModifier.cookSalmon);
     final showAshwagandha = !isAshwagandhaOff();
     final eatPastaThird = !isRefeedWeek();
+    
     return TimelineItem(
       time: time,
       title: 'Dinner',
@@ -499,7 +538,7 @@ class DailyPlanData {
       details: [
         const DetailItem('1 scoop Casein in 16oz water -> Swish/drink water after'),
         const DetailItem('The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.'),
-        if (sleepKiwiCount > 0) DetailItem('Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (30m before bed prep to protect enamel) & Swish water'),
+        if (sleepKiwiCount > 0) DetailItem('Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (~1hr before sleep) & brush 20 min after'),
         if (blueberryText.isNotEmpty) DetailItem('🫐 $blueberryText'),
         ...extraDetails,
         const DetailItem('📱 Final check of phone/messages before Screen Curfew starts.'),
@@ -576,7 +615,6 @@ class DailyPlanData {
     );
   }
 
-
   // ------------------------------------------
   // Study Cycle Helper (Weekend)
   // ------------------------------------------
@@ -594,69 +632,81 @@ class DailyPlanData {
   // ------------------------------------------
 
   static List<TimelineItem> _buildStandardWeekday({
-    Set<NutritionAddOn> wakeupNutrition = const {},
-    String? morningSkincare,
     required String clothes,
+    required TimelineItem dinner,
+    required GymConfig gym,
+    required int magAmount,
+    required String nightSkincare,
+    bool isOfficeDay = false,
+    ProteinSource morningProtein = ProteinSource.none,
     int eggs = 2,
     Set<MorningSupplement> morningSupplements = const {},
     bool morningBanana = false,
-    bool eatSalmon = false,
-    bool eatBeef = false,
     String morningAdditional = '',
-    bool isOfficeDay = false,
-
+    String? morningSkincare,
     List<DetailItem> amWorkDetails = const [],
-
     List<DetailItem> pmWorkDetails = const [],
-    String? preGymStudyTime,
-    Set<NutritionAddOn> preGymStudyNutrition = const {},
-    String commuteToGymTime = '5:55-6:30 pm',
-    Set<NutritionAddOn> commuteToGymNutrition = const {NutritionAddOn.dextrin, NutritionAddOn.whey},
-    Set<RoutineModifier> commuteToGymModifiers = const {},
-    String gymTime = '6:30-8:00 pm',
-    required String gymTitle,
-    bool gymIsCardio = false,
-    String commuteHomeFromGymTime = '8:00-8:30 pm',
-    required TimelineItem dinner,
-    String choresTime = '9:20-9:50 pm',
-    int choresSleepKiwiCount = 0,
-    String choresBlueberryText = '',
-    List<TimelineItem> extraPostChoresItems = const [],
-    String bedPrepTime = '9:50-10:20 pm',
-    String bedPrepHair = '60s warm massage',
-    Set<RoutineModifier> bedPrepModifiers = const {},
-    bool isHarshActiveNight = false,
-    String nightSupplementTime = '10:20-10:50 pm',
-    required int magAmount,
-    required String nightSkincare,
+    ChoresConfig chores = const ChoresConfig(),
+    BedPrepConfig bedPrep = const BedPrepConfig(),
+    Set<NutritionAddOn> wakeupNutrition = const {},
   }) {
     final effectiveSkincare = morningSkincare ??
         (isOfficeDay ? _Routines.morningHaruharu : _Routines.morningSkin1004);
-    final effectiveStudyTime = preGymStudyTime ??
+    final effectiveStudyTime = gym.preGymStudyTime ??
         (isOfficeDay ? '5:10-5:55 pm' : '5:00-5:55 pm');
     final effectiveSunscreen = isOfficeDay ? _Routines.reapplyHaruharu : _Routines.reapplyHur;
 
     return [
       _wakeup('8:00-8:10 am', nutrition: wakeupNutrition),
-      _morningDine('8:10-8:30 am', eggs: eggs, supplements: morningSupplements, banana: morningBanana, eatSalmon: eatSalmon, eatBeef: eatBeef, additional: morningAdditional),
+      _morningDine(
+        '8:10-8:30 am', 
+        eggs: eggs, 
+        supplements: morningSupplements, 
+        banana: morningBanana, 
+        protein: morningProtein, 
+        additional: morningAdditional, 
+        isResistanceDay: gym.isResistance
+      ),
       _getReady('8:30-8:50 am', skincare: effectiveSkincare, clothes: clothes),
       if (isOfficeDay) _grabThings('8:50-8:55 am'),
       if (isOfficeDay) _commuteToWork('8:55-9:00 am'),
-      _work(isOfficeDay ? '9:00-1:00 pm' : '8:50-1:00 pm', details: amWorkDetails, modifiers: isOfficeDay ? {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, nutrition: {}),
+      _work(
+        isOfficeDay ? '9:00-1:00 pm' : '8:50-1:00 pm', 
+        details: amWorkDetails, 
+        modifiers: isOfficeDay ? {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, 
+        nutrition: {}
+      ),
       _pastaLunch('1:00-1:30 pm'),
-      _work('1:30-5:00 pm', details: pmWorkDetails, modifiers: isOfficeDay ? {RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, nutrition: {}, afternoonSunscreen: effectiveSunscreen),
+      _work(
+        '1:30-5:00 pm', 
+        details: pmWorkDetails, 
+        modifiers: isOfficeDay ? {RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, 
+        nutrition: {}, 
+        afternoonSunscreen: effectiveSunscreen
+      ),
       if (isOfficeDay) TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
-      _study(effectiveStudyTime, details: [const DetailItem('Study (Beat traffic before gym)')], nutrition: preGymStudyNutrition),
-      _commuteToGym(commuteToGymTime, nutrition: commuteToGymNutrition, modifiers: commuteToGymModifiers),
-      _gym(gymTime, gymTitle, isCardio: gymIsCardio),
-      TimelineItem(time: commuteHomeFromGymTime, title: 'Commute Home', icon: '🚗'),
+      _study(effectiveStudyTime, details: [const DetailItem('Study (Beat traffic before gym)')], nutrition: gym.preGymStudyNutrition),
+      _commuteToGym(
+        gym.commuteTime, 
+        nutrition: gym.commuteNutrition, 
+        modifiers: gym.modifiers, 
+        isResistanceDay: gym.isResistance
+      ),
+      _gym(gym.time, gym.title, isCardio: gym.isCardio),
+      TimelineItem(time: gym.commuteHomeTime, title: 'Commute Home', icon: '🚗'),
       dinner,
-      _chores(choresTime, sleepKiwiCount: choresSleepKiwiCount, blueberryText: choresBlueberryText, nutrition: {}, extraDetails: [
-        if (!isRefeedWeek()) const DetailItem('Scoop 1/3 of tomorrow\'s pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.'),
-      ]),
-      ...extraPostChoresItems,
-      _bedPrep(bedPrepTime, hair: bedPrepHair, modifiers: bedPrepModifiers, isHarshActiveNight: isHarshActiveNight),
-      _nightSupplement(nightSupplementTime, magAmount: magAmount, skincare: nightSkincare),
+      _chores(
+        chores.time, 
+        sleepKiwiCount: chores.sleepKiwiCount, 
+        blueberryText: chores.blueberryText, 
+        nutrition: {}, 
+        extraDetails: [
+          if (!isRefeedWeek()) const DetailItem('Scoop 1/3 of tomorrow\'s pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.'),
+        ]
+      ),
+      ...chores.extraPostChoresItems,
+      _bedPrep(bedPrep.time, hair: bedPrep.hair, modifiers: bedPrep.modifiers, isHarshActiveNight: bedPrep.isHarshActiveNight),
+      _nightSupplement(bedPrep.nightSupplementTime, magAmount: magAmount, skincare: nightSkincare),
       _fallAsleep('10:50-11:20 pm'),
     ];
   }
@@ -671,11 +721,10 @@ class DailyPlanData {
     morningSupplements: {MorningSupplement.zinc},
     amWorkDetails: [DetailItem(_Routines.laundryFaceTowels), const DetailItem('Run Dishwasher')],
     pmWorkDetails: [DetailItem(_Routines.laundryBathTowels)],
-    gymTitle: 'Chest, Shoulders & Triceps',
+    gym: const GymConfig(title: 'Chest, Shoulders & Triceps'),
     dinner: _salmonDinner('8:50-9:20 pm', modifiers: {RoutineModifier.cookSalmon}),
-    choresSleepKiwiCount: 1,
-    bedPrepModifiers: {RoutineModifier.newBathTowel},
-    isHarshActiveNight: true,
+    chores: const ChoresConfig(sleepKiwiCount: 2),
+    bedPrep: const BedPrepConfig(modifiers: {RoutineModifier.newBathTowel}, isHarshActiveNight: true),
     magAmount: 3,
     nightSkincare: _Routines.bha,
   );
@@ -684,11 +733,11 @@ class DailyPlanData {
     clothes: 'Get dressed for work (cloud x 4)',
     morningSupplements: {MorningSupplement.zinc},
     morningBanana: true,
-    eatSalmon: true,
+    morningProtein: ProteinSource.salmon,
     isOfficeDay: true,
-    gymTitle: 'Legs (Quads & Calves)',
+    gym: const GymConfig(title: 'Legs (Quads & Calves)'),
     dinner: _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.creatine, NutritionAddOn.copper}),
-    choresSleepKiwiCount: 1,
+    chores: const ChoresConfig(),
     magAmount: 3,
     nightSkincare: _Routines.joseon,
   );
@@ -696,48 +745,55 @@ class DailyPlanData {
   static List<TimelineItem> _buildWednesday() => _buildStandardWeekday(
     wakeupNutrition: {NutritionAddOn.nac},
     clothes: 'Get dressed for work (NK 9060/Bondi)',
-    morningSupplements: {},
     morningBanana: true,
-    eatSalmon: true,
+    morningProtein: ProteinSource.salmon,
     morningAdditional: '🥩 Take ground beef out of freezer to thaw in fridge',
     isOfficeDay: true,
-    preGymStudyTime: '5:10-6:05 pm',
-    preGymStudyNutrition: {NutritionAddOn.creatine},
-    commuteToGymTime: '6:05-6:15 pm',
-    commuteToGymNutrition: {NutritionAddOn.whey},
-    gymTime: '6:15-7:25 pm',
-    gymTitle: 'Cardio (LISS) / Haircut',
-    gymIsCardio: true,
-    commuteHomeFromGymTime: '7:25-7:35 pm',
+    gym: const GymConfig(
+      title: 'Cardio (LISS) / Haircut',
+      time: '6:15-7:25 pm',
+      commuteTime: '6:05-6:15 pm',
+      commuteHomeTime: '7:25-7:35 pm',
+      isCardio: true,
+      isResistance: false,
+      preGymStudyTime: '5:10-6:05 pm',
+      preGymStudyNutrition: {NutritionAddOn.creatine},
+    ),
     dinner: _salmonDinner('7:40-8:20 pm', nutrition: const {}),
-    choresTime: '8:20-8:50 pm',
-    extraPostChoresItems: [
-      _study('8:50-9:20 pm', sleepKiwiCount: 1),
-      _relaxOrCatchUp('9:20-9:50 pm'),
-    ],
-    bedPrepHair: 'CeraVe Gentle Shampoo (45s lather)',
-    isHarshActiveNight: true,
+    chores: ChoresConfig(
+      time: '8:20-8:50 pm',
+      extraPostChoresItems: [
+        _study('8:50-9:20 pm', sleepKiwiCount: 2),
+        _relaxOrCatchUp('9:20-9:50 pm'),
+      ],
+    ),
+    bedPrep: const BedPrepConfig(
+      hair: 'CeraVe Gentle Shampoo (45s lather)',
+      isHarshActiveNight: true,
+    ),
     magAmount: 2,
     nightSkincare: _Routines.retinol,
   );
 
   static List<TimelineItem> _buildThursday() => _buildStandardWeekday(
     clothes: 'Get dressed for the gym',
-    morningSupplements: {},
-    eatSalmon: true,
+    morningProtein: ProteinSource.salmon,
     amWorkDetails: [DetailItem(_Routines.laundryRegular), const DetailItem('Run Dishwasher')],
     pmWorkDetails: [const DetailItem('Cook 1lb ground beef (divide in 4, 4 fridge) while working')],
-    commuteToGymTime: '5:55-6:20 pm',
-    commuteToGymModifiers: {RoutineModifier.takeGymGloves},
-    gymTime: '6:20-7:50 pm',
-    gymTitle: 'Back, Biceps & Forearms',
-    commuteHomeFromGymTime: '7:50-8:20 pm',
+    gym: const GymConfig(
+      title: 'Back, Biceps & Forearms',
+      time: '6:20-7:50 pm',
+      commuteTime: '5:55-6:20 pm',
+      commuteHomeTime: '7:50-8:20 pm',
+      modifiers: {RoutineModifier.takeGymGloves},
+    ),
     dinner: _beefDinner('8:30-9:00 pm'),
-    choresTime: '9:00-9:30 pm',
-    choresSleepKiwiCount: 2,
-    bedPrepTime: '9:30-10:00 pm',
-    bedPrepModifiers: {RoutineModifier.newBathTowel},
-    nightSupplementTime: '10:00-10:50 pm',
+    chores: const ChoresConfig(time: '9:00-9:30 pm'),
+    bedPrep: const BedPrepConfig(
+      time: '9:30-10:00 pm',
+      modifiers: {RoutineModifier.newBathTowel},
+      nightSupplementTime: '10:00-10:50 pm',
+    ),
     magAmount: 2,
     nightSkincare: _Routines.joseon,
   );
@@ -746,19 +802,19 @@ class DailyPlanData {
     clothes: 'Get dressed for work (cloud x 4)',
     morningSupplements: {MorningSupplement.copper},
     morningBanana: true,
-    eatBeef: true,
+    morningProtein: ProteinSource.beef,
     isOfficeDay: true,
-    gymTitle: 'Legs (Hamstrings / Glutes)',
+    gym: const GymConfig(title: 'Legs (Hamstrings / Glutes)'),
     dinner: _beefDinner('8:50-9:20 pm'),
-    choresBlueberryText: 'Eat 1/2 of the box of Blueberries',
-    isHarshActiveNight: true,
+    chores: ChoresConfig(blueberryText: isRefeedWeek() ? 'Eat 1/2 of the box of Blueberries' : ''),
+    bedPrep: const BedPrepConfig(isHarshActiveNight: true),
     magAmount: 3,
     nightSkincare: _Routines.bha,
   );
 
   static List<TimelineItem> _buildSaturday() => [
     _wakeup('8:00-8:10 am'),
-    _morningDine('8:10-8:45 am', additional: '20mg adderall IR', eggs: 4, eatBeef: true, supplements: {MorningSupplement.omega3, MorningSupplement.d3K2, MorningSupplement.vitaminE}, banana: true),
+    _morningDine('8:10-8:45 am', additional: '20mg adderall IR', eggs: 4, protein: ProteinSource.beef, supplements: {MorningSupplement.omega3, MorningSupplement.d3K2, MorningSupplement.vitaminE}, banana: true, isResistanceDay: false),
     _getReady('8:45-9:05 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for gym (Hoka Bondi 8)'),
     ..._buildStudyCycle('9:05-10:35 am', '10:35-10:55 am'),
     ..._buildStudyCycle('10:55-12:20 pm', '12:20-12:35 pm', studyNutrition: {}),
@@ -766,11 +822,11 @@ class DailyPlanData {
     _pastaLunch('1:50-2:20 pm'),
     ..._buildStudyCycle('2:20-5:10 pm', '5:10-5:30 pm', studyNutrition: {}),
     _study('5:30-6:20 pm'),
-    _commuteToGym('6:20-6:25 pm', reapplySunscreen: _Routines.reapplyHur, nutrition: {}),
+    _commuteToGym('6:20-6:25 pm', reapplySunscreen: _Routines.reapplyHur, nutrition: {}, isResistanceDay: false),
     _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
     TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
     _beefDinner('7:45-8:00 pm'),
-    _chores('8:00-8:50 pm', blueberryText: 'Eat the rest of the box of Blueberries', nutrition: {}),
+    _chores('8:00-8:50 pm', blueberryText: isRefeedWeek() ? 'Eat the rest of the box of Blueberries' : '', nutrition: {}),
     _relaxOrCatchUp('8:50-9:35 pm'),
     _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
     _nightSupplement('10:20-10:35 pm', magAmount: 2, skincare: _Routines.joseon, nutrition: {NutritionAddOn.nac}),
@@ -779,7 +835,7 @@ class DailyPlanData {
 
   static List<TimelineItem> _buildSunday() => [
     _wakeup('8:00-8:10 am'),
-    _morningDine('8:10-9:15 am', eggs: 3, eatBeef: true, supplements: {MorningSupplement.d3K2}, banana: true),
+    _morningDine('8:10-9:15 am', eggs: 3, protein: ProteinSource.beef, supplements: {MorningSupplement.d3K2}, banana: true, isResistanceDay: false),
     _getReady('9:15-9:35 am', skincare: _Routines.morningSkin1004, clothes: 'Get dressed for shopping (NK 9060)'),
     ..._buildStudyCycle('9:50-11:20 am', '11:20-11:50 am', studyDetails: [const DetailItem.trackable('20mg adderall IR at 9:50am')], studyNutrition: {}),
     _study('11:50-1:20 pm'),
@@ -821,7 +877,7 @@ class DailyPlanData {
         isRefeedWeek()
             ? const DetailItem('Chipotle Bowl (REFEED): single chicken, double white rice, DOUBLE black beans, extra fajita veggies (NO SOUR CREAM)')
             : const DetailItem('Chipotle Bowl (MINI-REFEED): single chicken, double white rice, SINGLE black beans, extra fajita veggies (NO SOUR CREAM)'),
-        const DetailItem('🥕 Eat 1/7th of a bag (~10 baby carrots)'),
+        const DetailItem('🥕 Eat 1/7th of a bag (~14 baby carrots)'),
         if (isRefeedWeek()) const DetailItem('🍌 1 Medium Banana (REFEED WEEK)'),
         if (!isAshwagandhaOff()) const DetailItem.trackable('2 cap Ashwagandha'),
       ], 
@@ -851,7 +907,7 @@ class DailyPlanData {
       ]
     ),
     _relaxOrCatchUp('7:30-8:15 pm'),
-    _chores('8:15-8:50 pm', nutrition: {}, extraDetails: [const DetailItem('kiwi @ 8:15-8:20 if box u bought has 6')]),
+    _chores('8:15-8:50 pm', nutrition: {}, sleepKiwiCount: 2),
     _bedPrep('8:50-9:50 pm', isHarshActiveNight: true),
     _nightSupplement('9:50-10:05 pm', magAmount: 2, skincare: _Routines.retinol, nutrition: {NutritionAddOn.nac}),
     _relaxOrCatchUp('10:05-10:50 pm'),

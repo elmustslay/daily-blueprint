@@ -60,7 +60,7 @@ void main() {
       
       final commute = schedule.firstWhere((item) => item.title.contains('Commute to Gym'));
       expect(commute.time.contains('5:'), isTrue);
-      expect(commute.details.any((d) => d.text.contains('Mix 1 scoop Cluster Dextrin')), isTrue);
+      expect(commute.details.any((d) => d.text.contains('Mix 1 scoop whey isolate')), isTrue);
     }
   });
 
@@ -148,7 +148,7 @@ void main() {
     }
   });
 
-  test('Shopping list includes 28 Bananas and Quinoa for upcoming Refeed weeks', () async {
+  test('Shopping list includes 37 Bananas and Quinoa for upcoming Refeed weeks', () async {
     SharedPreferences.setMockInitialValues({});
     await SharedPrefsLogic.init();
 
@@ -157,7 +157,7 @@ void main() {
     final normalItems = ShoppingListNotifier().build();
     expect(normalItems.any((item) => item.name == 'Quinoa'), isFalse, reason: 'Quinoa should not appear on normal cut weeks');
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');
-    expect(bananaItemNormal.subtext, contains('9 Bananas (4 PW + 5 Morning)'));
+    expect(bananaItemNormal.subtext, contains('13 Bananas (8 PW + 5 Snack/Morning)'));
 
     // 2. Upcoming Refeed week (e.g. Sunday of Week 4 -> Week 5 IS refeed, so day 27 from plan start)
     try {
@@ -165,7 +165,7 @@ void main() {
       final refeedItems = ShoppingListNotifier().build();
       
       final bananaItem = refeedItems.firstWhere((item) => item.name == 'Bananas');
-      expect(bananaItem.subtext, contains('33 Bananas (REFEED WEEK)'));
+      expect(bananaItem.subtext, contains('37 Bananas (REFEED WEEK)'));
 
       final quinoaItem = refeedItems.firstWhere((item) => item.name == 'Quinoa');
       expect(quinoaItem.subtext, contains('1 bag (REFEED WEEK: need 3 cups dry)'));

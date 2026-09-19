@@ -78,7 +78,6 @@ void main() {
     verifyItemExact(standardItems, 'Ground Cumin', 'Ground Cumin', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp'));
     verifyItemExact(standardItems, 'Iodized Table Salt (or Sea Salt)', 'Iodized Table Salt', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp\s*\(standard\)'));
 
-    verifyItemExact(standardItems, 'Blueberries', 'Trader Joe\'s Blueberries', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*cups?'), RegExp(r'(\d+(?:\.\d+)?)\s*cup'));
     verifyItemExact(standardItems, 'D3-K2 Supplement', 'D3-K2', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*capsules?'), RegExp(r'(\d+(?:\.\d+)?)\s*capsule'));
     verifyItemExact(standardItems, 'Omega-3 Supplement', 'Omega-3', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*softgels?'), RegExp(r'(\d+(?:\.\d+)?)\s*softgel'));
     verifyItemExact(standardItems, 'Whey Isolate Protein', 'Whey Isolate', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*scoops?'), RegExp(r'(\d+(?:\.\d+)?)\s*scoop'));
@@ -94,6 +93,14 @@ void main() {
     final refeedItems = ShoppingListNotifier.getInitialItems(true);
     verifyItemExact(refeedItems, 'Morton Lite Salt', 'Morton Lite Salt', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp\s*\(refeed\)'));
     verifyItemExact(refeedItems, 'Bananas', 'Banana', RegExp(r'(\d+(?:\.\d+)?)\s*bananas'), RegExp(r'(\d+(?:\.\d+)?)\s*medium\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Blueberries', 'Trader Joe\'s Blueberries', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*cups?'), RegExp(r'(\d+(?:\.\d+)?)\s*cup\s*\(refeed\)'));
     verifyItemExact(refeedItems, 'Quinoa', 'Quinoa', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*cups'), RegExp(r'(\d+(?:\.\d+)?)\s*cup\s*\(dry\)\s*\(refeed\)'));
+
+    verifyItemExact(refeedItems, 'Spinach', 'Spinach', RegExp(r'(\d+(?:\.\d+)?)\s*bag'), RegExp(r'(\d+(?:\.\d+)?)\s*bag\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Ground Turkey', 'Ground Turkey (93% Lean)', RegExp(r'(\d+(?:\.\d+)?)\s*lbs?'), RegExp(r'(\d+(?:\.\d+)?)\s*lb\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Marinara Sauce', 'Marinara Sauce', RegExp(r'(\d+(?:\.\d+)?)\s*jars?'), RegExp(r'(\d+(?:\.\d+)?)\s*jar\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Garlic Powder', 'Garlic Powder', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tbsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tbsp\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Iodized Table Salt (or Sea Salt)', 'Iodized Table Salt', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tsp\s*\(refeed\)'));
+    verifyItemExact(refeedItems, 'Nutritional Yeast', 'Nutritional Yeast', RegExp(r'need\s*(\d+(?:\.\d+)?)\s*tbsp'), RegExp(r'(\d+(?:\.\d+)?)\s*tbsp\s*\(refeed\)'));
   });
 }

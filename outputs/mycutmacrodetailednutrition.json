@@ -21,10 +21,10 @@
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 335.0,
-                "Protein": 31.3,
-                "Carbs": 53.0,
-                "Fat": 0.8
+                "Calories": 340.0,
+                "Protein": 32.6,
+                "Carbs": 55.0,
+                "Fat": 1.1
             }
         },
         "8:50-9:20 pm": {
@@ -39,10 +39,10 @@
         "9:20-9:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 165.0,
-                "Protein": 26.0,
-                "Carbs": 14.0,
-                "Fat": 1.0
+                "Calories": 210.0,
+                "Protein": 27.0,
+                "Carbs": 25.0,
+                "Fat": 1.5
             }
         }
     },
@@ -68,10 +68,10 @@
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 335.0,
-                "Protein": 31.3,
-                "Carbs": 53.0,
-                "Fat": 0.8
+                "Calories": 340.0,
+                "Protein": 32.6,
+                "Carbs": 55.0,
+                "Fat": 1.1
             }
         },
         "8:50-9:20 pm": {
@@ -86,10 +86,10 @@
         "9:20-9:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 165.0,
-                "Protein": 26.0,
-                "Carbs": 14.0,
-                "Fat": 1.0
+                "Calories": 120.0,
+                "Protein": 25.0,
+                "Carbs": 3.0,
+                "Fat": 0.5
             }
         }
     },
@@ -142,10 +142,10 @@
         "8:50-9:20 pm": {
             "title": "Study Time",
             "nutrition": {
-                "Calories": 45.0,
-                "Protein": 1.0,
-                "Carbs": 11.0,
-                "Fat": 0.5
+                "Calories": 90.0,
+                "Protein": 2.0,
+                "Carbs": 22.0,
+                "Fat": 1.0
             }
         }
     },
@@ -171,10 +171,10 @@
         "5:55-6:20 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 335.0,
-                "Protein": 31.3,
-                "Carbs": 53.0,
-                "Fat": 0.8
+                "Calories": 340.0,
+                "Protein": 32.6,
+                "Carbs": 55.0,
+                "Fat": 1.1
             }
         },
         "8:30-9:00 pm": {
@@ -189,10 +189,10 @@
         "9:00-9:30 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 210.0,
-                "Protein": 27.0,
-                "Carbs": 25.0,
-                "Fat": 1.5
+                "Calories": 120.0,
+                "Protein": 25.0,
+                "Carbs": 3.0,
+                "Fat": 0.5
             }
         }
     },
@@ -218,10 +218,10 @@
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 335.0,
-                "Protein": 31.3,
-                "Carbs": 53.0,
-                "Fat": 0.8
+                "Calories": 340.0,
+                "Protein": 32.6,
+                "Carbs": 55.0,
+                "Fat": 1.1
             }
         },
         "8:50-9:20 pm": {
@@ -236,10 +236,10 @@
         "9:20-9:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 204.0,
-                "Protein": 26.1,
-                "Carbs": 24.4,
-                "Fat": 1.0
+                "Calories": 120.0,
+                "Protein": 25.0,
+                "Carbs": 3.0,
+                "Fat": 0.5
             }
         }
     },
@@ -274,10 +274,10 @@
         "8:00-8:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 204.0,
-                "Protein": 26.1,
-                "Carbs": 24.4,
-                "Fat": 1.0
+                "Calories": 120.0,
+                "Protein": 25.0,
+                "Carbs": 3.0,
+                "Fat": 0.5
             }
         }
     },
@@ -312,10 +312,10 @@
         "8:15-8:50 pm": {
             "title": "Chores & Clean Up",
             "nutrition": {
-                "Calories": 120.0,
-                "Protein": 25.0,
-                "Carbs": 3.0,
-                "Fat": 0.5
+                "Calories": 210.0,
+                "Protein": 27.0,
+                "Carbs": 25.0,
+                "Fat": 1.5
             }
         }
     }
