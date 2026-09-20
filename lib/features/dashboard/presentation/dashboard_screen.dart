@@ -30,11 +30,23 @@ class DashboardScreen extends ConsumerWidget {
                     return Text('Health Error: ${data.errorMessage}', style: const TextStyle(fontSize: 12, color: Colors.redAccent));
                   }
                   
+                  final now = DateTime.now();
+                  final bool isLowActivityDay = (now.weekday == DateTime.thursday || now.weekday == DateTime.friday);
+                  
                   Widget textWidget;
-                  if (data.stepsRemainingWeekly > 0) {
-                    textWidget = Text('${data.stepsRemainingWeekly} steps left this week!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent, fontWeight: FontWeight.bold));
+                  if (isLowActivityDay) {
+                    int dailyLeft = 4000 - data.currentDailySteps;
+                    if (dailyLeft > 0) {
+                      textWidget = Text('You only have $dailyLeft left for the day to walk', style: const TextStyle(fontSize: 12, color: Colors.orangeAccent, fontWeight: FontWeight.bold));
+                    } else {
+                      textWidget = const Text('Daily step limit reached! Rest up.', style: TextStyle(fontSize: 12, color: Colors.redAccent, fontWeight: FontWeight.bold));
+                    }
                   } else {
-                    textWidget = const Text('Weekly step goal reached!', style: TextStyle(fontSize: 12, color: Colors.greenAccent, fontWeight: FontWeight.bold));
+                    if (data.stepsRemainingWeekly > 0) {
+                      textWidget = Text('${data.stepsRemainingWeekly} steps left this week!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent, fontWeight: FontWeight.bold));
+                    } else {
+                      textWidget = const Text('Weekly step goal reached!', style: TextStyle(fontSize: 12, color: Colors.greenAccent, fontWeight: FontWeight.bold));
+                    }
                   }
                   
                   return GestureDetector(

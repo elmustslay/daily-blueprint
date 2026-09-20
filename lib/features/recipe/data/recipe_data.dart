@@ -12,8 +12,8 @@ class RecipeData {
       textIngredients: [
         '14.5 oz Barilla Protein+ Pasta (1 Full Box)',
         '2 lb ground turkey',
-        '2.5 tsp Morton Lite Salt',
-        '1 tsp Iodized Table Salt',
+        '1 tsp Morton Lite Salt',
+        '1.5 tsp Iodized Table Salt',
         '1 tbsp garlic powder, 1 tbsp Italian seasoning, 1 tsp Smoked Paprika',
         'Pepper to taste',
         '2 jars marinara sauce',
@@ -24,8 +24,8 @@ class RecipeData {
       ingredients: [
         IngredientPortion(ingredient: IngredientsData.barillaProteinPlus, amount: 14.5),
         IngredientPortion(ingredient: IngredientsData.groundTurkey, amount: 2),
-        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 2.5),
-        IngredientPortion(ingredient: IngredientsData.iodizedTableSalt, amount: 1),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 1.0),
+        IngredientPortion(ingredient: IngredientsData.iodizedTableSalt, amount: 1.5),
         IngredientPortion(ingredient: IngredientsData.marinaraSauce, amount: 2),
         IngredientPortion(ingredient: IngredientsData.nutritionalYeast, amount: 4),
         IngredientPortion(ingredient: IngredientsData.spinach, amount: 1),
@@ -41,7 +41,7 @@ class RecipeData {
       instructions: [
         'Preheat Pan: Preheat dry 12 qt sauté pan on medium-high for 2-3 mins.',
         'Sear Turkey: Add 2 lb ground turkey directly to the dry pan. (No oil needed, the turkey will render enough fat to prevent sticking).',
-        'Seasoning: Sprinkle 2.5 tsp Lite Salt, 1 tsp Table Salt, 1 tbsp garlic powder, 1 tbsp Italian seasoning, 1 tsp smoked paprika, and pepper. Sauté and break apart until browned (~8 mins).',
+        'Seasoning: Sprinkle 1 tsp Lite Salt, 1.5 tsp Table Salt, 1 tbsp garlic powder, 1 tbsp Italian seasoning, 1 tsp smoked paprika, and pepper. Sauté and break apart until browned (~8 mins).',
         'Liquid: Pour in 2 cups water and 48 oz marinara sauce. Bring to a boil.',
         'Pasta Simmer: Submerge the 14.5 oz dry pasta. Reduce heat to medium-low, cover, and simmer for 6-8 minutes (stir occasionally).',
         'Add Yeast: Uncover, stir in 4 tbsp nutritional yeast. Cover and cook another 3-5 mins until al dente.',
@@ -57,7 +57,7 @@ class RecipeData {
       textIngredients: [
         '1 lb 96% Lean Ground Beef',
         '1 tsp avocado oil',
-        '2 tsp Morton Lite Salt, 1 tsp black pepper',
+        '1 tsp Morton Lite Salt, 1 tsp black pepper',
         '2 tsp smoked paprika, 1 tsp cumin',
         '1 tsp garlic powder, 1 tsp onion powder, 1 tsp dried oregano',
         '1/4 cup water (for deglazing)',
@@ -66,7 +66,7 @@ class RecipeData {
       servings: 4,
       ingredients: [
         IngredientPortion(ingredient: IngredientsData.leanGroundBeef96, amount: 1),
-        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 2),
+        IngredientPortion(ingredient: IngredientsData.liteSalt, amount: 1),
         IngredientPortion(ingredient: IngredientsData.avocadoOil, amount: 1),
         IngredientPortion(ingredient: IngredientsData.garlicPowder, amount: 0.333),
         IngredientPortion(ingredient: IngredientsData.smokedPaprika, amount: 2.0),
@@ -82,7 +82,7 @@ class RecipeData {
       instructions: [
         'Spice Prep: Mix paprika, cumin, garlic, onion, and oregano in a small bowl. Have 1/4 cup of water ready.',
         'Preheat Pan: Heat a large stainless steel pan dry over medium-high for 2 minutes.',
-        'Sear Beef: Add 1 tsp avocado oil, then the ground beef. Sprinkle 2 tsp Lite Salt & 1 tsp pepper.',
+        'Sear Beef: Add 1 tsp avocado oil, then the ground beef. Sprinkle 1 tsp Lite Salt & 1 tsp pepper.',
         'Crust: Let beef sit untouched for 60 seconds to form a crust, then break apart and cook 3-4 mins until no longer pink.',
         'Spice Toast: Turn heat to Low. Push beef to the edges. Dump the spice blend in the center and toast in the fat for 15 seconds.',
         'Deglaze: Pour in 1/4 cup water. Scrape up the browned bits, mix everything together, and turn off heat.',

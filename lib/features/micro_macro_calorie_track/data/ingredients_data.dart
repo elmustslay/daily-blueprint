@@ -242,6 +242,7 @@ class IngredientsData {
       microNutrients: {
         'Sugar (g)': 14.4,
         'Potassium (mg)': 422,
+        'Fiber (g)': 3.1,
         'Magnesium (mg)': 32,
       
         'Calcium (Food) (mg)': 6, // #this is default assumed value

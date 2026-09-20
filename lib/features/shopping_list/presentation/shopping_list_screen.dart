@@ -24,15 +24,14 @@ class ShoppingItem {
 
 class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
   @override
-  static List<ShoppingItem> getInitialItems(bool isNextWeekRefeed) {
+  static List<ShoppingItem> getInitialItems() {
     return [
       // Produce
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
-      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '18 Kiwis'),
-      if (isNextWeekRefeed) ShoppingItem(id: 'prod-10', name: 'Blueberries', subtext: '1 clamshell box (need 2 cups)'),
+      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '10 Kiwis'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '24oz bag (for 7 servings)'),
-      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: isNextWeekRefeed ? '32 Bananas (REFEED WEEK)' : '8 Bananas (Pre-Workout)'),
+      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: '20 Bananas (Morning signals & weekend biological refeed)'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '2 lbs'),
@@ -44,7 +43,6 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Others
 
       ShoppingItem(id: 'oth-2', name: 'Barilla Protein+ Pasta', subtext: '1 box (14.5 oz)'),
-      if (isNextWeekRefeed) ShoppingItem(id: 'oth-3', name: 'Quinoa', subtext: '1 bag (REFEED WEEK: need 3 cups dry)'),
       ShoppingItem(id: 'oth-4', name: 'Marinara Sauce', subtext: '2 JARS (48 oz)'),
 
       ShoppingItem(id: 'oth-7', name: 'Nutritional Yeast', subtext: '1 container (need 4tbsp)'),
@@ -55,11 +53,11 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'spc-2', name: 'Garlic Powder', subtext: 'need 1.33 tbsp (~4 tsp)'),
       ShoppingItem(id: 'spc-3', name: 'Onion Powder', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-4', name: 'Dried Oregano', subtext: 'need 1tsp'),
-      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: isNextWeekRefeed ? 'CRITICAL for potassium! (need 8.2 tsp)' : 'CRITICAL for potassium! (need 7.2 tsp)'),
+      ShoppingItem(id: 'spc-5', name: 'Morton Lite Salt', subtext: 'CRITICAL for potassium! (need 2.5 tsp)'),
       ShoppingItem(id: 'spc-6', name: 'Black Pepper', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
       ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
-      ShoppingItem(id: 'spc-9', name: 'Iodized Table Salt (or Sea Salt)', subtext: 'need 2.75 tsp (Morning water & pasta)'),
+      ShoppingItem(id: 'spc-9', name: 'Iodized Table Salt (or Sea Salt)', subtext: 'need 4.57 tsp (Morning water, pre-workout & pasta)'),
       
       // Amazon
       // ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'), // Outdated, not used anymore
@@ -84,8 +82,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
   @override
   List<ShoppingItem> build() {
-    final isNextWeekRefeed = DailyPlanData.isNextWeekRefeedWeek();
-    final initialItems = getInitialItems(isNextWeekRefeed);
+    final initialItems = getInitialItems();
     final prefs = SharedPrefsLogic.instance;
     return initialItems.map((item) {
       final isChecked = prefs.getBool('shop_${item.id}') ?? false;

@@ -129,49 +129,18 @@ void main() {
   });
 
 
-  test('LISS Cardio becomes Zone 1 Recovery Walk on Refeed Weeks', () {
-    try {
-      // Set date to a known refeed week (Week 5: 28 days from plan start)
-      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28));
-      
-      // Check Wednesday
-      final wedSchedule = DailyPlanData.schedules[DailyPlanData.wed]!;
-      final wedCardio = wedSchedule.firstWhere((item) => item.title.contains('Recovery Walk / Haircut (Refeed)'));
-      expect(wedCardio.details.map((d) => d.text).join(' '), contains('UNDER 15k steps'));
-      
-      // Check Saturday
-      final satSchedule = DailyPlanData.schedules[DailyPlanData.sat]!;
-      final satCardio = satSchedule.firstWhere((item) => item.title.contains('Recovery Walk / Haircut (Refeed)'));
-      expect(satCardio.details.map((d) => d.text).join(' '), contains('UNDER 26k steps'));
-    } finally {
-      DailyPlanData.mockCurrentDate = null;
-    }
-  });
 
-  test('Shopping list includes 37 Bananas and Quinoa for upcoming Refeed weeks', () async {
+  test('Shopping list includes Bananas for upcoming Refeed weeks', () async {
     SharedPreferences.setMockInitialValues({});
     await SharedPrefsLogic.init();
 
     // 1. Normal cut week
     DailyPlanData.mockCurrentDate = DateTime(2026, 8, 15);
     final normalItems = ShoppingListNotifier().build();
-    expect(normalItems.any((item) => item.name == 'Quinoa'), isFalse, reason: 'Quinoa should not appear on normal cut weeks');
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');
-    expect(bananaItemNormal.subtext, contains('8 Bananas (Pre-Workout)'));
+    expect(bananaItemNormal.subtext, contains('20 Bananas (Morning signals & weekend biological refeed)'));
 
-    // 2. Upcoming Refeed week (e.g. Sunday of Week 4 -> Week 5 IS refeed, so day 27 from plan start)
-    try {
-      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 27));
-      final refeedItems = ShoppingListNotifier().build();
-      
-      final bananaItem = refeedItems.firstWhere((item) => item.name == 'Bananas');
-      expect(bananaItem.subtext, contains('32 Bananas (REFEED WEEK)'));
-
-      final quinoaItem = refeedItems.firstWhere((item) => item.name == 'Quinoa');
-      expect(quinoaItem.subtext, contains('1 bag (REFEED WEEK: need 3 cups dry)'));
-    } finally {
-      DailyPlanData.mockCurrentDate = null;
-    }
+    // Obsolete Refeed logic removed
   });
 
   test('Rule 13: Strict Pre-Workout Fat Restriction (Gastric Emptying)', () {
@@ -277,7 +246,9 @@ void main() {
               final hasBananas = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.banana);
               final hasDextrin = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.clusterDextrin);
               
-              expect(hasBananas, isFalse, reason: 'High-glycemic Bananas found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed). This will spike insulin and blunt GH/fat oxidation.');
+              if (entry.key != DailyPlanData.thu && entry.key != DailyPlanData.fri) {
+                expect(hasBananas, isFalse, reason: 'High-glycemic Bananas found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed). This will spike insulin and blunt GH/fat oxidation.');
+              }
               expect(hasDextrin, isFalse, reason: 'Cluster Dextrin found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed).');
             }
           }

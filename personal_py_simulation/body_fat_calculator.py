@@ -11,20 +11,17 @@ AGE = 23
 # These capture: Resistance Training EAT + NEAT + Aerobic activity (steps/LISS/dance)
 # Aerobic tracking is unified in the app via HealthKit:
 #   - Natural steps (pedometer), LISS (Active Calories × 20), Dance (Active Calories × 20)
-#   - App target: Cut = 55,000 unified steps/week, Refeed = 27,000 unified steps/week
-#   - Mix doesn't matter: multiplier holds within ±0.03 regardless of walk vs dance vs LISS split
-# 1.50 = Cut Week (4 days RT + 55k unified steps + NEAT, range 1.50-1.55)
-# 1.375 = Refeed Week (4 days RT, NO LISS + 27k unified steps + NEAT, range 1.37-1.41)
-CUT_ACT = 1.50
-REFEED_ACT = 1.375
-RT_DAYS_CUT = 4
-RT_DAYS_REFEED = 4
+#   - Base multiplier (Sedentary + 4 days lifting) = 1.25
+#   - Each 1,000 steps adds ~0.03125 to the multiplier
+
+# Dynamic Step Targets (Edit these to test different activity routines)
+# Index matches day of the week: [Mon, Tue, Wed, Thu, Fri, Sat, Sun]
+DAILY_STEPS = [6000, 8000, 10000, 4000, 4000, 10000, 8000]
+
+RT_DAYS = 4
 
 # OVERRIDES: set to a number to override timeline JSON
-OVERRIDES = {
-    'cut': {'prot': None, 'carb': None, 'fat': None, 'fiber': None, 'cal': None, 'alcohol': 0},
-    'ref': {'prot': None, 'carb': None, 'fat': None, 'fiber': None, 'cal': None, 'alcohol': 0}
-}
+OVERRIDES = {'prot': None, 'carb': None, 'fat': None, 'fiber': None, 'cal': None, 'alcohol': 0}
 
 # TRACKING ERROR: Set these to simulate accidentally eating extra macros/calories per day
 TRACKING_ERROR = {'cal': 0, 'prot': 0, 'carb': 0, 'fat': 0, 'fiber': 0}
@@ -118,9 +115,11 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     ketone_adaptation_days = 0
     fat_history = []
     consecutive_deficit_days = 0
+    consecutive_healing_days = 0
     cns_tdee_factor = 1.0
     refeed_sodium_water = 0.0
     na_k_water = 0.0
+    tdee_history = []
     
     # 1. Sleep Modifiers (Clinical data: ~5.5 hrs sleep = -55% fat oxidation in deficit, +impaired P-ratio in surplus)
     sleep_deficit = max(0.0, 7.5 - SLEEP_HOURS)
@@ -135,15 +134,15 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         current_bf = (current_fat / current_weight) * 100.0
         
         day_info = TIMELINE[day % len(TIMELINE)]
-        is_ref = day_info['isRefeed']
+            
         cal_val = day_info['cal']
         prot_val = day_info['prot']
         carb_val = day_info['carb']
         fiber_val = day_info.get('fiber', 0.0)
         fat_val = day_info['fat']
-        rt = RT_DAYS_REFEED if is_ref else RT_DAYS_CUT
+        rt = RT_DAYS
         
-        ov = OVERRIDES.get('ref' if is_ref else 'cut', {})
+        ov = OVERRIDES
         logged_cal = (ov.get('cal') if ov.get('cal') is not None else cal_val) + TRACKING_ERROR.get('cal', 0)
         
         prot = (ov.get('prot') if ov.get('prot') is not None else prot_val) + TRACKING_ERROR.get('prot', 0)
@@ -160,7 +159,7 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             fat_history.pop(0)
             
         avg_fat = sum(fat_history) / len(fat_history)
-        fat_minimum = current_weight * 0.30
+        fat_minimum = current_weight * 0.20 # Hormonal pushback threshold (lowered due to Omega-3 supplementation)
         hormonal_fat_penalty = 1.0
         if avg_fat < fat_minimum:
             deficit_g = fat_minimum - avg_fat
@@ -254,63 +253,11 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             post_workout_synergy += (pw_insulin * pw_mps) * 0.05
         # =========================================================================
         
-        # Partition carbs into pre-workout vs post-workout for glycogen modeling
-        if gym_hours and meal_carb_schedule:
-            gym_start = gym_hours[0]
-            total_meal_carbs = sum(mc for _, mc in meal_carb_schedule)
-            pre_gym_carbs = sum(mc for h, mc in meal_carb_schedule if h <= gym_start)
-            pre_workout_fraction = (pre_gym_carbs / total_meal_carbs) if total_meal_carbs > 0 else 0.5
-            pre_workout_net_carb = net_carb * pre_workout_fraction
-            post_workout_net_carb = net_carb * (1.0 - pre_workout_fraction)
-        else:
-            pre_workout_net_carb = net_carb
-            post_workout_net_carb = 0.0
-        
-        # BMR & TEF (Protein: 25%, Carbs: 8%, Fat: 2%, Alcohol: 15%)
-        rmr = 370 + (21.6 * (current_lean / 2.20462))
-        exact_tef = (prot * 4 * 0.25) + (carb * 4 * 0.08) + (fat * 9 * 0.02) + (alcohol * 7 * 0.15)
-        
-        # Adaptive Thermogenesis (Mass scaling + Hormonal NEAT drop below 15% BF + Prolonged deficit fatigue)
-        scaling = (current_weight / STARTING_WEIGHT) ** 0.55
-        
-        # Hormonal NEAT suppression when getting extremely lean (<15% in males)
-        neat_bf_drop = max(0.0, (15.0 - current_bf) * 12.0) if current_bf < 15.0 else 0.0
-        
-        if is_ref:
-            # Refeed hormonal restoration (Leptin & Thyroid T3 bounce-back fueled by carbohydrate refeeding)
-            scaling = 1.0 - ((1.0 - scaling) * (0.5 * min(1.0, net_carb / 250.0)))
-            neat_bf_drop *= 0.50 # Refeed partially restores spontaneous NEAT
-            # Cortisol drop / "Whoosh" flush: high carbs and lowered diet stress excrete water retention
-            current_cortisol_water = max(0.0, current_cortisol_water * 0.70)
-        else:
-            # Deficit cortisol accumulation (Cortisol cross-binding to aldosterone receptors causing water retention)
-            current_cortisol_water += max(0.0, (cal_val / 2000.0) * 0.015) * (1.0 + (sleep_deficit * 0.25))
-            current_cortisol_water = min(4.5, current_cortisol_water) # Cap realistic water retention at ~4.5 lbs
-        
-        # CNS & Thyroid fatigue (computed from previous day's consecutive_deficit_days before TDEE)
-        cns_fatigue_penalty = max(0.50, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * 0.50)
-        cns_tdee_factor = max(1.0 - THYROID_TDEE_PENALTY, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * THYROID_TDEE_PENALTY)
-        
-        tdee = (rmr * (REFEED_ACT if is_ref else CUT_ACT) * scaling * cns_tdee_factor) + (exact_tef - (cal * 0.10)) - neat_bf_drop
-        deficit = tdee - cal
-        
-        # Track prolonged deficit fatigue (CNS and Endocrine strain)
-        if deficit > (tdee * 0.25):
-            consecutive_deficit_days += 1
-        else:
-            # CNS recovery from chronic deficit takes 2-6 weeks at maintenance (research-backed).
-            # Each refeed day restores ~2 days' worth of accumulated fatigue, not 7.
-            consecutive_deficit_days = max(0, consecutive_deficit_days - 2)
-        
-        if day == 0: initial_tdee = tdee
-        if day == days - 1: final_tdee = tdee
-        
         # 1. Dynamic CNS Glucose Demand & Ketone Adaptation
-        # In non-ketoadapted state, the brain/RBCs require ~115g glucose/day.
-        # Under sustained low carbs (<50g) and depleted glycogen (<180g), hepatic ketogenesis ramps up over 3-5 days,
-        # allowing beta-hydroxybutyrate to cover ~70% of brain energy, lowering the glucose requirement to ~40g/day.
         if net_carb < 50.0 and current_glycogen < 180.0:
             ketone_adaptation_days = min(5, ketone_adaptation_days + 1)
+        elif net_carb > 100.0: # Massive insulin spike halts hepatic ketogenesis immediately
+            ketone_adaptation_days = 0 
         else:
             ketone_adaptation_days = max(0, ketone_adaptation_days - 1)
             
@@ -324,6 +271,90 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         
         # Direct skeletal catabolism if dietary protein cannot even cover the GNG glucose requirement
         direct_gluconeogenic_catabolism = max(0.0, protein_stolen_for_cns - prot) / 100.0
+        
+        # Prevent double-spending: Brain gets carbs first, muscles get the leftovers
+        carbs_available_for_glycogen = max(0.0, net_carb - cns_glucose_need)
+        
+        # Partition carbs into pre-workout vs post-workout for glycogen modeling
+        if gym_hours and meal_carb_schedule:
+            gym_start = gym_hours[0]
+            total_meal_carbs = sum(mc for _, mc in meal_carb_schedule)
+            pre_gym_carbs = sum(mc for h, mc in meal_carb_schedule if h <= gym_start)
+            pre_workout_fraction = (pre_gym_carbs / total_meal_carbs) if total_meal_carbs > 0 else 0.5
+            pre_workout_net_carb = carbs_available_for_glycogen * pre_workout_fraction
+            post_workout_net_carb = carbs_available_for_glycogen * (1.0 - pre_workout_fraction)
+        else:
+            pre_workout_net_carb = carbs_available_for_glycogen
+            post_workout_net_carb = 0.0
+        
+        # BMR & TEF (Protein: 25%, Carbs: 8%, Fat: 2%, Alcohol: 15%)
+        rmr = 370 + (21.6 * (current_lean / 2.20462))
+        # Convert internal muscle breakdown back into dry protein grams to apply the TEF tax
+        internal_prot_g = direct_gluconeogenic_catabolism * 100.0
+        exact_tef = ((prot + internal_prot_g) * 4 * 0.25) + (carb * 4 * 0.08) + (fat * 9 * 0.02) + (alcohol * 7 * 0.15)
+        
+        # Adaptive Thermogenesis (Mass scaling + Hormonal NEAT drop below 15% BF + Prolonged deficit fatigue)
+        scaling = (current_weight / STARTING_WEIGHT) ** 0.55
+        
+        # Hormonal NEAT suppression when getting extremely lean (<15% in males)
+        neat_bf_drop = max(0.0, (15.0 - current_bf) * 12.0) if current_bf < 15.0 else 0.0
+        
+        # CNS & Thyroid fatigue (computed from previous day's consecutive_deficit_days before TDEE)
+        cns_fatigue_penalty = max(0.50, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * 0.50)
+        cns_tdee_factor = max(1.0 - THYROID_TDEE_PENALTY, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * THYROID_TDEE_PENALTY)
+        
+        # Base TDEE before checking for deficit/surplus (so we can mathematically detect biological refeeds)
+        daily_steps = DAILY_STEPS[day % 7]
+        
+        # Base multiplier (1.25) + step calculation
+        current_act = 1.25 + (daily_steps * 0.00003125)
+        
+        base_tdee = (rmr * current_act * scaling * cns_tdee_factor) + (exact_tef - (cal * 0.10)) - neat_bf_drop
+        is_biological_refeed = (net_carb > 200.0 and cal >= base_tdee)
+        
+        if is_biological_refeed:
+            # Mathematical detection of a carbohydrate surplus triggers Leptin & Thyroid T3 bounce-back
+            scaling = 1.0 - ((1.0 - scaling) * (0.5 * min(1.0, net_carb / 250.0)))
+            neat_bf_drop *= 0.50 # Surplus partially restores spontaneous NEAT
+            # Cortisol drop / "Whoosh" flush: high carbs and lowered diet stress excrete water retention
+            current_cortisol_water = max(0.0, current_cortisol_water * 0.70)
+        
+        # Final TDEE recalculation using the potentially restored `scaling` and `neat_bf_drop`
+        unfatigued_tdee = (rmr * current_act * scaling) + (exact_tef - (cal * 0.10)) - neat_bf_drop
+        tdee = (rmr * current_act * scaling * cns_tdee_factor) + (exact_tef - (cal * 0.10)) - neat_bf_drop
+        
+        deficit = tdee - cal
+        tdee_history.append(tdee)
+        unfatigued_deficit = unfatigued_tdee - cal
+        
+        if deficit > 0:
+            # Deficit cortisol accumulation (Cortisol cross-binding to aldosterone receptors causing water retention)
+            current_cortisol_water += max(0.0, (deficit / 1000.0) * 0.015) * (1.0 + (sleep_deficit * 0.25))
+            current_cortisol_water = min(4.5, current_cortisol_water) # Cap realistic water retention at ~4.5 lbs
+        
+        # Track prolonged deficit fatigue (CNS and Endocrine strain)
+        if is_biological_refeed:
+            # A biological refeed heals the CNS, overriding any temporary TDEE bounce it causes
+            consecutive_healing_days += 1
+            heal_factor = 5 if consecutive_healing_days >= 2 else 3
+            consecutive_deficit_days = max(0, consecutive_deficit_days - heal_factor)
+        elif unfatigued_deficit > (unfatigued_tdee * 0.05): # Any real deficit accumulates fatigue
+            consecutive_deficit_days += 1
+            consecutive_healing_days = 0
+        elif unfatigued_deficit < 0: # Surplus actively heals fatigue faster
+            consecutive_healing_days += 1
+            # 48-hour Leptin peak: 2nd consecutive day of surplus heals exponentially more
+            heal_factor = 5 if consecutive_healing_days >= 2 else 3
+            consecutive_deficit_days = max(0, consecutive_deficit_days - heal_factor)
+        else: # Maintenance/Refeed heals it normally
+            consecutive_healing_days += 1
+            heal_factor = 3 if consecutive_healing_days >= 2 else 2
+            consecutive_deficit_days = max(0, consecutive_deficit_days - heal_factor)
+        
+        if day == 0: initial_tdee = tdee
+        if day == days - 1: final_tdee = tdee
+        
+        # (Moved CNS demand and GNG logic earlier)
         
         # 3. Insulin-Mediated Suppression of Muscle Protein Breakdown (MPB)
         # Using chrononutrition average instead of flat daily carbs
@@ -374,72 +405,70 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
                 muscle_atrophy = (2.0 - rt) * 0.018 # Prolonged bed-rest disuse rate
         
         # Energy balance partitioning (Synthesis costs 2,500 kcal/lb; Breakdown yields 750 kcal/lb)
-        net_deficit = deficit - (muscle_gain * LEAN_SYNTHESIS_COST_KCAL) + (muscle_atrophy * LEAN_CATABOLIC_YIELD_KCAL)
+        total_tissue_breakdown = muscle_atrophy + direct_gluconeogenic_catabolism
+        net_deficit = deficit + (muscle_gain * LEAN_SYNTHESIS_COST_KCAL) - (total_tissue_breakdown * LEAN_CATABOLIC_YIELD_KCAL)
         
+        # -------------------------------------------------------------
+        # METABOLIC LIMIT & RECOMP CALIBRATION
+        # -------------------------------------------------------------
+        # Biological maximum fat oxidation (Alpert's limit: 31.0 kcal/lb of fat/day)
+        max_ox = current_fat * 31.0 
+        if current_bf <= ESSENTIAL_BF_PCT or current_fat <= ESSENTIAL_FAT_LBS:
+            max_ox = 0.0
+        if alcohol > 0:
+            max_ox = max(0.0, max_ox - (alcohol * 7.0))
+            
         if net_deficit > 0:
-            # -------------------------------------------------------------
-            # CALORIC DEFICIT LOGIC
-            # -------------------------------------------------------------
-            # Biological maximum fat oxidation (Alpert's limit: 31.0 kcal/lb of fat/day)
-            max_ox = current_fat * 31.0 
-            
-            # Essential Fat Floor: If at essential fat limit, fat oxidation drops to 0
-            if current_bf <= ESSENTIAL_BF_PCT or current_fat <= ESSENTIAL_FAT_LBS:
-                max_ox = 0.0
-            
-            # Alcohol blocks hepatic fat oxidation while acetate is cleared
-            if alcohol > 0:
-                alcohol_cals = alcohol * 7.0
-                max_ox = max(0.0, max_ox - alcohol_cals)
-            
-            # Sleep alters deficit partitioning: forces a percentage onto lean mass
+            actual_fat_deficit = net_deficit * sleep_fat_ox_multiplier
+            if actual_fat_deficit > max_ox:
+                # We are demanding more energy from fat than biology allows.
+                # First, down-regulate muscle synthesis to try and close the gap.
+                fat_shortfall = actual_fat_deficit - max_ox
+                total_shortfall = fat_shortfall / sleep_fat_ox_multiplier
+                muscle_synthesis_cost = muscle_gain * LEAN_SYNTHESIS_COST_KCAL
+                
+                if muscle_synthesis_cost >= total_shortfall:
+                    # We can perfectly balance the equation just by building less muscle!
+                    muscle_gain -= (total_shortfall / LEAN_SYNTHESIS_COST_KCAL)
+                    net_deficit -= total_shortfall
+                else:
+                    # Even with 0 muscle growth, we are STILL starving beyond max_ox.
+                    muscle_gain = 0.0
+                    net_deficit = deficit - (total_tissue_breakdown * LEAN_CATABOLIC_YIELD_KCAL)
+
+        # -------------------------------------------------------------
+        # FINAL ENERGY PARTITIONING
+        # -------------------------------------------------------------
+        if net_deficit > 0:
+            # TRUE DEFICIT (Post-Adjustments)
             actual_fat_deficit = net_deficit * sleep_fat_ox_multiplier
             forced_lean_deficit = net_deficit - actual_fat_deficit
             
-            # Starvation / Essential Fat overflow check
-            if actual_fat_deficit > max_ox:
-                muscle_gain = 0.0
-                net_deficit = deficit + (muscle_atrophy * LEAN_CATABOLIC_YIELD_KCAL)
-                actual_fat_deficit = net_deficit * sleep_fat_ox_multiplier
-                forced_lean_deficit = net_deficit - actual_fat_deficit
-                overflow_deficit = max(0.0, actual_fat_deficit - max_ox)
-                fat_lost = max_ox / FAT_ENERGY_DENSITY_KCAL
-                catabolized = ((forced_lean_deficit + overflow_deficit) / LEAN_CATABOLIC_YIELD_KCAL) + direct_gluconeogenic_catabolism
-            else:
-                fat_lost = actual_fat_deficit / FAT_ENERGY_DENSITY_KCAL
-                catabolized = (forced_lean_deficit / LEAN_CATABOLIC_YIELD_KCAL) + direct_gluconeogenic_catabolism
-                
+            overflow_deficit = max(0.0, actual_fat_deficit - max_ox)
+            fat_lost = min(actual_fat_deficit, max_ox) / FAT_ENERGY_DENSITY_KCAL
+            catabolized = ((forced_lean_deficit + overflow_deficit) / LEAN_CATABOLIC_YIELD_KCAL) + direct_gluconeogenic_catabolism
+            
             total_catabolized += catabolized
             current_fat = max(ESSENTIAL_FAT_LBS, current_fat - fat_lost)
             current_lean += muscle_gain - muscle_atrophy - catabolized
+            
         else:
-            # -------------------------------------------------------------
-            # CALORIC SURPLUS LOGIC (Fixed P-ratio and synthesis energy cost)
-            # -------------------------------------------------------------
-            surplus = -net_deficit # positive surplus calories
+            # TRUE SURPLUS (Or Atrophy-Induced / Failed-Recomp Surplus)
+            true_surplus = -net_deficit 
+            surplus_fat_gain = true_surplus / FAT_ENERGY_DENSITY_KCAL
+            catabolized = direct_gluconeogenic_catabolism
             
-            # Forbes curve P-ratio: leaner bodies partition more surplus to lean mass; higher BF partitions more to fat
-            base_p_lean = max(0.15, min(0.65, 0.65 - (current_bf - 10.0) * 0.018))
-            rt_surplus_factor = min(1.0, rt / 4.0)
-            
-            # Sleep deprivation causes peripheral insulin resistance, directing more surplus into adipose tissue
-            effective_p_lean = base_p_lean * rt_surplus_factor * sleep_mps_multiplier * hormonal_fat_penalty
-            
-            surplus_to_lean = surplus * effective_p_lean
-            surplus_to_fat = surplus - surplus_to_lean
-            
-            surplus_lean_gain = surplus_to_lean / LEAN_SYNTHESIS_COST_KCAL
-            surplus_fat_gain = surplus_to_fat / FAT_ENERGY_DENSITY_KCAL
-            
+            total_catabolized += catabolized
             current_fat += surplus_fat_gain
-            current_lean += (surplus_lean_gain + muscle_gain)
-            catabolized = 0.0
+            current_lean += muscle_gain - muscle_atrophy - catabolized
         
-        # Glycogen turnover: subtract daily expenditure, add post-workout carbs
-        current_glycogen = max(20.0, min(500.0, current_glycogen + post_workout_net_carb - (130.0 if is_ref else 180.0)))
+        # Pure Mathematical Glycogen turnover: Base + Gym Hours + LISS/Walking/Dancing
+        # Add 40g of glycogen depletion if they hit at least 8k steps that day
+        glycogen_depletion = 50.0 + (len(gym_hours) * 30.0) + (40.0 if daily_steps >= 8000 else 0.0)
+        current_glycogen = max(20.0, min(500.0, current_glycogen + post_workout_net_carb - glycogen_depletion))
         
-        # Sodium-based fluid retention (refeeds spike aldosterone transiently)
-        if is_ref:
+        # Sodium-based fluid retention (massive carbs/sodium spike aldosterone transiently)
+        if is_biological_refeed:
             refeed_sodium_water = min(2.5, refeed_sodium_water + 0.5)
         else:
             refeed_sodium_water = max(0.0, refeed_sodium_water - 0.3)
@@ -454,28 +483,32 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             else:
                 na_k_water *= 0.85
 
-    tissue_w = current_fat + current_lean
     glycogen_mass_lbs = ((current_glycogen * 5.0) / 453.592) - ((500.0 * 5.0) / 453.592)
     
-    # refeed_sodium_water and na_k_water are now accumulated inside the daily loop
+    # Apply fluid and glycogen shifts directly to lean mass so the scale weight balances
+    fluid_shifts = glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water + na_k_water
+    actual_lean_weight = current_lean + fluid_shifts
+    scale_w = current_fat + actual_lean_weight
     
-    scale_w = tissue_w + glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water + na_k_water
+    # Calculate true metabolic adaptation using 7-day rolling averages
+    avg_initial_tdee = sum(tdee_history[:7]) / 7.0
+    avg_final_tdee = sum(tdee_history[-7:]) / 7.0
     
     print("="*50)
     print(f"PROJECTION FOR: {TARGET_DATE.strftime('%b %d, %Y')} ({days} days)")
     print(f"Start Scale:   {sim_start_weight:.1f} lbs ({sim_start_bf_pct:.1f}% BF)")
-    print(f"End Scale:     {scale_w:.1f} lbs (Tissue: {tissue_w:.1f} lbs)")
-    print(f"End Lean:      {current_lean:.1f} lbs ({current_lean - lean_mass:+.1f} lbs net)")
+    print(f"End Scale:     {scale_w:.1f} lbs")
+    print(f"End Lean:      {actual_lean_weight:.1f} lbs (Dry Structural Change: {current_lean - lean_mass:+.1f} lbs)")
     print(f"End Fat:       {current_fat:.1f} lbs ({current_fat - fat_mass:+.1f} lbs net)")
-    print(f"End BF %:      {(current_fat / tissue_w) * 100:.1f}%")
+    print(f"End BF %:      {(current_fat / scale_w) * 100:.1f}%")
     print(f"Catabolized:   {total_catabolized:.2f} lbs (Starvation & Gluconeogenesis)")
     if current_cortisol_water > 0.3:
         print(f"Water Masking: +{current_cortisol_water:.1f} lbs (Cortisol Extracellular Fluid)")
     if sleep_deficit > 0: 
         print(f"⚠️ SLEEP PENALTY ACTIVE: -{sleep_deficit*0.275*100:.0f}% Fat Ox, -{sleep_deficit*0.2*100:.0f}% MPS")
-    if RT_DAYS_CUT < 2 or RT_DAYS_REFEED < 2: 
+    if RT_DAYS < 2: 
         print("⚠️ DISUSE ATROPHY MODEL ACTIVE")
-    print(f"TDEE Shift:    {initial_tdee:.0f} -> {final_tdee:.0f} kcal/day")
+    print(f"Avg TDEE:      {avg_initial_tdee:.0f} -> {avg_final_tdee:.0f} kcal/day")
     print("="*50)
 
 if __name__ == "__main__":

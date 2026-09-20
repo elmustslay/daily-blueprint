@@ -3,13 +3,12 @@
 - Ashwagandha: 14 capsule (On), 0 capsule (Off)
 - Avocado Oil: 1.75 tsp
 - Baby Carrots: 23.97 oz
-- Banana: 8 medium (Standard), 32 medium (Refeed)
+- Banana: 20 medium
 - Barilla Protein+ Pasta: 14.50 oz
 - Biotin+Keratin: 7 capsule
 - Black Pepper: 1 tsp
 - Casein: 7 scoop
-- Chipotle Chicken Bowl: 1 bowl (Standard), 0 bowl (Refeed)
-- Chipotle Chicken Bowl (Refeed): 0 bowl (Standard), 1 bowl (Refeed)
+- Chipotle Chicken Bowl: 1 bowl
 - Citicoline: 7 capsule
 - Copper Glycinate (3mg): 2 capsule
 - Creatine Monohydrate: 7 scoop
@@ -17,24 +16,22 @@
 - Dried Oregano: 1 tsp
 - Egg: 18 large egg
 - Finasteride (1mg): 7 tablet
-- Garlic Powder: 1.33 tbsp (Standard), 1.33 tbsp (Refeed)
+- Garlic Powder: 1.33 tbsp
 - Ground Beef (96% Lean): 1 lb
 - Ground Cumin: 1 tsp
-- Ground Turkey (93% Lean): 2 lb (Standard), 2 lb (Refeed)
-- Iodized Table Salt: 2.75 tsp (Standard), 2.75 tsp (Refeed)
+- Ground Turkey (93% Lean): 2 lb
+- Iodized Table Salt: 4.57 tsp
 - Italian Seasoning: 3 tsp
 - Magnesium Glycinate: 17 capsule
-- Marinara Sauce: 2 jar (Standard), 2 jar (Refeed)
-- Morton Lite Salt: 7.20 tsp (Standard), 8.20 tsp (Refeed)
+- Marinara Sauce: 2 jar
+- Morton Lite Salt: 2.50 tsp
 - NAC + Selenium: 3 capsule
-- Nutritional Yeast: 4 tbsp (Standard), 4 tbsp (Refeed)
+- Nutritional Yeast: 4 tbsp
 - Omega-3: 3 softgel
 - Onion Powder: 1 tsp
-- Quinoa: 0 cup (dry) (Standard), 3 cup (dry) (Refeed)
 - Smoked Paprika: 3 tsp
-- Spinach: 1 bag (Standard), 1 bag (Refeed)
-- Trader Joe's Blueberries: 0 cup (Standard), 2 cup (Refeed)
-- Trader Joe's Kiwi (Skin-On): 18 kiwi
+- Spinach: 1 bag
+- Trader Joe's Kiwi (Skin-On): 10 kiwi
 - Vitamin E: 1 capsule
 - Vitamin K2 (MK-7): 12 capsule
 - Whey Isolate: 5 scoop

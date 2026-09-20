@@ -30,14 +30,9 @@ int _parseTime(String timeString) {
 }
 
 void main() {
-  Future<void> generateNutritionFiles(String prefix, {bool isRefeed = false}) async {
-    if (isRefeed) {
-      // Mock date to Week 5 (Refeed Week)
-      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 28)); // 4 weeks * 7 days
-    } else {
-      // Mock date to Week 1 (Standard Cut Week) to prevent real-world dates from shifting the cut export into a refeed week
-      DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 0));
-    }
+  Future<void> generateNutritionFiles(String prefix) async {
+    // Mock date to Week 1 (Standard Cut Week) to prevent real-world dates from shifting the cut export
+    DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(const Duration(days: 0));
 
     NutritionFact weeklyTotals = const NutritionFact();
     final Map<String, NutritionFact> dailyTotalsMap = {};
@@ -260,7 +255,6 @@ void main() {
 
   test('Calculate and export nutrition to JSON files', () async {
     await generateNutritionFiles('mycut');
-    await generateNutritionFiles('myrefeed', isRefeed: true);
 
     // Reset mock date
     DailyPlanData.mockCurrentDate = null;

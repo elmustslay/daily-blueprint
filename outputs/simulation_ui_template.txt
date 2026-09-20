@@ -8,16 +8,14 @@
 #   {{VAR ? "trueText" : "falseText"}}  - inline substitution
 
 === Monday ===
-[Active variables: isRefeedWeek, isAshwagandhaOff]
+[Active variables: isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-{{#if isRefeedWeek}}  - 🍌 Eat 1 Medium Banana{{/if}}
   - 3 Boiled Eggs
   - 2 standalone K2 (100mcg each)
   - 1 cap Biotin+Keratin (10mg/500mg)
@@ -36,8 +34,7 @@
   - Laundry Cycle 1: Bamboo Washcloths & Cotton Pillowcases (3/5 warmness) -> 1-2 tbsp All Free Clear (Liquid). NO Fabric Softener (Dry on LOW heat)
   - Run Dishwasher
 [1:00-1:30 pm] Lunch
-{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
-{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
+  - 2/3 serving of my pasta
 [1:30-5:00 pm] Work
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Laundry Cycle 2: Bath Towels & Body Washcloths (5/5 warmness) -> Wash 1: 2 tbsp All Free Clear (Liquid) + 1/3 cup Bleach -> Wash 2: Full Cycle (WATER ONLY - no detergent) to lift bleach residue (Dry on LOW heat)
@@ -45,22 +42,21 @@
   - Study (Beat traffic before gym)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3" : "2"}} Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
-  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.55 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
+  - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
+  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.33 tsp Table Salt electrolytes). Drink 1/3 on commute, sip rest during workout
 [6:30-8:00 pm] Chest, Shoulders & Triceps
 [8:00-8:30 pm] Commute Home
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Cook Salmon (3 portions): start 1st portion (eat 1/2, save 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
+  - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-{{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
-{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -86,17 +82,15 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Tuesday ===
-[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
+[Active variables: isWinter, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-{{#if isRefeedWeek}}  - 🍌 Eat 1 Medium Banana{{/if}}
-  - 🥝 Eat 2 Kiwis
+  - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Salmon (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -125,21 +119,20 @@
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
+  - 🧍‍♂️ Use Standing Desk for 3-4 hours
 [1:00-1:30 pm] Lunch
-{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
-{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
+  - 2/3 serving of my pasta
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
+  - 🧍‍♂️ Use Standing Desk for 3-4 hours
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3" : "2"}} Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
-  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.55 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
+  - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
+  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.33 tsp Table Salt electrolytes). Drink 1/3 on commute, sip rest during workout
 [6:30-8:00 pm] Legs (Quads & Calves)
 [8:00-8:30 pm] Commute Home
 [8:50-9:20 pm] Dinner
@@ -147,14 +140,13 @@
   - Take 1 cap Copper Glycinate (3mg)
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
+  - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-{{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
-{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -179,17 +171,16 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Wednesday ===
-[Active variables: isRefeedWeek, isAshwagandhaOff]
+[Active variables: isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 600mg NAC + 25mcg Selenium (Combo Pill)
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🥝 Eat 2 Kiwis
+  - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Salmon (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -218,13 +209,12 @@
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
+  - 🧍‍♂️ Use Standing Desk for 3-4 hours
 [1:00-1:30 pm] Lunch
-{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
-{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
+  - 2/3 serving of my pasta
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
+  - 🧍‍♂️ Use Standing Desk for 3-4 hours
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-6:05 pm] Study Time
@@ -232,21 +222,18 @@
   - Study (Beat traffic before gym)
 [6:05-6:15 pm] Get Dressed & Commute to Gym (LISS)
   - Get dressed for gym
-{{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle{{/if}}
   - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
-[6:15-7:25 pm] {{isRefeedWeek ? "Recovery Walk / Haircut (Refeed)" : "Cardio (LISS) / Haircut"}}
-{{#if isRefeedWeek}}  - Check weekly steps: If you are UNDER 15k steps so far, do a Zone 1 Recovery Walk (< 120bpm). Otherwise, skip LISS and rest!{{/if}}
+[6:15-7:25 pm] Cardio (LISS) / Haircut
 [7:25-7:35 pm] Commute Home
 [7:40-8:20 pm] Dinner
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
+  - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-{{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [8:20-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:20 pm] Study Time
   - Halfway through (~1hr before sleep): Eat 2 Kiwis & swish water (brush 20 min after)
@@ -274,16 +261,14 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Thursday ===
-[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
+[Active variables: isWinter, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-{{#if isRefeedWeek}}  - 🍌 Eat 1 Medium Banana{{/if}}
   - Finish leftover 0.5 portion of Salmon (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -302,8 +287,7 @@
   - Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)
   - Run Dishwasher
 [1:00-1:30 pm] Lunch
-{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
-{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
+  - 2/3 serving of my pasta
 [1:30-5:00 pm] Work
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Cook 1lb ground beef (divide in 4, 4 fridge) while working
@@ -311,8 +295,8 @@
   - Study (Beat traffic before gym)
 [5:55-6:20 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3" : "2"}} Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
-  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.55 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
+  - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
+  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.33 tsp Table Salt electrolytes). Drink 1/3 on commute, sip rest during workout
   - 🧤 Grab Gym Gloves
 [6:20-7:50 pm] Back, Biceps & Forearms
 [7:50-8:20 pm] Commute Home
@@ -320,13 +304,14 @@
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
+  - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-{{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
+  - 🍌 Eat 4 Medium Bananas (Post-Workout Carb Load)
 [9:00-9:30 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
+  - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
+  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:30-10:00 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -352,17 +337,15 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Friday ===
-[Active variables: isRefeedWeek, isAshwagandhaOff]
+[Active variables: isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:30 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-{{#if isRefeedWeek}}  - 🍌 Eat 1 Medium Banana{{/if}}
-  - 🥝 Eat 2 Kiwis
+  - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
   - 2 Boiled Eggs
   - 2 standalone K2 (100mcg each)
@@ -391,35 +374,33 @@
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
+  - 🧍‍♂️ Use Standing Desk for 3-4 hours
 [1:00-1:30 pm] Lunch
-{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
-{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
+  - 2/3 serving of my pasta
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
-{{#if !isRefeedWeek}}  - 🧍‍♂️ Use Standing Desk for 3-4 hours{{/if}}
+  - 🧍‍♂️ Use Standing Desk for 3-4 hours
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
-  - 🍌 Eat {{isRefeedWeek ? "3" : "2"}} Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
-  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.55 tsp Lite Salt electrolytes). Drink 1/3 on commute, sip rest during workout
+  - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle
+  - Mix 1 scoop whey isolate (30g protein) in water bottle (+ 0.33 tsp Table Salt electrolytes). Drink 1/3 on commute, sip rest during workout
 [6:30-8:00 pm] Legs (Hamstrings / Glutes)
 [8:00-8:30 pm] Commute Home
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
+  - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-{{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
+  - 🍌 Eat 4 Medium Bananas (Post-Workout Carb Load)
 [9:20-9:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-{{#if !isRefeedWeek}}  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.{{/if}}
-{{#if isRefeedWeek}}  - 🫐 Eat 1/2 of the box of Blueberries{{/if}}
+  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -444,16 +425,14 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Saturday ===
-[Active variables: isRefeedWeek, isWinter, isAshwagandhaOff]
+[Active variables: isWinter, isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-8:45 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🥝 Eat 2 Kiwis
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
   - 4 Boiled Eggs
   - 3 softgel omega-3
@@ -480,30 +459,25 @@
   - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
 [12:35-1:50 pm] Study Time
 [1:50-2:20 pm] Lunch
-{{#if !isRefeedWeek}}  - 2/3 serving of my pasta{{/if}}
-{{#if isRefeedWeek}}  - 1 full serving of my pasta{{/if}}
+  - 2/3 serving of my pasta
 [2:20-5:10 pm] Study Time
 [5:10-5:30 pm] Diffuse Brain Rest
   - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
 [5:30-6:20 pm] Study Time
 [6:20-6:25 pm] Get Dressed & Commute to Gym (LISS)
   - Get dressed for gym
-{{#if isRefeedWeek}}  - 🍌 Eat 3 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle{{/if}}
   - Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
-[6:25-7:35 pm] {{isRefeedWeek ? "Recovery Walk / Haircut (Refeed)" : "Cardio (LISS) / Haircut"}}
-{{#if isRefeedWeek}}  - Check weekly steps: If you are UNDER 26k steps for the week (assuming 1k tomorrow), do a Zone 1 Recovery Walk (< 120bpm) to hit your 27k target. Otherwise, rest!{{/if}}
+[6:25-7:35 pm] Cardio (LISS) / Haircut
 [7:35-7:45 pm] Commute Home
 [7:45-8:00 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if !isRefeedWeek}}  - 1/3 serving of my pasta{{/if}}
+  - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-{{#if isRefeedWeek}}  - 🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa{{/if}}
 [8:00-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-{{#if isRefeedWeek}}  - 🫐 Eat the rest of the box of Blueberries{{/if}}
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:35 pm] Relax / Catch up on reading
 [9:35-10:20 pm] Shower & Bed Prep (Wind Down Starts)
@@ -530,16 +504,15 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Sunday ===
-[Active variables: isRefeedWeek, isAshwagandhaOff, isNextWeekRefeedWeek]
+[Active variables: isAshwagandhaOff, isNextWeekRefeedWeek]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
   - Drink ~25oz water (Mix in 0.25 tsp Salt to restore blood volume)
-{{#if isRefeedWeek}}  - 🍌 REFEED WEEK: Eat 1 Medium Banana{{/if}}
   - Take 250mg Citicoline (w/ 25mg Tyrosine)
 [8:10-9:15 am] Morning Dine
   - Eat in front of Verilux HappyLight (45-degree angle to face):
-  - 🥝 Eat 2 Kiwis
+  - 🍌 Eat 1 Medium Banana
   - Finish leftover 0.5 portion of Ground Beef (from fridge)
   - 3 Boiled Eggs
   - 1 D3-K2
@@ -562,18 +535,16 @@
 [11:50-1:20 pm] Study Time
 [1:20-1:50 pm] Lunch
   - Eat the last full Ground Beef from fridge
-{{#if isRefeedWeek}}  - 🍌 2 Medium Bananas (Pre-Workout Boost){{/if}}
 [1:50-4:00 pm] Grocery Shop & Pick up Chipotle
   - Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - check what I have before going
   - Take both your TJ's shopping bags
 {{#if isNextWeekRefeedWeek}}  - 🛒 UPCOMING REFEED WEEK: Buy 21 Bananas (3/day: morning, afternoon snack, dinner), and 1 bag of Quinoa (if out){{/if}}
-  - Pick up Chipotle for dinner ({{isRefeedWeek ? "REFEED: Double white rice, DOUB" : "MINI-REFEED: Double white rice, SING"}}LE black beans, extra fajita veggies - NO SOUR CREAM)
+  - Pick up Chipotle for dinner (MINI-REFEED: Double white rice, SINGLE black beans, extra fajita veggies - NO SOUR CREAM)
 [4:00-4:30 pm] Dinner (Eat fresh Chipotle)
   - 1 scoop creatine monohydrate (5g)
-  - Chipotle Bowl ({{isRefeedWeek ? "REFEED): single chicken, double white rice, DOUB" : "MINI-REFEED): single chicken, double white rice, SING"}}LE black beans, extra fajita veggies (NO SOUR CREAM)
+  - Chipotle Bowl (MINI-REFEED): single chicken, double white rice, SINGLE black beans, extra fajita veggies (NO SOUR CREAM)
   - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-{{#if isRefeedWeek}}  - 🍌 1 Medium Banana (REFEED WEEK){{/if}}
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [4:30-7:30 pm] Cooking / Meal Prep
   - Meal Prep: Pasta (6 portions)

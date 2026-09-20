@@ -60,33 +60,26 @@ void main() {
     // that naturally occurs during a 24-week simulation.
     Map<String, double>? stdOn;
     Map<String, double>? stdOff;
-    Map<String, double>? refOn;
-    Map<String, double>? refOff;
 
     // Simulate 24 weeks (about 6 months) to capture all cycle variations
     for (int w = 0; w < 24; w++) {
       int daysOffset = w * 7;
       DailyPlanData.mockCurrentDate = DailyPlanData.planStartDate.add(Duration(days: daysOffset));
       
-      bool isRefeed = DailyPlanData.isRefeedWeek();
       bool isAshwaOff = DailyPlanData.isAshwagandhaOff();
       
       var list = getGroceryListForOffset(daysOffset, units);
       
-      if (!isRefeed && !isAshwaOff) stdOn ??= list;
-      if (!isRefeed && isAshwaOff) stdOff ??= list;
-      if (isRefeed && !isAshwaOff) refOn ??= list;
-      if (isRefeed && isAshwaOff) refOff ??= list;
+      if (!isAshwaOff) stdOn ??= list;
+      if (isAshwaOff) stdOff ??= list;
     }
     
     // Fallback to empty maps if a combination never naturally occurred in 24 weeks
     stdOn ??= {};
     stdOff ??= {};
-    refOn ??= {};
-    refOff ??= {};
     
     // Get all unique ingredients across all found scenarios
-    final allIngredients = {...stdOn.keys, ...stdOff.keys, ...refOn.keys, ...refOff.keys}.toList()..sort();
+    final allIngredients = {...stdOn.keys, ...stdOff.keys}.toList()..sort();
     
     final buffer = StringBuffer();
     buffer.writeln('=== CONSOLIDATED WEEKLY GROCERY LIST ===');
@@ -96,26 +89,16 @@ void main() {
       final unit = units[key]!;
       final vStdOn = stdOn[key] ?? 0.0;
       final vStdOff = stdOff[key] ?? 0.0;
-      final vRefOn = refOn[key] ?? 0.0;
-      final vRefOff = refOff[key] ?? 0.0;
       
       final strStdOn = formatAmount(vStdOn);
       final strStdOff = formatAmount(vStdOff);
-      final strRefOn = formatAmount(vRefOn);
-      final strRefOff = formatAmount(vRefOff);
 
-      if (vStdOn == vStdOff && vStdOn == vRefOn && vStdOn == vRefOff) {
-        // Same across all 4 scenarios
+      if (vStdOn == vStdOff) {
+        // Same across all scenarios
         buffer.writeln('- $key: $strStdOn $unit');
-      } else if (vStdOn == vStdOff && vRefOn == vRefOff) {
-        // Changes only by Refeed vs Standard
-        buffer.writeln('- $key: $strStdOn $unit (Standard), $strRefOn $unit (Refeed)');
-      } else if (vStdOn == vRefOn && vStdOff == vRefOff) {
+      } else {
         // Changes only by Ashwagandha On vs Off
         buffer.writeln('- $key: $strStdOn $unit (On), $strStdOff $unit (Off)');
-      } else {
-        // Mixed changes
-        buffer.writeln('- $key: $strStdOn $unit (Std/On), $strStdOff $unit (Std/Off), $strRefOn $unit (Ref/On), $strRefOff $unit (Ref/Off)');
       }
     }
 

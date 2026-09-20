@@ -19,6 +19,7 @@ class StepsData {
   final List<WorkoutLog> lissWorkouts;
   final bool isLissDay;
   final String? errorMessage;
+  final int currentDailySteps;
 
   StepsData({
     required this.targetWeeklySteps,
@@ -27,6 +28,7 @@ class StepsData {
     required this.lissWorkouts,
     this.isLissDay = false,
     this.errorMessage,
+    this.currentDailySteps = 0,
   });
 
   int get totalDanceSteps => danceWorkouts.fold(0, (sum, log) => sum + log.stepsEquivalent);
@@ -37,29 +39,24 @@ class StepsData {
 
 final stepsProvider = FutureProvider<StepsData>((ref) async {
   if (!Platform.isIOS) {
-    return StepsData(targetWeeklySteps: 40000, naturalSteps: 0, danceWorkouts: [], lissWorkouts: []);
+    return StepsData(targetWeeklySteps: 50000, naturalSteps: 0, danceWorkouts: [], lissWorkouts: []);
   }
 
   final now = DateTime.now();
   final dayOfWeek = now.weekday; // 1 = Monday, 7 = Sunday
-  bool isRefeed = DailyPlanData.isRefeedWeek();
   
-  // During a Refeed week, there is no LISS. Steps count every day (6k/day * 7 = 42k).
-  // During a Cut week, Wed and Sat are LISS days, so they don't count towards NEAT (8k/day * 5 = 40k).
-  // Wait, if we are unifying LISS into steps, the weekly target should be higher to account for LISS!
-  // If LISS is combined into steps: 2 days of LISS @ ~10,000 steps equivalent each = +20,000 steps.
-  // Wait! The user's goal was 56,000 steps/week for Cut (8k * 7 days). 
-  // CUT: 55,000 unified steps maps to ~1.55 multiplier (above 1.50, extra fat loss, 0 catabolism per py sim)
-  // REFEED: 27,000 unified steps maps to ~1.375 multiplier (perfect hormonal reset)
+  // The physics engine sweet spot (matches Python simulation DAILY_STEPS array)
+  // [6000, 8000, 10000, 4000, 4000, 10000, 8000] = 50,000 steps/week
   bool isLissDay = (dayOfWeek == DateTime.wednesday || dayOfWeek == DateTime.saturday);
-  int weeklyTarget = isRefeed ? 27000 : 55000;
+  int weeklyTarget = 50000;
 
   // 🍕 Pizza Offset: Adding 20,000 steps this week to cleanly wipe out 1,000 calories (at 1:20 ratio)
   if (now.isAfter(DateTime(2026, 9, 15)) && now.isBefore(DateTime(2026, 9, 21))) {
-    weeklyTarget = 75000;
+    weeklyTarget = 70000;
   }
 
   int naturalSteps = 0;
+  int stepsToday = 0;
   List<WorkoutLog> danceWorkouts = [];
   List<WorkoutLog> lissWorkouts = [];
   String? errorMsg;
@@ -71,6 +68,7 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
     if (authorized) {
       int daysSinceMonday = now.weekday - 1;
       DateTime monday = DateTime(now.year, now.month, now.day).subtract(Duration(days: daysSinceMonday));
+      DateTime todayStart = DateTime(now.year, now.month, now.day);
       
       // 1. Fetch Natural Steps
       for (int i = 0; i <= daysSinceMonday; i++) {
@@ -80,6 +78,9 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
         
         int daySteps = await Health().getTotalStepsInInterval(dayStart, dayEnd) ?? 0;
         naturalSteps += daySteps;
+        if (i == daysSinceMonday) {
+          stepsToday += daySteps;
+        }
       }
       
       // 2. Fetch Workouts
@@ -111,6 +112,9 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
               lissWorkouts.add(WorkoutLog(point.dateFrom, stepsEq, cals));
               allTrackedWorkouts.add(WorkoutLog(point.dateFrom, stepsEq, cals));
             }
+            if (point.dateFrom.isAfter(todayStart) || point.dateFrom.isAtSameMomentAs(todayStart)) {
+              stepsToday += stepsEq;
+            }
           }
         }
       }
@@ -126,6 +130,10 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
             int workoutSteps = await Health().getTotalStepsInInterval(point.dateFrom, point.dateTo) ?? 0;
             naturalSteps = naturalSteps - workoutSteps;
             if (naturalSteps < 0) naturalSteps = 0;
+            if (point.dateFrom.isAfter(todayStart) || point.dateFrom.isAtSameMomentAs(todayStart)) {
+              stepsToday = stepsToday - workoutSteps;
+              if (stepsToday < 0) stepsToday = 0;
+            }
           }
         }
       }
@@ -146,5 +154,6 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
     lissWorkouts: lissWorkouts,
     isLissDay: isLissDay,
     errorMessage: errorMsg,
+    currentDailySteps: stepsToday,
   );
 });
