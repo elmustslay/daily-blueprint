@@ -210,25 +210,6 @@ class IngredientsData {
 
 
 
-  static const Ingredient clusterDextrin = Ingredient(
-    id: 'cluster_dextrin',
-    name: 'Cluster Dextrin (Unflavored)',
-    baseUnit: 'scoop (25g)',
-    nutritionPerBaseUnit: NutritionFact(
-      calories: 100,
-      protein: 0,
-      carbs: 25,
-      fat: 0,
-      microNutrients: {
-        'Sugar (g)': 0.0,
-        'Calcium (Food) (mg)': 95,
-        'Phosphorus (mg)': 81,
-        'Magnesium (mg)': 28,
-        'Sodium (mg)': 50,
-        'Potassium (mg)': 80,
-      },
-    ),
-  );
 
   static const Ingredient banana = Ingredient(
     id: 'banana',
@@ -1207,7 +1188,7 @@ static const Ingredient marinaraSauce = Ingredient(
     chipotleBowlRefeed,
     egg,
     avocadoOil,
-    clusterDextrin,
+
     banana,
     salmon,
     wheyIsolate,

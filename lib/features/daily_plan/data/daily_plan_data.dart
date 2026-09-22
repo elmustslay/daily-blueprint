@@ -93,7 +93,7 @@ class _Routines {
 
 enum ProteinSource { salmon, beef, none }
 enum MorningSupplement { omega3, d3K2, vitaminE, zinc, copper }
-enum NutritionAddOn { whey, creatine, calcium, copper, nac, banana, postWorkoutBanana, midMorningBanana, preWorkoutBanana, dextrin }
+enum NutritionAddOn { whey, creatine, calcium, copper, nac, banana, postWorkoutBanana, midMorningBanana, preWorkoutBanana }
 enum RoutineModifier { caffeine, sparklingWater, standingDesk, cookSalmon, takeSunscreen, takeGymGloves, newBathTowel }
 
 // ==========================================
@@ -435,7 +435,6 @@ class DailyPlanData {
 
   static TimelineItem _commuteToGym(String time, {String? reapplySunscreen, Set<RoutineModifier> modifiers = const {}, Set<NutritionAddOn> nutrition = const {NutritionAddOn.whey}, bool isResistanceDay = true}) {
     final takeGymGloves = modifiers.contains(RoutineModifier.takeGymGloves);
-    final withDextrin = nutrition.contains(NutritionAddOn.dextrin);
     final withWhey = nutrition.contains(NutritionAddOn.whey);
     final preWorkoutBananaCount = (isResistanceDay || isRefeedWeek()) ? (isRefeedWeek() ? 3 : 2) : 0;
     
@@ -445,14 +444,15 @@ class DailyPlanData {
       icon: '🚗',
       details: [
         const DetailItem('Get dressed for gym'),
-        if (preWorkoutBananaCount > 0) DetailItem('🍌 Eat $preWorkoutBananaCount Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute) + drink one 21oz water bottle'),
-        if (withDextrin || withWhey || isResistanceDay) DetailItem.trackable('Mix ${[if (withDextrin) '1 scoop Cluster Dextrin', if (withWhey) '1 scoop whey isolate (30g protein)'].where((e) => e.isNotEmpty).join(' + ')} in water bottle${isResistanceDay ? ' (+ 0.33 tsp Table Salt electrolytes)' : ''}. Drink 1/3 on commute, sip rest during workout'),
+        if (isResistanceDay) const DetailItem.trackable('🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)')
+        else const DetailItem('💧 Drink one 21oz water bottle'),
+        if (preWorkoutBananaCount > 0) DetailItem('🍌 Eat $preWorkoutBananaCount Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)'),
+        if (withWhey) const DetailItem.trackable('Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout'),
         if (reapplySunscreen != null) DetailItem(reapplySunscreen),
         if (takeGymGloves) const DetailItem('🧤 Grab Gym Gloves'),
       ],
-      mealRecord: (withDextrin || preWorkoutBananaCount > 0 || withWhey || isResistanceDay) ? MealRecord(items: [
+      mealRecord: (preWorkoutBananaCount > 0 || withWhey || isResistanceDay) ? MealRecord(items: [
         if (preWorkoutBananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: preWorkoutBananaCount.toDouble()),
-        if (withDextrin) const IngredientPortion(ingredient: IngredientsData.clusterDextrin, amount: 1),
         if (withWhey) _Portions.whey,
         if (isResistanceDay) const IngredientPortion(ingredient: IngredientsData.iodizedTableSalt, amount: 0.33),
       ]) : null,

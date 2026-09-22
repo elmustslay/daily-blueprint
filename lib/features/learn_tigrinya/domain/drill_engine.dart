@@ -199,6 +199,8 @@ class DrillEngine {
       _generateWithConstructionDeck();
     } else if (module.type == DrillModuleType.questionWordBasic) {
       _generateQuestionWordBasicDeck();
+    } else if (module.type == DrillModuleType.integration) {
+      _generateIntegrationDeck();
     } else {
       _generateVerbDeck();
     }
@@ -679,6 +681,24 @@ class DrillEngine {
   }
 
   // ───────────────────── PRIVATE ─────────────────────
+
+  void _generateIntegrationDeck() {
+    if (module.integrationLevel == 1) {
+      _generateGreetingDeck();
+      _generatePronounDeck();
+      _generateDemonstrativeDeck();
+      _generatePrepositionDeck();
+      _generateNumberDeck();
+    } else if (module.integrationLevel == 2) {
+      _generateVerbDeck();
+      _generateFamilyDeck();
+    } else if (module.integrationLevel == 3) {
+      _generatePhraseDeck();
+      _generateAdjectiveDeck();
+    } else {
+      _generatePronounDeck();
+    }
+  }
 
   void _generatePronounDeck() {
     for (int i = 0; i < 30; i++) {

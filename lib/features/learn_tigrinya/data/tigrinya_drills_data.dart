@@ -74,6 +74,7 @@ class TigrinyaDrillsData {
     TigrinyaObject(tigrinya: 'ወርሒ', amharic: 'ወር', english: 'month'),
     TigrinyaObject(tigrinya: 'ዓመት', amharic: 'ዓመት', english: 'year'),
     TigrinyaObject(tigrinya: 'ድሕሪ', amharic: 'ቆየት ብሎ', english: 'after / later'),
+    TigrinyaObject(tigrinya: 'ንዘልኣለም', translit: 'nizelalem', amharic: 'ለዘለአለም', english: 'forever'),  // 🎵 ሙነይ
     TigrinyaObject(tigrinya: 'ሰኑይ', amharic: 'ሰኞ', english: 'Monday'),
     TigrinyaObject(tigrinya: 'ሰሉስ', amharic: 'ማክሰኞ', english: 'Tuesday'),
     TigrinyaObject(tigrinya: 'ረቡዕ', amharic: 'ረቡዕ', english: 'Wednesday'),
@@ -86,20 +87,127 @@ class TigrinyaDrillsData {
   // ───────────────────────── DEMONSTRATIVES ─────────────────────────
 
   static const List<TigrinyaObject> _allDemonstratives = [
-    TigrinyaObject(tigrinya: 'እዚ', amharic: 'ይህ', english: 'this (m.)'),
-    TigrinyaObject(tigrinya: 'እዛ', amharic: 'ይቺ', english: 'this (f.)'),
-    TigrinyaObject(tigrinya: 'እቲ', amharic: 'ያ', english: 'that (m.)'),
-    TigrinyaObject(tigrinya: 'እታ', amharic: 'ያቺ', english: 'that (f.)'),
-    TigrinyaObject(tigrinya: 'እዚኣቶም', amharic: 'እነዚህ', english: 'these (m.)'),
-    TigrinyaObject(tigrinya: 'እዚኣተን', amharic: 'እነዚህ (ሴ)', english: 'these (f.)'),
-    TigrinyaObject(tigrinya: 'እቲኣቶም', amharic: 'እነዚያ', english: 'those (m.)'),
-    TigrinyaObject(tigrinya: 'እቲኣተን', amharic: 'እነዚያ (ሴ)', english: 'those (f.)'),
+    TigrinyaObject(tigrinya: 'እዚ', translit: 'Ezi', amharic: 'ይህ', english: 'this (m.)'),
+    TigrinyaObject(tigrinya: 'እዛ', translit: 'Eza', amharic: 'ይቺ', english: 'this (f.)'),
+    TigrinyaObject(tigrinya: 'እቲ', translit: 'Eti', amharic: 'ያ', english: 'that (m.)'),
+    TigrinyaObject(tigrinya: 'እታ', translit: 'Eta', amharic: 'ያቺ', english: 'that (f.)'),
+    TigrinyaObject(tigrinya: 'እዚኣቶም', translit: 'Eziatom', amharic: 'እነዚህ', english: 'these (m.)'),
+    TigrinyaObject(tigrinya: 'እዚኣተን', translit: 'Eziaten', amharic: 'እነዚህ (ሴ)', english: 'these (f.)'),
+    TigrinyaObject(tigrinya: 'እቲኣቶም', translit: 'Etiatom', amharic: 'እነዚያ', english: 'those (m.)'),
+    TigrinyaObject(tigrinya: 'እቲኣተን', translit: 'Etiaten', amharic: 'እነዚያ (ሴ)', english: 'those (f.)'),
   ];
 
   static List<TigrinyaObject> get demonstratives {
     if (MasteryStorage.showFemininePlurals) return _allDemonstratives.toList();
     return _allDemonstratives.where((d) => d.english != 'these (f.)' && d.english != 'those (f.)').toList();
   }
+
+  static const List<Adjective> demonstrativeNouns = [
+    Adjective(
+      id: 'dem_n_singer',
+      english: 'Singer',
+      amharic: 'ዘፋኝ',
+      male: 'ደራፋይ',
+      female: 'ደራፊት',
+      plural: 'ደረፍቲ',
+    ),
+    Adjective(
+      id: 'dem_n_boy',
+      english: 'Boy',
+      amharic: 'ልጅ',
+      male: 'ወዲ',
+      female: 'ወዲ',
+      plural: 'ኣወዳት',
+    ),
+    Adjective(
+      id: 'dem_n_world',
+      english: 'World',
+      amharic: 'ዓለም',
+      male: 'ዓለም',
+      female: 'ዓለም',
+      plural: 'ዓለማት',
+    ),
+  ];
+
+  static const List<Adjective> demonstrativeAdjectives = [
+    Adjective(
+      id: 'dem_adj_good',
+      english: 'Good',
+      amharic: 'ጥሩ',
+      male: 'ጽቡቕ',
+      female: 'ጽብቕቲ',
+      plural: 'ጽቡቓት',
+    ),
+    Adjective(
+      id: 'dem_adj_attractive',
+      english: 'Attractive / Handsome',
+      amharic: 'ቆንጆ',
+      male: 'ምልኩዕ',
+      female: 'ምልክዕቲ',
+      plural: 'ምልኩዓት',
+    ),
+    Adjective(
+      id: 'dem_adj_hard',
+      english: 'Hard / Difficult',
+      amharic: 'ከባድ',
+      male: 'ከቢድ',
+      female: 'ከባዲት',
+      plural: 'ከበድቲ',
+    ),
+    Adjective(
+      id: 'dem_adj_new',
+      english: 'New',
+      amharic: 'አዲስ',
+      male: 'ሓዲስ',
+      female: 'ሓዳስ',
+      plural: 'ሓደሽቲ',
+    ),
+  ];
+
+  static const List<TigrinyaObject> demonstrativeExampleSentences = [
+    // This (m.)
+    TigrinyaObject(
+      tigrinya: 'ዚ ደራፋይ ጽቡቕ እዩ።',
+      translit: 'zi derafay tsibuq eyu.',
+      amharic: 'ይህ ዘፋኝ ጥሩ ነው።',
+      english: 'This singer is good.',
+    ),
+    // This (f.)
+    TigrinyaObject(
+      tigrinya: 'ዛ ዓለም ከባዲት እያ።',
+      translit: 'za alem kebadit eya.',
+      amharic: 'ይቺ ዓለም ከባድ ናት።',
+      english: 'This world is hard.',
+    ),
+    // That (m.)
+    TigrinyaObject(
+      tigrinya: 'ቲ ወዲ ምልኩዕ እዩ።',
+      translit: 'ti wedi milku\'e eyu.',
+      amharic: 'ያ ልጅ ቆንጆ ነው።',
+      english: 'That boy is attractive.',
+    ),
+    // That (f.)
+    TigrinyaObject(
+      tigrinya: 'ታ ዓለም ኣብ ገነት ሓዳስ እያ።',
+      translit: 'ta alem ab genet hadas eya.',
+      amharic: 'ያቺ ዓለም በገነት አዲስ ናት።',
+      english: 'That world in heaven is new.',
+    ),
+    // These (m.)
+    TigrinyaObject(
+      tigrinya: 'ዚኣቶም ሓደሽቲ እዮም።',
+      translit: 'ziatom hadeshti eyom.',
+      amharic: 'እነዚህ አዲስ ናቸው።',
+      english: 'These are new.',
+    ),
+    // Those (m.)
+    TigrinyaObject(
+      tigrinya: 'ቲኣቶም ደረፍቲ እዮም።',
+      translit: 'tiatom derafti eyom.',
+      amharic: 'እነዚያ ዘፋኞች ናቸው።',
+      english: 'Those are singers.',
+    ),
+  ];
 
   // ───────────────────────── PREPOSITIONS & CONNECTORS ─────────────────────────
 
@@ -112,6 +220,10 @@ class TigrinyaDrillsData {
     TigrinyaObject(tigrinya: 'ግን', amharic: 'ግን', english: 'but'),
     TigrinyaObject(tigrinya: 'ስለ', amharic: 'ስለ / ምክንያት', english: 'because'),
     TigrinyaObject(tigrinya: 'ስለዚ', amharic: 'ስለዚህ', english: 'therefore / so'),
+    // 🎵 From ሙነይ song
+    TigrinyaObject(tigrinya: 'ከም', translit: 'kem', amharic: 'እንደ / ልክ እንደ', english: 'like / as (e.g. ሰብ ከማኻ = a person like you)'),
+    TigrinyaObject(tigrinya: 'ናይ', translit: 'nay', amharic: 'የ', english: 'of (possessive — e.g. ናይ ፍቕሪ = of love)'),
+    TigrinyaObject(tigrinya: 'ኩሉ', translit: 'kulu', amharic: 'ሁሉ / ሁሉም', english: 'all / every / everything'),
   ];
 
   // ───────────────────────── COMMON PHRASES ─────────────────────────
@@ -172,6 +284,7 @@ class TigrinyaDrillsData {
       TigrinyaObject(tigrinya: 'ባኒ', amharic: 'ዳቦ', english: 'bread'),
       TigrinyaObject(tigrinya: 'ብርቱኳን', amharic: 'ብርቱካን', english: 'orange'),
       TigrinyaObject(tigrinya: 'መግቢ', amharic: 'ምግብ', english: 'food'),
+      TigrinyaObject(tigrinya: 'መቕረት', translit: 'meqret', amharic: 'ጣዕም', english: 'flavor / taste'),  // 🎵 ሙነይ
     ],
     'potable': [
       TigrinyaObject(tigrinya: 'ማይ', amharic: 'ውሃ', english: 'water'),
@@ -193,10 +306,13 @@ class TigrinyaDrillsData {
     'audible': [
       TigrinyaObject(tigrinya: 'ነቲ ወሬ', amharic: 'ወሬውን', english: 'the news'),
       TigrinyaObject(tigrinya: 'ድምጺ', amharic: 'ድምጽ', english: 'voice/sound'),
+      TigrinyaObject(tigrinya: 'ስም', translit: 'shim', amharic: 'ስም', english: 'name'),  // 🎵 ሙነይ — ብሽሙ
     ],
     'visual': [
       TigrinyaObject(tigrinya: 'ቴለቪዥን', amharic: 'ቴሌቪዥን', english: 'television'),
       TigrinyaObject(tigrinya: 'ስእሊ', amharic: 'ስዕል', english: 'picture'),
+      TigrinyaObject(tigrinya: 'ጽባይ', translit: 'tsbay', amharic: 'ፀባይ', english: 'character / radiant presence'),  // 🎵 ሙነይ — ዘብርህ ጽባይ
+      TigrinyaObject(tigrinya: 'ፀላም', translit: 'tselam', amharic: 'ጥል', english: 'darkness'),  // 🎵 ሙነይ — ዘብርህ ፀላም
     ],
     'romantic_nouns': [
       TigrinyaObject(tigrinya: 'ንጉስ', translit: 'nigus', amharic: 'ንጉስ', english: 'king'),
@@ -206,6 +322,14 @@ class TigrinyaDrillsData {
       TigrinyaObject(tigrinya: 'ህይወተይ', translit: 'hywetey', amharic: 'ህይወቴ', english: 'my life'),
       TigrinyaObject(tigrinya: 'ናተይ', translit: 'natey', amharic: 'የኔ', english: 'mine'),
       TigrinyaObject(tigrinya: 'ሓበሻ ወዲ', translit: 'habesha wedi', amharic: 'ሃበሻ ልጅ', english: 'Habesha guy'),
+      // 🎵 From ሙነይ song — words the user already knows
+      TigrinyaObject(tigrinya: 'ሙነይ', translit: 'muney', amharic: 'ውዴ', english: 'my darling'),
+      TigrinyaObject(tigrinya: 'ሰበይ', translit: 'sebey', amharic: 'ሰውዬ', english: 'my person / my man'),
+      TigrinyaObject(tigrinya: 'ህልመይ', translit: 'hilmey', amharic: 'ህልሜ', english: 'my dream'),
+      TigrinyaObject(tigrinya: 'ኣኽሊል', translit: 'aklil', amharic: 'አክሊል', english: 'crown'),
+      TigrinyaObject(tigrinya: 'ፍቕሪ', translit: 'fiqri', amharic: 'ፍቅር', english: 'love'),
+      TigrinyaObject(tigrinya: 'እድል', translit: 'edl', amharic: 'ዕድል', english: 'luck / fortune'),
+      TigrinyaObject(tigrinya: 'ባሀሪ', translit: 'bahari', amharic: 'ባህሪ', english: 'character / nature'),  // 🎵 ሙነይ — ናይ እንቁ ባሀሪ
     ],
     'music': [
       TigrinyaObject(tigrinya: 'ደርፊ', translit: 'derfi', amharic: 'ዘፈን', english: 'song'),
@@ -217,6 +341,11 @@ class TigrinyaDrillsData {
       TigrinyaObject(tigrinya: 'እንግሊዝኛ', amharic: 'እንግሊዝኛ', english: 'English'),
       TigrinyaObject(tigrinya: 'ኣምሓርኛ', amharic: 'አማርኛ', english: 'Amharic'),
       TigrinyaObject(tigrinya: 'ቁሩብ ትግርኛ', amharic: 'ትንሽ ትግርኛ', english: 'a little Tigrinya'),
+      TigrinyaObject(tigrinya: 'ቃል', translit: 'qal', amharic: 'ቃል', english: 'word(s)'),  // 🎵 ሙነይ — ቃል የብለይን
+      TigrinyaObject(tigrinya: 'ሓሳብ', translit: 'hasab', amharic: 'ሀሳብ', english: 'thought / idea'),  // 🎵 ሙነይ
+      TigrinyaObject(tigrinya: 'ጋህዲ', translit: 'gahdi', amharic: 'እውነት', english: 'truth / reality'),  // 🎵 ሙነይ — ጋህዲ ጌሩዎ
+      TigrinyaObject(tigrinya: 'ሻቕሎት', translit: 'shaqilot', amharic: 'ጣር', english: 'worry / anxiety'),  // 🎵 ሙነይ
+      TigrinyaObject(tigrinya: 'ፀገም', translit: 'tsegem', amharic: 'ችግር', english: 'problem / difficulty'),  // 🎵 ሙነይ
     ],
     'temporal': timeWords,
     'financial': [
@@ -234,6 +363,7 @@ class TigrinyaDrillsData {
       TigrinyaObject(tigrinya: 'ስልኪ', amharic: 'ስልክ', english: 'phone'),
       TigrinyaObject(tigrinya: 'ቁጽሪ ስልኪ', amharic: 'ስልክ ቁጥር', english: 'phone number'),
       TigrinyaObject(tigrinya: 'ማይ', amharic: 'ውሃ', english: 'water'),
+      TigrinyaObject(tigrinya: 'ህያብ', translit: 'hiyab', amharic: 'ስጦታ', english: 'gift'),  // 🎵 ሙነይ
     ],
     'family': [
       TigrinyaObject(tigrinya: 'ኣቦ', amharic: 'አባት', english: 'father'),
@@ -249,6 +379,7 @@ class TigrinyaDrillsData {
       TigrinyaObject(tigrinya: 'ገዛ', amharic: 'ቤት', english: 'house'),
       TigrinyaObject(tigrinya: 'ቤት ትምህርቲ', amharic: 'ትምህርት ቤት', english: 'school'),
       TigrinyaObject(tigrinya: 'ሆስፒታል', amharic: 'ሆስፒታል', english: 'hospital'),
+      TigrinyaObject(tigrinya: 'ዓለም', translit: 'alem', amharic: 'ዓለም', english: 'world'),  // 🎵 ሙነይ — አብ አለም
       TigrinyaObject(tigrinya: 'ዕዳጋ', amharic: 'ገበያ', english: 'market'),
       TigrinyaObject(tigrinya: 'ቤተ-ክርስትያን', amharic: 'ቤተ-ክርስትያን', english: 'church'),
     ],
@@ -261,6 +392,7 @@ class TigrinyaDrillsData {
       TigrinyaObject(tigrinya: 'ገጽ', translit: 'geTsi', amharic: 'ፊት', english: 'face'),
       TigrinyaObject(tigrinya: 'ከንፈር', translit: 'kenfer', amharic: 'ከንፈር', english: 'lips'),
       TigrinyaObject(tigrinya: 'ኣፍ', translit: 'af', amharic: 'አፍ', english: 'mouth'),
+      TigrinyaObject(tigrinya: 'ውሽጢ', translit: 'wishTi', amharic: 'ውስጥ', english: 'inside (of body)'),  // 🎵 ሙነይ
     ],
     'objects': [
       TigrinyaObject(tigrinya: 'ማዕጾ', amharic: 'በር', english: 'door'),
@@ -752,6 +884,91 @@ class TigrinyaDrillsData {
         'p6': 'ደራፍ{ና}', 'p7': 'ደራፍ{ኩም}', 'p8': 'ደራፍ{ክን}', 'p9': 'ደረ{ፉ}', 'p10': 'ደረ{ፋ}',
       }),
     ),
+    // 🎵 From ሙነይ song — ክነግረካ (to tell you)
+    VerbConjugator.generate(
+      id: 'v_tell',
+      lemma: 'ምንጋር',
+      translit: 'Mingar',
+      english: 'To tell / say',
+      amharic: 'መንገር',
+      categories: ['language', 'family', 'romantic_nouns', 'audible'],
+      present: ConjugationMap({
+        'p1': '{እ}ነግር', 'p2': '{ት}ነግር', 'p3': '{ት}ነግ{ሪ}', 'p4': '{ይ}ነግር', 'p5': '{ት}ነግር', 
+        'p6': '{ን}ነግር', 'p7': '{ት}ነግ{ሩ}', 'p8': '{ት}ነግ{ራ}', 'p9': '{ይ}ነግ{ሩ}', 'p10': '{ይ}ነግ{ራ}',
+      }),
+      past: ConjugationMap({
+        'p1': 'ነጊ{ረ}', 'p2': 'ነጊር{ካ}', 'p3': 'ነጊር{ኪ}', 'p4': 'ነጊ{ሩ}', 'p5': 'ነጊ{ራ}', 
+        'p6': 'ነጊር{ና}', 'p7': 'ነጊር{ኩም}', 'p8': 'ነጊር{ክን}', 'p9': 'ነጊ{ሮም}', 'p10': 'ነጊ{ረን}',
+      }),
+    ),
+    // 🎵 From ሙነይ song — ጀሚረ (I started)
+    VerbConjugator.generate(
+      id: 'v_start',
+      lemma: 'ምጅማር',
+      translit: 'Mijmar',
+      english: 'To start / begin',
+      amharic: 'መጀመር',
+      categories: ['temporal', 'location'],
+      present: ConjugationMap({
+        'p1': '{እ}ጅምር', 'p2': '{ት}ጅምር', 'p3': '{ት}ጅም{ሪ}', 'p4': '{ይ}ጅምር', 'p5': '{ት}ጅምር', 
+        'p6': '{ን}ጅምር', 'p7': '{ት}ጅም{ሩ}', 'p8': '{ት}ጅም{ራ}', 'p9': '{ይ}ጅም{ሩ}', 'p10': '{ይ}ጅም{ራ}',
+      }),
+      past: ConjugationMap({
+        'p1': 'ጀሚ{ረ}', 'p2': 'ጀሚር{ካ}', 'p3': 'ጀሚር{ኪ}', 'p4': 'ጀሚ{ሩ}', 'p5': 'ጀሚ{ራ}', 
+        'p6': 'ጀሚር{ና}', 'p7': 'ጀሚር{ኩም}', 'p8': 'ጀሚር{ክን}', 'p9': 'ጀሚ{ሮም}', 'p10': 'ጀሚ{ረን}',
+      }),
+    ),
+    // 🎵 From ሙነይ song — ዘብርህ (that shines)
+    VerbConjugator.generate(
+      id: 'v_shine',
+      lemma: 'ምብራህ',
+      translit: 'Mibrah',
+      english: 'To shine',
+      amharic: 'ማብራት',
+      categories: ['visual', 'places', 'temporal'],
+      present: ConjugationMap({
+        'p1': '{እ}በርህ', 'p2': '{ት}በርህ', 'p3': '{ት}በር{ሂ}', 'p4': '{ይ}በርህ', 'p5': '{ት}በርህ', 
+        'p6': '{ን}በርህ', 'p7': '{ት}በር{ሁ}', 'p8': '{ት}በር{ሃ}', 'p9': '{ይ}በር{ሁ}', 'p10': '{ይ}በር{ሃ}',
+      }),
+      past: ConjugationMap({
+        'p1': 'በሪህ{ኩ}', 'p2': 'በሪህ{ካ}', 'p3': 'በሪህ{ኪ}', 'p4': 'በሪ{ሁ}', 'p5': 'በሪ{ሃ}', 
+        'p6': 'በሪህ{ና}', 'p7': 'በሪህ{ኩም}', 'p8': 'በሪህ{ክን}', 'p9': 'በሪ{ሆም}', 'p10': 'በሪ{ሀን}',
+      }),
+    ),
+    // 🎵 From ሙነይ song — ዝተብሀለ (that is called)
+    VerbConjugator.generate(
+      id: 'v_be_called',
+      lemma: 'ምብሃል',
+      translit: 'Mibhal',
+      english: 'To be called / named',
+      amharic: 'መባል',
+      categories: ['audible', 'language'],
+      present: ConjugationMap({
+        'p1': '{እ}ብሃል', 'p2': '{ት}ብሃል', 'p3': '{ት}ብሃ{ሊ}', 'p4': '{ይ}ብሃል', 'p5': '{ት}ብሃል', 
+        'p6': '{ን}ብሃል', 'p7': '{ት}ብሃ{ሉ}', 'p8': '{ት}ብሃ{ላ}', 'p9': '{ይ}ብሃ{ሉ}', 'p10': '{ይ}ብሃ{ላ}',
+      }),
+      past: ConjugationMap({
+        'p1': 'ተባሂ{ለ}', 'p2': 'ተባሂል{ካ}', 'p3': 'ተባሂል{ኪ}', 'p4': 'ተባሂ{ሉ}', 'p5': 'ተባሂ{ላ}', 
+        'p6': 'ተባሂል{ና}', 'p7': 'ተባሂል{ኩም}', 'p8': 'ተባሂል{ክን}', 'p9': 'ተባሂ{ሎም}', 'p10': 'ተባሂ{ለን}',
+      }),
+    ),
+    // 🎵 From ሙነይ song — ዝተኣለሽ (that is sought)
+    VerbConjugator.generate(
+      id: 'v_seek',
+      lemma: 'ምእላሽ',
+      translit: 'Mi\'elash',
+      english: 'To seek / search for',
+      amharic: 'መፈለግ',
+      categories: ['objects', 'places'],
+      present: ConjugationMap({
+        'p1': '{እ}ኣልሽ', 'p2': '{ት}ኣልሽ', 'p3': '{ት}ኣል{ሺ}', 'p4': '{ይ}ኣልሽ', 'p5': '{ት}ኣልሽ', 
+        'p6': '{ን}ኣልሽ', 'p7': '{ት}ኣል{ሹ}', 'p8': '{ት}ኣል{ሻ}', 'p9': '{ይ}ኣል{ሹ}', 'p10': '{ይ}ኣል{ሻ}',
+      }),
+      past: ConjugationMap({
+        'p1': 'ኣሊ{ሸ}', 'p2': 'ኣሊሽ{ካ}', 'p3': 'ኣሊሽ{ኪ}', 'p4': 'ኣሊ{ሹ}', 'p5': 'ኣሊ{ሻ}', 
+        'p6': 'ኣሊሽ{ና}', 'p7': 'ኣሊሽ{ኩም}', 'p8': 'ኣሊሽ{ክን}', 'p9': 'ኣሊ{ሾም}', 'p10': 'ኣሊ{ሸን}',
+      }),
+    ),
   ];
 
 
@@ -829,6 +1046,33 @@ class TigrinyaDrillsData {
       male: 'ቕልጡፍ',
       female: 'ቕልጥፍቲ',
       plural: 'ቕልጡፋት',
+    ),
+    // 🎵 From ሙነይ song — ፍሉይ መቅረት
+    Adjective(
+      id: 'adj_special',
+      english: 'Special / Unique',
+      amharic: 'ልዩ',
+      male: 'ፍሉይ',
+      female: 'ፍልይቲ',
+      plural: 'ፍሉያት',
+    ),
+    // 🎵 From ሙነይ song — ቀሲኑ ህልመይ
+    Adjective(
+      id: 'adj_calm',
+      english: 'Calm / Peaceful',
+      amharic: 'ሰላማዊ',
+      male: 'ቅሱን',
+      female: 'ቅስንቲ',
+      plural: 'ቅሱናት',
+    ),
+    // 🎵 From ሙነይ song — እሳብ ዝግረም
+    Adjective(
+      id: 'adj_amazing',
+      english: 'Amazing / Wonderful',
+      amharic: 'አስደናቂ',
+      male: 'ግሩም',
+      female: 'ግርምቲ',
+      plural: 'ግሩማት',
     ),
   ];
 
@@ -969,10 +1213,10 @@ class TigrinyaDrillsData {
     // ── UNIT 4: EXPANDING VERBS (Weeks 7-8) ──
     DrillModule(
       id: 'mod_7',
-      name: 'Communication: Speak, Hear, Know',
+      name: 'Communication: Speak, Hear, Know, Tell',
       description: 'Learn communication verbs',
       type: DrillModuleType.verb,
-      verbIds: ['v_speak', 'v_hear', 'v_know'],
+      verbIds: ['v_speak', 'v_hear', 'v_know', 'v_tell', 'v_be_called'],
       patternRules: defaultPatternRules,
     ),
     DrillModule(
@@ -988,7 +1232,7 @@ class TigrinyaDrillsData {
       name: 'Question Word Drills',
       description: 'Entay, Men, Abey combined with verbs you know',
       type: DrillModuleType.questionWord,
-      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_wait', 'v_speak', 'v_hear', 'v_know', 'v_read', 'v_write'],
+      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_wait', 'v_speak', 'v_hear', 'v_know', 'v_tell', 'v_be_called', 'v_read', 'v_write'],
       patternRules: defaultPatternRules,
     ),
 
@@ -1045,18 +1289,18 @@ class TigrinyaDrillsData {
     // ── UNIT 6: DAILY LIFE & TENSES (Weeks 11-12) ──
     DrillModule(
       id: 'mod_9',
-      name: 'Daily Life: See, Want, Ride, Pay',
+      name: 'Daily Life: See, Want, Ride, Pay, Seek',
       description: 'Learn common daily life verbs',
       type: DrillModuleType.verb,
-      verbIds: ['v_see', 'v_want', 'v_ride', 'v_pay'],
+      verbIds: ['v_see', 'v_want', 'v_ride', 'v_pay', 'v_seek', 'v_shine'],
       patternRules: defaultPatternRules,
     ),
     DrillModule(
       id: 'mod_ws',
-      name: 'Work & Study: Work, Learn, Think',
+      name: 'Work & Study: Work, Learn, Think, Start',
       description: 'Learn verbs for work and study',
       type: DrillModuleType.verb,
-      verbIds: ['v_work', 'v_learn', 'v_think'],
+      verbIds: ['v_work', 'v_learn', 'v_think', 'v_start'],
       patternRules: defaultPatternRules,
     ),
     DrillModule(
@@ -1064,7 +1308,7 @@ class TigrinyaDrillsData {
       name: 'Continuous Tense: Right Now',
       description: 'Practice "I am eating" (እበልዕ ኣለኹ), "He is going" with ኣሎ/ኣላ',
       type: DrillModuleType.verb,
-      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_speak', 'v_hear', 'v_see', 'v_want', 'v_work', 'v_learn', 'v_think'],
+      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_speak', 'v_hear', 'v_tell', 'v_be_called', 'v_see', 'v_want', 'v_seek', 'v_shine', 'v_work', 'v_learn', 'v_think', 'v_start'],
       patternRules: defaultPatternRules,
     ),
     DrillModule(
@@ -1072,7 +1316,7 @@ class TigrinyaDrillsData {
       name: 'Future Tense: I Will...',
       description: 'Practice "I will go" (ክኸይድ እየ), "She will eat" with ክ-/ክት-',
       type: DrillModuleType.verb,
-      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_speak', 'v_hear', 'v_see', 'v_want', 'v_work', 'v_learn', 'v_think'],
+      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_speak', 'v_hear', 'v_tell', 'v_be_called', 'v_see', 'v_want', 'v_seek', 'v_shine', 'v_work', 'v_learn', 'v_think', 'v_start'],
       patternRules: defaultPatternRules,
     ),
     DrillModule(
@@ -1080,7 +1324,7 @@ class TigrinyaDrillsData {
       name: 'Negative: I Don\'t / I Didn\'t',
       description: 'Practice "I don\'t eat" (ኣይበልዕን), "He doesn\'t go" with ኣይ-...-ን',
       type: DrillModuleType.verb,
-      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_speak', 'v_hear', 'v_see', 'v_want', 'v_work', 'v_learn', 'v_think'],
+      verbIds: ['v_eat', 'v_drink', 'v_go', 'v_come', 'v_speak', 'v_hear', 'v_tell', 'v_be_called', 'v_see', 'v_want', 'v_seek', 'v_shine', 'v_work', 'v_learn', 'v_think', 'v_start'],
       patternRules: defaultPatternRules,
     ),
     DrillModule(
@@ -1411,6 +1655,11 @@ class TigrinyaDrillsData {
     TigrinyaObject(tigrinya: 'ልበይ', translit: 'libey', amharic: 'ልቤ', english: 'My heart'),
     TigrinyaObject(tigrinya: 'ምቁር ወዲ', translit: 'mqur wedi', amharic: 'ቆንጆ ልጅ', english: 'Handsome guy'),
     TigrinyaObject(tigrinya: 'ይደልየካ ኣለኹ', translit: 'yidelyeka aleku', amharic: 'እፈልግሃለሁ', english: 'I want you / I desire you (to m.)'),
+    // 🎵 From ሙነይ song
+    TigrinyaObject(tigrinya: 'ሙነይ', translit: 'muney', amharic: 'ውዴ', english: 'My darling'),
+    TigrinyaObject(tigrinya: 'ሰበይ', translit: 'sebey', amharic: 'ሰውዬ', english: 'My person / My man'),
+    TigrinyaObject(tigrinya: 'ንበይነይ ንበረለይ', translit: 'nibeyney nibereley', amharic: 'ለብቻዬ ቆይልኝ', english: 'Stay with me, just for me'),
+    TigrinyaObject(tigrinya: 'ሰበይ ኣለኒ ንዘልኣለም', translit: 'sebey aleni nizelalem', amharic: 'ሰውዬ አለኝ ለዘለአለም', english: 'I have my person forever'),
   ];
 
   // ────────────── "WITH" (ምስ) CONSTRUCTIONS ──────────────

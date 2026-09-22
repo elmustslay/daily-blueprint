@@ -232,9 +232,66 @@ class _TigrinyaDrillScreenState extends ConsumerState<TigrinyaDrillScreen>
         return _buildTeachRow(g.english, g.amharic, g.tigrinya);
       }).toList();
     } else if (widget.module.type == DrillModuleType.demonstrative) {
-      listItems = TigrinyaDrillsData.demonstratives.map((d) {
-        return _buildTeachRow(d.english, d.amharic, d.tigrinya);
-      }).toList();
+      listItems.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 8, bottom: 4),
+          child: Text('📝 Nouns (ስም)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.orangeAccent), textAlign: TextAlign.center),
+        ),
+      );
+      for (final n in TigrinyaDrillsData.demonstrativeNouns) {
+        listItems.add(_buildTeachRow(
+          '${n.english} / ${n.amharic}',
+          '♂ ${n.male}  ♀ ${n.female}  👥 ${n.plural}',
+          n.male,
+        ));
+      }
+      
+      listItems.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 16, bottom: 4),
+          child: Text('✨ Adjectives (ቅጽል)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.purpleAccent), textAlign: TextAlign.center),
+        ),
+      );
+      for (final adj in TigrinyaDrillsData.demonstrativeAdjectives) {
+        listItems.add(_buildTeachRow(
+          '${adj.english} / ${adj.amharic}',
+          '♂ ${adj.male}  ♀ ${adj.female}  👥 ${adj.plural}',
+          adj.male,
+        ));
+      }
+      
+      listItems.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 16, bottom: 4),
+          child: Text('✅ "To Be" (ምዃን)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.greenAccent), textAlign: TextAlign.center),
+        ),
+      );
+      final hePronoun = TigrinyaDrillsData.getPronounById('p4');
+      final shePronoun = TigrinyaDrillsData.getPronounById('p5');
+      final theyPronoun = TigrinyaDrillsData.getPronounById('p9');
+      listItems.add(_buildTeachRow('${hePronoun.english} is / ${hePronoun.amharic} ነው', '♂ / ♀', VerbConjugator.bePositive['p4']!.replaceAll('{', '').replaceAll('}', '')));
+      listItems.add(_buildTeachRow('${shePronoun.english} is / ${shePronoun.amharic} ናት', '♀ (for fem nouns)', VerbConjugator.bePositive['p5']!.replaceAll('{', '').replaceAll('}', '')));
+      listItems.add(_buildTeachRow('${theyPronoun.english} are / ${theyPronoun.amharic} ናቸው', '👥', VerbConjugator.bePositive['p9']!.replaceAll('{', '').replaceAll('}', '')));
+
+      listItems.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 16, bottom: 4),
+          child: Text('👉 Demonstratives', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blueAccent), textAlign: TextAlign.center),
+        ),
+      );
+      for (final d in TigrinyaDrillsData.demonstratives) {
+        listItems.add(_buildTeachRow(d.english, d.amharic, d.tigrinya));
+      }
+      
+      listItems.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 16, bottom: 4),
+          child: Text('💡 Example Sentences', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.amberAccent), textAlign: TextAlign.center),
+        ),
+      );
+      for (final s in TigrinyaDrillsData.demonstrativeExampleSentences) {
+        listItems.add(_buildTeachRow(s.tigrinya, '${s.english} / ${s.amharic}', ''));
+      }
     } else if (widget.module.type == DrillModuleType.family) {
       listItems = TigrinyaDrillsData.compatibleObjects['family']!.map((f) {
         return _buildTeachRow(f.english, f.amharic, f.tigrinya);

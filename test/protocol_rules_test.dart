@@ -102,7 +102,6 @@ void main() {
       // - Whole Food (Meat/Eggs): Hits slower (0.5h delay), lasts ~6 hours.
       // - Fiber: Adds 1 hour to whole food digestion (lasts ~7 hours).
       // - Casein: Hits slower (0.5h delay), lasts ~7.5 hours (overnight protection).
-      // - Cluster Dextrin: Provides an insulin spike (highly anti-catabolic), protecting muscle during workouts for ~2.5 hours.
 
       DateTime fixMidnight(DateTime time) {
         if (time.hour < 4) {
@@ -129,17 +128,8 @@ void main() {
             
             final hasWhey = mealRecord.items.any((i) => i.ingredient == IngredientsData.wheyIsolate);
             final hasCasein = mealRecord.items.any((i) => i.ingredient == IngredientsData.casein);
-            final hasDextrin = mealRecord.items.any((i) => i.ingredient == IngredientsData.clusterDextrin);
             
             final hasFiber = (nutrition.microNutrients['Fiber (g)'] ?? 0.0) >= 5.0;
-
-            if (hasDextrin) {
-              coverageWindows.add({
-                'source': 'Cluster Dextrin Insulin Spike (${item.title})',
-                'start': startTime,
-                'end': startTime.add(const Duration(hours: 2, minutes: 30)),
-              });
-            }
 
             if (protein >= 10.0) {
               if (hasWhey) {
@@ -178,13 +168,12 @@ void main() {
 
           if (start.isAfter(currentTime)) {
              final gap = start.difference(currentTime);
-             // Since we now track dextrin/insulin protection, our test can be much stricter!
              // Maximum allowed completely unprotected gap is 1.5 hours.
              expect(gap.inMinutes, lessThanOrEqualTo(90), 
                  reason: 'Unprotected catabolic gap of ${gap.inHours}h ${gap.inMinutes % 60}m on $day between '
                          '${currentTime.hour}:${currentTime.minute.toString().padLeft(2, '0')} and '
                          '${start.hour}:${start.minute.toString().padLeft(2, '0')}. '
-                         'Neither amino acids nor insulin spikes are protecting you here!');
+                         'No amino acids are protecting you here!');
           }
           if (end.isAfter(currentTime)) {
             currentTime = end;

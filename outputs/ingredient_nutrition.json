@@ -192,24 +192,6 @@
             }
         }
     },
-    "cluster_dextrin": {
-        "name": "Cluster Dextrin (Unflavored)",
-        "baseUnit": "scoop (25g)",
-        "nutrition": {
-            "Calories": 100.0,
-            "Protein": 0.0,
-            "Carbs": 25.0,
-            "Fat": 0.0,
-            "Micros": {
-                "Sugar (g)": 0.0,
-                "Calcium (Food) (mg)": 95.0,
-                "Phosphorus (mg)": 81.0,
-                "Magnesium (mg)": 28.0,
-                "Sodium (mg)": 50.0,
-                "Potassium (mg)": 80.0
-            }
-        }
-    },
     "banana": {
         "name": "Banana",
         "baseUnit": "medium",

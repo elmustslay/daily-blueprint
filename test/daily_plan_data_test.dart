@@ -39,22 +39,9 @@ void main() {
 
 
 
-  test('Dextrin counts and presence in grab lists are correct', () {
-    expect(
-        DailyPlanData.schedules[DailyPlanData.tue]!.any((item) =>
-            item.title.contains('Grab') && item.details.any((d) => d.text.contains('1 scoop Cluster Dextrin'))),
-        isFalse);
-    expect(
-        DailyPlanData.schedules[DailyPlanData.wed]!.any((item) =>
-            item.title.contains('Grab') && item.details.any((d) => d.text.contains('1 scoop Cluster Dextrin'))),
-        isFalse);
-    expect(
-        DailyPlanData.schedules[DailyPlanData.fri]!.any((item) =>
-            item.title.contains('Grab') && item.details.any((d) => d.text.contains('1 scoop Cluster Dextrin'))),
-        isFalse);
-  });
 
-  test('Pre-workout dextrin schedule timing is correct on gym days', () {
+
+  test('Pre-workout whey schedule timing is correct on gym days', () {
     for (final day in [DailyPlanData.mon, DailyPlanData.tue, DailyPlanData.thu, DailyPlanData.fri]) {
       final schedule = DailyPlanData.schedules[day]!;
       
@@ -94,7 +81,6 @@ void main() {
           final grabThings = schedule.firstWhere((item) => item.title.contains('Grab things'));
           
           int requiredEggs = 0;
-          int requiredDextrins = 0;
           int requiredBananas = 0;
           bool needsZinc = false;
           bool needsCopper = false;
@@ -105,7 +91,6 @@ void main() {
             if (item.mealRecord != null) {
               for (final portion in item.mealRecord!.items) {
                 if (portion.ingredient.id == 'egg') requiredEggs += portion.amount.toInt();
-                if (portion.ingredient.id == 'cluster_dextrin') requiredDextrins += portion.amount.toInt();
                 if (portion.ingredient.id == 'banana') requiredBananas += portion.amount.toInt();
                 if (portion.ingredient.id == 'zinc') needsZinc = true;
                 if (portion.ingredient.id == 'copper_glycinate') needsCopper = true;
@@ -116,7 +101,6 @@ void main() {
           
           final grabDetails = grabThings.details.map((d) => d.text).join(' ');
           if (requiredEggs > 0) expect(grabDetails, contains('$requiredEggs Boiled Eggs'), reason: '$day (refeed=$isRefeed) missing eggs in grab list');
-          if (requiredDextrins > 0) expect(grabDetails, contains(requiredDextrins == 1 ? '1 scoop Cluster Dextrin' : '$requiredDextrins scoops Cluster Dextrin'), reason: '$day (refeed=$isRefeed) missing dextrins in grab list');
           if (requiredBananas > 0) expect(grabDetails, contains('Banana'), reason: '$day (refeed=$isRefeed) missing Banana in grab list');
           if (needsZinc) expect(grabDetails, contains('Zinc Picolinate'), reason: '$day (refeed=$isRefeed) missing Zinc in grab list');
           if (needsCopper) expect(grabDetails, contains('Copper Glycinate'), reason: '$day (refeed=$isRefeed) missing Copper in grab list');
@@ -244,12 +228,10 @@ void main() {
 
             if (minutesBeforeSleep >= 0 && minutesBeforeSleep <= 120) {
               final hasBananas = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.banana);
-              final hasDextrin = item.mealRecord!.items.any((i) => i.ingredient == IngredientsData.clusterDextrin);
               
               if (entry.key != DailyPlanData.thu && entry.key != DailyPlanData.fri) {
                 expect(hasBananas, isFalse, reason: 'High-glycemic Bananas found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed). This will spike insulin and blunt GH/fat oxidation.');
               }
-              expect(hasDextrin, isFalse, reason: 'Cluster Dextrin found within 2 hours of sleep on ${entry.key} (refeed: $isRefeed).');
             }
           }
         }
