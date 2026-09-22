@@ -29,9 +29,9 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       // Produce
       ShoppingItem(id: 'prod-4', name: 'Spinach', subtext: '1 bag (/5)'),
 
-      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '10 Kiwis'),
+      ShoppingItem(id: 'prod-8', name: 'Kiwis', subtext: '6 Kiwis (1 pack)'),
       ShoppingItem(id: 'prod-9', name: 'Baby Carrots', subtext: '24oz bag (for 7 servings)'),
-      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: '20 Bananas (Morning signals & weekend biological refeed)'),
+      ShoppingItem(id: 'prod-11', name: 'Bananas', subtext: '22 Bananas'),
       
       // Poultry & Meat
       ShoppingItem(id: 'meat-1', name: 'Ground Turkey (93% Lean)', subtext: '2 lbs'),
@@ -57,7 +57,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'spc-6', name: 'Black Pepper', subtext: 'need 1tsp'),
       ShoppingItem(id: 'spc-7', name: 'Italian Seasoning', subtext: 'need 1tbsp'),
       ShoppingItem(id: 'spc-8', name: 'Ground Cumin', subtext: 'need 1tsp'),
-      ShoppingItem(id: 'spc-9', name: 'Iodized Table Salt (or Sea Salt)', subtext: 'need 4.57 tsp (Morning water, pre-workout & pasta)'),
+      ShoppingItem(id: 'spc-9', name: 'Iodized Table Salt', subtext: 'need 4.57 tsp'),
       
       // Amazon
       // ShoppingItem(id: 'amz-2', name: 'Psyllium Husk'), // Outdated, not used anymore
@@ -73,7 +73,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
 
       ShoppingItem(id: 'amz-15', name: 'Anua Heartleaf Pore Control Cleansing Oil', subtext: 'Sunscreen Remover'),
       ShoppingItem(id: 'amz-16', name: 'Dove Deep Moisture Body Wash', subtext: 'Prevents ashiness without lotion'),
-      ShoppingItem(id: 'amz-17', name: 'Vanicream Gentle Facial Cleanser', subtext: 'Face Wash (Foams beautifully, zero stripping)'),
+      ShoppingItem(id: 'amz-17', name: 'Vanicream Gentle Facial Cleanser', subtext: 'Face Wash (gentle foam)'),
       ShoppingItem(id: 'amz-19', name: 'The Ordinary Caffeine Solution 5% + EGCG', subtext: 'For dark circles and bags'),
       ShoppingItem(id: 'amz-18', name: 'All Free Clear (Liquid)', subtext: 'Laundry Detergent'),
 

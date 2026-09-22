@@ -49,7 +49,7 @@
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Cook Salmon (3 portions): start 1st portion (eat 1/2, save 1/2 in fridge)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+  - 🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
@@ -139,7 +139,7 @@
   - 1 scoop creatine monohydrate (5g)
   - Take 1 cap Copper Glycinate (3mg)
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+  - 🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
@@ -227,16 +227,14 @@
 [7:25-7:35 pm] Commute Home
 [7:40-8:20 pm] Dinner
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+  - 🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [8:20-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:20 pm] Study Time
-  - Halfway through (~1hr before sleep): Eat 2 Kiwis & swish water (brush 20 min after)
 [9:20-9:50 pm] Relax / Catch up on reading
 [9:50-10:20 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -287,7 +285,8 @@
   - Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)
   - Run Dishwasher
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+  - 1 full serving of my pasta
+  - 🍌 Eat 1 Medium Bananas (Refeed Carb Load)
 [1:30-5:00 pm] Work
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Cook 1lb ground beef (divide in 4, 4 fridge) while working
@@ -303,15 +302,13 @@
 [8:30-9:00 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-  - 1/3 serving of my pasta
+  - 🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
   - 🍌 Eat 4 Medium Bananas (Post-Workout Carb Load)
 [9:00-9:30 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
-  - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [9:30-10:00 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).
@@ -370,13 +367,15 @@
   - Oil-Absorbing Blotting Sheets
   - Pasta lunch
   - water bottle
+  - 🍌 Pack 1 Banana for lunch!
 [8:55-9:00 am] Commute to Work
 [9:00-1:00 pm] Work
   - ☕️ Drink Caffeine around 9:30 am
   - Drink Sparkling Water
   - 🧍‍♂️ Use Standing Desk for 3-4 hours
 [1:00-1:30 pm] Lunch
-  - 2/3 serving of my pasta
+  - 1 full serving of my pasta
+  - 🍌 Eat 1 Medium Bananas (Refeed Carb Load)
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
   - 🧍‍♂️ Use Standing Desk for 3-4 hours
@@ -393,8 +392,7 @@
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
-  - 1/3 serving of my pasta
+  - 🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
   - 🍌 Eat 4 Medium Bananas (Post-Workout Carb Load)
 [9:20-9:50 pm] Chores & Clean Up
@@ -472,7 +470,7 @@
 [7:45-8:00 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+  - 🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [8:00-8:50 pm] Chores & Clean Up
@@ -504,7 +502,7 @@
   - Lights completely out (pitch black). Close eyes and allow sleep to happen naturally.
 
 === Sunday ===
-[Active variables: isAshwagandhaOff, isNextWeekRefeedWeek]
+[Active variables: isAshwagandhaOff]
 [8:00-8:10 am] Wakeup
   - Use bathroom
   - Weight (Step on scale)
@@ -539,23 +537,20 @@
   - Wash hands -> Blotting Sheet  -> Wash hands -> Haruharu Wonder Sunscreen: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - check what I have before going
   - Take both your TJ's shopping bags
-{{#if isNextWeekRefeedWeek}}  - 🛒 UPCOMING REFEED WEEK: Buy 21 Bananas (3/day: morning, afternoon snack, dinner), and 1 bag of Quinoa (if out){{/if}}
   - Pick up Chipotle for dinner (MINI-REFEED: Double white rice, SINGLE black beans, extra fajita veggies - NO SOUR CREAM)
 [4:00-4:30 pm] Dinner (Eat fresh Chipotle)
   - 1 scoop creatine monohydrate (5g)
   - Chipotle Bowl (MINI-REFEED): single chicken, double white rice, SINGLE black beans, extra fajita veggies (NO SOUR CREAM)
-  - 🥕 Eat 1/7th of a bag (~14 baby carrots)
+  - 🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [4:30-7:30 pm] Cooking / Meal Prep
   - Meal Prep: Pasta (6 portions)
-{{#if isNextWeekRefeedWeek}}  - 🧑‍🍳 UPCOMING REFEED WEEK: Cook a batch of Quinoa for Mon-Sat dinners (divide into 3 containers){{/if}}
   - Put ground beef in freezer
   - Boil 18 eggs for the week (warm on counter 10m first)
 [7:30-8:15 pm] Relax / Catch up on reading
 [8:15-8:50 pm] Chores & Clean Up
   - 1 scoop Casein in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
-  - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:50 pm] Shower & Bed Prep (Wind Down Starts)
   - 📱 SCREEN CURFEW: Dim bathroom and bedroom lights. Put phone on charger across the room (No more screens tonight).

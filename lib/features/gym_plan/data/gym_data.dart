@@ -303,7 +303,7 @@ class GymData {
     ),
   ];
 
-  // Lower A (Wednesday) - Quad & Glute Focus
+  // Lower A (Tuesday) - Quad & Glute Focus
   static const List<Exercise> lowerADay = [
     Exercise(
       id: 'legs_1a', name: 'Leg Press Machine', sets: '4', reps: '6-8', rest: '3 min', primaryMuscleGroup: 'Quads',
@@ -490,13 +490,14 @@ class GymData {
       id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '2 min', primaryMuscleGroup: 'Abs',
       tip: '🎯 Focus: Deep core stability.\n\n💡 How to do it: Forearms down.\n\n🔒 NON-NEGOTIABLE: Glutes forcefully squeezed. Straight line head to heel.\n\n⚠️ Common Pitfall: Letting your hips sag toward the floor. This completely disengages the abdominal wall and dumps all the structural stress onto your lower back ligaments.',
     ),
-    Exercise(
-      id: 'pull_bicep_1a', name: 'Alternating Dumbbell Curl', sets: '3', reps: '8-12', rest: '2 min', primaryMuscleGroup: 'Biceps',
-      tip: '🎯 Focus: Biceps.\n\n💡 How to do it: Twist wrist so pinky turns to shoulder at peak.\n\n🔒 NON-NEGOTIABLE: Elbows physically bolted to the sides of your ribcage.\n\n⚠️ Common Pitfall: "Elbow Drift". If your elbow swings forward in front of your ribs, your front shoulder is lifting the weight, completely removing tension from the bicep.',
-      warmupSets: [WarmupSet(reps: 8, weightFactor: 0.5), WarmupSet(reps: 3, weightFactor: 0.75)],
-      secondaryWarmupSets: [],
-      warmupRest: 'Rest 1 min.',
-    ),
+    // Outdated excersise (put back for bulk)
+    // Exercise(
+    //   id: 'pull_bicep_1a', name: 'Alternating Dumbbell Curl', sets: '3', reps: '8-12', rest: '2 min', primaryMuscleGroup: 'Biceps',
+    //   tip: '🎯 Focus: Biceps.\n\n💡 How to do it: Twist wrist so pinky turns to shoulder at peak.\n\n🔒 NON-NEGOTIABLE: Elbows physically bolted to the sides of your ribcage.\n\n⚠️ Common Pitfall: "Elbow Drift". If your elbow swings forward in front of your ribs, your front shoulder is lifting the weight, completely removing tension from the bicep.',
+    //   warmupSets: [WarmupSet(reps: 8, weightFactor: 0.5), WarmupSet(reps: 3, weightFactor: 0.75)],
+    //   secondaryWarmupSets: [],
+    //   warmupRest: 'Rest 1 min.',
+    // ),
     Exercise(
       id: 'stretch_lower_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None', primaryMuscleGroup: 'Mobility',
       tip: 'Lower Body Cool-down (Hold each for 30s-60s):\n\n1️⃣ Hip Flexor Lunge: Kneel on one knee, squeeze the glute on the grounded leg, and push hips forward.\n2️⃣ Hamstring Stretch: Put foot on a low bench and gently hinge forward at the hips with a flat back.\n3️⃣ Couch Stretch (Quads): Put shin against a wall/bench, knee on the floor, and sit upright.\n4️⃣ Calf/Ankle Mobilization: Stand on a ledge, let heels drop deep, and hold the stretch to prevent Achilles tightness.',

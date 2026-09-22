@@ -44,7 +44,8 @@ class _Portions {
   static const zinc = IngredientPortion(ingredient: IngredientsData.zincPicolinate, amount: 1);
   static const whey = IngredientPortion(ingredient: IngredientsData.wheyIsolate, amount: 1);
   static const creatine = IngredientPortion(ingredient: IngredientsData.creatine, amount: 1);
-  static const babyCarrots = IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 24 / 7);
+  static const babyCarrotsRegular = IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 12 / 7);
+  static const babyCarrotsLarge = IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 54 / 7);
   
   static const calciumCitrate = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 3);
   static const calciumCitrate2 = IngredientPortion(ingredient: IngredientsData.calciumCitrate, amount: 2);
@@ -207,12 +208,12 @@ class DailyPlanData {
   }
 
   static bool isRefeedWeek() { // no more refeed weeks
-    if (currentWeekNumber == -1) return true;
-    return false;
+    if (currentWeekNumber != -1) return false;
+    return currentWeekNumber == 5 || currentWeekNumber == 12 || currentWeekNumber == 18;
   }
 
   static bool isNextWeekRefeedWeek() {
-    if (currentWeekNumber == -1) return true;
+    if (currentWeekNumber != -1) return false;
     if (currentWeekNumber == 0) return false;
     return currentWeekNumber == 4 || currentWeekNumber == 11 || currentWeekNumber == 17;
   }
@@ -380,8 +381,8 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _pastaLunch(String time, {int extraBananas = 0}) {
-    final isFullLunch = isRefeedWeek();
+  static TimelineItem _pastaLunch(String time, {int extraBananas = 0, bool isFullPastaDay = false}) {
+    final isFullLunch = isRefeedWeek() || isFullPastaDay;
     return TimelineItem(
       time: time,
       title: 'Lunch',
@@ -475,31 +476,31 @@ class DailyPlanData {
     return TimelineItem(time: time, title: title, icon: isCardio ? '🏃' : '🏋️', isCardio: isCardio);
   }
 
-  static TimelineItem _salmonDinner(String time, {Set<NutritionAddOn> nutrition = const {NutritionAddOn.creatine}, Set<RoutineModifier> modifiers = const {}}) {
-    final withCreatine = nutrition.contains(NutritionAddOn.creatine);
+  static TimelineItem _salmonDinner(String time, {Set<RoutineModifier> modifiers = const {}, Set<NutritionAddOn> nutrition = const {NutritionAddOn.creatine}, bool withCreatine = false, bool isFullPastaDay = false, bool largeCarrots = false}) {
+    final effectiveWithCreatine = nutrition.contains(NutritionAddOn.creatine) || withCreatine;
     final copper = nutrition.contains(NutritionAddOn.copper);
     final cook = modifiers.contains(RoutineModifier.cookSalmon);
     final showAshwagandha = !isAshwagandhaOff();
-    final eatPastaThird = !isRefeedWeek();
+    final eatPastaThird = !isRefeedWeek() && !isFullPastaDay;
     
     return TimelineItem(
       time: time,
       title: 'Dinner',
       icon: '🥗',
       details: [
-        if (withCreatine) const DetailItem.trackable('1 scoop creatine monohydrate (5g)'),
+        if (effectiveWithCreatine) const DetailItem.trackable('1 scoop creatine monohydrate (5g)'),
         if (copper) const DetailItem.trackable('Take 1 cap Copper Glycinate (3mg)'),
         if (cook) const DetailItem('Cook Salmon (3 portions): start 1st portion (eat 1/2, save 1/2 in fridge)') else const DetailItem('Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)'), 
-        const DetailItem('🥕 Eat 1/7th of a bag (~14 baby carrots)'),
+        DetailItem(largeCarrots ? '🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)' : '🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)'),
         if (eatPastaThird) const DetailItem('1/3 serving of my pasta'),
         if (showAshwagandha) const DetailItem.trackable('2 cap Ashwagandha'),
         if (isRefeedWeek()) const DetailItem('🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa'),
       ],
       mealRecord: MealRecord(
         items: [
-          if (withCreatine) _Portions.creatine,
+          if (effectiveWithCreatine) _Portions.creatine,
           if (copper) const IngredientPortion(ingredient: IngredientsData.copperGlycinate, amount: 1),
-          _Portions.babyCarrots,
+          largeCarrots ? _Portions.babyCarrotsLarge : _Portions.babyCarrotsRegular,
           if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
         ], 
         recipeItems: [
@@ -511,9 +512,9 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _beefDinner(String time, {int extraBananas = 0}) {
+  static TimelineItem _beefDinner(String time, {int extraBananas = 0, bool isFullPastaDay = false, bool largeCarrots = false}) {
     final showAshwagandha = !isAshwagandhaOff();
-    final eatPastaThird = !isRefeedWeek();
+    final eatPastaThird = !isRefeedWeek() && !isFullPastaDay;
     return TimelineItem(
       time: time,
       title: 'Dinner',
@@ -521,7 +522,7 @@ class DailyPlanData {
       details: [
         const DetailItem.trackable('1 scoop creatine monohydrate (5g)'),
         const DetailItem('Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)'), 
-        const DetailItem('🥕 Eat 1/7th of a bag (~14 baby carrots)'),
+        DetailItem(largeCarrots ? '🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)' : '🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)'),
         if (eatPastaThird) const DetailItem('1/3 serving of my pasta'),
         if (showAshwagandha) const DetailItem.trackable('2 cap Ashwagandha'),
         if (isRefeedWeek()) const DetailItem('🍚 REFEED WEEK: Include 0.5 cups (dry) cooked Quinoa'),
@@ -530,7 +531,7 @@ class DailyPlanData {
       mealRecord: MealRecord(
         items: [
           _Portions.creatine,
-          _Portions.babyCarrots,
+          largeCarrots ? _Portions.babyCarrotsLarge : _Portions.babyCarrotsRegular,
           if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
           if (extraBananas > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: extraBananas.toDouble()),
         ], 
@@ -664,6 +665,8 @@ class DailyPlanData {
     Set<NutritionAddOn> wakeupNutrition = const {},
     int lunchExtraBananas = 0,
     String grabThingsAdditional = '',
+    bool isFullPastaDay = false,
+    bool prepTomorrowPasta = true,
   }) {
     final effectiveSkincare = morningSkincare ??
         (isOfficeDay ? _Routines.morningHaruharu : _Routines.morningSkin1004);
@@ -691,7 +694,7 @@ class DailyPlanData {
         modifiers: isOfficeDay ? {RoutineModifier.caffeine, RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, 
         nutrition: {}
       ),
-      _pastaLunch('1:00-1:30 pm', extraBananas: lunchExtraBananas),
+      _pastaLunch('1:00-1:30 pm', extraBananas: lunchExtraBananas, isFullPastaDay: isFullPastaDay),
       _work(
         '1:30-5:00 pm', 
         details: pmWorkDetails, 
@@ -716,7 +719,7 @@ class DailyPlanData {
         blueberryText: chores.blueberryText, 
         nutrition: {}, 
         extraDetails: [
-          if (!isRefeedWeek()) const DetailItem('Scoop 1/3 of tomorrow\'s pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.'),
+          if (!isRefeedWeek() && prepTomorrowPasta) const DetailItem('Scoop 1/3 of tomorrow\'s pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.'),
         ]
       ),
       ...chores.extraPostChoresItems,
@@ -779,7 +782,7 @@ class DailyPlanData {
     chores: ChoresConfig(
       time: '8:20-8:50 pm',
       extraPostChoresItems: [
-        _study('8:50-9:20 pm', sleepKiwiCount: 2),
+        _study('8:50-9:20 pm'),
         _relaxOrCatchUp('9:20-9:50 pm'),
       ],
     ),
@@ -789,9 +792,11 @@ class DailyPlanData {
     ),
     magAmount: 2,
     nightSkincare: _Routines.retinol,
+    prepTomorrowPasta: false, // Tomorrow (Thursday) is a full pasta day
   );
 
   static List<TimelineItem> _buildThursday() => _buildStandardWeekday(
+    lunchExtraBananas: 1,
     clothes: 'Get dressed for the gym',
     morningProtein: ProteinSource.salmon,
     amWorkDetails: [DetailItem(_Routines.laundryRegular), const DetailItem('Run Dishwasher')],
@@ -803,7 +808,7 @@ class DailyPlanData {
       commuteHomeTime: '7:50-8:20 pm',
       modifiers: {RoutineModifier.takeGymGloves},
     ),
-    dinner: _beefDinner('8:30-9:00 pm', extraBananas: 4),
+    dinner: _beefDinner('8:30-9:00 pm', extraBananas: 4, isFullPastaDay: true, largeCarrots: true),
     chores: const ChoresConfig(time: '9:00-9:30 pm', sleepKiwiCount: 2),
     bedPrep: const BedPrepConfig(
       time: '9:30-10:00 pm',
@@ -812,20 +817,25 @@ class DailyPlanData {
     ),
     magAmount: 2,
     nightSkincare: _Routines.joseon,
+    isFullPastaDay: true, // Full pasta at lunch, 0 at dinner
+    prepTomorrowPasta: false, // Tomorrow (Friday) is a full pasta day
   );
 
   static List<TimelineItem> _buildFriday() => _buildStandardWeekday(
+    grabThingsAdditional: '🍌 Pack 1 Banana for lunch!',
+    lunchExtraBananas: 1,
     clothes: 'Get dressed for work (cloud x 4)',
     morningSupplements: {MorningSupplement.copper},
     morningBanana: 1,
     morningProtein: ProteinSource.beef,
     isOfficeDay: true,
     gym: const GymConfig(title: 'Legs (Hamstrings / Glutes)'),
-    dinner: _beefDinner('8:50-9:20 pm', extraBananas: 4),
+    dinner: _beefDinner('8:50-9:20 pm', extraBananas: 4, isFullPastaDay: true, largeCarrots: true),
     chores: const ChoresConfig(),
     bedPrep: const BedPrepConfig(isHarshActiveNight: true),
     magAmount: 3,
     nightSkincare: _Routines.bha,
+    isFullPastaDay: true, // Full pasta at lunch, 0 at dinner
   );
 
   static List<TimelineItem> _buildSaturday() => [
@@ -893,7 +903,7 @@ class DailyPlanData {
         isRefeedWeek()
             ? const DetailItem('Chipotle Bowl (REFEED): single chicken, double white rice, DOUBLE black beans, extra fajita veggies (NO SOUR CREAM)')
             : const DetailItem('Chipotle Bowl (MINI-REFEED): single chicken, double white rice, SINGLE black beans, extra fajita veggies (NO SOUR CREAM)'),
-        const DetailItem('🥕 Eat 1/7th of a bag (~14 baby carrots)'),
+        const DetailItem('🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)'),
         if (isRefeedWeek()) const DetailItem('🍌 1 Medium Banana (REFEED WEEK)'),
         if (!isAshwagandhaOff()) const DetailItem.trackable('2 cap Ashwagandha'),
       ], 
@@ -905,7 +915,7 @@ class DailyPlanData {
             amount: 1,
           ),
           if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.banana, amount: 1),
-          const IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 3.4),
+          const IngredientPortion(ingredient: IngredientsData.babyCarrots, amount: 12 / 7),
           if (!isAshwagandhaOff()) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
         ], 
         recipeItems: const []
@@ -923,7 +933,7 @@ class DailyPlanData {
       ]
     ),
     _relaxOrCatchUp('7:30-8:15 pm'),
-    _chores('8:15-8:50 pm', nutrition: {}, sleepKiwiCount: 2),
+    _chores('8:15-8:50 pm', nutrition: {}, sleepKiwiCount: 0),
     _bedPrep('8:50-9:50 pm', isHarshActiveNight: true),
     _nightSupplement('9:50-10:05 pm', magAmount: 2, skincare: _Routines.retinol, nutrition: {NutritionAddOn.nac}),
     _relaxOrCatchUp('10:05-10:50 pm'),

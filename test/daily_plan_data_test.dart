@@ -138,7 +138,7 @@ void main() {
     DailyPlanData.mockCurrentDate = DateTime(2026, 8, 15);
     final normalItems = ShoppingListNotifier().build();
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');
-    expect(bananaItemNormal.subtext, contains('20 Bananas (Morning signals & weekend biological refeed)'));
+    expect(bananaItemNormal.subtext, contains('22 Bananas'));
 
     // Obsolete Refeed logic removed
   });

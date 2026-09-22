@@ -45,6 +45,12 @@ fi
 
 green "Found device: $DEVICE_ID"
 
+# ── Force new provisioning profile ────────────────────────────────────────
+cyan "Clearing cached provisioning profiles to force a full 7-day renewal..."
+rm -rf ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles/* 2>/dev/null || true
+rm -rf ~/Library/MobileDevice/Provisioning\ Profiles/* 2>/dev/null || true
+rm -rf build/ios
+
 # ── Build & install ───────────────────────────────────────────────────────
 cyan "Building the app (this takes ~90 seconds)..."
 
