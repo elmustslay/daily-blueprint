@@ -2,11 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../../core/storage/shared_prefs.dart';
+import '../../../core/services/notification_service.dart';
 import '../data/gym_data.dart';
 import '../../daily_plan/data/daily_plan_data.dart';
 import 'gym_stats_screen.dart';
 import 'gym_logs_editor_screen.dart';
-import '../../../core/storage/shared_prefs.dart';
 
 
 
@@ -116,6 +117,7 @@ class _GymPlanScreenState extends ConsumerState<GymPlanScreen> with SingleTicker
   @override
   void initState() {
     super.initState();
+    NotificationService().requestPermissions();
     _tabController = TabController(
       initialIndex: _getInitialTabIndex(),
       length: 5, 
@@ -607,6 +609,12 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
   void _startTimer(int seconds) {
     final endTime = DateTime.now().add(Duration(seconds: seconds));
     SharedPrefsLogic.instance.setString('$_restKeyPrefix${widget.exercise.id}', endTime.toIso8601String());
+    NotificationService().scheduleTimerEnd(
+      id: widget.exercise.id.hashCode,
+      title: 'Rest Complete!',
+      body: 'Time to crush your next set of ${widget.exercise.name} 💪',
+      delaySeconds: seconds,
+    );
     _startTimerWithEndTime(endTime);
   }
 
@@ -635,6 +643,7 @@ class _ExerciseCardState extends ConsumerState<ExerciseCard> with WidgetsBinding
     _timer?.cancel();
     _endTime = null;
     SharedPrefsLogic.instance.remove('$_restKeyPrefix${widget.exercise.id}');
+    NotificationService().cancelTimer(widget.exercise.id.hashCode);
     if (mounted && _restRemaining > 0) {
       setState(() {
         _restRemaining = 0;

@@ -51,3 +51,6 @@ app.*.map.json
 # Auto-generated simulation files
 personal_py_simulation/grid_sim_new.py
 personal_py_simulation/temp_sim.py
+
+# Audio tools and temp files
+audio_tools/

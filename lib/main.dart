@@ -5,6 +5,7 @@ import 'core/theme.dart';
 import 'core/storage/shared_prefs.dart';
 import 'features/dashboard/presentation/dashboard_screen.dart';
 import 'features/learn_tigrinya/data/mastery_provider.dart';
+import 'core/services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ void main() async {
   }
   await SharedPrefsLogic.init();
   MasteryStorage.loadSettings();
+  await NotificationService().init();
   runApp(
     const ProviderScope(
       child: MyApp(),
