@@ -18,13 +18,31 @@
                 "Fat": 14.042444444444442
             }
         },
+        "5:00-5:55 pm": {
+            "title": "Study Time",
+            "nutrition": {
+                "Calories": 105.0,
+                "Protein": 1.3,
+                "Carbs": 27.0,
+                "Fat": 0.3
+            }
+        },
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 340.0,
-                "Protein": 32.6,
-                "Carbs": 55.0,
-                "Fat": 1.1
+                "Calories": 210.0,
+                "Protein": 2.6,
+                "Carbs": 54.0,
+                "Fat": 0.6
+            }
+        },
+        "8:00-8:30 pm": {
+            "title": "Commute Home",
+            "nutrition": {
+                "Calories": 130.0,
+                "Protein": 30.0,
+                "Carbs": 1.0,
+                "Fat": 0.5
             }
         },
         "8:50-9:20 pm": {
@@ -65,13 +83,31 @@
                 "Fat": 14.042444444444442
             }
         },
+        "5:10-5:55 pm": {
+            "title": "Study Time",
+            "nutrition": {
+                "Calories": 105.0,
+                "Protein": 1.3,
+                "Carbs": 27.0,
+                "Fat": 0.3
+            }
+        },
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 340.0,
-                "Protein": 32.6,
-                "Carbs": 55.0,
-                "Fat": 1.1
+                "Calories": 210.0,
+                "Protein": 2.6,
+                "Carbs": 54.0,
+                "Fat": 0.6
+            }
+        },
+        "8:00-8:30 pm": {
+            "title": "Commute Home",
+            "nutrition": {
+                "Calories": 130.0,
+                "Protein": 30.0,
+                "Carbs": 1.0,
+                "Fat": 0.5
             }
         },
         "8:50-9:20 pm": {
@@ -112,8 +148,8 @@
                 "Fat": 14.042444444444442
             }
         },
-        "6:05-6:15 pm": {
-            "title": "Get Dressed & Commute to Gym (LISS)",
+        "7:25-7:35 pm": {
+            "title": "Commute Home",
             "nutrition": {
                 "Calories": 130.0,
                 "Protein": 30.0,
@@ -159,22 +195,40 @@
                 "Fat": 21.363666666666663
             }
         },
+        "5:00-5:55 pm": {
+            "title": "Study Time",
+            "nutrition": {
+                "Calories": 105.0,
+                "Protein": 1.3,
+                "Carbs": 27.0,
+                "Fat": 0.3
+            }
+        },
         "5:55-6:20 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 340.0,
-                "Protein": 32.6,
-                "Carbs": 55.0,
-                "Fat": 1.1
+                "Calories": 210.0,
+                "Protein": 2.6,
+                "Carbs": 54.0,
+                "Fat": 0.6
+            }
+        },
+        "7:50-8:20 pm": {
+            "title": "Commute Home",
+            "nutrition": {
+                "Calories": 130.0,
+                "Protein": 30.0,
+                "Carbs": 1.0,
+                "Fat": 0.5
             }
         },
         "8:30-9:00 pm": {
             "title": "Dinner",
             "nutrition": {
-                "Calories": 573.0998571428571,
-                "Protein": 17.49695714285714,
-                "Carbs": 126.94673214285713,
-                "Fat": 3.9379125000000004
+                "Calories": 468.0998571428571,
+                "Protein": 16.196957142857144,
+                "Carbs": 99.94673214285713,
+                "Fat": 3.6379125000000005
             }
         },
         "9:00-9:30 pm": {
@@ -206,22 +260,40 @@
                 "Fat": 21.363666666666663
             }
         },
+        "5:10-5:55 pm": {
+            "title": "Study Time",
+            "nutrition": {
+                "Calories": 105.0,
+                "Protein": 1.3,
+                "Carbs": 27.0,
+                "Fat": 0.3
+            }
+        },
         "5:55-6:30 pm": {
             "title": "Get Dressed & Commute to Gym (Resistance)",
             "nutrition": {
-                "Calories": 340.0,
-                "Protein": 32.6,
-                "Carbs": 55.0,
-                "Fat": 1.1
+                "Calories": 210.0,
+                "Protein": 2.6,
+                "Carbs": 54.0,
+                "Fat": 0.6
+            }
+        },
+        "8:00-8:30 pm": {
+            "title": "Commute Home",
+            "nutrition": {
+                "Calories": 130.0,
+                "Protein": 30.0,
+                "Carbs": 1.0,
+                "Fat": 0.5
             }
         },
         "8:50-9:20 pm": {
             "title": "Dinner",
             "nutrition": {
-                "Calories": 573.0998571428571,
-                "Protein": 17.49695714285714,
-                "Carbs": 126.94673214285713,
-                "Fat": 3.9379125000000004
+                "Calories": 468.0998571428571,
+                "Protein": 16.196957142857144,
+                "Carbs": 99.94673214285713,
+                "Fat": 3.6379125000000005
             }
         },
         "9:20-9:50 pm": {
@@ -247,10 +319,10 @@
         "1:50-2:20 pm": {
             "title": "Lunch",
             "nutrition": {
-                "Calories": 427.47351111111107,
-                "Protein": 31.608088888888894,
-                "Carbs": 46.14044444444444,
-                "Fat": 14.042444444444442
+                "Calories": 532.4735111111111,
+                "Protein": 32.90808888888889,
+                "Carbs": 73.14044444444444,
+                "Fat": 14.342444444444443
             }
         },
         "7:45-8:00 pm": {

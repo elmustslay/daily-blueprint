@@ -1319,37 +1319,7 @@ class _DailyPlanScreenState extends ConsumerState<DailyPlanScreen> with SingleTi
         ),
         content: SingleChildScrollView(
           child: Text(
-            '🔴 DELOAD WEEK — Intensity-Preservation\n'
-            'Because you are on a caloric deficit, dropping weight will signal your body to shed muscle. Drop fatigue, not intensity.\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'LIFTING (Mon / Wed / Thu / Fri):\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Keep your working weight the SAME (100%)\n'
-            '• Cut your volume in half (e.g., 2 sets instead of 4)\n'
-            '• Keep the same rep ranges and rest periods\n'
-            '• Stop 2-3 reps short of failure (RPE 7) on every set\n'
-            '• Do absolutely zero forced reps or drop sets\n\n'
-            'Example:\n'
-            '  If you normally Leg Press 200 lbs × 4 sets to failure\n'
-            '  → This week: 200 lbs × 2 sets (stopping 2 reps early)\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'CARDIO (Tue / Sat):\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Keep your ${DailyPlanData.isRefeedWeek() ? "40-minute" : "1-hour"} LISS schedule exactly same.\n'
-            '• Since you track HR, just stay strictly in your target zone.\n'
-            '• LISS does not tax the CNS, so no deload is needed here. Keep burning the fat.\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'PLANK HOLD:\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Do 2 sets × 20-30 sec (instead of 3-4 sets)\n\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            'NUTRITION & SUPPLEMENTS:\n'
-            '━━━━━━━━━━━━━━━━━━━━\n'
-            '• Keep protein intake the exact same\n'
-            '• Keep creatine at 5g/day (never cycle it)\n'
-            '• Expect sleep quality to drastically improve this week\n'
-            '• If hungrier than usual — that\'s normal, hold the cut line\n\n'
-            '⚡ Clear the CNS fatigue. Keep the muscle. Trust the math.',
+            DailyPlanData.deloadProtocolText, // single source of truth (daily_plan_data.dart)
             style: TextStyle(height: 1.5, fontSize: 14),
           ),
         ),

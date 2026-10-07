@@ -52,6 +52,9 @@ class TigrinyaDrillsData {
     TigrinyaObject(tigrinya: 'ሸሞንተ', amharic: 'ስምንት', english: 'eight (8)'),
     TigrinyaObject(tigrinya: 'ትሽዓተ', amharic: 'ዘጠኝ', english: 'nine (9)'),
     TigrinyaObject(tigrinya: 'ዓሰርተ', amharic: 'አስር', english: 'ten (10)'),
+  ];
+
+  static const List<TigrinyaObject> advancedNumbers = [
     TigrinyaObject(tigrinya: 'ዕስራ', amharic: 'ሃያ', english: 'twenty (20)'),
     TigrinyaObject(tigrinya: 'ሰላሳ', amharic: 'ሰላሳ', english: 'thirty (30)'),
     TigrinyaObject(tigrinya: 'ኣርብዓ', amharic: 'አርባ', english: 'forty (40)'),
@@ -1112,18 +1115,12 @@ class TigrinyaDrillsData {
       description: 'In, to, from, with, and (ን...ን), but, because',
       type: DrillModuleType.preposition,
     ),
-    DrillModule(
-      id: 'mod_3',
-      name: 'Numbers',
-      description: 'Master counting from 1 to 100',
-      type: DrillModuleType.number,
-    ),
 
     // ── INTEGRATION 1: Unit 1 Review ──
     DrillModule(
       id: 'mod_integration_1',
       name: '🧩 Integration 1',
-      description: 'Combine Greetings + Pronouns + Demonstratives + Prepositions + Numbers',
+      description: 'Combine Greetings + Pronouns + Demonstratives + Prepositions',
       type: DrillModuleType.integration,
       integrationLevel: 1,
     ),
@@ -1200,12 +1197,18 @@ class TigrinyaDrillsData {
       description: 'Learn the essential question words as vocabulary',
       type: DrillModuleType.questionWordBasic,
     ),
+    DrillModule(
+      id: 'mod_3',
+      name: 'Numbers (1-10)',
+      description: 'Master counting from 1 to 10',
+      type: DrillModuleType.number,
+    ),
 
     // ── INTEGRATION 3: Unit 3 Review ──
     DrillModule(
       id: 'mod_integration_3',
       name: '🧩 Integration 3',
-      description: 'Build sentences with adjectives, possession, identity, SOV, existentials',
+      description: 'Build sentences with adjectives, possession, identity, SOV, existentials, and numbers',
       type: DrillModuleType.integration,
       integrationLevel: 3,
     ),
@@ -1263,6 +1266,12 @@ class TigrinyaDrillsData {
       name: 'Time, Days & Dates',
       description: 'Yesterday, tomorrow, Monday, Tuesday...',
       type: DrillModuleType.time,
+    ),
+    DrillModule(
+      id: 'mod_advanced_numbers',
+      name: 'Advanced Numbers (20-100)',
+      description: 'Learn twenty, thirty, up to one hundred',
+      type: DrillModuleType.advancedNumber,
     ),
     DrillModule(
       id: 'mod_location',

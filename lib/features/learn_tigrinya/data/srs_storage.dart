@@ -97,6 +97,13 @@ class SrsStorage {
 
   /// Record a review for a card. Updates SM-2 scheduling.
   static Future<void> recordReview(String cardKey, bool isCorrect) async {
+    final parts = cardKey.split('_');
+    if (parts.length >= 3 && parts[1].isEmpty && parts[2] == 'pronoun') {
+      // Ignore complex grammar strings that lack an object and a verb.
+      // They cannot be reconstructed by the Daily Review screen and will become ghost cards.
+      return;
+    }
+
     final record = getCardRecord(cardKey) ?? SrsCardRecord(cardKey: cardKey);
     record.lastSeenTimestamp = DateTime.now().millisecondsSinceEpoch;
 
@@ -137,6 +144,9 @@ class SrsStorage {
 
   /// Record a hint peek (user tapped to see translation).
   static Future<void> recordHintPeek(String cardKey) async {
+    final parts = cardKey.split('_');
+    if (parts.length >= 3 && parts[1].isEmpty && parts[2] == 'pronoun') return;
+
     final record = getCardRecord(cardKey) ?? SrsCardRecord(cardKey: cardKey);
     record.hintPeekCount++;
 
@@ -163,7 +173,20 @@ class SrsStorage {
     final prefs = SharedPrefsLogic.instance;
     final index = prefs.getStringList(_indexKey) ?? [];
     final records = <SrsCardRecord>[];
+    
+    final advancedWords = ['ዕስራ', 'ሰላሳ', 'ኣርብዓ', 'ሓምሳ', 'ሱሳ', 'ሰብዓ', 'ሰማንያ', 'ተስዓ', 'ሚእቲ'];
+
     for (final key in index) {
+      final parts = key.split('_');
+      // Actively ignore advanced numbers if they are still floating in memory
+      if (parts.length > 1 && advancedWords.contains(parts[1])) {
+        continue;
+      }
+      // Actively ignore unsupported grammar cards that lack an object and a verb
+      if (parts.length > 2 && parts[1].isEmpty && parts[2] == 'pronoun') {
+        continue;
+      }
+      
       final record = getCardRecord(key);
       if (record != null) records.add(record);
     }

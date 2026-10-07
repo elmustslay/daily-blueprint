@@ -76,15 +76,20 @@ class MasteryStorage {
     // Check if question word module (must pass both present & past MCQ for all previous verb modules)
     if (allModules[moduleIndex].type == DrillModuleType.questionWord) {
       for (int i = 1; i < moduleIndex; i++) {
-        if (!isMcqPassed(allModules[i].id, Tense.present) ||
-            !isMcqPassed(allModules[i].id, Tense.past)) {
-          return false;
+        if (allModules[i].type == DrillModuleType.verb) {
+          if (!isMcqPassed(allModules[i].id, Tense.present) ||
+              !isMcqPassed(allModules[i].id, Tense.past)) {
+            return false;
+          }
         }
       }
       return true;
     }
     
     final prevModule = allModules[moduleIndex - 1];
+    if (prevModule.type == DrillModuleType.integration) {
+      return getMastery(prevModule.id, Tense.present, DrillStage.selfGrade) >= unlockThreshold;
+    }
     return isMcqPassed(prevModule.id, Tense.present);
   }
 

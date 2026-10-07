@@ -40,13 +40,15 @@
   - Laundry Cycle 2: Bath Towels & Body Washcloths (5/5 warmness) -> Wash 1: 2 tbsp All Free Clear (Liquid) + 1/3 cup Bleach -> Wash 2: Full Cycle (WATER ONLY - no detergent) to lift bleach residue (Dry on LOW heat)
 [5:00-5:55 pm] Study Time
   - Study (Beat traffic before gym)
+  - 🍌 Eat 1 Medium Banana (Pre-Workout Phase 1)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
   - 🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)
   - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)
-  - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
+  - 🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)
 [6:30-8:00 pm] Chest, Shoulders & Triceps
 [8:00-8:30 pm] Commute Home
+  - 🥤 Drink the whey isolate shake on commute home.
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Cook Salmon (3 portions): start 1st portion (eat 1/2, save 1/2 in fridge)
@@ -54,7 +56,7 @@
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
   - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
@@ -130,13 +132,15 @@
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
+  - 🍌 Eat 1 Medium Banana (Pre-Workout Phase 1)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
   - 🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)
   - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)
-  - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
+  - 🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)
 [6:30-8:00 pm] Legs (Quads & Calves)
 [8:00-8:30 pm] Commute Home
+  - 🥤 Drink the whey isolate shake on commute home.
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Take 1 cap Copper Glycinate (3mg)
@@ -145,7 +149,7 @@
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [9:20-9:50 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
   - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
@@ -225,16 +229,17 @@
 [6:05-6:15 pm] Get Dressed & Commute to Gym (LISS)
   - Get dressed for gym
   - 💧 Drink one 21oz water bottle
-  - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
+  - 🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)
 [6:15-7:25 pm] Cardio (LISS) / Haircut
 [7:25-7:35 pm] Commute Home
+  - 🥤 Drink the whey isolate shake on commute home.
 [7:40-8:20 pm] Dinner
   - Start a new portion of Salmon (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [8:20-8:50 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:20 pm] Study Time
@@ -289,28 +294,30 @@
   - Run Dishwasher
 [1:00-1:30 pm] Lunch
   - 1 full serving of my pasta
-  - 🍌 Eat 1 Medium Bananas (Refeed Carb Load)
+  - 🍌 Eat 1 Medium Banana (Refeed Carb Load)
 [1:30-5:00 pm] Work
   - 4:00 pm Touch-up: Wash hands -> Blotting Sheet  -> Wash hands -> House of Hur Sun Fluid: Apply face in 2 layers (0.5 finger, wait 30s, 0.5 finger) -> Apply 1 finger for neck -> WAIT 3m
   - Cook 1lb ground beef (divide in 4, 4 fridge) while working
 [5:00-5:55 pm] Study Time
   - Study (Beat traffic before gym)
+  - 🍌 Eat 1 Medium Banana (Pre-Workout Phase 1)
 [5:55-6:20 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
   - 🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)
   - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)
-  - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
+  - 🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)
   - 🧤 Grab Gym Gloves
 [6:20-7:50 pm] Back, Biceps & Forearms
 [7:50-8:20 pm] Commute Home
+  - 🥤 Drink the whey isolate shake on commute home.
 [8:30-9:00 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-  - 🍌 Eat 4 Medium Bananas (Post-Workout Carb Load)
+  - 🍌 Eat 3 Medium Bananas (Post-Workout Carb Load)
 [9:00-9:30 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Eat 2 Kiwis now (~1hr before sleep) & swish water (brush 20 min after)
   - 📱 Final check of phone/messages before Screen Curfew starts.
@@ -379,7 +386,7 @@
   - 🧍‍♂️ Use Standing Desk for 3-4 hours
 [1:00-1:30 pm] Lunch
   - 1 full serving of my pasta
-  - 🍌 Eat 1 Medium Bananas (Refeed Carb Load)
+  - 🍌 Eat 1 Medium Banana (Refeed Carb Load)
 [1:30-5:00 pm] Work
   - Drink Sparkling Water
   - 🧍‍♂️ Use Standing Desk for 3-4 hours
@@ -387,21 +394,23 @@
 [5:00-5:10 pm] Commute Home
 [5:10-5:55 pm] Study Time
   - Study (Beat traffic before gym)
+  - 🍌 Eat 1 Medium Banana (Pre-Workout Phase 1)
 [5:55-6:30 pm] Get Dressed & Commute to Gym (Resistance)
   - Get dressed for gym
   - 🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)
   - 🍌 Eat 2 Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)
-  - Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout
+  - 🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)
 [6:30-8:00 pm] Legs (Hamstrings / Glutes)
 [8:00-8:30 pm] Commute Home
+  - 🥤 Drink the whey isolate shake on commute home.
 [8:50-9:20 pm] Dinner
   - 1 scoop creatine monohydrate (5g)
   - Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)
   - 🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
-  - 🍌 Eat 4 Medium Bananas (Post-Workout Carb Load)
+  - 🍌 Eat 3 Medium Bananas (Post-Workout Carb Load)
 [9:20-9:50 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - Scoop 1/3 of tomorrow's pasta into a separate container for dinner. The remaining 2/3 stays in the main container for lunch.
   - 📱 Final check of phone/messages before Screen Curfew starts.
@@ -463,6 +472,7 @@
 [12:35-1:50 pm] Study Time
 [1:50-2:20 pm] Lunch
   - 2/3 serving of my pasta
+  - 🍌 Eat 1 Medium Banana (Muscle Shield: covers brain glucose so protein goes to muscle)
 [2:20-5:10 pm] Study Time
 [5:10-5:30 pm] Diffuse Brain Rest
   - NO PHONE. Relax or nap on bed/chair. Close eyes and allow memory consolidation.
@@ -480,7 +490,7 @@
   - 1/3 serving of my pasta
 {{#if !isAshwagandhaOff}}  - 2 cap Ashwagandha{{/if}}
 [8:00-8:50 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:35 pm] Relax / Catch up on reading
@@ -489,7 +499,7 @@
   - Brush teeth (Boka nHAp) -> Spit, DO NOT rinse. (Mental cue: Keep mouth CLOSED in shower!)
   - Pre-Shower: Gently massage 2-3 pumps Cleansing Oil on DRY face (MAX 45s CRUCIAL - do not over-rub) to melt sunscreen/sweat
   - In-Shower: Wet hands, rub face/neck/ears to emulsify oil (15-20s) -> Rinse thoroughly
-  - Hair: Nizoral 1% (5m lather)
+  - Hair: Nizoral 1% (5m lather) -> Post-shower: Massage a few drops of Argan Oil into damp scalp to prevent severe dryness
   - Body: Hold Washcloth under water until SOAKING wet. Apply Dove Deep Moisture Body Wash into cloth and rub together to build a rich foam cushion. Gently sweep foamy cloth over upper and lower body (for frictionless gym maintenance)
   - Face: Lather 1 pump of {{isWinter ? "Lipikar AP+ (Barrier Shield)" : "Vanicream Gentle Cleanser"}} in wet hands for 3-4s to build foam. Gently glide foam onto face/neck/ears with LUKEWARM water (CRUCIAL: NO HOT WATER) for EXACTLY 30s (then rinse)
   - Finish: Hot rinse to raise skin temperature (helps drop core body temp afterward for sleep onset)
@@ -555,7 +565,7 @@
   - Boil 18 eggs for the week (warm on counter 10m first)
 [7:30-8:15 pm] Relax / Catch up on reading
 [8:15-8:50 pm] Chores & Clean Up
-  - 1 scoop Casein in 16oz water -> Swish/drink water after
+  - 1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after
   - The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.
   - 📱 Final check of phone/messages before Screen Curfew starts.
 [8:50-9:50 pm] Shower & Bed Prep (Wind Down Starts)

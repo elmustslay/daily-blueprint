@@ -7,6 +7,12 @@ STARTING_WEIGHT = 156.0
 STARTING_BF_PCT = 31.2
 AGE = 23
 
+# WEIGH-IN CHECKPOINT: on this date the sim snaps to the real scale weight.
+# Assumes ALL weight lost since START_DATE was fat (lean held at each scenario's starting lean).
+# Set CHECKPOINT_WEIGHT = None to disable.
+CHECKPOINT_DATE = datetime.date(2026, 10, 6)
+CHECKPOINT_WEIGHT = 143.0
+
 # Activity Multipliers (applied to RMR only; TEF is computed separately below)
 # These capture: Resistance Training EAT + NEAT + Aerobic activity (steps/LISS/dance)
 # Aerobic tracking is unified in the app via HealthKit:
@@ -108,7 +114,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     fat_mass = sim_start_weight * (sim_start_bf_pct / 100.0)
     lean_mass = sim_start_weight - fat_mass
     current_fat, current_lean = fat_mass, lean_mass
-    current_glycogen = 500.0
+    liver_glycogen = 100.0
+    muscle_glycogen = 400.0
     current_cortisol_water = 0.0
     total_catabolized = 0.0
     consecutive_disuse_days = 0
@@ -129,7 +136,12 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     # 2. Protein Distribution & Leucine Triggering (Now calculated dynamically via Chrononutrition Engine)
     # leucine_distribution_efficiency will be calculated per-day
     
+    checkpoint_day = (CHECKPOINT_DATE - START_DATE).days if CHECKPOINT_WEIGHT else -1
+    
     for day in range(days):
+        if day == checkpoint_day:
+            current_lean = lean_mass
+            current_fat = max(ESSENTIAL_FAT_LBS, CHECKPOINT_WEIGHT - lean_mass)
         current_weight = current_fat + current_lean
         current_bf = (current_fat / current_weight) * 100.0
         
@@ -253,8 +265,23 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             post_workout_synergy += (pw_insulin * pw_mps) * 0.05
         # =========================================================================
         
+        # BMR, Activity, and Adaptive Thermogenesis estimates (needed early for glycerol estimation)
+        rmr = 370 + (21.6 * (current_lean / 2.20462))
+        scaling = (current_weight / STARTING_WEIGHT) ** 0.55
+        neat_bf_drop = max(0.0, (15.0 - current_bf) * 12.0) if current_bf < 15.0 else 0.0
+        cns_fatigue_penalty = max(0.50, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * 0.50)
+        cns_tdee_factor = max(1.0 - THYROID_TDEE_PENALTY, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * THYROID_TDEE_PENALTY)
+        daily_steps = DAILY_STEPS[day % 7]
+        current_act = 1.25 + (daily_steps * 0.00003125)
+
+        # Estimate daily deficit to calculate free glycerol glucose from lipolysis
+        estimated_base_tdee = (rmr * current_act * scaling * cns_tdee_factor) - neat_bf_drop
+        estimated_deficit = max(0.0, estimated_base_tdee - cal)
+        estimated_fat_lost_grams = (estimated_deficit * sleep_fat_ox_multiplier) / 9.0
+        glycerol_glucose = estimated_fat_lost_grams * 0.10
+
         # 1. Dynamic CNS Glucose Demand & Ketone Adaptation
-        if net_carb < 50.0 and current_glycogen < 180.0:
+        if net_carb < 50.0 and liver_glycogen < 50.0:
             ketone_adaptation_days = min(5, ketone_adaptation_days + 1)
         elif net_carb > 100.0: # Massive insulin spike halts hepatic ketogenesis immediately
             ketone_adaptation_days = 0 
@@ -265,7 +292,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         cns_glucose_need = 115.0 - (75.0 * keto_shift) # 115g -> 40g
         
         # 2. Gluconeogenesis (GNG) Subsystem with 1.6:1 Amino Acid Conversion Ratio
-        carb_deficit_for_cns = max(0.0, cns_glucose_need - net_carb)
+        # Brain uses glycerol from fat first before stealing protein
+        carb_deficit_for_cns = max(0.0, cns_glucose_need - net_carb - glycerol_glucose)
         protein_stolen_for_cns = carb_deficit_for_cns * GNG_EFFICIENCY_RATIO
         effective_prot = max(0.0, prot - protein_stolen_for_cns)
         
@@ -288,27 +316,10 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             post_workout_net_carb = 0.0
         
         # BMR & TEF (Protein: 25%, Carbs: 8%, Fat: 2%, Alcohol: 15%)
-        rmr = 370 + (21.6 * (current_lean / 2.20462))
-        # Convert internal muscle breakdown back into dry protein grams to apply the TEF tax
-        internal_prot_g = direct_gluconeogenic_catabolism * 100.0
-        exact_tef = ((prot + internal_prot_g) * 4 * 0.25) + (carb * 4 * 0.08) + (fat * 9 * 0.02) + (alcohol * 7 * 0.15)
-        
-        # Adaptive Thermogenesis (Mass scaling + Hormonal NEAT drop below 15% BF + Prolonged deficit fatigue)
-        scaling = (current_weight / STARTING_WEIGHT) ** 0.55
-        
-        # Hormonal NEAT suppression when getting extremely lean (<15% in males)
-        neat_bf_drop = max(0.0, (15.0 - current_bf) * 12.0) if current_bf < 15.0 else 0.0
-        
-        # CNS & Thyroid fatigue (computed from previous day's consecutive_deficit_days before TDEE)
-        cns_fatigue_penalty = max(0.50, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * 0.50)
-        cns_tdee_factor = max(1.0 - THYROID_TDEE_PENALTY, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * THYROID_TDEE_PENALTY)
+        # TEF applies to oral food only, NOT internally catabolized muscle
+        exact_tef = (prot * 4 * 0.25) + (carb * 4 * 0.08) + (fat * 9 * 0.02) + (alcohol * 7 * 0.15)
         
         # Base TDEE before checking for deficit/surplus (so we can mathematically detect biological refeeds)
-        daily_steps = DAILY_STEPS[day % 7]
-        
-        # Base multiplier (1.25) + step calculation
-        current_act = 1.25 + (daily_steps * 0.00003125)
-        
         base_tdee = (rmr * current_act * scaling * cns_tdee_factor) + (exact_tef - (cal * 0.10)) - neat_bf_drop
         is_biological_refeed = (net_carb > 200.0 and cal >= base_tdee)
         
@@ -362,12 +373,13 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         
         # 4. Glycogen-Driven Resistance Training Stimulus Factor
         # Only pre-workout carbs are available for glycogen loading before performance is evaluated
-        # Floor at 20g: reflects real-world depletion under sustained low-carb + heavy lifting
-        # (previous 100g floor was artificially protecting performance during deep depletion)
-        current_glycogen = max(20.0, min(500.0, current_glycogen + pre_workout_net_carb))
+        liver_space = 100.0 - liver_glycogen
+        liver_replenish = min(liver_space, pre_workout_net_carb)
+        liver_glycogen += liver_replenish
+        muscle_glycogen = max(15.0, min(400.0, muscle_glycogen + (pre_workout_net_carb - liver_replenish)))
         
         # Intramuscular glycogen < 250g impairs calcium release and high-intensity force output
-        glycogen_performance_factor = max(0.08, min(1.0, current_glycogen / 250.0))
+        glycogen_performance_factor = max(0.08, min(1.0, muscle_glycogen / 250.0))
         
         # 5. Optimal P-Ratio Anabolic Window (Biphasic Curve for Body Fat vs MPS)
         # Peak anabolic sensitivity is between 10% and 22% BF.
@@ -412,7 +424,10 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         # METABOLIC LIMIT & RECOMP CALIBRATION
         # -------------------------------------------------------------
         # Biological maximum fat oxidation (Alpert's limit: 31.0 kcal/lb of fat/day)
-        max_ox = current_fat * 31.0 
+        # Insulin lipolysis blocker: high insulin suppresses HSL, shutting down fat oxidation
+        insulin_lipolysis_blocker = max(0.1, 1.0 - avg_insulin_protection)
+        max_ox = current_fat * 31.0 * insulin_lipolysis_blocker
+        
         if current_bf <= ESSENTIAL_BF_PCT or current_fat <= ESSENTIAL_FAT_LBS:
             max_ox = 0.0
         if alcohol > 0:
@@ -463,9 +478,14 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             current_lean += muscle_gain - muscle_atrophy - catabolized
         
         # Pure Mathematical Glycogen turnover: Base + Gym Hours + LISS/Walking/Dancing
-        # Add 40g of glycogen depletion if they hit at least 8k steps that day
-        glycogen_depletion = 50.0 + (len(gym_hours) * 30.0) + (40.0 if daily_steps >= 8000 else 0.0)
-        current_glycogen = max(20.0, min(500.0, current_glycogen + post_workout_net_carb - glycogen_depletion))
+        liver_space_post = 100.0 - liver_glycogen
+        liver_replenish_post = min(liver_space_post, post_workout_net_carb)
+        liver_glycogen += liver_replenish_post
+        muscle_glycogen = max(15.0, min(400.0, muscle_glycogen + (post_workout_net_carb - liver_replenish_post)))
+        
+        liver_glycogen = max(5.0, liver_glycogen - 50.0) # Base turnover
+        muscle_depletion = (len(gym_hours) * 30.0) + (40.0 if daily_steps >= 8000 else 0.0)
+        muscle_glycogen = max(15.0, muscle_glycogen - muscle_depletion)
         
         # Sodium-based fluid retention (massive carbs/sodium spike aldosterone transiently)
         if is_biological_refeed:
@@ -483,7 +503,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
             else:
                 na_k_water *= 0.85
 
-    glycogen_mass_lbs = ((current_glycogen * 5.0) / 453.592) - ((500.0 * 5.0) / 453.592)
+    total_glycogen = liver_glycogen + muscle_glycogen
+    glycogen_mass_lbs = ((total_glycogen * 5.0) / 453.592) - ((500.0 * 5.0) / 453.592)
     
     # Apply fluid and glycogen shifts directly to lean mass so the scale weight balances
     fluid_shifts = glycogen_mass_lbs + current_cortisol_water + refeed_sodium_water + na_k_water
@@ -497,6 +518,8 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
     print("="*50)
     print(f"PROJECTION FOR: {TARGET_DATE.strftime('%b %d, %Y')} ({days} days)")
     print(f"Start Scale:   {sim_start_weight:.1f} lbs ({sim_start_bf_pct:.1f}% BF)")
+    if CHECKPOINT_WEIGHT and 0 <= checkpoint_day < days:
+        print(f"Checkpoint:    {CHECKPOINT_WEIGHT:.1f} lbs on {CHECKPOINT_DATE.strftime('%b %d')} ({(CHECKPOINT_WEIGHT - lean_mass) / CHECKPOINT_WEIGHT * 100:.1f}% BF, all loss = fat)")
     print(f"End Scale:     {scale_w:.1f} lbs")
     print(f"End Lean:      {actual_lean_weight:.1f} lbs (Dry Structural Change: {current_lean - lean_mass:+.1f} lbs)")
     print(f"End Fat:       {current_fat:.1f} lbs ({current_fat - fat_mass:+.1f} lbs net)")

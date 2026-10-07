@@ -124,7 +124,7 @@ class GymConfig {
     this.commuteNutrition = const {NutritionAddOn.whey},
     this.isWednesday = false,
     this.preGymStudyTime,
-    this.preGymStudyNutrition = const {},
+    this.preGymStudyNutrition = const {NutritionAddOn.preWorkoutBanana},
   });
 }
 
@@ -190,7 +190,57 @@ class DailyPlanData {
     return (diff ~/ 7) + 1;
   }
 
-  static bool isDeloadWeek() => isRefeedWeek();
+  // DELOAD WINDOWS (7 days each, decoupled from refeed weeks which are disabled).
+  // Starts Thursday so all 4 lifting sessions (Thu, Fri, Mon, Tue) get deloaded exactly once.
+  //  - Oct 8:  ~10 weeks of hard training in a deficit -> performance dip (glycogen-limited, not CNS)
+  //  - Dec 3:  8 weeks later; ~2 weeks pre-Addis so you arrive recovered, un-inflamed & full-looking
+  static final List<DateTime> deloadStartDates = [
+    DateTime(2026, 10, 8),
+    DateTime(2026, 12, 3),
+  ];
+
+  static bool isDeloadWeek() {
+    final now = mockCurrentDate ?? DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    return deloadStartDates.any((s) =>
+        !today.isBefore(s) && today.isBefore(DateTime(s.year, s.month, s.day + 7)));
+  }
+
+  static String get deloadProtocolText =>
+      '🔴 DELOAD WEEK — Intensity-Preservation\n'
+      'Drop fatigue, not intensity. Heavy load keeps telling your body to hold onto muscle while the deficit continues; cutting volume lets the accumulated fatigue clear.\n\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      'LIFTING (Mon / Tue / Thu / Fri):\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      '• Keep your working weight the SAME (100%)\n'
+      '• Cut your sets roughly in half (4 → 2, 3 → 2)\n'
+      '• Keep the same rep ranges and rest periods\n'
+      '• Stop 2-3 reps short of failure (RPE 7) on EVERY set (isolations too)\n'
+      '• Zero forced reps, partials, or drop sets\n'
+      '• Skip warm-up feeder sets beyond what you need to feel ready\n\n'
+      'Example:\n'
+      '  Normally Leg Press 200 lbs × 4 sets to failure\n'
+      '  → This week: 200 lbs × 2 sets (stopping 2-3 reps early)\n\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      'ABS (Crunch Machine / Bicycle Crunches):\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      '• 2 sets each, stop a few reps short of failure\n\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      'CARDIO (Wed / Sat):\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      '• Keep your ${isRefeedWeek() ? "40-minute" : "1-hour"} LISS exactly the same and stay in your HR zone.\n'
+      '• Zone 2 walking barely taxes recovery, so no deload needed here.\n\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      'NUTRITION & SUPPLEMENTS:\n'
+      '━━━━━━━━━━━━━━━━━━━━\n'
+      '• Same food plan, same protein — do NOT eat extra (the sim showed it costs fat, not muscle)\n'
+      '• Keep creatine at 5g/day (never cycle it)\n'
+      '• Feeling hungrier or restless is normal — hold the line\n\n'
+      'AFTER THE DELOAD:\n'
+      '• Compounds (Tier 1): stop 1-2 reps short of failure\n'
+      '• Isolations: failure on the LAST set only\n\n'
+      '⚡ Clear the fatigue. Keep the muscle. Trust the math.';
+
   static bool shouldScaleUpCardio() => currentWeekNumber >= 17;
   static bool isBloodDonationWeek() => currentWeekNumber > 0 && currentWeekNumber % 22 == 0;
 
@@ -371,7 +421,7 @@ class DailyPlanData {
         if (sparklingWater) const DetailItem('Drink Sparkling Water'),
         if (standingDesk && !isRefeedWeek()) const DetailItem('🧍‍♂️ Use Standing Desk for 3-4 hours'),
         if (midMorningBanana) const DetailItem('🍌 11:30 am: Eat 1 Medium Banana (Mid-Morning)'),
-        if (banana) const DetailItem('🍌 3:30-4:00 pm: Eat 1 Medium Banana (Afternoon Snack)'),
+        if (banana) const DetailItem('🍌 4:30 pm: Eat 1 Medium Banana (Afternoon Snack)'),
         if (afternoonSunscreen != null) DetailItem('4:00 pm Touch-up: $afternoonSunscreen'),
         ...details
       ],
@@ -381,7 +431,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _pastaLunch(String time, {int extraBananas = 0, bool isFullPastaDay = false}) {
+  static TimelineItem _pastaLunch(String time, {int extraBananas = 0, bool isFullPastaDay = false, String bananaReason = 'Refeed Carb Load'}) {
     final isFullLunch = isRefeedWeek() || isFullPastaDay;
     return TimelineItem(
       time: time,
@@ -389,7 +439,7 @@ class DailyPlanData {
       icon: '🍝',
       details: [
         if (isFullLunch) const DetailItem('1 full serving of my pasta') else const DetailItem('2/3 serving of my pasta'),
-        if (extraBananas > 0) DetailItem('🍌 Eat $extraBananas Medium Bananas (Refeed Carb Load)'),
+        if (extraBananas > 0) DetailItem('🍌 Eat $extraBananas Medium Banana${extraBananas > 1 ? "s" : ""} ($bananaReason)'),
       ],
       mealRecord: MealRecord(
         items: [
@@ -407,7 +457,8 @@ class DailyPlanData {
   }) {
     final banana = nutrition.contains(NutritionAddOn.banana);
     final midMorningBanana = nutrition.contains(NutritionAddOn.midMorningBanana);
-    final bananaCount = (banana ? 1 : 0) + (midMorningBanana ? 1 : 0);
+    final preWorkoutBanana = nutrition.contains(NutritionAddOn.preWorkoutBanana);
+    final bananaCount = (banana ? 1 : 0) + (midMorningBanana ? 1 : 0) + (preWorkoutBanana ? 1 : 0);
     final withCreatine = nutrition.contains(NutritionAddOn.creatine);
 
     return TimelineItem(
@@ -418,7 +469,8 @@ class DailyPlanData {
         if (withCreatine) const DetailItem.trackable('🥤 Pre-Workout Shake: 1 scoop creatine monohydrate (5g)'),
         ...details,
         if (midMorningBanana) const DetailItem('🍌 11:30 am: Eat 1 Medium Banana (Mid-Morning)'),
-        if (banana) const DetailItem('🍌 3:30-4:00 pm: Eat 1 Medium Banana (Afternoon Snack)'),
+        if (banana) const DetailItem('🍌 4:30 pm: Eat 1 Medium Banana (Afternoon Snack)'),
+        if (preWorkoutBanana) const DetailItem('🍌 Eat 1 Medium Banana (Pre-Workout Phase 1)'),
         if (sleepKiwiCount > 0) DetailItem('Halfway through (~1hr before sleep): Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} & swish water (brush 20 min after)'),
       ],
       mealRecord: (sleepKiwiCount > 0 || bananaCount > 0 || withCreatine) ? MealRecord(items: [
@@ -433,7 +485,7 @@ class DailyPlanData {
     return TimelineItem(time: time, title: title, icon: icon);
   }
 
-  static TimelineItem _commuteToGym(String time, {String? reapplySunscreen, Set<RoutineModifier> modifiers = const {}, Set<NutritionAddOn> nutrition = const {NutritionAddOn.whey}, bool isResistanceDay = true}) {
+  static TimelineItem _commuteToGym(String time, {String? reapplySunscreen, Set<RoutineModifier> modifiers = const {}, Set<NutritionAddOn> nutrition = const {}, bool isResistanceDay = true}) {
     final takeGymGloves = modifiers.contains(RoutineModifier.takeGymGloves);
     final withWhey = nutrition.contains(NutritionAddOn.whey);
     final preWorkoutBananaCount = (isResistanceDay || isRefeedWeek()) ? (isRefeedWeek() ? 3 : 2) : 0;
@@ -447,14 +499,28 @@ class DailyPlanData {
         if (isResistanceDay) const DetailItem.trackable('🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)')
         else const DetailItem('💧 Drink one 21oz water bottle'),
         if (preWorkoutBananaCount > 0) DetailItem('🍌 Eat $preWorkoutBananaCount Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)'),
-        if (withWhey) const DetailItem.trackable('Mix 1 scoop whey isolate (30g protein) in water bottle. Drink 1/3 on commute, sip rest during workout'),
+        if (withWhey) const DetailItem('🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)'),
         if (reapplySunscreen != null) DetailItem(reapplySunscreen),
         if (takeGymGloves) const DetailItem('🧤 Grab Gym Gloves'),
       ],
-      mealRecord: (preWorkoutBananaCount > 0 || withWhey || isResistanceDay) ? MealRecord(items: [
+      mealRecord: (preWorkoutBananaCount > 0 || isResistanceDay) ? MealRecord(items: [
         if (preWorkoutBananaCount > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: preWorkoutBananaCount.toDouble()),
-        if (withWhey) _Portions.whey,
         if (isResistanceDay) const IngredientPortion(ingredient: IngredientsData.iodizedTableSalt, amount: 0.33),
+      ]) : null,
+    );
+  }
+
+  static TimelineItem _commuteHomeFromGym(String time, {Set<NutritionAddOn> nutrition = const {}}) {
+    final withWhey = nutrition.contains(NutritionAddOn.whey);
+    return TimelineItem(
+      time: time,
+      title: 'Commute Home',
+      icon: '🚗',
+      details: [
+        if (withWhey) const DetailItem.trackable('🥤 Drink the whey isolate shake on commute home.'),
+      ],
+      mealRecord: withWhey ? MealRecord(items: [
+        _Portions.whey,
       ]) : null,
     );
   }
@@ -550,7 +616,7 @@ class DailyPlanData {
       title: 'Chores & Clean Up',
       icon: '🧼',
       details: [
-        const DetailItem('1 scoop Casein in 16oz water -> Swish/drink water after'),
+        const DetailItem('1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after'),
         const DetailItem('The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.'),
         if (sleepKiwiCount > 0) DetailItem('Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (~1hr before sleep) & swish water (brush 20 min after)'),
         if (blueberryText.isNotEmpty) DetailItem('🫐 $blueberryText'),
@@ -660,6 +726,7 @@ class DailyPlanData {
     String? morningSkincare,
     List<DetailItem> amWorkDetails = const [],
     List<DetailItem> pmWorkDetails = const [],
+    Set<NutritionAddOn> pmWorkNutrition = const {},
     ChoresConfig chores = const ChoresConfig(),
     BedPrepConfig bedPrep = const BedPrepConfig(),
     Set<NutritionAddOn> wakeupNutrition = const {},
@@ -699,7 +766,7 @@ class DailyPlanData {
         '1:30-5:00 pm', 
         details: pmWorkDetails, 
         modifiers: isOfficeDay ? {RoutineModifier.sparklingWater, RoutineModifier.standingDesk} : {}, 
-        nutrition: {}, 
+        nutrition: pmWorkNutrition, 
         afternoonSunscreen: effectiveSunscreen
       ),
       if (isOfficeDay) TimelineItem(time: '5:00-5:10 pm', title: 'Commute Home', icon: '🚗'),
@@ -711,7 +778,7 @@ class DailyPlanData {
         isResistanceDay: gym.isResistance
       ),
       _gym(gym.time, gym.title, isCardio: gym.isCardio, isWednesday: gym.isWednesday),
-      TimelineItem(time: gym.commuteHomeTime, title: 'Commute Home', icon: '🚗'),
+      _commuteHomeFromGym(gym.commuteHomeTime, nutrition: gym.commuteNutrition),
       dinner,
       _chores(
         chores.time, 
@@ -808,7 +875,7 @@ class DailyPlanData {
       commuteHomeTime: '7:50-8:20 pm',
       modifiers: {RoutineModifier.takeGymGloves},
     ),
-    dinner: _beefDinner('8:30-9:00 pm', extraBananas: 4, isFullPastaDay: true, largeCarrots: true),
+    dinner: _beefDinner('8:30-9:00 pm', extraBananas: 3, isFullPastaDay: true, largeCarrots: true), // 4 -> 3: 4th banana moved to Sat lunch (refeed still > 200g net carbs)
     chores: const ChoresConfig(time: '9:00-9:30 pm', sleepKiwiCount: 2),
     bedPrep: const BedPrepConfig(
       time: '9:30-10:00 pm',
@@ -830,7 +897,7 @@ class DailyPlanData {
     morningProtein: ProteinSource.beef,
     isOfficeDay: true,
     gym: const GymConfig(title: 'Legs (Hamstrings / Glutes)'),
-    dinner: _beefDinner('8:50-9:20 pm', extraBananas: 4, isFullPastaDay: true, largeCarrots: true),
+    dinner: _beefDinner('8:50-9:20 pm', extraBananas: 3, isFullPastaDay: true, largeCarrots: true), // 4 -> 3: refeed still > 200g net carbs
     chores: const ChoresConfig(),
     bedPrep: const BedPrepConfig(isHarshActiveNight: true),
     magAmount: 3,
@@ -845,7 +912,9 @@ class DailyPlanData {
     ..._buildStudyCycle('9:05-10:35 am', '10:35-10:55 am'),
     ..._buildStudyCycle('10:55-12:20 pm', '12:20-12:35 pm', studyNutrition: {}),
     _study('12:35-1:50 pm'),
-    _pastaLunch('1:50-2:20 pm'),
+    // +1 banana: Saturday is the lowest-carb day (~64g net). Without it, the sim burns protein
+    // for brain glucose (GNG). Moving 1 banana here from Thu/Fri cut catabolism ~1.3 -> ~0.4 lbs by Dec.
+    _pastaLunch('1:50-2:20 pm', extraBananas: 1, bananaReason: 'Muscle Shield: covers brain glucose so protein goes to muscle'),
     ..._buildStudyCycle('2:20-5:10 pm', '5:10-5:30 pm', studyNutrition: {}),
     _study('5:30-6:20 pm'),
     _commuteToGym('6:20-6:25 pm', reapplySunscreen: _Routines.reapplyHur, nutrition: {}, isResistanceDay: false),
@@ -854,7 +923,7 @@ class DailyPlanData {
     _beefDinner('7:45-8:00 pm'),
     _chores('8:00-8:50 pm', blueberryText: isRefeedWeek() ? 'Eat the rest of the box of Blueberries' : '', nutrition: {}, sleepKiwiCount: 0),
     _relaxOrCatchUp('8:50-9:35 pm'),
-    _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather)'),
+    _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather) -> Post-shower: Massage a few drops of Argan Oil into damp scalp to prevent severe dryness'),
     _nightSupplement('10:20-10:35 pm', magAmount: 2, skincare: _Routines.joseon, nutrition: {NutritionAddOn.nac}),
     _fallAsleep('10:35-11:05 pm'),
   ];

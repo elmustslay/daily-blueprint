@@ -122,9 +122,39 @@ void main() {
     DailyPlanData.mockCurrentDate = DateTime(2026, 8, 15);
     final normalItems = ShoppingListNotifier().build();
     final bananaItemNormal = normalItems.firstWhere((item) => item.name == 'Bananas');
-    expect(bananaItemNormal.subtext, contains('22 Bananas'));
+    expect(bananaItemNormal.subtext, contains('25 Bananas'));
 
     // Obsolete Refeed logic removed
+  });
+
+  test('Deload windows fire independently of (disabled) refeed weeks and cover each lifting day once', () {
+    try {
+      for (final start in DailyPlanData.deloadStartDates) {
+        final liftingDaysSeen = <int>[];
+        for (int i = -1; i <= 7; i++) {
+          final date = DateTime(start.year, start.month, start.day + i);
+          DailyPlanData.mockCurrentDate = DateTime(date.year, date.month, date.day, 18, 30);
+          final inWindow = i >= 0 && i < 7;
+          expect(DailyPlanData.isDeloadWeek(), inWindow, reason: 'isDeloadWeek wrong on $date (window starts $start)');
+          expect(DailyPlanData.isRefeedWeek(), isFalse);
+          if (inWindow && const {DateTime.monday, DateTime.tuesday, DateTime.thursday, DateTime.friday}.contains(date.weekday)) {
+            liftingDaysSeen.add(date.weekday);
+          }
+        }
+        expect(liftingDaysSeen.toSet().length, 4, reason: 'Deload starting $start must include Mon/Tue/Thu/Fri exactly once');
+        expect(liftingDaysSeen.length, 4);
+      }
+      // A normal training day is not a deload
+      DailyPlanData.mockCurrentDate = DateTime(2026, 11, 2);
+      expect(DailyPlanData.isDeloadWeek(), isFalse);
+      // Protocol text must match the current split (no planks, LISS on Wed/Sat)
+      final text = DailyPlanData.deloadProtocolText;
+      expect(text, contains('Mon / Tue / Thu / Fri'));
+      expect(text, contains('CARDIO (Wed / Sat)'));
+      expect(text.toLowerCase(), isNot(contains('plank')));
+    } finally {
+      DailyPlanData.mockCurrentDate = null;
+    }
   });
 
   test('Rule 13: Strict Pre-Workout Fat Restriction (Gastric Emptying)', () {

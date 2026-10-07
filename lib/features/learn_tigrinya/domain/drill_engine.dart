@@ -114,6 +114,14 @@ class DrillEngine {
           [8, 11],   // Negative identity
         ]);
 
+      case DrillModuleType.advancedNumber:
+        final items = TigrinyaDrillsData.advancedNumbers;
+        return (items: items, chunks: [
+          [0, 3],    // 20-50
+          [4, 7],    // 60-90
+          [8, 8],    // 100
+        ]);
+
       // ── Existential: 10 items → single chunk (small enough) ──
       // ── All other flashcard modules ≤10 items: single chunk ──
       default:
@@ -157,6 +165,8 @@ class DrillEngine {
       _generateQuestionWordDeck();
     } else if (module.type == DrillModuleType.number) {
       _generateNumberDeck();
+    } else if (module.type == DrillModuleType.advancedNumber) {
+      _generateAdvancedNumberDeck();
     } else if (module.type == DrillModuleType.time) {
       _generateTimeDeck();
     } else if (module.type == DrillModuleType.adjective) {
@@ -688,13 +698,37 @@ class DrillEngine {
       _generatePronounDeck();
       _generateDemonstrativeDeck();
       _generatePrepositionDeck();
-      _generateNumberDeck();
     } else if (module.integrationLevel == 2) {
       _generateVerbDeck();
       _generateFamilyDeck();
     } else if (module.integrationLevel == 3) {
-      _generatePhraseDeck();
       _generateAdjectiveDeck();
+      _generateIdentityDeck();
+      _generateSentenceDeck();
+      _generatePossessionDeck();
+      _generateExistentialDeck();
+      _generateQuestionWordBasicDeck();
+      _generateNumberDeck();
+    } else if (module.integrationLevel == 4) {
+      _generateVerbDeck();
+      _generateQuestionWordDeck();
+    } else if (module.integrationLevel == 5) {
+      _generatePossessivePronounDeck();
+      _generateNounPossessionDeck();
+      _generateTimeDeck();
+      _generateLocationWordDeck();
+      _generateCompoundSubjectDeck();
+      _generateAdvancedNumberDeck();
+    } else if (module.integrationLevel == 6) {
+      _generateVerbDeck();
+      _generateEmotionDeck();
+      _generateImperativeDeck();
+    } else if (module.integrationLevel == 7) {
+      _generateVerbDeck();
+      _generateWithConstructionDeck();
+      _generateVerbObjectSuffixDeck();
+      _generatePhraseDeck();
+      _generateIntimatePhraseDeck();
     } else {
       _generatePronounDeck();
     }
@@ -868,6 +902,13 @@ class DrillEngine {
 
   void _generateNumberDeck() {
     final info = DrillEngine.getChunkInfo(DrillModuleType.number);
+    if (info != null) {
+      _generateChunkedDeck(info.items, info.chunks);
+    }
+  }
+
+  void _generateAdvancedNumberDeck() {
+    final info = DrillEngine.getChunkInfo(DrillModuleType.advancedNumber);
     if (info != null) {
       _generateChunkedDeck(info.items, info.chunks);
     }

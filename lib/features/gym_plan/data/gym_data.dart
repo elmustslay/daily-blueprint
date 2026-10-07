@@ -256,7 +256,7 @@ class GymData {
     Exercise(
       id: 'pull_1', name: 'Lat Pulldown Machine', sets: '3', reps: '8-12', rest: '3 min', primaryMuscleGroup: 'Lats',
       tier: 1,
-      tip: '🎯 Focus: Your lats (the "wings" on the sides of your back).\n\n💡 How to do it: Grab bar wider than shoulders. Pull elbows straight down to your back pockets.\n\n🔒 NON-NEGOTIABLE: Thighs locked firmly under the pads so you cannot lift off the seat. Torso angle remains rigidly locked.\n\n⚠️ Common Pitfall: Leaning your torso way back horizontally as you pull. You are just using your body weight falling backward to move the bar, turning off the lats entirely.',
+      tip: '🎯 Focus: Your lats (the "wings" on the sides of your back).\n\n💡 How to do it: Grab bar wider than shoulders using a thumbless grip (no squeeze). Pull elbows straight down to your back pockets.\n\n🔒 NON-NEGOTIABLE: Thighs locked firmly under the pads so you cannot lift off the seat. Torso angle remains rigidly locked.\n\n⚠️ Common Pitfall: Leaning your torso way back horizontally as you pull. You are just using your body weight falling backward to move the bar, turning off the lats entirely.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.4), WarmupSet(reps: 6, weightFactor: 0.6), WarmupSet(reps: 2, weightFactor: 0.8)],
       secondaryWarmupSets: [WarmupSet(reps: 4, weightFactor: 0.75, note: 'Feeder set')],
       warmupRest: 'Rest 1 min between warmups, 2 mins before working set.',
@@ -278,21 +278,21 @@ class GymData {
     ),
     Exercise(
       id: 'push_4', name: 'Machine Lateral Raise', sets: '3', reps: '10-15', rest: '2 min', primaryMuscleGroup: 'Side Delts',
-      tip: '🎯 Focus: Building the "cap" of your shoulder (side deltoid) for a wider look.\n\n💡 How to do it: Lead with elbows, push pads out to the sides.\n\n🔒 NON-NEGOTIABLE: Shoulders pressed DOWN, actively pushed away from your ears.\n\n⚠️ Common Pitfall: Shrugging your traps up toward your ears to lift the weight. The weight will go up, but your side delts will do zero work.\n\n🔥 AESTHETIC NOTE: Because you do only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, it doesn\'t count.',
+      tip: '🎯 Focus: Building the "cap" of your shoulder (side deltoid) for a wider look.\n\n💡 How to do it: Keep your hands and wrists totally relaxed, and focus entirely on pushing your upper arms/elbows outward toward the walls.\n\n🔒 NON-NEGOTIABLE: Shoulders pressed DOWN, actively pushed away from your ears. Your entire outer upper arm must stay completely flush against the pad. If your arm slides forward and your wrist takes the pressure, the rep does not count.\n\n⚠️ Common Pitfall: Shrugging your traps up toward your ears to lift the weight. The weight will go up, but your side delts will do zero work.\n\n🔥 AESTHETIC NOTE: Because you do only 3 sets, you MUST take them to absolute, grueling failure. If you can do another rep, it doesn\'t count.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5), WarmupSet(reps: 5, weightFactor: 0.75)],
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
     ),
     Exercise(
-      id: 'push_5', name: 'Tricep Pushdown/Press', sets: '3', reps: '8-12', rest: '2 min', primaryMuscleGroup: 'Triceps',
-      tip: '🎯 Focus: The lateral and long heads of the triceps.\n\n💡 How to do it: Set seat VERY LOW so handles are right at shoulders. Press straight down.\n\n🔒 NON-NEGOTIABLE: Elbows physically pinned tightly against your ribcage. ONLY the forearms move.\n\n⚠️ Common Pitfall: Letting your elbows flare outward or drift forward away from your ribs. Once the elbow leaves the torso, the chest and front shoulders take over the pressing motion.',
+      id: 'push_5', name: 'Machine Tricep Press (Seated Dip)', sets: '3', reps: '8-12', rest: '2 min', primaryMuscleGroup: 'Triceps',
+      tip: '🎯 Focus: Massive tricep builder (compound movement).\n\n💡 How to do it: Adjust the seat so the handles are roughly even with your lower chest/ribcage at the start. Press the handles down and slightly forward until your arms are fully locked out.\n\n🔒 NON-NEGOTIABLE: Shoulders aggressively locked DOWN away from your ears for the entire set. Your elbows must travel backward behind your torso on the way up, but keep them tucked relatively close to your sides—do not let them flare out like chicken wings.\n\n⚠️ Common Pitfall: Letting your shoulders shrug up into your ears as the handles rise to the top. This turns off the triceps and dumps all the dangerous tension into your neck and shoulder joints.',
       warmupSets: [WarmupSet(reps: 8, weightFactor: 0.5), WarmupSet(reps: 3, weightFactor: 0.75)],
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
     ),
     Exercise(
       id: 'pull_5', name: 'Machine Bicep Curl', sets: '3', reps: '10-12', rest: '2 min', primaryMuscleGroup: 'Biceps',
-      tip: '🎯 Focus: The main "peak" of your bicep.\n\n💡 How to do it: Squeeze hard at the peak of the curl.\n\n🔒 NON-NEGOTIABLE: Armpit wedged snug over the top edge of the pad. Triceps remain totally flat against the pad at all times.\n\n⚠️ Common Pitfall: Lifting your elbows off the pad or leaning your torso back to use body leverage to hoist the weight up.',
+      tip: '🎯 Focus: The main "peak" of your bicep.\n\n💡 How to do it: Squeeze hard at the peak of the curl with your wrists bent slightly backward.\n\n🔒 NON-NEGOTIABLE: Armpit wedged snug over the top edge of the pad. Triceps remain totally flat against the pad at all times.\n\n⚠️ Common Pitfall: Lifting your elbows off the pad or leaning your torso back to use body leverage to hoist the weight up.',
       warmupSets: [WarmupSet(reps: 8, weightFactor: 0.5), WarmupSet(reps: 3, weightFactor: 0.75)],
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
@@ -351,9 +351,15 @@ class GymData {
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
     ),
+    // Swapped in for Plank Hold (Addis aesthetic block): planks build almost no visible muscle.
+    // Glute medius/upper glute = the round "shelf" look + makes the waist look smaller by contrast.
     Exercise(
-      id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '2 min', primaryMuscleGroup: 'Abs',
-      tip: '🎯 Focus: Deep core stability.\n\n💡 How to do it: Forearms down.\n\n🔒 NON-NEGOTIABLE: Glutes forcefully squeezed. Body in a perfectly straight line from head to heel.\n\n⚠️ Common Pitfall: Piking your hips high up into the air. This vertically stacks your skeleton against gravity, giving your core muscles a rest break and making the plank useless.',
+      id: 'legs_8a_abd', name: 'Hip Abduction Machine (Lean Forward)', sets: '3', reps: '15-20', rest: '90 sec', primaryMuscleGroup: 'Glutes',
+      tier: 2, prerequisiteExerciseIds: const ['legs_1a', 'legs_4a'],
+      tip: '🎯 Focus: Upper glutes / glute medius (the round "shelf" at the top of your butt).\n\n💡 How to do it: Sit, then hinge your torso forward ~45° and grab the handles or the seat edge. Push knees out, pause 1 second at the widest point.\n\n🔒 NON-NEGOTIABLE: Slow 2-3 second return. The plates must NOT touch between reps.\n\n⚠️ Common Pitfall: Sitting bolt upright and slamming the pads open with momentum. Upright mostly hits the TFL (side of hip); leaning forward shifts it onto the glutes you actually want to grow.\n\n🔥 AESTHETIC NOTE: Last set = go to failure, then 5-10 partial reps in the fully-open position.',
+      warmupSets: [WarmupSet(reps: 12, weightFactor: 0.5)],
+      secondaryWarmupSets: [],
+      warmupRest: 'Rest 1 min.',
     ),
     Exercise(
       id: 'stretch_lower_a', name: 'Post-Workout Mobility', sets: '1', reps: '5 mins', rest: 'None', primaryMuscleGroup: 'Mobility',
@@ -382,7 +388,7 @@ class GymData {
     Exercise(
       id: 'pull_2', name: 'Machine Seated Row', sets: '3', reps: '8-12', rest: '3 min', primaryMuscleGroup: 'Mid-Back',
       tier: 1,
-      tip: '🎯 Focus: Lats and Mid-back thickness.\n\n💡 How to do it: Drive elbows straight back.\n\n🔒 NON-NEGOTIABLE: Chest bolted firmly against the chest pad at all times.\n\n⚠️ Common Pitfall: Peeling your chest backward off the pad to lean back as you pull. This turns the movement into a lower-back extension. The weight will feel lighter, but your mid-back stops doing the work.',
+      tip: '🎯 Focus: Lats and Mid-back thickness.\n\n💡 How to do it: Drive elbows straight back using a thumbless grip (no squeeze).\n\n🔒 NON-NEGOTIABLE: Chest bolted firmly against the chest pad at all times.\n\n⚠️ Common Pitfall: Peeling your chest backward off the pad to lean back as you pull. This turns the movement into a lower-back extension. The weight will feel lighter, but your mid-back stops doing the work.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5), WarmupSet(reps: 4, weightFactor: 0.75)],
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min between warmups, 2 mins before working set.',
@@ -435,7 +441,7 @@ class GymData {
     Exercise(
       id: 'legs_7b', name: 'Dumbbell Romanian Deadlift', sets: '3', reps: '8-10', rest: '3 min', primaryMuscleGroup: 'Hamstrings',
       tier: 1,
-      tip: '🎯 Focus: Glutes and hamstrings via hip hinge.\n\n💡 How to do it: Keep dumbbells gliding against legs.\n\n🔒 NON-NEGOTIABLE: Shins stay mostly vertical. Hips must travel straight BACKWARD.\n\n⚠️ Common Pitfall: Bending at the waist and rounding the lower back instead of pushing the hips back. This shifts the mechanical tension entirely off the hamstrings and puts dangerous sheer force directly onto your spine.',
+      tip: '🎯 Focus: Glutes and hamstrings via hip hinge.\n\n💡 How to do it: Keep dumbbells gliding against legs while maintaining a double chin to keep your neck neutral.\n\n🔒 NON-NEGOTIABLE: Shins stay mostly vertical. Hips must travel straight BACKWARD.\n\n⚠️ Common Pitfall: Bending at the waist and rounding the lower back instead of pushing the hips back. This shifts the mechanical tension entirely off the hamstrings and puts dangerous sheer force directly onto your spine.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.3), WarmupSet(reps: 6, weightFactor: 0.5), WarmupSet(reps: 3, weightFactor: 0.75)],
       secondaryWarmupSets: [WarmupSet(reps: 5, weightFactor: 0.7, note: 'Feeder set')],
       warmupRest: 'Rest ~90s between warmups, 2-3 mins before working set.',
@@ -449,7 +455,7 @@ class GymData {
       warmupRest: 'Rest ~90s between warmups, 2-3 mins before working set.',
     ),
      Exercise(
-      id: 'legs_2b', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2 min', primaryMuscleGroup: 'Hamstrings',
+      id: 'legs_2a', name: 'Seated Leg Curl Machine', sets: '3', reps: '10-12', rest: '2 min', primaryMuscleGroup: 'Hamstrings',
       tier: 2, prerequisiteExerciseIds: const ['legs_7b'],
       tip: '🎯 Focus: Isolates hamstrings in a lengthened position.\n\n💡 How to do it (2-3 tight, 4max pad, 2 metal, 3 back):\n\n🔒 NON-NEGOTIABLE: Lap pad cranked down completely tight. Thighs immobilized.\n\n⚠️ Common Pitfall: Sitting forward or leaning away from the back pad to gain leverage. If the pad doesn\'t lock your legs down perfectly, your body uses hip flexors to cheat the weight.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5), WarmupSet(reps: 5, weightFactor: 0.75)],
@@ -465,7 +471,7 @@ class GymData {
       warmupRest: 'Rest 1 min.',
     ),
     Exercise(
-      id: 'legs_5b', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '3 min', primaryMuscleGroup: 'Quads',
+      id: 'legs_5a', name: 'Leg Extension Machine', sets: '3', reps: '12-15', rest: '3 min', primaryMuscleGroup: 'Quads',
       tier: 2, prerequisiteExerciseIds: const ['legs_3b'],
       tip: '🎯 Focus: Isolating the quads.\n\n💡 How to do it: Set to 2.\n\n🔒 NON-NEGOTIABLE: Butt fully back in seat. Dead-stop 1-second pause/squeeze at the top.\n\n⚠️ Common Pitfall: Relying on momentum to swing the weight up. If you cannot pause at the top of the rep, the weight is too heavy.',
       warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5), WarmupSet(reps: 5, weightFactor: 0.75)],
@@ -486,9 +492,14 @@ class GymData {
       secondaryWarmupSets: [],
       warmupRest: 'Rest 1 min.',
     ),
+    // Swapped in for Plank Hold (Addis aesthetic block): 3rd weekly side-delt hit -> 9 sets/week.
+    // Shoulder width is the biggest lever on shoulder-to-waist ratio (V-taper), and side delts recover in <48h.
     Exercise(
-      id: 'bw_1a', name: 'Plank Hold', sets: '3', reps: '30-60 sec', rest: '2 min', primaryMuscleGroup: 'Abs',
-      tip: '🎯 Focus: Deep core stability.\n\n💡 How to do it: Forearms down.\n\n🔒 NON-NEGOTIABLE: Glutes forcefully squeezed. Straight line head to heel.\n\n⚠️ Common Pitfall: Letting your hips sag toward the floor. This completely disengages the abdominal wall and dumps all the structural stress onto your lower back ligaments.',
+      id: 'push_4b', name: 'Machine Lateral Raise (Bonus)', sets: '3', reps: '12-20', rest: '90 sec', primaryMuscleGroup: 'Side Delts',
+      tip: '🎯 Focus: Shoulder width (side deltoid). Wider shoulders = smaller-looking waist = V-taper.\n\n💡 How to do it: Lead with elbows, push pads out to the sides. Slightly lighter than Mon/Thu, higher reps.\n\n🔒 NON-NEGOTIABLE: Shoulders pressed DOWN away from ears. Outer upper arm flush against the pad.\n\n⚠️ Common Pitfall: Shrugging traps up to lift the weight. The weight goes up, but side delts do zero work.\n\n🔥 AESTHETIC NOTE: Take every set to failure. Legs are already fried, so these are the "bonus" sets.',
+      warmupSets: [WarmupSet(reps: 10, weightFactor: 0.5)],
+      secondaryWarmupSets: [],
+      warmupRest: 'Rest 1 min.',
     ),
     // Outdated excersise (put back for bulk)
     // Exercise(

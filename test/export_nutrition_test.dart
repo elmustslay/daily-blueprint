@@ -313,7 +313,8 @@ void main() {
       ];
 
       for (int d = 0; d < totalDays; d++) {
-        final date = startDate.add(Duration(days: d));
+        // Calendar-day math (NOT Duration) so the DST fall-back on Nov 1 doesn't duplicate a day
+        final date = DateTime(startDate.year, startDate.month, startDate.day + d);
         DailyPlanData.mockCurrentDate = date;
         final dayKey = dayNames[date.weekday - 1];
         final isRefeed = DailyPlanData.isRefeedWeek();
@@ -365,7 +366,7 @@ void main() {
       StringBuffer textDump = StringBuffer();
       Set<String> uniqueDays = {};
       for (int d = 0; d < totalDays; d++) {
-        final date = startDate.add(Duration(days: d));
+        final date = DateTime(startDate.year, startDate.month, startDate.day + d);
         DailyPlanData.mockCurrentDate = date;
         final dayKey = dayNames[date.weekday - 1];
         final isRefeed = DailyPlanData.isRefeedWeek();

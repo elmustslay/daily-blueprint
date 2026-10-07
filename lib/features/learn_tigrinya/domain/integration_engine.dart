@@ -60,11 +60,11 @@ class IntegrationEngine {
   List<IntegrationSentence? Function()> _getGeneratorsForLevel() {
     switch (integrationLevel) {
       case 1:
-        return [_genPronounDemo, _genGreetingNumber, _genPronounDemonstrative];
+        return [_genPronounDemo, _genPronounDemonstrative];
       case 2:
         return [_genSubjectObjectVerb, _genPronounDemo, _genFamilyVerb];
       case 3:
-        return [_genSubjectObjectVerb, _genPronounAdjectiveBe, _genPossessionSentence, _genSubjectObjectVerbWithIdentity];
+        return [_genSubjectObjectVerb, _genPronounAdjectiveBe, _genPossessionSentence, _genSubjectObjectVerbWithIdentity, _genGreetingNumber];
       case 4:
         return [_genSubjectObjectVerb, _genQuestionWordSentence, _genPronounAdjectiveBe, _genPossessionSentence];
       case 5:

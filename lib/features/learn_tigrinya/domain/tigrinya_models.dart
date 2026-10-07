@@ -151,7 +151,7 @@ class Verb {
   }
 }
 
-enum DrillModuleType { pronoun, verb, questionWord, number, time, adjective, greeting, possession, demonstrative, phrase, preposition, family, possessivePronoun, sentence, nounPossession, verbObjectSuffix, imperative, locationWord, existential, intimatePhrase, compoundSubject, identityToBe, emotion, withConstruction, questionWordBasic, integration }
+enum DrillModuleType { pronoun, verb, questionWord, number, advancedNumber, time, adjective, greeting, possession, demonstrative, phrase, preposition, family, possessivePronoun, sentence, nounPossession, verbObjectSuffix, imperative, locationWord, existential, intimatePhrase, compoundSubject, identityToBe, emotion, withConstruction, questionWordBasic, integration }
 
 class DrillModule {
   final String id;

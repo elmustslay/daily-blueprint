@@ -152,7 +152,7 @@ void main() {
     // [2] push_3: 'Pec Deck / Machine Fly' (we will set to ACTIVE)
     // [3] pull_4: 'Machine Reverse Fly / Rear Delt'
     // [4] push_4: 'Machine Lateral Raise' (we will set to COMPLETED)
-    // [5] push_5: 'Tricep Pushdown/Press'
+    // [5] push_5: 'Machine Tricep Press (Seated Dip)'
     // [6] pull_5: 'Machine Bicep Curl'
     // [7] stretch_upper_a: 'Post-Workout Mobility'
     
@@ -190,7 +190,7 @@ void main() {
     expect(titles[1], 'Hammer Strength MTS Incline Press');
     expect(titles[2], 'Lat Pulldown Machine');
     expect(titles[3], 'Machine Reverse Fly / Rear Delt');
-    expect(titles[4], 'Tricep Pushdown/Press');
+    expect(titles[4], 'Machine Tricep Press (Seated Dip)');
     expect(titles[5], 'Machine Bicep Curl');
     expect(titles[6], 'Post-Workout Mobility');
     expect(titles.last, 'Machine Lateral Raise'); 

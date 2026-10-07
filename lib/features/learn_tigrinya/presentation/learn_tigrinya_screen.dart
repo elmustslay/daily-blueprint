@@ -59,7 +59,7 @@ class LearnTigranyaScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildHeader(context, ref),
-          _buildDailyReviewCard(context),
+          _buildDailyReviewCard(context, ref),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
@@ -148,14 +148,16 @@ class LearnTigranyaScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildDailyReviewCard(BuildContext context) {
+  Widget _buildDailyReviewCard(BuildContext context, WidgetRef ref) {
     final dueCount = SrsStorage.getDueCardCount();
 
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(builder: (_) => const SrsReviewScreen()),
-        );
+        ).then((_) {
+          ref.invalidate(masteryProvider);
+        });
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),

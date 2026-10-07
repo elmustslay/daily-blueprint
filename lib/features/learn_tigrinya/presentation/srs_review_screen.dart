@@ -99,6 +99,7 @@ class _SrsReviewScreenState extends ConsumerState<SrsReviewScreen>
       final allItems = <TigrinyaObject>[
         ...TigrinyaDrillsData.greetings,
         ...TigrinyaDrillsData.numbers,
+        ...TigrinyaDrillsData.advancedNumbers,
         ...TigrinyaDrillsData.timeWords,
         ...TigrinyaDrillsData.demonstratives,
         ...TigrinyaDrillsData.prepositions,

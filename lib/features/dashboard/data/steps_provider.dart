@@ -50,9 +50,9 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
   bool isLissDay = (dayOfWeek == DateTime.wednesday || dayOfWeek == DateTime.saturday);
   int weeklyTarget = 50000;
 
-  // 🍕 Pizza Offset Carryover: Rolled over 10,000 steps from last week (50k normal + 10k rollover)
-  if (now.isAfter(DateTime(2026, 9, 21)) && now.isBefore(DateTime(2026, 9, 28))) {
-    weeklyTarget = 60000;
+  // 🍝🍰 Pasta + Cake Offset: Added 14,000 steps for this week (700 cals extra)
+  if (now.isAfter(DateTime(2026, 9, 28)) && now.isBefore(DateTime(2026, 10, 5))) {
+    weeklyTarget = 64000;
   }
 
   int naturalSteps = 0;
