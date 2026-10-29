@@ -1,9 +1,66 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health/health.dart';
 import 'dart:io';
+import 'dart:math' as math;
 import '../../daily_plan/data/daily_plan_data.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+/// Daily step targets indexed [Mon..Sun] = 60,000/week.
+/// Keep in sync with the LAST entry of DAILY_STEPS_SCHEDULE in
+/// personal_py_simulation/body_fat_calculator.py.
+const List<int> kDailyStepTargets = [8500, 5000, 15000, 4000, 4000, 15000, 8500];
+
+/// Thu/Fri are recovery days: the daily number is a CAP, not a goal.
+const Set<int> kStepLimitDays = {DateTime.thursday, DateTime.friday};
+
+/// On Saturday, leave at most this many steps for Sunday.
+const int kSundayReserveSteps = 5000;
+
+const int kDefaultWeeklySteps = 60000;
+/// The old default; upgraded to 60k ONCE (see _migratedKey), never again.
+const int _kLegacyWeeklySteps = 50000;
+
+class TargetWeeklyStepsNotifier extends Notifier<int> {
+  static const _key = 'target_weekly_steps';
+  static const _migratedKey = 'target_weekly_steps_60k_migrated';
+  SharedPreferences? _prefs;
+
+  @override
+  int build() {
+    _load();
+    return kDefaultWeeklySteps;
+  }
+
+  Future<void> _load() async {
+    _prefs = await SharedPreferences.getInstance();
+    // One-time upgrade of the old 50k default to 60k. After this runs, any value
+    // you set yourself (including 50k) is kept as-is.
+    if (!(_prefs!.getBool(_migratedKey) ?? false)) {
+      if (_prefs!.getInt(_key) == _kLegacyWeeklySteps) {
+        await _prefs!.setInt(_key, kDefaultWeeklySteps);
+      }
+      await _prefs!.setBool(_migratedKey, true);
+    }
+    if (_prefs!.containsKey(_key)) {
+      state = _prefs!.getInt(_key)!;
+    }
+  }
+
+  Future<void> updateTarget(int newTarget) async {
+    state = newTarget;
+    _prefs ??= await SharedPreferences.getInstance();
+    await _prefs!.setInt(_key, newTarget);
+  }
+
+  Future<void> resetToDefault() async {
+    await updateTarget(kDefaultWeeklySteps);
+  }
+}
+
+final targetWeeklyStepsProvider = NotifierProvider<TargetWeeklyStepsNotifier, int>(() {
+  return TargetWeeklyStepsNotifier();
+});
 class WorkoutLog {
   final DateTime date;
   final int stepsEquivalent;
@@ -35,11 +92,39 @@ class StepsData {
   int get totalLissSteps => lissWorkouts.fold(0, (sum, log) => sum + log.stepsEquivalent);
   int get currentWeeklySteps => naturalSteps + totalDanceSteps + totalLissSteps;
   int get stepsRemainingWeekly => targetWeeklySteps > currentWeeklySteps ? targetWeeklySteps - currentWeeklySteps : 0;
+
+  bool get isDailyLimit => kStepLimitDays.contains(DateTime.now().weekday);
+
+  /// Weekly steps still needed as of the START of today (today's steps excluded),
+  /// so today's goal stays stable while you walk.
+  int get _remainingAtDayStart =>
+      math.max(0, targetWeeklySteps - (currentWeeklySteps - currentDailySteps));
+
+  /// Today's goal:
+  /// - Thu/Fri: fixed cap.
+  /// - Saturday: what's left for the week minus [kSundayReserveSteps]; if that
+  ///   would be <= 0, just whatever is left for the week.
+  /// - Other days: the day's target, but never more than what's left for the week.
+  int get dailyTarget {
+    final wd = DateTime.now().weekday;
+    final base = kDailyStepTargets[wd - 1];
+    if (isDailyLimit) return base;
+    final left = _remainingAtDayStart;
+    if (wd == DateTime.saturday) {
+      final t = left - kSundayReserveSteps;
+      return t > 0 ? t : left;
+    }
+    return math.min(base, left);
+  }
+
+  int get stepsRemainingToday => math.max(0, dailyTarget - currentDailySteps);
 }
 
 final stepsProvider = FutureProvider<StepsData>((ref) async {
+  final targetWeeklySteps = ref.watch(targetWeeklyStepsProvider);
+
   if (!Platform.isIOS) {
-    return StepsData(targetWeeklySteps: 50000, naturalSteps: 0, danceWorkouts: [], lissWorkouts: []);
+    return StepsData(targetWeeklySteps: targetWeeklySteps, naturalSteps: 0, danceWorkouts: [], lissWorkouts: []);
   }
 
   final now = DateTime.now();
@@ -48,12 +133,7 @@ final stepsProvider = FutureProvider<StepsData>((ref) async {
   // The physics engine sweet spot (matches Python simulation DAILY_STEPS array)
   // [6000, 8000, 10000, 4000, 4000, 10000, 8000] = 50,000 steps/week
   bool isLissDay = (dayOfWeek == DateTime.wednesday || dayOfWeek == DateTime.saturday);
-  int weeklyTarget = 50000;
-
-  // 🍝🍰 Pasta + Cake Offset: Added 14,000 steps for this week (700 cals extra)
-  if (now.isAfter(DateTime(2026, 9, 28)) && now.isBefore(DateTime(2026, 10, 5))) {
-    weeklyTarget = 64000;
-  }
+  int weeklyTarget = targetWeeklySteps;
 
   int naturalSteps = 0;
   int stepsToday = 0;

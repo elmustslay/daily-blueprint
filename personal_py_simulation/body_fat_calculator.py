@@ -22,7 +22,19 @@ CHECKPOINT_WEIGHT = 143.0
 
 # Dynamic Step Targets (Edit these to test different activity routines)
 # Index matches day of the week: [Mon, Tue, Wed, Thu, Fri, Sat, Sun]
-DAILY_STEPS = [6000, 8000, 10000, 4000, 4000, 10000, 8000]
+# Date-effective: each entry applies from its date until the next entry. Keep the LAST entry
+# in sync with kDailyStepTargets in lib/features/dashboard/data/steps_provider.dart.
+DAILY_STEPS_SCHEDULE = [
+    (datetime.date(2026, 7, 27),  [6000, 8000, 10000, 4000, 4000, 10000, 8000]),    # 50k/wk original
+    (datetime.date(2026, 10, 26), [8500, 5000, 15000, 4000, 4000, 15000, 8500]),    # 60k/wk: big Wed (LISS) + Sat (dance), Thu/Fri capped
+]
+
+def steps_for_date(d):
+    steps = DAILY_STEPS_SCHEDULE[0][1]
+    for eff_date, arr in DAILY_STEPS_SCHEDULE:
+        if d >= eff_date:
+            steps = arr
+    return steps[d.weekday()]
 
 RT_DAYS = 4
 
@@ -271,7 +283,7 @@ def run_simulation(weight_change=0.0, bf_change=0.0):
         neat_bf_drop = max(0.0, (15.0 - current_bf) * 12.0) if current_bf < 15.0 else 0.0
         cns_fatigue_penalty = max(0.50, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * 0.50)
         cns_tdee_factor = max(1.0 - THYROID_TDEE_PENALTY, 1.0 - (min(consecutive_deficit_days, 28) / 28.0) * THYROID_TDEE_PENALTY)
-        daily_steps = DAILY_STEPS[day % 7]
+        daily_steps = steps_for_date(START_DATE + datetime.timedelta(days=day))
         current_act = 1.25 + (daily_steps * 0.00003125)
 
         # Estimate daily deficit to calculate free glycerol glucose from lipolysis

@@ -234,6 +234,7 @@
                     "Choline (mg)": 60.0,
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Absorbed Iron (mg)": 0.01
                 }
             }
@@ -246,7 +247,6 @@
                 "Carbs": 27.0,
                 "Fat": 12.3,
                 "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 5.36,
                     "Sugar (g)": 6.75,
                     "Vitamin A (Food) (mcg)": 489.22,
@@ -589,6 +589,7 @@
                     "Choline (mg)": 60.0,
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Absorbed Iron (mg)": 0.01
                 }
             }
@@ -601,7 +602,6 @@
                 "Carbs": 27.0,
                 "Fat": 12.3,
                 "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0,
                     "Copper (mg)": 3.21,
                     "Fiber (g)": 5.36,
                     "Sugar (g)": 6.75,
@@ -824,18 +824,6 @@
                 }
             }
         },
-        "5:10-6:05 pm": {
-            "title": "Study Time",
-            "nutrition": {
-                "Calories": 0.0,
-                "Protein": 0.0,
-                "Carbs": 0.0,
-                "Fat": 0.0,
-                "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0
-                }
-            }
-        },
         "7:25-7:35 pm": {
             "title": "Commute Home",
             "nutrition": {
@@ -873,6 +861,7 @@
                     "Choline (mg)": 60.0,
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Absorbed Iron (mg)": 0.01
                 }
             }
@@ -1223,6 +1212,7 @@
                     "Choline (mg)": 60.0,
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Absorbed Iron (mg)": 0.01
                 }
             }
@@ -1235,7 +1225,6 @@
                 "Carbs": 99.9,
                 "Fat": 3.6,
                 "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 15.71,
                     "Sugar (g)": 53.29,
                     "Vitamin A (Food) (mcg)": 1533.5,
@@ -1574,6 +1563,7 @@
                     "Choline (mg)": 60.0,
                     "EPA (Food) (mg)": 0.0,
                     "DHA (Food) (mg)": 0.0,
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Absorbed Iron (mg)": 0.01
                 }
             }
@@ -1586,7 +1576,6 @@
                 "Carbs": 99.9,
                 "Fat": 3.6,
                 "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 15.71,
                     "Sugar (g)": 53.29,
                     "Vitamin A (Food) (mcg)": 1533.5,
@@ -1793,6 +1782,7 @@
                     "Tyrosine (Food) (mg)": 1298.93,
                     "EPA (Food) (mg)": 2.22,
                     "DHA (Food) (mg)": 2.22,
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Saturated Fat (g)": 3.43,
                     "Sodium (mg)": 1354.82,
                     "Added Sugar (g)": 1.21,
@@ -1816,7 +1806,6 @@
                 "Carbs": 28.2,
                 "Fat": 9.8,
                 "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0,
                     "Fiber (g)": 5.59,
                     "Sugar (g)": 6.81,
                     "Vitamin A (Food) (mcg)": 468.39,
@@ -1998,6 +1987,7 @@
                 "Carbs": 2.4,
                 "Fat": 5.5,
                 "Micros": {
+                    "Creatine Monohydrate (mg)": 5000.0,
                     "Saturated Fat (g)": 2.13,
                     "Cholesterol (mg)": 60.0,
                     "Sodium (mg)": 355.5,
@@ -2046,7 +2036,6 @@
                 "Carbs": 115.9,
                 "Fat": 17.0,
                 "Micros": {
-                    "Creatine Monohydrate (mg)": 5000.0,
                     "Saturated Fat (g)": 4.0,
                     "Fiber (g)": 12.37,
                     "Sugar (g)": 8.23,

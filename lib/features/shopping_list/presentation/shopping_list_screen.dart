@@ -70,6 +70,7 @@ class ShoppingListNotifier extends Notifier<List<ShoppingItem>> {
       ShoppingItem(id: 'amz-10', name: 'Citicoline', subtext: 'need 7 capsules'),
       ShoppingItem(id: 'amz-11', name: 'NAC + Selenium', subtext: 'need 3 capsules'),
       ShoppingItem(id: 'amz-13', name: 'Ashwagandha', subtext: '14 capsules (On), 0 (Off)'),
+      ShoppingItem(id: 'amz-14', name: 'MiraLAX (PEG 3350)', subtext: 'need 3.5–7 capfuls (½–1 cap/day), replaces Colace'),
 
       ShoppingItem(id: 'amz-15', name: 'Anua Heartleaf Pore Control Cleansing Oil', subtext: 'Sunscreen Remover'),
       ShoppingItem(id: 'amz-16', name: 'Dove Deep Moisture Body Wash', subtext: 'Prevents ashiness without lotion'),

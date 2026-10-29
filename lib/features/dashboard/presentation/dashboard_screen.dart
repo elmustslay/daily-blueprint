@@ -30,22 +30,21 @@ class DashboardScreen extends ConsumerWidget {
                     return Text('Health Error: ${data.errorMessage}', style: const TextStyle(fontSize: 12, color: Colors.redAccent));
                   }
                   
-                  final now = DateTime.now();
-                  final bool isLowActivityDay = (now.weekday == DateTime.thursday || now.weekday == DateTime.friday);
-                  
                   Widget textWidget;
-                  if (isLowActivityDay) {
-                    int dailyLeft = 4000 - data.currentDailySteps;
+                  if (data.isDailyLimit) {
+                    int dailyLeft = data.dailyTarget - data.currentDailySteps;
                     if (dailyLeft > 0) {
                       textWidget = Text('You only have $dailyLeft left for the day to walk', style: const TextStyle(fontSize: 12, color: Colors.orangeAccent, fontWeight: FontWeight.bold));
                     } else {
                       textWidget = const Text('Daily step limit reached! Rest up.', style: TextStyle(fontSize: 12, color: Colors.redAccent, fontWeight: FontWeight.bold));
                     }
                   } else {
-                    if (data.stepsRemainingWeekly > 0) {
-                      textWidget = Text('${data.stepsRemainingWeekly} steps left this week!', style: const TextStyle(fontSize: 12, color: Colors.blueAccent, fontWeight: FontWeight.bold));
+                    String k(int n) => n >= 1000 ? '${(n / 1000).toStringAsFixed(n % 1000 == 0 ? 0 : 1)}k' : '$n';
+                    final weeklyPart = data.stepsRemainingWeekly > 0 ? '${k(data.stepsRemainingWeekly)} this wk' : 'week done!';
+                    if (data.stepsRemainingToday > 0) {
+                      textWidget = Text('${k(data.stepsRemainingToday)} left today · $weeklyPart', style: const TextStyle(fontSize: 12, color: Colors.blueAccent, fontWeight: FontWeight.bold));
                     } else {
-                      textWidget = const Text('Weekly step goal reached!', style: TextStyle(fontSize: 12, color: Colors.greenAccent, fontWeight: FontWeight.bold));
+                      textWidget = Text('Daily goal hit! · $weeklyPart', style: const TextStyle(fontSize: 12, color: Colors.greenAccent, fontWeight: FontWeight.bold));
                     }
                   }
                   
@@ -62,7 +61,7 @@ class DashboardScreen extends ConsumerWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          textWidget,
+                          Flexible(child: DefaultTextStyle.merge(overflow: TextOverflow.ellipsis, maxLines: 1, child: textWidget)),
                           const SizedBox(width: 6),
                           const Icon(Icons.info_outline, size: 14, color: Colors.blueAccent),
                         ],
@@ -239,7 +238,22 @@ class DashboardScreen extends ConsumerWidget {
               
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text('Weekly Goal:', style: TextStyle(color: Colors.white70)),
-                Text('${data.targetWeeklySteps}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                Row(
+                  children: [
+                    Text('${data.targetWeeklySteps}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                    const SizedBox(width: 8),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        return GestureDetector(
+                          onTap: () {
+                            _showEditGoalDialog(context, ref, data.targetWeeklySteps);
+                          },
+                          child: const Icon(Icons.edit, size: 16, color: Colors.blueAccent),
+                        );
+                      }
+                    ),
+                  ],
+                ),
               ]),
               const Divider(color: Colors.white24, height: 24),
               
@@ -279,6 +293,65 @@ class DashboardScreen extends ConsumerWidget {
           ),
         );
       }
+    );
+  }
+
+  void _showEditGoalDialog(BuildContext context, WidgetRef ref, int currentGoal) {
+    final controller = TextEditingController(text: currentGoal.toString());
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).cardColor,
+          title: const Text('Edit Weekly Goal', style: TextStyle(color: Colors.white)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: controller,
+                keyboardType: TextInputType.number,
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: 'Steps',
+                  labelStyle: TextStyle(color: Colors.white70),
+                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
+                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blueAccent)),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: () {
+                    ref.read(targetWeeklyStepsProvider.notifier).resetToDefault();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(); // close bottom sheet to refresh
+                  },
+                  icon: const Icon(Icons.restore, color: Colors.orangeAccent, size: 16),
+                  label: const Text('Reset to 60k', style: TextStyle(color: Colors.orangeAccent)),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel', style: TextStyle(color: Colors.white70)),
+            ),
+            TextButton(
+              onPressed: () {
+                final newGoal = int.tryParse(controller.text);
+                if (newGoal != null) {
+                  ref.read(targetWeeklyStepsProvider.notifier).updateTarget(newGoal);
+                }
+                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // close bottom sheet to refresh
+              },
+              child: const Text('Save', style: TextStyle(color: Colors.blueAccent)),
+            ),
+          ],
+        );
+      },
     );
   }
 Widget _buildProgressBar(BuildContext context) {

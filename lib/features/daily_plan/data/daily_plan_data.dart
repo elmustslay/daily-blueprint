@@ -89,6 +89,13 @@ class _Routines {
   static const String laundryFaceTowels = 'Laundry Cycle 1: Bamboo Washcloths & Cotton Pillowcases (3/5 warmness) -> 1-2 tbsp All Free Clear (Liquid). NO Fabric Softener (Dry on LOW heat)';
   static const String laundryBathTowels = 'Laundry Cycle 2: Bath Towels & Body Washcloths (5/5 warmness) -> Wash 1: 2 tbsp All Free Clear (Liquid) + 1/3 cup Bleach -> Wash 2: Full Cycle (WATER ONLY - no detergent) to lift bleach residue (Dry on LOW heat)';
   static const String laundryRegular = 'Laundry: Regular Wash (All other clothes/gym gear, 3/5 warmness) -> All Free Clear (Liquid)';
+
+  // Stool Softener (moved from night -> lunch to avoid bedtime fluids; PEG works cumulatively so timing doesn't matter)
+  static const String miralax = '½ capful MiraLAX (8.5g PEG 3350) stirred into 8oz water (counts toward the 7 bottles)';
+  static const String miralaxDosing = 'MiraLAX dose: start ½ cap. If still hard/skipping days after 3 days -> full cap (17g). If too loose -> drop to ¼ cap.';
+
+  // Weekend creatine (weekdays it's in the post-gym whey shake)
+  static const String creatineWithWater = '1 scoop creatine monohydrate (5g) mixed into a FULL 16oz water (drink it all)';
 }
 
 enum ProteinSource { salmon, beef, none }
@@ -431,7 +438,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _pastaLunch(String time, {int extraBananas = 0, bool isFullPastaDay = false, String bananaReason = 'Refeed Carb Load'}) {
+  static TimelineItem _pastaLunch(String time, {int extraBananas = 0, bool isFullPastaDay = false, String bananaReason = 'Refeed Carb Load', bool withCreatine = false}) {
     final isFullLunch = isRefeedWeek() || isFullPastaDay;
     return TimelineItem(
       time: time,
@@ -440,10 +447,14 @@ class DailyPlanData {
       details: [
         if (isFullLunch) const DetailItem('1 full serving of my pasta') else const DetailItem('2/3 serving of my pasta'),
         if (extraBananas > 0) DetailItem('🍌 Eat $extraBananas Medium Banana${extraBananas > 1 ? "s" : ""} ($bananaReason)'),
+        if (withCreatine) const DetailItem.trackable(_Routines.creatineWithWater),
+        DetailItem.trackable(_Routines.miralax),
+        DetailItem(_Routines.miralaxDosing),
       ],
       mealRecord: MealRecord(
         items: [
           if (extraBananas > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: extraBananas.toDouble()),
+          if (withCreatine) _Portions.creatine,
         ],
         recipeItems: [if (isFullLunch) _Recipes.pasta else _Recipes.pastaTwoThirds],
       ),
@@ -499,7 +510,7 @@ class DailyPlanData {
         if (isResistanceDay) const DetailItem.trackable('🧂 Mix 0.33 tsp Table Salt (electrolytes) in 21oz water bottle and drink it (front load)')
         else const DetailItem('💧 Drink one 21oz water bottle'),
         if (preWorkoutBananaCount > 0) DetailItem('🍌 Eat $preWorkoutBananaCount Medium Bananas (Pre-Workout) literally right before walking out the door (digests during commute)'),
-        if (withWhey) const DetailItem('🥤 Mix 1 scoop whey isolate (30g protein) in shaker bottle with water and ice (leave in car for later)'),
+        if (withWhey) const DetailItem('🥤 Mix 1 scoop whey isolate (30g protein) + 1 scoop creatine monohydrate (5g) in shaker bottle with 16oz water and ice (leave in car for later)'),
         if (reapplySunscreen != null) DetailItem(reapplySunscreen),
         if (takeGymGloves) const DetailItem('🧤 Grab Gym Gloves'),
       ],
@@ -517,10 +528,11 @@ class DailyPlanData {
       title: 'Commute Home',
       icon: '🚗',
       details: [
-        if (withWhey) const DetailItem.trackable('🥤 Drink the whey isolate shake on commute home.'),
+        if (withWhey) const DetailItem.trackable('🥤 Drink the whey + creatine shake on commute home.'),
       ],
       mealRecord: withWhey ? MealRecord(items: [
         _Portions.whey,
+        _Portions.creatine,
       ]) : null,
     );
   }
@@ -578,7 +590,7 @@ class DailyPlanData {
     );
   }
 
-  static TimelineItem _beefDinner(String time, {int extraBananas = 0, bool isFullPastaDay = false, bool largeCarrots = false}) {
+  static TimelineItem _beefDinner(String time, {int extraBananas = 0, bool isFullPastaDay = false, bool largeCarrots = false, bool withCreatine = true}) {
     final showAshwagandha = !isAshwagandhaOff();
     final eatPastaThird = !isRefeedWeek() && !isFullPastaDay;
     return TimelineItem(
@@ -586,7 +598,7 @@ class DailyPlanData {
       title: 'Dinner',
       icon: '🍛',
       details: [
-        const DetailItem.trackable('1 scoop creatine monohydrate (5g)'),
+        if (withCreatine) const DetailItem.trackable('1 scoop creatine monohydrate (5g)'),
         const DetailItem('Start a new portion of Ground Beef (eat 1/2, save other 1/2 in fridge)'), 
         DetailItem(largeCarrots ? '🥕 Eat 32% of bag (54/7 oz, ~31 baby carrots)' : '🥕 Eat 7% of bag (12/7 oz, ~7 baby carrots)'),
         if (eatPastaThird) const DetailItem('1/3 serving of my pasta'),
@@ -596,7 +608,7 @@ class DailyPlanData {
       ],
       mealRecord: MealRecord(
         items: [
-          _Portions.creatine,
+          if (withCreatine) _Portions.creatine,
           largeCarrots ? _Portions.babyCarrotsLarge : _Portions.babyCarrotsRegular,
           if (showAshwagandha) const IngredientPortion(ingredient: IngredientsData.ashwagandha, amount: 2),
           if (extraBananas > 0) IngredientPortion(ingredient: IngredientsData.banana, amount: extraBananas.toDouble()),
@@ -616,7 +628,7 @@ class DailyPlanData {
       title: 'Chores & Clean Up',
       icon: '🧼',
       details: [
-        const DetailItem('1 scoop Casein + 1 pill Colace (100mg Docusate Sodium) in 16oz water -> Swish/drink water after'),
+        const DetailItem('1 scoop Casein in 10oz water -> Swish/drink water after'),
         const DetailItem('The 7 bottles water are separate from this. This is in addition to that. So 7 bottles + this.'),
         if (sleepKiwiCount > 0) DetailItem('Eat $sleepKiwiCount Kiwi${sleepKiwiCount > 1 ? "s" : ""} now (~1hr before sleep) & swish water (brush 20 min after)'),
         if (blueberryText.isNotEmpty) DetailItem('🫐 $blueberryText'),
@@ -807,7 +819,7 @@ class DailyPlanData {
     amWorkDetails: [DetailItem(_Routines.laundryFaceTowels), const DetailItem('Run Dishwasher')],
     pmWorkDetails: [DetailItem(_Routines.laundryBathTowels)],
     gym: const GymConfig(title: 'Chest, Shoulders & Triceps'),
-    dinner: _salmonDinner('8:50-9:20 pm', modifiers: {RoutineModifier.cookSalmon}),
+    dinner: _salmonDinner('8:50-9:20 pm', modifiers: {RoutineModifier.cookSalmon}, nutrition: const {}), // Creatine is in post-gym whey shake
     chores: const ChoresConfig(sleepKiwiCount: 2),
     bedPrep: const BedPrepConfig(modifiers: {RoutineModifier.newBathTowel}, isHarshActiveNight: true),
     magAmount: 3,
@@ -821,7 +833,7 @@ class DailyPlanData {
     morningProtein: ProteinSource.salmon,
     isOfficeDay: true,
     gym: const GymConfig(title: 'Legs (Quads & Calves)'),
-    dinner: _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.creatine, NutritionAddOn.copper}),
+    dinner: _salmonDinner('8:50-9:20 pm', nutrition: {NutritionAddOn.copper}), // Creatine is in post-gym whey shake
     chores: const ChoresConfig(sleepKiwiCount: 2),
     magAmount: 3,
     nightSkincare: _Routines.joseon,
@@ -843,7 +855,7 @@ class DailyPlanData {
       isResistance: false,
       isWednesday: true,
       preGymStudyTime: '5:10-6:05 pm',
-      preGymStudyNutrition: {NutritionAddOn.creatine},
+      preGymStudyNutrition: {}, // Must stay explicit: overrides default {preWorkoutBanana}. Creatine is in post-gym whey shake
     ),
     dinner: _salmonDinner('7:40-8:20 pm', nutrition: const {}),
     chores: ChoresConfig(
@@ -875,7 +887,7 @@ class DailyPlanData {
       commuteHomeTime: '7:50-8:20 pm',
       modifiers: {RoutineModifier.takeGymGloves},
     ),
-    dinner: _beefDinner('8:30-9:00 pm', extraBananas: 3, isFullPastaDay: true, largeCarrots: true), // 4 -> 3: 4th banana moved to Sat lunch (refeed still > 200g net carbs)
+    dinner: _beefDinner('8:30-9:00 pm', extraBananas: 3, isFullPastaDay: true, largeCarrots: true, withCreatine: false), // 4 -> 3: 4th banana moved to Sat lunch (refeed still > 200g net carbs). Creatine is in post-gym whey shake
     chores: const ChoresConfig(time: '9:00-9:30 pm', sleepKiwiCount: 2),
     bedPrep: const BedPrepConfig(
       time: '9:30-10:00 pm',
@@ -897,7 +909,7 @@ class DailyPlanData {
     morningProtein: ProteinSource.beef,
     isOfficeDay: true,
     gym: const GymConfig(title: 'Legs (Hamstrings / Glutes)'),
-    dinner: _beefDinner('8:50-9:20 pm', extraBananas: 3, isFullPastaDay: true, largeCarrots: true), // 4 -> 3: refeed still > 200g net carbs
+    dinner: _beefDinner('8:50-9:20 pm', extraBananas: 3, isFullPastaDay: true, largeCarrots: true, withCreatine: false), // 4 -> 3: refeed still > 200g net carbs. Creatine is in post-gym whey shake
     chores: const ChoresConfig(),
     bedPrep: const BedPrepConfig(isHarshActiveNight: true),
     magAmount: 3,
@@ -914,13 +926,13 @@ class DailyPlanData {
     _study('12:35-1:50 pm'),
     // +1 banana: Saturday is the lowest-carb day (~64g net). Without it, the sim burns protein
     // for brain glucose (GNG). Moving 1 banana here from Thu/Fri cut catabolism ~1.3 -> ~0.4 lbs by Dec.
-    _pastaLunch('1:50-2:20 pm', extraBananas: 1, bananaReason: 'Muscle Shield: covers brain glucose so protein goes to muscle'),
+    _pastaLunch('1:50-2:20 pm', extraBananas: 1, bananaReason: 'Muscle Shield: covers brain glucose so protein goes to muscle', withCreatine: true),
     ..._buildStudyCycle('2:20-5:10 pm', '5:10-5:30 pm', studyNutrition: {}),
     _study('5:30-6:20 pm'),
     _commuteToGym('6:20-6:25 pm', reapplySunscreen: _Routines.reapplyHur, nutrition: {}, isResistanceDay: false),
     _gym('6:25-7:35 pm', 'Cardio (LISS) / Haircut', isCardio: true),
     TimelineItem(time: '7:35-7:45 pm', title: 'Commute Home', icon: '🚗'),
-    _beefDinner('7:45-8:00 pm'),
+    _beefDinner('7:45-8:00 pm', withCreatine: false), // Creatine moved to lunch
     _chores('8:00-8:50 pm', blueberryText: isRefeedWeek() ? 'Eat the rest of the box of Blueberries' : '', nutrition: {}, sleepKiwiCount: 0),
     _relaxOrCatchUp('8:50-9:35 pm'),
     _bedPrep('9:35-10:20 pm', hair: 'Nizoral 1% (5m lather) -> Post-shower: Massage a few drops of Argan Oil into damp scalp to prevent severe dryness'),
@@ -940,11 +952,15 @@ class DailyPlanData {
       icon: '🍛', 
       details: [
         const DetailItem('Eat the last full Ground Beef from fridge'), 
-        if (isRefeedWeek()) const DetailItem('🍌 2 Medium Bananas (Pre-Workout Boost)')
+        if (isRefeedWeek()) const DetailItem('🍌 2 Medium Bananas (Pre-Workout Boost)'),
+        const DetailItem.trackable(_Routines.creatineWithWater),
+        DetailItem.trackable(_Routines.miralax),
+        DetailItem(_Routines.miralaxDosing),
       ], 
       mealRecord: MealRecord(
         items: [
-          if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.banana, amount: 2)
+          if (isRefeedWeek()) const IngredientPortion(ingredient: IngredientsData.banana, amount: 2),
+          _Portions.creatine,
         ], 
         recipeItems: [_Recipes.beef]
       )
@@ -968,7 +984,6 @@ class DailyPlanData {
       title: 'Dinner (Eat fresh Chipotle)', 
       icon: '🌯', 
       details: [
-        const DetailItem.trackable('1 scoop creatine monohydrate (5g)'), 
         isRefeedWeek()
             ? const DetailItem('Chipotle Bowl (REFEED): single chicken, double white rice, DOUBLE black beans, extra fajita veggies (NO SOUR CREAM)')
             : const DetailItem('Chipotle Bowl (MINI-REFEED): single chicken, double white rice, SINGLE black beans, extra fajita veggies (NO SOUR CREAM)'),
@@ -978,7 +993,6 @@ class DailyPlanData {
       ], 
       mealRecord: MealRecord(
         items: [
-          _Portions.creatine, 
           IngredientPortion(
             ingredient: isRefeedWeek() ? IngredientsData.chipotleBowlRefeed : IngredientsData.chipotleBowl, 
             amount: 1,
